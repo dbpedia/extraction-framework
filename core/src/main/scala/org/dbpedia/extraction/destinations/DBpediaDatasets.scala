@@ -15,6 +15,7 @@ object DBpediaDatasets
      * General
      */
     val Labels = new Dataset("labels", "Titles of all Wikipedia Articles in the corresponding language.")
+    val WikipediaDump = new Dataset("pages_articles", "The original Wikipedia xml dump file of this language.")
     val CategoryLabels = new Dataset("category_labels", "Labels for Categories.")
     val Images = new Dataset("images", "Main image and corresponding thumbnail from Wikipedia article.")
     val GeoCoordinates = new Dataset("geo_coordinates", "Geographic coordinates extracted from Wikipedia.")
@@ -122,6 +123,7 @@ object DBpediaDatasets
     val WikidataReifiedR2R = new Dataset("mappingbased_properties_reified") // keep same name with other languages
     val WikidataReifiedR2RQualifier= new Dataset("mappingbased_properties_reified_qualifiers") // keep same name with other languages
     val WikidataRaw = new Dataset("raw_unredirected")
+    val WikidataRawRedirected = new Dataset("raw")
     val WikidataRawReified = new Dataset("raw_reified")
     val WikidataRawReifiedQualifiers = new Dataset("raw_reified_qualifiers")
     val WikidataReference = new Dataset("references")

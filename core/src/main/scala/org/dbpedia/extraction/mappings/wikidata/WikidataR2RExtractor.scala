@@ -1,10 +1,14 @@
 package org.dbpedia.extraction.mappings
 
+import java.io.{IOException, File}
+
+import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.config.mappings.wikidata._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
+import org.dbpedia.extraction.wikiparser.JsonNode
 import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
@@ -12,6 +16,10 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
+import com.fasterxml.jackson.core.JsonFactory
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import scala.language.postfixOps
 
 /**
  * Created by ali on 10/26/14.
@@ -40,6 +48,9 @@ class WikidataR2RExtractor(
 
   val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
 
+  //class mappings generated with script WikidataSubClassOf and written to json file.
+  val classMappings = readClassMappings("auto_generated_mapping.json")
+
   private val rdfType = context.ontology.properties("rdf:type")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
@@ -55,10 +66,10 @@ class WikidataR2RExtractor(
                               DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
                               DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
 
-
   override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
+
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
         val duplicateList = getDuplicates(statementGroup)
@@ -219,16 +230,47 @@ class WikidataR2RExtractor(
 
     value match {
       case v: ItemIdValue => {
-        val valueTitle = "wikidata:" + WikidataUtil.getItemId(v)
-        context.ontology.wikidataClassesMap.foreach({ map =>
-          if (map._1.matches(valueTitle)) {
-            classes ++= map._2
+        val wikidataItem = WikidataUtil.getItemId(v)
+          classMappings.get(wikidataItem) match {
+            case Some(mappings) => classes++=mappings
+            case _=>
           }
-        })
       }
       case _ =>
     }
     classes
+  }
+
+  private def readClassMappings(fileName:String): mutable.Map[String,Set[OntologyClass]] = {
+    val finalMap = mutable.Map[String,Set[OntologyClass]]()
+
+    try {
+      val source = scala.io.Source.fromFile(fileName)
+      val jsonString = source.getLines() mkString
+      val mapper = new ObjectMapper() with ScalaObjectMapper
+      mapper.registerModule(DefaultScalaModule)
+      val mapFromJson = mapper.readValue[Map[String, String]](jsonString)
+
+      mapFromJson.foreach{
+        pair =>
+          mapFromJson.get(pair._1) match {
+            case Some(ontologyKey) => {
+              context.ontology.classes.get(ontologyKey) match {
+                case Some(oClass)=> finalMap+=pair._1 -> Set(oClass)
+                case _=>
+              }}
+            case _=>
+          }
+      }
+    } catch {
+      case ioe: IOException => println("Please check class mapping file "+ioe)
+    }
+
+    context.ontology.wikidataClassesMap.foreach {
+      classMap => finalMap+=classMap._1.replace("wikidata:","")->classMap._2
+    }
+
+    return finalMap
   }
 
   private def getEquivalentProperties(property: String): Set[OntologyProperty] = {
@@ -296,4 +338,3 @@ class WikidataR2RExtractor(
     adjustedGraph
   }
 }
-
