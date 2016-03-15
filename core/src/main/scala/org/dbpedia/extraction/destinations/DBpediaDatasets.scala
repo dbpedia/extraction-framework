@@ -118,7 +118,7 @@ object DBpediaDatasets
     /**
      * Citations
      */
-    val CitationLinks = new Dataset("citation_links")
-    val CitationData = new Dataset("citation_data")
-    val CitationTypes = new Dataset("citation_types")
+    val CitationLinks = new Dataset("citation_links", "Links from a citation to a DBpedia article using the dbp:isCitedBy property")
+    val CitationData = new Dataset("citation_data", "Raw data extracted from Wikipedia citation templates")
+    //val CitationTypes = new Dataset("citation_types")
 }
