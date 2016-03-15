@@ -7,6 +7,11 @@ package org.dbpedia.extraction.destinations
 object DBpediaDatasets
 {
     /**
+      * Source
+      */
+    val WikipediaDump = new Dataset("pages_articles", "The Wikipedia dump file, which is the source for all other extracted datasets.")
+
+    /**
      * General
      */
     val Labels = new Dataset("labels", "Titles of all Wikipedia Articles in the corresponding language.")
@@ -23,14 +28,15 @@ object DBpediaDatasets
     val ArticleTemplatesNested = new Dataset("article_templates_nested", "Templates used in an article (nested)")
     val SkosCategories = new Dataset("skos_categories", "Information which concept is a category and how categories are related using the SKOS Vocabulary.")
     val RevisionUris = new Dataset("revision_uris", "Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.")
-    val RevisionIds = new Dataset("revision_ids", "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from. Until DBpedia 3.7, these files had names like 'revisions_en.nt'. Since DBpedia 3.9, they were renamed to 'revisions_ids_en.nt' to distinguish them from the new 'revision_uris_en.nt' files.")
+    val RevisionIds = new Dataset("revision_ids", "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from.")
     val RevisionMeta = new Dataset("revision_meta", "Dataset containing additional revision information")
     val PageIds = new Dataset("page_ids", "Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.")
-    val InterLanguageLinks = new Dataset("interlanguage_links", "Dataset linking a DBpedia resource to the same resource in other languages and in ((http:www.wikidata.org Wikidata,,. Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
+    val InterLanguageLinks = new Dataset("interlanguage_links", "Dataset linking a DBpedia resource to the same resource in other languages and in Wikidata.") // Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
+    val InterLanguageLinksChapter = new Dataset("interlanguage_links_chapters", "Chapter specific interlanguage links only contains the interlanguage links between those languages for which a DBpedia mapping chapter exists and provides dereferencable URIs. (a subset of interlanguage links)")
     val Genders = new Dataset("genders", "Dataset trying to identify the gender of a resource")
     val TopicalConcepts = new Dataset("topical_concepts_unredirected", "Resources that describe a category")
-    val UriSameAsIri = new Dataset("uri_same_as_iri", "owl:sameAs links between the ((http:tools.ietf.org/html/rfc3987 IRI,, and ((http:tools.ietf.org/html/rfc3986 URI,, format of DBpedia resources. Only extracted when IRI and URI are actually different.")
-    val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
+    val UriSameAsIri = new Dataset("uri_same_as_iri", "The owl:sameAs links between the IRI and URI format of DBpedia resources. Only extracted when IRI and URI are actually different.")
+    //deprecated!  val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length", "Numbers of characters contained in a Wikipedia article's source.")
     val ImageGalleries = new Dataset("image_galleries", "An image gallery for a resource")
     val ImageAnnotations = new Dataset("image_annotations", "Annotations of image regions")
@@ -44,14 +50,19 @@ object DBpediaDatasets
     val OntologyTypes = new Dataset("instance_types", "Contains triples of the form $object rdf:type $class from the mapping-based extraction.")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive", "Contains transitive rdf:type $class based on the DBpedia ontology.")
     val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned_unredirected")
-    val OntologyPropertiesLiterals = new Dataset("mappingbased_literals", "High-quality data extracted from Infoboxes using the mapping-based extraction (Literal properties only). The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
+    val OntologyPropertiesLiterals = new Dataset("mappingbased_literals", "High-quality data extracted from Infoboxes using the mapping-based extraction (Literal properties only). The predicates in this dataset are in the ontology namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace.")  //For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
     val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased", "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki")
     val SpecificProperties = new Dataset("specific_mappingbased_properties", "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.")
 
-    val OntologyPropertiesObjectsCleaned = new Dataset("mappingbased-objects", "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the /ontology/ namespace.//\n  Note that this data is of much higher quality than the Raw Infobox Properties in the /property/ namespace. For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
+    val OntologyPropertiesObjectsCleaned = new Dataset("mappingbased-objects", "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the 'ontology' namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace.") // For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
     val OntologyPropertiesDisjointRange = new Dataset("mappingbased-objects-disjoint-range", "Errors detected in the mapping based properties (disjoint range).")
     val OntologyPropertiesDisjointDomain = new Dataset("mappingbased-objects-disjoint-domain", "Errors detected in the mapping based properties (disjoint domain).")
 
+    val LhdDboInstanceTypes = new Dataset("instance_types_lhd_dbo", "Linked Hypernym dataset attaches entity articles with a DBpedia resource or a DBpedia ontology concept as their type. The types are hypernyms mined from articles' free text using hand-crafted lexicosyntactic patterns. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology.")
+    val LhdExtInstanceTypes = new Dataset("instance_types_lhd_ext", "Linked Hypernym dataset attaches entity articles with a DBpedia resource or a DBpedia ontology concept as their type. The types are hypernyms mined from articles' free text using hand-crafted lexicosyntactic patterns. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology.")
+    val TaxDboInstanceTypes = new Dataset("instance_types_dbtax_dbo", "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology.")
+    val TaxExtInstanceTypes = new Dataset("instance_types_dbtax_ext", "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology.")
+    val SDInstanceTypes = new Dataset("instance_types_sdtyped_dbo", "The SDType heuristic can extract probable type information in large, cross-domain databases on noisy data. This is its result for DBpedia which supplements the normally gathered instance types. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology.")
 
     /**
      * French population template
@@ -61,8 +72,8 @@ object DBpediaDatasets
     /**
      *  Infobox
      */
-    val InfoboxProperties = new Dataset("infobox_properties_unredirected", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean /property/ namespace. The Mapping-based Properties (/ontology/ namespace, should always be preferred over this data.")
-    val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions", "All properties / predicates used in infoboxes.")
+    val InfoboxProperties = new Dataset("infobox_properties_unredirected", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data.")
+    val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions", "All properties predicates used in infoboxes.")
     val TemplateParameters = new Dataset("template_parameters", "Dataset describing names of template parameters.")
     val InfoboxTest = new Dataset("infobox_test")
 
@@ -80,9 +91,11 @@ object DBpediaDatasets
     val LinksToWikipediaArticle = new Dataset("wikipedia_links", "Dataset linking DBpedia resource to corresponding article in Wikipedia.")
     val ExternalLinks = new Dataset("external_links", "Links to external web pages about a concept.")
     val PageLinks = new Dataset("page_links_unredirected", "Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.")
-    val DisambiguationLinks  = new Dataset("disambiguations_unredirected", "Links extracted from Wikipedia ((http:en.wikipedia.org/wiki/Wikipedia:Disambiguation disambiguation,, pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.")
+    val DisambiguationLinks  = new Dataset("disambiguations_unredirected", "Links extracted from Wikipedia disambiguation pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.")
     val Homepages = new Dataset("homepages", "Links to homepages of persons, organizations etc.")
     val OutDegree = new Dataset("out_degree", "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.")
+    val FreebaseLinks = new Dataset("freebase_links", "This file contains the back-links (owl:sameAs) to the Freebase dataset.")
+    val GeonamesLinks = new Dataset("geonames_links", "This file contains the back-links (owl:sameAs) to the Geonames dataset.")
 
 
     /**

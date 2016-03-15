@@ -21,7 +21,7 @@ var table = null;
 
 function init(catalogUrl, callback, params)
 {
-    getCatalog(catalogUrl);
+    sendRequest(catalogUrl, "GET", null, true, catalogLoaded, function () {});
     initCallback = callback;
     callbackParam = params;
 }
@@ -35,12 +35,12 @@ function tabulate(columns) {
         .style("opacity", 0);                  // set the opacity to nil
 
     var table = d3.select("#canvas")
-        .append("table")
-        .attr("border","0")
-        .attr("id","table")
-        .attr("class","display dataTable")
-        .attr("width","100%")
-        .attr("cellspacing","0"),
+            .append("table")
+            .attr("border","0")
+            .attr("id","table")
+            .attr("class","display dataTable")
+            .attr("width","100%")
+            .attr("cellspacing","0"),
         thead = table.append("thead"),
         tbody = table.append("tbody")
             .attr("overflow-y", "auto")
@@ -158,7 +158,7 @@ function tabulate(columns) {
         ret += "</a>&nbsp;";
 
         if(obj["dataid:preview"])
-            ret += "<a href=\"" + obj["dataid:preview"]["@value"] + "\" title=\"preview&nbsp;file\">?</a>";
+            ret += "<a href=\"" + obj["dataid:preview"]["@id"] + "\" title=\"preview&nbsp;file\">?</a>";
 
         ret += "</small><br/>";
         return ret;
@@ -220,11 +220,6 @@ function getLanguageJson(langs, onload)
         if(Object.keys(datasets).indexOf(langs[i]) == -1)
             sendRequest(ids[langs[i]], "GET", null, true, onload, function () {});
     }
-}
-
-function getCatalog(catalogUrl, callback)
-{
-    sendRequest(catalogUrl, "GET", null, true, catalogLoaded, function () {});
 }
 
 function langLoaded(e)
@@ -379,20 +374,6 @@ function insertOntologyTable()
     ontoTable.html("<table><tbody><tr><td><strong>Dataset</strong></td><td><strong>owl</strong></td></tr>" +
         "<tr><td><a href=\"" + document.URL + "#dbpedia-ontology\" name=\"odbpedia-ontology\">DBpedia Ontology</a></td>" +
         "<td><a href=\"" + owl + "\">owl</a><br><a href=\"" + nt + "\">nt</a></td></tr></tbody></table>");
-}
-
-function subArrayTest(sub, array)
-{
-    if(array.length < sub.length)
-        return false;
-    var zw = false;
-    for(var j in sub){
-        if(array.indexOf(sub[j]) == -1)
-            zw = true;
-    }
-    if(zw)
-        return false;
-    return true;
 }
 
 function reDrawTable(s)

@@ -253,6 +253,26 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>TypeStatistics</id>
+                            <mainClass>org.dbpedia.extraction.statistics.TypeStatistics</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms4G</jvmArg>
+                                <jvmArg>-Xmx8G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
+                            <id>PostProcessinfStats</id>
+                            <mainClass>org.dbpedia.extraction.statistics.StatsPostProcessing</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms4G</jvmArg>
+                                <jvmArg>-Xmx8G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>GenerateDataIds</id>
                             <mainClass>org.dbpedia.extraction.scripts.DataIdGenerator</mainClass>
                             <jvmArgs>
@@ -278,7 +298,6 @@
                         </launcher>
                     </launchers>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>

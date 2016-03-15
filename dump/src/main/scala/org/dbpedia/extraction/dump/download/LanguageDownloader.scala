@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.dump.download
 
 import java.net.URL
-import java.io.File
+import java.io.{PrintWriter, File}
 import scala.collection.mutable.{Set,HashMap}
 import scala.collection.immutable.SortedSet
 import scala.io.{Source,Codec}
@@ -133,9 +133,16 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     }
     else {
       println("date page '"+datePage+"' has all files ["+allFileNames.mkString(",")+"]")
-      // download all files
-      for (url <- urls) downloader.downloadTo(url, dateDir)
+
       complete.createNewFile
+      val pw = new PrintWriter(complete)
+      pw.println(date)
+      // download all files
+      for (url <- urls) {
+        downloader.downloadTo(url, dateDir)
+        pw.println(url)
+      }
+      pw.close()
       true
     }
   }
