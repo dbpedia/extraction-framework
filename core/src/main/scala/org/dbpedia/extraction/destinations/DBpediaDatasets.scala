@@ -61,7 +61,7 @@ object DBpediaDatasets
     val LhdExtInstanceTypes = new Dataset("instance_types_lhd_ext", "Linked Hypernym dataset attaches entity articles with a DBpedia resource or a DBpedia ontology concept as their type. The types are hypernyms mined from articles' free text using hand-crafted lexicosyntactic patterns. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology.")
     val TaxDboInstanceTypes = new Dataset("instance_types_dbtax_dbo", "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology.")
     val TaxExtInstanceTypes = new Dataset("instance_types_dbtax_ext", "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology.")
-    val SDInstanceTypes = new Dataset("instance_types_dbtax_ext", "The SDType heuristic can extract probable type information in large, cross-domain databases on noisy data. This is its result for DBpedia which supplements the normally gathered instance types.")
+    val SDInstanceTypes = new Dataset("instance_types_sdtyped_dbo", "The SDType heuristic can extract probable type information in large, cross-domain databases on noisy data. This is its result for DBpedia which supplements the normally gathered instance types. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology.")
 
     /**
      * French population template
@@ -94,7 +94,7 @@ object DBpediaDatasets
     val Homepages = new Dataset("homepages", "Links to homepages of persons, organizations etc.")
     val OutDegree = new Dataset("out_degree", "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.")
     val FreebaseLinks = new Dataset("freebase_links", "This file contains the back-links (owl:sameAs) to the Freebase dataset.")
-    val GeonamesLinks = new Dataset("geonames_links", "This file contains the back-links (owl:sameAs) to the Freebase dataset.")
+    val GeonamesLinks = new Dataset("geonames_links", "This file contains the back-links (owl:sameAs) to the Geonames dataset.")
 
 
     /**
