@@ -15,7 +15,6 @@ object DBpediaDatasets
      * General
      */
     val Labels = new Dataset("labels", "Titles of all Wikipedia Articles in the corresponding language.")
-    val WikipediaDump = new Dataset("pages_articles", "The original Wikipedia xml dump file of this language.")
     val CategoryLabels = new Dataset("category_labels", "Labels for Categories.")
     val Images = new Dataset("images", "Main image and corresponding thumbnail from Wikipedia article.")
     val GeoCoordinates = new Dataset("geo_coordinates", "Geographic coordinates extracted from Wikipedia.")
