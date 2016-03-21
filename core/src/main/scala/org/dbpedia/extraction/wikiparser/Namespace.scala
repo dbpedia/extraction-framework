@@ -79,7 +79,8 @@ private class NamespaceBuilder {
 
   val mappingsFile: JsonConfig = WikidataExtractorConfigFactory.createConfig("/mappinglanguages.json").asInstanceOf[JsonConfig]
   
-  for ((lang,code) <- mappingsFile.configMap) mappings(Language(lang)) = ns(new Integer(code.get("code").get), "Mapping "+lang, true)
+  for ((lang,code) <- mappingsFile.configMap)
+    mappings(Language(lang)) = ns(new Integer(code.get("code").get), "Mapping "+lang, true)
 }
 
 /**

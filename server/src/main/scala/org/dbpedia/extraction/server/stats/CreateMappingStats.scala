@@ -60,7 +60,7 @@ object CreateMappingStats
         // if no languages are given, use all languages for which a mapping namespace is defined
         if (languages.isEmpty) languages = Namespace.mappings.keySet.toSeq
         
-        for (language <- languages.sorted) {
+        languages.sorted.par.foreach(language =>  {
           
             val millis = System.currentTimeMillis()
             
@@ -94,6 +94,6 @@ object CreateMappingStats
             new MappingStatsManager(statsDir, language)
             
             logger.info("created statistics for "+language.wikiCode+" in "+prettyMillis(System.currentTimeMillis - millis))
-        }
+        })
     }
 }
