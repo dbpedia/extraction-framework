@@ -1,7 +1,30 @@
 {
-  "BUILD SUCCESS":{"msg":"Extraction complete\n", "exit":true, "slack":true, "msgStart": 0, "msgUntil": 5},
-  "BUILD FAILURE":{"msg":"Extraction aborted!\n", "exit":true, "slack":true, "msgStart": 0, "msgUntil": 10},
-  "^(?!(Caused by:|\\[|\\s+at)).*Exception":{"msg":"An exception occurred.\n", "exit":false, "slack":false, "msgStart": 0, "msgUntil": 12},
-  "stdSlack:":{"msg":"", "exit":false, "slack":true, "msgStart": 0, "msgUntil": 0},
-  "stdGist:":{"msg":"", "exit":false, "slack":false, "msgStart": 0, "msgUntil": 0}
+  "BUILD SUCCESS":{
+    "msg":"Extraction complete\n",
+    "exit":true,
+    "slack":1,
+    "msgStart": 0,
+    "msgUntil": 5
+  },
+  "BUILD FAILURE":{
+    "msg":"Extraction aborted!\n",
+    "exit":true,
+    "slack":1,
+    "msgStart": 0,
+    "msgUntil": 10
+  },
+  "stdSlack:":{
+    "msg":"",
+    "exit":false,
+    "slack":1,
+    "msgStart": 0,
+    "msgUntil": 0
+  },
+  "stdGist:":{
+    "msg":"",
+    "exit":false,
+    "slack":0,
+    "msgStart": 0,
+    "msgUntil": 0
+  }
 }
