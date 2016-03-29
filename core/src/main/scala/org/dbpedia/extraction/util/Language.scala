@@ -120,10 +120,6 @@ object Language extends (String => Language)
       "https://www.wikidata.org/w/api.php"
     )
 
-
-
-
-
     languages("mappings") =
     new Language(
       "mappings",
