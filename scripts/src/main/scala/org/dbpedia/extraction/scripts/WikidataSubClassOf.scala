@@ -36,7 +36,7 @@ import scala.util.control.Breaks._
 object WikidataSubClassOf {
 
   val replaceStr = Language.Wikidata.resourceUri.namespace + "Q"
-  val subClassProperty = "http://wikidata.org/entity/P279"
+  val subClassProperty = "http://www.wikidata.org/entity/P279"
 
 
   def main(args: Array[String]) {
