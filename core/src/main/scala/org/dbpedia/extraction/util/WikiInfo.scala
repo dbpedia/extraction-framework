@@ -17,7 +17,8 @@ object WikiInfo
 {
   // hard-coded - there probably is no mirror, and the format is very specific.
   // TODO: user might want to use a local file...
-  val URL = new URL("http://s23.org/wikistats/wikipedias_csv.php")
+  // TODO: mayby change this to XML serialization
+  val URL = new URL("http://wikistats.wmflabs.org/api.php?action=dump&table=wikipedias&format=csv")
   
   // Most browsers would save the file with this name, because s23.org returns it in a http header.
   val FileName = "wikipedias.csv"
