@@ -230,7 +230,7 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
    */
   def getWikidataUri(entity: String) : String = {
     val wikidataName = entity.split("/").last
-    s"http://wikidata.org/entity/$wikidataName"
+    s"http://www.wikidata.org/entity/$wikidataName"
   }
 
   /**

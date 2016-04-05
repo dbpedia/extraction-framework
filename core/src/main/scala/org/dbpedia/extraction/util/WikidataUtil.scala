@@ -97,7 +97,7 @@ object WikidataUtil {
   }
 
   def getWikidataNamespace(namespace: String): String = {
-    namespace.replace(WikidataUtil.wikidataDBpNamespace, "http://wikidata.org/entity/")
+    namespace.replace(WikidataUtil.wikidataDBpNamespace, "http://www.wikidata.org/entity/")
   }
 
   val wikidataDBpNamespace = Language("wikidata").resourceUri.namespace

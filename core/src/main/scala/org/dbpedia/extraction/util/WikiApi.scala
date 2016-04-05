@@ -62,7 +62,7 @@ class WikiApi(url: URL, language: Language)
         retrievePagesByPageID(pageIds).foreach(f)
 
         //Retrieve remaining pages
-        for(continuePage <- response \ "query-continue" \ "allpages" \ "@apcontinue" headOption)
+        for(continuePage <- response \ "continue" \ "@apcontinue" headOption)
         {
             // TODO: use iteration instead of recursion
             retrievePagesByNamespace(namespace, f, continuePage.text)

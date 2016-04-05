@@ -10,7 +10,7 @@ import scala.language.reflectiveCalls
 
 /**
 * it's an extractor to extract Mappings between Wikidata URIs to WikiData URIs inside DBpedia, in the form of :
-* <http://wikidata.dbpedia.org/resource/Q18>  <owl:sameas> <http://wikidata.org/entity/Q18>
+* <http://wikidata.dbpedia.org/resource/Q18>  <owl:sameas> <http://www.wikidata.org/entity/Q18>
 */
 class WikidataNameSpaceSameAsExtractor(
                          context : {
@@ -32,7 +32,7 @@ class WikidataNameSpaceSameAsExtractor(
     val quads = new ArrayBuffer[Quad]()
 
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
-      val objectUri = subjectUri.replace(WikidataUtil.wikidataDBpNamespace,"http://wikidata.org/entity/")
+      val objectUri = subjectUri.replace(WikidataUtil.wikidataDBpNamespace,"http://www.wikidata.org/entity/")
 
       quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.sourceUri,null)
     }
