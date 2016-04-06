@@ -61,7 +61,7 @@ object WikiInfo
       if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
       
       val pages = try fields(5).toInt
-      catch { case nfe: NumberFormatException => throw new Exception("expected page count in field with index [5], found line ["+line+"]") }
+      catch { case nfe: NumberFormatException => 0 }
       
       val wikiCode = fields(2)
       if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
