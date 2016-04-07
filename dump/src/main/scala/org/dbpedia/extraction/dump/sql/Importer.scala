@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.dump.sql
 
+import com.mysql.jdbc.MysqlDataTruncation
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.StringUtils
@@ -142,6 +143,7 @@ class Importer(conn: Connection) {
     catch {
       // throw our own exception that our XML parser won't catch
       case icv: MySQLIntegrityConstraintViolationException =>       //catch unique key violations (which will occur...)
+      case dce: MysqlDataTruncation =>                              //catch if data is too long for a column
       case sqle: SQLException => throw new ImporterException(sqle)
     }
     finally stmt.close
