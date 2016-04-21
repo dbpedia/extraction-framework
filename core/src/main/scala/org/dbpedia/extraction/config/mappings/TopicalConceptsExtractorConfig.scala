@@ -10,7 +10,7 @@ object TopicalConceptsExtractorConfig
     val catMainTemplates = Set(
       "مزيد"   ,// ar
                                "Infocat", "Infocatm", // ca
-                               "Catmore", // el
+                               "Catmore", // el,ja
                                "Cat main", // en
                                "AP", // es
                                "Nagusia", // eu
