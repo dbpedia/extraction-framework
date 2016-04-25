@@ -74,6 +74,7 @@ class DateTimeParser ( context : {
 
     private val YearRegex = ("""(?iu)""" + prefix + """(?<![\d\pL\w])(-?\d{1,4})(?!\d)\s*(""" + eraRegex + """)?""" + postfix).r
 
+    private val YearRegex2 = ("""(?iu)""" + prefix + """(""" + eraRegex + """)(?<![\d])(\d{1,4})(?!\d)\s*""" + postfix).r
 
     override def parse(node : Node) : Option[Date] =
     {
@@ -162,7 +163,11 @@ class DateTimeParser ( context : {
                     	    (eraIdentifier+year).toInt
                     	  } 
                     	  case YearRegex(year) => year.toInt
-                    	}
+                          case YearRegex2(era, year) => {
+                              val eraIdentifier = getEraSign(era)
+                              (eraIdentifier+year).toInt
+                          }
+                        }
                         return Some(new Date(Some(yearNum), Some(monthNum), Some(day.toInt), datatype))
                     }
                     catch
@@ -353,6 +358,12 @@ class DateTimeParser ( context : {
         {
             val year = result.group(1)
             val eraIdentifier = getEraSign(result.group(2))
+            return new Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
+        }
+        for(result <- YearRegex2.findFirstMatchIn(input))
+        {
+            val year = result.group(2)
+            val eraIdentifier = getEraSign(result.group(1))
             return new Some(new Date(year = Some((eraIdentifier+year).toInt), datatype = datatype))
         }
         None
