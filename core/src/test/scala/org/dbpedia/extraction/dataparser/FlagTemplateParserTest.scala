@@ -68,6 +68,34 @@ class FlagTemplateParserTest extends FlatSpec with ShouldMatchers
     {
         parse("fr", "{{Afrique du Sud}}") should equal (Some("Afrique du Sud"))
     }
+    "FlagTemplateParser" should "return 日本@ja" in
+    {
+        parse("ja", "{{JPN}}") should equal (Some("日本"))
+    }
+    "FlagTemplateParser" should "return スウェーデン@ja" in
+    {
+        parse("ja", "{{flagicon|SWE}}") should equal (Some("スウェーデン"))
+    }
+    "FlagTemplateParser" should "return アメリカ合衆国@ja" in
+    {
+        parse("ja", "{{flagicon2|USA}}") should equal (Some("アメリカ合衆国"))
+    }
+    "FlagTemplateParser" should "return ポルトガル@ja" in
+    {
+        parse("ja", "{{flagicon2|ポルトガル|coronial}}") should equal (Some("ポルトガル"))
+    }
+    "FlagTemplateParser" should "return ブラジル@ja" in
+    {
+        parse("ja", "{{flag|ブラジル}}") should equal (Some("ブラジル"))
+    }
+    "FlagTemplateParser" should "return オーストラリア@ja" in
+    {
+        parse("ja", "{{flag|オーストラリア}}") should equal (Some("オーストラリア"))
+    }
+    "FlagTemplateParser" should "return ドイツ@ja" in
+    {
+        parse("ja", "{{flagcountry|GER}}") should equal (Some("ドイツ"))
+    }
 
 /*  Performance tests for different cases
   
