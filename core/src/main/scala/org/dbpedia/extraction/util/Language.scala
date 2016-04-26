@@ -32,6 +32,7 @@ import scala.collection.mutable.HashMap
  */
 class Language private(
   val wikiCode: String,
+  val name: String,
   val isoCode: String,
   val iso639_3: String,
   val dbpediaDomain: String,
@@ -63,9 +64,10 @@ object Language extends (String => Language)
   
   val map: Map[String, Language] = locally {
     
-    def language(code : String, iso_1: String, iso_3: String): Language = {
+    def language(code : String, name: String, iso_1: String, iso_3: String): Language = {
       new Language(
         code,
+        name,
         iso_1,
         iso_3,
         code+".dbpedia.org",
@@ -84,13 +86,14 @@ object Language extends (String => Language)
     {
       langMapFile.getValue(langEntry).get("iso639_1") match {
         case Some(iso_1) if(iso_1.trim.length > 0) =>
-          languages(langEntry) = language(langEntry, iso_1, langMapFile.getValue(langEntry).get("iso639_3").get)
+          languages(langEntry) = language(langEntry, langMapFile.getValue(langEntry).get("name").get, iso_1, langMapFile.getValue(langEntry).get("iso639_3").get)
         case _ =>
       }
     }
     languages("commons") =
     new Language(
       "commons",
+      "Commons",
       "en",
       "eng",
        // TODO: do DBpedia URIs make sense here? Do we use them at all? Maybe use null instead.
@@ -119,6 +122,7 @@ object Language extends (String => Language)
     languages("wikidata") =
     new Language(
       "wikidata",
+      "Wikidata",
       "en",
       "eng",
        // TODO: do DBpedia URIs make sense here? Do we use them at all? Maybe use null instead.
@@ -133,6 +137,7 @@ object Language extends (String => Language)
     languages("mappings") =
     new Language(
       "mappings",
+      "Mappings",
       "en",
       "eng",
       // No DBpedia / RDF namespaces for mappings wiki. 

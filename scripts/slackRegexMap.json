@@ -1,4 +1,30 @@
 {
-  "[INFO] BUILD SUCCESS":{"msg:":"Extraction is finished.", "exit":true},
-  "[INFO] BUILD FAILURE":{"msg:":"Extraction experienced a failure.", "exit":true}
+  "BUILD SUCCESS":{
+    "msg":"Extraction complete\n",
+    "exit":true,
+    "slack":1,
+    "msgStart": 0,
+    "msgUntil": 5
+  },
+  "BUILD FAILURE":{
+    "msg":"Extraction failed!\n",
+    "exit":true,
+    "slack":1,
+    "msgStart": 0,
+    "msgUntil": 5
+  },
+  "stdSlack:":{
+  "msg":"",
+  "exit":false,
+  "slack":1,
+  "msgStart": 0,
+  "msgUntil": 0
+},
+  "stdGist:":{
+    "msg":"",
+    "exit":false,
+    "slack":0,
+    "msgStart": 0,
+    "msgUntil": 0
+  }
 }

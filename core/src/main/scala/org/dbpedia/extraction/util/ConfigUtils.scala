@@ -65,6 +65,7 @@ object ConfigUtils {
   
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappings.keySet
+      case "@chapters" => languages ++= Namespace.chapters.keySet
       case RangeRegex(from, to) => ranges += toRange(from, to)
       case LanguageRegex(language) => languages += Language(language)
       case ExcludedLanguageRegex(language) => excludedLanguages += Language(language)
