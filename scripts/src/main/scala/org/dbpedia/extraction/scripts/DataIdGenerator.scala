@@ -33,6 +33,8 @@ object DataIdGenerator {
   var rightsStatement: Resource = null
   var dataidStandard: Resource = null
   var dataidLdStandard: Resource = null
+  
+  var currentDataid: Model = null
 
   def main(args: Array[String]) {
 
@@ -137,11 +139,13 @@ object DataIdGenerator {
       Option(lang) match{
         case Some(lang) =>{
           val context = model.createResource(webDir + lang.wikiCode.replace("-", "_") + "/dataid.ttl?subj=" + agentMap.get("role").getAsString.value().toLowerCase + "Context")
-          model.add(context, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "AuthorityEntityContext"))
+          model.add(context, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Authorization"))
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedAgent"), agent)
+          model.add(agent, model.createProperty(model.getNsPrefixURI("dataid"), "hasAuthorization"), context)
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorityAgentRole"), model.createResource(model.getNsPrefixURI("dataid") + agentMap.get("role").getAsString.value()))
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "isInheritable"), model.createTypedLiteral("true", model.getNsPrefixURI("xsd") + "boolean" ))
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "authorizedFor"), uri)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dataid"), "underAuthorization"), context)
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "validForAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PublicAccess"))
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "validForAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "SemiPrivateAccess"))
           model.add(context, model.createProperty(model.getNsPrefixURI("dataid"), "validForAccessLevel"), model.createResource(model.getNsPrefixURI("dataid") + "PrivateAccess"))
@@ -328,13 +332,13 @@ object DataIdGenerator {
         val distributions = dir.listFiles(filter).map(x => x.getName).toList.sorted
 
         if(lang != null && distributions.map(x => x.contains("short-abstracts") || x.contains("short_abstracts") || x.contains("interlanguage_links") || x.contains("interlanguage-links")).foldRight(false)(_ || _)) {
-          val dataidModel = ModelFactory.createDefaultModel()
+          currentDataid = ModelFactory.createDefaultModel()
           val topsetModel = ModelFactory.createDefaultModel()
           val agentModel = ModelFactory.createDefaultModel()
           val mainModel = ModelFactory.createDefaultModel()
           stmtModel = ModelFactory.createDefaultModel()
 
-          addPrefixes(dataidModel)
+          addPrefixes(currentDataid)
           addPrefixes(topsetModel)
           addPrefixes(mainModel)
           addPrefixes(agentModel)
@@ -344,9 +348,9 @@ object DataIdGenerator {
           val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
           logger.log(Level.INFO, "started DataId: " + ttlOutFile.getAbsolutePath)
 
-          uri = dataidModel.createResource(webDir + outer.getName + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
+          uri = currentDataid.createResource(webDir + outer.getName + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
           require(uri != null, "Please provide a valid directory")
-          dataidModel.add(uri, RDF.`type`, dataidModel.createResource(dataidModel.getNsPrefixURI("dataid") + "DataId"))
+          currentDataid.add(uri, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DataId"))
 
           //statements
           versionStatement = addSimpleStatement("version", idVersion, idVersion)
@@ -357,26 +361,26 @@ object DataIdGenerator {
           val creator = addAgent(agentModel, lang, configMap.get("creator").getAsObject)
           val maintainer = addAgent(agentModel, lang, configMap.get("maintainer").getAsObject)
           val contact = addAgent(agentModel, lang, configMap.get("contact").getAsObject)
-          require(creator != null, "Please define an dataid:Agent as a Creator in the dataid stump file (use AuthorityEntityContext).")
+          require(creator != null, "Please define an dataid:Agent as a Creator in the dataid stump file (use dataid:Authorization).")
 
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "modified"), dataidModel.createTypedLiteral(dateformat.format(new Date()), dataidModel.getNsPrefixURI("xsd") + "date"))
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "issued"), dataidModel.createTypedLiteral(dateformat.format(new Date()), dataidModel.getNsPrefixURI("xsd") + "date"))
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "hasAccessLevel"), dataidModel.createResource(dataidModel.getNsPrefixURI("dataid") + "PublicAccess"))
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "latestVersion"), uri)
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "associatedAgent"), creator)
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "associatedAgent"), maintainer)
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dataid"), "associatedAgent"), contact)
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "title"), dataidModel.createLiteral("DataID meta data for the " + lang.locale.getLanguage + " DBpedia", "en"))
-          dataidModel.add(uri,dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
-          dataidModel.add(uri,dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "conformsTo"), dataidLdStandard)
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "publisher"), creator)
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("dc"), "hasVersion"), versionStatement)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dc"), "modified"), currentDataid.createTypedLiteral(dateformat.format(new Date()), currentDataid.getNsPrefixURI("xsd") + "date"))
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dc"), "issued"), currentDataid.createTypedLiteral(dateformat.format(new Date()), currentDataid.getNsPrefixURI("xsd") + "date"))
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dataid"), "hasAccessLevel"), currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "PublicAccess"))
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dataid"), "latestVersion"), uri)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dataid"), "associatedAgent"), creator)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dataid"), "associatedAgent"), maintainer)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dataid"), "associatedAgent"), contact)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dc"), "title"), currentDataid.createLiteral("DataID meta data for the " + lang.locale.getLanguage + " DBpedia", "en"))
+          currentDataid.add(uri,currentDataid.createProperty(currentDataid.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
+          currentDataid.add(uri,currentDataid.createProperty(currentDataid.getNsPrefixURI("dc"), "conformsTo"), dataidLdStandard)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dc"), "publisher"), creator)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("dc"), "hasVersion"), versionStatement)
           catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dcat"), "record"), uri)
 
           topset = addDataset(topsetModel, lang, "dataset", creator, true)
 
           catalogModel.add(catalog, catalogModel.createProperty(catalogModel.getNsPrefixURI("dcat"), "dataset"), topset)
-          dataidModel.add(uri, dataidModel.createProperty(dataidModel.getNsPrefixURI("foaf"), "primaryTopic"), topset)
+          currentDataid.add(uri, currentDataid.createProperty(currentDataid.getNsPrefixURI("foaf"), "primaryTopic"), topset)
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("foaf"), "isPrimaryTopicOf"), uri)
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "vocabulary"), topsetModel.createResource(vocabulary))
           topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "vocabulary"), topsetModel.createResource(vocabulary.replace(".owl", ".nt")))
@@ -407,33 +411,33 @@ object DataIdGenerator {
           //TODO validate & publish DataIds online!!!
 
           //dataidModel.add(staticModel)                                                     //adding type statements
-          dataidModel.write(new FileOutputStream(ttlOutFile), "TURTLE")
-          dataidModel.add(agentModel)
+          currentDataid.write(new FileOutputStream(ttlOutFile), "TURTLE")
+          currentDataid.add(agentModel)
           var baos = new ByteArrayOutputStream()
           agentModel.write(baos, "TURTLE")
           var outString = new String(baos.toByteArray(), Charset.defaultCharset())
-          outString = "\n#### Agents & EntityContexts ####\n" +
+          outString = "\n#### Agents & Authorizations ####\n" +
             outString.replaceAll("(@prefix).*\\n", "")
 
-          dataidModel.add(topsetModel)
+          currentDataid.add(topsetModel)
           baos = new ByteArrayOutputStream()
           topsetModel.write(baos, "TURTLE")
           outString += "\n########## Main Dataset ##########\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
-          dataidModel.add(mainModel)
+          currentDataid.add(mainModel)
           baos = new ByteArrayOutputStream()
           mainModel.write(baos, "TURTLE")
           outString += "\n#### Datasets & Distributions ####\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
-          dataidModel.add(stmtModel)
+          currentDataid.add(stmtModel)
           baos = new ByteArrayOutputStream()
           stmtModel.write(baos, "TURTLE")
           outString += "\n########### Statements ###########\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
-          dataidModel.add(staticModel)
+          currentDataid.add(staticModel)
           baos = new ByteArrayOutputStream()
           staticModel.write(baos, "TURTLE")
           outString += "\n########### MediaTypes ###########\n" +
@@ -444,7 +448,7 @@ object DataIdGenerator {
           printStream.print(outString)
           printStream.close()
 
-          outString = OpenRdfUtils.writeSerialization(OpenRdfUtils.convertToOpenRdfModel(dataidModel), RDFFormat.JSONLD)
+          outString = OpenRdfUtils.writeSerialization(OpenRdfUtils.convertToOpenRdfModel(currentDataid), RDFFormat.JSONLD)
           os = new FileOutputStream(jldOutFile, false)
           printStream = new PrintStream(os)
           printStream.print(outString)
