@@ -109,6 +109,7 @@ object Language extends (String => Language)
     languages("core") =
     new Language(
       "core",
+      "Core Directory",
       "en",
       "eng",
       "core.dbpedia.org",

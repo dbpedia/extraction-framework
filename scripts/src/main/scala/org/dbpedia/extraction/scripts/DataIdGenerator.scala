@@ -4,17 +4,14 @@ import java.io._
 import java.net.{URLEncoder, URI}
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
-import java.util
 import java.util.Date
 import java.util.logging.{Level, Logger}
 
 import com.hp.hpl.jena.rdf.model.{Model, ModelFactory, Resource}
 import com.hp.hpl.jena.vocabulary.RDF
-import org.apache.commons.io.FileUtils
 import org.apache.commons.io.filefilter.IOFileFilter
 import org.apache.jena.atlas.json.{JsonString, JSON, JsonObject}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.ontology.DBpediaNamespace
 import org.dbpedia.extraction.util.{OpenRdfUtils, Language}
 import org.openrdf.rio.RDFFormat
 
@@ -23,6 +20,9 @@ import scala.collection.JavaConverters._
 import scala.io.{BufferedSource, Source}
 import scala.reflect.runtime.currentMirror
 import scala.reflect.runtime.universe._
+
+import scala.language.postfixOps
+import sys.process._
 
 
 /**
@@ -338,7 +338,9 @@ object DataIdGenerator {
     //TODO links...
     //visit all subdirectories, determine if its a dbpedia language dir, and create a DataID for this language
     for (outer <- dump.listFiles().filter(_.isDirectory)) {
-      for (dir <- outer.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith("."))) {
+      //core has other structure (no languages)
+      val realDir = if(outer.getName == "core") dump else outer
+      for (dir <- realDir.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith("."))) {
         val lang = Language.get(dir.getName.replace("_", "-")) match {
           case Some(l) => l
           case _ =>
@@ -361,10 +363,11 @@ object DataIdGenerator {
               false
           }
         }
+        //have to use processes to avoid symlink problem with listFiles
+          val commandRes: String = ("ls -1 " + dir.getAbsolutePath).!!
+          val distributions = commandRes.split("\\n").map(_.trim).toList.sorted
 
-          val distributions = FileUtils.listFiles(dir, filter, null).asScala.toList.sorted
-
-          if (lang != null && distributions.map(x => x.getName.contains("short-abstracts") || x.getName.contains("short_abstracts") || x.getName.contains("interlanguage_links") || x.getName.contains("interlanguage-links")).foldRight(false)(_ || _)) {
+          if (lang != null && distributions.map(x => x.contains("short-abstracts") || x.contains("interlanguage-links")).foldRight(false)(_ || _)) {
             currentDataid = ModelFactory.createDefaultModel()
             val topsetModel = ModelFactory.createDefaultModel()
             val agentModel = ModelFactory.createDefaultModel()
@@ -381,7 +384,7 @@ object DataIdGenerator {
             val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
             logger.log(Level.INFO, "started DataId: " + ttlOutFile.getAbsolutePath)
 
-            uri = currentDataid.createResource(webDir + outer.getName + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
+            uri = currentDataid.createResource(webDir + realDir.getName + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
             require(uri != null, "Please provide a valid directory")
             currentDataid.add(uri, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DataId"))
 
@@ -429,16 +432,16 @@ object DataIdGenerator {
             var lastFile: String = null
             var dataset: Resource = null
             for (dis <- distributions) {
-              if (lastFile != dis.getName.substring(0, dis.getName.lastIndexOf("_"))) {
-                lastFile = dis.getName.substring(0, dis.getName.lastIndexOf("_"))
-                dataset = addDataset(mainModel, lang, dis.getName, creator)
+              if (lastFile != dis.substring(0, dis.lastIndexOf("_"))) {
+                lastFile = dis.substring(0, dis.lastIndexOf("_"))
+                dataset = addDataset(mainModel, lang, dis, creator)
                 topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "subset"), dataset)
                 mainModel.add(dataset, mainModel.createProperty(mainModel.getNsPrefixURI("dc"), "isPartOf"), topset)
               }
-              if (coreList.contains(dis.getName.substring(0, dis.getName.lastIndexOf('.')))) {
+              if (coreList.contains(dis.substring(0, dis.lastIndexOf('.')))) {
                 mainModel.add(addSparqlEndpoint(dataset))
               }
-              addDistribution(mainModel, dataset, lang, outer.getName, dis.getName, creator)
+              addDistribution(mainModel, dataset, lang, realDir.getName, dis, creator)
             }
 
             //TODO validate & publish DataIds online!!!
