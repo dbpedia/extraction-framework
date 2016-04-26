@@ -101,6 +101,20 @@ object Language extends (String => Language)
       "http://commons.wikimedia.org",
       "https://commons.wikimedia.org/w/api.php"
     )
+
+    //used to refer to dbpedia core directory
+    languages("core") =
+    new Language(
+      "core",
+      "en",
+      "eng",
+      "core.dbpedia.org",
+      "http://core.dbpedia.org",
+      new DBpediaNamespace("http://core.dbpedia.org/resource/"),
+      new DBpediaNamespace("http://core.dbpedia.org/property/"),
+      "http://core.wikimedia.org",
+      "https://core.wikimedia.org/w/api.php"
+    )
     
     languages("wikidata") =
     new Language(
@@ -152,7 +166,12 @@ object Language extends (String => Language)
    * Wikimedia Wikidata
    */
   val Wikidata = map("wikidata")
-  
+
+  /**
+    * Wikimedia Wikidata
+    */
+  val Core = map("core")
+
   /**
    * Gets a language object for a Wikipedia language code.
    * Throws IllegalArgumentException if language code is unknown.
