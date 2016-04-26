@@ -341,6 +341,7 @@ object DataIdGenerator {
       //core has other structure (no languages)
       val realDir = if(outer.getName == "core") dump else outer
       for (dir <- realDir.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith("."))) {
+        val innerPath = if(outer.getName == "core") "" else outer.getName
         val lang = Language.get(dir.getName.replace("_", "-")) match {
           case Some(l) => l
           case _ =>
@@ -384,7 +385,7 @@ object DataIdGenerator {
             val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
             logger.log(Level.INFO, "started DataId: " + ttlOutFile.getAbsolutePath)
 
-            uri = currentDataid.createResource(webDir + realDir.getName + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
+            uri = currentDataid.createResource(webDir + innerPath + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
             require(uri != null, "Please provide a valid directory")
             currentDataid.add(uri, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DataId"))
 
