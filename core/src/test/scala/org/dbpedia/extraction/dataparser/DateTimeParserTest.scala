@@ -619,7 +619,64 @@ class DateTimeParserTest extends FlatSpec with Matchers
     	parse("en", "xsd:date", "15,25") should equal (None)
     	parse("fr", "xsd:date", "15,25") should equal (None)
     }
-    
+
+    "DataParser" should "return date ({{生年月日と年齢|1989|7|23}})" in
+    {
+        parse("ja", "xsd:date", "{{生年月日と年齢|1989|7|23}}") should equal (Some("1989-07-23"))
+    }
+    "DataParser" should "return date ({{生年月日と年齢|1989|7|23|死亡}})" in
+    {
+        parse("ja", "xsd:date", "{{生年月日と年齢|1989|7|23|死亡}}") should equal (Some("1989-07-23"))
+    }
+    "DataParser" should "return date ({{生年月日と年齢2|1988|6|10|1961|7|4}})" in
+    {
+        parse("ja", "xsd:date", "{{生年月日と年齢2|1988|6|10|1961|7|4}}") should equal (Some("1961-07-04"))
+    }
+    "DataParser" should "return date ({{生年月日と馬齢|p=0|2002|1|1}})" in
+    {
+        parse("ja", "xsd:date", "{{生年月日と馬齢|p=0|2002|1|1}}") should equal (Some("2002-01-01"))
+    }
+    "DataParser" should "return date ({{死亡年月日と没年齢|1940|10|9|1980|12|8}})" in
+    {
+        parse("ja", "xsd:date", "{{死亡年月日と没年齢|1940|10|9|1980|12|8}}") should equal (Some("1980-12-08"))
+    }
+    "DataParser" should "return date ({{死亡年月日と没馬齢|p=1|1973|4|19|1978|3|5}})" in
+    {
+        parse("ja", "xsd:date", "{{死亡年月日と没馬齢|p=1|1973|4|19|1978|3|5}}") should equal (Some("1978-03-05"))
+    }
+    "DataParser" should "return date ({{没年齢|1940|10|9|1980|12|8}})" in
+    {
+        parse("ja", "xsd:date", "{{没年齢|1940|10|9|1980|12|8}}") should equal (Some("1980-12-08"))
+    }
+    "DataParser" should "return date ({{没年齢2|1940|10|9|1980|12|8}})" in
+    {
+        parse("ja", "xsd:date", "{{没年齢2|1893|10|9|1947|12|8}}") should equal (Some("1947-12-08"))
+    }
+    "DataParser" should "return date ({{年数|1940|10|9|1980|12|8}})" in
+    {
+        parse("ja", "xsd:date", "{{年数|1989|7|23}}") should equal (Some("1989-07-23"))
+    }
+    "DataParser" should "return gYear ({{年|1980}})" in
+    {
+        parse("ja", "xsd:gYear", "{{年|1980}}") should equal (Some("1980"))
+    }
+    "DataParser" should "return gYear (1990年)" in
+    {
+        parse("ja", "xsd:gYear", "1990年") should equal (Some("1990"))
+    }
+    "DataParser" should "return date (紀元前20年)" in
+    {
+        parse("ja", "xsd:gYear", "紀元前20年") should equal (Some("-0020"))
+    }
+    "DataParser" should "return date (前259年)" in
+    {
+        parse("ja", "xsd:gYear", "前259年") should equal (Some("-0259"))
+    }
+    "DataParser" should "return date (西暦2012年)" in
+    {
+        parse("ja", "xsd:gYear", "西暦2012年") should equal (Some("2012"))
+    }
+
 
     private val wikiParser = WikiParser.getInstance()
 
