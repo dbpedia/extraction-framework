@@ -346,7 +346,9 @@ object DataIdGenerator {
           logger.log(Level.INFO, "no language found for: " + dir.getName)
           null
       }
-      val filterstring = ("^[^$]+_" + dir.getName + "(" + extensions.foldLeft(new StringBuilder) { (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + "|.xml)" + compression).replace(".", "\\.")
+      val filterstring = ("^[^$]+_[a-z-_]+(" + extensions.foldLeft(new StringBuilder) { (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + "|.xml)" + compression).replace(".", "\\.")
+
+      //val filter = new FileFilter {
       val filter = new IOFileFilter {
         override def accept(file: File): Boolean = {
           if (file.getName.matches(filterstring))
@@ -366,10 +368,13 @@ object DataIdGenerator {
       val commandRes: String = ("ls -1 " + dir.getAbsolutePath).!!
       val distributions = commandRes.split("\\n").map(_.trim).toList.sorted
 
-      if(outer.getName == "core")
+      //windows:
+      //val distributions = dir.listFiles(filter).map(x => x.getName.replace("-", "_")).toList.sorted
+
+      if(dir.getName == "core")
         coreList = distributions.flatMap( dis => dumpFile.findFirstIn(dis))
 
-      if (lang != null && distributions.map(x => x.contains("short-abstracts") || x.contains("interlanguage-links")).foldRight(false)(_ || _)) {
+      if (lang != null && distributions.map(x => x.contains("short_abstracts") || x.contains("interlanguage_links")).foldRight(false)(_ || _)) {
         currentDataid = ModelFactory.createDefaultModel()
         val topsetModel = ModelFactory.createDefaultModel()
         val agentModel = ModelFactory.createDefaultModel()
@@ -441,7 +446,9 @@ object DataIdGenerator {
             mainModel.add(dataset, mainModel.createProperty(mainModel.getNsPrefixURI("dc"), "isPartOf"), topset)
           }
           dumpFile.findFirstIn(dis) match {
-            case Some(l) if(coreList.contains(l)) => mainModel.add(addSparqlEndpoint(dataset))
+            case Some(l) =>
+              if(coreList.contains(l))
+                mainModel.add(addSparqlEndpoint(dataset))
             case None =>
           }
           addDistribution(mainModel, dataset, lang, outer.getName, dis, creator)
@@ -571,8 +578,9 @@ object DataIdGenerator {
         //core has other structure (no languages)
         if(outer.getName == "core")
           extractDataID(dump, outer)
-        for (dir <- outer.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith(".")))
-          extractDataID(outer, dir)
+        else
+          for (dir <- outer.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith(".")))
+            extractDataID(outer, dir)
       }
       //write catalog
 
