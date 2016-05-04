@@ -369,7 +369,7 @@ object DataIdGenerator {
           val distributions = commandRes.split("\\n").map(_.trim).toList.sorted
 
         if(outer.getName == "core")
-          coreList = distributions.map( dis => dis.substring(0, dis.lastIndexOf("_") + dis.substring(dis.lastIndexOf("_")).indexOf('.')))
+          coreList = distributions.flatMap( dis => "^[a-zA-Z0-9-_]+".r.findFirstIn(dis))
 
           if (lang != null && distributions.map(x => x.contains("short-abstracts") || x.contains("interlanguage-links")).foldRight(false)(_ || _)) {
             currentDataid = ModelFactory.createDefaultModel()
