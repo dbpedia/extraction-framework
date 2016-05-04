@@ -96,7 +96,7 @@ object DataIdGenerator {
     val sparqlEndpoint = configMap.get("sparqlEndpoint").getAsString.value
     require(configMap.get("sparqlEndpoint") == null || URI.create(sparqlEndpoint) != null, "Please specify a valid sparql endpoint!")
 
-    val coreList = configMap.get("coreDatasets").getAsArray().toArray().map(x => (x.asInstanceOf[JsonString].value().toString))
+    var coreList = List("")
 
     val license = configMap.get("licenseUri").getAsString.value
     require(URI.create(license) != null, "Please enter a valid license uri (odrl license)")
@@ -335,7 +335,7 @@ object DataIdGenerator {
       dist
     }
 
-    //TODO links...
+    //TODO links... + do core first to get corelist!
     //visit all subdirectories, determine if its a dbpedia language dir, and create a DataID for this language
     for (outer <- dump.listFiles().filter(_.isDirectory)) {
       //core has other structure (no languages)
@@ -367,6 +367,9 @@ object DataIdGenerator {
         //have to use processes to avoid symlink problem with listFiles
           val commandRes: String = ("ls -1 " + dir.getAbsolutePath).!!
           val distributions = commandRes.split("\\n").map(_.trim).toList.sorted
+
+        if(outer.getName == "core")
+          coreList = distributions.map( dis => dis.substring(0, dis.lastIndexOf("_") + dis.substring(dis.lastIndexOf("_")).indexOf('.')))
 
           if (lang != null && distributions.map(x => x.contains("short-abstracts") || x.contains("interlanguage-links")).foldRight(false)(_ || _)) {
             currentDataid = ModelFactory.createDefaultModel()
@@ -439,7 +442,7 @@ object DataIdGenerator {
                 topsetModel.add(topset, topsetModel.createProperty(topsetModel.getNsPrefixURI("void"), "subset"), dataset)
                 mainModel.add(dataset, mainModel.createProperty(mainModel.getNsPrefixURI("dc"), "isPartOf"), topset)
               }
-              if (coreList.contains(dis.substring(0, dis.lastIndexOf('.')))) {
+              if (coreList.contains(dis.substring(0, dis.lastIndexOf("_") + dis.substring(dis.lastIndexOf("_")).indexOf('.')))) {
                 mainModel.add(addSparqlEndpoint(dataset))
               }
               addDistribution(mainModel, dataset, lang, realDir.getName, dis, creator)
