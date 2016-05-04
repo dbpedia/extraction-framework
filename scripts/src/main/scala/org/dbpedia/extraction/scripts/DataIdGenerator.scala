@@ -572,13 +572,12 @@ object DataIdGenerator {
         dataset
       }
 
-      //TODO links... + do core first to get corelist!
+      //TODO links...
       //visit all subdirectories, determine if its a dbpedia language dir, and create a DataID for this language
+      extractDataID(dump, new File(dump, "core"))
       for (outer <- dump.listFiles().filter(_.isDirectory)) {
         //core has other structure (no languages)
-        if(outer.getName == "core")
-          extractDataID(dump, outer)
-        else
+        if(outer.getName != "core")
           for (dir <- outer.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith(".")))
             extractDataID(outer, dir)
       }
