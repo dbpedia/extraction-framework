@@ -90,7 +90,7 @@ object LiveExtractionConfigLoader
     val lang = Language.apply(landCode)
     val articlesSource : Source =
       if (item.getXML.isEmpty)
-        WikiSource.fromPageIDs(List(item.getItemID), new URL(apiURL), lang)
+        WikiSource.fromRevisionIDs(List(item.getItemID), new URL(apiURL), lang)
       else {
         XMLSource.fromOAIXML(XML.loadString(item.getXML))
       }

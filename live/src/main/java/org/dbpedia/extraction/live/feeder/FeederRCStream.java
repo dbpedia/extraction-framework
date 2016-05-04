@@ -12,13 +12,13 @@ import java.util.Set;
 import java.util.Iterator;
 import java.util.List;
 
-import socketio.IOAcknowledge;
-import socketio.IOCallback;
-import socketio.SocketIO;
-import socketio.SocketIOException;
+import io.socket.IOAcknowledge;
+import io.socket.IOCallback;
+import io.socket.SocketIO;
+import io.socket.SocketIOException;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 
 
@@ -42,18 +42,22 @@ public class FeederRCStream extends Feeder implements IOCallback {
 
     protected final long pollInterval;              // in miliseconds
     protected final long sleepInterval;             // in miliseconds
+    public String addr;
+    public String subs;
 
     protected Set<LiveQueueItem> RCStreamRecordSet;
 
     public FeederRCStream(String feederName, LiveQueuePriority queuePriority,
-                     String oaiUri, String oaiPrefix, String baseWikiUri,
-                     long pollInterval, long sleepInterval, String defaultStartTime,
-                     String folderBasePath) {
+                          String oaiUri, String oaiPrefix, String baseWikiUri,
+                          long pollInterval, long sleepInterval, String defaultStartTime,
+                          String folderBasePath, String addr, String subs) {
         super(feederName,queuePriority,defaultStartTime,folderBasePath);
 
         this.oaiUri = oaiUri;
         this.oaiPrefix = oaiPrefix;
         this.baseWikiUri = baseWikiUri;
+        this.addr = addr;
+        this.subs = subs;
 
         this.pollInterval = pollInterval;
         this.sleepInterval = sleepInterval;
@@ -63,20 +67,25 @@ public class FeederRCStream extends Feeder implements IOCallback {
     @Override
     protected void initFeeder() {
         RCStreamRecordSet = JDBCUtil.getCacheUnmodified(30, 5000);
-        try {System.out.println("hello");
+        try {
             socket = new SocketIO();
             socket.connect("http://stream.wikimedia.org/rc", this);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+
     }
 
-    @Override
-    public void onMessage(JSONObject json, IOAcknowledge ack) {}
 
     @Override
     public void onMessage(String data, IOAcknowledge ack) {}
+
+    @Override
+    public void onMessage(JsonElement jsonElement, IOAcknowledge ioAcknowledge) {
+
+    }
 
     @Override
     public void onError(SocketIOException socketIOException) {}
@@ -86,29 +95,16 @@ public class FeederRCStream extends Feeder implements IOCallback {
 
     @Override
     public void onConnect() {
-        System.out.println("Server connected: ");
+        //System.out.println("Server connected: ");
         socket.emit("subscribe", "fr.wikipedia.org");
     }
 
     @Override
-    public void on(String event, IOAcknowledge ack, Object... args) {
-        //System.out.println("Server on: ");
-        /*try {
-            JSONObject json = (JSONObject) (args[0]);
-            if(json.getJSONObject("revision") != null) {
-                //System.out.println("ok :: "+(JSONObject) (args[0]));
-                //System.out.println("Server said:" + json.getString("id") + "    " + json.getJSONObject("revision").getString("new"));
-                RCStreamRecordSet.add(new LiveQueueItem( new Integer( json.getJSONObject("revision").getString("new") ), json.getString("timestamp")) );
-            }
-        } catch (Exception e) {System.out.println("ok2 :: " + (JSONObject) (args[0]));
-
-        }*/
+    public void on(String event, IOAcknowledge ack, JsonElement... args) {
         try {
-            JSONObject json = (JSONObject) (args[0]);
-            if (json.getString("id") != "null") {
-                //System.out.println("ok2 :: " + (JSONObject) (args[0]));
-                //System.out.println("Server said:" + json.getString("id") + "    " + json.getJSONObject("revision").getString("new"));
-                RCStreamRecordSet.add(new LiveQueueItem(new Integer(json.getString("id")), json.getString("timestamp")));
+            JsonObject json = (JsonObject)(args[0]);
+            if (json.get("id").getAsString() != "null") {
+                RCStreamRecordSet.add(new LiveQueueItem(new Integer(json.getAsJsonObject("revision").get("new").getAsString()), json.get("timestamp").getAsString()));
             }
         }catch (Exception e2) {
 

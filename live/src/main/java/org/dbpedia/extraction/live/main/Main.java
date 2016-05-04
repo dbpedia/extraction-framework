@@ -81,7 +81,7 @@ public class Main {
             feeders .add( new FeederRCStream("FeederRCStream", LiveQueuePriority.LivePriority,
                     LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
                     pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
-                    LiveOptions.options.get("working_directory")));
+                    LiveOptions.options.get("working_directory"), LiveOptions.options.get("feeder.live.rcStreamUrl"), LiveOptions.options.get("feeder.live.rcStreamSubscribe")));
         }
 
         /*if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
@@ -115,7 +115,6 @@ public class Main {
                 p.startProcessor();
 
             publisher = new Publisher("Publisher", 4);
-
             //statistics.startStatistics();
 
             logger.info("DBpedia-Live components started");

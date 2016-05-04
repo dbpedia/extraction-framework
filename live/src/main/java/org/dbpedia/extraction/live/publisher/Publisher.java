@@ -68,6 +68,7 @@ public class Publisher extends Thread{
                         subjectsClear.size() > MAX_QUEUE_SIZE) {
 
                     pageCache.clear();
+
                     flush();
                 }
                 bufferDiff(pubData);
@@ -98,7 +99,7 @@ public class Publisher extends Thread{
 
         String fileName = publishDiffBaseName + "/" + PublisherService.getNextPublishPath();
         File parent = new File(fileName).getParentFile();
-
+        System.out.println(fileName);
         if(parent != null)
             parent.mkdirs();
 
