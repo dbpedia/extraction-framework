@@ -23,6 +23,7 @@ object DisambiguationExtractorConfig
          "hu" -> " (egyértelműsítő lap)",
          "id" -> " (disambig)",
          "it" -> " (disambigua)",
+         "ja" -> " (曖昧さ回避)",
          "ko" -> " (동음이의)",
          "nl" -> " (doorverwijspagina)", //TODO make it Set() for multiple “nl” -> " (disambigueren)"
          "pl" -> " (ujednoznacznienie)",
