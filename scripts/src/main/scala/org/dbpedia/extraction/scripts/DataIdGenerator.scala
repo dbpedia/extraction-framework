@@ -9,7 +9,6 @@ import java.util.logging.{Level, Logger}
 
 import com.hp.hpl.jena.rdf.model.{Model, ModelFactory, Resource}
 import com.hp.hpl.jena.vocabulary.RDF
-import org.apache.commons.io.filefilter.IOFileFilter
 import org.apache.jena.atlas.json.{JSON, JsonObject}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.{OpenRdfUtils, Language}
@@ -346,27 +345,11 @@ object DataIdGenerator {
           logger.log(Level.INFO, "no language found for: " + dir.getName)
           null
       }
-      val filterstring = ("^[^$]+_[a-z-_]+(" + extensions.foldLeft(new StringBuilder) { (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + "|.xml)" + compression).replace(".", "\\.")
+      val fileFilter = ("^[^$]+_[a-z-_]+(" + extensions.foldLeft(new StringBuilder) { (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + "|.xml)" + compression).replace(".", "\\.").r
 
-      //val filter = new FileFilter {
-      val filter = new IOFileFilter {
-        override def accept(file: File): Boolean = {
-          if (file.getName.matches(filterstring))
-            true
-          else
-            false
-        }
-
-        override def accept(dir: File, name: String): Boolean = {
-          if (name.matches(filterstring))
-            true
-          else
-            false
-        }
-      }
       //have to use processes to avoid symlink problem with listFiles
       val commandRes: String = ("ls -1 " + dir.getAbsolutePath).!!
-      val distributions = commandRes.split("\\n").map(_.trim.replace("-", "_")).toList.sorted
+      val distributions = commandRes.split("\\n").flatMap(x => fileFilter.findFirstIn(x)).map(_.trim.replace("-", "_")).toList.sorted
 
       //windows:
       //val distributions = dir.listFiles(filter).map(x => x.getName.replace("-", "_")).toList.sorted
