@@ -94,8 +94,13 @@ public class PageProcessor extends Thread{
                     JSONCache.deleteCacheItem(page.getItemID(),LiveExtractionConfigLoader.policies());
                     logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
                 }
-                else
-                    processPageFromTitle(page);
+                else {
+                    if (page.getItemName().isEmpty()) {
+                        processPageFromTitle(page);
+                    } else {
+                        processPage(page);
+                    }
+                }
             }
             catch (Exception exp){
                 logger.error("Failed to process page " + currentPage.getItemID() + " reason: " + exp.getMessage(), exp);
