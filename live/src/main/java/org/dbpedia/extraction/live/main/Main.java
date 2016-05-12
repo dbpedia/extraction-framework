@@ -62,7 +62,7 @@ public class Main {
             //    LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
             //    pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
             //   LiveOptions.options.get("working_directory")));
-            feeders.add(new RCStreamFeeder("RCStreamFeeder", LiveQueuePriority.LivePriority, null, "./tmp", "en.wikipedia.org"));
+            feeders.add(new RCStreamFeeder("RCStreamFeeder", LiveQueuePriority.LivePriority,  LiveOptions.options.get("uploaded_dump_date"), "./tmp", "en.wikipedia.org"));
         }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
