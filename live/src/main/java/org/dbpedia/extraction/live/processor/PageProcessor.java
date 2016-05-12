@@ -43,11 +43,27 @@ public class PageProcessor extends Thread{
 
 
     private void processPage(LiveQueueItem item){
+        processPage(item, false);
+    }
+
+    private void processPageFromTitle(LiveQueueItem item){
+        processPage(item, true);
+    }
+
+    private void processPage(LiveQueueItem item, boolean isTitle) {
         try{
-            Boolean extracted = LiveExtractionConfigLoader.extractPage(
-                    item,
-                    LiveOptions.options.get("localApiURL"),
-                    LiveOptions.language);
+            Boolean extracted = false;
+            if (isTitle) {
+                extracted = LiveExtractionConfigLoader.extractPageFromTitle(
+                        item,
+                        LiveOptions.options.get("localApiURL"),
+                        LiveOptions.language);
+            } else {
+                extracted = LiveExtractionConfigLoader.extractPage(
+                        item,
+                        LiveOptions.options.get("localApiURL"),
+                        LiveOptions.language);
+            }
 
             if (!extracted)
                 JSONCache.setErrorOnCache(item.getItemID(), -1);
@@ -57,7 +73,6 @@ public class PageProcessor extends Thread{
             JSONCache.setErrorOnCache(item.getItemID(), -2);
         }
     }
-
 
     public void run(){
         LiveQueueItem currentPage = new LiveQueueItem(0,"");
@@ -80,7 +95,7 @@ public class PageProcessor extends Thread{
                     logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
                 }
                 else
-                    processPage(page);
+                    processPageFromTitle(page);
             }
             catch (Exception exp){
                 logger.error("Failed to process page " + currentPage.getItemID() + " reason: " + exp.getMessage(), exp);
