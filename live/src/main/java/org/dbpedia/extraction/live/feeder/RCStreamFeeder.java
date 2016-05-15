@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -101,10 +102,14 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
     @Override
     public void on(String event, IOAcknowledge ack, com.google.gson.JsonElement... args) {
         JsonObject jsonObject = (JsonObject) args[0];
+        if (jsonObject.get("type").getAsString().matches("(categorize|log)")) {
+            // Don't handle log or categorize events, they don't indicate a change of wikipages
+            return;
+        }
         String title = jsonObject.get("title").getAsString();
         Long timestamp = jsonObject.get("timestamp").getAsLong();
         String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
-        synchronized (this){
+        synchronized (this) {
             events.add(new LiveQueueItem(-1, title, eventTimestamp, false, ""));
             logger.debug("Registered event for page " + title + " at " + eventTimestamp);
         }
