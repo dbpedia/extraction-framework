@@ -57,14 +57,14 @@ public class Main {
 
         JDBCUtil.execSQL("SET names utf8");
 
-        /*if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
             long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.sleepInterval"));
             feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
                 LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
                 pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
                 LiveOptions.options.get("working_directory")));
-        }*/
+        }
 
         /*if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.live.pollInterval"));
@@ -84,7 +84,7 @@ public class Main {
                     LiveOptions.options.get("working_directory"), LiveOptions.options.get("feeder.live.rcStreamUrl"), LiveOptions.options.get("feeder.live.rcStreamSubscribe")));
         }
 
-        /*if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
             int minDaysAgo = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.minDaysAgo"));
             int chunk = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.chunk"));
             int threshold = Integer.parseInt(LiveOptions.options.get("feeder.unmodified.threshold"));
@@ -92,7 +92,7 @@ public class Main {
             feeders .add( new UnmodifiedFeeder("FeederUnmodified", LiveQueuePriority.UnmodifiedPagePriority,
                 minDaysAgo, chunk, threshold, sleepTime,
                 LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
-        }*/
+        }
 
         int threads = Integer.parseInt(LiveOptions.options.get("ProcessingThreads"));
         for (int i=0; i < threads ; i++){

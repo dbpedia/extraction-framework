@@ -99,7 +99,7 @@ public class Publisher extends Thread{
 
         String fileName = publishDiffBaseName + "/" + PublisherService.getNextPublishPath();
         File parent = new File(fileName).getParentFile();
-        System.out.println(fileName);
+
         if(parent != null)
             parent.mkdirs();
 
