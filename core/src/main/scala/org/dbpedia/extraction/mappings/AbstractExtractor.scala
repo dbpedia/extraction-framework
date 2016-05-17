@@ -37,9 +37,9 @@ class AbstractExtractor(
 extends PageNodeExtractor
 {
     //TODO make this configurable
-    protected def apiUrl: String = "http://localhost/mediawiki/api.php"
+    protected def apiUrl: String = "http://localhost:8008/mediawiki/api.php"
 
-    private val maxRetries = 3
+    private val maxRetries = 5
 
     /** timeout for connection to web server, milliseconds */
     private val connectMs = 2000
@@ -48,7 +48,7 @@ extends PageNodeExtractor
     private val readMs = 8000
 
     /** sleep between retries, milliseconds, multiplied by CPU load */
-    private val sleepFactorMs = 4000
+    private val sleepFactorMs = 1000
 
     private val language = context.language.wikiCode
 

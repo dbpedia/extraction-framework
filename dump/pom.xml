@@ -41,25 +41,25 @@
 							</jvmArgs>
 							<args>
 								<!-- base folder of downloaded dumps -->
-								<arg>/data/dbpedia-release/data</arg>
+								<arg>/data/extraction-data/2016-04</arg>
 								<!-- location of SQL file containing MediaWiki table definitions -->
-								<arg>/home/dbpedia-release/bin/mediawiki/core/maintenance/tables.sql</arg>
+								<arg>/home/extractor/mediawikiTables.sql</arg>
 								<!-- JDBC URL of MySQL server. Import creates a new database for 
 									each wiki. -->
-								<arg>jdbc:mysql://localhost/?characterEncoding=UTF-8</arg>
+								<arg>jdbc:mysql://localhost/?characterEncoding=UTF-8&amp;user=root</arg>
 								<!-- require-download-complete -->
-								<arg>true</arg>
+								<arg>true</arg> 
 								<!-- file name: pages-articles.xml{,.bz2,.gz} -->
 								<arg>pages-articles.xml.bz2</arg>
 								<!-- languages and article count ranges, comma-separated, e.g. "de,en" 
 									or "@mappings" etc. -->
-								<arg>10000-</arg>
+								<arg>bg,bn,bpy,br,bug,ca,ceb,ce,ckb,commons,cv,cy,el,et,eu,fa,fi,fo,fy,ga,gd,gl,gu,hi,hr,ht,hu,hy,ia,id,io,is,it,jv,ka,kk,kn,ku,ky,la,lb,lmo,lt,lv,map-bms,mg,mk,ml,mn,mr,ms,mt,my,mzn,nah,nap,nds,ne,new,nn,no,oc,pa,pms,pnb,pt,qu,sah,sa,scn,sco,sh,simple,si,sk,sl,sq,sr,su,sv,sw,ta,te,tg,th,tl,tr,tt,uk,ur,uz,vec,vi,vo,war,wa,wikidata,yi,yo,zh-min-nan,zh-yue,zh</arg>
 							</args>
 						</launcher>
 
 						<launcher>
 							<id>extraction</id>
-							<mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass>
+							<mainClass>org.dbpedia.extraction.dump.extract.Extraction</mainClass> 
 
 							<jvmArgs>
 								<jvmArg>-server</jvmArg>
@@ -129,7 +129,14 @@
 									these files -->
 							</args>
 						</launcher>
-
+                        <launcher>
+                            <id>SlackForwarder</id>
+                            <mainClass>org.dbpedia.extraction.scripts.SlackForwarder</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
 					</launchers>
 				</configuration>
 
