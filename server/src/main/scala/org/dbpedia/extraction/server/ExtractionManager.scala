@@ -154,6 +154,10 @@ abstract class ExtractionManager(
         val source = if (paths.mappingsDir != null && paths.mappingsDir.isDirectory)
         {
             val file = new File(paths.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+            if(!file.exists()) {
+              logger.warning("MAPPING FILE [" + file + "] DOES NOT EXIST! WILL BE IGNORED")
+              return Map[WikiTitle, WikiPage]()
+            }
             logger.warning("LOADING MAPPINGS NOT FROM SERVER, BUT FROM LOCAL FILE ["+file+"] - MAY BE OUTDATED - ONLY FOR TESTING!")
             XMLSource.fromFile(file, language) // TODO: use Language.Mappings?
         }
