@@ -11,6 +11,8 @@ import java.util.Objects;
  */
 public class LiveQueueItem implements Comparable<LiveQueueItem>{
     private long itemID = 0;
+    private long itemRevisionID = 0;
+    private String itemTitle = "";
     private LiveQueuePriority itemPriority;
     private String itemName = "";
     private String modificationDate = "";
@@ -20,6 +22,13 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
 
     public LiveQueueItem(long itemID, String modificationDate){
         this.itemID = itemID;
+        this.modificationDate = modificationDate;
+    }
+
+    public LiveQueueItem(long itemID, long itemRevisionID, String itemTitle, String modificationDate){
+        this.itemID = itemID;
+        this.itemRevisionID = itemRevisionID;
+        this.itemTitle = itemTitle;
         this.modificationDate = modificationDate;
     }
 
@@ -33,6 +42,14 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
 
     public long getItemID() {
         return itemID;
+    }
+
+    public long getItemRevisionID() {
+        return itemRevisionID;
+    }
+
+    public String getItemTitle() {
+        return itemTitle;
     }
 
     public void setPriority(LiveQueuePriority itemPriority){

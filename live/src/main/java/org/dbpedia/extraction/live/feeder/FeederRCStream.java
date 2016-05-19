@@ -73,9 +73,6 @@ public class FeederRCStream extends Feeder implements IOCallback {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     }
 
 
@@ -103,7 +100,7 @@ public class FeederRCStream extends Feeder implements IOCallback {
         try {
             JsonObject json = (JsonObject)(args[0]);
             if (json.get("id").getAsString() != "null") {
-                RCStreamRecordSet.add(new LiveQueueItem(new Integer(json.getAsJsonObject("revision").get("new").getAsString()), json.get("timestamp").getAsString()));
+                RCStreamRecordSet.add(new LiveQueueItem(0, new Integer(json.getAsJsonObject("revision").get("new").getAsString()), json.get("title").getAsString(), json.get("timestamp").getAsString()));
             }
         }catch (Exception e2) {
 
