@@ -42,22 +42,22 @@ public class FeederRCStream extends Feeder implements IOCallback {
 
     protected final long pollInterval;              // in miliseconds
     protected final long sleepInterval;             // in miliseconds
-    public String addr;
-    public String subs;
+    protected String serverUrl;
+    protected String serverSubs;
 
     protected Set<LiveQueueItem> RCStreamRecordSet;
 
     public FeederRCStream(String feederName, LiveQueuePriority queuePriority,
                           String oaiUri, String oaiPrefix, String baseWikiUri,
                           long pollInterval, long sleepInterval, String defaultStartTime,
-                          String folderBasePath, String addr, String subs) {
+                          String folderBasePath, String serverUrl, String serverSubs) {
         super(feederName,queuePriority,defaultStartTime,folderBasePath);
 
         this.oaiUri = oaiUri;
         this.oaiPrefix = oaiPrefix;
         this.baseWikiUri = baseWikiUri;
-        this.addr = addr;
-        this.subs = subs;
+        this.serverUrl = serverUrl;
+        this.serverSubs = serverSubs;
 
         this.pollInterval = pollInterval;
         this.sleepInterval = sleepInterval;
@@ -69,7 +69,7 @@ public class FeederRCStream extends Feeder implements IOCallback {
         RCStreamRecordSet = JDBCUtil.getCacheUnmodified(30, 5000);
         try {
             socket = new SocketIO();
-            socket.connect("http://stream.wikimedia.org/rc", this);
+            socket.connect(this.serverUrl, this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,8 +95,7 @@ public class FeederRCStream extends Feeder implements IOCallback {
 
     @Override
     public void onConnect() {
-        //System.out.println("Server connected: ");
-        socket.emit("subscribe", "fr.wikipedia.org");
+        socket.emit("subscribe", this.serverSubs);
     }
 
     @Override
