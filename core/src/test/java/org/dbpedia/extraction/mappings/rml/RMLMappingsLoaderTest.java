@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.mappings;
+package org.dbpedia.extraction.mappings.rml;
 
 import static org.junit.Assert.*;
 

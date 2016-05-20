@@ -1,6 +1,7 @@
-package org.dbpedia.extraction.mappings;
+package org.dbpedia.extraction.mappings.rml;
 
 import be.ugent.mmlab.rml.model.RMLMapping;
+import org.dbpedia.extraction.mappings.Mappings;
 
 import java.util.Collection;
 
