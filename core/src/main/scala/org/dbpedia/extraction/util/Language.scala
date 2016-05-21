@@ -53,7 +53,6 @@ class Language private(
      * Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
      */
     val filePrefix = wikiCode.replace('-', '_')
-    
     /**
      */
     override def toString = "wiki="+wikiCode+",locale="+locale.getLanguage
@@ -90,11 +89,25 @@ object Language extends (String => Language)
     val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
     val wikiLanguageCodes = try source.getLines.toList finally source.close
 
-    val specialLangs: JsonConfig = WikidataExtractorConfigFactory.createConfig("/addonlanguages.json").asInstanceOf[JsonConfig]
+    val specialLangs: JsonConfig = WikidataExtractorConfigFactory.createConfig("/addonlangs.json").asInstanceOf[JsonConfig]
 
     for ((lang,properties) <- specialLangs.configMap) {
       {
-        languages(lang) = language(properties.get("wikiCode").get, properties.get("name").get, properties.get("isoCode").get, properties.get("iso639_3").get)
+        properties.get("dbpediaDomain") match{
+          case Some(dom) => languages(lang) = new Language(
+            properties.get("wikiCode").get,
+            properties.get("name").get,
+            properties.get("isoCode").get,
+            properties.get("iso639_3").get,
+            dom,
+            properties.get("dbpediaUri").get,
+            new DBpediaNamespace(properties.get("resourceUri").get),
+            new DBpediaNamespace(properties.get("propertyUri").get),
+            properties.get("baseUri").get,
+            properties.get("apiUri").get
+          )
+          case None => languages(lang) = language(properties.get("wikiCode").get, properties.get("name").get, properties.get("isoCode").get, properties.get("iso639_3").get)
+        }
       }
     }
 
