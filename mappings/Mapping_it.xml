@@ -1117,12 +1117,12 @@
     | mapToClass = Hospital
     | mappings =
     {{ PropertyMapping | templateProperty = Indirizzo | ontologyProperty = address }}
-}}</text></revision></page><page><title>Mapping it:Paesi membri</title><ns>212</ns><id>9526</id><revision><id>35304</id><timestamp>2014-06-17T08:41:39Z</timestamp><text>{{ TemplateMapping
+}}</text></revision></page><page><title>Mapping it:Paesi membri</title><ns>212</ns><id>9526</id><revision><id>49564</id><timestamp>2015-11-22T15:10:59Z</timestamp><text>{{ TemplateMapping
     | mapToClass = Country
     | mappings =
     {{ PropertyMapping | templateProperty = valute | ontologyProperty = value }}
-    {{ PropertyMapping | templateProperty = popolazione | ontologyProperty = population }}
-    {{ PropertyMapping | templateProperty = densità | ontologyProperty = density }}
+    {{ PropertyMapping | templateProperty = popolazione | ontologyProperty = populationTotal }}
+    {{ PropertyMapping | templateProperty = densità | ontologyProperty = populationDensity }}
     {{ PropertyMapping | templateProperty = superficie | ontologyProperty = hasSurfaceForm }}
     {{ PropertyMapping | templateProperty = PIL | ontologyProperty = grossDomesticProduct }}
 }}</text></revision></page><page><title>Mapping it:Paralimpiade</title><ns>212</ns><id>9546</id><revision><id>35330</id><timestamp>2014-06-17T08:53:55Z</timestamp><text>{{ TemplateMapping
@@ -1250,7 +1250,7 @@
     | mappings =
     {{ PropertyMapping | templateProperty = nome | ontologyProperty = foaf:name }}
     {{ PropertyMapping | templateProperty = genere | ontologyProperty = category }}
-}}</text></revision></page><page><title>Mapping it:Sportivo</title><ns>212</ns><id>5139</id><revision><id>35354</id><timestamp>2014-06-18T16:32:55Z</timestamp><text>&lt;!--
+}}</text></revision></page><page><title>Mapping it:Sportivo</title><ns>212</ns><id>5139</id><revision><id>51065</id><timestamp>2016-05-12T09:22:36Z</timestamp><text>&lt;!--
 1. Map to more specific classes depending on the "Disciplina" template property
 cf. http://it.wikipedia.org/wiki/Template:Sportivo#Parametro_disciplina
 2. Only top covered sports are mapped, according to this query:
@@ -1489,7 +1489,7 @@ select count(?s) as ?n, ?d where { ?s a &lt;http://dbpedia.org/ontology/Athlete&
     {{ Condition
         | templateProperty = Disciplina
         | operator = contains
-        | value = ennis
+        | value = uoto
         | mapping =
         {{ TemplateMapping
             | mapToClass = Swimmer
