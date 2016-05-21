@@ -3392,6 +3392,82 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	&lt;!-- {{PropertyMapping | templateProperty = connect | ontologyProperty = ??? }} --&gt;
 	{{PropertyMapping | templateProperty = disabled | ontologyProperty = isHandicappedAccessible }}
 	{{PropertyMapping | templateProperty = facilities | ontologyProperty = foaf:page }}
+}}</text></revision></page><page><title>Mapping en:Infobox Company</title><ns>204</ns><id>11606</id><revision><id>50644</id><timestamp>2016-03-23T14:17:34Z</timestamp><text>{{ ConditionalMapping 
+| cases =
+ {{Condition 
+    | templateProperty = industry
+    | operator = contains
+    | value = banking
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Bank
+                }}
+ }}
+
+ {{Condition 
+    | templateProperty = industry
+    | operator = contains
+    | value = financial
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Bank
+                }}
+ }}
+
+ {{Condition
+    | operator = otherwise
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Company
+                }}
+ }}
+
+| defaultMappings = 
+    {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = type | ontologyProperty = type }}
+    {{ PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
+    {{ PropertyMapping | templateProperty = fate | ontologyProperty = fate }}
+    {{ PropertyMapping | templateProperty = predecessor | ontologyProperty = predecessor }}
+    {{ PropertyMapping | templateProperty = successor | ontologyProperty = successor }}
+    &lt;!-- mapped foundation into three different ontologyProperties    --&gt;
+    {{ PropertyMapping | templateProperty = foundation | ontologyProperty = foundingDate }}
+    {{ PropertyMapping | templateProperty = foundation | ontologyProperty = foundingYear }}
+    {{ PropertyMapping | templateProperty = foundation | ontologyProperty = foundationPlace }}
+    {{ PropertyMapping | templateProperty = founder | ontologyProperty = foundedBy }}
+    {{ PropertyMapping | templateProperty = defunct | ontologyProperty = extinctionDate }}
+    {{ PropertyMapping | templateProperty = defunct | ontologyProperty = extinctionYear }}
+    {{ PropertyMapping | templateProperty = location_city | ontologyProperty = locationCity }}
+    {{ PropertyMapping | templateProperty = location_country | ontologyProperty = locationCountry }}
+    {{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
+    {{ PropertyMapping | templateProperty = locations | ontologyProperty = numberOfLocations }}
+    {{ PropertyMapping | templateProperty = area_served | ontologyProperty = regionServed }}
+    {{ PropertyMapping | templateProperty = key_people | ontologyProperty = keyPerson }}
+    &lt;!-- {{ IntermediateNodeMapping | nodeClass = PersonFunction | correspondingProperty = leaderFunction | mappings = {{ PropertyMapping | templateProperty = key_people | ontologyProperty = person }} {{ PropertyMapping | templateProperty = key_people | ontologyProperty = title }} }} --&gt;
+
+    {{ PropertyMapping | templateProperty = industry | ontologyProperty = industry }}
+    {{ PropertyMapping | templateProperty = products | ontologyProperty = product }}
+    {{ PropertyMapping | templateProperty = services | ontologyProperty = service }}
+    {{ PropertyMapping | templateProperty = revenue | ontologyProperty = revenue | unit = Currency }}
+    {{ PropertyMapping | templateProperty = operating_income | ontologyProperty = operatingIncome | unit = Currency }}
+    {{ PropertyMapping | templateProperty = net_income | ontologyProperty = netIncome | unit = Currency }}
+    {{ PropertyMapping | templateProperty = aum | ontologyProperty = assetUnderManagement | unit = Currency }}
+    {{ PropertyMapping | templateProperty = assets | ontologyProperty = assets | unit = Currency }}
+    {{ PropertyMapping | templateProperty = equity | ontologyProperty = equity | unit = Currency }}
+    {{ PropertyMapping | templateProperty = owner | ontologyProperty = owner }}
+    {{ PropertyMapping | templateProperty = owner | ontologyProperty = owningCompany }}
+    {{ PropertyMapping | templateProperty = num_employees | ontologyProperty = numberOfEmployees }}
+    {{ PropertyMapping | templateProperty = parent | ontologyProperty = parentCompany }}
+    {{ PropertyMapping | templateProperty = divisions | ontologyProperty = division }}
+    {{ PropertyMapping | templateProperty = subsid | ontologyProperty = subsidiary }}
+    {{ PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
+    {{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+
+    {{ PropertyMapping | templateProperty = company_logo | ontologyProperty = foaf:depiction }}
+    {{ PropertyMapping | templateProperty = logo | ontologyProperty = foaf:depiction }}
+
+    {{ PropertyMapping | templateProperty = intl | ontologyProperty = internationally }}
+    &lt;!-- not named in definition of Infobox company, but deliver sparql-results --&gt;
+
+    {{ PropertyMapping | templateProperty = production | ontologyProperty = production }}
+    {{ PropertyMapping | templateProperty = company_name | ontologyProperty = foaf:name }}
+    {{ PropertyMapping | templateProperty = company_type | ontologyProperty = type }} 
 }}</text></revision></page><page><title>Mapping en:Infobox Congressman</title><ns>204</ns><id>76</id><revision><id>7281</id><timestamp>2010-05-12T14:27:28Z</timestamp><text>{{TemplateMapping
 | mapToClass = Congressman
 | mappings =
@@ -4447,7 +4523,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	&lt;!-- {{PropertyMapping | templateProperty = lowusage0708 | ontologyProperty = ??? }} --&gt;
 	{{PropertyMapping | templateProperty = lowusage0910 | ontologyProperty = passengersPerYear }}
 	{{PropertyMapping | templateProperty = lowusage1011 | ontologyProperty = passengersPerYear }}
-}}</text></revision></page><page><title>Mapping en:Infobox Geopolitical organization</title><ns>204</ns><id>106</id><revision><id>16230</id><timestamp>2011-11-10T12:23:11Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox Geopolitical organization</title><ns>204</ns><id>106</id><revision><id>49514</id><timestamp>2015-11-10T13:23:26Z</timestamp><text>{{TemplateMapping
 | mapToClass = Organisation
 | mappings =
 	{{PropertyMapping | templateProperty = national_anthem | ontologyProperty = anthem }}
@@ -13468,29 +13544,6 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = demonym | ontologyProperty = demonym }}
 	{{PropertyMapping | templateProperty = neighboring_municipalities | ontologyProperty = neighboringMunicipality }}
 	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}	
-}}</text></revision></page><page><title>Mapping en:Infobox Space Shuttle</title><ns>204</ns><id>250</id><revision><id>7448</id><timestamp>2010-05-12T14:48:32Z</timestamp><text>{{TemplateMapping
-| mapToClass = SpaceShuttle
-| mappings =
-	{{PropertyMapping | templateProperty = number | ontologyProperty = number }}
-	{{PropertyMapping | templateProperty = country | ontologyProperty = country }}
-	{{PropertyMapping | templateProperty = contract | ontologyProperty = contractAward }}
-	{{PropertyMapping | templateProperty = named_after | ontologyProperty = namedAfter }}
-	{{PropertyMapping | templateProperty = first_flight | ontologyProperty = firstFlight }}
-	{{PropertyMapping | templateProperty = last_flight | ontologyProperty = lastFlight }}
-	{{PropertyMapping | templateProperty = missions | ontologyProperty = missions }}
-	{{PropertyMapping | templateProperty = crews | ontologyProperty = crews }}
-	{{PropertyMapping | templateProperty = time | ontologyProperty = timeInSpace | unit = Time }}
-	{{PropertyMapping | templateProperty = orbits | ontologyProperty = orbits }}
-	{{PropertyMapping | templateProperty = distance | ontologyProperty = distance | unit = Length }}
-	{{PropertyMapping | templateProperty = deployed | ontologyProperty = satellitesDeployed }}
-	{{PropertyMapping | templateProperty = dockings_mir | ontologyProperty = mirDockings }}
-	{{PropertyMapping | templateProperty = dockings_iss | ontologyProperty = issDockings }}
-	{{PropertyMapping | templateProperty = status | ontologyProperty = status }}
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = first_date | ontologyProperty = firstFlightStartDate }}
-	{{PropertyMapping | templateProperty = first_date | ontologyProperty = firstFlightEndDate }}
-	{{PropertyMapping | templateProperty = last_date | ontologyProperty = lastFlightStartDate }}
-	{{PropertyMapping | templateProperty = last_date | ontologyProperty = lastFlightEndDate }}
 }}</text></revision></page><page><title>Mapping en:Infobox Space Shuttle mission</title><ns>204</ns><id>251</id><revision><id>10458</id><timestamp>2010-11-10T16:55:42Z</timestamp><text>{{TemplateMapping
 | mapToClass = SpaceMission
 | mappings =
@@ -14783,6 +14836,13 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = city | ontologyProperty = location }}
 	{{PropertyMapping | templateProperty = lastevent | ontologyProperty = previousEvent }}
 	{{PropertyMapping | templateProperty = nextevent | ontologyProperty = followingEvent }}
+}}</text></revision></page><page><title>Mapping en:Infobox academic conference</title><ns>204</ns><id>11552</id><revision><id>50365</id><timestamp>2016-02-29T20:16:03Z</timestamp><text>{{TemplateMapping
+| mapToClass = AcademicConference
+| mappings =
+	{{PropertyMapping | templateProperty = discipline | ontologyProperty = academicDiscipline }}
+	{{PropertyMapping | templateProperty = abbreviation | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = publisher | ontologyProperty = publisher }}
+	{{PropertyMapping | templateProperty = frequency | ontologyProperty = frequencyOfPublication }}
 }}</text></revision></page><page><title>Mapping en:Infobox actor</title><ns>204</ns><id>16</id><revision><id>49020</id><timestamp>2015-09-30T17:10:11Z</timestamp><text>{{ TemplateMapping 
 | mapToClass = Actor 
 | mappings = 
@@ -15661,11 +15721,15 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 
 
 
-}}</text></revision></page><page><title>Mapping en:Infobox award</title><ns>204</ns><id>40</id><revision><id>7248</id><timestamp>2010-05-12T14:23:15Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox award</title><ns>204</ns><id>40</id><revision><id>50310</id><timestamp>2016-01-26T13:38:38Z</timestamp><text>{{TemplateMapping
 | mapToClass = Award
 | mappings =
-	{{PropertyMapping | templateProperty = country | ontologyProperty = country }}
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+                {{PropertyMapping | templateProperty = country | ontologyProperty = country }}
+                {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+                {{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+                {{PropertyMapping | templateProperty = year | ontologyProperty = year }}
+                {{PropertyMapping | templateProperty = presenter | ontologyProperty = presenter }}
+               
 }}</text></revision></page><page><title>Mapping en:Infobox badminton player</title><ns>204</ns><id>41</id><revision><id>7249</id><timestamp>2010-05-12T14:23:21Z</timestamp><text>{{TemplateMapping
 | mapToClass = BadmintonPlayer
 | mappings =
@@ -16336,7 +16400,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
 	{{PropertyMapping | templateProperty = MeshNumber | ontologyProperty = meshNumber }}
 	{{PropertyMapping | templateProperty = DorlandsPre | ontologyProperty = dorlandsPrefix }}
 	{{PropertyMapping | templateProperty = DorlandsSuf | ontologyProperty = dorlandsSuffix }}
-}}</text></revision></page><page><title>Mapping en:Infobox book</title><ns>204</ns><id>1696</id><revision><id>15822</id><timestamp>2011-11-03T18:19:16Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox book</title><ns>204</ns><id>1696</id><revision><id>51052</id><timestamp>2016-05-08T08:23:00Z</timestamp><text>{{TemplateMapping
 | mapToClass = Book
 | mappings = 
  {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -16350,6 +16414,7 @@ http://en.wikipedia.org/wiki/Template:Infobox_Christian_leader --&gt;
  {{PropertyMapping | templateProperty = series | ontologyProperty = series }}
  {{PropertyMapping | templateProperty = subject | ontologyProperty = nonFictionSubject }}
  {{PropertyMapping | templateProperty = genre | ontologyProperty = literaryGenre }}
+ {{PropertyMapping | templateProperty = release_date | ontologyProperty = releaseDate }}
  &lt;!-- use dc:publisher instead --&gt;
  {{PropertyMapping | templateProperty = publisher | ontologyProperty = publisher }}
  {{PropertyMapping | templateProperty = pub_date | ontologyProperty = publicationDate }}
@@ -20066,7 +20131,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = manufacturer | ontologyProperty = manufacturer }}
 	{{PropertyMapping | templateProperty = weight | ontologyProperty = weight }}
 	{{PropertyMapping | templateProperty = status | ontologyProperty = status }}
-}}</text></revision></page><page><title>Mapping en:Infobox model</title><ns>204</ns><id>148</id><revision><id>11069</id><timestamp>2011-03-20T02:28:25Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox model</title><ns>204</ns><id>148</id><revision><id>50309</id><timestamp>2016-01-26T12:50:09Z</timestamp><text>{{TemplateMapping
 | mapToClass = Model
 | mappings =
 	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -20080,6 +20145,37 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = alias | ontologyProperty = alias }}
 	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
 	{{PropertyMapping | templateProperty = homepage | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = birth_date | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = haircolor | ontologyProperty = hairColor }}
+	{{PropertyMapping | templateProperty = eyecolor | ontologyProperty = eyeColor }}
+	{{PropertyMapping | templateProperty = hair_color | ontologyProperty = hairColor }}
+	{{PropertyMapping | templateProperty = eye_color | ontologyProperty = eyeColor }}
+	{{PropertyMapping | templateProperty = haircolour | ontologyProperty = hairColor }}
+	{{PropertyMapping | templateProperty = eyecolour | ontologyProperty = eyeColor }}
+	{{PropertyMapping | templateProperty = hair_colour | ontologyProperty = hairColor }}
+	{{PropertyMapping | templateProperty = eye_colour | ontologyProperty = eyeColor }}	
+	{{PropertyMapping | templateProperty = birth_name | ontologyProperty = birthName }}
+	{{PropertyMapping | templateProperty = agency | ontologyProperty = agency }}
+	{{PropertyMapping | templateProperty = occupation | ontologyProperty = occupation }}
+	{{PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
+	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = shoe_size | ontologyProperty = shoeSize }}
+	{{PropertyMapping | templateProperty = shoe size | ontologyProperty = shoeSize }}
+	{{PropertyMapping | templateProperty = ethnicity | ontologyProperty = ethnicity }}
+	{{PropertyMapping | templateProperty = yearsactive | ontologyProperty = activeYears }}
+	{{PropertyMapping | templateProperty = year_sactive | ontologyProperty = activeYears }}
+	{{PropertyMapping | templateProperty = other_names  | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = known_for  | ontologyProperty = knownFor }}
+	{{PropertyMapping | templateProperty = citizenship  | ontologyProperty = citizenship }}
+	{{PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = alma_mater | ontologyProperty = almaMater }}
+	{{PropertyMapping | templateProperty = partner | ontologyProperty = partner }}
+	{{PropertyMapping | templateProperty = residence | ontologyProperty = residence }}
+	{{PropertyMapping | templateProperty = parents | ontologyProperty = parent }}
+	{{PropertyMapping | templateProperty = relatives | ontologyProperty = relative }}
+	{{PropertyMapping | templateProperty = death_cause | ontologyProperty = deathCause }}
 }}</text></revision></page><page><title>Mapping en:Infobox monarch</title><ns>204</ns><id>149</id><revision><id>7351</id><timestamp>2010-05-12T14:36:09Z</timestamp><text>{{TemplateMapping
 | mapToClass = Monarch
 | mappings =
@@ -20110,53 +20206,18 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = place of birth | ontologyProperty = birthPlace }}
 	{{PropertyMapping | templateProperty = date of death | ontologyProperty = deathDate }}
 	{{PropertyMapping | templateProperty = place of death | ontologyProperty = deathPlace }}
-}}</text></revision></page><page><title>Mapping en:Infobox monument</title><ns>204</ns><id>6463</id><revision><id>23744</id><timestamp>2013-02-15T09:13:08Z</timestamp><text>{{ TemplateMapping 
+}}</text></revision></page><page><title>Mapping en:Infobox monument</title><ns>204</ns><id>6463</id><revision><id>51058</id><timestamp>2016-05-08T20:21:34Z</timestamp><text>{{ TemplateMapping 
  | mapToClass = Monument
  | mappings = 
-	{{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
+
         {{ PropertyMapping | templateProperty = monument_name | ontologyProperty = foaf:name }}
         {{ PropertyMapping | templateProperty = designer | ontologyProperty = designer }}
-}}
+        {{ PropertyMapping | templateProperty = location | ontologyProperty = location }}
 
-&lt;!--
-    {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
-    {{ GeocoordinatesMapping | latitude = latitude | longitude = longitude }}
-    {{ PropertyMapping | templateProperty = motto | ontologyProperty = motto }}
-    {{ PropertyMapping | templateProperty = established | ontologyProperty = foundingDate }}
-    {{ PropertyMapping | templateProperty = established | ontologyProperty = foundingYear }}
-    {{ PropertyMapping | templateProperty = closed | ontologyProperty = closingDate }}
-    {{ PropertyMapping | templateProperty = closed | ontologyProperty = closingYear }}
-    {{ PropertyMapping | templateProperty = type | ontologyProperty = type }}
-    {{ PropertyMapping | templateProperty = religion | ontologyProperty = religion }}
-    {{ PropertyMapping | templateProperty = president | ontologyProperty = president }}
-    {{ PropertyMapping | templateProperty = head_label | ontologyProperty = headLabel }}
-    {{ PropertyMapping | templateProperty = head | ontologyProperty = head }}
-    {{ PropertyMapping | templateProperty = r_head_label | ontologyProperty = religiousHeadLabel }}
-    {{ PropertyMapping | templateProperty = r_head | ontologyProperty = religiousHead }}
-    {{ PropertyMapping | templateProperty = deputy_head_label | ontologyProperty = vicePrincipalLabel }}
-    {{ PropertyMapping | templateProperty = deputy_head | ontologyProperty = vicePrincipal }}
-    {{ PropertyMapping | templateProperty = chair_label | ontologyProperty = chairLabel }}
-    {{ PropertyMapping | templateProperty = chair | ontologyProperty = chairperson }}
-    {{ PropertyMapping | templateProperty = founder | ontologyProperty = foundedBy }}
-    {{ PropertyMapping | templateProperty = specialist | ontologyProperty = specialist }}
-    {{ PropertyMapping | templateProperty = city | ontologyProperty = city }}
-    {{ PropertyMapping | templateProperty = county | ontologyProperty = county }}
-    {{ PropertyMapping | templateProperty = country | ontologyProperty = country }}
-    {{ PropertyMapping | templateProperty = postcode | ontologyProperty = postalCode }}
-    {{ PropertyMapping | templateProperty = LEA | ontologyProperty = localAuthority }}
-    {{ PropertyMapping | templateProperty = dfeno | ontologyProperty = dfE }}
-    {{ PropertyMapping | templateProperty = dcsfno | ontologyProperty = dfE }}
-    {{ PropertyMapping | templateProperty = urn | ontologyProperty = uRN }}
-    {{ PropertyMapping | templateProperty = dcsfurn | ontologyProperty = uRN }}
-    {{ PropertyMapping | templateProperty = staff | ontologyProperty = staff }}
-    {{ PropertyMapping | templateProperty = enrollment | ontologyProperty = numberOfStudents }}
-    {{ PropertyMapping | templateProperty = enrolment | ontologyProperty = numberOfStudents }}
-    {{ PropertyMapping | templateProperty = gender | ontologyProperty = gender }}
-    {{ PropertyMapping | templateProperty = lower_age | ontologyProperty = lowerAge }}
-    {{ PropertyMapping | templateProperty = upper_age | ontologyProperty = upperAge }}
-    {{ PropertyMapping | templateProperty = colours | ontologyProperty = officialSchoolColour }}
-    {{ PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
---&gt;</text></revision></page><page><title>Mapping en:Infobox motorcycle</title><ns>204</ns><id>7999</id><revision><id>28142</id><timestamp>2013-09-01T12:54:52Z</timestamp><text>{{TemplateMapping | mapToClass = Motorcycle
+{{GeocoordinatesMapping 
+    | latitudeDirection = latNS | latitudeDegrees = latd | latitudeMinutes = latm | latitudeSeconds = lats 
+    | longitudeDirection = longEW | longitudeDegrees = longd | longitudeMinutes = longm | longitudeSeconds = longs }}
+}}</text></revision></page><page><title>Mapping en:Infobox motorcycle</title><ns>204</ns><id>7999</id><revision><id>28142</id><timestamp>2013-09-01T12:54:52Z</timestamp><text>{{TemplateMapping | mapToClass = Motorcycle
 | mappings = 
 	{{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
 
@@ -23418,7 +23479,7 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = elevation | ontologyProperty = elevation | unit = metre }}
 	{{GeocoordinatesMapping | ontologyProperty = sourcePosition | latitudeDegrees = source_lat_d  | latitudeMinutes = source_lat_m  | latitudeSeconds = source_lat_s  | latitudeDirection = source_lat_NS  | longitudeDegrees = source_long_d  | longitudeMinutes = source_long_m  | longitudeSeconds = source_long_s  | longitudeDirection = source_long_EW }}
 	{{GeocoordinatesMapping | ontologyProperty = mouthPosition | latitudeDegrees = mouth_lat_d  | latitudeMinutes = mouth_lat_m  | latitudeSeconds = mouth_lat_s  | latitudeDirection = mouth_lat_NS  | longitudeDegrees = mouth_long_d  | longitudeMinutes = mouth_long_m  | longitudeSeconds = mouth_long_s  | longitudeDirection = mouth_long_EW }}
-}}</text></revision></page><page><title>Mapping en:Infobox road</title><ns>204</ns><id>221</id><revision><id>14662</id><timestamp>2011-07-28T15:05:02Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping en:Infobox road</title><ns>204</ns><id>221</id><revision><id>49962</id><timestamp>2015-12-30T18:37:56Z</timestamp><text>{{TemplateMapping
 | mapToClass = Road
 | mappings =
 	{{PropertyMapping | templateProperty = country | ontologyProperty = country }}
@@ -23433,7 +23494,7 @@ Template Properties not mapped yet:
         {{PropertyMapping | templateProperty = image | ontologyProperty = picture }}
         {{PropertyMapping | templateProperty = photo | ontologyProperty = picture }}
 	{{PropertyMapping | templateProperty = beltway_city | ontologyProperty = beltwayCity }}
-	{{PropertyMapping | templateProperty = counties | ontologyProperty = county }}
+	{{PropertyMapping | templateProperty = countries | ontologyProperty = county }}
 	{{PropertyMapping | templateProperty = rural_municipalities | ontologyProperty = ruralMunicipality }}
 	{{PropertyMapping | templateProperty = cities | ontologyProperty = city }}
 	{{PropertyMapping | templateProperty = system | ontologyProperty = highwaySystem }}
@@ -25354,6 +25415,29 @@ Template Properties not mapped yet:
 	{{PropertyMapping | templateProperty = next | ontologyProperty = nextMission }}
 	{{PropertyMapping | templateProperty = mission_name | ontologyProperty = foaf:name }}
 	{{PropertyMapping | templateProperty = Name | ontologyProperty = foaf:name }}
+}}</text></revision></page><page><title>Mapping en:Infobox space shuttle</title><ns>204</ns><id>250</id><revision><id>49824</id><timestamp>2015-12-09T15:33:37Z</timestamp><text>{{TemplateMapping
+| mapToClass = SpaceShuttle 
+| mappings =
+	{{PropertyMapping | templateProperty = number | ontologyProperty = number }}
+	{{PropertyMapping | templateProperty = country | ontologyProperty = country }}
+	{{PropertyMapping | templateProperty = contract | ontologyProperty = contractAward }}
+	{{PropertyMapping | templateProperty = named_after | ontologyProperty = namedAfter }}
+	{{PropertyMapping | templateProperty = first_flight | ontologyProperty = firstFlight }}
+	{{PropertyMapping | templateProperty = last_flight | ontologyProperty = lastFlight }}
+	{{PropertyMapping | templateProperty = missions | ontologyProperty = missions }}
+	{{PropertyMapping | templateProperty = crews | ontologyProperty = crews }}
+	{{PropertyMapping | templateProperty = time | ontologyProperty = timeInSpace | unit = Time }}
+	{{PropertyMapping | templateProperty = orbits | ontologyProperty = orbits }}
+	{{PropertyMapping | templateProperty = distance | ontologyProperty = distance | unit = Length }}
+	{{PropertyMapping | templateProperty = deployed | ontologyProperty = satellitesDeployed }}
+	{{PropertyMapping | templateProperty = dockings_mir | ontologyProperty = mirDockings }}
+	{{PropertyMapping | templateProperty = dockings_iss | ontologyProperty = issDockings }}
+	{{PropertyMapping | templateProperty = status | ontologyProperty = status }}
+	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = first_date | ontologyProperty = firstFlightStartDate }}
+	{{PropertyMapping | templateProperty = first_date | ontologyProperty = firstFlightEndDate }}
+	{{PropertyMapping | templateProperty = last_date | ontologyProperty = lastFlightStartDate }}
+	{{PropertyMapping | templateProperty = last_date | ontologyProperty = lastFlightEndDate }}
 }}</text></revision></page><page><title>Mapping en:Infobox space station</title><ns>204</ns><id>252</id><revision><id>7450</id><timestamp>2010-05-12T14:48:47Z</timestamp><text>{{TemplateMapping
 | mapToClass = SpaceStation
 | mappings =
@@ -27498,126 +27582,126 @@ Template Properties not mapped yet:
 }}</text></revision></page><page><title>Mapping en:Switzerland-railstation-stub</title><ns>204</ns><id>8366</id><revision><id>29049</id><timestamp>2013-12-18T09:47:01Z</timestamp><text>{{TemplateMapping | mapToClass = RailwayStation
 | mappings =
 {{ConstantMapping | ontologyProperty = country | value = Switzerland}}
-}}</text></revision></page><page><title>Mapping en:Table/Automobile</title><ns>204</ns><id>288</id><revision><id>7147</id><timestamp>2010-05-11T13:52:16Z</timestamp><text>{{TableMapping
-|mapToClass 			= AutomobileEngine
-|correspondingClass		= Automobile
+}}</text></revision></page><page><title>Mapping en:Table/Automobile</title><ns>204</ns><id>288</id><revision><id>50968</id><timestamp>2016-04-26T14:45:54Z</timestamp><text>{{TableMapping
+|mapToClass            = AutomobileEngine
+|correspondingClass    = Automobile
 |correspondingProperty = engine
-|header					= engine; name; power, power&amp;kw, power&amp;ps, output; model; production; displacement, displacement&amp;cc, volume, volume&amp;cc;
-						torque; redline;
-						year; note; type; code; stroke; bore; compression; fuel; 0&amp;100&amp;km, 0&amp;60&amp;mph, 0&amp;62&amp;mph;
-						top speed; co2, co2&amp;g/km; valvetrain; cyl
+|header                = engine; name; power, power&amp;kw, power&amp;ps, output; model; production; displacement, displacement&amp;cc, volume, volume&amp;cc; torque; redline; year; note; type; code; stroke; bore; compression; fuel; 0&amp;100&amp;km, 0&amp;60&amp;mph, 0&amp;62&amp;mph; top speed; co2, co2&amp;g/km; valvetrain; cyl
+|keywords              = engine; model,power,output
+|mappings              =
+  {{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name}}
 
-|keywords 				= engine; model,power,output
-| mappings =
+  {{PropertyMapping | templateProperty = engine | ontologyProperty = powerOutput | unit = Power}}
+  {{PropertyMapping | templateProperty = engine | ontologyProperty = torqueOutput | unit = Torque}}
+  {{PropertyMapping | templateProperty = engine | ontologyProperty = displacement | unit = Volume}}
+  {{PropertyMapping | templateProperty = engine | ontologyProperty = configuration}}
 
-	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name}}
+  {{PropertyMapping | templateProperty = power | ontologyProperty = powerOutput | unit = Power }}
+  {{PropertyMapping | templateProperty = power&amp;kw | ontologyProperty = powerOutput | unit = Power | unit = kilowatt }}
+  {{PropertyMapping | templateProperty = power&amp;ps | ontologyProperty = powerOutput | unit = Power | unit = pferdestaerke }}
+  {{PropertyMapping | templateProperty = output | ontologyProperty = powerOutput | unit = Power }}
 
-	{{PropertyMapping | templateProperty = engine | ontologyProperty = powerOutput | unit = Power}}
-    {{PropertyMapping | templateProperty = engine | ontologyProperty = torqueOutput | unit = Torque}}
-    {{PropertyMapping | templateProperty = engine | ontologyProperty = displacement | unit = Volume}}
-    {{PropertyMapping | templateProperty = engine | ontologyProperty = configuration}}
+  {{PropertyMapping | templateProperty = model | ontologyProperty = automobileModel}}
 
-	{{PropertyMapping | templateProperty = power | ontologyProperty = powerOutput | unit = Power }}
+  {{PropertyMapping | templateProperty = displacement | ontologyProperty = displacement | unit = Volume }}
+  {{PropertyMapping | templateProperty = displacement&amp;cc | ontologyProperty = displacement | unit = cubicCentimetre }}
 
-	{{PropertyMapping | templateProperty = power&amp;kw | ontologyProperty = powerOutput | unit = Power | unit = kilowatt }}
+  {{PropertyMapping | templateProperty = torque | ontologyProperty = torqueOutput | unit = Torque }}
+  {{PropertyMapping | templateProperty = redline | ontologyProperty = redline }}
 
-	{{PropertyMapping | templateProperty = power&amp;ps | ontologyProperty = powerOutput | unit = Power | unit = pferdestaerke }}
+  {{DateIntervalMapping | templateProperty = production | startDateOntologyProperty = startYearOfInsertion | endDateOntologyProperty = endYearOfInsertion }}
+  {{DateIntervalMapping | templateProperty = year | startDateOntologyProperty = startYearOfInsertion | endDateOntologyProperty = endYearOfInsertion }}
 
-	{{PropertyMapping | templateProperty = output | ontologyProperty = powerOutput | unit = Power }}
+  {{PropertyMapping | templateProperty = note | ontologyProperty = note }}
+  {{PropertyMapping | templateProperty = type | ontologyProperty = configuration }}
+  {{PropertyMapping | templateProperty = type | ontologyProperty = valvetrain }}
+  {{PropertyMapping | templateProperty = engine code| ontologyProperty = code }}
 
-	{{PropertyMapping | templateProperty = model | ontologyProperty = automobileModel}}
+  {{PropertyMapping | templateProperty = stroke  | ontologyProperty = pistonStroke | unit = Length }}
+  {{PropertyMapping | templateProperty = bore  | ontologyProperty = cylinderBore | unit = Length }}
+  {{PropertyMapping | templateProperty = compression  | ontologyProperty = compressionRatio }}
+  {{PropertyMapping | templateProperty = fuel | ontologyProperty = fuelType }}
 
-	{{DateIntervalMapping | templateProperty = production |
-	startDateOntologyProperty = startYearOfInsertion |
-	endDateOntologyProperty = endYearOfInsertion }}
+  {{PropertyMapping | templateProperty = 0&amp;100&amp;km | ontologyProperty = acceleration | unit = second}}
+  {{PropertyMapping | templateProperty = 0&amp;60&amp;mph | ontologyProperty = acceleration | unit = second}}
+  {{PropertyMapping | templateProperty = 0&amp;62&amp;mph | ontologyProperty = acceleration | unit = second}}
 
-	{{PropertyMapping | templateProperty = displacement | ontologyProperty = displacement | unit = Volume }}
+  {{PropertyMapping | templateProperty = top speed | ontologyProperty = topSpeed | unit = kilometrePerHour }}
 
-	{{PropertyMapping | templateProperty = displacement&amp;cc | ontologyProperty = displacement | unit = cubicCentimetre }}
+  {{PropertyMapping | templateProperty = co2 | ontologyProperty = co2Emission | unit = LinearMassDensity }}
+  {{PropertyMapping | templateProperty = co2&amp;g/km | ontologyProperty = co2Emission | unit = gramPerKilometre }}
 
-	{{PropertyMapping | templateProperty = torque | ontologyProperty = torqueOutput | unit = Torque }}
+  {{PropertyMapping | templateProperty = volume | ontologyProperty = displacement | unit = Volume }}
+  {{PropertyMapping | templateProperty = volume&amp;cc | ontologyProperty = displacement | unit = cubicCentimetre }}
 
-	{{PropertyMapping | templateProperty = redline | ontologyProperty = redline }}
+  {{PropertyMapping | templateProperty = valvetrain | ontologyProperty = valvetrain }}
 
-	{{DateIntervalMapping | templateProperty = year |
-	startDateOntologyProperty = startYearOfInsertion |
-	endDateOntologyProperty = endYearOfInsertion }}
-
-	{{PropertyMapping | templateProperty = note | ontologyProperty = note }}
-
-	{{PropertyMapping | templateProperty = type | ontologyProperty = configuration }}
-
-	{{PropertyMapping | templateProperty = type | ontologyProperty = valvetrain }}
-
-	{{PropertyMapping | templateProperty = engine code| ontologyProperty = code }}
-
-	{{PropertyMapping | templateProperty = stroke  | ontologyProperty = pistonStroke | unit = Length }}
-
-	{{PropertyMapping | templateProperty = bore  | ontologyProperty = cylinderBore | unit = Length }}
-
-	{{PropertyMapping | templateProperty = compression  | ontologyProperty = compressionRatio }}
-
-	{{PropertyMapping | templateProperty = fuel | ontologyProperty = fuelType }}
-
-	{{PropertyMapping | templateProperty = 0&amp;100&amp;km | ontologyProperty = acceleration | unit = second}}
-	{{PropertyMapping | templateProperty = 0&amp;60&amp;mph | ontologyProperty = acceleration | unit = second}}
-	{{PropertyMapping | templateProperty = 0&amp;62&amp;mph | ontologyProperty = acceleration | unit = second}}
-
-	{{PropertyMapping | templateProperty = top speed | ontologyProperty = topSpeed | unit = kilometrePerHour }}
-
-	{{PropertyMapping | templateProperty = co2 | ontologyProperty = co2Emission | unit = LinearMassDensity }}
-
-	{{PropertyMapping | templateProperty = co2&amp;g/km | ontologyProperty = co2Emission | unit = gramPerKilometre }}
-
-	{{PropertyMapping | templateProperty = volume | ontologyProperty = displacement | unit = Volume }}
-
-	{{PropertyMapping | templateProperty = volume&amp;cc | ontologyProperty = displacement | unit = cubicCentimetre }}
-
-	{{PropertyMapping | templateProperty = valvetrain | ontologyProperty = valvetrain }}
-
-	{{PropertyMapping | templateProperty = cyl | ontologyProperty = configuration }}
-
+  {{PropertyMapping | templateProperty = cyl | ontologyProperty = configuration }}
 }}
 
 
 {{TableMapping
-|mapToClass 			= Sales
-|correspondingClass		= MeanOfTransportation
+|mapToClass            = Sales
+|correspondingClass    = MeanOfTransportation
 |correspondingProperty = sales
-|header					= built,no.&amp;built, number&amp;built; years, cal. years; model;
-
-|keywords 				= built;model;years
-| mappings =
-
-
-    {{PropertyMapping | templateProperty = built | ontologyProperty = sales}}
-	{{PropertyMapping | templateProperty = no.&amp;built | ontologyProperty = sales}}
-	{{PropertyMapping | templateProperty = number&amp;built | ontologyProperty = sales}}
-	{{PropertyMapping | templateProperty = model | ontologyProperty = model}}
-	{{DateIntervalMapping | templateProperty = years |
-	startDateOntologyProperty = startYearOfSales |
-	endDateOntologyProperty = endYearOfSales }}
-	{{DateIntervalMapping | templateProperty = cal. years |
-	startDateOntologyProperty = startYearOfSales |
-	endDateOntologyProperty = endYearOfSales }}
-
+|header                = built,no.&amp;built, number&amp;built; years, cal. years; model;
+|keywords              = built; model; years
+|mappings              =
+  {{PropertyMapping | templateProperty = built | ontologyProperty = sales}}
+  {{PropertyMapping | templateProperty = no.&amp;built | ontologyProperty = sales}}
+  {{PropertyMapping | templateProperty = number&amp;built | ontologyProperty = sales}}
+  {{PropertyMapping | templateProperty = model | ontologyProperty = model}}
+  {{DateIntervalMapping | templateProperty = years | startDateOntologyProperty = startYearOfSales | endDateOntologyProperty = endYearOfSales }}
+  {{DateIntervalMapping | templateProperty = cal. years | startDateOntologyProperty = startYearOfSales | endDateOntologyProperty = endYearOfSales }}
 }}
 
 {{TableMapping
-|mapToClass 			= Sales
-|correspondingClass		= MeanOfTransportation
+|mapToClass            = Sales
+|correspondingClass    = MeanOfTransportation
 |correspondingProperty = sales
-|header					= sales; year; sales&amp;us, sales&amp;u.s., sales&amp;united states, american&amp;sales
-
-|keywords 				= sales;year
-| mappings =
-
-	{{PropertyMapping | templateProperty = sales | ontologyProperty = sales}}
-	{{PropertyMapping | templateProperty = sales&amp;us | ontologyProperty = usSales}}
-	{{PropertyMapping | templateProperty = sales&amp;u.s. | ontologyProperty = usSales}}
-	{{PropertyMapping | templateProperty = sales&amp;united states | ontologyProperty = usSales}}
-	{{PropertyMapping | templateProperty = american&amp;sales | ontologyProperty = usSales}}
-	{{PropertyMapping | templateProperty = year | ontologyProperty = year}}
+|header                = sales, total&amp;production; year; sales&amp;us, sales&amp;u.s., sales&amp;united states, american&amp;sales, us&amp;sales
+|keywords              = sales, total&amp;production; year
+|mappings =
+  {{PropertyMapping | templateProperty = sales | ontologyProperty = numberSold}}
+  {{PropertyMapping | templateProperty = total&amp;production | ontologyProperty = numberSold}}
+  {{PropertyMapping | templateProperty = sales&amp;us | ontologyProperty = usSales}}
+  {{PropertyMapping | templateProperty = sales&amp;u.s. | ontologyProperty = usSales}}
+  {{PropertyMapping | templateProperty = sales&amp;united states | ontologyProperty = usSales}}
+  {{PropertyMapping | templateProperty = american&amp;sales | ontologyProperty = usSales}}
+  {{PropertyMapping | templateProperty = us&amp;sales | ontologyProperty = usSales}}
+  {{PropertyMapping | templateProperty = year | ontologyProperty = year}}
+}}</text></revision></page><page><title>Mapping en:Table/Championship</title><ns>204</ns><id>11624</id><revision><id>50963</id><timestamp>2016-04-26T14:29:51Z</timestamp><text>
+{{TableMapping
+|mapToClass            = MotorsportSeason
+|correspondingClass    = SportsTeam
+|correspondingProperty = team
+|header                = team; engine; no.; driver
+|keywords              = team; engine
+|mappings              =
+  {{PropertyMapping | templateProperty = team | ontologyProperty = team}}
+  {{PropertyMapping | templateProperty = engine | ontologyProperty = manufacturer}}
+  {{PropertyMapping | templateProperty = no. | ontologyProperty = carNumber}}
+  {{PropertyMapping | templateProperty = driver | ontologyProperty = firstDriver}}
+}}</text></revision></page><page><title>Mapping en:Table/Race</title><ns>204</ns><id>11627</id><revision><id>50974</id><timestamp>2016-04-26T15:35:13Z</timestamp><text>{{TableMapping
+|mapToClass            = SportCompetitionResult
+|correspondingClass    = MotorRace
+|correspondingProperty = raceResult
+|header                = position; car number; driver; team; engine; laps; time/retired; pit stops; grid; laps led; points
+|keywords              = position; car number; driver; team; engine; laps; time/retired; points
+|mappings              =
+  {{PropertyMapping | templateProperty =  position     | ontologyProperty = rank}}
+  {{PropertyMapping | templateProperty =  car number   | ontologyProperty = carNumber}}
+  {{PropertyMapping | templateProperty =  driver       | ontologyProperty = firstDriver}}
+  {{PropertyMapping | templateProperty =  team         | ontologyProperty = team}}
+  {{PropertyMapping | templateProperty =  engine       | ontologyProperty = manufacturer}}
+  {{PropertyMapping | templateProperty =  laps         | ontologyProperty = numberOfLaps}}
+  {{PropertyMapping | templateProperty =  time/retired | ontologyProperty = time}}
+  {{PropertyMapping | templateProperty =  points       | ontologyProperty = score}}
+&lt;!--
+  {{PropertyMapping | templateProperty =  pit stops    | ontologyProperty = }}
+  {{PropertyMapping | templateProperty =  grid         | ontologyProperty = }} starting position (determined from qualifying)
+  {{PropertyMapping | templateProperty =  laps led     | ontologyProperty = }}
+--&gt;
 }}</text></revision></page><page><title>Mapping en:Taxobox</title><ns>204</ns><id>285</id><revision><id>35067</id><timestamp>2014-06-03T12:08:17Z</timestamp><text>{{ConditionalMapping
 | cases =
 {{Condition

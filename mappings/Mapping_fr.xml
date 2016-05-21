@@ -599,12 +599,12 @@
         {{PropertyMapping | templateProperty = durée | ontologyProperty = runtime | unit = Time}}
         {{PropertyMapping | templateProperty = licence_original | ontologyProperty = license}}
         {{PropertyMapping | templateProperty = licence_francophone | ontologyProperty = license}}
-}}</text></revision></page><page><title>Mapping fr:Infobox Appareil photo numérique</title><ns>210</ns><id>6552</id><revision><id>24169</id><timestamp>2013-03-01T15:22:22Z</timestamp><text>{{TemplateMapping
+}}</text></revision></page><page><title>Mapping fr:Infobox Appareil photo numérique</title><ns>210</ns><id>6552</id><revision><id>50312</id><timestamp>2016-01-27T10:14:21Z</timestamp><text>{{TemplateMapping
 | mapToClass = DigitalCamera
 | mappings =
 	{{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
-	{{PropertyMapping | templateProperty = fabriquant | ontologyProperty = manufacturer }}
 	{{PropertyMapping | templateProperty = poids | ontologyProperty = weight | unit = gram }}
+	{{PropertyMapping | templateProperty = nombre_pixels | ontologyProperty = numberOfPixels }}
 }}</text></revision></page><page><title>Mapping fr:Infobox Arbitre</title><ns>210</ns><id>6340</id><revision><id>27167</id><timestamp>2013-07-08T14:49:57Z</timestamp><text>{{TemplateMapping
 | mapToClass = Referee
 | mappings =
@@ -6653,6 +6653,82 @@
         {{PropertyMapping | templateProperty = travaux | ontologyProperty = knownFor}}
         {{PropertyMapping | templateProperty = detracteur | ontologyProperty = detractor}}
         {{PropertyMapping | templateProperty = partisan | ontologyProperty = disciple}}
+}}</text></revision></page><page><title>Mapping fr:Infobox Quartier</title><ns>210</ns><id>11687</id><revision><id>51068</id><timestamp>2016-05-12T16:23:19Z</timestamp><text>{{ TemplateMapping 
+| mapToClass = CityDistrict
+| mappings = 
+    {{PropertyMapping | templateProperty = nom | ontologyProperty = foaf:name }}
+    {{PropertyMapping | templateProperty = légende | ontologyProperty = thumbnailCaption }}
+    {{PropertyMapping | templateProperty = pays | ontologyProperty = country }}
+    {{PropertyMapping | templateProperty = division | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division2 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division3 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division4 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division5 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division6 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division7 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division8 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division9 | ontologyProperty = isPartOf }}
+    {{PropertyMapping | templateProperty = division10 | ontologyProperty = isPartOf }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité | ontologyProperty = title }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité2  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité2 | ontologyProperty = title }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité3  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité3 | ontologyProperty = title }}
+    }}
+    {{IntermediateNodeMapping
+    | nodeClass = PoliticalFunction
+    | correspondingProperty = politicalLeader
+    | mappings =
+       {{PropertyMapping | templateProperty = autorité4  | ontologyProperty = authority }}
+       {{PropertyMapping | templateProperty = titre autorité4 | ontologyProperty = title }}
+    }}
+    {{PropertyMapping | templateProperty = url | ontologyProperty = foaf:homepage }}
+    {{PropertyMapping | templateProperty = sites touristiques | ontologyProperty = touristicSite }}
+    {{IntermediateNodeMapping
+    | nodeClass = Demographics
+    | correspondingProperty = demographics
+    | mappings =
+       {{PropertyMapping | templateProperty = population | ontologyProperty = populationTotal }} 
+       {{PropertyMapping | templateProperty = année_pop | ontologyProperty = year }} 
+    }}
+    {{PropertyMapping | templateProperty = cp | ontologyProperty = postalCode }}
+    {{GeocoordinatesMapping | latitude = latitude  | longitude = longitude }}
+    {{PropertyMapping | templateProperty = type coord | ontologyProperty = typeCoordinate }}
+
+    {{IntermediateNodeMapping
+    | nodeClass = Altitude
+    | correspondingProperty = altitude
+    | mappings =
+       {{PropertyMapping | templateProperty = altitude | ontologyProperty = value }} 
+    }}
+    {{IntermediateNodeMapping
+        | nodeClass = Agglomeration
+        | correspondingProperty = agglomeration
+        | mappings = 
+           {{IntermediateNodeMapping
+           | nodeClass = Area
+           | correspondingProperty = wholeArea
+           | mappings =
+              {{PropertyMapping | templateProperty = superficie | ontologyProperty = value }} 
+           }}
+        }}
+    {{PropertyMapping | templateProperty = eau | ontologyProperty = watercourse }}
+
 }}</text></revision></page><page><title>Mapping fr:Infobox Rugbyman</title><ns>210</ns><id>5858</id><revision><id>35427</id><timestamp>2014-06-24T21:50:57Z</timestamp><text>{{TemplateMapping
  | mapToClass = RugbyPlayer
  | mappings = 
