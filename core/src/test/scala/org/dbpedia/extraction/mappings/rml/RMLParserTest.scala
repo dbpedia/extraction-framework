@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.mappings.rml
 
+import collection.JavaConverters._
+
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner

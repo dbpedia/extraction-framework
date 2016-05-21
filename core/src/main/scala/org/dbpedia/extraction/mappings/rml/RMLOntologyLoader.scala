@@ -5,12 +5,15 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 import org.openrdf.model.URI
 import scala.language.reflectiveCalls
 
+/**
+  * Loading ontology functions
+  */
 object RMLOntologyLoader {
 
   private final val mapToClass: String = "class"
 
   def loadMapToClassOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyClass = {
-      loadOntologyClass(triplesMap, mapToClass, context)
+      loadTriplesMapOntologyClass(triplesMap, mapToClass, context)
   }
 
   def loadCorrespondingPropertyOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyProperty = {
@@ -21,12 +24,28 @@ object RMLOntologyLoader {
       null //TODO: ?
   }
 
-  def loadOntologyClass(triplesMap: TriplesMap, ontologyType : String, context: {def ontology : Ontology}): OntologyClass = {
-      val ontologyClassName = loadOntologyClassName(triplesMap)
+  def loadOntologyClass(ontologyClassName : String, context: {def ontology: Ontology}): OntologyClass = {
       context.ontology.classes(ontologyClassName)
   }
 
-  private def loadOntologyClassName(triplesMap: TriplesMap): String = {
+  def loadOntologyProperty(ontologyPropertyName: String, context: {def ontology: Ontology}): OntologyProperty = {
+      context.ontology.properties(ontologyPropertyName)
+  }
+
+  def loadOntologyPropertyFromIRI(ontologyIRI : String, context : {def ontology: Ontology}): OntologyProperty = {
+      //TODO: change in RMLProcessor for looking up local ontology property
+      val localOntologyPropertyName = ontologyIRI.replaceAll(".*/","")
+      return loadOntologyProperty(localOntologyPropertyName, context)
+  }
+
+  private def loadTriplesMapOntologyClass(triplesMap: TriplesMap, ontologyType : String, context: {def ontology : Ontology}): OntologyClass = {
+      val ontologyClassName = loadTriplesMapOntologyClassName(triplesMap)
+      return loadOntologyClass(ontologyClassName, context)
+  }
+
+  private def loadTriplesMapOntologyClassName(triplesMap: TriplesMap): String = {
       triplesMap.getSubjectMap.getClassIRIs.toArray.head.asInstanceOf[URI].getLocalName
   }
+
+
 }

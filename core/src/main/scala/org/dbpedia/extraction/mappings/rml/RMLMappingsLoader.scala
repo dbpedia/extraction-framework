@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings.rml
 
 import be.ugent.mmlab.rml.model.{RMLMapping, TriplesMap}
-import org.dbpedia.extraction.mappings.{Extractor, Mappings, PropertyMapping, TemplateMapping}
+import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{TableNode, TemplateNode}
+
 import collection.JavaConverters._
 import scala.collection.immutable.List
 import scala.collection.mutable.HashMap
@@ -22,6 +23,7 @@ object RMLMappingsLoader {
   def load(context: {
               def ontology : Ontology
               def language : Language
+              def redirects: Redirects
               def mappingDoc : RMLMapping }) : Mappings =
   {
 
@@ -42,7 +44,8 @@ object RMLMappingsLoader {
     */
   private def loadTemplateMapping(triplesMap: TriplesMap, context : {
                                                             def ontology: Ontology
-                                                            def language: Language }) : TemplateMapping =
+                                                            def language: Language
+                                                            def redirects: Redirects}) : TemplateMapping =
   {
 
       val mapToClass: OntologyClass = RMLOntologyLoader.loadMapToClassOntology(triplesMap, context)
