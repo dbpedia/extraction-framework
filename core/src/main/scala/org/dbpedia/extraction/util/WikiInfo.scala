@@ -47,7 +47,12 @@ object WikiInfo
     if (! lines.hasNext) throw new Exception("empty file")
     lines.next // skip first line (headers)
     
-    for (line <- lines) if (line.nonEmpty) info += fromLine(line)
+    for (line <- lines)
+      if (line.nonEmpty)
+        fromLine(line) match{
+          case Some(x) => info += x
+          case None =>
+        }
     
     info
   }
@@ -55,7 +60,7 @@ object WikiInfo
   /**
    * Reads a WikiInfo object from a single CSV line.
    */
-  def fromLine(line: String): WikiInfo = {
+  def fromLine(line: String): Option[WikiInfo] = {
       val fields = line.split(",", -1)
       
       if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
@@ -65,7 +70,10 @@ object WikiInfo
       
       val wikiCode = fields(2)
       if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
-      
-      new WikiInfo(Language(wikiCode), pages)
+
+      if(Language.map.keySet.contains(wikiCode))
+        Option(new WikiInfo(Language(wikiCode), pages))
+      else
+        None
   }
 }
