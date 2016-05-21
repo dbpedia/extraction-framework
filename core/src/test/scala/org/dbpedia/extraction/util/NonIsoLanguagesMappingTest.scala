@@ -1,49 +1,47 @@
 package org.dbpedia.extraction.util
 
 import java.util.Locale
+import org.junit.runner.RunWith
+import org.scalatest.junit._
+import org.scalatest._
+import Inspectors._
+
 import io.{Codec, Source}
-import java.net.URL
 
 /**
  * Tests if the Map Language.nonIsoWpCodes is complete, so that for each MediaWiki language code
  * that is not also a ISO 639-1 language code, there exists a mapping to a related ISO 639-1 language code. 
  */
-object NonIsoLanguagesMappingTest
+@RunWith(classOf[JUnitRunner])
+class NonIsoLanguagesMappingTest extends FlatSpec with Matchers
 {
-    //TODO make this a proper Scala Test class
-    def main(args : Array[String])
-    {
         // get all existing language codes for which a Wikipedia exists
-        val source = Source.fromURL("http://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
+        val source = Source.fromURL(Language.wikipediaLanguageUrl)(Codec.UTF8)
         val wikiLanguageCodes = try source.getLines.toList finally source.close
 
+    "Wiki langauge codes" should " be more than 0" in {
+        wikiLanguageCodes.size should be > 0
+    }
         // get all ISO 639-1 language codes
         val isoLanguageCodes = Locale.getISOLanguages
 
+    "ISO 639-1 codes" should " be more than 0" in {
+        wikiLanguageCodes.size should be > 0
+    }
+
         // get all Wikipedia language codes that are not ISO 639-1 language codes
         val wpNonIsoLanguageCodes = wikiLanguageCodes.toSet &~ isoLanguageCodes.toSet
-        
-        var errorCount = 0
-        for (wpNonIsoCode <- wpNonIsoLanguageCodes) {
-            try {
-                // check if this Wikipedia language code already has a mapping in the nonIsoWpCodes map
-                val language = Language(wpNonIsoCode) 
-                // if a mapping exists, check if the mapping points to a ISO 639-1 language code
-                if (! isoLanguageCodes.contains(language.isoCode)) {
-                    println("* mapping to non-ISO code: '"+wpNonIsoCode+"' -> '"+language.isoCode+"'")
-                    errorCount += 1
-                }
-            }
-            catch {
-                case _ : IllegalArgumentException => 
-                    println("* no mapping for non-ISO code '"+wpNonIsoCode+"'")
-                    errorCount += 1
-            }
+
+    "Every wiki-code" should " have a mapping in the non-ISO code map" in {
+        forAll(wikiLanguageCodes) {
+            Language.map.keys should contain(_)
         }
-        
-        println("\nTest finished. "+errorCount+"/"+wpNonIsoLanguageCodes.size+" failed.")
-        if (errorCount == 0) {
-            println("Non-iso languages map is complete.")
+    }
+
+    "Every non-ISO code map entry " should "point to a ISO 639-1 language code" in {
+        // if a mapping exists, check if the mapping points to a ISO 639-1 language code
+        forAll(wikiLanguageCodes) {x: String =>
+            isoLanguageCodes should contain(Language.map(x).isoCode)
         }
     }
 

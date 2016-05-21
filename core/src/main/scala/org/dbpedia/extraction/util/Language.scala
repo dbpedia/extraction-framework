@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.util
 
-import java.util.Locale
+import java.util.logging.{Level, Logger}
+import java.util.{MissingResourceException, Locale}
 
-import org.dbpedia.extraction.config.mappings.wikidata.WikidataExtractorConfigFactory
+import org.dbpedia.extraction.config.mappings.wikidata.{JsonConfig, WikidataExtractorConfigFactory}
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 
 import scala.collection.mutable.HashMap
+import scala.io.{Codec, Source}
 
 /**
  * Represents a MediaWiki instance and the language used on it. Initially, this class was
@@ -44,6 +46,7 @@ class Language private(
 )
 {
     val locale = new Locale(isoCode)
+
     
     /** 
      * Wikipedia dump files use this prefix (with underscores), e.g. be_x_old, but
@@ -61,6 +64,10 @@ class Language private(
 object Language extends (String => Language)
 {
   implicit val wikiCodeOrdering = Ordering.by[Language, String](_.wikiCode)
+
+  val logger = Logger.getLogger(Language.getClass.getName)
+
+  val wikipediaLanguageUrl = "https://noc.wikimedia.org/conf/langlist"
   
   val map: Map[String, Language] = locally {
     
@@ -78,77 +85,31 @@ object Language extends (String => Language)
         "https://"+code+".wikipedia.org/w/api.php"
       )
     }
-    
-    val languages = new HashMap[String,Language]
-    val langMapFile = WikidataExtractorConfigFactory.createConfig("/wikitoisomap.json")
 
-    for (langEntry <- langMapFile.keys())
-    {
-      langMapFile.getValue(langEntry).get("iso639_1") match {
-        case Some(iso_1) if(iso_1.trim.length > 0) =>
-          languages(langEntry) = language(langEntry, langMapFile.getValue(langEntry).get("name").get, iso_1, langMapFile.getValue(langEntry).get("iso639_3").get)
-        case _ =>
+    val languages = new HashMap[String,Language]
+    val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
+    val wikiLanguageCodes = try source.getLines.toList finally source.close
+
+    val specialLangs: JsonConfig = WikidataExtractorConfigFactory.createConfig("/addonLanguages.json").asInstanceOf[JsonConfig]
+
+    for ((lang,properties) <- specialLangs.configMap) {
+      {
+        languages(lang) = language(properties.get("wikiCode").get, properties.get("name").get, properties.get("isoCode").get, properties.get("iso639_3").get)
       }
     }
-    languages("commons") =
-    new Language(
-      "commons",
-      "Commons",
-      "en",
-      "eng",
-       // TODO: do DBpedia URIs make sense here? Do we use them at all? Maybe use null instead.
-      "commons.dbpedia.org",
-      "http://commons.dbpedia.org",
-      new DBpediaNamespace("http://commons.dbpedia.org/resource/"),
-      new DBpediaNamespace("http://commons.dbpedia.org/property/"),
-      "http://commons.wikimedia.org",
-      "https://commons.wikimedia.org/w/api.php"
-    )
 
-    //used to refer to dbpedia core directory
-    languages("core") =
-    new Language(
-      "core",
-      "Core Directory",
-      "en",
-      "eng",
-      "core.dbpedia.org",
-      "http://core.dbpedia.org",
-      new DBpediaNamespace("http://core.dbpedia.org/resource/"),
-      new DBpediaNamespace("http://core.dbpedia.org/property/"),
-      "http://core.wikimedia.org",
-      "https://core.wikimedia.org/w/api.php"
-    )
-    
-    languages("wikidata") =
-    new Language(
-      "wikidata",
-      "Wikidata",
-      "en",
-      "eng",
-       // TODO: do DBpedia URIs make sense here? Do we use them at all? Maybe use null instead.
-      "wikidata.dbpedia.org",
-      "http://wikidata.dbpedia.org",
-      new DBpediaNamespace("http://wikidata.dbpedia.org/resource/"),
-      new DBpediaNamespace("http://wikidata.dbpedia.org/property/"),
-      "http://www.wikidata.org",
-      "https://www.wikidata.org/w/api.php"
-    )
-
-    languages("mappings") =
-    new Language(
-      "mappings",
-      "Mappings",
-      "en",
-      "eng",
-      // No DBpedia / RDF namespaces for mappings wiki. 
-      "mappings.dbpedia.org",
-      "http://mappings.dbpedia.org",
-      RdfNamespace.MAPPINGS,
-      RdfNamespace.MAPPINGS,
-      "http://mappings.dbpedia.org",
-      "http://mappings.dbpedia.org/api.php"
-    )
+    for (langEntry <- wikiLanguageCodes)
+    {
+      val loc = new Locale(langEntry)
+      try {
+        languages(langEntry) = language(langEntry, loc.getDisplayName, loc.getLanguage, loc.getISO3Language)
+      }
+      catch{
+        case mre : MissingResourceException =>
+          if(!languages.keySet.contains(langEntry))
+            logger.log(Level.WARNING, "Language not found: " + langEntry + ". To extract this language, please edit the addonLanguage.json in core.")
+      }
+    }
 
     languages.toMap // toMap makes immutable
   }
@@ -193,4 +154,5 @@ object Language extends (String => Language)
    * Gets a language object for a Wikipedia language code, or the default if the given code is unknown.
    */
   def getOrElse(code: String, default: => Language) : Language = map.getOrElse(code, default)
+
 }

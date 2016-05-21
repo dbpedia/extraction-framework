@@ -66,7 +66,7 @@ object GenerateWikiSettings {
     // TODO: use http://noc.wikimedia.org/conf/wikipedia.dblist instead? It doesn't contain the languages that
     // are rdirected. Do we need them? Are there other differences between wikipedia.dblist and langlist?
     //
-    val source = Source.fromURL("https://noc.wikimedia.org/conf/langlist")(Codec.UTF8)
+    val source = Source.fromURL(Language.wikipediaLanguageUrl)(Codec.UTF8)
     val wikiLanguages = try source.getLines.toList finally source.close
     val languages = "mappings" :: "commons" :: "wikidata" :: wikiLanguages
     
@@ -76,55 +76,59 @@ object GenerateWikiSettings {
     println("generating wiki config for "+languages.length+" languages")
     
     languages.map { code =>
-      val language = Language(code)
-      val file = new File(baseDir, language.wikiCode+"wiki-configuration.xml")
-      val disambigFile = new File(baseDir, language.wikiCode+"wiki-disambiguation-templates.xml")
+      try {
+        val language = Language(code)
+        val file = new File(baseDir, language.wikiCode + "wiki-configuration.xml")
+        val disambigFile = new File(baseDir, language.wikiCode + "wiki-disambiguation-templates.xml")
 
-      try
-      {
-        var url = new URL(language.apiUri+"?"+WikiSettingsReader.query)
-        var caller = new LazyWikiCaller(url, followRedirects, file, overwrite)
-        val settings = caller.execute { stream =>
-          val xml = factory.createXMLEventReader(stream)
-          WikiSettingsReader.read(xml)
-        }
-        namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first
-        redirectMap(code) = settings.magicwords("redirect")
-
-        if (wikiLanguages contains code) {
-          // Get disambiguation templates stored in MediaWiki:Disambiguationspage
-          url = new URL(language.apiUri+"?"+WikiDisambigReader.query)
-          caller = new LazyWikiCaller(url, followRedirects, disambigFile, overwrite)
-
-          var disambiguations = Set[String]()
-
-          try {
-            caller.execute { stream =>
-              val xml = factory.createXMLEventReader(stream)
-              disambiguations = WikiDisambigReader.read(language, xml)
-            }
-          } catch {
-            case ioex: IOException => {
-              // catch this and ignore. We are going to use curated disambiguations
-            }
+        try {
+          var url = new URL(language.apiUri + "?" + WikiSettingsReader.query)
+          var caller = new LazyWikiCaller(url, followRedirects, file, overwrite)
+          val settings = caller.execute { stream =>
+            val xml = factory.createXMLEventReader(stream)
+            WikiSettingsReader.read(xml)
           }
+          namespaceMap(code) = settings.aliases ++ settings.namespaces // order is important - aliases first
+          redirectMap(code) = settings.magicwords("redirect")
 
-          disambiguations = disambiguations ++ CuratedDisambiguation.get(language).getOrElse(Set())
-          if (!disambiguations.isEmpty) disambiguationsMap(code) = disambiguations
+          if (wikiLanguages contains code) {
+            // Get disambiguation templates stored in MediaWiki:Disambiguationspage
+            url = new URL(language.apiUri + "?" + WikiDisambigReader.query)
+            caller = new LazyWikiCaller(url, followRedirects, disambigFile, overwrite)
+
+            var disambiguations = Set[String]()
+
+            try {
+              caller.execute { stream =>
+                val xml = factory.createXMLEventReader(stream)
+                disambiguations = WikiDisambigReader.read(language, xml)
+              }
+            } catch {
+              case ioex: IOException => {
+                // catch this and ignore. We are going to use curated disambiguations
+              }
+            }
+
+            disambiguations = disambiguations ++ CuratedDisambiguation.get(language).getOrElse(Set())
+            if (!disambiguations.isEmpty) disambiguationsMap(code) = disambiguations
+          }
+          // TODO: also use interwikis
+          println(s"${code} - OK")
+        } catch {
+          case hrex: HttpRetryException => {
+            val target = hrex.getMessage
+            languageMap(code) = target
+            println(s"${code} - redirected to ${target}")
+          }
+          case ioex: IOException => {
+            val error = ioex.getMessage
+            errors(code) = error
+            println(s"${code} - Error: ${error}")
+          }
         }
-        // TODO: also use interwikis
-        println(s"${code} - OK")
-      } catch {
-        case hrex: HttpRetryException => {
-          val target = hrex.getMessage
-          languageMap(code) = target
-          println(s"${code} - redirected to ${target}")
-        }
-        case ioex: IOException => {
-          val error = ioex.getMessage
-          errors(code) = error
-          println(s"${code} - Error: ${error}")
-        }
+      }
+      catch {
+        case uae: IllegalArgumentException =>
       }
     }
     
@@ -161,7 +165,8 @@ object GenerateWikiSettings {
   
   /**
    * Generate file by replacing insertion point lines by strings and copying all other lines.
-   * @param map from insertion point name to replacement string
+    *
+    * @param map from insertion point name to replacement string
    */
   private def generate(fileName : String, strings : Map[String, String]) : Unit =
   {
