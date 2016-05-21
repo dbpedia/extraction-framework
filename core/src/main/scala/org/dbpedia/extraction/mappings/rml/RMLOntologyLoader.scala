@@ -25,11 +25,20 @@ object RMLOntologyLoader {
   }
 
   def loadOntologyClass(ontologyClassName : String, context: {def ontology: Ontology}): OntologyClass = {
-      context.ontology.classes(ontologyClassName)
+      try {
+        context.ontology.classes(ontologyClassName)
+      } catch {
+        case _: NoSuchElementException => throw new IllegalArgumentException("Ontology class not found: " + ontologyClassName)
+      }
+
   }
 
   def loadOntologyProperty(ontologyPropertyName: String, context: {def ontology: Ontology}): OntologyProperty = {
-      context.ontology.properties(ontologyPropertyName)
+      try {
+        context.ontology.properties(ontologyPropertyName)
+      } catch {
+        case _ : NoSuchElementException => throw new IllegalArgumentException("Ontology property not found: " + ontologyPropertyName)
+      }
   }
 
   def loadOntologyPropertyFromIRI(ontologyIRI : String, context : {def ontology: Ontology}): OntologyProperty = {
