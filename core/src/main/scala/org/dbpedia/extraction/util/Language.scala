@@ -90,7 +90,7 @@ object Language extends (String => Language)
     val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
     val wikiLanguageCodes = try source.getLines.toList finally source.close
 
-    val specialLangs: JsonConfig = WikidataExtractorConfigFactory.createConfig("/addonLanguages.json").asInstanceOf[JsonConfig]
+    val specialLangs: JsonConfig = WikidataExtractorConfigFactory.createConfig("/addonlanguages.json").asInstanceOf[JsonConfig]
 
     for ((lang,properties) <- specialLangs.configMap) {
       {
