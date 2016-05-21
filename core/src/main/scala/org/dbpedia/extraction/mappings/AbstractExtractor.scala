@@ -37,7 +37,7 @@ class AbstractExtractor(
 extends PageNodeExtractor
 {
     //TODO make this configurable
-    protected def apiUrl: String = "https://en.wikipedia.org/w/api.php"
+    protected def apiUrl: String = "http://localhost:8008/mediawiki/api.php"
 
     private val maxRetries = 5
 
