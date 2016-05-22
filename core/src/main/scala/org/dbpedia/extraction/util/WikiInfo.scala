@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.util
 
 import java.net.URL
+import java.util.logging.{Level, Logger}
 import scala.io.{Source, Codec}
 import java.io.File
 import scala.collection.mutable.ArrayBuffer
@@ -15,6 +16,7 @@ class WikiInfo(val language: Language, val pages: Int)
  */
 object WikiInfo
 {
+  val logger = Logger.getLogger(WikiInfo.getClass.getName)
   // hard-coded - there probably is no mirror, and the format is very specific.
   // TODO: user might want to use a local file...
   // TODO: mayby change this to XML serialization
@@ -74,6 +76,9 @@ object WikiInfo
       if(Language.map.keySet.contains(wikiCode))
         Option(new WikiInfo(Language(wikiCode), pages))
       else
+      {
+        logger.log(Level.WARNING, "Could not find language: " + wikiCode)
         None
+      }
   }
 }
