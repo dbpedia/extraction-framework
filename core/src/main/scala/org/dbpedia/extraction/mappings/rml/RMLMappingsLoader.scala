@@ -32,7 +32,7 @@ object RMLMappingsLoader {
       val triplesMapCollection = context.mappingDoc.getTriplesMaps.asScala
 
       for (triplesMap: TriplesMap <- triplesMapCollection) {
-        templateMappings.put(triplesMap.getShortName, loadTemplateMapping(triplesMap, context))
+        templateMappings.put(triplesMap.getName().replaceAll(".*/", ""), loadTemplateMapping(triplesMap, context))
       }
 
       new Mappings(templateMappings.toMap,tableMappings.toList)
