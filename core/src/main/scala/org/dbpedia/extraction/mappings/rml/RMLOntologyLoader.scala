@@ -10,6 +10,7 @@ import scala.language.reflectiveCalls
   */
 object RMLOntologyLoader {
 
+  // "class" is the rml value
   private final val mapToClass: String = "class"
 
   def loadMapToClassOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyClass = {
@@ -17,11 +18,11 @@ object RMLOntologyLoader {
   }
 
   def loadCorrespondingPropertyOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyProperty = {
-      null //TODO: ?
+      null //TODO: ? not defined in the rml mappings
   }
 
   def loadCorrespondingClassOntology(triplesMap: TriplesMap, context: {def ontology : Ontology}): OntologyClass = {
-      null //TODO: ?
+      null //TODO: ? not defined in the rml mappings
   }
 
   def loadOntologyClass(ontologyClassName : String, context: {def ontology: Ontology}): OntologyClass = {

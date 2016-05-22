@@ -14,6 +14,9 @@ import collection.JavaConverters._
   */
 object RMLPropertyMappingsLoader {
 
+  /**
+    * Loads all property mappings from a triples map
+    */
   def loadPropertyMappings(triplesMap: TriplesMap, context:{def ontology: Ontology
                                                             def language: Language
                                                             def redirects: Redirects}) : List[PropertyMapping] =
@@ -31,6 +34,9 @@ object RMLPropertyMappingsLoader {
 
   }
 
+  /**
+    * Loads simple property mappings
+    */
   def loadPropertyMapping(predicateObjectMap: PredicateObjectMap, context: {def ontology: Ontology
                                                                             def language: Language
                                                                             def redirects: Redirects}) : PropertyMapping =
