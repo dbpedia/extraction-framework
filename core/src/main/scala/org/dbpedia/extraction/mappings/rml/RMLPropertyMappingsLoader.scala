@@ -47,7 +47,7 @@ object RMLPropertyMappingsLoader {
 
 
     val templateProperty = objectMap.getReferenceMap.getReference
-    val ontologyProperty = RMLOntologyLoader.loadOntologyPropertyFromIRI(predicateMap.getConstantValue.stringValue(), context)
+    val ontologyProperty = RMLOntologyUtil.loadOntologyPropertyFromIRI(predicateMap.getConstantValue.stringValue(), context)
 
     return new SimplePropertyMapping(templateProperty, ontologyProperty, null, null, null, null, null, null, 1, context)
   }

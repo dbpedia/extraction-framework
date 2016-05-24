@@ -1,15 +1,23 @@
 package org.dbpedia.extraction.mappings.rml
 
 import org.dbpedia.extraction.mappings.{DateIntervalMapping, GeoCoordinatesMapping, _}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode
 
 object TemplateMappingsPrinter {
 
   def printTemplateMappings(templateMappings : Map[String, Extractor[TemplateNode]]): Unit = {
+    println("Iterating over template mappings...")
     for((k,v: TemplateMapping) <- templateMappings) {
-      println("Iterating over template mappings...")
       println("TemplateMapping: " + k)
       println("\tOntology class: " + v.mapToClass.name + " ("+ v.mapToClass.uri +")")
+      println("\tLabels: ")
+      print("\t\t")
+      var i = 0
+      for((k : Language, v2: String) <- v.mapToClass.labels) {
+        if(i < v.mapToClass.labels.size - 1) print(v2 + ", ") else println(v2)
+        i = i + 1
+      }
       println("\tProperty Mappings: ")
       for(propertyMapping: PropertyMapping <- v.mappings) {
         printPropertyMapping(propertyMapping, 0)

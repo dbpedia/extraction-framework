@@ -42,11 +42,12 @@ class RMLMappingsLoaderTest extends FlatSpec with Matchers
 
   // setting context
   val rmlContext = new {
-      def ontology: Ontology = ontologyObject
-      def language: Language = languageEN
-      def redirects: Redirects  = null
-      def mappingDoc: RMLMapping = rmlMapping
+    def ontology: Ontology = ontologyObject
+    def language: Language = languageEN
+    def redirects: Redirects  = null
+    def mappingDoc: RMLMapping = rmlMapping
   }
+
   val xmlContext = new {
     def ontology: Ontology = ontologyObject
     def language: Language = languageEN
@@ -61,9 +62,8 @@ class RMLMappingsLoaderTest extends FlatSpec with Matchers
   // printing output of both versions
   println("**** RML MAPPINGS ****")
   TemplateMappingsPrinter.printTemplateMappings(rmlTemplateMappings)
+
   println("\n\n**** XML MAPPINGS ****")
   TemplateMappingsPrinter.printTemplateMappings(xmlTemplateMappings)
-
-
 
 }

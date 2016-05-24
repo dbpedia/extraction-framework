@@ -6,9 +6,9 @@ import org.openrdf.model.URI
 import scala.language.reflectiveCalls
 
 /**
-  * Loading ontology functions
+  * Loading ontology data from given ontology class instance
   */
-object RMLOntologyLoader {
+object RMLOntologyUtil {
 
   // "class" is the rml value
   private final val mapToClass: String = "class"
@@ -47,6 +47,8 @@ object RMLOntologyLoader {
       val localOntologyPropertyName = ontologyIRI.replaceAll(".*/","")
       return loadOntologyProperty(localOntologyPropertyName, context)
   }
+
+  // private defs
 
   private def loadTriplesMapOntologyClass(triplesMap: TriplesMap, ontologyType : String, context: {def ontology : Ontology}): OntologyClass = {
       val ontologyClassName = loadTriplesMapOntologyClassName(triplesMap)
