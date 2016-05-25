@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.mappings.rml
 
 import be.ugent.mmlab.rml.model.TriplesMap
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.openrdf.model.URI
+
 import scala.language.reflectiveCalls
 
 /**
@@ -42,17 +44,30 @@ object RMLOntologyUtil {
       }
   }
 
+  def loadOntologyDataType(ontologyDataTypeName: String, context: {def ontology: Ontology}): Datatype = {
+    try {
+      context.ontology.datatypes(ontologyDataTypeName)
+    } catch {
+      case _ : NoSuchElementException => null
+    }
+  }
+
   def loadOntologyPropertyFromIRI(ontologyIRI : String, context : {def ontology: Ontology}): OntologyProperty = {
       //TODO: change in RMLProcessor for looking up local ontology property
       val localOntologyPropertyName = ontologyIRI.replaceAll(".*/","")
-      return loadOntologyProperty(localOntologyPropertyName, context)
+      loadOntologyProperty(localOntologyPropertyName, context)
+  }
+
+  def loadOntologyDataTypeFromIRI(ontologyIRI : String, context : { def ontology : Ontology}) : Datatype = {
+      val localOntologyDataTypeName = ontologyIRI.replaceAll(".*/","")
+      loadOntologyDataType(localOntologyDataTypeName, context)
   }
 
   // private defs
 
   private def loadTriplesMapOntologyClass(triplesMap: TriplesMap, ontologyType : String, context: {def ontology : Ontology}): OntologyClass = {
       val ontologyClassName = loadTriplesMapOntologyClassName(triplesMap)
-      return loadOntologyClass(ontologyClassName, context)
+      loadOntologyClass(ontologyClassName, context)
   }
 
   private def loadTriplesMapOntologyClassName(triplesMap: TriplesMap): String = {

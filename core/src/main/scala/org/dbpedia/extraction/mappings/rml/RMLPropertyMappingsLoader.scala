@@ -42,13 +42,15 @@ object RMLPropertyMappingsLoader {
                                                                             def redirects: Redirects}) : PropertyMapping =
   {
 
+    //TODO: Making a distinction between the type of mappings
+
     val predicateMap = predicateObjectMap.getPredicateMaps.asScala.head
     val objectMap = predicateObjectMap.getObjectMaps.asScala.head
 
-
     val templateProperty = objectMap.getReferenceMap.getReference
     val ontologyProperty = RMLOntologyUtil.loadOntologyPropertyFromIRI(predicateMap.getConstantValue.stringValue(), context)
+    val dataType = RMLOntologyUtil.loadOntologyDataTypeFromIRI(ontologyProperty.range.name, context)
 
-    return new SimplePropertyMapping(templateProperty, ontologyProperty, null, null, null, null, null, null, 1, context)
+    new SimplePropertyMapping(templateProperty, ontologyProperty, null, null, null, null, dataType, context.language, 1, context)
   }
 }

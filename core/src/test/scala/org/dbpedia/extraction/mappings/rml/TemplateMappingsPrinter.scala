@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings.rml
 
+import org.dbpedia.extraction.destinations.Dataset
 import org.dbpedia.extraction.mappings.{DateIntervalMapping, GeoCoordinatesMapping, _}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode
@@ -36,6 +37,7 @@ object TemplateMappingsPrinter {
           println("\tTemplate property: " + simplePropertyMapping.templateProperty)
           printIndent(indent)
           println("\tOntology property: " + simplePropertyMapping.ontologyProperty.name + "\t(" + simplePropertyMapping.ontologyProperty.uri + ")")
+          printIndent(indent)
           false
         }
         case "IntermediateNodeMapping" => {
