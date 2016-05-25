@@ -20,11 +20,11 @@ import org.dbpedia.extraction.util.Language
 @RunWith(classOf[JUnitRunner])
 class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMethodTester {
 
-  "DraftMappingExtractor" should """return correct property id's P17, P18, P94, P41""" in {
+  "DraftMappingExtractor" should """return correct property id's for YM infobox""" in {
 
     val lang = Language.English
 
-    val quads = parse(
+    val parsed = parse(
       """{{YM
             | |status                                 =
             | |azərbaycan dilində adı       = Telqte
@@ -49,97 +49,90 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
             |""", "TestPage", lang)
 
 
-      val answer = Set("{{#property:P17}}","{{#property:P18}}","{{#property:P94}}", "{{#property:P41}}","{{#property:P473}}","{{#property:P395}}","{{#property:P856}}")
-      var parsed = scala.collection.mutable.Set[String]()
-       for ( quad <- quads){
-          parsed.add(quad.value)
-      }
+      val answer = List(("YM", "ölkə", "{{#property:P17}}"),("YM", "şəkil","{{#property:P18}}"),("YM", "gerb", "{{#property:P94}}"),
+        ("YM", "bayraq", "{{#property:P41}}"),("YM", "telefon kodu", "{{#property:P473}}"),("YM", "nəqliyyat kodu","{{#property:P395}}"),("YM", "sayt","{{#property:P856}}"))
+
     (parsed) should be (answer)
   }
 
-  "DraftMappingExtractor" should """return correct property id's P367, P61, P575 """ in {
+  "DraftMappingExtractor" should """return correct property id's for Infobox planet """ in {
 
     val lang = Language.English
 
-    val quads = parse(
-      """{{Use British English|date=January 2015}}
-        || name = Uranus
-        || symbol = [[File:{{#property:P367}}|25px]]
-        || image = [[File:Uranus2.jpg|260px]]
-        || caption = Uranus as a featureless disc, photographed&lt;br&gt;by ''[[Voyager&amp;nbsp;2]]'' in 1986
-        || discovery = yes
-        || image = [[File:Uranus2.jpg|260px]]
-        || caption = Uranus as a featureless disc, photographed&lt;br&gt;by ''[[Voyager&amp;nbsp;2]]'' in 1986
-        || discovery = yes
-        || discoverer = [[{{#property:P61}}]]
-        || discovered =  {{#time:F j, Y|{{#property:P575}}}}
-        || orbit_ref =
-        |&lt;ref name=&quot;VSOP87&quot; /&gt;{{efn | These are the mean elements from VSOP87, together with derived quantities.}}
-        || epoch = [[J2000]]
-        || aphelion = {{val|20.11|ul=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|3008|u=Gm}}}})
-        || perihelion = {{val|18.33|u=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|2742|u=Gm}}}})
-        || semimajor = {{val|19.2184|u=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|2875.04|u=Gm}}}})
-        || eccentricity = {{val|0.046381}}""", "TestPage", lang)
+    val parsed = parse(
+      """{{Infobox planet
+        | name = Uranus
+        | symbol = [[File:{{#property:P367}}|25px]]
+        | image = [[File:Uranus2.jpg|260px]]
+        | caption = Uranus as a featureless disc, photographed&lt;br&gt;by ''[[Voyager&amp;nbsp;2]]'' in 1986
+        | discovery = yes
+        | image = [[File:Uranus2.jpg|260px]]
+        | caption = Uranus as a featureless disc, photographed&lt;br&gt;by ''[[Voyager&amp;nbsp;2]]'' in 1986
+        | discovery = yes
+        | discoverer = [[{{#property:P61}}]]
+        | discovered =  {{#time:F j, Y|{{#property:P575}}}}
+        | epoch = [[J2000]]
+        | aphelion = {{val|20.11|ul=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|3008|u=Gm}}}})
+        | perihelion = {{val|18.33|u=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|2742|u=Gm}}}})
+        | semimajor = {{val|19.2184|u=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|2875.04|u=Gm}}}})
+        | eccentricity = {{val|0.046381}}
+        }}""", "TestPage", lang)
 
-    val answer = Set("{{#property:P367}}","{{#property:P61}}","{{#property:P575}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
+    val answer = List(("Infobox planet", "symbol", "{{#property:P367}}"),("Infobox planet","discoverer","{{#property:P61}}"))
+
     (parsed) should be (answer)
 
   }
-  "DraftMappingExtractor" should """return correct property id's P373 """ in {
+  "DraftMappingExtractor" should """return correct property id's for Commons Category """ in {
 
     val lang = Language.English
 
-    val quads = parse(
-      """* {{cite book|author = R. Prud'Homme Van Reine|title = Admiraal Zilvervloot – Biografie van Piet Hein|publisher = De Arbeiderspers|year = 2003|volume = }}
+    val parsed = parse(
+      """
+        |* {{cite book|author = R. Prud'Homme Van Reine|title = Admiraal Zilvervloot – Biografie van Piet Hein|publisher = De Arbeiderspers|year = 2003|volume = }}
         |{{Commons category|{{#property:P373}}}}
         |{{Use dmy dates|date=September 2011}}
-        |{{Commons category|{{#property:P373}}}}""", "TestPage", lang)
+        |{{Commons category|{{#property:P373}}}}
+        }}""", "TestPage", lang)
 
-    val answer = Set("{{#property:P373}}","{{#property:P373}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
+    val answer = List(( "Commons category","1","{{#property:P373}}"), ( "Commons category","1","{{#property:P373}}"))
+
     (parsed) should be (answer)
 
   }
-  "DraftMappingExtractor" should """return correct property id's P36, P6, P856 """ in {
+  "DraftMappingExtractor" should """return correct property id's for Infobox Politics """ in {
 
     val lang = Language.English
 
-    val quads = parse(
-      """| seat                    = [[{{#property:P36}}]]
-        || leader_title            = Governor
-        || leader_title            = Governor
-        || leader_name             = [[{{#property:P6}}]]
-        || area_total_km2          = 4,443
-        || population_footnotes    = &lt;ref name=&quot;r-pop&quot;&gt;{{Metadata Population BE||QUELLE}}&lt;/ref&gt;
-        || population_total        = {{Metadata Population BE|80000}}
-        || population_as_of        = {{Metadata Population BE||STAND}}
-        || population_density_km2  = auto
-        || area_total_km2          = 4,443
-        || population_footnotes    = &lt;ref name=&quot;r-pop&quot;&gt;{{Metadata Population BE||QUELLE}}&lt;/ref&gt;
-        || population_total        = {{Metadata Population BE|80000}}
-        || population_as_of        = {{Metadata Population BE||STAND}}
-        || population_density_km2  = auto
-        || website                 = {{URL|{{#property:P856}}}}""", "TestPage", lang)
+    val parsed = parse(
+      """{{Infobox Politics
+         | seat                    = [[{{#property:P36}}]]
+         | leader_title            = Governor
+         | leader_title            = Governor
+         | leader_name             = [[{{#property:P6}}]]
+         | area_total_km2          = 4,443
+         | population_footnotes    = &lt;ref name=&quot;r-pop&quot;&gt;{{Metadata Population BE||QUELLE}}&lt;/ref&gt;
+         | population_total        = {{Metadata Population BE|80000}}
+         | population_as_of        = {{Metadata Population BE||STAND}}
+         | population_density_km2  = auto
+         | area_total_km2          = 4,443
+         | population_footnotes    = &lt;ref name=&quot;r-pop&quot;&gt;{{Metadata Population BE||QUELLE}}&lt;/ref&gt;
+         | population_total        = {{Metadata Population BE|80000}}
+         | population_as_of        = {{Metadata Population BE||STAND}}
+         | population_density_km2  = auto
+         | website                 = {{URL|{{#property:P856}}}}
+         }}""", "TestPage", lang)
 
-    val answer = Set("{{#property:P36}}","{{#property:P6}}","{{#property:P856}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
+    val answer = List(("Infobox Politics","seat","{{#property:P36}}"), ("Infobox Politics","leader_name","{{#property:P6}}"),
+      ("Infobox Politics","1","{{#property:P856}}"))
+
     (parsed) should be (answer)
   }
-  "DraftMappingExtractor" should """return correct property id's P856""" in {
+  "DraftMappingExtractor" should """return correct property id's for nest property functions """ in {
 
     val lang = Language.English
 
-    val quads = parse(
+    val parsed = parse(
       """|title=Philippine ZIP Codes Directory
         ||area_code              = 0
         ||blank_name             =
@@ -148,75 +141,58 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         ||blank1_info            =
         ||website                = {{nowrap|{{URL|{{#property:P856}}}}}}""", "TestPage", lang)
 
-    val answer = Set("{{#property:P856}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
+    val answer = List(("URL","1","{{#property:P856}}"))
+
     (parsed) should be (answer)
 
   }
-  "DraftMappingExtractor" should """return correct property id's P1082 """ in {
+  "DraftMappingExtractor" should """return correct property id's for Infobox test """ in {
 
     val lang = Language.English
 
-    val quads = parse(
-      """| elevation_footnotes     =
-        || elevation_m             =
-        || population_total        = {{#property:P1082}}
-        || population_as_of        = 2010
-        || population_as_of        = 2010
-        || population_density_km2  = {{#expr: {{formatnum: {{#property:P1082}}|R}} / 0.67 round 0}}
-        || population_demonym      =
-        || population_note         = """, "TestPage", lang)
+    val parsed = parse(
+      """
+         {{Infobox Test
+         | elevation_footnotes     =
+         | elevation_m             =
+         | population_total        = {{#property:P1082}}
+         | population_as_of        = 2010
+         | population_as_of        = 2010
+         | population_density_km2  = {{#expr: {{formatnum: {{#property:P1082}}|R}} / 0.67 round 0}}
+         | population_demonym      =
+         | population_note         =
+         }}""", "TestPage", lang)
 
-    val answer = Set("{{#property:P1082}}","{{#property:P1082}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
-    (parsed) should be (answer)
+    val answer = List(("Infobox Test", "population_total" , "{{#property:P1082}}"))
+
+   (parsed) should be (answer)
   }
-  "DraftMappingExtractor" should """return correct property id's P242, P131 """ in {
+  "DraftMappingExtractor" should """return correct property id's for Infobox Tourism """ in {
 
     val lang = Language.English
 
-    val quads = parse(
-      """| tourism_slogan         = Masaganang Maitum
-        || image_map              = {{#property:P242}}
-        || map_caption            = Map of {{#property:P131}} with Maitum highlighted
-        || pushpin_map            = Philippines
-        || pushpin_label_position = left """, "TestPage", lang)
+    val parsed = parse(
+      """{{Infobox Tourism
+         | tourism_slogan         = Masaganang Maitum
+         | image_map              = {{#property:P242}}
+         | map_caption            = Map of {{#property:P131}} with Maitum highlighted
+         | pushpin_map            = Philippines
+         | pushpin_label_position = left
+         }}""", "TestPage", lang)
 
-    val answer = Set("{{#property:P242}}","{{#property:P131}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
-    (parsed) should be (answer)
-  }
-  "DraftMappingExtractor" should """return correct property id's P625 """ in {
+    val answer = List(("Infobox Tourism", "image_map", "{{#property:P242}}"),("Infobox Tourism", "map_caption", "{{#property:P131}}"))
 
-    val lang = Language.English
-
-    val quads = parse(
-      """| rowclass9 = mergedtoprow
-        ||  data9 = {{#if:{{{pushpin_map_narrow|}}}||{{#if:{{both| {{{pushpin_map|}}} | {{both|{{{latd|}}}|{{{longd|}}}}} {{both|{{{coordinates_wikidata|{{{wikidata|}}}}}}|{{#property:P625}}}} }}|""", "TestPage", lang)
-
-    val answer = Set("{{#property:P625}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
-    (parsed) should be (answer)
+   (parsed) should be (answer)
   }
 
-  "DraftMappingExtractor" should """return correct property id's p742, p570, p20 """ in {
+  "DraftMappingExtractor" should """return correct property id's for Infobox Test """ in {
 
-    val lang = Language.English
+    val lang = Language.get("fr").getOrElse(Language.English)
 
-    val quads = parse(
-      """| surnom            = {{#property:p742}}
+    val parsed = parse(
+      """
+         {{Infobox Test
+         | surnom            = {{#property:p742}}
          | date de naissance = {{Date|18|septembre|1943|au cinéma|âge=oui}}
          | lieu de naissance = [[Montréal]], {{Québec}} ([[Canada]])
          | nationalité       = {{drapeau|Canada}} [[Canada|Canadienne]]
@@ -225,75 +201,30 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | nationalité       = {{drapeau|Canada}} [[Canada|Canadienne]]
          | date de décès     = {{#property:p570}}
          | lieu de décès     = {{#property:p20}}
-         | profession        = [[Acteur|Actrice]]""", "TestPage", lang)
+         | profession        = [[Acteur|Actrice]]
+         }}""", "TestPage", lang)
 
-    val answer = Set("{{#property:p742}}", "{{#property:p570}}", "{{#property:p20}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
+    val answer = List(("Infobox Test", "surnom","{{#property:p742}}"), ("Infobox Test","date de décès" ,"{{#property:p570}}"), ("Infobox Test","lieu de décès", "{{#property:p20}}"))
+
     (parsed) should be (answer)
   }
 
-  "DraftMappingExtractor" should """return correct property id's P735, P734 """ in {
+  "DraftMappingExtractor" should """return correct property id's for multiple #property in a line """ in {
 
-    val lang = Language.English
+    val lang = Language.get("fr").getOrElse(Language.English)
+    val answer = List(("Infobox Test","nom","{{#property:P735}}"), ("Infobox Test","nom","{{#property:P734}}"))
+    val parsed = parse(
+      """
+        {{Infobox Test
+        | nom               = {{#property:P735}} {{#property:P734}}
+        }}""", "TestPage", lang)
 
-    val quads = parse(
-      """ | nom               = {{#property:P735}} {{#property:P734}}
-        """, "TestPage", lang)
-
-    val answer = Set("{{#property:P735}}", "{{#property:P734}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
     (parsed) should be (answer)
   }
-
-  "DraftMappingExtractor" should """return correct property id's p1563 """ in {
-
-    val lang = Language.English
-
-    val quads = parse(
-      """lien auteur2=Edmund Robertson
-        |jour={{{jour|}}}
-        |mois={{{mois|}}}
-        |année={{{année|}}}
-        |lire en ligne=http://www-history.mcs.st-andrews.ac.uk/Biographies/{{{id|{{#property:p1563}}}}}.html
-        |titre chapitre={{{title|{{PAGENAME}}}}}
-        |titre ouvrage=[[MacTutor History of Mathematics archive]]
-        |lien éditeur=université de St Andrews
-        |éditeur=université de {{lang|en|St Andrews}}
-        |consulté le={{{accessdate|}}}""", "TestPage", lang)
-
-    val answer = Set("{{#property:p1563}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
-    (parsed) should be (answer)
-  }
-
-  "DraftMappingExtractor" should """return correct property id's P31, P570 """ in {
-
-    val lang = Language.English
-
-    val quads = parse(
-      """{{Infobox/Ligne mixte optionnelle|Date de décès|{{{date de décès|}}}|{{#invoke:Date|dateInfobox|mort|{{{date de naissance|}}}|{{{date de décès|}}}|qualificatif={{{qualificatif date|}}} }}{{#ifeq:{{#property:P31}}|être humain|{{#ifeq:{{#property:P570}}{{NAMESPACE}}||[[Category:P570 absent de Wikidata]]}}}} }}""", "TestPage", lang)
-
-    val answer = Set("{{#property:P31}}", "{{#property:P570}}")
-    var parsed = scala.collection.mutable.Set[String]()
-    for ( quad <- quads){
-      parsed.add(quad.value)
-    }
-    (parsed) should be (answer)
-  }
-
 
   private val parser = WikiParser.getInstance()
 
-  private def parse(input : String, title: String = "TestPage", lang: Language = Language.English) : Seq[Quad] =
+  private def parse(input : String, title: String = "TestPage", lang: Language = Language.English) : List[(String,String, String)] =
   {
     val page = new WikiPage(WikiTitle.parse(title, lang), input)
     val context = new {
@@ -304,16 +235,11 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
 
     val extractor = new DraftMappingExtractor(context)
     parser(page) match {
-      case Some(pageNode) => extractor.getPropertyParserFunctions(pageNode, "TestPage")
-      case None => Seq.empty
+      case Some(pageNode) => extractor.getPropertyTuples(pageNode)
+      case None => List.empty
     }
-
   }
-
-
-
 }
-
 
 object DraftMappingExtractorTest {
 
@@ -328,10 +254,4 @@ object DraftMappingExtractorTest {
     def redirects = new Redirects(Map())
   }
 
-
-//  private val datasets = new DraftMappingExtractor(new {
-//    def ontology = DraftMappingExtractorTest.ontology;
-//    def language = Language.English;
-//    def redirects = null
-//  }).datasets
 }

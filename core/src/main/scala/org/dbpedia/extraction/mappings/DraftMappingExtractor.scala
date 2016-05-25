@@ -36,7 +36,6 @@ class DraftMappingExtractor(context: {
     val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
     val propertyParserFuncionsMappings = getTemplateMappingsFromPropertyParserFunc(propertyParserFuncions)
 
-
     val invokeFunc = parserFunctions.filter(p => p.title.equalsIgnoreCase("#invoke"))
     val wikidataParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("wikidata"))
     val propertyLinkParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("propertyLink"))
@@ -62,19 +61,23 @@ class DraftMappingExtractor(context: {
 
   }
 
-  def getPropertyParserFunctions(page : PageNode, subjectUri : String) : List[Quad] = {
+  def getPropertyTuples(page : PageNode) : List[(String,String, String)] = {
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
 
-    val propertyParserFuncions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from")))
-    val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
+    val propertyParserFunctions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from") && p.parent.isInstanceOf[PropertyNode]))
+    val keys = propertyParserFunctions.map(x => x.parent.asInstanceOf[PropertyNode].key )
+    var infobox_name = ""
+    if( propertyParserFunctions.map(x => x.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded ).size > 0){
+      infobox_name = propertyParserFunctions.map(x => x.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded).head
+    } else {
+      infobox_name = "unspecified"
+    }
+     (propertyParserFunctions ).map( p =>
+      new Tuple3(infobox_name, p.parent.asInstanceOf[PropertyNode].key, p.toWikiText))
 
-    val parserFuncQuads = (propertyParserFuncions ).map( p =>
-      new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
-        p.toWikiText, page.sourceUri, context.ontology.datatypes("xsd:string"))
-    )
-
-    parserFuncQuads
   }
+
+
 
   private def getTemplateMappingsFromPropertyParserFunc(propertyFunctions: Seq[ParserFunctionNode]) : Seq[(String, String)] = {
 
