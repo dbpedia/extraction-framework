@@ -5,10 +5,14 @@ import io.socket.IOAcknowledge;
 import io.socket.IOCallback;
 import io.socket.SocketIO;
 import io.socket.SocketIOException;
+import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.util.DateUtil;
+import org.dbpedia.extraction.util.Language;
+import org.dbpedia.extraction.wikiparser.Namespace;
+import org.dbpedia.extraction.wikiparser.WikiTitle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,11 +111,17 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
             return;
         }
         String title = jsonObject.get("title").getAsString();
-        Long timestamp = jsonObject.get("timestamp").getAsLong();
-        String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
-        synchronized (this) {
-            events.add(new LiveQueueItem(-1, title, eventTimestamp, false, ""));
-            logger.debug("Registered event for page " + title + " at " + eventTimestamp);
+        WikiTitle wikiTitle = WikiTitle.parse(title, Language.apply(LiveOptions.language));
+        // Todo: Check whether we have to accept Namespace:File
+        if(wikiTitle.namespace() == Namespace.Main() ||
+                wikiTitle.namespace() == Namespace.Template() ||
+                wikiTitle.namespace() == Namespace.Category()) {
+            Long timestamp = jsonObject.get("timestamp").getAsLong();
+            String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
+            synchronized (this) {
+                events.add(new LiveQueueItem(-1, title, eventTimestamp, false, ""));
+                logger.debug("Registered event for page " + title + " at " + eventTimestamp);
+            }
         }
     }
 
