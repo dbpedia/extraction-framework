@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.logging.Level;
 
 /**
  * This class extends the default Feeder for RCStreem handling.
@@ -45,6 +46,11 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
                           String folderBasePath, String room) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         this.room = room;
+
+        // Set Logger preferences for Socket.io
+        java.util.logging.Logger sioLogger = java.util.logging.Logger.getLogger("io.socket");
+        sioLogger.setLevel(Level.WARNING);
+
         try {
             connect();
         } catch(MalformedURLException e){
