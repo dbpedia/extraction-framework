@@ -45,7 +45,8 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
     public RCStreamFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
                           String folderBasePath, String room) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
-        this.room = room;
+        // use baseURO without protocol as room to subscribe to
+        this.room = Language.apply(LiveOptions.language).baseUri().replaceAll("https?:\\/\\/", "");
 
         // Set Logger preferences for Socket.io
         java.util.logging.Logger sioLogger = java.util.logging.Logger.getLogger("io.socket");
@@ -117,11 +118,10 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
             return;
         }
         String title = jsonObject.get("title").getAsString();
-        WikiTitle wikiTitle = WikiTitle.parse(title, Language.apply(LiveOptions.language));
-        // Todo: Check whether we have to accept Namespace:File
-        if(wikiTitle.namespace() == Namespace.Main() ||
-                wikiTitle.namespace() == Namespace.Template() ||
-                wikiTitle.namespace() == Namespace.Category()) {
+        int namespaceCode = jsonObject.get("namespace").getAsInt();
+        if(namespaceCode == Namespace.Main().code() ||
+                namespaceCode == Namespace.Template().code() ||
+                namespaceCode == Namespace.Category().code()) {
             Long timestamp = jsonObject.get("timestamp").getAsLong();
             String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
             synchronized (this) {

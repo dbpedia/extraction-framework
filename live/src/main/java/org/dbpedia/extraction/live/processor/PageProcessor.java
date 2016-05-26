@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.processor;
 
+import org.dbpedia.extraction.util.Language;
 import org.slf4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
@@ -56,12 +57,12 @@ public class PageProcessor extends Thread{
             if (isTitle) {
                 extracted = LiveExtractionConfigLoader.extractPageFromTitle(
                         item,
-                        LiveOptions.options.get("localApiURL"),
+                        Language.apply(LiveOptions.language).apiUri(),
                         LiveOptions.language);
             } else {
                 extracted = LiveExtractionConfigLoader.extractPage(
                         item,
-                        LiveOptions.options.get("localApiURL"),
+                        Language.apply(LiveOptions.language).apiUri(),
                         LiveOptions.language);
             }
 
