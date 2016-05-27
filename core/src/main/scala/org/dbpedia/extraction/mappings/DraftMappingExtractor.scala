@@ -61,19 +61,21 @@ class DraftMappingExtractor(context: {
 
   }
 
+  def extract_property(str : String) : String = {
+    val pattern = """\{\{#property:([0-9A-Za-z]+)\}\}""".r
+    str match {
+      case pattern(group) => group
+      case _ => ""
+    }
+  }
   def getPropertyTuples(page : PageNode) : List[(String,String, String)] = {
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
 
     val propertyParserFunctions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from") && p.parent.isInstanceOf[PropertyNode]))
     val keys = propertyParserFunctions.map(x => x.parent.asInstanceOf[PropertyNode].key )
-    var infobox_name = ""
-    if( propertyParserFunctions.map(x => x.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded ).size > 0){
-      infobox_name = propertyParserFunctions.map(x => x.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded).head
-    } else {
-      infobox_name = "unspecified"
-    }
+
      (propertyParserFunctions ).map( p =>
-      new Tuple3(infobox_name, p.parent.asInstanceOf[PropertyNode].key, p.toWikiText))
+      new Tuple3(p.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded, p.parent.asInstanceOf[PropertyNode].key, extract_property(p.toWikiText)))
 
   }
 

@@ -49,8 +49,8 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
             |""", "TestPage", lang)
 
 
-      val answer = List(("YM", "ölkə", "{{#property:P17}}"),("YM", "şəkil","{{#property:P18}}"),("YM", "gerb", "{{#property:P94}}"),
-        ("YM", "bayraq", "{{#property:P41}}"),("YM", "telefon kodu", "{{#property:P473}}"),("YM", "nəqliyyat kodu","{{#property:P395}}"),("YM", "sayt","{{#property:P856}}"))
+      val answer = List(("YM", "ölkə", "P17"),(("YM"), "şəkil","P18"),(("YM"), "gerb", "P94"),
+        (("YM"), "bayraq", "P41"),(("YM"), "telefon kodu", "P473"),(("YM"), "nəqliyyat kodu","P395"),(("YM"), "sayt","P856"))
 
     (parsed) should be (answer)
   }
@@ -78,7 +78,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         | eccentricity = {{val|0.046381}}
         }}""", "TestPage", lang)
 
-    val answer = List(("Infobox planet", "symbol", "{{#property:P367}}"),("Infobox planet","discoverer","{{#property:P61}}"))
+    val answer = List(("Infobox planet", "symbol", "P367"),("Infobox planet","discoverer","P61"))
 
     (parsed) should be (answer)
 
@@ -95,7 +95,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         |{{Commons category|{{#property:P373}}}}
         }}""", "TestPage", lang)
 
-    val answer = List(( "Commons category","1","{{#property:P373}}"), ( "Commons category","1","{{#property:P373}}"))
+    val answer = List(( "Commons category","1","P373"), ( "Commons category","1","P373"))
 
     (parsed) should be (answer)
 
@@ -120,11 +120,9 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | population_total        = {{Metadata Population BE|80000}}
          | population_as_of        = {{Metadata Population BE||STAND}}
          | population_density_km2  = auto
-         | website                 = {{URL|{{#property:P856}}}}
          }}""", "TestPage", lang)
 
-    val answer = List(("Infobox Politics","seat","{{#property:P36}}"), ("Infobox Politics","leader_name","{{#property:P6}}"),
-      ("Infobox Politics","1","{{#property:P856}}"))
+    val answer = List(("Infobox Politics","seat","P36"), ("Infobox Politics","leader_name","P6"))
 
     (parsed) should be (answer)
   }
@@ -141,7 +139,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         ||blank1_info            =
         ||website                = {{nowrap|{{URL|{{#property:P856}}}}}}""", "TestPage", lang)
 
-    val answer = List(("URL","1","{{#property:P856}}"))
+    val answer = List(("URL","1","P856"))
 
     (parsed) should be (answer)
 
@@ -163,7 +161,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | population_note         =
          }}""", "TestPage", lang)
 
-    val answer = List(("Infobox Test", "population_total" , "{{#property:P1082}}"))
+    val answer = List(("Infobox Test", "population_total" , "P1082"))
 
    (parsed) should be (answer)
   }
@@ -180,7 +178,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | pushpin_label_position = left
          }}""", "TestPage", lang)
 
-    val answer = List(("Infobox Tourism", "image_map", "{{#property:P242}}"),("Infobox Tourism", "map_caption", "{{#property:P131}}"))
+    val answer = List(("Infobox Tourism", "image_map", "P242"),("Infobox Tourism", "map_caption", "P131"))
 
    (parsed) should be (answer)
   }
@@ -204,7 +202,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | profession        = [[Acteur|Actrice]]
          }}""", "TestPage", lang)
 
-    val answer = List(("Infobox Test", "surnom","{{#property:p742}}"), ("Infobox Test","date de décès" ,"{{#property:p570}}"), ("Infobox Test","lieu de décès", "{{#property:p20}}"))
+    val answer = List(("Infobox Test", "surnom","p742"), ("Infobox Test","date de décès" ,"p570"), ("Infobox Test","lieu de décès", "p20"))
 
     (parsed) should be (answer)
   }
@@ -212,7 +210,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
   "DraftMappingExtractor" should """return correct property id's for multiple #property in a line """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
-    val answer = List(("Infobox Test","nom","{{#property:P735}}"), ("Infobox Test","nom","{{#property:P734}}"))
+    val answer = List(("Infobox Test","nom","P735"), ("Infobox Test","nom","P734"))
     val parsed = parse(
       """
         {{Infobox Test
@@ -221,6 +219,25 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
 
     (parsed) should be (answer)
   }
+
+  "DraftMappingExtractor" should """return correct property id's for multiple info boxes """ in {
+
+    val lang = Language.get("fr").getOrElse(Language.English)
+    val answer = List(("Infobox Test1","arg1","P1"), ("Infobox Test2","arg2","P2"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        | arg1   = {{#property:P1}}
+        }}
+
+        {{Infobox Test2
+        | arg2 = {{#property:P2}}
+        }}
+      """, "TestPage", lang)
+
+    (parsed) should be (answer)
+  }
+
 
   private val parser = WikiParser.getInstance()
 
