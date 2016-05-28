@@ -18,9 +18,9 @@ import org.dbpedia.extraction.util.Language
   *
   */
 @RunWith(classOf[JUnitRunner])
-class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMethodTester {
+class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMethodTester {
 
-  "DraftMappingExtractor" should """return correct property id's for YM infobox""" in {
+  "InfoboxMappingsExtractor" should """return correct property id's for YM infobox""" in {
 
     val lang = Language.English
 
@@ -46,7 +46,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
             | |sayt                                 = {{#property:P856}}
             | |saytın dili                         = de
             |}}
-            |""", "TestPage", lang)
+            |""", "TestPage", lang, "#property")
 
 
       val answer = List(("YM", "ölkə", "P17"),(("YM"), "şəkil","P18"),(("YM"), "gerb", "P94"),
@@ -55,7 +55,7 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
     (parsed) should be (answer)
   }
 
-  "DraftMappingExtractor" should """return correct property id's for Infobox planet """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for Infobox planet """ in {
 
     val lang = Language.English
 
@@ -76,14 +76,14 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         | perihelion = {{val|18.33|u=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|2742|u=Gm}}}})
         | semimajor = {{val|19.2184|u=AU}}&lt;br&gt;({{nowrap|{{val|fmt=commas|2875.04|u=Gm}}}})
         | eccentricity = {{val|0.046381}}
-        }}""", "TestPage", lang)
+        }}""", "TestPage", lang, "#property")
 
     val answer = List(("Infobox planet", "symbol", "P367"),("Infobox planet","discoverer","P61"))
 
     (parsed) should be (answer)
 
   }
-  "DraftMappingExtractor" should """return correct property id's for Commons Category """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for Commons Category """ in {
 
     val lang = Language.English
 
@@ -93,14 +93,14 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         |{{Commons category|{{#property:P373}}}}
         |{{Use dmy dates|date=September 2011}}
         |{{Commons category|{{#property:P373}}}}
-        }}""", "TestPage", lang)
+        }}""", "TestPage", lang, "#property")
 
     val answer = List(( "Commons category","1","P373"), ( "Commons category","1","P373"))
 
     (parsed) should be (answer)
 
   }
-  "DraftMappingExtractor" should """return correct property id's for Infobox Politics """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for Infobox Politics """ in {
 
     val lang = Language.English
 
@@ -120,13 +120,13 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | population_total        = {{Metadata Population BE|80000}}
          | population_as_of        = {{Metadata Population BE||STAND}}
          | population_density_km2  = auto
-         }}""", "TestPage", lang)
+         }}""", "TestPage", lang, "#property")
 
     val answer = List(("Infobox Politics","seat","P36"), ("Infobox Politics","leader_name","P6"))
 
     (parsed) should be (answer)
   }
-  "DraftMappingExtractor" should """return correct property id's for nest property functions """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for nest property functions """ in {
 
     val lang = Language.English
 
@@ -137,14 +137,14 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         ||blank_info             =
         ||blank1_name            =
         ||blank1_info            =
-        ||website                = {{nowrap|{{URL|{{#property:P856}}}}}}""", "TestPage", lang)
+        ||website                = {{nowrap|{{URL|{{#property:P856}}}}}}""", "TestPage", lang, "#property")
 
     val answer = List(("URL","1","P856"))
 
     (parsed) should be (answer)
 
   }
-  "DraftMappingExtractor" should """return correct property id's for Infobox test """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for Infobox test """ in {
 
     val lang = Language.English
 
@@ -159,13 +159,14 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | population_density_km2  = {{#expr: {{formatnum: {{#property:P1082}}|R}} / 0.67 round 0}}
          | population_demonym      =
          | population_note         =
-         }}""", "TestPage", lang)
+         }}""", "TestPage", lang, "#property")
 
     val answer = List(("Infobox Test", "population_total" , "P1082"))
 
    (parsed) should be (answer)
   }
-  "DraftMappingExtractor" should """return correct property id's for Infobox Tourism """ in {
+
+  "InfoboxMappingsExtractor" should """return correct property id's for Infobox Tourism """ in {
 
     val lang = Language.English
 
@@ -176,14 +177,14 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | map_caption            = Map of {{#property:P131}} with Maitum highlighted
          | pushpin_map            = Philippines
          | pushpin_label_position = left
-         }}""", "TestPage", lang)
+         }}""", "TestPage", lang, "#property")
 
     val answer = List(("Infobox Tourism", "image_map", "P242"),("Infobox Tourism", "map_caption", "P131"))
 
    (parsed) should be (answer)
   }
 
-  "DraftMappingExtractor" should """return correct property id's for Infobox Test """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for Infobox Test """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
 
@@ -200,14 +201,14 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
          | date de décès     = {{#property:p570}}
          | lieu de décès     = {{#property:p20}}
          | profession        = [[Acteur|Actrice]]
-         }}""", "TestPage", lang)
+         }}""", "TestPage", lang, "#property")
 
     val answer = List(("Infobox Test", "surnom","p742"), ("Infobox Test","date de décès" ,"p570"), ("Infobox Test","lieu de décès", "p20"))
 
     (parsed) should be (answer)
   }
 
-  "DraftMappingExtractor" should """return correct property id's for multiple #property in a line """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for multiple #property in a line """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
     val answer = List(("Infobox Test","nom","P735"), ("Infobox Test","nom","P734"))
@@ -215,12 +216,12 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
       """
         {{Infobox Test
         | nom               = {{#property:P735}} {{#property:P734}}
-        }}""", "TestPage", lang)
+        }}""", "TestPage", lang, "#property")
 
     (parsed) should be (answer)
   }
 
-  "DraftMappingExtractor" should """return correct property id's for multiple info boxes """ in {
+  "InfoboxMappingsExtractor" should """return correct property id's for multiple info boxes """ in {
 
     val lang = Language.get("fr").getOrElse(Language.English)
     val answer = List(("Infobox Test1","arg1","P1"), ("Infobox Test2","arg2","P2"))
@@ -233,7 +234,78 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
         {{Infobox Test2
         | arg2 = {{#property:P2}}
         }}
-      """, "TestPage", lang)
+      """, "TestPage", lang, "#property")
+
+    (parsed) should be (answer)
+  }
+
+  "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function  """ in {
+
+    val lang = Language.get("fr").getOrElse(Language.English)
+    val answer = List(("Infobox Test1","population_as_of","P1082/P585"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        | area_total_km2         = 54.84
+        | population_as_of       = {{#invoke:Wikidata|getQualifierDateValue|P1082|P585|FETCH_WIKIDATA|dmy}}
+        | population_note        =
+        | population_total       = {{#property:P1082}}
+        }}
+      """, "TestPage", lang, "#invoke")
+
+    (parsed) should be (answer)
+  }
+
+
+  "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function nested """ in {
+
+    val lang = Language.get("fr").getOrElse(Language.English)
+    val answer = List(("Infobox Test1","data2","P137"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        | label2 = Organisation
+        || label2 = Organisation
+        || data2  = {{#invoke:Wikidata|getValue|P137|{{{organization|{{{organisation|FETCH_WIKIDATA}}}}}}}}
+        || label3 = Location(s)
+        || class3 = label
+        || label3 = Location(s)
+        || class3 = label
+        }}
+      """, "TestPage", lang, "#invoke")
+
+    (parsed) should be (answer)
+  }
+  "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function for multiple infoboxes """ in {
+
+    val lang = Language.get("fr").getOrElse(Language.English)
+    val answer = List(("Infobox Test1","arg1","P729"),("Infobox Test2","arg2","P87") )
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        | arg1  = {{#invoke:Wikidata|getValue|P729|{{{first_light|FETCH_WIKIDATA}}}}}
+        }}
+
+        | {{Infobox Test2
+        | arg2  = {{#invoke:Wikidata|getValue|P87|{{{first_light|FETCH_WIKIDATA}}}}}
+        }
+      """, "TestPage", lang, "#invoke")
+
+    (parsed) should be (answer)
+  }
+  "InfoboxMappingsExtractor" should """return correct property id's #invoke type parser function for ProperyLink  """ in {
+
+    val lang = Language.get("fr").getOrElse(Language.English)
+    val answer = List(("Infobox Test1","operating system","p306"),("Infobox Test1","license","p275"), ("Infobox Test1","website","p856"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        | operating system       = {{#invoke:PropertyLink|property|p306}}
+        | license                = {{#invoke:PropertyLink|property|p275}}
+        | website                = {{#invoke:Wikidata|property|p856}}
+        | random                  = {{#invoke:Random|property|p456}}
+        }}
+      """, "TestPage", lang, "#invoke")
 
     (parsed) should be (answer)
   }
@@ -241,24 +313,34 @@ class DraftMappingExtractorTest extends FlatSpec with Matchers with PrivateMetho
 
   private val parser = WikiParser.getInstance()
 
-  private def parse(input : String, title: String = "TestPage", lang: Language = Language.English) : List[(String,String, String)] =
+  private def parse(input : String, title: String = "TestPage", lang: Language = Language.English, test : String) : List[(String,String, String)] =
   {
     val page = new WikiPage(WikiTitle.parse(title, lang), input)
     val context = new {
-      def ontology = DraftMappingExtractorTest.context.ontology;
+      def ontology = InfoboxMappingsExtractorTest.context.ontology;
       def language = lang;
       def redirects = new Redirects(Map("Official" -> "Official website"))
     }
 
-    val extractor = new DraftMappingExtractor(context)
-    parser(page) match {
-      case Some(pageNode) => extractor.getPropertyTuples(pageNode)
-      case None => List.empty
+    val extractor = new InfoboxMappingsExtractor(context)
+    var to_return : List[(String,String, String)]= List.empty
+    if ( test == "#property") {
+      to_return =  parser(page) match {
+        case Some(pageNode) => extractor.getPropertyTuples(pageNode)
+        case None => List.empty
+      }
+    } else if ( test == "#invoke"){
+      to_return = parser(page) match {
+        case Some(pageNode) => extractor.getInvokeTuples(pageNode)
+        case None => List.empty
+      }
     }
+
+    to_return
   }
 }
 
-object DraftMappingExtractorTest {
+object InfoboxMappingsExtractorTest {
 
   val context = new {
     def ontology = {

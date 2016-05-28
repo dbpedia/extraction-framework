@@ -5,12 +5,13 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.wikiparser._
 
+
 import scala.language.reflectiveCalls
 
 /**
   * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
   */
-class DraftMappingExtractor(context: {
+class InfoboxMappingsExtractor(context: {
   def ontology: Ontology
   def language : Language
 }
@@ -27,8 +28,6 @@ class DraftMappingExtractor(context: {
 
   override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) || page.isRedirect) return Seq.empty
-
-    //return getPropertyParserFunctions(page, subjectUri)
 
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
 
@@ -61,24 +60,48 @@ class DraftMappingExtractor(context: {
 
   }
 
-  def extract_property(str : String) : String = {
-    val pattern = """\{\{#property:([0-9A-Za-z]+)\}\}""".r
-    str match {
-      case pattern(group) => group
-      case _ => ""
+  def isNumber(s : String): Boolean = {s.matches("\\d+")}
+
+  def extract_property(str : String, typeOfStr : String) : String = {
+    var answer = ""
+    if ( typeOfStr == "#property") {
+      val pattern = """\{\{#property:([0-9A-Za-z]+)\}\}""".r
+      answer = str match {
+        case pattern(group) => group
+        case _ => ""
+      }
+    } else if (typeOfStr == "#invoke") {
+     val list_words = str.split("""\|""")
+      if (!(list_words(0) == "Wikidata" || list_words(0) == "PropertyLink"))
+        return answer
+      val properties = list_words.filter(s => (s.charAt(0) == 'p' || s.charAt(0) == 'P') && isNumber(s.substring(1)))
+      for ( p <- properties){
+        answer = answer + "/" + p
+      }
+
+      if (answer.size > 0)
+       answer = answer.substring(1)
+
     }
+    answer
   }
   def getPropertyTuples(page : PageNode) : List[(String,String, String)] = {
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
 
     val propertyParserFunctions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from") && p.parent.isInstanceOf[PropertyNode]))
-    val keys = propertyParserFunctions.map(x => x.parent.asInstanceOf[PropertyNode].key )
 
      (propertyParserFunctions ).map( p =>
-      new Tuple3(p.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded, p.parent.asInstanceOf[PropertyNode].key, extract_property(p.toWikiText)))
+      new Tuple3(p.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded, p.parent.asInstanceOf[PropertyNode].key, extract_property(p.toWikiText, "#property")))
 
   }
 
+   def getInvokeTuples(page : PageNode) : List[(String, String, String)] = {
+    val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
+    var invokeFunc = parserFunctions.filter(p => ( p.title.equalsIgnoreCase("#invoke")))
+     invokeFunc = invokeFunc.filter(p => extract_property(p.children.head.toWikiText, "#invoke") != "")
+    (invokeFunc ).map( p => new Tuple3(p.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded, p.parent.asInstanceOf[PropertyNode].key, extract_property(p.children.head.toWikiText, "#invoke")))
+
+  }
 
 
   private def getTemplateMappingsFromPropertyParserFunc(propertyFunctions: Seq[ParserFunctionNode]) : Seq[(String, String)] = {
@@ -92,6 +115,7 @@ class DraftMappingExtractor(context: {
     } yield (parameterSiblings.head.parameter -> p.children.head.toPlainText)
 
   }
+
 
   def getPropertyTuples(node: Node) : String= {
     ""
