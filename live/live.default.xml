@@ -2,6 +2,16 @@
 <configuration>
     <language name ="en">
         <extractors>
+            <extractor name ="org.dbpedia.extraction.mappings.CommonsResourceExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+            
             <extractor name ="org.dbpedia.extraction.mappings.LabelExtractor" status="ACTIVE">
                 <produces>
                     <matchPattern type="EXACT">
