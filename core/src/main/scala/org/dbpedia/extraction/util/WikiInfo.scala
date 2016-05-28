@@ -67,7 +67,7 @@ object WikiInfo
       
       if (fields.length < 15) throw new Exception("expected [15] fields, found ["+fields.length+"] in line ["+line+"]")
       
-      val pages = try fields(5).toInt
+      val pages = try fields(4).toInt
       catch { case nfe: NumberFormatException => 0 }
       
       val wikiCode = fields(2)
@@ -77,7 +77,7 @@ object WikiInfo
         Option(new WikiInfo(Language(wikiCode), pages))
       else
       {
-        logger.log(Level.WARNING, "Could not find language: " + wikiCode)
+        logger.log(Level.WARNING, "Language: " + wikiCode + " will be ignored. Add this language to the addonlangs.json file to extract it.")
         None
       }
   }
