@@ -145,7 +145,7 @@ object Node {
   // For this list of characters, see ifragment in RFC 3987 and 
   // https://sourceforge.net/mailarchive/message.php?msg_id=28982391
   // Only difference to ipchar: don't escape '?'. We don't escape '/' anyway.
-  private val fragmentEscapes = {
+  val fragmentEscapes = {
     val chars = ('\u0000' to '\u001F').mkString + "\"#%<>[\\]^`{|}" + ('\u007F' to '\u009F').mkString
     val replace = replacements('%', chars)
     // don't escape space, replace it by underscore

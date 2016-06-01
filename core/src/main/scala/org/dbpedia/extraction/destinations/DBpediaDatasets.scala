@@ -72,6 +72,7 @@ object DBpediaDatasets
      *  Infobox
      */
     val InfoboxProperties = new Dataset("infobox_properties_unredirected", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data.")
+    val InfoboxPropertiesMapped = new Dataset("infobox_properties-mapped_unredirected", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data. This dataset contains facts that have equivalent mapped facts in the mapping-based datasets. ")
     val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions", "All properties predicates used in infoboxes.")
     val TemplateParameters = new Dataset("template_parameters", "Dataset describing names of template parameters.")
     val InfoboxTest = new Dataset("infobox_test")

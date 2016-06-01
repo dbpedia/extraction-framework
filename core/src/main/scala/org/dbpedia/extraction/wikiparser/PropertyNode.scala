@@ -1,5 +1,8 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.util.StringUtils
+
 /**
  * Represents a template property.
  *
@@ -23,4 +26,20 @@ case class PropertyNode(key : String, override val children : List[Node], overri
     def toPlainText = ""
 
     def propertyNodeValueToPalinText = children.map(_.toPlainText).mkString
+
+    override def sourceUri : String =
+    {
+
+      val sb = new StringBuilder
+
+      sb append(super.sourceUri)
+
+      if (this.parent != null && this.parent.isInstanceOf[TemplateNode]) {
+        sb append "&template="  append this.parent.asInstanceOf[TemplateNode].title.encoded
+      }
+
+      sb append  "&property=" append StringUtils.escape(this.key, Node.fragmentEscapes )
+
+      sb.toString
+    }
 }
