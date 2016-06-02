@@ -1,10 +1,60 @@
 <?xml version="1.0"?>
 <configuration>
-    <language name ="en">
+    <language name ="commons">
         <extractors>
-            <extractor name ="org.dbpedia.extraction.mappings.CommonsResourceExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.DBpediaResourceExtractor" status="ACTIVE">
                 <produces>
-                    <matchPattern type="EXACT">
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.CommonsKMLExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.ImageAnnotationExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.GalleryExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.FileTypeExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.TemplateParameterExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
                         <s></s>
                         <p></p>
                         <o></o>
@@ -22,7 +72,7 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.WikiPageExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.WikiPageExtractor" status="PURGE">
                 <produces>
                     <matchPattern type="STARTSWITH" pexact ="true">
                         <s></s>
@@ -122,7 +172,7 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.HomepageExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.HomepageExtractor" status="PURGE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
@@ -132,7 +182,7 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.DisambiguationExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.DisambiguationExtractor" status="PURGE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
@@ -142,7 +192,7 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.PersondataExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.PersondataExtractor" status="PURGE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
@@ -192,7 +242,7 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.PndExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.PndExtractor" status="PURGE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
@@ -295,7 +345,7 @@
 
             </extractor>
 
-            <extractor name="org.dbpedia.extraction.mappings.AbstractExtractorWikipedia" status="ACTIVE">
+            <extractor name="org.dbpedia.extraction.mappings.AbstractExtractorWikipedia" status="PURGE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
@@ -310,7 +360,7 @@
                 </produces>
             </extractor>
 
-            <extractor name="org.dbpedia.extraction.mappings.MetaInformationExtractor" status="ACTIVE">
+            <extractor name="org.dbpedia.extraction.mappings.MetaInformationExtractor" status="PURGE">
                 <matchPattern type="EXACT">
                     <s></s>
                     <p>DC_MODIFIED</p>
@@ -352,7 +402,7 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.ImageExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.ImageExtractor" status="PURGE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
