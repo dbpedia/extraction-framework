@@ -6,7 +6,7 @@
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
-                        <p></p>
+                        <p>OWL_SAMEAS</p>
                         <o></o>
                     </matchPattern>
                 </produces>
@@ -292,7 +292,21 @@
                         <o></o>
                     </matchPattern>
                 </produces>
+            </extractor>
 
+            <extractor name="org.dbpedia.extraction.mappings.AbstractExtractor" status="PURGE">
+                <produces>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>DB_ABSTRACT</p>
+                        <o></o>
+                    </matchPattern>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>RDFS_COMMENT</p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
             </extractor>
 
             <extractor name="org.dbpedia.extraction.mappings.AbstractExtractorWikipedia" status="ACTIVE">

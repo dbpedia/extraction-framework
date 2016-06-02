@@ -33,7 +33,7 @@ public class Constants{
     public static final String RDFS_COMMENT = "http://www.w3.org/2000/01/rdf-schema#comment";
 
 
-    //public static final String OWL_SAMEAS = "http://www.w3.org/2002/07/owl#sameAs";
+    public static final String OWL_SAMEAS = "http://www.w3.org/2002/07/owl#sameAs";
     public static final String OWL_THING = "http://www.w3.org/2002/07/owl#Thing";
 
     public static final String DC_MODIFIED = "http://purl.org/dc/terms/modified";
