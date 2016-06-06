@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
 import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
@@ -112,13 +113,24 @@ class InfoboxMappingsExtractor(context: {
 
   }
 
-  def getP856Tuples(page : PageNode) : List[(String, String, String)] = {
+  def checkForP856Strings(propertyNode : PropertyNode, lang: Language) : Boolean = {
+
+    for( x <- KeyWordsMapForP856.getOrElse(lang.wikiCode, Map())){
+      if (reduceChildrenToString(propertyNode).contains(x._1))
+        return true
+    }
+
+    return false
+
+  }
+
+  def getP856Tuples(page : PageNode, lang : Language) : List[(String, String, String)] = {
     val templateNodes = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
-    val infoboxes = templateNodes.filter(p => p.title.toString().contains("Infobox"))
+    val infoboxes = templateNodes.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
 
     var website_rows = scala.collection.mutable.ListBuffer[PropertyNode]()
     infoboxes.foreach(x => {
-      website_rows = website_rows ++ x.children.filter(p => reduceChildrenToString(p).contains("Official website") || reduceChildrenToString(p).contains("Official URL") )
+      website_rows = website_rows ++ x.children.filter(p => checkForP856Strings(p, lang) )
     })
     var answer = scala.collection.mutable.ListBuffer[(String, String, String)]()
     for ( x <- website_rows){

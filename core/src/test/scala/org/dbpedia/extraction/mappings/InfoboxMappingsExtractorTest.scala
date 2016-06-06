@@ -312,7 +312,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
 
   "InfoboxMappingsExtractor" should """return correct property id's for P856  """ in {
 
-    val lang = Language.get("fr").getOrElse(Language.English)
+    val lang = Language.English
     val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","website2","P856"))
     val parsed = parse(
       """
@@ -327,7 +327,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
 
   "InfoboxMappingsExtractor" should """return correct property id's for P856 for multiple infoboxes  """ in {
 
-    val lang = Language.get("fr").getOrElse(Language.English)
+    val lang = Language.English
     val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test2","website2","P856"))
     val parsed = parse(
       """
@@ -343,6 +343,20 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
     (parsed) should be (answer)
   }
 
+  "InfoboxMappingsExtractor" should """return correct property id's for P856 for different Language  """ in {
+
+    val lang = Language.getOrElse("no", Language.English)
+    val answer = List(("Infoboks Test1","website1","P856"))
+    val parsed = parse(
+      """
+        {{Infoboks Test1
+        | website1                = {{BetingetURL}}
+        }}
+
+      """, "TestPage", lang, "#P856")
+
+    (parsed) should be (answer)
+  }
 
   private val parser = WikiParser.getInstance()
 
@@ -369,7 +383,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
       }
     } else if ( test == "#P856") {
       to_return = parser(page) match {
-        case Some(pageNode) => extractor.getP856Tuples(pageNode)
+        case Some(pageNode) => extractor.getP856Tuples(pageNode, lang)
         case None => List.empty
       }
     }
