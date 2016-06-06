@@ -39,6 +39,7 @@ class InfoboxMappingsExtractor(context: {
     val wikidataParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("wikidata"))
     val propertyLinkParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("propertyLink"))
 
+
     val mappingQuads = propertyParserFuncionsMappings.map( p => {
       val value = p._1.toString + "=>" + p._2.toString
       new Quad(context.language, mapDataset, subjectUri, templateParameterProperty,
@@ -60,6 +61,11 @@ class InfoboxMappingsExtractor(context: {
 
   }
 
+  def reduceChildrenToString(propertyNode: PropertyNode) : String = {
+    var answer = ""
+    propertyNode.children.foreach(x => answer += x.toWikiText)
+    return answer
+  }
   def isNumber(s : String): Boolean = {s.matches("\\d+")}
 
   def extract_property(str : String, typeOfStr : String) : String = {
@@ -88,7 +94,10 @@ class InfoboxMappingsExtractor(context: {
   def getPropertyTuples(page : PageNode) : List[(String,String, String)] = {
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
 
-    val propertyParserFunctions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from") && p.parent.isInstanceOf[PropertyNode]))
+    val propertyParserFunctions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") &&  //To filter out parser functions with title #property
+      p.children.nonEmpty && // Ignore those that have no children
+      !p.children.head.toString.contains("from") && // Ignore those that have "from" in them for eg {#property:P1308|from=Q824910}
+      p.parent.isInstanceOf[PropertyNode])) // Parent needs to be a PropertyNode to get the key
 
      (propertyParserFunctions ).map( p =>
       new Tuple3(p.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded, p.parent.asInstanceOf[PropertyNode].key, extract_property(p.toWikiText, "#property")))
@@ -103,6 +112,20 @@ class InfoboxMappingsExtractor(context: {
 
   }
 
+  def getP856Tuples(page : PageNode) : List[(String, String, String)] = {
+    val templateNodes = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
+    val infoboxes = templateNodes.filter(p => p.title.toString().contains("Infobox"))
+
+    var website_rows = scala.collection.mutable.ListBuffer[PropertyNode]()
+    infoboxes.foreach(x => {
+      website_rows = website_rows ++ x.children.filter(p => reduceChildrenToString(p).contains("Official website") || reduceChildrenToString(p).contains("Official URL") )
+    })
+    var answer = scala.collection.mutable.ListBuffer[(String, String, String)]()
+    for ( x <- website_rows){
+     answer += new Tuple3(x.parent.asInstanceOf[TemplateNode].title.decoded, x.key.toString, "P856")
+    }
+    answer.toList
+  }
 
   private def getTemplateMappingsFromPropertyParserFunc(propertyFunctions: Seq[ParserFunctionNode]) : Seq[(String, String)] = {
 
