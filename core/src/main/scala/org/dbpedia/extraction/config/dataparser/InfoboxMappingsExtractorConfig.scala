@@ -11,8 +11,8 @@ object InfoboxMappingsExtractorConfig {
 
   )
 
-  val KeyWordsMapForP856 = Map(
-    "en" -> Map("Official website" -> "1", "Official URL" -> "2"),
-    "no" -> Map("BetingetURL" -> "1")
+  val directTemplateMapsToWikidata = Map(
+    "en" -> Map("Official website" -> "P856", "Official URL" -> "P856"),
+    "no" -> Map("BetingetURL" -> "P856")
   )
 }

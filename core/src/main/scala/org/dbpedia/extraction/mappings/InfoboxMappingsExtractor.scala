@@ -113,9 +113,9 @@ class InfoboxMappingsExtractor(context: {
 
   }
 
-  def checkForP856Strings(propertyNode : PropertyNode, lang: Language) : Boolean = {
+  def getDirectTemplateWikidataMappings(propertyNode : PropertyNode, lang: Language) : Boolean = {
 
-    for( x <- KeyWordsMapForP856.getOrElse(lang.wikiCode, Map())){
+    for( x <- directTemplateMapsToWikidata.getOrElse(lang.wikiCode, Map())){
       if (reduceChildrenToString(propertyNode).contains(x._1))
         return true
     }
@@ -130,7 +130,7 @@ class InfoboxMappingsExtractor(context: {
 
     var website_rows = scala.collection.mutable.ListBuffer[PropertyNode]()
     infoboxes.foreach(x => {
-      website_rows = website_rows ++ x.children.filter(p => checkForP856Strings(p, lang) )
+      website_rows = website_rows ++ x.children.filter(p => getDirectTemplateWikidataMappings(p, lang) )
     })
     var answer = scala.collection.mutable.ListBuffer[(String, String, String)]()
     for ( x <- website_rows){
