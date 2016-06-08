@@ -313,12 +313,13 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
   "InfoboxMappingsExtractor" should """return correct property id's for P856  """ in {
 
     val lang = Language.English
-    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","website2","P856"))
+    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","website2","P856"), ("Infobox Test1","blog","P1581"))
     val parsed = parse(
       """
         {{Infobox Test1
         | website1                = {{Official URL}}
         | website2                = {{Official website}}
+        | blog                    = {{Official blog}}
         }}
       """, "TestPage", lang, "#P856")
 
@@ -383,7 +384,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
       }
     } else if ( test == "#P856") {
       to_return = parser(page) match {
-        case Some(pageNode) => extractor.getP856Tuples(pageNode, lang)
+        case Some(pageNode) => extractor.getDirectTemplateWikidataMappings(pageNode, lang)
         case None => List.empty
       }
     }

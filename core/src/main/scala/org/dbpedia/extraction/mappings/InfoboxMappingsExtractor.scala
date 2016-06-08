@@ -113,7 +113,7 @@ class InfoboxMappingsExtractor(context: {
 
   }
 
-  def getDirectTemplateWikidataMappings(propertyNode : PropertyNode, lang: Language) : Boolean = {
+  def checkDirectTemplateWikidataMappings(propertyNode : PropertyNode, lang: Language) : Boolean = {
 
     for( x <- directTemplateMapsToWikidata.getOrElse(lang.wikiCode, Map())){
       if (reduceChildrenToString(propertyNode).contains(x._1))
@@ -124,17 +124,17 @@ class InfoboxMappingsExtractor(context: {
 
   }
 
-  def getP856Tuples(page : PageNode, lang : Language) : List[(String, String, String)] = {
+  def getDirectTemplateWikidataMappings(page : PageNode, lang : Language) : List[(String, String, String)] = {
     val templateNodes = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
     val infoboxes = templateNodes.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
 
     var website_rows = scala.collection.mutable.ListBuffer[PropertyNode]()
     infoboxes.foreach(x => {
-      website_rows = website_rows ++ x.children.filter(p => getDirectTemplateWikidataMappings(p, lang) )
+      website_rows = website_rows ++ x.children.filter(p => checkDirectTemplateWikidataMappings(p, lang) )
     })
     var answer = scala.collection.mutable.ListBuffer[(String, String, String)]()
     for ( x <- website_rows){
-     answer += new Tuple3(x.parent.asInstanceOf[TemplateNode].title.decoded, x.key.toString, "P856")
+     answer += new Tuple3(x.parent.asInstanceOf[TemplateNode].title.decoded, x.key.toString, directTemplateMapsToWikidata.getOrElse(lang.wikiCode, Map()).getOrElse(x.children.head.asInstanceOf[TemplateNode].title.decoded, "") )
     }
     answer.toList
   }
