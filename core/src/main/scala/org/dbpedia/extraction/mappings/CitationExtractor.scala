@@ -274,27 +274,49 @@ extends WikiPageExtractor
         val doiId = getPropertyValueAsStringForKeys(templateNode, List("doi"))
         if (doiId.isDefined) {
             return Some("http://doi.org/" + doiId.get.trim.toLowerCase)
+        }
 
+        //then jstor
+        val jstorId = getPropertyValueAsStringForKeys(templateNode, List("doi"))
+        if (jstorId.isDefined) {
+            return Some("https://www.jstor.org/stable/" + jstorId.get.trim.toLowerCase)
+
+        }
+
+        // PMC (PUBMED Central)
+        val pmcId = getPropertyValueAsStringForKeys(templateNode, List("pmc"))
+        if (pmcId.isDefined) {
+            return Some("https://www.ncbi.nlm.nih.gov/pmc/articles/PMC" + pmcId.get.trim.toLowerCase)
+        }
+
+        // then PUBMED
+        val pmidId = getPropertyValueAsStringForKeys(templateNode, List("pmid"))
+        if (pmidId.isDefined) {
+            return Some("https://www.ncbi.nlm.nih.gov/pubmed/" + pmidId.get.trim.toLowerCase)
+        }
+
+        // then arxiv
+        val arxivId = getPropertyValueAsStringForKeys(templateNode, List("arxiv"))
+        if (arxivId.isDefined) {
+            return Some("http://arxiv.org/abs/" + arxivId.get.trim.toLowerCase)
+        }
+
+        // Then ISBN
+        val isbn = getPropertyValueAsStringForKeys(templateNode, List("isbn"))
+        if (isbn.isDefined) {
+            return Some("http://books.google.com/books?vid=ISBN" + isbn.get.trim.toUpperCase.replace("ISBN",""))
+        }
+
+        // then ISSN
+        val issn = getPropertyValueAsStringForKeys(templateNode, List("issn"))
+        if (issn.isDefined) {
+            return Some("https://www.worldcat.org/ISSN/" + issn.get.trim.toUpperCase.replace("ISSN",""))
         }
 
         // Then url / website
         val webIri = getPropertyValueAsLinkForKeys(templateNode, List("url", "website") )
         if (webIri.isDefined) {
             return webIri
-        }
-
-        // Then ISBN
-        val isdn = getPropertyValueAsStringForKeys(templateNode, List("isbn"))
-        if (isdn.isDefined) {
-            return Some("http://books.google.com/books?vid=ISBN" + isdn.get.trim.toUpperCase.replace("ISBN",""))
-
-        }
-
-        // then ISSN
-        val issn = getPropertyValueAsStringForKeys(templateNode, List("issn"))
-        if (issn.isDefined) {
-            return Some("http://books.google.com/books?vid=ISSN" + issn.get.trim.toUpperCase.replace("ISSN",""))
-
         }
 
         None
