@@ -8,26 +8,32 @@ import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 /**
   * Factory that creates RML Template Mappings converted from DBpedia mappings using a triple store
   */
-class RMLTemplateMappingFactory(page: PageNode, language: Language, templateMapping : TemplateMapping) extends RMLMappingFactory {
+class RMLTemplateMappingFactory extends RMLMappingFactory {
 
-
-  //TODO: initiate triple store
+  private var page: PageNode = null
+  private var language: Language = null
+  private var templateMapping: TemplateMapping = null
 
   /**
     * Creates the converted mapping
     */
-  def createMapping(): RMLTemplateMapping = {
+  def createMapping(page: PageNode, language: Language, mapping : Extractor): RMLTemplateMapping = {
+    this.page = page
+    this.language = language
+    this.templateMapping = mapping.asInstanceOf[TemplateMapping]
+    createMapping()
+  }
+
+  private def createMapping(): RMLTemplateMapping = {
+    createNewTriplesMap(page.title)
     defineTriplesMap()
-    defineLogicalSource()
-    defineSubjectMap()
     addPropertyMappings()
     new RMLTemplateMapping()
   }
 
-
   private def defineTriplesMap() = {
-    addLogicalSourceToTriplesMap()
-    addSubjectMapToTriplesMap()
+    defineSubjectMap()
+    defineLogicalSource()
   }
 
   private def defineLogicalSource() = {
@@ -59,14 +65,6 @@ class RMLTemplateMappingFactory(page: PageNode, language: Language, templateMapp
       case "ConditionalMapping" => addConditionalMapping(mapping.asInstanceOf[ConditionalMapping])
       case "IntermediateNodeMapping" => addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
     }
-  }
-
-  private def addSubjectMapToTriplesMap() = {
-    //TODO: implement
-  }
-
-  private def addLogicalSourceToTriplesMap() = {
-    //TODO: implement
   }
 
   private def addConstantToSubjectMap() = {

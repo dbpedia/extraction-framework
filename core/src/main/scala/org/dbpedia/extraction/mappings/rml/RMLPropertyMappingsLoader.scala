@@ -35,7 +35,7 @@ object RMLPropertyMappingsLoader {
   }
 
   /**
-    * Loads simple property mappings
+    * Loads property mapping
     */
   def loadPropertyMapping(predicateObjectMap: PredicateObjectMap, context: {def ontology: Ontology
                                                                             def language: Language
@@ -53,4 +53,5 @@ object RMLPropertyMappingsLoader {
 
     new SimplePropertyMapping(templateProperty, ontologyProperty, null, null, null, null, dataType, context.language, 1, context)
   }
+
 }
