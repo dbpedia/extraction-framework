@@ -15,7 +15,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   private var templateMapping: TemplateMapping = null
 
   /**
-    * Creates the converted mapping
+    * Creates the converted mapping and sets the context for this
     */
   def createMapping(page: PageNode, language: Language, mapping : Extractor): RMLTemplateMapping = {
     this.page = page
@@ -28,7 +28,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     createNewTriplesMap(page.title)
     defineTriplesMap()
     addPropertyMappings()
-    new RMLTemplateMapping()
+    createRMLTemplateMapping
   }
 
   private def defineTriplesMap() = {
