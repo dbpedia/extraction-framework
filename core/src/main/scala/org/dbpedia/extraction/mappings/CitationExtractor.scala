@@ -304,13 +304,19 @@ extends WikiPageExtractor
         // Then ISBN
         val isbn = getPropertyValueAsStringForKeys(templateNode, List("isbn"))
         if (isbn.isDefined) {
-            return Some("http://books.google.com/books?vid=ISBN" + isbn.get.trim.toUpperCase.replace("ISBN",""))
+            return Some("http://books.google.com/books?vid=ISBN" + isbn.get.trim)
         }
 
         // then ISSN
         val issn = getPropertyValueAsStringForKeys(templateNode, List("issn"))
         if (issn.isDefined) {
-            return Some("https://www.worldcat.org/ISSN/" + issn.get.trim.toUpperCase.replace("ISSN",""))
+            return Some("https://www.worldcat.org/ISSN/" + issn.get.trim)
+        }
+
+        // then oclc
+        val oclc = getPropertyValueAsStringForKeys(templateNode, List("oclc"))
+        if (oclc.isDefined) {
+            return Some("https://www.worldcat.org/oclc/" + oclc.get.trim)
         }
 
         // Then url / website
