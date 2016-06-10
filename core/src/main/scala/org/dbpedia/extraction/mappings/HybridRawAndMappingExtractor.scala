@@ -24,13 +24,20 @@ class HybridRawAndMappingExtractor(
 extends PageNodeExtractor {
   private val rawinfoboxExtractor = new InfoboxExtractor(context)
   private val mappingExtractor = new MappingExtractor(context)
+  private val language = context.language
+
+  private val enableMappingExtractor = Namespace.mappings.contains(language)
 
   override val datasets = (rawinfoboxExtractor.datasets ++ mappingExtractor.datasets) + DBpediaDatasets.InfoboxPropertiesMapped
 
   override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
 
 
-    val mappedGraph = mappingExtractor.extract(page, subjectUri, pageContext)
+    val mappedGraph =
+      // check if the mappings exist for a language
+      if (enableMappingExtractor) mappingExtractor.extract(page, subjectUri, pageContext)
+      else Seq.empty
+
     val rawGraph = rawinfoboxExtractor.extract(page, subjectUri, pageContext)
 
     return mappedGraph ++ splitRawGraph(rawGraph, mappedGraph)
