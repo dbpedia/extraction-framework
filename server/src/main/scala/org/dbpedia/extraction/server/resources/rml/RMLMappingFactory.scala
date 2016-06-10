@@ -11,6 +11,10 @@ import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
   */
 abstract class RMLMappingFactory {
 
+  /**
+    * Instantiating the factory
+    */
+
   private var model: Model = ModelFactory.createDefaultModel()
   private val prefixes = collection.immutable.HashMap(
     "rr" -> "http://www.w3.org/ns/r2rml#",
@@ -22,7 +26,6 @@ abstract class RMLMappingFactory {
     "foaf" -> "http://xmlns.com/foaf/0.1/"
   )
 
-
   //setting prefixes in the model
   for(prefix <- prefixes) {
     model.setNsPrefix(prefix._1, prefix._2)
@@ -31,7 +34,12 @@ abstract class RMLMappingFactory {
   /**
     * Main method for creating the mappings
     */
+
   def createMapping(page: PageNode, language: Language, mapping : Extractor[Node]): RMLMapping
+
+  /**
+    * Common methods for instances of this factory
+    */
 
   protected def createNewTriplesMap(title: WikiTitle) = {
     model = ModelFactory.createDefaultModel() //every time this method is called a new instance of the model is made
@@ -44,6 +52,10 @@ abstract class RMLMappingFactory {
   protected def createRMLTemplateMapping = {
     new RMLTemplateMapping(model)
   }
+
+  /**
+    * Utility methods for creating new triples map
+    */
 
   private def createLogicalSource(title: WikiTitle): Resource = {
     val ls = model.createResource(convertToLogicalSourceUri(title))
@@ -60,7 +72,7 @@ abstract class RMLMappingFactory {
   }
 
   /**
-    * Making sure that blank nodes have a proper uri
+    * Methods to give a blank nodes a proper uri
     */
 
   private def convertToLogicalSourceUri(title: WikiTitle): String = {
