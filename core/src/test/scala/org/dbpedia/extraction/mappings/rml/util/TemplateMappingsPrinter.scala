@@ -1,6 +1,5 @@
-package org.dbpedia.extraction.mappings.rml
+package org.dbpedia.extraction.mappings.rml.util
 
-import org.dbpedia.extraction.destinations.Dataset
 import org.dbpedia.extraction.mappings.{DateIntervalMapping, GeoCoordinatesMapping, _}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode

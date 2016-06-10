@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.resources.rml
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
 
 /**
   * Factory that creates RML Template Mappings converted from DBpedia mappings using a triple store
@@ -17,7 +17,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   /**
     * Creates the converted mapping and sets the context for this
     */
-  def createMapping(page: PageNode, language: Language, mapping : Extractor): RMLTemplateMapping = {
+  def createMapping(page: PageNode, language: Language, mapping : Extractor[Node]): RMLTemplateMapping = {
     this.page = page
     this.language = language
     this.templateMapping = mapping.asInstanceOf[TemplateMapping]

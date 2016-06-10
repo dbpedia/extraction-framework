@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.resources.rml
 import org.apache.jena.rdf.model.{Model, ModelFactory, Property, Resource}
 import org.dbpedia.extraction.mappings.{Extractor, TemplateMapping}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
 
 /**
   * Abstract factory class for creating RML mappings
@@ -31,7 +31,7 @@ abstract class RMLMappingFactory {
   /**
     * Main method for creating the mappings
     */
-  def createMapping(page: PageNode, language: Language, mapping : Extractor): RMLMapping
+  def createMapping(page: PageNode, language: Language, mapping : Extractor[Node]): RMLMapping
 
   protected def createNewTriplesMap(title: WikiTitle) = {
     model = ModelFactory.createDefaultModel() //every time this method is called a new instance of the model is made
