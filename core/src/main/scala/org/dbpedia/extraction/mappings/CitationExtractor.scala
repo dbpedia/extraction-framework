@@ -1,14 +1,18 @@
 package org.dbpedia.extraction.mappings
 
+import java.net.URI
+
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
+import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
 import scala.collection.mutable.{ArrayBuffer, HashSet}
 import scala.language.reflectiveCalls
@@ -24,7 +28,7 @@ class CitationExtractor(
     def redirects : Redirects 
   } 
 ) 
-extends PageNodeExtractor
+extends WikiPageExtractor
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Configuration
@@ -90,14 +94,19 @@ extends PageNodeExtractor
     override val datasets = Set(DBpediaDatasets.CitationData, DBpediaDatasets.CitationLinks /*, DBpediaDatasets.CitationTypes*/)
 
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
     {
-        if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
-        
+        if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
+
         val quads = new ArrayBuffer[Quad]()
 
+        // the simple wiki parser is confused with the <ref> ... </ref> hetml tags and ignores whatever is inside them
+        // with this hack we create a wikiPage close and remove all "<ref" from the source and then try to reparse the page
+        val pageWithoutRefs = new WikiPage(title = page.title, redirect = page.redirect, id = page.id, revision = page.revision, timestamp = page.timestamp, contributorID = page.contributorID, contributorName = page.contributorName, source = page.source.replaceAll("<ref", ""), format = page.format)
+
         /** Retrieve all templates on the page which are not ignored */
-        for { template <- InfoboxExtractor.collectTemplates(node)
+        for { node <- new SimpleWikiParser().apply(pageWithoutRefs)
+            template <- ExtractorUtils.collectTemplatesFromNodeTransitive(node)
           resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
           if citationTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)
         }
@@ -259,55 +268,89 @@ extends PageNodeExtractor
         language.propertyUri.append(result)
     }
 
-    private def getPropertyLabel(key : String) : String =
-    {
-        // convert property key to camelCase
-        var result = key
-
-        result = result.replace("_", " ")
-        
-        // Rename Properties like LeaderName1, LeaderName2, ... to LeaderName
-        result = TrailingNumberRegex.replaceFirstIn(result, "")
-
-        result
-    }
-
-    def getCitationIRI(templateNode: TemplateNode) : Option[String] =
+    private def getCitationIRI(templateNode: TemplateNode) : Option[String] =
     {
         //first try DOI
-        for (p <- templateNode.children
-          if (p.key.toLowerCase equals("doi"))
-        ) {
-            for (s <- StringParser.parse(p)) {
-                return Some("http://doi.org/" + s.trim)
-            }
+        val doiId = getPropertyValueAsStringForKeys(templateNode, List("doi"))
+        if (doiId.isDefined) {
+            return Some("http://doi.org/" + doiId.get.trim.toLowerCase)
+
         }
 
         // Then url / website
-        for (p <- templateNode.children
-             if List("url", "website").contains(p.key.toLowerCase)
-        ) {
-            return linkParser.parse(p).map(_.toString)
+        val webIri = getPropertyValueAsLinkForKeys(templateNode, List("url", "website") )
+        if (webIri.isDefined) {
+            return webIri
         }
 
-        //ISBN
-        for (p <- templateNode.children
-             if (p.key.toLowerCase equals("isbn"))
-        ) {
-            for (s <- StringParser.parse(p)) {
-                return Some("http://books.google.com/books?vid=ISBN" + s.trim.toUpperCase.replace("ISBN",""))
-            }
+        // Then ISBN
+        val isdn = getPropertyValueAsStringForKeys(templateNode, List("isbn"))
+        if (isdn.isDefined) {
+            return Some("http://books.google.com/books?vid=ISBN" + isdn.get.trim.toUpperCase.replace("ISBN",""))
+
         }
 
-        //ISSN
-        for (p <- templateNode.children
-             if (p.key.toLowerCase equals("issn"))
-        ) {
-            for (s <- StringParser.parse(p)) {
-                return Some("http://books.google.com/books?vid=ISSN" + s.trim.toUpperCase.replace("ISSN",""))
-            }
+        // then ISSN
+        val issn = getPropertyValueAsStringForKeys(templateNode, List("issn"))
+        if (issn.isDefined) {
+            return Some("http://books.google.com/books?vid=ISSN" + issn.get.trim.toUpperCase.replace("ISSN",""))
+
         }
 
-        return None
+        None
+    }
+
+    private def getPropertyKeyIgnoreCase(templateNode: TemplateNode, propertyNames: List[String]) : Option[PropertyNode] =
+    {
+        templateNode
+          .children
+          .filter(p => propertyNames.contains(p.key.toLowerCase))
+          .find(p => p.children.nonEmpty)  // don't get empty nodes
+    }
+
+    private def getPropertyValueAsString(propertyNode: PropertyNode): Option[String] =
+    {
+        StringParser.parse(propertyNode) match {
+            case Some(stringValue) if stringValue.trim.nonEmpty => Some(stringValue)
+            case _ => None
+        }
+    }
+
+    private def getPropertyValueAsLink(propertyNode: PropertyNode): Option[String] =
+    {
+        StringParser.parse(propertyNode) match {
+            case Some(stringValue) if stringValue.trim.nonEmpty => Some(stringValue)
+            case _ => None
+        }
+
+        linkParser.parse(propertyNode) match {
+            case Some(linkFromParser) => Some(linkFromParser.toString)
+            case _ =>
+                try {
+                    val text = propertyNode.children.flatMap(_.toPlainText).mkString.trim
+                    val iri = new URI(text)
+                    if (iri.isAbsolute) Some(iri.toString)
+                    else None
+                } catch {
+                    case _: Throwable => None
+                }
+        }
+
+    }
+
+    private def getPropertyValueAsStringForKeys(templateNode: TemplateNode, propertyNames: List[String]) : Option[String] =
+    {
+        getPropertyKeyIgnoreCase(templateNode, propertyNames) match {
+            case Some(propertyNode) => getPropertyValueAsString(propertyNode)
+            case _ => None
+        }
+    }
+
+    private def getPropertyValueAsLinkForKeys(templateNode: TemplateNode, propertyNames: List[String]) : Option[String] =
+    {
+        getPropertyKeyIgnoreCase(templateNode, propertyNames) match {
+            case Some(propertyNode) => getPropertyValueAsLink(propertyNode)
+            case _ => None
+        }
     }
 }
