@@ -35,7 +35,7 @@ class InfoboxMappingsExtractor(context: {
     val propertyParserFuncions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from")))
     val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
     val propertyParserFuncionsMappings = getTemplateMappingsFromPropertyParserFunc(propertyParserFuncions)
-
+    val try12 = InfoboxExtractor.collectTemplates(page)
     val invokeFunc = parserFunctions.filter(p => p.title.equalsIgnoreCase("#invoke"))
     val wikidataParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("wikidata"))
     val propertyLinkParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("propertyLink"))
@@ -60,6 +60,13 @@ class InfoboxMappingsExtractor(context: {
 
     parserFuncQuads ++ templateQuads ++ mappingQuads
 
+  }
+
+  def extractTuples(page : PageNode, lang: Language ) : List[(String,String, String)] = {
+    var allTuples = getDirectTemplateWikidataMappings(page, lang)
+    allTuples = allTuples ++ getInvokeTuples(page)
+    allTuples = allTuples ++ getPropertyTuples(page)
+    allTuples
   }
 
   def reduceChildrenToString(propertyNode: PropertyNode) : String = {

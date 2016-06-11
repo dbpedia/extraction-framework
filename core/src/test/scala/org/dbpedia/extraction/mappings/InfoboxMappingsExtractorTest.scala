@@ -359,6 +359,24 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
     (parsed) should be (answer)
   }
 
+  "InfoboxMappingsExtractor" should """return correct property id's for a combination of above  """ in {
+
+    val lang = Language.English
+    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","random","p456"), ("Infobox Test1","population_total","P1082"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        | website1                = {{Official URL}}
+        | random                  = {{#invoke:Wikidata|property|p456}}
+        | population_total       = {{#property:P1082}}
+        }}
+      """, "TestPage", lang, "all")
+
+    (parsed) should be (answer)
+  }
+
+
+
   private val parser = WikiParser.getInstance()
 
   private def parse(input : String, title: String = "TestPage", lang: Language = Language.English, test : String) : List[(String,String, String)] =
@@ -385,6 +403,11 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
     } else if ( test == "#P856") {
       to_return = parser(page) match {
         case Some(pageNode) => extractor.getDirectTemplateWikidataMappings(pageNode, lang)
+        case None => List.empty
+      }
+    } else if ( test == "all"){
+      to_return = parser(page) match {
+        case Some(pageNode) => extractor.extractTuples(pageNode, lang)
         case None => List.empty
       }
     }
