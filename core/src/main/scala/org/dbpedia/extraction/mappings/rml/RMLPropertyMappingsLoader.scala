@@ -5,7 +5,7 @@ import be.ugent.mmlab.rml.model.{PredicateObjectMap, TriplesMap}
 import org.dbpedia.extraction.mappings.{PropertyMapping, Redirects, SimplePropertyMapping}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-
+import scala.language.reflectiveCalls
 import collection.JavaConverters._
 
 

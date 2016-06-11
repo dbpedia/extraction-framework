@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.server.resources.rml
 
+import be.ugent.mmlab.rml.model.RMLMapping
 import org.apache.jena.rdf.model.{Model, ModelFactory, Property, Resource}
-import org.dbpedia.extraction.mappings.{Extractor, TemplateMapping}
+import org.dbpedia.extraction.mappings.{Extractor, Mappings, TemplateMapping}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
-
+import collection.JavaConverters._
 /**
   * Abstract factory class for creating RML mappings
   * Contains logic for initiating an RML mapping with a triples map, logical source and subject map
@@ -26,16 +27,15 @@ abstract class RMLMappingFactory {
     "foaf" -> "http://xmlns.com/foaf/0.1/"
   )
 
-  //setting prefixes in the model
-  for(prefix <- prefixes) {
-    model.setNsPrefix(prefix._1, prefix._2)
-  }
+
+
+
 
   /**
     * Main method for creating the mappings
     */
 
-  def createMapping(page: PageNode, language: Language, mapping : Extractor[Node]): RMLMapping
+  def createMapping(page: PageNode, language: Language, mappings: Mappings): RMLMapping
 
   /**
     * Common methods for instances of this factory
@@ -43,10 +43,12 @@ abstract class RMLMappingFactory {
 
   protected def createNewTriplesMap(title: WikiTitle) = {
     model = ModelFactory.createDefaultModel() //every time this method is called a new instance of the model is made
-    model.createResource(title.resourceIri)
-          .addProperty(model.createProperty("a"), model.createProperty(prefixes.get("rr") + "triplesMap"))
-          .addProperty(model.createProperty(prefixes.get("rml") + "logicalSource"), createLogicalSource(title))
-          .addProperty(model.createProperty(prefixes.get("rml") + "subjectMap"), createSubjectMap(title))
+    for(prefix <- prefixes) {
+      model.setNsPrefix(prefix._1, prefix._2)
+    }
+    model.createResource(title.resourceIri, model.createProperty(prefixes.get("rr").get + "triplesMap"))
+          .addProperty(model.createProperty(prefixes.get("rml").get + "logicalSource"), createLogicalSource(title))
+          .addProperty(model.createProperty(prefixes.get("rr").get + "subjectMap"), createSubjectMap(title))
   }
 
   protected def createRMLTemplateMapping = {
@@ -58,17 +60,15 @@ abstract class RMLMappingFactory {
     */
 
   private def createLogicalSource(title: WikiTitle): Resource = {
-    val ls = model.createResource(convertToLogicalSourceUri(title))
-                  .addProperty(model.createProperty("a"), model.createProperty(prefixes.get("rml") + "logicalSource"))
-                  .addProperty(model.createProperty(prefixes.get("rml") + "referenceFormulation"), model.createProperty(prefixes.get("ql") + "wikiText"))
-                  .addProperty(model.createProperty(prefixes.get("rml") + "iterator"), "Infobox")
-    return ls
+    val ls = model.createResource(convertToLogicalSourceUri(title), model.createProperty(prefixes.get("rml").get + "logicalSource"))
+                  .addProperty(model.createProperty(prefixes.get("rml").get + "referenceFormulation"), model.createProperty(prefixes.get("ql").get + "wikiText"))
+                  .addProperty(model.createProperty(prefixes.get("rml").get + "iterator"), "Infobox")
+    ls
   }
 
   private def createSubjectMap(title: WikiTitle): Resource = {
-    val sm = model.createResource(convertToSubjectMapUri(title))
-                  .addProperty(model.createProperty("a"), model.createProperty(prefixes.get("rml") + "subjectMap"))
-    return sm
+    val sm = model.createResource(convertToSubjectMapUri(title), model.createProperty(prefixes.get("rr").get + "subjectMap"))
+    sm
   }
 
   /**

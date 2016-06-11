@@ -3,10 +3,10 @@ package org.dbpedia.extraction.server.resources.rml
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode, WikiTitle}
 
 /**
-  * Factory that creates RML Template Mappings converted from DBpedia mappings using a triple store
+  * Factory that creates RML template mappings converted from DBpedia mappings using a triple store (Jena)
   */
 class RMLTemplateMappingFactory extends RMLMappingFactory {
 
@@ -15,18 +15,18 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   private var templateMapping: TemplateMapping = null
 
   /**
-    * Creates the converted mapping and sets the context for this
+    * Creates the context for the converted mapping and creates the mapping from it
     */
-  def createMapping(page: PageNode, language: Language, mapping : Extractor[Node]): RMLTemplateMapping = {
+  def createMapping(page: PageNode, language: Language, mappings: Mappings): RMLTemplateMapping = {
     this.page = page
     this.language = language
-    this.templateMapping = mapping.asInstanceOf[TemplateMapping]
+    this.templateMapping = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping] // :|
     createMapping()
   }
 
   private def createMapping(): RMLTemplateMapping = {
     createNewTriplesMap(page.title)
-    defineTriplesMap()
+    defineTriplesMap()                                  //sets details of the triples map
     addPropertyMappings()
     createRMLTemplateMapping
   }
@@ -55,7 +55,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   }
 
   private def addPropertyMapping(mapping: PropertyMapping) = {
-    mapping.getClass.getName match {
+    mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
       case "ConstantMapping" => addConstantMapping(mapping.asInstanceOf[ConstantMapping])
       case "CalculateMapping" => addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
