@@ -8,7 +8,7 @@ import collection.JavaConverters._
   */
 class RMLTemplateMapping(model: Model) extends RMLMapping {
 
-  def writeAsTriples: Unit = {
+  def writeAsNTriples: Unit = {
     model.write(System.out, "N-TRIPLES")
   }
 
@@ -16,8 +16,5 @@ class RMLTemplateMapping(model: Model) extends RMLMapping {
     model.write(System.out, "TURTLE")
   }
 
-  def writeAsPrettyTurtle: Unit = {
-    RDFDataMgr.write(System.out, model, RDFFormat.TURTLE_PRETTY) ;
-  }
 
 }

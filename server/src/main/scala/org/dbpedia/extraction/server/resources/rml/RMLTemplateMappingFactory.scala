@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.server.resources.rml
 
+import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
@@ -10,9 +11,8 @@ import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode, WikiTitl
   */
 class RMLTemplateMappingFactory extends RMLMappingFactory {
 
-  private var page: PageNode = null
-  private var language: Language = null
   private var templateMapping: TemplateMapping = null
+
 
   /**
     * Creates the context for the converted mapping and creates the mapping from it
@@ -25,8 +25,8 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   }
 
   private def createMapping(): RMLTemplateMapping = {
-    createNewTriplesMap(page.title)
-    defineTriplesMap()                                  //sets details of the triples map
+    createNewTriplesMap()
+    defineTriplesMap() //sets details of the triples map
     addPropertyMappings()
     createRMLTemplateMapping
   }
@@ -36,17 +36,14 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     defineLogicalSource()
   }
 
+  private def defineSubjectMap() = {
+    addConstantToSubjectMap()
+    addMapToClassToSubjectMap()
+  }
+
   private def defineLogicalSource() = {
     addSourceToLogicalSource()
   }
-
-  private def defineSubjectMap() = {
-    addConstantToSubjectMap()
-    addCorrespondingClass()
-    addCorrespondingProperty()
-    addMapToClass()
-  }
-
 
   private def addPropertyMappings() = {
     for(mapping <- templateMapping.mappings) {
@@ -68,22 +65,33 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   }
 
   private def addConstantToSubjectMap() = {
-    //TODO: implement
+    addStringPropertyToResource(subjectMap, prefixes("rr") + "constant", page.title.encoded.toString)
   }
 
   private def addSourceToLogicalSource() = {
     //TODO: implement
   }
 
-  private def addMapToClass() = {
-    //TODO: implement
+  private def addMapToClassToSubjectMap() = {
+    val objectMap = addPropertyResource(null, templateMapping.mapToClass.uri)
+    if(templateMapping.correspondingProperty != null) {
+      addPropertyToResource(objectMap, prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
+      val objectMap2 = addPropertyResource(null)
+      val objectMap3 = addPropertyResource(null)
+      val subjectMap = addPropertyResource(null)
+      addResourcePropertyToResource(objectMap, prefixes("rr") + "objectMap", objectMap2)
+      addResourcePropertyToResource(objectMap2, prefixes("rr") + "parentTriplesMap", objectMap3)
+      addResourcePropertyToResource(objectMap3, prefixes("rr") + "subjectMap", subjectMap)
+      addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.correspondingClass.uri)
+    }
+    addResourcePropertyToResource(subjectMap, prefixes("rr") + "predicateObjectMap", objectMap)
   }
 
-  private def addCorrespondingClass() = {
-    //TODO: implement
+  private def addCorrespondingClassToSubjectMap() = {
+    //TODO:implement
   }
 
-  private def addCorrespondingProperty() = {
+  private def addCorrespondingPropertyToSubjectMap() = {
     //TODO: implement
   }
 
