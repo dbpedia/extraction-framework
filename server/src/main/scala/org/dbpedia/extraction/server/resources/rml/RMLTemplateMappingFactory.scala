@@ -73,18 +73,20 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   }
 
   private def addMapToClassToSubjectMap() = {
-    val objectMap = addPropertyResource(null, templateMapping.mapToClass.uri)
+    val objectMap = addPropertyResource(null)
+    addResourcePropertyToResource(subjectMap, prefixes("rr") + "class", objectMap)
+    val predicateObjectMap = addPropertyResource(null, templateMapping.mapToClass.uri)
+    addResourcePropertyToResource(objectMap, prefixes("rr") + "predicateObjectMap", predicateObjectMap)
     if(templateMapping.correspondingProperty != null) {
-      addPropertyToResource(objectMap, prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
+      addPropertyToResource(predicateObjectMap, prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
       val objectMap2 = addPropertyResource(null)
       val objectMap3 = addPropertyResource(null)
       val subjectMap = addPropertyResource(null)
-      addResourcePropertyToResource(objectMap, prefixes("rr") + "objectMap", objectMap2)
+      addResourcePropertyToResource(predicateObjectMap, prefixes("rr") + "objectMap", objectMap2)
       addResourcePropertyToResource(objectMap2, prefixes("rr") + "parentTriplesMap", objectMap3)
       addResourcePropertyToResource(objectMap3, prefixes("rr") + "subjectMap", subjectMap)
       addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.correspondingClass.uri)
     }
-    addResourcePropertyToResource(subjectMap, prefixes("rr") + "predicateObjectMap", objectMap)
   }
 
   private def addCorrespondingClassToSubjectMap() = {
