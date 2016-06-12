@@ -189,7 +189,7 @@ class Mappings(@PathParam("lang") langCode : String)
       //Load mappings
       val factory = new RMLTemplateMappingFactory()
       val rmlMapping = factory.createMapping(parser(page.head).get, language, MappingsLoader.load(context))
-      rmlMapping.writeToString
+      rmlMapping.writeAsTurtle
     }
 
     /**

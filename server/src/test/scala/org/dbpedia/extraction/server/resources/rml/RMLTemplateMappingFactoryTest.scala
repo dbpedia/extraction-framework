@@ -41,12 +41,12 @@ class RMLTemplateMappingFactoryTest extends FunSuite {
         //printing mapping content
         println("N-Triples notation: ")
         println("\n\n")
-        mapping.writeAsNTriples
+        mapping.printAsNTriples
         println("\n\n")
 
         println("Turtle notation: ")
         println("\n\n")
-        mapping.writeAsTurtle
+        mapping.printAsTurtle
         println("\n\n")
       }
 

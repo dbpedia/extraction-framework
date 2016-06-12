@@ -11,15 +11,15 @@ import collection.JavaConverters._
   */
 class RMLTemplateMapping(model: Model) extends RMLMapping {
 
-  def writeAsNTriples: Unit = {
+  def printAsNTriples: Unit = {
     model.write(System.out, "N-TRIPLES")
   }
 
-  def writeAsTurtle: Unit = {
+  def printAsTurtle: Unit = {
     model.write(System.out, "TURTLE")
   }
 
-  def writeToString: String = {
+  def writeAsTurtle: String = {
     val out = new StringWriter()
     model.write(out, "TURTLE")
     out.toString

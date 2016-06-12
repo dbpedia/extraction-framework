@@ -13,6 +13,7 @@ class ModelMapper(modelWrapper: ModelWrapper) {
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) = {
     val objectMap = modelWrapper.addBlankNode()
     modelWrapper.addLiteralPropertyToResource(objectMap, Prefixes("rml") + "reference", mapping.templateProperty)
+    modelWrapper.addLiteralPropertyToResource(objectMap, Prefixes("rml") + "languageMap", mapping.language.name)
     modelWrapper.addPredicateObjectMapToRoot(mapping.ontologyProperty.uri, objectMap)
   }
 
