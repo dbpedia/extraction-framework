@@ -72,7 +72,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   }
 
   private def addSourceToLogicalSource() = {
-    modelWrapper.addPropertyToResource(logicalSource, prefixes("rr") + "source", page.sourceUri)
+    modelWrapper.addPropertyToResource(logicalSource, prefixes("rml") + "source", page.sourceUri)
   }
 
   private def addMapToClassToSubjectMap() = {
@@ -87,7 +87,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
       modelWrapper.addResourcePropertyToResource(objectMap, prefixes("rr") + "parentTriplesMap", parentTriplesMap)
       val subjectMap = modelWrapper.addPropertyResource(null)
       modelWrapper.addResourcePropertyToResource(parentTriplesMap,prefixes("rr") + "subjectMap", subjectMap)
-      modelWrapper.addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.correspondingClass.name)
+      modelWrapper.addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.correspondingClass.uri)
     }
   }
 
