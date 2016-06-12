@@ -3,8 +3,10 @@ package org.dbpedia.extraction.server.resources.rml
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.apache.jena.rdf.model.{Model, ModelFactory, Property, Resource}
 import org.dbpedia.extraction.mappings.{Extractor, Mappings, TemplateMapping}
+import org.dbpedia.extraction.server.resources.rml.util.ModelWrapper
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
+
 import collection.JavaConverters._
 /**
   * Abstract factory class for creating RML mappings
@@ -17,7 +19,6 @@ abstract class RMLMappingFactory {
     */
 
   private var model: Model = ModelFactory.createDefaultModel()
-
 
   protected val prefixes = collection.immutable.HashMap(
     "rr" -> "http://www.w3.org/ns/r2rml#",
@@ -34,6 +35,7 @@ abstract class RMLMappingFactory {
   protected var triplesMap: Resource = null
   protected var subjectMap: Resource = null
   protected var logicalSource: Resource = null
+  protected var modelWrapper: ModelWrapper = null
 
 
   /**
@@ -48,8 +50,9 @@ abstract class RMLMappingFactory {
 
   protected def createNewTriplesMap() = {
 
-    //every time this method is called a new instance of the model is made
+    //every time this method is called a new instance of the model is made and put into a wrapper
     model = ModelFactory.createDefaultModel()
+    modelWrapper = new ModelWrapper(model)
 
     //setting predefined prefixes
     for(prefix <- prefixes) {
@@ -66,29 +69,6 @@ abstract class RMLMappingFactory {
   protected def createRMLTemplateMapping = {
     new RMLTemplateMapping(model)
   }
-
-  protected def addPropertyToResource(subject: Resource, predicate: String, _object: String): Unit = {
-    subject.addProperty(model.createProperty(predicate), model.createProperty(_object))
-  }
-
-  protected def addStringPropertyToResource(subject: Resource, predicate: String, _object: String): Unit = {
-    subject.addProperty(model.createProperty(predicate), _object)
-  }
-
-  protected def addPropertyResource(subjectIRI: String, _object: String): Resource = {
-    model.createResource(subjectIRI, model.createProperty(_object))
-  }
-
-  protected def addPropertyResource(subjectIRI: String): Resource = {
-    model.createResource(subjectIRI)
-  }
-
-  protected def addResourcePropertyToResource(subject: Resource, predicate: String, _object: Resource): Unit = {
-    subject.addProperty(model.createProperty(predicate), _object)
-  }
-
-
-
 
   /**
     * Utility methods for creating new triples map
@@ -109,7 +89,6 @@ abstract class RMLMappingFactory {
           .addProperty(model.createProperty(prefixes("rml") + "logicalSource"), logicalSource)
           .addProperty(model.createProperty(prefixes("rr") + "subjectMap"), subjectMap)
   }
-
 
   /**
     * Methods to give a blank nodes a proper uri

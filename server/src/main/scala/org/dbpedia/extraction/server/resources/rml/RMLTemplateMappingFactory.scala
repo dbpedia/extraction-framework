@@ -3,6 +3,7 @@ package org.dbpedia.extraction.server.resources.rml
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
+import org.dbpedia.extraction.server.resources.rml.util.ModelMapper
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode, WikiTitle}
 
@@ -12,6 +13,7 @@ import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode, WikiTitl
 class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private var templateMapping: TemplateMapping = null
+  private val mapper: ModelMapper = new ModelMapper(modelWrapper)
 
 
   /**
@@ -39,6 +41,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   private def defineSubjectMap() = {
     addConstantToSubjectMap()
     addMapToClassToSubjectMap()
+    addCorrespondingPropertyAndClassToSubjectMap()
   }
 
   private def defineLogicalSource() = {
@@ -53,80 +56,48 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private def addPropertyMapping(mapping: PropertyMapping) = {
     mapping.getClass.getSimpleName match {
-      case "SimplePropertyMapping" => addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
-      case "ConstantMapping" => addConstantMapping(mapping.asInstanceOf[ConstantMapping])
-      case "CalculateMapping" => addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
-      case "CombineDateMapping" => addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
-      case "DateIntervalMapping" => addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
-      case "GeoCoordinatesMapping" => addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
-      case "ConditionalMapping" => addConditionalMapping(mapping.asInstanceOf[ConditionalMapping])
-      case "IntermediateNodeMapping" => addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
+      case "SimplePropertyMapping" => mapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
+      case "ConstantMapping" => mapper.addConstantMapping(mapping.asInstanceOf[ConstantMapping])
+      case "CalculateMapping" => mapper.addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
+      case "CombineDateMapping" => mapper.addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
+      case "DateIntervalMapping" => mapper.addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
+      case "GeoCoordinatesMapping" => mapper.addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
+      case "ConditionalMapping" => mapper.addConditionalMapping(mapping.asInstanceOf[ConditionalMapping])
+      case "IntermediateNodeMapping" => mapper.addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
     }
   }
 
   private def addConstantToSubjectMap() = {
-    addStringPropertyToResource(subjectMap, prefixes("rr") + "constant", page.title.encoded.toString)
+    modelWrapper.addStringPropertyToResource(subjectMap, prefixes("rr") + "constant", page.title.encoded.toString)
   }
 
   private def addSourceToLogicalSource() = {
-    //TODO: implement
+    modelWrapper.addPropertyToResource(logicalSource, prefixes("rr") + "source", page.sourceUri)
   }
 
   private def addMapToClassToSubjectMap() = {
-    val objectMap = addPropertyResource(null)
-    addResourcePropertyToResource(subjectMap, prefixes("rr") + "class", objectMap)
-    val predicateObjectMap = addPropertyResource(null, templateMapping.mapToClass.uri)
-    addResourcePropertyToResource(objectMap, prefixes("rr") + "predicateObjectMap", predicateObjectMap)
-    if(templateMapping.correspondingProperty != null) {
-      addPropertyToResource(predicateObjectMap, prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
-      val objectMap2 = addPropertyResource(null)
-      val objectMap3 = addPropertyResource(null)
-      val subjectMap = addPropertyResource(null)
-      addResourcePropertyToResource(predicateObjectMap, prefixes("rr") + "objectMap", objectMap2)
-      addResourcePropertyToResource(objectMap2, prefixes("rr") + "parentTriplesMap", objectMap3)
-      addResourcePropertyToResource(objectMap3, prefixes("rr") + "subjectMap", subjectMap)
-      addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.correspondingClass.uri)
+    modelWrapper.addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.mapToClass.uri)
+  }
+
+  private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) = {
+    if(templateMapping.correspondingClass != null) {
+      val objectMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addResourcePropertyToResource(predicateObjectMap, prefixes("rr") + "objectMap", objectMap)
+      val parentTriplesMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addResourcePropertyToResource(objectMap, prefixes("rr") + "parentTriplesMap", parentTriplesMap)
+      val subjectMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addResourcePropertyToResource(parentTriplesMap,prefixes("rr") + "subjectMap", subjectMap)
+      modelWrapper.addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.correspondingClass.name)
     }
   }
 
-  private def addCorrespondingClassToSubjectMap() = {
-    //TODO:implement
-  }
-
-  private def addCorrespondingPropertyToSubjectMap() = {
-    //TODO: implement
-  }
-
-  private def addSimplePropertyMapping(mapping: SimplePropertyMapping) = {
-    //TODO: implement
-  }
-
-  private def addConstantMapping(mapping: ConstantMapping) = {
-    //TODO: implement
-  }
-
-  private def addCalculateMapping(mapping: CalculateMapping) = {
-    //TODO: implement
-  }
-
-  private def addCombineDateMapping(mapping: CombineDateMapping) = {
-    //TODO: implement
-  }
-
-  private def addDateIntervalMapping(mapping: DateIntervalMapping) = {
-    //TODO: implement
-  }
-
-  private def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) = {
-    //TODO: implement
-  }
-
-  private def addConditionalMapping(mapping: ConditionalMapping) = {
-    //TODO: implement
-  }
-
-  private def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) = {
-    //TODO: implement
+  private def addCorrespondingPropertyAndClassToSubjectMap() = {
+    if(templateMapping.correspondingProperty != null) {
+      val predicateObjectMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addPropertyToResource(predicateObjectMap, prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
+      modelWrapper.addResourcePropertyToResource(subjectMap, prefixes("rr") + "predicateObjectMap", predicateObjectMap)
+      addCorrespondingClassToSubjectMap(predicateObjectMap)
+    }
   }
 
 }
