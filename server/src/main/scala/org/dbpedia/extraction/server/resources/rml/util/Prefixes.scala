@@ -6,6 +6,7 @@ package org.dbpedia.extraction.server.resources.rml.util
 object Prefixes {
 
   val map = collection.immutable.HashMap(
+    "rdf" -> "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rr" -> "http://www.w3.org/ns/r2rml#",
     "rml" -> "http://semweb.mmlab.be/ns/rml#",
     "ql" -> "http://semweb.mmlab.be/ns/ql#",

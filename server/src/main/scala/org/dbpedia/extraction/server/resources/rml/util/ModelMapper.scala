@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.server.resources.rml.util
 
+import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
 
 /**
@@ -7,10 +8,11 @@ import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMappin
   */
 class ModelMapper(modelWrapper: ModelWrapper) {
 
-
+  val triplesMap: Resource = modelWrapper.getRoot
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) = {
-    //TODO: implement
+    val predicateObjectMap = modelWrapper.addBlankNode()
+    modelWrapper.addResourcePropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
   }
 
   def addConstantMapping(mapping: ConstantMapping) = {

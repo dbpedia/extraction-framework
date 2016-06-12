@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.{Model, Resource}
 class ModelWrapper(model: Model) {
 
 
+
   /**
     * Add a string as a property to a resource in this model
     */
@@ -23,10 +24,10 @@ class ModelWrapper(model: Model) {
   }
 
   /**
-    * Create a resource and add to this model
+    * Create a blank node and add to this model
     */
-  def addPropertyResource(subjectIRI: String): Resource = {
-    model.createResource(subjectIRI)
+  def addBlankNode(): Resource = {
+    model.createResource()
   }
 
   /**
@@ -41,6 +42,31 @@ class ModelWrapper(model: Model) {
     */
   def addPropertyToResource(subject: Resource, predicate: String, _object: String): Unit = {
     subject.addProperty(model.createProperty(predicate), model.createProperty(_object))
+  }
+
+  /**
+    * Returns resource using a String from this model
+    */
+  def getResource(resource: String) = {
+    model.getResource(resource)
+  }
+
+
+  /**
+    * Obtain root from model
+    */
+  def getRoot = {
+    var root: Resource = null
+    val it = model.listStatements()
+    while(it.hasNext) {
+      val next = it.next()
+      if(next.getPredicate.getLocalName.equals("type")) {
+        if(next.getObject.asResource().getLocalName.equals("triplesMap")) {
+          root = next.getSubject.asResource()
+        }
+      }
+    }
+    root
   }
 
 }

@@ -13,7 +13,7 @@ import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode, WikiTitl
 class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private var templateMapping: TemplateMapping = null
-  private val mapper: ModelMapper = new ModelMapper(modelWrapper)
+  private var mapper: ModelMapper = null
 
 
   /**
@@ -32,6 +32,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   private def createMapping(): RMLTemplateMapping = {
     createNewTriplesMap()
     defineTriplesMap() //sets details of the triples map
+    mapper = new ModelMapper(modelWrapper) //modelWrapper got updated
     addPropertyMappings()
     createRMLTemplateMapping
   }
@@ -71,11 +72,11 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) = {
     if(templateMapping.correspondingClass != null) {
-      val objectMap = modelWrapper.addPropertyResource(null)
+      val objectMap = modelWrapper.addBlankNode()
       modelWrapper.addResourcePropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
-      val parentTriplesMap = modelWrapper.addPropertyResource(null)
+      val parentTriplesMap = modelWrapper.addBlankNode()
       modelWrapper.addResourcePropertyToResource(objectMap, Prefixes("rr") + "parentTriplesMap", parentTriplesMap)
-      val subjectMap = modelWrapper.addPropertyResource(null)
+      val subjectMap = modelWrapper.addBlankNode()
       modelWrapper.addResourcePropertyToResource(parentTriplesMap, Prefixes("rr") + "subjectMap", subjectMap)
       modelWrapper.addPropertyToResource(subjectMap, Prefixes("rr") + "class", templateMapping.correspondingClass.uri)
     }
@@ -83,7 +84,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private def addCorrespondingPropertyAndClassToSubjectMap() = {
     if(templateMapping.correspondingProperty != null) {
-      val predicateObjectMap = modelWrapper.addPropertyResource(null)
+      val predicateObjectMap = modelWrapper.addBlankNode()
       modelWrapper.addPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
       modelWrapper.addResourcePropertyToResource(subjectMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
       addCorrespondingClassToSubjectMap(predicateObjectMap)
