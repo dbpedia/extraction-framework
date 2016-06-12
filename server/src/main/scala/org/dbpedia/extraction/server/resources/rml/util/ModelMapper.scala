@@ -11,8 +11,9 @@ class ModelMapper(modelWrapper: ModelWrapper) {
   val triplesMap: Resource = modelWrapper.getRoot
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) = {
-    val predicateObjectMap = modelWrapper.addBlankNode()
-    modelWrapper.addResourcePropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
+    val objectMap = modelWrapper.addBlankNode()
+    modelWrapper.addStringPropertyToResource(objectMap, Prefixes("rml") + "reference", mapping.templateProperty)
+    modelWrapper.addPredicateObjectMap(mapping.ontologyProperty.uri, objectMap)
   }
 
   def addConstantMapping(mapping: ConstantMapping) = {

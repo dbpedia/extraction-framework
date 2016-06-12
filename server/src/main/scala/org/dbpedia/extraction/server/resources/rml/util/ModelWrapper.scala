@@ -51,6 +51,14 @@ class ModelWrapper(model: Model) {
     model.getResource(resource)
   }
 
+  def addPredicateObjectMap(predicate: String, _object: Resource): Resource = {
+    val predicateObjectMap = addBlankNode()
+    addResourcePropertyToResource(getRoot, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
+    addPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", predicate)
+    addResourcePropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", _object)
+    predicateObjectMap
+  }
+
 
   /**
     * Obtain root from model

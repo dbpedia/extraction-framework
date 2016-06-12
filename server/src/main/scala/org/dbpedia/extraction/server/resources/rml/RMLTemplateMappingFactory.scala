@@ -2,10 +2,9 @@ package org.dbpedia.extraction.server.resources.rml
 
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.server.resources.rml.util.{ModelMapper, Prefixes}
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser.PageNode
 
 /**
   * Factory that creates RML template mappings converted from DBpedia mappings using a triple store (Jena)
@@ -32,7 +31,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   private def createMapping(): RMLTemplateMapping = {
     createNewTriplesMap()
     defineTriplesMap() //sets details of the triples map
-    mapper = new ModelMapper(modelWrapper) //modelWrapper got updated
+    mapper = new ModelMapper(modelWrapper) //modelWrapper updated with new root
     addPropertyMappings()
     createRMLTemplateMapping
   }
@@ -43,31 +42,19 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   }
 
   private def defineSubjectMap() = {
-    addConstantToSubjectMap()
-    addMapToClassToSubjectMap()
+    modelWrapper.addStringPropertyToResource(subjectMap, Prefixes("rr") + "constant", page.title.encoded.toString)
+    modelWrapper.addPropertyToResource(subjectMap, Prefixes("rr") + "class", templateMapping.mapToClass.uri)
     addCorrespondingPropertyAndClassToSubjectMap()
   }
 
   private def defineLogicalSource() = {
-    addSourceToLogicalSource()
+    modelWrapper.addPropertyToResource(logicalSource, Prefixes("rml") + "source", page.sourceUri)
   }
 
   private def addPropertyMappings() = {
     for(mapping <- templateMapping.mappings) {
       addPropertyMapping(mapping)
     }
-  }
-
-  private def addConstantToSubjectMap() = {
-    modelWrapper.addStringPropertyToResource(subjectMap, Prefixes("rr") + "constant", page.title.encoded.toString)
-  }
-
-  private def addSourceToLogicalSource() = {
-    modelWrapper.addPropertyToResource(logicalSource, Prefixes("rml") + "source", page.sourceUri)
-  }
-
-  private def addMapToClassToSubjectMap() = {
-    modelWrapper.addPropertyToResource(subjectMap, Prefixes("rr") + "class", templateMapping.mapToClass.uri)
   }
 
   private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) = {
