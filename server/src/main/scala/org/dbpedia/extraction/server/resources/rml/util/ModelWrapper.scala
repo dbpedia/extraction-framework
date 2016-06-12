@@ -12,7 +12,7 @@ class ModelWrapper(model: Model) {
   /**
     * Add a string as a property to a resource in this model
     */
-  def addStringPropertyToResource(subject: Resource, predicate: String, _object: String): Unit = {
+  def addLiteralPropertyToResource(subject: Resource, predicate: String, _object: String): Unit = {
     subject.addProperty(model.createProperty(predicate), _object)
   }
 
@@ -51,12 +51,16 @@ class ModelWrapper(model: Model) {
     model.getResource(resource)
   }
 
-  def addPredicateObjectMap(predicate: String, _object: Resource): Resource = {
+  def addPredicateObjectMapToResource(resource: Resource, predicate: String, _object: Resource) = {
     val predicateObjectMap = addBlankNode()
-    addResourcePropertyToResource(getRoot, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
+    addResourcePropertyToResource(resource, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
     addPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", predicate)
     addResourcePropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", _object)
     predicateObjectMap
+  }
+
+  def addPredicateObjectMapToRoot(predicate: String, _object: Resource): Resource = {
+    addPredicateObjectMapToResource(getRoot, predicate, _object)
   }
 
 

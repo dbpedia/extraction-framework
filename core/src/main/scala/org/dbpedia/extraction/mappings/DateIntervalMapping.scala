@@ -14,8 +14,8 @@ import scala.language.reflectiveCalls
 
 class DateIntervalMapping ( 
   val templateProperty : String, //TODO CreateMappingStats requires this to be public. Is there a better way?
-  startDateOntologyProperty : OntologyProperty,
-  endDateOntologyProperty : OntologyProperty,
+  val startDateOntologyProperty : OntologyProperty, //TODO: rml mappings need this to be public (e.g. ModelMapper)
+  val endDateOntologyProperty : OntologyProperty,   //TODO: same as above
   context : {
     def redirects : Redirects  // redirects required by DateTimeParser
     def language : Language 

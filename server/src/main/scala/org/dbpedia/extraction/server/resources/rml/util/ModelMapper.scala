@@ -12,12 +12,8 @@ class ModelMapper(modelWrapper: ModelWrapper) {
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) = {
     val objectMap = modelWrapper.addBlankNode()
-    modelWrapper.addStringPropertyToResource(objectMap, Prefixes("rml") + "reference", mapping.templateProperty)
-    modelWrapper.addPredicateObjectMap(mapping.ontologyProperty.uri, objectMap)
-  }
-
-  def addConstantMapping(mapping: ConstantMapping) = {
-    //TODO: implement
+    modelWrapper.addLiteralPropertyToResource(objectMap, Prefixes("rml") + "reference", mapping.templateProperty)
+    modelWrapper.addPredicateObjectMapToRoot(mapping.ontologyProperty.uri, objectMap)
   }
 
   def addCalculateMapping(mapping: CalculateMapping) = {
@@ -29,11 +25,24 @@ class ModelMapper(modelWrapper: ModelWrapper) {
   }
 
   def addDateIntervalMapping(mapping: DateIntervalMapping) = {
-    //TODO: implement
+    val dateIntervalPom = modelWrapper.addBlankNode()
+    modelWrapper.addResourcePropertyToResource(modelWrapper.getRoot, Prefixes("rr") + "predicateObjectMap", dateIntervalPom)
+    val object1 = modelWrapper.addBlankNode()
+    modelWrapper.addLiteralPropertyToResource(object1, Prefixes("rml") + "reference", mapping.templateProperty)
+    modelWrapper.addPredicateObjectMapToResource(dateIntervalPom, mapping.startDateOntologyProperty.uri, object1)
+    val object2 = modelWrapper.addBlankNode()
+    modelWrapper.addLiteralPropertyToResource(object2, Prefixes("rml") + "reference", mapping.templateProperty)
+    modelWrapper.addPredicateObjectMapToResource(dateIntervalPom, mapping.endDateOntologyProperty.uri, object2)
   }
 
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) = {
-    //TODO: implement
+    if(mapping.coordinates != null) {
+      val objectMap1 = modelWrapper.addBlankNode()
+      modelWrapper.addLiteralPropertyToResource(objectMap1, Prefixes("rr") + "parentTriplesMap", mapping.coordinates)
+      modelWrapper.addPredicateObjectMapToRoot(Prefixes("dbo") + "coordinates", objectMap1)
+    } else if (mapping.latitude != null && mapping.longitude != null) {
+      //TODO: implement
+    }
   }
 
   def addConditionalMapping(mapping: ConditionalMapping) = {

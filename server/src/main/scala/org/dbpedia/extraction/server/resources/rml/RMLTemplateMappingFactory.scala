@@ -42,8 +42,9 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   }
 
   private def defineSubjectMap() = {
-    modelWrapper.addStringPropertyToResource(subjectMap, Prefixes("rr") + "constant", page.title.encoded.toString)
+    modelWrapper.addLiteralPropertyToResource(subjectMap, Prefixes("rr") + "constant", page.title.encoded.toString)
     modelWrapper.addPropertyToResource(subjectMap, Prefixes("rr") + "class", templateMapping.mapToClass.uri)
+    modelWrapper.addPropertyToResource(subjectMap, Prefixes("rr") + "termType", Prefixes("rr") + "IRI")
     addCorrespondingPropertyAndClassToSubjectMap()
   }
 
@@ -81,7 +82,6 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   private def addPropertyMapping(mapping: PropertyMapping) = {
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => mapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
-      case "ConstantMapping" => mapper.addConstantMapping(mapping.asInstanceOf[ConstantMapping])
       case "CalculateMapping" => mapper.addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
       case "CombineDateMapping" => mapper.addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
       case "DateIntervalMapping" => mapper.addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
