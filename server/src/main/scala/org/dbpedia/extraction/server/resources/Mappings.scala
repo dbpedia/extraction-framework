@@ -3,18 +3,22 @@ package org.dbpedia.extraction.server.resources
 import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
 import org.dbpedia.extraction.server.resources.RMLMapping
 import org.dbpedia.extraction.util.{Language, WikiApi}
-import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
+import org.dbpedia.extraction.server.resources.stylesheets.{Log, TriX}
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
-import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, Namespace, WikiTitle}
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiParser, WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
-import org.dbpedia.extraction.destinations.{WriterDestination,LimitingDestination}
+import org.dbpedia.extraction.destinations.{LimitingDestination, WriterDestination}
 import java.net.{URI, URL}
 import java.lang.Exception
-import xml.{ProcInstr, XML, NodeBuffer, Elem}
+
+import xml.{Elem, NodeBuffer, ProcInstr, XML}
 import java.io.StringWriter
+
+import org.dbpedia.extraction.server.resources.rml.RMLTemplateMappingFactory
 
 /**
  * TODO: merge Extraction.scala and Mappings.scala
@@ -183,8 +187,9 @@ class Mappings(@PathParam("lang") langCode : String)
       }
 
       //Load mappings
-      val rdfTemplate = new RMLMapping(parser(page.head).get, language, MappingsLoader.load(context))
-      rdfTemplate.getRdfTemplate()
+      val factory = new RMLTemplateMappingFactory()
+      val rmlMapping = factory.createMapping(parser(page.head).get, language, MappingsLoader.load(context))
+      rmlMapping.writeToString
     }
 
     /**
