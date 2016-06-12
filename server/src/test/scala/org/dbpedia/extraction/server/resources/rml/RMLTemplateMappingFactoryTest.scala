@@ -36,13 +36,16 @@ class RMLTemplateMappingFactoryTest extends FunSuite {
       var i = 0
       for(i <- 0 until contexts.size) {
         val mapping = factory.createMapping(parser(contexts(i).mappingPageSource.head).get, languageEN, xmlTemplateMappings(i))
-
+        println("\n\n")
+        println("\n\n")
         //printing mapping content
         println("N-Triples notation: ")
+        println("\n\n")
         mapping.writeAsNTriples
         println("\n\n")
 
         println("Turtle notation: ")
+        println("\n\n")
         mapping.writeAsTurtle
         println("\n\n")
       }

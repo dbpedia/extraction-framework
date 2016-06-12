@@ -7,6 +7,8 @@ import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMappin
   */
 class ModelMapper(modelWrapper: ModelWrapper) {
 
+
+
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) = {
     //TODO: implement
   }

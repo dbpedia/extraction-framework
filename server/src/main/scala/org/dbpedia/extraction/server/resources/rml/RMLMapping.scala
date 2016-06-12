@@ -5,4 +5,7 @@ package org.dbpedia.extraction.server.resources.rml
   */
 abstract class RMLMapping {
 
+  def writeAsNTriples: Unit
+
+  def writeAsTurtle: Unit
 }

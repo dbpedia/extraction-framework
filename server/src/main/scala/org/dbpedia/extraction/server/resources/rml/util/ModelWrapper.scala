@@ -7,6 +7,7 @@ import org.apache.jena.rdf.model.{Model, Resource}
   */
 class ModelWrapper(model: Model) {
 
+
   /**
     * Add a string as a property to a resource in this model
     */

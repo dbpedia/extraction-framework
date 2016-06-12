@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.resources.rml
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty}
-import org.dbpedia.extraction.server.resources.rml.util.ModelMapper
+import org.dbpedia.extraction.server.resources.rml.util.{ModelMapper, Prefixes}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode, WikiTitle}
 
@@ -26,6 +26,9 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     createMapping()
   }
 
+  /**
+    * Create the mapping
+    */
   private def createMapping(): RMLTemplateMapping = {
     createNewTriplesMap()
     defineTriplesMap() //sets details of the triples map
@@ -54,6 +57,39 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     }
   }
 
+  private def addConstantToSubjectMap() = {
+    modelWrapper.addStringPropertyToResource(subjectMap, Prefixes("rr") + "constant", page.title.encoded.toString)
+  }
+
+  private def addSourceToLogicalSource() = {
+    modelWrapper.addPropertyToResource(logicalSource, Prefixes("rml") + "source", page.sourceUri)
+  }
+
+  private def addMapToClassToSubjectMap() = {
+    modelWrapper.addPropertyToResource(subjectMap, Prefixes("rr") + "class", templateMapping.mapToClass.uri)
+  }
+
+  private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) = {
+    if(templateMapping.correspondingClass != null) {
+      val objectMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addResourcePropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
+      val parentTriplesMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addResourcePropertyToResource(objectMap, Prefixes("rr") + "parentTriplesMap", parentTriplesMap)
+      val subjectMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addResourcePropertyToResource(parentTriplesMap, Prefixes("rr") + "subjectMap", subjectMap)
+      modelWrapper.addPropertyToResource(subjectMap, Prefixes("rr") + "class", templateMapping.correspondingClass.uri)
+    }
+  }
+
+  private def addCorrespondingPropertyAndClassToSubjectMap() = {
+    if(templateMapping.correspondingProperty != null) {
+      val predicateObjectMap = modelWrapper.addPropertyResource(null)
+      modelWrapper.addPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
+      modelWrapper.addResourcePropertyToResource(subjectMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
+      addCorrespondingClassToSubjectMap(predicateObjectMap)
+    }
+  }
+
   private def addPropertyMapping(mapping: PropertyMapping) = {
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => mapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
@@ -64,39 +100,6 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
       case "GeoCoordinatesMapping" => mapper.addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
       case "ConditionalMapping" => mapper.addConditionalMapping(mapping.asInstanceOf[ConditionalMapping])
       case "IntermediateNodeMapping" => mapper.addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
-    }
-  }
-
-  private def addConstantToSubjectMap() = {
-    modelWrapper.addStringPropertyToResource(subjectMap, prefixes("rr") + "constant", page.title.encoded.toString)
-  }
-
-  private def addSourceToLogicalSource() = {
-    modelWrapper.addPropertyToResource(logicalSource, prefixes("rml") + "source", page.sourceUri)
-  }
-
-  private def addMapToClassToSubjectMap() = {
-    modelWrapper.addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.mapToClass.uri)
-  }
-
-  private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) = {
-    if(templateMapping.correspondingClass != null) {
-      val objectMap = modelWrapper.addPropertyResource(null)
-      modelWrapper.addResourcePropertyToResource(predicateObjectMap, prefixes("rr") + "objectMap", objectMap)
-      val parentTriplesMap = modelWrapper.addPropertyResource(null)
-      modelWrapper.addResourcePropertyToResource(objectMap, prefixes("rr") + "parentTriplesMap", parentTriplesMap)
-      val subjectMap = modelWrapper.addPropertyResource(null)
-      modelWrapper.addResourcePropertyToResource(parentTriplesMap,prefixes("rr") + "subjectMap", subjectMap)
-      modelWrapper.addPropertyToResource(subjectMap, prefixes("rr") + "class", templateMapping.correspondingClass.uri)
-    }
-  }
-
-  private def addCorrespondingPropertyAndClassToSubjectMap() = {
-    if(templateMapping.correspondingProperty != null) {
-      val predicateObjectMap = modelWrapper.addPropertyResource(null)
-      modelWrapper.addPropertyToResource(predicateObjectMap, prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
-      modelWrapper.addResourcePropertyToResource(subjectMap, prefixes("rr") + "predicateObjectMap", predicateObjectMap)
-      addCorrespondingClassToSubjectMap(predicateObjectMap)
     }
   }
 
