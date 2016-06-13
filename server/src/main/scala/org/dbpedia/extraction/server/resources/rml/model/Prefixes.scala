@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.server.resources.rml.util
+package org.dbpedia.extraction.server.resources.rml.model
 
 /**
   * Contains the RML prefixes

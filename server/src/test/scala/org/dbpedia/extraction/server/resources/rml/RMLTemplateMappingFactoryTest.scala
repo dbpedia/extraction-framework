@@ -19,8 +19,8 @@ class RMLTemplateMappingFactoryTest extends FunSuite {
       val languageEN = Language.English
 
       //test files
-      val pathsToXml: Array[String] = Array("src/test/resources/org/dbpedia/extraction/mappings/rml/infobox_person.xml",
-        "src/test/resources/org/dbpedia/extraction/mappings/rml/infobox_automobile_generation.xml")
+      val pathsToXml: Array[String] = Array("../core/src/test/resources/org/dbpedia/extraction/mappings/rml/infobox_person.xml",
+        "../core/src/test/resources/org/dbpedia/extraction/mappings/rml/infobox_automobile_generation.xml")
 
       //context
       val contexts = pathsToXml.map( path => ContextCreator.createXMLContext(path, languageEN))

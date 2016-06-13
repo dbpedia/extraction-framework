@@ -1,28 +1,22 @@
 package org.dbpedia.extraction.server.resources.rml
 
-import java.io.StringWriter
+import org.dbpedia.extraction.server.resources.rml.model.ModelWrapper
 
-import org.apache.jena.rdf.model.Model
-import org.apache.jena.riot.{RDFDataMgr, RDFFormat}
-
-import collection.JavaConverters._
 /**
   * RML Template Mapping converted from the DBpedia mappings
   */
-class RMLTemplateMapping(model: Model) extends RMLMapping {
+class RMLTemplateMapping(modelWrapper: ModelWrapper) extends RMLMapping {
 
   def printAsNTriples: Unit = {
-    model.write(System.out, "N-TRIPLES")
+    modelWrapper.printAsNTriples
   }
 
   def printAsTurtle: Unit = {
-    model.write(System.out, "TURTLE")
+    modelWrapper.printAsTurtle
   }
 
   def writeAsTurtle: String = {
-    val out = new StringWriter()
-    model.write(out, "TURTLE")
-    out.toString
+    modelWrapper.writeAsTurtle
   }
 
 
