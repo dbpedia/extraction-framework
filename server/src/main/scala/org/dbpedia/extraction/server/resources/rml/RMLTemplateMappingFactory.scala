@@ -33,7 +33,6 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   {
     createNewModelWithTriplesMap()
     defineTriplesMap() //sets details of the triples map
-    updateModelMapper()
     addPropertyMappings()
     createRMLTemplateMapping
   }
@@ -42,11 +41,6 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   {
     defineSubjectMap()
     defineLogicalSource()
-  }
-
-  private def updateModelMapper() =
-  {
-    mapper = new RMLModelMapper(modelWrapper)
   }
 
   private def defineSubjectMap() =
@@ -64,9 +58,15 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private def addPropertyMappings() =
   {
+    updateModelMapper()
     for(mapping <- templateMapping.mappings) {
       addPropertyMapping(mapping)
     }
+  }
+
+  private def updateModelMapper() =
+  {
+    mapper = new RMLModelMapper(modelWrapper)
   }
 
   private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) =
