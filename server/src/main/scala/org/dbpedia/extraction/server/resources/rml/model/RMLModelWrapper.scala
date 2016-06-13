@@ -25,7 +25,8 @@ class RMLModelWrapper extends ModelWrapper {
     * Methods for creating new triples map
     */
 
-  def addLogicalSourceToModel(wikiTitle: WikiTitle): Unit = {
+  def addLogicalSourceToModel(wikiTitle: WikiTitle): Unit =
+  {
     if(_logicalSource == null) {
       _logicalSource = createResource(convertToLogicalSourceUri(wikiTitle), createProperty(Prefixes("rml") + "LogicalSource"))
         .addProperty(createProperty(Prefixes("rml") + "referenceFormulation"), createProperty(Prefixes("ql") + "wikiText"))
@@ -34,14 +35,16 @@ class RMLModelWrapper extends ModelWrapper {
     } else throw new IllegalStateException("Model already has a a logical source.")
   }
 
-  def addSubjectMapToModel(wikiTitle: WikiTitle): Unit = {
+  def addSubjectMapToModel(wikiTitle: WikiTitle): Unit =
+  {
     if(_subjectMap == null) {
       _subjectMap = createResource(convertToSubjectMapUri(wikiTitle), createProperty(Prefixes("rr") + "SubjectMap"))
 
     } else throw new IllegalStateException("Model already has a subject map.")
   }
 
-  def addTriplesMapToModel(wikiTitle: WikiTitle): Unit = {
+  def addTriplesMapToModel(wikiTitle: WikiTitle): Unit =
+  {
     if(_triplesMap == null) {
       _triplesMap = createResource(wikiTitle.resourceIri, createProperty(Prefixes("rr") + "TriplesMap"))
         .addProperty(createProperty(Prefixes("rml") + "logicalSource"), logicalSource)
@@ -50,17 +53,20 @@ class RMLModelWrapper extends ModelWrapper {
     } else throw new IllegalStateException("Model already has a triples map.")
   }
 
-  private def convertToLogicalSourceUri(title: WikiTitle): String = {
+  private def convertToLogicalSourceUri(title: WikiTitle): String =
+  {
     title.resourceIri + "/Source/" + title.encoded.toString().trim
   }
 
-  private def convertToSubjectMapUri(title: WikiTitle): String = {
+  private def convertToSubjectMapUri(title: WikiTitle): String =
+  {
     title.resourceIri + "/Class/" + title.encoded.toString().trim
   }
 
 
 
-  def addPredicateObjectMapToResource(resource: Resource, predicate: String, _object: Resource) = {
+  def addPredicateObjectMapToResource(resource: Resource, predicate: String, _object: Resource) =
+  {
     val predicateObjectMap = addBlankNode()
     addResourceAsPropertyToResource(resource, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
     addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", predicate)
@@ -68,17 +74,20 @@ class RMLModelWrapper extends ModelWrapper {
     predicateObjectMap
   }
 
-  def addPredicateObjectMapToRoot(predicate: String, _object: Resource): Resource = {
+  def addPredicateObjectMapToRoot(predicate: String, _object: Resource): Resource =
+  {
     addPredicateObjectMapToResource(triplesMap, predicate, _object)
   }
 
 
 
-  private def createResource(s: String, p: Property) = {
+  private def createResource(s: String, p: Property) =
+  {
     model.createResource(s, p)
   }
 
-  private def createProperty(s: String) = {
+  private def createProperty(s: String) =
+  {
     model.createProperty(s)
   }
 

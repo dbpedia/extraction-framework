@@ -16,7 +16,8 @@ object Prefixes {
     "foaf" -> "http://xmlns.com/foaf/0.1/"
   )
 
-  def apply(prefix: String) : String= {
+  def apply(prefix: String) : String=
+  {
     map(prefix)
   }
 

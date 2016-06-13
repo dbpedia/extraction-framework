@@ -7,15 +7,18 @@ import org.dbpedia.extraction.server.resources.rml.model.ModelWrapper
   */
 class RMLTemplateMapping(modelWrapper: ModelWrapper) extends RMLMapping {
 
-  def printAsNTriples: Unit = {
+  def printAsNTriples: Unit =
+  {
     modelWrapper.printAsNTriples
   }
 
-  def printAsTurtle: Unit = {
+  def printAsTurtle: Unit =
+  {
     modelWrapper.printAsTurtle
   }
 
-  def writeAsTurtle: String = {
+  def writeAsTurtle: String =
+  {
     modelWrapper.writeAsTurtle
   }
 

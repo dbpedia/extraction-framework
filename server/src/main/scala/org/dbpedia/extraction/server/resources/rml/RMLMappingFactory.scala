@@ -14,14 +14,9 @@ import collection.JavaConverters._
   */
 abstract class RMLMappingFactory {
 
-  /**
-    * Setup of the factory
-    */
-
   protected var page: PageNode = null
   protected var language: Language = null
   protected var modelWrapper: RMLModelWrapper = null
-
 
   /**
     * Main method for creating the mappings
@@ -33,7 +28,8 @@ abstract class RMLMappingFactory {
     * Common methods for instances of this factory
     */
 
-  protected def createNewModelWithTriplesMap() = {
+  protected def createNewModelWithTriplesMap() =
+  {
 
     //every time this method is called a new instance of the model is made and put into a wrapper
     modelWrapper = new RMLModelWrapper()
@@ -45,7 +41,8 @@ abstract class RMLMappingFactory {
 
   }
 
-  protected def createRMLTemplateMapping = {
+  protected def createRMLTemplateMapping =
+  {
     new RMLTemplateMapping(modelWrapper)
   }
 

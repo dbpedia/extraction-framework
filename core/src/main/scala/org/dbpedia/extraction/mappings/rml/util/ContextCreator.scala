@@ -20,11 +20,13 @@ object ContextCreator {
   private val ontologySource = XMLSource.fromFile(ontologyFile,Language.Mappings)
   private val ontologyObject = new OntologyReader().read(ontologySource)
 
-  def createXMLContext(pathToXML: String, lang: Language): {
+  def createXMLContext(pathToXML: String, lang: Language):
+  {
     def ontology: Ontology
     def language: Language
     def redirects: Redirects
-    def mappingPageSource: Traversable[WikiPage]} =
+    def mappingPageSource: Traversable[WikiPage]
+  } =
   {
     val xmlMappingFile = new File(pathToXML)
     val xmlMapping = XMLSource.fromFile(xmlMappingFile, Language.Mappings)
@@ -39,7 +41,8 @@ object ContextCreator {
     }
   }
 
-  def createRMLContext(pathToRml: String, lang: Language): {
+  def createRMLContext(pathToRml: String, lang: Language):
+  {
     def ontology : Ontology
     def language : Language
     def redirects: Redirects

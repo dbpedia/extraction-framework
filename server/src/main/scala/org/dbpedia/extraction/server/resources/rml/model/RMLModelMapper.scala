@@ -9,22 +9,26 @@ import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMappin
 class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
 
-  def addSimplePropertyMapping(mapping: SimplePropertyMapping) = {
+  def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
+  {
     val objectMap = modelWrapper.addBlankNode()
     modelWrapper.addLiteralAsPropertyToResource(objectMap, Prefixes("rml") + "reference", mapping.templateProperty)
     modelWrapper.addLiteralAsPropertyToResource(objectMap, Prefixes("rml") + "languageMap", mapping.language.name)
     modelWrapper.addPredicateObjectMapToRoot(mapping.ontologyProperty.uri, objectMap)
   }
 
-  def addCalculateMapping(mapping: CalculateMapping) = {
+  def addCalculateMapping(mapping: CalculateMapping) =
+  {
     //TODO: implement
   }
 
-  def addCombineDateMapping(mapping: CombineDateMapping) = {
+  def addCombineDateMapping(mapping: CombineDateMapping) =
+  {
     //TODO: implement
   }
 
-  def addDateIntervalMapping(mapping: DateIntervalMapping) = {
+  def addDateIntervalMapping(mapping: DateIntervalMapping) =
+  {
     val dateIntervalPom = modelWrapper.addBlankNode()
     modelWrapper.addResourceAsPropertyToResource(modelWrapper.triplesMap, Prefixes("rr") + "predicateObjectMap", dateIntervalPom)
 
@@ -37,7 +41,8 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addPredicateObjectMapToResource(dateIntervalPom, mapping.endDateOntologyProperty.uri, object2)
   }
 
-  def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) = {
+  def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
+  {
     if(mapping.coordinates != null) {
       val objectMap1 = modelWrapper.addBlankNode()
       modelWrapper.addLiteralAsPropertyToResource(objectMap1, Prefixes("rr") + "parentTriplesMap", mapping.coordinates)
@@ -48,11 +53,13 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     }
   }
 
-  def addConditionalMapping(mapping: ConditionalMapping) = {
+  def addConditionalMapping(mapping: ConditionalMapping) =
+  {
     //TODO: implement
   }
 
-  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) = {
+  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) =
+  {
     //TODO: implement
   }
   

@@ -18,7 +18,8 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   /**
     * Creates the context in this factory and creates the mapping from it
     */
-  def createMapping(page: PageNode, language: Language, mappings: Mappings): RMLTemplateMapping = {
+  def createMapping(page: PageNode, language: Language, mappings: Mappings): RMLTemplateMapping =
+  {
     this.page = page
     this.language = language
     this.templateMapping = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping] // :|
@@ -28,7 +29,8 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   /**
     * Create the mapping
     */
-  private def createMapping(): RMLTemplateMapping = {
+  private def createMapping(): RMLTemplateMapping =
+  {
     createNewModelWithTriplesMap()
     defineTriplesMap() //sets details of the triples map
     updateModelMapper()
@@ -36,33 +38,39 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     createRMLTemplateMapping
   }
 
-  private def defineTriplesMap() = {
+  private def defineTriplesMap() =
+  {
     defineSubjectMap()
     defineLogicalSource()
   }
 
-  private def updateModelMapper() = {
+  private def updateModelMapper() =
+  {
     mapper = new RMLModelMapper(modelWrapper)
   }
 
-  private def defineSubjectMap() = {
+  private def defineSubjectMap() =
+  {
     modelWrapper.addLiteralAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "constant", page.title.encoded.toString)
     modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "class", templateMapping.mapToClass.uri)
     modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "termType", Prefixes("rr") + "IRI")
     addCorrespondingPropertyAndClassToSubjectMap()
   }
 
-  private def defineLogicalSource() = {
+  private def defineLogicalSource() =
+  {
     modelWrapper.addPropertyAsPropertyToResource(modelWrapper.logicalSource, Prefixes("rml") + "source", page.sourceUri)
   }
 
-  private def addPropertyMappings() = {
+  private def addPropertyMappings() =
+  {
     for(mapping <- templateMapping.mappings) {
       addPropertyMapping(mapping)
     }
   }
 
-  private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) = {
+  private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) =
+  {
     if(templateMapping.correspondingClass != null) {
       val objectMap = modelWrapper.addBlankNode()
       modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
@@ -74,7 +82,8 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     }
   }
 
-  private def addCorrespondingPropertyAndClassToSubjectMap() = {
+  private def addCorrespondingPropertyAndClassToSubjectMap() =
+  {
     if(templateMapping.correspondingProperty != null) {
       val predicateObjectMap = modelWrapper.addBlankNode()
       modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
@@ -83,7 +92,8 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     }
   }
 
-  private def addPropertyMapping(mapping: PropertyMapping) = {
+  private def addPropertyMapping(mapping: PropertyMapping) =
+  {
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => mapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
       case "CalculateMapping" => mapper.addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
