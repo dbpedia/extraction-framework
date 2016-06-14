@@ -332,7 +332,7 @@ extends WikiPageExtractor
         }
 
         //create a hash based IRI
-        Some("http://citation.dbpedia.org/hash/" + createHashCodeForTemplateNode(templateNode))
+        createHashedCitationIRIFromTemplateNode(templateNode)
     }
 
     private def getPropertyKeyIgnoreCase(templateNode: TemplateNode, propertyNames: List[String]) : Option[PropertyNode] =
@@ -389,7 +389,7 @@ extends WikiPageExtractor
         }
     }
 
-    private def createHashCodeForTemplateNode(templateNode: TemplateNode) : String =
+    private def createHashedCitationIRIFromTemplateNode(templateNode: TemplateNode) : Option[String] =
     {
         val template = new StringBuilder
 
@@ -405,6 +405,17 @@ extends WikiPageExtractor
         template append "}"
 
         //MD5 from https://stevenwilliamalexander.wordpress.com/2012/06/11/scala-md5-hash-function-for-scala-console/
-        java.security.MessageDigest.getInstance("SHA-256").digest(template.toString().getBytes()).map(0xFF & _).map { "%02x".format(_) }.foldLeft(""){_ + _}
+        try {
+            val shaHash = java.security.MessageDigest.getInstance("SHA-256").
+              digest(template.toString().getBytes())
+              .map(0xFF & _).map {
+                "%02x".format(_)
+                }.foldLeft("") {
+                  _ + _
+                }
+            Some("http://citation.dbpedia.org/hash/" + shaHash)
+        } catch {
+            case _: Throwable => None
+        }
     }
 }
