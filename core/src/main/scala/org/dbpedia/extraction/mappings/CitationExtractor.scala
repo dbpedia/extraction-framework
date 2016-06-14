@@ -277,7 +277,7 @@ extends WikiPageExtractor
         }
 
         //then jstor
-        val jstorId = getPropertyValueAsStringForKeys(templateNode, List("doi"))
+        val jstorId = getPropertyValueAsStringForKeys(templateNode, List("jstor"))
         if (jstorId.isDefined) {
             return Some("https://www.jstor.org/stable/" + jstorId.get.trim.toLowerCase)
 
@@ -320,12 +320,19 @@ extends WikiPageExtractor
         }
 
         // Then url / website
-        val webIri = getPropertyValueAsLinkForKeys(templateNode, List("url", "website") )
-        if (webIri.isDefined) {
-            return webIri
+        val webIri1 = getPropertyValueAsLinkForKeys(templateNode, List("url") )
+        if (webIri1.isDefined) {
+            return webIri1
         }
 
-        None
+        // Then url / website
+        val webIri2 = getPropertyValueAsLinkForKeys(templateNode, List("website") )
+        if (webIri2.isDefined) {
+            return webIri2
+        }
+
+        //create a hash based IRI
+        Some("http://citation.dbpedia.org/hash/" + createHashCodeForTemplateNode(templateNode))
     }
 
     private def getPropertyKeyIgnoreCase(templateNode: TemplateNode, propertyNames: List[String]) : Option[PropertyNode] =
@@ -380,5 +387,24 @@ extends WikiPageExtractor
             case Some(propertyNode) => getPropertyValueAsLink(propertyNode)
             case _ => None
         }
+    }
+
+    private def createHashCodeForTemplateNode(templateNode: TemplateNode) : String =
+    {
+        val template = new StringBuilder
+
+        template append templateNode.title.decoded append  "{"
+
+        templateNode.children
+            .filter(_.children.nonEmpty)
+            .sortWith(_.key > _.key)
+            .foreach( p => {
+                template append '|' append  p.key append '=' append p.children.flatMap(_.toPlainText).mkString.trim
+            })
+
+        template append "}"
+
+        //MD5 from https://stevenwilliamalexander.wordpress.com/2012/06/11/scala-md5-hash-function-for-scala-console/
+        java.security.MessageDigest.getInstance("SHA-256").digest(template.toString().getBytes()).map(0xFF & _).map { "%02x".format(_) }.foldLeft(""){_ + _}
     }
 }
