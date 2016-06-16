@@ -4,10 +4,13 @@ import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
 import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.extraction.wikiparser.Node
 import org.dbpedia.extraction.wikiparser._
 
 
+import scala.collection.mutable.ListBuffer
 import scala.language.reflectiveCalls
+import scala.util.matching.Regex
 
 /**
   * Extracts template variables from template pages (see http://en.wikipedia.org/wiki/Help:Template#Handling_parameters)
@@ -63,10 +66,20 @@ class InfoboxMappingsExtractor(context: {
   }
 
   def extractTuples(page : PageNode, lang: Language ) : List[(String,String, String)] = {
-    var allTuples = getDirectTemplateWikidataMappings(page, lang)
-    allTuples = allTuples ++ getInvokeTuples(page)
-    allTuples = allTuples ++ getPropertyTuples(page)
-    allTuples
+    val allProperties = getAllPropertiesInInfobox(page, lang)
+    var completedTuples = getDirectTemplateWikidataMappings(page, lang)
+    completedTuples = completedTuples ++ getInvokeTuples(page)
+    completedTuples = completedTuples ++ getPropertyTuples(page)
+    for ( tuple <- completedTuples){
+      allProperties -= new Tuple2(tuple._1, tuple._3)
+    }
+
+    var incompleteTuples = ListBuffer[(String, String, String)]()
+
+    for ( prop <- allProperties){
+      incompleteTuples += new Tuple3(prop._1, "?", prop._2 )
+    }
+    completedTuples ++ incompleteTuples.toList
   }
 
   def reduceChildrenToString(propertyNode: PropertyNode) : String = {
@@ -116,6 +129,7 @@ class InfoboxMappingsExtractor(context: {
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
     var invokeFunc = parserFunctions.filter(p => ( p.title.equalsIgnoreCase("#invoke")))
      invokeFunc = invokeFunc.filter(p => extract_property(p.children.head.toWikiText, "#invoke") != "")
+     (invokeFunc ).filter(p => p.parent.isInstanceOf[PropertyNode])
     (invokeFunc ).map( p => new Tuple3(p.parent.asInstanceOf[PropertyNode].parent.asInstanceOf[TemplateNode].title.decoded, p.parent.asInstanceOf[PropertyNode].key, extract_property(p.children.head.toWikiText, "#invoke")))
 
   }
@@ -135,16 +149,41 @@ class InfoboxMappingsExtractor(context: {
     val templateNodes = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
     val infoboxes = templateNodes.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
 
-    var website_rows = scala.collection.mutable.ListBuffer[PropertyNode]()
+    var website_rows = ListBuffer[PropertyNode]()
     infoboxes.foreach(x => {
       website_rows = website_rows ++ x.children.filter(p => checkDirectTemplateWikidataMappings(p, lang) )
     })
-    var answer = scala.collection.mutable.ListBuffer[(String, String, String)]()
+    var answer = ListBuffer[(String, String, String)]()
     for ( x <- website_rows){
      answer += new Tuple3(x.parent.asInstanceOf[TemplateNode].title.decoded, x.key.toString, directTemplateMapsToWikidata.getOrElse(lang.wikiCode, Map()).getOrElse(x.children.head.asInstanceOf[TemplateNode].title.decoded, "") )
     }
     answer.toList
   }
+
+  def getConditionalWikidataMappings(page : PageNode, lang : Language) : List[(String, String, String)] = {
+    var answer = ListBuffer[(String, String, String)]()
+    answer.toList
+  }
+
+
+  def getAllPropertiesInInfobox(page : PageNode, lang : Language) : scala.collection.mutable.Set[(String, String)] = {
+    val templateNodes = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
+    val infoboxes = templateNodes.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
+    var answer = scala.collection.mutable.Set[(String, String)]()
+
+    infoboxes.foreach( x => {
+      val reg = """((p|P)([0-9]+)\})|((p|P)([0-9]+)\|)""".r
+      for (m <- reg.findAllIn(page.toWikiText)) {
+
+        answer = answer + new Tuple2(x.title.decoded, m.substring(0,m.length -1))
+
+      }
+
+    })
+
+    answer
+  }
+
 
   private def getTemplateMappingsFromPropertyParserFunc(propertyFunctions: Seq[ParserFunctionNode]) : Seq[(String, String)] = {
 

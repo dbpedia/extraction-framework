@@ -375,6 +375,25 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
     (parsed) should be (answer)
   }
 
+  "InfoboxMappingsExtractor" should """return correct property id's for trial  """ in {
+
+    val lang = Language.English
+    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","random","p456"), ("Infobox Test1","population_total","P1082"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        | website1                = {{Official URL}}
+        | random                  = {{#invoke:Wikidata|property|p456}}
+        | population_total       = {{#property:P1082}}
+        | data38    = {{{website|{{{homepage|{{{URL|{{#ifeq:{{{website|{{{homepage|{{{URL|}}}}}}}}} | FETCH_WIKIDATA | {{#if:{{#property:P856}}|{{Url|1={{#invoke:Wikidata|getValue|P856|FETCH_WIKIDATA}} }} }} |}}}}}}}}}}}
+
+        }}
+      """, "TestPage", lang, "all")
+
+    (parsed) should be (answer)
+  }
+
+
 
 
   private val parser = WikiParser.getInstance()
