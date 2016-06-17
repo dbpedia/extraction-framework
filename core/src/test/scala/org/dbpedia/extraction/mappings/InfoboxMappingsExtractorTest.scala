@@ -321,7 +321,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         | website2                = {{Official website}}
         | blog                    = {{Official blog}}
         }}
-      """, "TestPage", lang, "#P856")
+      """, "TestPage", lang, "DTM")
 
     (parsed) should be (answer)
   }
@@ -339,7 +339,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         {{Infobox Test2
         | website2                = {{Official URL}}
         }}
-      """, "TestPage", lang, "#P856")
+      """, "TestPage", lang, "DTM")
 
     (parsed) should be (answer)
   }
@@ -354,47 +354,91 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         | website1                = {{BetingetURL}}
         }}
 
-      """, "TestPage", lang, "#P856")
+      """, "TestPage", lang, "DTM")
 
     (parsed) should be (answer)
   }
+
+  "InfoboxMappingsExtractor" should """return correct property id's for conditional expressions """ in {
+
+    val lang = Language.English
+    val answer = List(("Infobox Test1","string1","P1082"), ("Infobox Test1","string2","P1082"), ("Infobox Test1","string4","P1082"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+
+        | data37    = {{#ifeq: temp_string1 | temp_string2 | temp_string3 | temp_string4 }}
+        | data38    = {{#ifeq: string1 | string2 |{{#property:P1082}} | string4 }}
+        }}
+      """, "TestPage", lang, "all")
+
+    (parsed) should be (answer)
+  }
+
+  "InfoboxMappingsExtractor" should """return correct property id's for incorrect conditional expressions """ in {
+
+    val lang = Language.English
+    val answer = List(("Infobox Test1","?","p456"), ("Infobox Test1","?","P1082"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+
+        | data37    = {{#ifeq: temp_string1 | temp_string2 | temp_string3 | temp_string4 }}
+        | data38    = {{#ifeq: string1 | string2 |{{#property:P1082}} |  {{#invoke:Wikidata|property|p456}} }}
+        }}
+      """, "TestPage", lang, "all")
+
+    (parsed) should be (answer)
+  }
+
+
+
+  "InfoboxMappingsExtractor" should """return correct property id's for conditional expressions with one nested level """ in {
+
+    val lang = Language.English
+    val answer = List(("Infobox Test1","string1","p123"), ("Infobox Test1","string2","p123"), ("Infobox Test1","value if non-empty","p123"), ("Infobox Test1","value if empty","p123"), ("Infobox Test1","value if different","p123"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+          |data39   = {{#ifeq: string1 | string2 | {{#if: {{#property:p123}} | value if non-empty | value if empty }} | value if different }}
+        }}
+      """, "TestPage", lang, "all")
+
+    (parsed) should be (answer)
+  }
+
+  "InfoboxMappingsExtractor" should """return correct property id's for conditional expressions with multiple nested level """ in {
+
+    val lang = Language.English
+    val answer = List(("Infobox Test1","string1","p1243"), ("Infobox Test1","string2","p1243"), ("Infobox Test1","test_string1","p1243"),
+      ("Infobox Test1","test_string2","p1243"), ("Infobox Test1","test_string3","p1243"),("Infobox Test1","test_string4","p1243"), ("Infobox Test1","test_string5","p1243"))
+    val parsed = parse(
+      """
+        {{Infobox Test1
+        |data40   = {{#ifeq: string1 | string2 | {{#if: test_string1 |  {{#ifexist: {{#property:p1243}} | test_string2 | test_string3 }}| test_string4 }} | test_string5 }}        }}
+      """, "TestPage", lang, "all")
+
+    (parsed) should be (answer)
+  }
+
 
   "InfoboxMappingsExtractor" should """return correct property id's for a combination of above  """ in {
 
     val lang = Language.English
-    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","random","p456"), ("Infobox Test1","population_total","P1082"))
+    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","random","p456"), ("Infobox Test1","population_total","P1082"),
+      ("Infobox Test1","string1","p4563"), ("Infobox Test1","string2","p4563"), ("Infobox Test1","string4","p4563"))
     val parsed = parse(
       """
         {{Infobox Test1
         | website1                = {{Official URL}}
         | random                  = {{#invoke:Wikidata|property|p456}}
         | population_total       = {{#property:P1082}}
+        | data38    = {{#ifeq: string1 | string2 |{{#invoke:Wikidata|property|p4563}} | string4 }}
         }}
       """, "TestPage", lang, "all")
 
     (parsed) should be (answer)
   }
-
-  "InfoboxMappingsExtractor" should """return correct property id's for trial  """ in {
-
-    val lang = Language.English
-    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","random","p456"), ("Infobox Test1","population_total","P1082"))
-    val parsed = parse(
-      """
-        {{Infobox Test1
-        | website1                = {{Official URL}}
-        | random                  = {{#invoke:Wikidata|property|p456}}
-        | population_total       = {{#property:P1082}}
-        | data38    = {{{website|{{{homepage|{{{URL|{{#ifeq:{{{website|{{{homepage|{{{URL|}}}}}}}}} | FETCH_WIKIDATA | {{#if:{{#property:P856}}|{{Url|1={{#invoke:Wikidata|getValue|P856|FETCH_WIKIDATA}} }} }} |}}}}}}}}}}}
-
-        }}
-      """, "TestPage", lang, "all")
-
-    (parsed) should be (answer)
-  }
-
-
-
 
   private val parser = WikiParser.getInstance()
 
@@ -419,7 +463,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         case Some(pageNode) => extractor.getInvokeTuples(pageNode)
         case None => List.empty
       }
-    } else if ( test == "#P856") {
+    } else if ( test == "DTM") {
       to_return = parser(page) match {
         case Some(pageNode) => extractor.getDirectTemplateWikidataMappings(pageNode, lang)
         case None => List.empty
