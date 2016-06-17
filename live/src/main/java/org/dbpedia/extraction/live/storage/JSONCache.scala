@@ -94,7 +94,7 @@ class JSONCache(pageID: Long, pageTitle: String) {
     val updatedTimes = if ( cacheObj == null || performCleanUpdate()) "0" else (cacheObj.updatedTimes + 1).toString
 
     if ( ! isModified) {
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateUnmodified, Array[String](updatedTimes, "" + this.pageID))
+      return MongoUtil.updateUnmodified(this.pageID, updatedTimes)
     }
     
     // On clean Update do not reuse existing subjects
@@ -109,15 +109,15 @@ class JSONCache(pageID: Long, pageTitle: String) {
 
     // Check wheather to update oΑr insert
     if (cacheExists) {
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  json, subjects.toString, diff,  "" + this.pageID))
+      return MongoUtil.update(this.pageID, this.pageTitle, updatedTimes,  json, subjects.toString, diff)
     }
     else
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, updatedTimes,  json, subjects.toString, diff))
+      return MongoUtil.insert(this.pageID, this.pageTitle, updatedTimes,  json, subjects.toString, diff)
   }
 
   private def initCache {
     try {
-      cacheObj = JDBCUtil.getCacheContent(DBpediaSQLQueries.getJSONCacheSelect, this.pageID)
+      cacheObj = MongoUtil.getItem(this.pageID)
       if (cacheObj == null) return
       cacheExists = true
       if (cacheObj.json.equals("")) return
@@ -153,7 +153,7 @@ object JSONCache {
   JSONCache.mapper.registerModule(DefaultScalaModule)
 
   def setErrorOnCache(pageID: Long, error: Int) {
-    JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdateError, Array[String]("" + error, "" + pageID))
+    MongoUtil.updateError(pageID, "" + error)
   }
 
   def deleteCacheItem(pageID: Long, policies: Array[Policy] = null) {
@@ -173,7 +173,7 @@ object JSONCache {
   }
 
   def deleteCacheOnlyItem(pageID: Long) {
-    JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheDelete, Array[String]("" + pageID))
+    MongoUtil.delete(pageID)
   }
 
   def getTriplesFromJson(jsonString: String) : Traversable[Quad] = {

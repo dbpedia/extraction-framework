@@ -1,15 +1,13 @@
 package org.dbpedia.extraction.live.storage;
 
 
-import org.slf4j.Logger;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.util.DateUtil;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,7 +16,6 @@ import java.util.Set;
 public class JDBCUtil {
     //Initializing the Logger
     private static Logger logger = LoggerFactory.getLogger(JDBCUtil.class);
-
 
     /*
     * Execs an SQL query and returns true if everything went ok or false  in case of exception
@@ -31,7 +28,6 @@ public class JDBCUtil {
     /*
     * Execs an SQL query and returns true if everything went ok or false  in case of exception
     * */
-
     public static boolean execSQL(String query, boolean sparql) {
         try {
             _execSQL(query,sparql);
@@ -43,7 +39,6 @@ public class JDBCUtil {
     }
 
     private static void _execSQL(String query, boolean sparql) throws Exception {
-
         Connection conn = null;
         Statement stmt = null;
         ResultSet result = null;
@@ -228,4 +223,5 @@ public class JDBCUtil {
             }
         }
     }
+
 }

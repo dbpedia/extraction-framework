@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.live.main;
 
 
+import org.dbpedia.extraction.live.administrative.AdminInterface;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
@@ -13,7 +14,7 @@ import org.dbpedia.extraction.live.processor.PageProcessor;
 import org.dbpedia.extraction.live.publisher.Publisher;
 import org.dbpedia.extraction.live.statistics.Statistics;
 import org.dbpedia.extraction.live.storage.JDBCUtil;
-import org.dbpedia.extraction.live.util.DateUtil;
+import org.dbpedia.extraction.live.storage.MongoUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.live.util.Files;
 import org.slf4j.Logger;
@@ -30,13 +31,14 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    public static String state = "stopped"; //the state DBpedia Live {stopped, running, starting}
 
     //Used for publishing triples to files
     public static BlockingQueue<DiffData> publishingDataQueue = new LinkedBlockingDeque<DiffData>(1000);
 
     // TODO make these non-static
 
-    //private volatile static Statistics statistics = null;
+    private volatile static Statistics statistics = null;
 
     private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
@@ -88,11 +90,6 @@ public class Main {
         for (int i=0; i < threads ; i++){
             processors.add( new PageProcessor("N" + (i+1)));
         }
-
-        //statistics = new Statistics(LiveOptions.options.get("statisticsFilePath"), 20,
-        //        DateUtil.getDuration1MinMillis(), 2 * DateUtil.getDuration1MinMillis());
-
-
     }
 
     public static void startLive() {
@@ -106,8 +103,10 @@ public class Main {
 
             publisher = new Publisher("Publisher", 4);
 
-            //statistics.startStatistics();
+            statistics = new Statistics(1000, 60000);
+            statistics.startStatistics();
 
+            state = "running";
             logger.info("DBpedia-Live components started");
         } catch (Exception exp) {
             logger.error(ExceptionUtil.toString(exp), exp);
@@ -128,13 +127,14 @@ public class Main {
                 f.stopFeeder(LiveQueue.getPriorityDate(f.getQueuePriority()));
 
             // Statistics
-            //if (statistics != null) statistics.stopStatistics();
+            if (statistics != null) statistics.stopStatistics();
 
             // Publisher
             publisher.flush();
+
+            state = "stopped";
             // Page Processor
             // TODO
-
         } catch (Exception exp) {
             logger.error(ExceptionUtil.toString(exp));
         }
@@ -148,6 +148,9 @@ public class Main {
             public void run() {
                 try {
                     stopLive();
+
+                    //Close MongoDB connection
+                    MongoUtil.closeClient();
                 } catch (Exception exp) {
 
                 }
@@ -158,5 +161,7 @@ public class Main {
 
         initLive();
         startLive();
+
+        new AdminInterface().start();
     }
 }

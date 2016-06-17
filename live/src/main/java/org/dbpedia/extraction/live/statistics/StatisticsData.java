@@ -1,7 +1,10 @@
 package org.dbpedia.extraction.live.statistics;
 
+import org.apache.commons.lang3.mutable.MutableLong;
 import org.dbpedia.extraction.live.util.DateUtil;
+
 import java.util.Iterator;
+import java.util.Stack;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
@@ -13,165 +16,99 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  */
 
 public class StatisticsData {
-    // stats* variables hold the number of updated pages
-    private static long stats1m = 0;
-    private static long stats5m = 0;
-    private static long stats1h = 0;
-    private static long stats1d = 0;
-    private static long statsAll = 0;
+    private static long entityAll = 0;
+    private static long triplesAll = 0;
+    private static StatisticsResult result = null;
+    private static final long startTime = System.currentTimeMillis();
 
-    // keep a list with a detailed latetest page changes
-    private static ConcurrentLinkedDeque<StatisticsItem> statisticsDetailedQueue = new ConcurrentLinkedDeque<StatisticsItem>();
+    /*Store the results of each hour of runtime
+     *This method of storing the hour results may not work as intended if the update interval is large.
+     *It's best to keep it around a few seconds
+     */
+    private static Stack<MutableLong> entityHours = new Stack<>(); //Max elements: 23 (for the hours in a day)
+    private static Stack<MutableLong> triplesHours = new Stack<>();
+    private static Stack<ExtractedItem> extractedTitles = new Stack<>();
+    private static long newValueTimestamp = 0; //saves the timestamp of the last insertion in the stack
 
-    // keep a list with just timestamps to keep track of page change number
-    private static ConcurrentLinkedDeque<Long> statisticsTimestampQueue = new ConcurrentLinkedDeque<Long>();
+    // keep a list with triples and timestamps
+    private static ConcurrentLinkedDeque<TripleItem> statisticsTriplesQueue = new ConcurrentLinkedDeque<TripleItem>();
 
     protected StatisticsData() {
     }
 
-    public static synchronized void setAllStats(long s1m, long s5m, long s1h, long s1d, long sall) {
-        stats1m = s1m;
-        stats5m = s5m;
-        stats1h = s1h;
-        stats1d = s1d;
-        statsAll = sall;
-    }
-
-    public static synchronized void setStats1m(long value) {
-        stats1m = value;
-    }
-
-    public static synchronized void setStats5m(long value) {
-        stats5m = value;
-    }
-
-    public static synchronized void setStats1h(long value) {
-        stats1h = value;
-    }
-
-    public static synchronized void setStats1d(long value) {
-        stats1d = value;
-    }
-
-    public static synchronized void setStatsAll(long value) {
-        statsAll = value;
-    }
-
-    public static void addItem(String pageName, String pageDBpediaURI, String pageWikipediaURI, int pageID, long pageTimestamp) {
+    public static void addItem(String pageTitle, String wikiuri, int numTriples, long pageTimestamp) {
         try {
-            statisticsDetailedQueue.addFirst(new StatisticsItem(pageName, pageDBpediaURI, pageWikipediaURI, pageID, pageTimestamp));
-            statisticsTimestampQueue.addFirst(pageTimestamp);
+            statisticsTriplesQueue.addFirst(new TripleItem(numTriples, pageTimestamp));
+            extractedTitles.push(new ExtractedItem(pageTitle, wikiuri));
+            if(extractedTitles.size() > Statistics.numItems)
+                extractedTitles.remove(0);
         } catch (NullPointerException e) {
             // TODO take furter action? not important...
         }
     }
 
-    public static synchronized String generateStatistics(int noOfDetailedIntances) {
+    public static StatisticsResult getResults(){
+        return result;
+    }
 
+    public static synchronized void generateStatistics() {
         long now = System.currentTimeMillis();
 
-        // remove old statistics
-        while (!statisticsTimestampQueue.isEmpty()) {
-            if (now - statisticsTimestampQueue.peekLast() > DateUtil.getDuration1DayMillis()) {
-                statisticsTimestampQueue.pollLast(); // remove from list if older than a day
-                statsAll++;
-            } else
-                break;
-        }
-
-        while (statisticsDetailedQueue.size() > noOfDetailedIntances) {
-            statisticsDetailedQueue.pollLast();
-        }
-
-        // update stats variables
-        stats1m = 0;
-        stats5m = 0;
-        stats1h = 0;
-        stats1d = 0;
-        Iterator<Long> timeIter = statisticsTimestampQueue.iterator();
-        while (timeIter.hasNext()) {
-
-            long d = now - (long) timeIter.next();
-
-            if (d < DateUtil.getDuration1HourMillis()) {
-                stats1h++;
-                if (d < 5*DateUtil.getDuration1MinMillis()) {
-                    stats5m++;
-                    if (d < DateUtil.getDuration1MinMillis()) {
-                        stats1m++;
-                    }
-                }
-            } else {
-
-                break;
+        //Check if hour needs changing
+        if(now - newValueTimestamp > DateUtil.getDuration1HourMillis()){
+            entityHours.push(new MutableLong(0)); //add item for new hour
+            triplesHours.push(new MutableLong(0));
+            newValueTimestamp = now;
+            //remove the 24th hour because we only want the last 23
+            if(entityHours.size() > 23) {
+                entityAll += entityHours.get(0).longValue();
+                triplesAll += triplesHours.get(0).longValue();
+                entityHours.remove(0);
+                triplesHours.remove(0);
             }
         }
-        stats1d = statisticsTimestampQueue.size();
 
-        // generate json contents
-        StringBuffer sb = new StringBuffer("");
+        // compute entity variables
+        int entity1m = 0, entity5m = 0, entity1h = 0, entity1d = 0;
+        // compute triples variables
+        int triples1m = 0, triples5m = 0, triples1h = 0, triples1d = 0;
 
-        sb.append("{");
-        sb.append("\"upd1m\": \"" + stats1m + "\",\n");
-        sb.append("\"upd5m\": \"" + stats5m + "\",\n");
-        sb.append("\"upd1h\": \"" + stats1h + "\",\n");
-        sb.append("\"upd1d\": \"" + stats1d + "\",\n");
-        sb.append("\"updat\": \"" + statsAll + stats1d + "\",\n");
-        sb.append("\"timestamp\": \"" + System.currentTimeMillis() + "\",\n");
-        sb.append("\"latest\": [");
+        Iterator<TripleItem> triplesIter = statisticsTriplesQueue.iterator();
+        while (triplesIter.hasNext()) {
+            TripleItem item = (TripleItem) triplesIter.next();
+            long timestamp = item.getTimestamp();
+            int val = item.getNumOfTriples();
+            long d = now - timestamp;
 
-
-        Iterator<StatisticsItem> detIter = statisticsDetailedQueue.iterator();
-        while (detIter.hasNext()) {
-            StatisticsItem item = detIter.next();
-            sb.append("\n{");
-            sb.append("\"title\":\"" + item.getPageTitle() + "\",");
-            sb.append("\"dbpediaURI\": \"" + item.getDBpediaURI() + "\",");
-            sb.append("\"wikipediaURI\": \"" + item.getWikipediaURI() + "\",");
-            sb.append("\"timestamp\": \"" + item.getTimestamp() + "\",");
-            sb.append("\"delta\": \"" + item.getHasDelta() + "\"");
-            sb.append("}");
-            if (detIter.hasNext())
-                sb.append(",");
+            if (d < DateUtil.getDuration1HourMillis()) {
+                triples1h+=val;
+                entity1h++;
+                if (d < 5*DateUtil.getDuration1MinMillis()) {
+                    triples5m+=val;
+                    entity5m++;
+                    if (d < DateUtil.getDuration1MinMillis()) {
+                        triples1m+=val;
+                        entity1m++;
+                    }
+                }
+            }else {
+                triplesHours.peek().add(val);
+                entityHours.peek().increment();
+                triplesIter.remove(); // remove from list if older than an hour
+            }
         }
-        sb.append("]}");
+        // sum last 23 hours and current hour to get the stats for the last day
+        for(MutableLong val: entityHours)
+            entity1d += val.longValue();
+        for(MutableLong val: triplesHours)
+            triples1d += val.longValue();
 
-        return sb.toString();
+        entity1d += entity1h;
+        triples1d += triples1h;
+
+        // create result object
+        result = new StatisticsResult(entity1m, entity5m, entity1h, entity1d, entityAll + entity1d);
+        result.setTriples(triples1m, triples5m, triples1h, triples1d, triplesAll + triples1d);
+        result.finish(startTime, extractedTitles.toString());
     }
 }
-
-/*
-
- {
-     "upd-1m": "99",
-     "upd-5m": "478",
-     "upd-1h": "3452",
-     "upd-1d": "3452",
-     "upd-at": "3452",
-     "latest": [
-         {
-             "title": "Yuko Matsumiya",
-             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "timestamp": "1350637099091",
-             "delta": "false"
-         },
-         {
-             "title": "Yuko Matsumiya",
-             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "timestamp": "1350637099091",
-             "delta": "false"
-         },
-         {
-             "title": "Yuko Matsumiya",
-             "dbpedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "wikipedia-uri": "http://wiki=nl,locale=nl.wikipedia.org/wiki/Yuko_Matsumiya",
-             "timestamp": "1350637099091",
-             "delta": "false"
-         }
-     ]
- }
-
-
-* */

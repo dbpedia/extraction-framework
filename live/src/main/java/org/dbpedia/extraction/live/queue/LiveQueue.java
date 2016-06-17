@@ -1,11 +1,9 @@
 package org.dbpedia.extraction.live.queue;
 
+import org.dbpedia.extraction.live.statistics.Statistics;
 import org.slf4j.Logger;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
@@ -76,4 +74,16 @@ public class LiveQueue {
         return "";
     }
 
+    /*
+    * Used to get a list of the next items in the queue.
+    * */
+    public static ArrayList<String> getNextQueuedItems(){
+        ArrayList<String> titles = new ArrayList<>();
+        Iterator<LiveQueueItem> iterator = queue.iterator();
+        for (int i = 1; i <= Statistics.numItems && iterator.hasNext(); i++){
+            LiveQueueItem item = iterator.next();
+            titles.add("{\"id\":" + item.getItemID() + ", \"priority\":\"" + item.getPriority().toString() + "\"}");
+        }
+        return titles;
+    }
 }
