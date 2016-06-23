@@ -96,7 +96,7 @@ public abstract class Feeder extends Thread {
         if (date == null || date.equals(""))
             date = latestProcessDate;
 
-        //Files.createFile(latestProcessDateFile, date);
+        Files.createFile(latestProcessDateFile, date);
     }
 
     protected abstract Collection<LiveQueueItem> getNextItems();
