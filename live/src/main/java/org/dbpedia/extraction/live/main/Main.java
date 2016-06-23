@@ -57,9 +57,9 @@ public class Main {
 
         JDBCUtil.execSQL("SET names utf8");
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.rcstream.enabled"))) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.rcstream.enabled")) == true) {
             feeders .add(new RCStreamFeeder("RCStreamFeeder", LiveQueuePriority.LivePriority,
-                LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.getComment("working_directory"),
+                LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory"),
                 LiveOptions.options.get("feeder.rcstream.room")));
         }
 
