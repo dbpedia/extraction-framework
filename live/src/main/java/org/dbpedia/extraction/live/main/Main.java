@@ -58,10 +58,11 @@ public class Main {
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
             long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.sleepInterval"));
-            feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
-                LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
-                pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
-                LiveOptions.options.get("working_directory")));
+            //feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
+            //    LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
+            //    pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
+            //   LiveOptions.options.get("working_directory")));
+            feeders.add(new RCStreamFeeder("RCStreamFeeder", LiveQueuePriority.LivePriority, null, "./tmp", "en.wikipedia.org"));
         }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {

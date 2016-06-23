@@ -26,6 +26,8 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
@@ -42,7 +44,7 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
 
     public RCStreamFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
                           String folderBasePath, String room) {
-        super(feederName, queuePriority, defaultStartTime, folderBasePath);
+        super(feederName, queuePriority, "2016-05-05T14:03:00Z", folderBasePath);
         this.room = room;
         try {
             connect();
@@ -60,24 +62,26 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
 
     protected void connect() throws MalformedURLException {
         socket = new SocketIO("http://stream.wikimedia.org/rc");
+        socket.connect(this);
     }
 
     @Override
     protected Collection<LiveQueueItem> getNextItems() {
+        Collection<LiveQueueItem> returnValue;
         synchronized (this){
-            Collection<LiveQueueItem> returnValue = events;
+            returnValue = events;
             events = new ArrayList<LiveQueueItem>();
-            return returnValue;
         }
+        return returnValue;
     }
 
     @Override
     public void onDisconnect() {
-        try {
-            connect();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            connect();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -87,12 +91,12 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
 
     @Override
     public void onMessage(String data, IOAcknowledge ack) {
-
+        logger.debug("Message: " + data);
     }
 
     @Override
     public void onMessage(com.google.gson.JsonElement json, IOAcknowledge ack) {
-
+        logger.debug("Message: " + json.toString());
     }
 
     private long getIDForTitle(String title) {
@@ -100,13 +104,14 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
                 title + "&prop=pageimages&format=json&pithumbsize=350";
         URL url = null;
         try {
-            url = new URL(apiURL);
+            url = new URL(apiURL.replace(" ", "%20"));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             String json = new Scanner(connection.getInputStream()).useDelimiter("\\A").next();
-            JsonObject object = gson.fromJson(json, JsonObject.class);
-            return Long.parseLong(object.getAsJsonObject("query").getAsJsonObject("pages").entrySet()
-                    .iterator().next().getKey());
+            Pattern pattern = Pattern.compile("\\d+");
+            Matcher matcher = pattern.matcher(json);
+            matcher.find();
+            return Long.parseLong(matcher.group(0));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,12 +120,13 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
 
     @Override
     public void on(String event, IOAcknowledge ack, com.google.gson.JsonElement... args) {
-        JsonObject jsonobject = gson.fromJson(args[0], JsonObject.class);
-        String title = jsonobject.get("title").getAsString();
-        Long timestamp = jsonobject.get("timestamp").getAsLong();
+        logger.info("message received");
+        JsonObject jsonObject = (JsonObject) args[0];
+        String title = jsonObject.get("title").getAsString();
+        Long timestamp = jsonObject.get("timestamp").getAsLong();
+        long pageid = getIDForTitle(title);
+        String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
         synchronized (this){
-            long pageid = getIDForTitle(title);
-            String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
             events.add(new LiveQueueItem(pageid, eventTimestamp));
             logger.info("Registered event for page " + pageid + " at " + eventTimestamp);
         }
