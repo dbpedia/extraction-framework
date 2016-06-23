@@ -427,6 +427,31 @@
                 </produces>
             </extractor>
 
+            <extractor name ="org.dbpedia.extraction.mappings.ImageExtractorLive" status="ACTIVE">
+                <produces>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>FOAF_DEPICTION</p>
+                        <o></o>
+                    </matchPattern>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>FOAF_THUMBNAIL</p>
+                        <o></o>
+                    </matchPattern>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>DC_RIGHTS</p>
+                        <o></o>
+                    </matchPattern>
+                    <matchPattern type="EXACT">
+                        <s></s>
+                        <p>DBO_THUMBNAIL</p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
             <extractor name ="org.dbpedia.extraction.mappings.MappingExtractor" status="ACTIVE">
                 <produces>
                     <matchPattern type="STARTSWITH">

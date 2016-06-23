@@ -2,8 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
-import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiUtil}
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, PropertyNode, TextNode}
+import scala.language.reflectiveCalls
 
 /**
   * Created by Lukas Faber, Sebastian Serth, Stephan Haarmann

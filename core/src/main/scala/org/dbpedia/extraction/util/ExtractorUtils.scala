@@ -114,6 +114,18 @@ object ExtractorUtils {
       language.baseUri + "/wiki/Special:FilePath/" + filename + "?width=300"
 
   /**
+    * Determine the file URL on DBpedia for a filename.
+    *
+    * @param filename the name of the file.
+    * @param language the wiki on which the file exists.
+    * @return the file URL
+    */
+  def getDbpediaFileURL(filename: String, language: Language): String = {
+    val fileNamespaceIdentifier = Namespace.File.name(language)
+    language.dbpediaUri + "/resource/" + fileNamespaceIdentifier + ":" + filename
+  }
+
+  /**
     * Collects all internal links from a Node
     */
   def collectInternalLinksFromNode(node : Node) : List[InternalLinkNode] =
