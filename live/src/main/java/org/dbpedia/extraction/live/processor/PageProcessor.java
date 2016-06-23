@@ -95,7 +95,7 @@ public class PageProcessor extends Thread{
                     logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
                 }
                 else {
-                    if (page.getItemName().isEmpty()) {
+                    if (!page.getItemName().isEmpty()) {
                         processPageFromTitle(page);
                     } else {
                         processPage(page);
