@@ -1,18 +1,15 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser._
-import impl.wikipedia.Namespaces
-import org.dbpedia.extraction.sources.Source
-import collection.mutable.{HashSet, Set => MutableSet}
-import java.math.BigInteger
-import java.security.MessageDigest
+
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiApi, WikiUtil}
-import org.dbpedia.extraction.util.RichString.wrapString
-import scala.collection.mutable.ArrayBuffer
+import org.dbpedia.extraction.wikiparser._
+
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.language.reflectiveCalls
 
 /**
@@ -60,7 +57,8 @@ extends PageNodeExtractor
     var quads = new ArrayBuffer[Quad]()
 
     val api = new WikiApi(null, language)
-    for ((imageFileName, sourceNode) <- searchImage(node.children, 0) if !imageFileName.toLowerCase.startsWith("replace_this_image"))
+    var firstImage = true
+    for ((imageFileName, sourceNode) <- searchImages(node.children, 0).flatten if !imageFileName.toLowerCase.startsWith("replace_this_image"))
     {
       val lang = if (api.fileExistsOnWiki(imageFileName, commonsLang))
         commonsLang else language
@@ -68,23 +66,32 @@ extends PageNodeExtractor
       val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, lang)
       val wikipediaImageUrl = language.baseUri+"/wiki/"+fileNamespaceIdentifier+":"+imageFileName
 
+      if (firstImage) {
+        if (lang == language) {
+          quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+        }
+
+        quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceUri)
+        quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
+        quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
+
+        firstImage = false
+      }
+
       if (lang == language) {
-        quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
         quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceUri)
         quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
       }
 
       quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
-      quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
-      quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceUri)
-      quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
     }
 
     quads
   }
 
-  private def searchImage(nodes: List[Node], sections: Int): Option[(String, Node)] =
+  private def searchImages(nodes: List[Node], sections: Int): List[Option[(String, Node)]] =
   {
+    var images = new ListBuffer[Option[(String, Node)]]()
     var currentSections = sections
     for (node <- nodes)
     {
@@ -92,7 +99,6 @@ extends PageNodeExtractor
       {
         case SectionNode(_, _, _, _) =>
         {
-          if (currentSections > 1) return None
           currentSections += 1
         }
         case TemplateNode(_, children, _, _) =>
@@ -106,24 +112,24 @@ extends PageNodeExtractor
                  fileName
                )
           {
-            return Some((encodedFileName, textNode))
+            images += Some((encodedFileName, textNode))
           }
-          searchImage(children, sections).foreach(s => return Some(s))
+          searchImages(children, sections).foreach(s => images :+ Some(s))
         }
         case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == Namespace.File =>
         {
           for (fileName <- ImageExtractorConfig.ImageLinkRegex.findFirstIn(destination.encoded))
           {
-            return Some((fileName, linkNode))
+            images += Some((fileName, linkNode))
           }
         }
         case _ =>
         {
-          searchImage(node.children, sections).foreach(s => return Some(s))
+          searchImages(node.children, sections).foreach(s => images += s)
         }
       }
     }
-    None
+    images.toList
 
   }
 
