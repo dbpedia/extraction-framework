@@ -116,6 +116,15 @@ extends PageNodeExtractor
           }
           searchImages(children, sections).foreach(s => images :+ Some(s))
         }
+        // match Files included over galleries format("File:<filename>|<futherText>")
+        case (textNode @ TextNode(text, line)) if (text.contains("|")) =>
+        {
+          val filestring = text.split("\\|").head.replace("\n","").replace("<gallery>","").replace("File:", "")
+          val filename = ImageExtractorConfig.ImageRegex.findFirstIn(filestring)
+          if (filename != None){
+            images += Some((filename.get, textNode))
+          }
+        }
         case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == Namespace.File =>
         {
           for (fileName <- ImageExtractorConfig.ImageLinkRegex.findFirstIn(destination.encoded))
