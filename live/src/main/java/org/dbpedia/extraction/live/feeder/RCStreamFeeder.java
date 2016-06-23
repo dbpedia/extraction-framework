@@ -32,9 +32,8 @@ import java.util.logging.Level;
  */
 public class RCStreamFeeder extends Feeder implements IOCallback {
 
-    /** The Socket used for receiving the RCStream */
     private static String WIKIMEDIA_RCSTREAM_URL = "http://stream.wikimedia.org/rc";
-
+    /** The Socket used for receiving the RCStream */
     private SocketIO socket;
     /** The room describes the wiki, which RCStream will be processed e.G. https://en.wikipedia.org */
     private String room;
