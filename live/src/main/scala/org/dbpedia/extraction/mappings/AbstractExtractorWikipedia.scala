@@ -2,6 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
+import scala.language.reflectiveCalls
 
 /**
   * Overwrites the apiUrl property for the AbstractExtractor in the core module to work with configurable Wikipedias.
