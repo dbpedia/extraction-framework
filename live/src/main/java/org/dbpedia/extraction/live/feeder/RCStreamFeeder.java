@@ -45,7 +45,7 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
                           String folderBasePath, String room) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         // use baseURI without protocol as room to subscribe to
-        this.room = Language.apply(LiveOptions.language).baseUri().replaceAll("https?:\\/\\/", "");
+        this.room = room;
 
         // Set Logger preferences for Socket.io
         java.util.logging.Logger sioLogger = java.util.logging.Logger.getLogger("io.socket");
