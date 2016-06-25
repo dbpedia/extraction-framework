@@ -57,19 +57,16 @@ extends PageNodeExtractor
 
     val api = new WikiApi(null, language)
     var firstImage = true
-    for ((imageFileName, sourceNode) <- searchImages(node.children, 0).flatten if !imageFileName.toLowerCase.startsWith("replace_this_image"))
+    for ((imageFileName, sourceNode) <- searchImages(node.children, 0).flatten
+         if (!imageFileName.toLowerCase.startsWith("replace_this_image"))
+           && (api.fileExistsOnWiki(imageFileName, commonsLang)))
     {
-      val lang = if (api.fileExistsOnWiki(imageFileName, commonsLang))
-        commonsLang else language
-      val url = ExtractorUtils.getDbpediaFileURL(imageFileName, lang)
-      val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, lang)
+      val url = ExtractorUtils.getDbpediaFileURL(imageFileName, commonsLang)
+      val thumbnailUrl = ExtractorUtils.getThumbnailURL(imageFileName, commonsLang)
       val wikipediaImageUrl = language.baseUri+"/wiki/"+fileNamespaceIdentifier+":"+imageFileName
 
       if (firstImage) {
-        if (lang == language) {
-          quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
-        }
-
+        quads += new Quad(language, DBpediaDatasets.Images, url, foafThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
         quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, rdfType, imageClass.uri, sourceNode.sourceUri)
         quads += new Quad(language, DBpediaDatasets.Images, thumbnailUrl, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
         quads += new Quad(language, DBpediaDatasets.Images, subjectUri, dbpediaThumbnailProperty, thumbnailUrl, sourceNode.sourceUri)
@@ -77,10 +74,8 @@ extends PageNodeExtractor
         firstImage = false
       }
 
-      if (lang == language) {
-        quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceUri)
-        quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
-      }
+      quads += new Quad(language, DBpediaDatasets.Images, url, rdfType, imageClass.uri, sourceNode.sourceUri)
+      quads += new Quad(language, DBpediaDatasets.Images, url, dcRightsProperty, wikipediaImageUrl, sourceNode.sourceUri)
 
       quads += new Quad(language, DBpediaDatasets.Images, subjectUri, foafDepictionProperty, url, sourceNode.sourceUri)
     }
