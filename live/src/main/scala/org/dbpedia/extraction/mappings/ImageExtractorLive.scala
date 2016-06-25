@@ -1,14 +1,13 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiApi, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
-
+import org.dbpedia.extraction.util.RichString.wrapString
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.language.reflectiveCalls
 
