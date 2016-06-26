@@ -45,7 +45,7 @@ object ResolveTransitiveLinks {
     val languages = parseLanguages(baseDir, args.drop(4))
     require(languages.nonEmpty, "no languages")
     
-    for (language <- languages.filter(_.wikiCode.charAt(0) > 'k')) {
+    for (language <- languages) {
       
       val finder = new DateFinder(baseDir, language)
       
