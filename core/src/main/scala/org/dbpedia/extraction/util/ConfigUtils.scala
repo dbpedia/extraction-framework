@@ -69,6 +69,16 @@ object ConfigUtils {
       case RangeRegex(from, to) => ranges += toRange(from, to)
       case LanguageRegex(language) => languages += Language(language)
       case ExcludedLanguageRegex(language) => excludedLanguages += Language(language)
+      case "@downloaded" => {
+        // resolve only downloaded languages
+        for(file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki")))
+        {
+          Language.get(file.getName.replace("wiki", "")) match{
+            case Some(l) => languages += l
+            case None =>
+          }
+        }
+      }
       case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
