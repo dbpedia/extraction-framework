@@ -80,11 +80,12 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
     predicateObjectMap
   }
 
-  def addPredicateObjectMapUriToTriplesMap(predicateObjectMapUri: String) =
+  def addPredicateObjectMapUriToTriplesMap(predicateObjectMapUri: String, triplesMap: Resource) =
   {
     addPropertyAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMapUri)
 
   }
+
 
   def addPredicateObjectMapToMainTriplesMap(predicate: String, _object: Resource): Resource =
   {
@@ -104,6 +105,8 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
   {
     model.createProperty(s)
   }
+
+
 
 
 

@@ -14,8 +14,14 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
-    val uniqueString = createUniquePredicateObjectMapString("SimplePropertyMapping/" + mapping.templateProperty)
-    val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uniqueString)
+    val uniqueString = createUniquePredicateObjectMapString("")
+    addSimplePropertyMappingToTriplesMap(mapping, modelWrapper.triplesMap, uniqueString)
+  }
+
+  private def addSimplePropertyMappingToTriplesMap(mapping: SimplePropertyMapping, triplesMap: Resource, uri: String) =
+  {
+
+    val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uri )
 
     //add predicate
     modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", mapping.ontologyProperty.uri)
@@ -28,7 +34,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     //add unit if present
     if(mapping.unit != null) addUnitToPredicateObjectMap(predicateObjectMap, mapping.unit)
 
-    modelWrapper.addPredicateObjectMapUriToTriplesMap(uniqueString)
+    modelWrapper.addPredicateObjectMapUriToTriplesMap(uri + "SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty, triplesMap)
   }
 
   def addCalculateMapping(mapping: CalculateMapping) =
@@ -82,7 +88,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uniqueString)
 
     modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", mapping.correspondingProperty.uri)
-    modelWrapper.addPredicateObjectMapUriToTriplesMap(uniqueString)
+    modelWrapper.addPredicateObjectMapUriToTriplesMap(uniqueString, modelWrapper.triplesMap)
 
 
     //create the triples map
@@ -95,6 +101,9 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
 
     //create the mappings
+    for(mapping <- mapping.mappings) {
+      addPropertyMapping(mapping, triplesMap)
+    }
 
   }
 
@@ -108,6 +117,20 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     val objectMap = modelWrapper.addBlankNode()
     modelWrapper.addPropertyAsPropertyToResource(objectMap, Prefixes("rr") + "parentTriplesMap", unit.uri)
     modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
+  }
+
+  private def addPropertyMapping(mapping: PropertyMapping, triplesMap: Resource) =
+  {
+    mapping.getClass.getSimpleName match {
+      case "SimplePropertyMapping" => addSimplePropertyMappingToTriplesMap(mapping.asInstanceOf[SimplePropertyMapping],
+        triplesMap, triplesMap.getNameSpace + "/SimplePropertyMapping/")
+      case "CalculateMapping" => println("Intermediate Calculate Mapping not supported.")
+      case "CombineDateMapping" => println("Intermediate Combine Date Mapping not supported.")
+      case "DateIntervalMapping" => println("Intermediate Date Interval Mapping not supported.")
+      case "GeoCoordinatesMapping" => println("Intermediate GeoCoordinates Mapping not supported.")
+      case "ConditionalMapping" => println("Intermediate Conditional Mapping not supported.")
+      case "IntermediateNodeMapping" => println("Intermediate Intermediate Mapping not supported.")
+    }
   }
   
 }
