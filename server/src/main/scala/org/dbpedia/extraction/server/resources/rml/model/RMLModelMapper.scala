@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.server.resources.rml.model
 
+import java.util.Date
+
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
 
@@ -11,10 +13,11 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
-    val objectMap = modelWrapper.addBlankNode()
-    modelWrapper.addLiteralAsPropertyToResource(objectMap, Prefixes("rml") + "reference", mapping.templateProperty)
-    modelWrapper.addLiteralAsPropertyToResource(objectMap, Prefixes("rml") + "languageMap", mapping.language.name)
-    modelWrapper.addPredicateObjectMapToRoot(mapping.ontologyProperty.uri, objectMap)
+    val uniqueString = createUniquePredicateObjectMapString(mapping.templateProperty)
+    val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uniqueString)
+    modelWrapper.addLiteralAsPropertyToResource(predicateObjectMap, Prefixes("rml") + "reference", mapping.templateProperty)
+    modelWrapper.addLiteralAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "language", mapping.language.isoCode)
+    modelWrapper.addPredicateObjectMapUri(uniqueString)
   }
 
   def addCalculateMapping(mapping: CalculateMapping) =
@@ -29,7 +32,8 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addDateIntervalMapping(mapping: DateIntervalMapping) =
   {
-    val dateIntervalPom = modelWrapper.addBlankNode()
+    val uniqueString = createUniquePredicateObjectMapString(mapping.templateProperty + "/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name)
+    val dateIntervalPom = modelWrapper.addPredicateObjectMapToModel(uniqueString)
     modelWrapper.addResourceAsPropertyToResource(modelWrapper.triplesMap, Prefixes("rr") + "predicateObjectMap", dateIntervalPom)
 
     val object1 = modelWrapper.addBlankNode()
@@ -61,6 +65,11 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
   def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) =
   {
     //TODO: implement
+  }
+
+  def createUniquePredicateObjectMapString(name : String): String =
+  {
+    "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/predicate_object_map/" + name
   }
   
 }

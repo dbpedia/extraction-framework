@@ -6,7 +6,7 @@ import org.dbpedia.extraction.wikiparser.WikiTitle
 /**
   * ModelWrapper with behaviour for RML
   */
-class RMLModelWrapper extends ModelWrapper {
+class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
 
   private var _logicalSource: Resource = null
   private var _subjectMap: Resource = null
@@ -25,7 +25,7 @@ class RMLModelWrapper extends ModelWrapper {
     * Methods for creating new triples map
     */
 
-  def addLogicalSourceToModel(wikiTitle: WikiTitle): Unit =
+  def addLogicalSourceToModel(): Unit =
   {
     if(_logicalSource == null) {
       _logicalSource = createResource(convertToLogicalSourceUri(wikiTitle), createProperty(Prefixes("rml") + "LogicalSource"))
@@ -35,7 +35,7 @@ class RMLModelWrapper extends ModelWrapper {
     } else throw new IllegalStateException("Model already has a a logical source.")
   }
 
-  def addSubjectMapToModel(wikiTitle: WikiTitle): Unit =
+  def addSubjectMapToModel(): Unit =
   {
     if(_subjectMap == null) {
       _subjectMap = createResource(convertToSubjectMapUri(wikiTitle), createProperty(Prefixes("rr") + "SubjectMap"))
@@ -43,7 +43,11 @@ class RMLModelWrapper extends ModelWrapper {
     } else throw new IllegalStateException("Model already has a subject map.")
   }
 
-  def addTriplesMapToModel(wikiTitle: WikiTitle): Unit =
+  def addPredicateObjectMapToModel(uri: String): Resource = {
+    createResource(uri, createProperty(Prefixes("rr") + "PredicateObjectMap"))
+  }
+
+  def addTriplesMapToModel(): Unit =
   {
     if(_triplesMap == null) {
       _triplesMap = createResource(wikiTitle.resourceIri, createProperty(Prefixes("rr") + "TriplesMap"))
@@ -74,12 +78,16 @@ class RMLModelWrapper extends ModelWrapper {
     predicateObjectMap
   }
 
+  def addPredicateObjectMapUri(predicateObjectMapUri: String) =
+  {
+    addLiteralAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMapUri)
+
+  }
+
   def addPredicateObjectMapToRoot(predicate: String, _object: Resource): Resource =
   {
     addPredicateObjectMapToResource(triplesMap, predicate, _object)
   }
-
-
 
   private def createResource(s: String, p: Property) =
   {

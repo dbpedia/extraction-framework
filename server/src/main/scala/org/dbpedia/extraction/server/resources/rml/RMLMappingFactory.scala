@@ -32,12 +32,12 @@ abstract class RMLMappingFactory {
   {
 
     //every time this method is called a new instance of the model is made and put into a wrapper
-    modelWrapper = new RMLModelWrapper()
+    modelWrapper = new RMLModelWrapper(page.title)
 
     // triples map, logical source and subject map resources created and added to the model
-    modelWrapper.addLogicalSourceToModel(page.title)
-    modelWrapper.addSubjectMapToModel(page.title)
-    modelWrapper.addTriplesMapToModel(page.title)
+    modelWrapper.addLogicalSourceToModel()
+    modelWrapper.addSubjectMapToModel()
+    modelWrapper.addTriplesMapToModel()
 
   }
 

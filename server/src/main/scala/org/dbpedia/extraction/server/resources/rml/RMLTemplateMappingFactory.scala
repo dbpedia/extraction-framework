@@ -45,9 +45,8 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private def defineSubjectMap() =
   {
-    modelWrapper.addLiteralAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "constant", page.title.encoded.toString)
+    modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "constant", page.title.resourceIri)
     modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "class", templateMapping.mapToClass.uri)
-    modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "termType", Prefixes("rr") + "IRI")
     addCorrespondingPropertyAndClassToSubjectMap()
   }
 
