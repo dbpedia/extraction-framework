@@ -4,6 +4,7 @@ import java.util.Date
 
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 
 /**
   * Class that adds rml mappings to a ModelWrapper
@@ -17,6 +18,9 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uniqueString)
     modelWrapper.addLiteralAsPropertyToResource(predicateObjectMap, Prefixes("rml") + "reference", mapping.templateProperty)
     modelWrapper.addLiteralAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "language", mapping.language.isoCode)
+
+    if(mapping.unit != null) addUnitToPredicateObjectMap(predicateObjectMap, mapping.unit)
+
     modelWrapper.addPredicateObjectMapUri(uniqueString)
   }
 
@@ -67,9 +71,16 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     //TODO: implement
   }
 
-  def createUniquePredicateObjectMapString(name : String): String =
+  private def createUniquePredicateObjectMapString(name : String): String =
   {
     "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/predicate_object_map/" + name
+  }
+
+  private def addUnitToPredicateObjectMap(predicateObjectMap: Resource, unit : Datatype): Unit =
+  {
+    val objectMap = modelWrapper.addBlankNode()
+    modelWrapper.addPropertyAsPropertyToResource(objectMap, Prefixes("rr") + "parentTriplesMap", unit.uri)
+    modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
   }
   
 }

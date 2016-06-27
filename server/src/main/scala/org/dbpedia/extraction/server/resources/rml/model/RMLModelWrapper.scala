@@ -80,7 +80,7 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
 
   def addPredicateObjectMapUri(predicateObjectMapUri: String) =
   {
-    addLiteralAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMapUri)
+    addPropertyAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMapUri)
 
   }
 
