@@ -21,10 +21,6 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
     model.setNsPrefix(prefix._1, prefix._2)
   }
 
-  /**
-    * Methods for creating new triples map
-    */
-
   def addLogicalSourceToModel(): Unit =
   {
     if(_logicalSource == null) {
@@ -47,7 +43,7 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
     createResource(uri, createProperty(Prefixes("rr") + "PredicateObjectMap"))
   }
 
-  def addTriplesMapToModel(): Unit =
+  def addMainTriplesMapToModel(): Unit =
   {
     if(_triplesMap == null) {
       _triplesMap = createResource(wikiTitle.resourceIri, createProperty(Prefixes("rr") + "TriplesMap"))
@@ -55,6 +51,13 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
         .addProperty(createProperty(Prefixes("rr") + "subjectMap"), subjectMap)
 
     } else throw new IllegalStateException("Model already has a triples map.")
+  }
+
+  def addTriplesMapToModel(uri: String, subjectMap: Resource): Resource =
+  {
+    createResource(uri, createProperty(Prefixes("rr") + "TriplesMap"))
+      .addProperty(createProperty(Prefixes("rml") + "logicalSource"), logicalSource)
+      .addProperty(createProperty(Prefixes("rr") + "subjectMap"), subjectMap)
   }
 
   private def convertToLogicalSourceUri(title: WikiTitle): String =
@@ -68,7 +71,6 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
   }
 
 
-
   def addPredicateObjectMapToResource(resource: Resource, predicate: String, _object: Resource) =
   {
     val predicateObjectMap = addBlankNode()
@@ -78,15 +80,19 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
     predicateObjectMap
   }
 
-  def addPredicateObjectMapUri(predicateObjectMapUri: String) =
+  def addPredicateObjectMapUriToTriplesMap(predicateObjectMapUri: String) =
   {
     addPropertyAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMapUri)
 
   }
 
-  def addPredicateObjectMapToRoot(predicate: String, _object: Resource): Resource =
+  def addPredicateObjectMapToMainTriplesMap(predicate: String, _object: Resource): Resource =
   {
     addPredicateObjectMapToResource(triplesMap, predicate, _object)
+  }
+
+  def addResource(uri: String, predicate: String) : Resource = {
+    model.createResource(uri, createProperty(predicate))
   }
 
   private def createResource(s: String, p: Property) =

@@ -14,14 +14,21 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
-    val uniqueString = createUniquePredicateObjectMapString(mapping.templateProperty)
+    val uniqueString = createUniquePredicateObjectMapString("SimplePropertyMapping/" + mapping.templateProperty)
     val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uniqueString)
-    modelWrapper.addLiteralAsPropertyToResource(predicateObjectMap, Prefixes("rml") + "reference", mapping.templateProperty)
-    modelWrapper.addLiteralAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "language", mapping.language.isoCode)
 
+    //add predicate
+    modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", mapping.ontologyProperty.uri)
+
+    //add object map with rml reference
+    val objectMap = modelWrapper.addBlankNode()
+    modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
+    modelWrapper.addLiteralAsPropertyToResource(objectMap, Prefixes("rml") + "reference", mapping.templateProperty)
+
+    //add unit if present
     if(mapping.unit != null) addUnitToPredicateObjectMap(predicateObjectMap, mapping.unit)
 
-    modelWrapper.addPredicateObjectMapUri(uniqueString)
+    modelWrapper.addPredicateObjectMapUriToTriplesMap(uniqueString)
   }
 
   def addCalculateMapping(mapping: CalculateMapping) =
@@ -54,7 +61,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     if(mapping.coordinates != null) {
       val objectMap1 = modelWrapper.addBlankNode()
       modelWrapper.addLiteralAsPropertyToResource(objectMap1, Prefixes("rr") + "parentTriplesMap", mapping.coordinates)
-      modelWrapper.addPredicateObjectMapToRoot(Prefixes("dbo") + "coordinates", objectMap1)
+      modelWrapper.addPredicateObjectMapToMainTriplesMap(Prefixes("dbo") + "coordinates", objectMap1)
 
     } else if (mapping.latitude != null && mapping.longitude != null) {
       //TODO: implement
@@ -68,12 +75,32 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) =
   {
-    //TODO: implement
+
+    //create the predicate object map
+    val templateString = "IntermediateNodeMapping/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name
+    val uniqueString = createUniquePredicateObjectMapString(templateString)
+    val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uniqueString)
+
+    modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", mapping.correspondingProperty.uri)
+    modelWrapper.addPredicateObjectMapUriToTriplesMap(uniqueString)
+
+
+    //create the triples map
+    val subjectMap = modelWrapper.addResource(createUniquePredicateObjectMapString(templateString + "/SubjectMap"), Prefixes("rr") + "SubjectMap")
+    modelWrapper.addPropertyAsPropertyToResource(subjectMap, Prefixes("rr") + "constant", "tobeDefined")
+    val triplesMap = modelWrapper.addTriplesMapToModel(createUniquePredicateObjectMapString(templateString + "/TriplesMap"), subjectMap)
+
+    val objectMap = modelWrapper.addBlankNode()
+    modelWrapper.addResourceAsPropertyToResource(objectMap, Prefixes("rr") + "parentTriplesMap", triplesMap)
+    modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
+
+    //create the mappings
+
   }
 
   private def createUniquePredicateObjectMapString(name : String): String =
   {
-    "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/predicate_object_map/" + name
+    "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/" + name
   }
 
   private def addUnitToPredicateObjectMap(predicateObjectMap: Resource, unit : Datatype): Unit =
