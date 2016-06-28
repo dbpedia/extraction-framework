@@ -13,7 +13,10 @@ object Prefixes {
     "rdfs" -> "http://www.w3.org/2000/01/rdf-schema#",
     "skos" -> "http://www.w3.org/2004/02/skos/core#",
     "dbo" -> "http://dbpedia.org/ontology/",
-    "foaf" -> "http://xmlns.com/foaf/0.1/"
+    "foaf" -> "http://xmlns.com/foaf/0.1/",
+    "fnml" -> "http://semweb.mmlab.be/ns/fnml#",
+    "fno" -> "http://w3id.org/function/ontology/",
+    "ex" -> "http://example.org/stuff/1.0/"
   )
 
   def apply(prefix: String) : String=

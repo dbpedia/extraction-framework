@@ -24,7 +24,7 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
   def addLogicalSourceToModel(): Unit =
   {
     if(_logicalSource == null) {
-      _logicalSource = createResource(convertToLogicalSourceUri(wikiTitle), createProperty(Prefixes("rml") + "LogicalSource"))
+      _logicalSource = addResource(convertToLogicalSourceUri(wikiTitle), createProperty(Prefixes("rml") + "LogicalSource"))
         .addProperty(createProperty(Prefixes("rml") + "referenceFormulation"), createProperty(Prefixes("ql") + "wikiText"))
         .addProperty(createProperty(Prefixes("rml") + "iterator"), "Infobox")
 
@@ -34,28 +34,33 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
   def addSubjectMapToModel(): Unit =
   {
     if(_subjectMap == null) {
-      _subjectMap = createResource(convertToSubjectMapUri(wikiTitle), createProperty(Prefixes("rr") + "SubjectMap"))
+      _subjectMap = addResource(convertToSubjectMapUri(wikiTitle), createProperty(Prefixes("rr") + "SubjectMap"))
 
     } else throw new IllegalStateException("Model already has a subject map.")
   }
 
   def addPredicateObjectMapToModel(uri: String): Resource = {
-    createResource(uri, createProperty(Prefixes("rr") + "PredicateObjectMap"))
+    addResource(uri, createProperty(Prefixes("rr") + "PredicateObjectMap"))
   }
 
   def addMainTriplesMapToModel(): Unit =
   {
     if(_triplesMap == null) {
-      _triplesMap = createResource(wikiTitle.resourceIri, createProperty(Prefixes("rr") + "TriplesMap"))
+      _triplesMap = addResource(wikiTitle.resourceIri, createProperty(Prefixes("rr") + "TriplesMap"))
         .addProperty(createProperty(Prefixes("rml") + "logicalSource"), logicalSource)
         .addProperty(createProperty(Prefixes("rr") + "subjectMap"), subjectMap)
 
     } else throw new IllegalStateException("Model already has a triples map.")
   }
 
+  def addTriplesMapToModel(uri: String) : Resource =
+  {
+    addResource(uri, createProperty(Prefixes("rr") + "TriplesMap"))
+  }
+
   def addTriplesMapToModel(uri: String, subjectMap: Resource): Resource =
   {
-    createResource(uri, createProperty(Prefixes("rr") + "TriplesMap"))
+    addResource(uri, createProperty(Prefixes("rr") + "TriplesMap"))
       .addProperty(createProperty(Prefixes("rml") + "logicalSource"), logicalSource)
       .addProperty(createProperty(Prefixes("rr") + "subjectMap"), subjectMap)
   }
@@ -96,7 +101,12 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
     model.createResource(uri, createProperty(predicate))
   }
 
-  private def createResource(s: String, p: Property) =
+  def addResource(uri: String): Resource =
+  {
+    model.createResource(uri)
+  }
+
+  private def addResource(s: String, p: Property) =
   {
     model.createResource(s, p)
   }
