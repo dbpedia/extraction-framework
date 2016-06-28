@@ -10,6 +10,7 @@ import org.dbpedia.extraction.live.main.Main;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.util.DateUtil;
+import org.dbpedia.extraction.live.util.ExceptionUtil;
 import org.dbpedia.extraction.util.Language;
 import org.dbpedia.extraction.wikiparser.Namespace;
 import org.dbpedia.extraction.wikiparser.WikiTitle;
@@ -53,8 +54,8 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
 
         try {
             connect();
-        } catch(MalformedURLException e){
-
+        } catch(MalformedURLException exp){
+            logger.error(ExceptionUtil.toString(exp), exp);
         }
         events = new ArrayList<LiveQueueItem>();
     }
@@ -89,8 +90,8 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
     public void onDisconnect() {
         try {
             connect();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        } catch (MalformedURLException exp) {
+            logger.error(ExceptionUtil.toString(exp), exp);
         }
     }
 
