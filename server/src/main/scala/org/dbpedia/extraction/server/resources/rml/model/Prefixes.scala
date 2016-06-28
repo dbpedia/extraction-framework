@@ -16,7 +16,9 @@ object Prefixes {
     "foaf" -> "http://xmlns.com/foaf/0.1/",
     "fnml" -> "http://semweb.mmlab.be/ns/fnml#",
     "fno" -> "http://w3id.org/function/ontology/",
-    "ex" -> "http://example.org/stuff/1.0/"
+    "ex" -> "http://example.org/stuff/1.0/",
+    "dbf" -> "http://dbpedia.org/function/",
+    "dcterms" -> "http://purl.org/dc/terms/"
   )
 
   def apply(prefix: String) : String=

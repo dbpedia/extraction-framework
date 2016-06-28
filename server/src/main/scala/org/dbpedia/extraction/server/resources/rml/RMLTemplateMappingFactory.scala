@@ -68,28 +68,35 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
     mapper = new RMLModelMapper(modelWrapper)
   }
 
-  private def addCorrespondingClassToSubjectMap(predicateObjectMap: Resource) =
+  private def addCorrespondingPropertyAndClassToSubjectMap() =
+  {
+    if(templateMapping.correspondingProperty != null) {
+      val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel("correspondingProperty")
+      modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
+      addCorrespondingClassToPredicateObjectMap(predicateObjectMap)
+    }
+  }
+
+  private def addCorrespondingClassToPredicateObjectMap(predicateObjectMap: Resource) =
   {
     if(templateMapping.correspondingClass != null) {
       val objectMap = modelWrapper.addBlankNode()
       modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
       val parentTriplesMap = modelWrapper.addBlankNode()
       modelWrapper.addResourceAsPropertyToResource(objectMap, Prefixes("rr") + "parentTriplesMap", parentTriplesMap)
+
+      //add subject map to parent triples map
       val subjectMap = modelWrapper.addBlankNode()
       modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, Prefixes("rr") + "subjectMap", subjectMap)
-      modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "class", templateMapping.correspondingClass.uri)
+
+      //add class to subject map
+      modelWrapper.addPropertyAsPropertyToResource(subjectMap, Prefixes("rr") + "class", templateMapping.correspondingClass.uri)
+
+      //add logical source to subject to parent triples map
+      modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, Prefixes("rml") + "logicalSource", modelWrapper.logicalSource)
     }
   }
 
-  private def addCorrespondingPropertyAndClassToSubjectMap() =
-  {
-    if(templateMapping.correspondingProperty != null) {
-      val predicateObjectMap = modelWrapper.addBlankNode()
-      modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
-      modelWrapper.addResourceAsPropertyToResource(modelWrapper.subjectMap, Prefixes("rr") + "predicateObjectMap", predicateObjectMap)
-      addCorrespondingClassToSubjectMap(predicateObjectMap)
-    }
-  }
 
   private def addPropertyMapping(mapping: PropertyMapping) =
   {

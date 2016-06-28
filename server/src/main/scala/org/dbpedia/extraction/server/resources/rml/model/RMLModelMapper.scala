@@ -4,13 +4,13 @@ import java.util.Date
 
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
+import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 
 /**
   * Class that adds rml mappings to a ModelWrapper
   */
 class RMLModelMapper(modelWrapper: RMLModelWrapper) {
-
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
@@ -23,6 +23,9 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
     //create predicate object map
     val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uri + "SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
+
+    //add dcterms type to predicate map
+    modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("dcterms") + "type", Prefixes("dbf") + "simplePropertyMapping" )
 
     //add predicate to predicate object map
     modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", mapping.ontologyProperty.uri)
@@ -37,6 +40,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
     //add predicate object map to triples map
     modelWrapper.addPredicateObjectMapUriToTriplesMap(uri + "SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty, triplesMap)
+
   }
 
   def addCalculateMapping(mapping: CalculateMapping) =
@@ -74,21 +78,26 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
   private def addDateToDateIntervalMapping(uri: String, mapping: DateIntervalMapping, triplesMap: Resource, endOrStart: String) =
   {
 
-    var dateOntologyProperty = ""
+    var dateOntologyProperty: OntologyProperty  = null
     if(endOrStart == "start") {
-      dateOntologyProperty = mapping.startDateOntologyProperty.name
-    } else dateOntologyProperty = mapping.endDateOntologyProperty.name
+      dateOntologyProperty = mapping.startDateOntologyProperty
+    } else {
+      dateOntologyProperty = mapping.endDateOntologyProperty
+    }
 
     //create predicate object map for start date
-    val uniqueString = uri + "dateInterval/" + endOrStart + "/" + mapping.startDateOntologyProperty.name + "/" + dateOntologyProperty
+    val uniqueString = uri + "dateInterval/" + endOrStart + "/" + dateOntologyProperty.name + "/" + dateOntologyProperty.name
     val dateIntervalPom = modelWrapper.addPredicateObjectMapToModel(uniqueString)
     modelWrapper.addResourceAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", dateIntervalPom)
 
+    //add dcterms:type to predicate
+    modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, Prefixes("dcterms") + "type", Prefixes("dbf") + "dateIntervalMapping")
+
     //add predicate to start date pom
-    modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, Prefixes("rr") + "predicate", mapping.startDateOntologyProperty.uri)
+    modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, Prefixes("rr") + "predicate", Prefixes("ex") + "something")
 
     //add object map to start date pom
-    val objectMapStartString = uniqueString + "/" + endOrStart + "IntervalFunctionMap"
+    val objectMapStartString = uniqueString + "/" + "IntervalFunctionMap"
     val objectMapStart = modelWrapper.addResource(objectMapStartString, Prefixes("fnml") + "FunctionTermMap")
     modelWrapper.addResourceAsPropertyToResource(dateIntervalPom, Prefixes("rr") + "objectMap", objectMapStart)
 
@@ -116,8 +125,8 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
     //add object map blank node to pom blank node
     val omBlankNode = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(pomBlankNode, Prefixes("rr") + "ObjectMap", omBlankNode)
-    modelWrapper.addPropertyAsPropertyToResource(omBlankNode, Prefixes("rr") + "constant", mapping.startDateOntologyProperty.uri)
+    modelWrapper.addResourceAsPropertyToResource(pomBlankNode, Prefixes("rr") + "objectMap", omBlankNode)
+    modelWrapper.addPropertyAsPropertyToResource(omBlankNode, Prefixes("rr") + "constant", Prefixes("dbf") + dateOntologyProperty.name)
 
     //add pom blank node to pom blank node
     val pomBlankNode2 = modelWrapper.addBlankNode()
@@ -130,6 +139,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     val omBlankNode2 = modelWrapper.addBlankNode()
     modelWrapper.addResourceAsPropertyToResource(pomBlankNode2, Prefixes("rr") + "objectMap", omBlankNode2)
     modelWrapper.addLiteralAsPropertyToResource(omBlankNode2, Prefixes("rml") + "reference", mapping.templateProperty)
+
   }
 
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
@@ -159,6 +169,8 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", mapping.correspondingProperty.uri)
     modelWrapper.addPredicateObjectMapUriToTriplesMap(uniqueString, modelWrapper.triplesMap)
 
+    //add dcterms:type to predicate:
+    modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("dcterms") + "type", Prefixes("dbf") + "intermediateNodeMapping" )
 
     //create the triples map with its subject map and object map
     val subjectMap = modelWrapper.addResource(baseName(templateString + "/SubjectMap"), Prefixes("rr") + "SubjectMap")
@@ -174,6 +186,8 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     }
 
   }
+
+
 
   /**
     * Returns the base name + name added
