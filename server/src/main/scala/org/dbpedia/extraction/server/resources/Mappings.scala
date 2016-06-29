@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.server.resources
 
 import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
-import org.dbpedia.extraction.server.resources.RMLMapping
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{Log, TriX}
 import org.dbpedia.extraction.server.Server
@@ -48,7 +47,8 @@ class Mappings(@PathParam("lang") langCode : String)
             <div class="row">
               <div class="col-md-3 col-md-offset-5">
               <h2>Mappings</h2>
-              <a href="pages/">Source Pages</a><br/>
+              <a href="pages/">Original Source Pages</a><br/>
+              <a href="pages/rml">RML Source Pages</a><br/>
               <a href="validate/">Validate Pages</a><br/>
               <a href="extractionSamples/">Retrieve extraction samples</a><br/>
               <a href="redirects/">Redirects</a><br/>
