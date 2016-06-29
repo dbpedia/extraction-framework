@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.server.resources.rml
 
-import be.ugent.mmlab.rml.model.RMLMapping
 import org.apache.jena.rdf.model.{Model, ModelFactory, Property, Resource}
 import org.dbpedia.extraction.mappings.{Extractor, Mappings, TemplateMapping}
 import org.dbpedia.extraction.server.resources.rml.model.{ModelWrapper, Prefixes, RMLModelWrapper}

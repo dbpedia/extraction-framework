@@ -4,7 +4,6 @@ import java.io.File
 
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.dbpedia.extraction.mappings.Redirects
-import org.dbpedia.extraction.mappings.rml.RMLParser
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{WikiPage, XMLSource}
@@ -40,22 +39,5 @@ object ContextCreator {
       def mappingPageSource: Traversable[WikiPage] = xmlMapping
     }
   }
-
-  def createRMLContext(pathToRml: String, lang: Language):
-  {
-    def ontology : Ontology
-    def language : Language
-    def redirects: Redirects
-    def mappingDoc : RMLMapping } = {
-    val rmlMapping = RMLParser.parseFromFile(pathToRml)
-    new {
-      def ontology: Ontology = ontologyObject
-      def language: Language = lang
-      def redirects: Redirects  = null
-      def mappingDoc: RMLMapping = rmlMapping
-    }
-  }
-
-
 
 }
