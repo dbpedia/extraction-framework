@@ -3,22 +3,20 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
 import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.{InfoboxMappingsUtils, ExtractorUtils, Language}
-import org.dbpedia.extraction.wikiparser.{Namespace, TextNode, ParserFunctionNode, PageNode}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.mappings.InfoboxMappingsExtractor
-
+import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ListBuffer
 
-/**
-  * Created by aditya on 6/21/16.
-  */
 class InfoboxMappingsTemplateExtractor (context: {
   def ontology: Ontology
   def language : Language
 }
                                        )
 
-  extends PageNodeExtractor
+  extends WikiPageExtractor
 {
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesWikidataProperty")
 
@@ -26,15 +24,15 @@ class InfoboxMappingsTemplateExtractor (context: {
   val hintDataset = new Dataset("template_mapping_hints")
   val mapDataset = new Dataset("template_mappings")
   override val datasets = Set(hintDataset, mapDataset)
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
-    if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) || page.isRedirect) return Seq.empty
+  override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
+    if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) ) return Seq.empty
 
-    val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)
+    var simpleParser = WikiParser.getInstance("simple")
+    val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(simpleParser.apply(page).getOrElse(null))
 
     val propertyParserFuncions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from")))
     val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
     val propertyParserFuncionsMappings = getTemplateMappingsFromPropertyParserFunc(propertyParserFuncions)
-    val try12 = InfoboxExtractor.collectTemplates(page)
     val invokeFunc = parserFunctions.filter(p => p.title.equalsIgnoreCase("#invoke"))
     val wikidataParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("wikidata"))
     val propertyLinkParserFunc = invokeFunc.filter(p => p.children.headOption.get.toPlainText.toLowerCase.startsWith("propertyLink"))
@@ -50,7 +48,7 @@ class InfoboxMappingsTemplateExtractor (context: {
         p.toWikiText, page.sourceUri, context.ontology.datatypes("xsd:string"))
     )
 
-    val templateQuads = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
+    val templateQuads = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(page).getOrElse(null))
       .filter(t => List("conditionalurl",/* "official_website",*/ "wikidatacheck").contains(t.title.encoded.toString.toLowerCase))
       .map(t => new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
         t.toWikiText, page.sourceUri, context.ontology.datatypes("xsd:string")))
@@ -62,25 +60,69 @@ class InfoboxMappingsTemplateExtractor (context: {
   def ltrim(s: String) = s.replaceAll("^\\s+", "")
   def rtrim(s: String) = s.replaceAll("\\s+$", "")
 
-  def getTuplesFromConditionalExpressions(page : PageNode, lang : Language) : List[(String, String, String)] = {
 
-    val templateNodes = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
-    val infoboxes = templateNodes.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
-    var answer = ListBuffer[(String, String, String)]()
+  def checkForPropertySyntax(str : String) : Boolean = {
+    if( str.length > 0 && (str.charAt(0) == 'p' || str.charAt(0) == 'P') && InfoboxMappingsUtils.isNumber(str.substring(1))){
+      return true
+    }
+    return false
+  }
+
+  def isBlackListed( str : String) : Boolean = {
+    if (str == "FETCH_WIKIDATA")
+      return true
+    return false
+  }
+  def getTuplesFromConditionalExpressions(page : WikiPage, lang : Language) : List[(String, String, String)] = {
+
+    var simpleParser = WikiParser.getInstance("simple")
+    var swebleParser = WikiParser.getInstance("sweble")
+    var tempPageSweble = new WikiPage(page.title, page.source)
+    var tempPageSimple = new WikiPage(page.title, cleanUp(page.source))
+    var swebleAST = swebleParser.apply(tempPageSweble).getOrElse(null)
+    val templateNodesSweble = ExtractorUtils.collectTemplatesFromNodeTransitive(swebleParser.apply(tempPageSweble).getOrElse(null))
+    val templateNodesSimple = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(tempPageSimple).getOrElse(null))
+
+    val infoboxesSweble = templateNodesSweble.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
+    val infoboxesSimple = templateNodesSimple.filter(p => p.title.toString().contains(infoboxNameMap.get(lang.wikiCode).getOrElse("Infobox")))
+
+    var answerSweble = Set[(String, String, String)]()
+    var answerSimple = Set[(String, String, String)]()
+
 
     // Loop through all infoboxes
-    infoboxes.foreach(f = infobox => {
+    infoboxesSweble.foreach(infobox => {
+      // Loop through each property
+      for (propertyNode <- infobox.children) {
+
+        for( child <- propertyNode.children){
+          // Get list of all equivalent terms in the conditional expression foreg {{#ifeq: "string1" | "String2" | {{#property:p193}} | "string3"} }}
+          // should return string1, string2, string3 along with the associated property
+          var temp_answer = getListOfEquivalentTermsAndPropertySweble(child, false)
+          var cleansed_list = temp_answer._1.filter(str => !ltrim(rtrim(str)).isEmpty)
+          if (temp_answer._2 != "ERROR" && temp_answer._2 != "" && checkForPropertySyntax(temp_answer._2)) {
+            for (term <- cleansed_list) {
+              if ( !isBlackListed(term))
+                answerSweble += new Tuple3(infobox.title.decoded, rtrim(ltrim(term)), temp_answer._2)
+            }
+          }
+        }
+      }
+    })
+    // Loop through all infoboxes
+    infoboxesSimple.foreach(infobox => {
       // Loop through each property
       for (propertyNode <- infobox.children) {
         // The child should be a ParserFunctionNode with title #if...
-        if (propertyNode.children.head.isInstanceOf[ParserFunctionNode] && propertyNode.children.head.asInstanceOf[ParserFunctionNode].title.substring(0, 3) == "#if") {
+        if (propertyNode.children.length > 0 && propertyNode.children.head.isInstanceOf[ParserFunctionNode] && propertyNode.children.head.asInstanceOf[ParserFunctionNode].title.substring(0, 3) == "#if") {
           // Get list of all equivalent terms in the conditional expression foreg {{#ifeq: "string1" | "String2" | {{#property:p193}} | "string3"} }}
           // should return string1, string2, string3 along with the associated property
-          var temp_answer = getListOfEquivalentTermsAndProperty(propertyNode.children.head.asInstanceOf[ParserFunctionNode])
+          var temp_answer = getListOfEquivalentTermsAndPropertySimple(propertyNode.children.head.asInstanceOf[ParserFunctionNode])
           var cleansed_list = temp_answer._1.filter(str => !ltrim(rtrim(str)).isEmpty)
           if (temp_answer._2 != "ERROR" && temp_answer._2 != "") {
             for (term <- cleansed_list) {
-              answer += new Tuple3(infobox.title.decoded, rtrim(ltrim(term)), temp_answer._2)
+              if ( !isBlackListed(term))
+              answerSimple += new Tuple3(infobox.title.decoded, rtrim(ltrim(term)), temp_answer._2)
             }
           }
 
@@ -88,11 +130,105 @@ class InfoboxMappingsTemplateExtractor (context: {
       }
     })
 
-    answer.toList
+      (answerSimple ++  answerSweble).toList
+  }
+
+  def proccessChildren(tempNode : Node, answerList : ArrayBuffer[String], prop : String, getProp : Boolean) :  String = {
+
+    var property = prop
+    for( child <- tempNode.children){
+
+      var child_answer =  getListOfEquivalentTermsAndPropertySweble(child, getProp)
+      answerList ++= child_answer._1
+
+      // There should be only a single property
+      if ( property != "" && child_answer._2 != "" && property != child_answer._2){
+        property = "ERROR"
+      } else if (property == ""){
+        property = child_answer._2
+      }
+
+    }
+
+    return  property
+  }
+  // returns a list of equivalent terms in a nested conditional expression
+  def getListOfEquivalentTermsAndPropertySweble(node : Node, getProp : Boolean) : (Array[String], String) = {
+
+    var answerList = ArrayBuffer[String]()
+    var property = ""
+
+     if ( node.isInstanceOf[PropertyNode]){
+      var propertyNode = node.asInstanceOf[PropertyNode]
+       if ( !InfoboxMappingsUtils.isNumber(propertyNode.key) && !getProp ){
+         answerList += propertyNode.key
+       }
+      property = proccessChildren(propertyNode, answerList, property, getProp)
+
+     } else if (node.isInstanceOf[TemplateNode]){
+      var templateNode = node.asInstanceOf[TemplateNode]
+
+       if ( templateNode.title.decoded.charAt(0) == '#' && templateNode.title.decoded.substring(0,3) != "#if" ) {
+         var index = templateNode.title.decoded.indexOf(':')
+         if(checkForPropertySyntax(templateNode.title.decoded.substring(index+1)) )
+          property = templateNode.title.decoded.substring(index+1)
+         else
+           property = proccessChildren(templateNode, answerList, property, true)
+
+       } else {
+         if ( templateNode.title.decoded.substring(0,3) != "#if" && !getProp)
+          answerList += templateNode.title.decoded
+         property = proccessChildren(templateNode, answerList, property, getProp)
+       }
+
+     } else if (node.isInstanceOf[TemplateParameterNode]){
+      var templateParameterNode = node.asInstanceOf[TemplateParameterNode]
+       if ( !getProp)
+        answerList += templateParameterNode.parameter
+      property = proccessChildren(templateParameterNode, answerList, property, getProp)
+
+
+     } else if( node.isInstanceOf[ParserFunctionNode]){
+       var parserNode = node.asInstanceOf[ParserFunctionNode]
+
+       // To absorb #invoke & #property but not #if
+       if ( parserNode.title.charAt(0) == "#" && parserNode.title.substring(0,3) != "#"){
+         if( parserNode.title == "#invoke")
+           property = InfoboxMappingsUtils.extract_property(parserNode.children.head.toWikiText, parserNode.title)
+         else if (parserNode.title == "#property")
+           property = InfoboxMappingsUtils.extract_property(parserNode.toWikiText, parserNode.title)
+         return (answerList.toArray, property)
+       } else {
+         property = proccessChildren(parserNode, answerList, property, getProp)
+       }
+
+     } else if ( node.isInstanceOf[TextNode]){
+      var text : String = ltrim(rtrim(node.asInstanceOf[TextNode].text))
+      if(text == null || text == "" || text.length < 2 ){
+        return (answerList.toArray, property)
+      } else {
+        if ( text.contains("|") && !getProp){
+          answerList = answerList ++ text.split('|').filter(str => !checkForPropertySyntax(str))
+
+          var propertyArr =  text.split('|').filter(str => checkForPropertySyntax(str))
+          if ( propertyArr.length  == 1) property = propertyArr.head
+          else if (propertyArr.length > 1) property = "ERROR"
+        } else {
+          if(checkForPropertySyntax(text) )
+            property += text
+          else if(!getProp)
+            answerList += text
+        }
+        return (answerList.toArray, property)
+      }
+
+    }
+
+    (answerList.toArray.filter(str => str != "" && str != " " ), property)
   }
 
   // returns a list of equivalent terms in a nested conditional expression
-  def getListOfEquivalentTermsAndProperty(parserNode : ParserFunctionNode) : (Array[String], String) = {
+  def getListOfEquivalentTermsAndPropertySimple(parserNode : ParserFunctionNode) : (Array[String], String) = {
 
     var answerList = Array[String]()
     var property = ""
@@ -111,7 +247,7 @@ class InfoboxMappingsTemplateExtractor (context: {
       if( child.isInstanceOf[TextNode]){
         answerList = answerList ++ child.asInstanceOf[TextNode].toWikiText.split('|')
       } else if( child.isInstanceOf[ParserFunctionNode]) {
-        var child_answer =  getListOfEquivalentTermsAndProperty(child.asInstanceOf[ParserFunctionNode])
+        var child_answer =  getListOfEquivalentTermsAndPropertySimple(child.asInstanceOf[ParserFunctionNode])
         answerList = answerList ++ child_answer._1
 
         // There should be only a single property
@@ -124,6 +260,15 @@ class InfoboxMappingsTemplateExtractor (context: {
     }
 
     (answerList.filter(str => str != "" && str != " " ), property)
+  }
+
+
+  def cleanUp(str : String) : String = {
+    var text = str
+    var  pattern1 = """\{\{\{([0-9A-Za-z\_]+)\|?\}\}\}"""
+    var  pattern2 = """\{\{\{([0-9A-Za-z\_]+)\|?\}\}\}\}\}\}"""
+    text  = str.replaceAll(pattern2, "$1")
+    text.replaceAll(pattern1, "$1")
   }
 
   private def getTemplateMappingsFromPropertyParserFunc(propertyFunctions: Seq[ParserFunctionNode]) : Seq[(String, String)] = {
