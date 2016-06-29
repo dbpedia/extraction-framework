@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings.rml.util
 
 import java.io.File
 
-import be.ugent.mmlab.rml.model.RMLMapping
+
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
