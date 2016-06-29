@@ -321,7 +321,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         | website2                = {{Official website}}
         | blog                    = {{Official blog}}
         }}
-      """, "TestPage", lang, "#P856")
+      """, "TestPage", lang, "DTM")
 
     (parsed) should be (answer)
   }
@@ -339,7 +339,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         {{Infobox Test2
         | website2                = {{Official URL}}
         }}
-      """, "TestPage", lang, "#P856")
+      """, "TestPage", lang, "DTM")
 
     (parsed) should be (answer)
   }
@@ -354,28 +354,10 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         | website1                = {{BetingetURL}}
         }}
 
-      """, "TestPage", lang, "#P856")
+      """, "TestPage", lang, "DTM")
 
     (parsed) should be (answer)
   }
-
-  "InfoboxMappingsExtractor" should """return correct property id's for a combination of above  """ in {
-
-    val lang = Language.English
-    val answer = List(("Infobox Test1","website1","P856"), ("Infobox Test1","random","p456"), ("Infobox Test1","population_total","P1082"))
-    val parsed = parse(
-      """
-        {{Infobox Test1
-        | website1                = {{Official URL}}
-        | random                  = {{#invoke:Wikidata|property|p456}}
-        | population_total       = {{#property:P1082}}
-        }}
-      """, "TestPage", lang, "all")
-
-    (parsed) should be (answer)
-  }
-
-
 
   private val parser = WikiParser.getInstance()
 
@@ -400,7 +382,7 @@ class InfoboxMappingsExtractorTest extends FlatSpec with Matchers with PrivateMe
         case Some(pageNode) => extractor.getInvokeTuples(pageNode)
         case None => List.empty
       }
-    } else if ( test == "#P856") {
+    } else if ( test == "DTM") {
       to_return = parser(page) match {
         case Some(pageNode) => extractor.getDirectTemplateWikidataMappings(pageNode, lang)
         case None => List.empty
