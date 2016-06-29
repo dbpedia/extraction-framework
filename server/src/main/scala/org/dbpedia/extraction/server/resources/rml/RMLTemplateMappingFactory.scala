@@ -71,7 +71,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   private def addCorrespondingPropertyAndClassToSubjectMap() =
   {
     if(templateMapping.correspondingProperty != null) {
-      val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel("correspondingProperty")
+      val predicateObjectMap = modelWrapper.addPredicateObjectMap("correspondingProperty")
       modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", templateMapping.correspondingProperty.uri)
       addCorrespondingClassToPredicateObjectMap(predicateObjectMap)
     }
@@ -100,6 +100,9 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private def addPropertyMapping(mapping: PropertyMapping) =
   {
+
+    //println(mapping.getClass.getSimpleName) //TODO: remove, this is for debug purposes
+
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => mapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
       case "CalculateMapping" => mapper.addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
@@ -108,6 +111,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
       case "GeoCoordinatesMapping" => mapper.addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
       case "ConditionalMapping" => mapper.addConditionalMapping(mapping.asInstanceOf[ConditionalMapping])
       case "IntermediateNodeMapping" => mapper.addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
+      case "ConstantMapping" => mapper.addConstantMapping(mapping.asInstanceOf[ConstantMapping])
     }
   }
 

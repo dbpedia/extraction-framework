@@ -34,9 +34,9 @@ abstract class RMLMappingFactory {
     modelWrapper = new RMLModelWrapper(page.title)
 
     // triples map, logical source and subject map resources created and added to the model
-    modelWrapper.addLogicalSourceToModel()
-    modelWrapper.addSubjectMapToModel()
-    modelWrapper.addMainTriplesMapToModel()
+    modelWrapper.addMainLogicalSource()
+    modelWrapper.addMainSubjectMap()
+    modelWrapper.addMainTriplesMap()
 
   }
 

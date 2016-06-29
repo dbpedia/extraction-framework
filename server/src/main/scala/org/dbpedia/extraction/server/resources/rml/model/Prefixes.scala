@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server.resources.rml.model
 
 /**
-  * Contains the RML prefixes
+  * Contains the prefixes map
   */
 object Prefixes {
 

@@ -6,7 +6,7 @@ import org.apache.jena.rdf.model.{Model, ModelFactory, Resource, Statement}
 import org.dbpedia.extraction.wikiparser.WikiTitle
 
 /**
-  * Class that is a wrapper around a Jena model that adds behaviour
+  * Class that is a wrapper around an rdf model that adds behaviour (in this case Jena)
   */
 class ModelWrapper() {
 

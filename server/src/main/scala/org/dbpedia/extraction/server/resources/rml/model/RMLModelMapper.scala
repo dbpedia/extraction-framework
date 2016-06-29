@@ -12,6 +12,8 @@ import org.dbpedia.extraction.ontology.datatypes.Datatype
   */
 class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
+  //TODO: refactor this into seperate classes maybe?
+
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
     val uniqueString = baseName("")
@@ -22,7 +24,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
   {
 
     //create predicate object map
-    val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uri + "SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
+    val predicateObjectMap = modelWrapper.addPredicateObjectMap(uri + "SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
 
     //add dcterms type to predicate map
     modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("dcterms") + "type", Prefixes("dbf") + "simplePropertyMapping" )
@@ -43,15 +45,28 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   }
 
+
+
+
   def addCalculateMapping(mapping: CalculateMapping) =
   {
     //TODO: implement
+    println("Calculate Mappings not supported")
   }
+
+
+
+
 
   def addCombineDateMapping(mapping: CombineDateMapping) =
   {
     //TODO: implement
+    println("Combine Date Mappings not supported")
   }
+
+
+
+
 
   def addDateIntervalMapping(mapping: DateIntervalMapping) =
   {
@@ -87,7 +102,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
     //create predicate object map for date
     val uniqueString = uri + "dateInterval/" + endOrStart + "/" + dateOntologyProperty.name + "/" + dateOntologyProperty.name
-    val dateIntervalPom = modelWrapper.addPredicateObjectMapToModel(uniqueString)
+    val dateIntervalPom = modelWrapper.addPredicateObjectMap(uniqueString)
     modelWrapper.addResourceAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", dateIntervalPom)
 
     //add dcterms:type to predicate
@@ -98,12 +113,12 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
     //add object map to start date pom
     val objectMapStartString = uniqueString + "/" + "IntervalFunctionMap"
-    val objectMapStart = modelWrapper.addResource(objectMapStartString, Prefixes("fnml") + "FunctionTermMap")
+    val objectMapStart = modelWrapper.addResourceWithPredicate(objectMapStartString, Prefixes("fnml") + "FunctionTermMap")
     modelWrapper.addResourceAsPropertyToResource(dateIntervalPom, Prefixes("rr") + "objectMap", objectMapStart)
 
     //add triples map to object map
     val triplesMapStartString = objectMapStartString + "/TriplesMap"
-    val triplesMapStart = modelWrapper.addTriplesMapToModel(triplesMapStartString)
+    val triplesMapStart = modelWrapper.addTriplesMap(triplesMapStartString)
     modelWrapper.addResourceAsPropertyToResource(objectMapStart, Prefixes("fnml") + "functionValue", triplesMapStart)
 
     //add logical source to triples map
@@ -142,6 +157,10 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   }
 
+
+
+
+
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
   {
     val uri = baseName("")
@@ -150,6 +169,8 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, uri: String) =
   {
+
+    println("Geocoordinates Mapping not supported")
 
     val uniqueUri = uri + "/GeoCoordinatesMapping/"
 
@@ -166,10 +187,19 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     }
   }
 
+
+
+
+
   def addConditionalMapping(mapping: ConditionalMapping) =
   {
     //TODO: implement
+    println("Conditional Mappings not supported")
   }
+
+
+
+
 
   def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) =
   {
@@ -177,7 +207,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     //create the predicate object map and it to the triples map
     val templateString = "IntermediateNodeMapping/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name
     val uniqueString = baseName(templateString)
-    val predicateObjectMap = modelWrapper.addPredicateObjectMapToModel(uniqueString)
+    val predicateObjectMap = modelWrapper.addPredicateObjectMap(uniqueString)
     modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "predicate", mapping.correspondingProperty.uri)
     modelWrapper.addPredicateObjectMapUriToTriplesMap(uniqueString, modelWrapper.triplesMap)
 
@@ -185,9 +215,9 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, Prefixes("dcterms") + "type", Prefixes("dbf") + "intermediateNodeMapping" )
 
     //create the triples map with its subject map and object map
-    val subjectMap = modelWrapper.addResource(baseName(templateString + "/SubjectMap"), Prefixes("rr") + "SubjectMap")
+    val subjectMap = modelWrapper.addResourceWithPredicate(baseName(templateString + "/SubjectMap"), Prefixes("rr") + "SubjectMap")
     modelWrapper.addPropertyAsPropertyToResource(subjectMap, Prefixes("rr") + "constant", "tobeDefined")
-    val triplesMap = modelWrapper.addTriplesMapToModel(baseName(templateString + "/TriplesMap"), subjectMap)
+    val triplesMap = modelWrapper.addTriplesMap(baseName(templateString + "/TriplesMap"), subjectMap)
     val objectMap = modelWrapper.addBlankNode()
     modelWrapper.addResourceAsPropertyToResource(objectMap, Prefixes("rr") + "parentTriplesMap", triplesMap)
     modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
@@ -198,6 +228,13 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     }
 
   }
+
+  def addConstantMapping(mapping: ConstantMapping) =
+  {
+    //TODO: implement
+    println("Constant Mappings not supported")
+  }
+
 
 
 
@@ -216,6 +253,9 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, Prefixes("rr") + "objectMap", objectMap)
   }
 
+  /**
+    * Adds mappings (this is used by intermediate node mappings
+    */
   private def addPropertyMapping(mapping: PropertyMapping, triplesMap: Resource) =
   {
     mapping.getClass.getSimpleName match {
