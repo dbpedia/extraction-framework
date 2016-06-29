@@ -169,7 +169,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addResourceAsPropertyToResource(triplesMapStart, RdfNamespace.RR.namespace + "predicateObjectMap", pomBlankNode4)
 
     //add predicate to pom blank node 4
-    modelWrapper.addPropertyAsPropertyToResource(pomBlankNode4, RdfNamespace.RR.namespace + "predicate", RdfNamespace.DBF.namespace + "endParameter")
+    modelWrapper.addPropertyAsPropertyToResource(pomBlankNode4, RdfNamespace.RR.namespace + "predicate", RdfNamespace.DBF.namespace + "propertyParameter")
 
     //add object map blank node to pom blank node 4
     val omBlankNode4 = modelWrapper.addBlankNode()
@@ -185,25 +185,45 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
   {
     val uri = baseName("")
-    addGeoCoordinatesMappingToTriplesMap(mapping, uri)
+    addGeoCoordinatesMappingToTriplesMap(mapping, uri, modelWrapper.triplesMap)
   }
 
-  def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, uri: String) =
+  def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, uri: String, triplesMap: Resource) =
   {
 
-    println("Geocoordinates Mapping not supported")
+    println("Geocoordinates Mapping not fully supported: " + mapping.ontologyProperty.name)
 
-    val uniqueUri = uri + "/GeoCoordinatesMapping/"
+    val uniqueUri = uri + "GeoCoordinatesMapping/" + mapping.ontologyProperty.name
 
+    //add pom to triples map
+    val geoCoordinatesPom = modelWrapper.addPredicateObjectMap(uniqueUri)
+    modelWrapper.addResourceAsPropertyToResource(triplesMap, RdfNamespace.RR.namespace + "predicateObjectMap", geoCoordinatesPom)
+
+    //add dcterms:type to predicate
+    modelWrapper.addPropertyAsPropertyToResource(geoCoordinatesPom, RdfNamespace.DCTERMS.namespace + "type", RdfNamespace.DBF.namespace + "geoCoordinatesMapping")
+
+    //add predicate to pom
+    modelWrapper.addPropertyAsPropertyToResource(geoCoordinatesPom, RdfNamespace.RR.namespace + "predicate", mapping.ontologyProperty.uri)
+
+    //add object map to pom
+    val objectMap = modelWrapper.addBlankNode()
+    modelWrapper.addResourceAsPropertyToResource(geoCoordinatesPom, RdfNamespace.RR.namespace + "objectMap", objectMap)
+
+    //add triples map to object map
+    val parentTriplesMap = modelWrapper.addTriplesMap(uniqueUri + "/ParentTriplesMap")
+    modelWrapper.addResourceAsPropertyToResource(objectMap, RdfNamespace.RR.namespace + "parentTriplesMap", parentTriplesMap)
 
     if(mapping.coordinates != null) {
+      val coordinatesUri = uniqueUri + "/coordinates"
       //first case: pair of coordinates is given
       //TODO: implement
     } else if (mapping.latitude != null && mapping.longitude != null) {
+      val coordinatesUri = uniqueUri + "/latitude_longitude"
       //second case: only latitude and longitude is given
       //TODO: implement
     } else {
-      //third case: 8 values are given for calculating longitude and latitude
+      val coordinatesUri = uniqueUri + "/degrees"
+      //third case: degrees are given for calculating longitude and latitude
       //TODO: implement
     }
   }
