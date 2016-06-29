@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server.resources.rml
 
 import org.dbpedia.extraction.mappings.MappingsLoader
 import org.scalatest.FunSuite
+import scala.language.reflectiveCalls
 import org.dbpedia.extraction.mappings.rml.util.ContextCreator
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiParser, WikiTitle}

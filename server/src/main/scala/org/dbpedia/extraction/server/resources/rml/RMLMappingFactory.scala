@@ -2,7 +2,7 @@ package org.dbpedia.extraction.server.resources.rml
 
 import org.apache.jena.rdf.model.{Model, ModelFactory, Property, Resource}
 import org.dbpedia.extraction.mappings.{Extractor, Mappings, TemplateMapping}
-import org.dbpedia.extraction.server.resources.rml.model.{ModelWrapper, Prefixes, RMLModelWrapper}
+import org.dbpedia.extraction.server.resources.rml.model.{ModelWrapper, RMLModelWrapper}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, PageNode, WikiTitle}
 
