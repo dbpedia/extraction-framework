@@ -85,7 +85,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
       dateOntologyProperty = mapping.endDateOntologyProperty
     }
 
-    //create predicate object map for start date
+    //create predicate object map for date
     val uniqueString = uri + "dateInterval/" + endOrStart + "/" + dateOntologyProperty.name + "/" + dateOntologyProperty.name
     val dateIntervalPom = modelWrapper.addPredicateObjectMapToModel(uniqueString)
     modelWrapper.addResourceAsPropertyToResource(triplesMap, Prefixes("rr") + "predicateObjectMap", dateIntervalPom)
@@ -128,9 +128,9 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addResourceAsPropertyToResource(pomBlankNode, Prefixes("rr") + "objectMap", omBlankNode)
     modelWrapper.addPropertyAsPropertyToResource(omBlankNode, Prefixes("rr") + "constant", Prefixes("dbf") + dateOntologyProperty.name)
 
-    //add pom blank node to pom blank node
+    //add pom blank node to triples map
     val pomBlankNode2 = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(pomBlankNode, Prefixes("rr") + "predicateObjectMap", pomBlankNode2)
+    modelWrapper.addResourceAsPropertyToResource(triplesMapStart, Prefixes("rr") + "predicateObjectMap", pomBlankNode2)
 
     //add predicate to pom blank node 2
     modelWrapper.addPropertyAsPropertyToResource(pomBlankNode2, Prefixes("rr") + "predicate", Prefixes("ex") + "parameter")
@@ -144,12 +144,24 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
   {
-    if(mapping.coordinates != null) {
-      val objectMap1 = modelWrapper.addBlankNode()
-      modelWrapper.addLiteralAsPropertyToResource(objectMap1, Prefixes("rr") + "parentTriplesMap", mapping.coordinates)
-      modelWrapper.addPredicateObjectMapToMainTriplesMap(Prefixes("dbo") + "coordinates", objectMap1)
+    val uri = baseName("")
+    addGeoCoordinatesMappingToTriplesMap(mapping, uri)
+  }
 
+  def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, uri: String) =
+  {
+
+    val uniqueUri = uri + "/GeoCoordinatesMapping/"
+
+
+    if(mapping.coordinates != null) {
+      //first case: pair of coordinates is given
+      //TODO: implement
     } else if (mapping.latitude != null && mapping.longitude != null) {
+      //second case: only latitude and longitude is given
+      //TODO: implement
+    } else {
+      //third case: 8 values are given for calculating longitude and latitude
       //TODO: implement
     }
   }
@@ -215,6 +227,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
       case "GeoCoordinatesMapping" => println("Intermediate GeoCoordinates Mapping not supported.")
       case "ConditionalMapping" => println("Intermediate Conditional Mapping not supported.")
       case "IntermediateNodeMapping" => println("Intermediate Intermediate Mapping not supported.")
+      case "ConstantMapping" => println("Constant Mapping not supported.")
     }
   }
   
