@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.resources.rml
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.server.resources.rml.model.RMLModelMapper
+import org.dbpedia.extraction.server.resources.rml.mappings.RMLModelMapper
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.PageNode
 

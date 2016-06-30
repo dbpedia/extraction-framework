@@ -81,7 +81,7 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
   }
 
   //add a predicate object map with directly a given predicate and object
-  def addPredicateObjectMapToResource(resource: Resource, predicate: String, _object: Resource) =
+  def addPredicateObjectMapToResource(resource: Resource, predicate: String, _object: Resource) : Resource =
   {
     val predicateObjectMap = addBlankNode()
     addResourceAsPropertyToResource(resource, RdfNamespace.RR.namespace + "predicateObjectMap", predicateObjectMap)
