@@ -33,20 +33,26 @@ import java.util.logging.Level;
  */
 public class RCStreamFeeder extends Feeder implements IOCallback {
 
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static String WIKIMEDIA_RCSTREAM_URL = "http://stream.wikimedia.org/rc";
     /** The Socket used for receiving the RCStream */
     private SocketIO socket;
     /** The room describes the wiki, which RCStream will be processed e.G. https://en.wikipedia.org */
     private String room;
+    /** The array including all allowed namespaces to be added to the LiveQueue */
+    private ArrayList<Integer> allowedNamespaces = new ArrayList<>();
     private Collection<LiveQueueItem> events;
-
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public RCStreamFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
                           String folderBasePath, String room) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         // use baseURI without protocol as room to subscribe to
         this.room = room;
+
+        // parse allowedNamespaces to Array
+        for (String namespace : LiveOptions.options.get("feeder.rcstream.allowedNamespaces").split("\\s*,\\s*")) {
+            allowedNamespaces.add(Integer.parseInt(namespace));
+        }
 
         // Set Logger preferences for Socket.io
         java.util.logging.Logger sioLogger = java.util.logging.Logger.getLogger("io.socket");
@@ -119,9 +125,7 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
         }
         String title = jsonObject.get("title").getAsString();
         int namespaceCode = jsonObject.get("namespace").getAsInt();
-        if(namespaceCode == Namespace.Main().code() ||
-                namespaceCode == Namespace.Template().code() ||
-                namespaceCode == Namespace.Category().code()) {
+        if(allowedNamespaces.contains(namespaceCode)) {
             Long timestamp = jsonObject.get("timestamp").getAsLong();
             String eventTimestamp = DateUtil.transformToUTC(timestamp * 1000L);
             synchronized (this) {
