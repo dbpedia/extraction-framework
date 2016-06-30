@@ -71,7 +71,6 @@ object RdfNamespace {
   val DBO = ns("dbo", "http://dbpedia.org/ontology/")
   val FNML = ns("fnml", "http://semweb.mmlab.be/ns/fnml#")
   val FNO = ns("fno", "http://w3id.org/function/ontology/")
-  val EX = ns("ex", "http://example.org/stuff/1.0/")
   val DBF = ns("dbf", "http://dbpedia.org/function/")
 
   //the following namespaces are required for supporting the entries in the mappings Wiki as of 2014-07-15

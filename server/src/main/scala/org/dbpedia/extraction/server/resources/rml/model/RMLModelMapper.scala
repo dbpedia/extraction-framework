@@ -86,7 +86,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, RdfNamespace.DCTERMS.namespace + "type", RdfNamespace.DBF.namespace + "dateIntervalMapping")
 
     //add predicate to start date pom
-    modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, RdfNamespace.RR.namespace + "predicate", RdfNamespace.EX.namespace + "something")
+    modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, RdfNamespace.RR.namespace + "predicate", RdfNamespace.DBF.namespace + "something")
 
     //add object map to start date pom
     val objectMapStartString= uniqueUri + "/" + "IntervalFunctionMap"
@@ -180,8 +180,6 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
 
 
-
-
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
   {
     val uri = baseName("")
@@ -200,7 +198,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addResourceAsPropertyToResource(triplesMap, RdfNamespace.RR.namespace + "predicateObjectMap", geoCoordinatesPom)
 
     //add dcterms:type to predicate
-    modelWrapper.addPropertyAsPropertyToResource(geoCoordinatesPom, RdfNamespace.DCTERMS.namespace + "type", RdfNamespace.DBF.namespace + "geoCoordinatesMapping")
+    modelWrapper.addPropertyAsPropertyToResource(geoCoordinatesPom, RdfNamespace.DCTERMS.namespace + "type", RdfNamespace.DCTERMS.namespace + "geoCoordinatesMapping")
 
     //add predicate to pom
     modelWrapper.addPropertyAsPropertyToResource(geoCoordinatesPom, RdfNamespace.RR.namespace + "predicate", mapping.ontologyProperty.uri)
@@ -210,26 +208,108 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
     modelWrapper.addResourceAsPropertyToResource(geoCoordinatesPom, RdfNamespace.RR.namespace + "objectMap", objectMap)
 
     //add triples map to object map
-    val parentTriplesMap = modelWrapper.addTriplesMap(uniqueUri + "/ParentTriplesMap")
+    val parenTriplesMapUri = uniqueUri + "/ParentTriplesMap"
+    val parentTriplesMap = modelWrapper.addTriplesMap(parenTriplesMapUri)
     modelWrapper.addResourceAsPropertyToResource(objectMap, RdfNamespace.RR.namespace + "parentTriplesMap", parentTriplesMap)
 
+    //add logical source to paren triples map
+    modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RML.namespace + "logicalSource", modelWrapper.logicalSource)
+
+    //add subject map to parent triples map
+    modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RR.namespace + "subjectMap", modelWrapper.subjectMap)
+
+
     if(mapping.coordinates != null) {
+
+      println(mapping.ontologyProperty + " : " + mapping.coordinates)
+
+
       val coordinatesUri = uniqueUri + "/coordinates"
       //first case: pair of coordinates is given
       //TODO: implement
+
     } else if (mapping.latitude != null && mapping.longitude != null) {
+
       val coordinatesUri = uniqueUri + "/latitude_longitude"
+
+      println("Mapping with latitude and longitude present")
+
       //second case: only latitude and longitude is given
-      //TODO: implement
+
+      addLatitudeOrLongitude(mapping, parentTriplesMap, coordinatesUri, "lat")
+      addLatitudeOrLongitude(mapping, parentTriplesMap, coordinatesUri, "long")
+
+
     } else {
+
       val coordinatesUri = uniqueUri + "/degrees"
       //third case: degrees are given for calculating longitude and latitude
       //TODO: implement
+
     }
   }
 
 
+  private def addLatitudeOrLongitude(mapping: GeoCoordinatesMapping, parentTriplesMap: Resource, coordinatesUri: String, latOrLong: String) =
+  {
 
+    //create predicate for latitude/longitude pom
+    val latOrLongPredicate = RdfNamespace.RR + "predicate"
+
+    //create object map for latitude/longitude pom
+    val latitudeObjectMapUri = coordinatesUri + "/" + latOrLong + "ObjectMap"
+    val latitudeObjectMap = modelWrapper.addResourceWithPredicate(latitudeObjectMapUri, RdfNamespace.FNML.namespace + "FunctionTermMap")
+
+    //add predicate and object map to latitude pom
+    modelWrapper.addPredicateObjectMapToResource(parentTriplesMap, latOrLongPredicate, latitudeObjectMap)
+
+    //add function value triples map to object map
+    val functionValueTriplesMapUri = latitudeObjectMapUri + "/FunctionValueTriplesMap"
+    val functionValueTriplesMap = modelWrapper.addTriplesMap(functionValueTriplesMapUri)
+    modelWrapper.addResourceAsPropertyToResource(latitudeObjectMap, RdfNamespace.FNML.namespace + "functionValue", functionValueTriplesMap)
+
+    //add logical source to triples map
+    modelWrapper.addResourceAsPropertyToResource(functionValueTriplesMap, RdfNamespace.RML.namespace + "logicalSource", modelWrapper.logicalSource)
+
+    //add subject map to triples map
+    val functionSubjectMap = modelWrapper.addResource(coordinatesUri + "/FunctionSubjectMap")
+    modelWrapper.addResourceAsPropertyToResource(functionValueTriplesMap, RdfNamespace.RR.namespace + "subjectMap", functionSubjectMap)
+
+    //add termType and class to subject map
+    modelWrapper.addPropertyAsPropertyToResource(functionSubjectMap, RdfNamespace.RR.namespace + "termType", RdfNamespace.RR.namespace + "BlankNode")
+    modelWrapper.addPropertyAsPropertyToResource(functionSubjectMap, RdfNamespace.RR.namespace + "class", RdfNamespace.FNO.namespace + "Execution")
+
+    //create pom to functionValueTriplesMap
+    val functionValuePom = modelWrapper.addBlankNode()
+
+    //create predicate for functionValue pom
+    val functionValuePredicate = RdfNamespace.FNO.namespace + "executes"
+
+    //create object map for functionValue pom
+    val functionValueObjectMap = modelWrapper.addBlankNode()
+
+    //add predicate and object map to pom
+    modelWrapper.addPredicateObjectMapToResource(functionValuePom, functionValuePredicate, functionValueObjectMap)
+
+    //add constant to object map
+    modelWrapper.addPropertyAsPropertyToResource(functionValueObjectMap, RdfNamespace.RR.namespace + "constant", RdfNamespace.DBF.namespace + latOrLong)
+
+    //create pom for functionValuePom
+    val functionValuePom2 = modelWrapper.addBlankNode()
+
+    //create predicate for pom
+    val functionValuePom2Predicate = RdfNamespace.DBF.namespace + latOrLong + "TemplateProperty"
+
+    //create object map for pom
+    val functionValueObjectMap2 = modelWrapper.addBlankNode()
+
+    //add predicate and object map to pom
+    modelWrapper.addPredicateObjectMapToResource(functionValuePom2, functionValuePom2Predicate, functionValueObjectMap2)
+
+    //add reference to object map
+    modelWrapper.addPropertyAsPropertyToResource(functionValueObjectMap2, RdfNamespace.RML.namespace, mapping.ontologyProperty.uri)
+
+  }
 
 
   def addConditionalMapping(mapping: ConditionalMapping) =
