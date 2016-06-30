@@ -63,6 +63,10 @@
 
 							<jvmArgs>
 								<jvmArg>-server</jvmArg>
+								<jvmArg>-Dextract.wikiapi.customUserAgent.enabled=false</jvmArg>
+								<!-- You might want to add your email address here, see https://phabricator.wikimedia.org/T70538 for details. -->
+								<!-- The link to the phabricator discussion will be added automatically -->
+								<jvmArg>-Dextract.wikiapi.customUserAgent.text="DBpedia Extraction Framework"</jvmArg>
 								<!-- <jvmArg>-Xmx4096m</jvmArg> <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg> 
 									<jvmArg>-XX:+UseConcMarkSweepGC</jvmArg> <jvmArg>-XX:+PrintGC</jvmArg> <jvmArg>-XX:+PrintGCTimeStamps</jvmArg> 
 									<jvmArg>-Dhttp.proxyHost=proxy.server.com</jvmArg> <jvmArg>-Dhttp.proxyPort=80</jvmArg> 

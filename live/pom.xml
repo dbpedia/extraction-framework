@@ -35,6 +35,10 @@
                             <id>live</id>
                             <mainClass>org.dbpedia.extraction.live.main.Main</mainClass>
                             <jvmArgs>
+                                <jvmArg>-Dextract.wikiapi.customUserAgent.enabled=true</jvmArg>
+                                <!-- You might want to add your email address here, see https://phabricator.wikimedia.org/T70538 for details. -->
+                                <!-- The link to the phabricator discussion will be added automatically -->
+                                <jvmArg>-Dextract.wikiapi.customUserAgent.text="DBpedia Live Extraction Framework using RCStreams"</jvmArg>
                                 <jvmArg>-Xmx6096m</jvmArg>
                             </jvmArgs>
                         </launcher>
