@@ -1,20 +1,23 @@
 package org.dbpedia.extraction.server.resources
 
 import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
-import org.dbpedia.extraction.server.resources.RMLMapping
 import org.dbpedia.extraction.util.{Language, WikiApi}
-import org.dbpedia.extraction.server.resources.stylesheets.{TriX,Log}
+import org.dbpedia.extraction.server.resources.stylesheets.{Log, TriX}
 import org.dbpedia.extraction.server.Server
 import javax.ws.rs._
-import java.util.logging.{Logger,Level}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser, Namespace, WikiTitle}
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiParser, WikiTitle}
 import org.dbpedia.extraction.server.util.PageUtils
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
-import org.dbpedia.extraction.destinations.{WriterDestination,LimitingDestination}
+import org.dbpedia.extraction.destinations.{LimitingDestination, WriterDestination}
 import java.net.{URI, URL}
 import java.lang.Exception
-import xml.{ProcInstr, XML, NodeBuffer, Elem}
+
+import xml.{Elem, NodeBuffer, ProcInstr, XML}
 import java.io.StringWriter
+
+import org.dbpedia.extraction.server.resources.rml.RMLTemplateMappingFactory
 
 /**
  * TODO: merge Extraction.scala and Mappings.scala
@@ -44,7 +47,8 @@ class Mappings(@PathParam("lang") langCode : String)
             <div class="row">
               <div class="col-md-3 col-md-offset-5">
               <h2>Mappings</h2>
-              <a href="pages/">Source Pages</a><br/>
+              <a href="pages/">Original Source Pages</a><br/>
+              <a href="pages/rml">RML Source Pages</a><br/>
               <a href="validate/">Validate Pages</a><br/>
               <a href="extractionSamples/">Retrieve extraction samples</a><br/>
               <a href="redirects/">Redirects</a><br/>
@@ -136,7 +140,7 @@ class Mappings(@PathParam("lang") langCode : String)
      * Retrieves a mapping as rml
      */
     @GET
-    @Path("pages/rdf/")
+    @Path("pages/rml/")
     @Produces(Array("application/xml"))
     def getRdf(@PathParam("title") title : String) : Elem =
     {
@@ -147,7 +151,7 @@ class Mappings(@PathParam("lang") langCode : String)
         <body>
           <div class="row">
             <div class="col-md-3 col-md-offset-5">
-              <h2>Rdf Mapping pages</h2>
+              <h2>RML Mapping pages</h2>
               { pages.map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
             </div>
           </div>
@@ -159,7 +163,7 @@ class Mappings(@PathParam("lang") langCode : String)
      * Retrieves a rml mapping page
      */
     @GET
-    @Path("pages/rdf/{title: .+$}")
+    @Path("pages/rml/{title: .+$}")
     @Produces(Array("text/turtle"))
     def getRdfMapping(@PathParam("title") title : String) : String =
     {
@@ -183,8 +187,9 @@ class Mappings(@PathParam("lang") langCode : String)
       }
 
       //Load mappings
-      val rdfTemplate = new RMLMapping(parser(page.head).get, language, MappingsLoader.load(context))
-      rdfTemplate.getRdfTemplate()
+      val factory = new RMLTemplateMappingFactory()
+      val rmlMapping = factory.createMapping(parser(page.head).get, language, MappingsLoader.load(context))
+      rmlMapping.writeAsTurtle
     }
 
     /**

@@ -10,8 +10,8 @@ import scala.language.reflectiveCalls
 
 class TemplateMapping( 
   val mapToClass : OntologyClass,
-  correspondingClass : OntologyClass,
-  correspondingProperty : OntologyProperty,
+  val correspondingClass : OntologyClass, // must be public val for converting to rml
+  val correspondingProperty : OntologyProperty, // must be public for converting to rml
   val mappings : List[PropertyMapping], // must be public val for statistics
   context: {
     def ontology : Ontology
