@@ -138,7 +138,8 @@ object LiveExtractionConfigLoader
 
       if(wikiPage.title.namespace == Namespace.Main ||
         wikiPage.title.namespace == Namespace.Template ||
-        wikiPage.title.namespace == Namespace.Category)
+        wikiPage.title.namespace == Namespace.Category ||
+        (language.wikiCode == "commons" && wikiPage.title.namespace == Namespace.File))
       {
 
 
