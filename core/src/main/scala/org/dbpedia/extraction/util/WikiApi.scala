@@ -17,21 +17,21 @@ object WikiApi
   /** name of api.php parameter for revision IDs */
   val RevisionIDs = "revids"
 
-    /** Specify whether you want to set the user agent for queries to the MediaWiki API */
-    private val customUserAgentEnabled =
-      try {
-        System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
-      } catch {
-        case ex : Exception => false
-      }
-
-    /** Specify a custom user agent for queries to the MediaWiki API */
-    private val customUserAgentText =
+  /** Specify whether you want to set the user agent for queries to the MediaWiki API */
+  private val customUserAgentEnabled =
     try {
-      System.getProperty("extract.wikiapi.customUserAgent.text", "DBpedia Extraction Framework")
+      System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
     } catch {
-      case ex : Exception => "DBpedia Extraction Framework"
+      case ex : Exception => false
     }
+
+  /** Specify a custom user agent for queries to the MediaWiki API */
+  private val customUserAgentText =
+  try {
+    System.getProperty("extract.wikiapi.customUserAgent.text", "DBpedia Extraction Framework")
+  } catch {
+    case ex : Exception => "DBpedia Extraction Framework"
+  }
 }
 
 /**
@@ -237,9 +237,7 @@ class WikiApi(url: URL, language: Language)
                 val connection = new URL(url + params).openConnection()
                 if (customUserAgentEnabled) {
                   connection.setRequestProperty(
-                    "User-Agent",
-                    customUserAgentText +
-                      " (https://phabricator.wikimedia.org/T70538)")
+                    "User-Agent", customUserAgentText )
                 }
                 val reader = connection.getInputStream
                 val xml = XML.load(reader)
