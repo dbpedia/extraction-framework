@@ -10,7 +10,7 @@ import org.dbpedia.extraction.wikiparser.WikiTitle
   */
 class ModelWrapper() {
 
-  protected val model: Model = ModelFactory.createDefaultModel()
+  val model: Model = ModelFactory.createDefaultModel()
 
   /**
     * Add a string as a property to a resource in this model

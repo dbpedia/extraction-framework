@@ -119,6 +119,16 @@ class RMLModelWrapper(val wikiTitle: WikiTitle) extends ModelWrapper {
     model.createResource(uri)
   }
 
+  def createRMLTriplesMap(uri: String) : RMLTriplesMap = {
+    val resource = model.createResource(uri)
+    new RMLTriplesMap(resource)
+  }
+
+  def createRMLPredicateObjectMap(uri: String) : RMLPredicateObjectMap = {
+    val resource = model.createResource(uri)
+    new RMLPredicateObjectMap(resource)
+  }
+
 
 
   /**

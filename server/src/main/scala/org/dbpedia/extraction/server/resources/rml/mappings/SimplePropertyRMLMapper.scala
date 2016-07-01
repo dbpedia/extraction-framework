@@ -4,7 +4,7 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{GeoCoordinatesMapping, SimplePropertyMapping}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.server.resources.rml.model.RMLModelWrapper
+import org.dbpedia.extraction.server.resources.rml.model.{RMLModelWrapper, RMLResourceFactory}
 
 /**
   * Creates RML Mapping from SimplePropertyMappings and adds the triples to the given model
@@ -23,7 +23,7 @@ class SimplePropertyRMLMapper(modelWrapper: RMLModelWrapper, mapping: SimpleProp
 
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: Resource) =
   {
-
+    
     //create predicate object map
     val predicateObjectMap = modelWrapper.addPredicateObjectMap(uri + "SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
 

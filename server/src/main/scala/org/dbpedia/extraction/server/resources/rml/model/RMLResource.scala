@@ -7,7 +7,8 @@ import org.apache.jena.rdf.model.{Model, Property, Resource}
   */
 class RMLResource(resource: Resource) {
 
-  private val model = resource.getModel
+  protected val model = resource.getModel
+  protected val factory = new RMLResourceFactory(model)
 
   def addLiteral(predicate: String, literal: String): RMLResource = {
     resource.addProperty(createProperty(predicate), literal)
@@ -24,11 +25,11 @@ class RMLResource(resource: Resource) {
     this
   }
 
-  private def createProperty(property: String) : Property = {
+  protected def createProperty(property: String) : Property = {
     model.createProperty(property)
   }
 
-  private def createProperty(property: String, _type: String) : Property = {
+  protected def createProperty(property: String, _type: String) : Property = {
     model.createProperty(property, _type)
   }
 
