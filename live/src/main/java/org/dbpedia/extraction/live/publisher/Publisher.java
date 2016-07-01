@@ -68,6 +68,7 @@ public class Publisher extends Thread{
                         subjectsClear.size() > MAX_QUEUE_SIZE) {
 
                     pageCache.clear();
+
                     flush();
                 }
                 bufferDiff(pubData);

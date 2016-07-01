@@ -7,6 +7,7 @@ import org.dbpedia.extraction.live.feeder.RCStreamFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
 import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
+import org.dbpedia.extraction.live.feeder.FeederRCStream;
 import org.dbpedia.extraction.live.publisher.DiffData;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
@@ -72,13 +73,22 @@ public class Main {
                 LiveOptions.options.get("working_directory")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
+        /*if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
             long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.live.pollInterval"));
             long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.live.sleepInterval"));
             feeders .add( new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
                 LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
                 pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
                 LiveOptions.options.get("working_directory")));
+        }*/
+
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
+            long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.live.pollInterval"));
+            long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.live.sleepInterval"));
+            feeders .add( new FeederRCStream("FeederRCStream", LiveQueuePriority.LivePriority,
+                    LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
+                    pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
+                    LiveOptions.options.get("working_directory"), LiveOptions.options.get("feeder.live.rcStreamUrl"), LiveOptions.options.get("feeder.live.rcStreamSubscribe")));
         }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
@@ -112,7 +122,6 @@ public class Main {
                 p.startProcessor();
 
             publisher = new Publisher("Publisher", 4);
-
             //statistics.startStatistics();
 
             logger.info("DBpedia-Live components started");
