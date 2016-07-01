@@ -16,6 +16,22 @@ object WikiApi
   
   /** name of api.php parameter for revision IDs */
   val RevisionIDs = "revids"
+
+    /** Specify whether you want to set the user agent for queries to the MediaWiki API */
+    private val customUserAgentEnabled =
+      try {
+        System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
+      } catch {
+        case ex : Exception => false
+      }
+
+    /** Specify a custom user agent for queries to the MediaWiki API */
+    private val customUserAgentText =
+    try {
+      System.getProperty("extract.wikiapi.customUserAgent.text", "DBpedia Extraction Framework")
+    } catch {
+      case ex : Exception => "DBpedia Extraction Framework"
+    }
 }
 
 /**
@@ -38,22 +54,6 @@ class WikiApi(url: URL, language: Language)
 
     /** The number of pages which are downloaded per request. MediaWikis usually limit this to a maximum of 50. */
     private val pageDownloadLimit = 50
-
-    /** Specify whether you want to set the user agent for queries to the MediaWiki API */
-    private val customUserAgentEnabled =
-      try {
-        System.getProperty("extract.wikiapi.customUserAgent.enabled", "false").toBoolean
-      } catch {
-        case ex : Exception => false
-      }
-
-    /** Specify a custom user agent for queries to the MediaWiki API */
-    private val customUserAgentText =
-    try {
-      System.getProperty("extract.wikiapi.customUserAgent.text", "DBpedia Extraction Framework")
-    } catch {
-      case ex : Exception => "DBpedia Extraction Framework"
-    }
 
     /**
      * Retrieves all pages with a specific namespace starting from a specific page.
