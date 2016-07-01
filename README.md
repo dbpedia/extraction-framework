@@ -1,4 +1,4 @@
-# DBPedia Information Extraction Framework
+# DBpedia Information Extraction Framework
 
 [![Build Status](https://travis-ci.org/dbpedia/extraction-framework.svg?branch=master)](https://travis-ci.org/dbpedia/extraction-framework)
 
