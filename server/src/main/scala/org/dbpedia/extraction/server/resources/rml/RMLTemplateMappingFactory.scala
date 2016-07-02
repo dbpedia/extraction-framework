@@ -18,6 +18,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   def createMapping(page: PageNode, language: Language, mappings: Mappings): RMLTemplateMapping =
   {
+    println("Loading RML Mapping: " + page.title.encodedWithNamespace)
     val rmlModel = new RMLModel(page.title, page.sourceUri)
     if(mappings.templateMappings.head._2.isInstanceOf[TemplateMapping]) {
       val templateMapping = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping] // :|

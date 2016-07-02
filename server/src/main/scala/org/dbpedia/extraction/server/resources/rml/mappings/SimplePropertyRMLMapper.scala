@@ -4,7 +4,7 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{GeoCoordinatesMapping, SimplePropertyMapping}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.RMLTriplesMap
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLPredicateObjectMap, RMLTriplesMap}
 import org.dbpedia.extraction.server.resources.rml.model.{RMLModel, RMLResourceFactory}
 
 /**
@@ -37,24 +37,13 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
     objectMap.addRMLReference(rmlFactory.createRMLLiteral(mapping.templateProperty))
 
     //add unit if present
-//    if(mapping.unit != null) addUnitToPredicateObjectMap(predicateObjectMap, mapping.unit)
+    if(mapping.unit != null) addUnitToPredicateObjectMap(simplePmPom, mapping.unit)
 
   }
 
-  /**
-    * Returns the base name + name added
-    */
-  private def baseName(name : String): String =
+
+  private def addUnitToPredicateObjectMap(predicateObjectMap: RMLPredicateObjectMap, unit : Datatype): Unit =
   {
-    //"http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/" + name
-    ""
+    //TODO
   }
-/*
-  private def addUnitToPredicateObjectMap(predicateObjectMap: Resource, unit : Datatype): Unit =
-  {
-    val objectMap = modelWrapper.addBlankNode()
-    modelWrapper.addPropertyAsPropertyToResource(objectMap, RdfNamespace.RR.namespace + "parentTriplesMap", unit.uri)
-    modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, RdfNamespace.RR.namespace + "objectMap", objectMap)
-  }
-  */
 }
