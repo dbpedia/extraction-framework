@@ -3,13 +3,13 @@ package org.dbpedia.extraction.server.resources.rml.mappings
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.GeoCoordinatesMapping
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.server.resources.rml.model.RMLModelWrapper
+import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 
-/**
+  /**
   * Creates RML Mapping from GeoCoordinatesMapping and adds the triples to the given model
-  */
-class GeoCoordinatesRMLMapper(modelWrapper: RMLModelWrapper, mapping: GeoCoordinatesMapping) {
-
+  **/
+class GeoCoordinatesRMLMapper(modelWrapper: RMLModel, mapping: GeoCoordinatesMapping) {
+/**
   //TODO: replace latOrLong by enum
 
   def mapToModel() = {
@@ -21,73 +21,75 @@ class GeoCoordinatesRMLMapper(modelWrapper: RMLModelWrapper, mapping: GeoCoordin
   def addGeoCoordinatesMapping() =
   {
     val uri = baseName("")
-    addGeoCoordinatesMappingToTriplesMap(uri, modelWrapper.triplesMap)
+   // addGeoCoordinatesMappingToTriplesMap(uri, modelWrapper.triplesMap)
   }
 
   def addGeoCoordinatesMappingToTriplesMap(uri: String, triplesMap: Resource) =
   {
-
+    
     val uniqueUri = uri + "GeoCoordinatesMapping/" + checkForOntologyProperty
-
-    //add pom to triples map
+ 
+ //add pom to triples map
     val geoCoordinatesPom = modelWrapper.addPredicateObjectMap(uniqueUri)
     modelWrapper.addResourceAsPropertyToResource(triplesMap, RdfNamespace.RR.namespace + "predicateObjectMap", geoCoordinatesPom)
-
-    //add dcterms:type to predicate
+ 
+ //add dcterms:type to predicate
     modelWrapper.addPropertyAsPropertyToResource(geoCoordinatesPom, RdfNamespace.DCTERMS.namespace + "type", RdfNamespace.DCTERMS.namespace + "geoCoordinatesMapping")
-
-    //add predicate to pom
+ 
+ //add predicate to pom
     modelWrapper.addPropertyAsPropertyToResource(geoCoordinatesPom, RdfNamespace.RR.namespace + "predicate", mapping.ontologyProperty.uri)
-
-    //add object map to pom
+ 
+ //add object map to pom
     val objectMap = modelWrapper.addBlankNode()
     modelWrapper.addResourceAsPropertyToResource(geoCoordinatesPom, RdfNamespace.RR.namespace + "objectMap", objectMap)
-
-    if(mapping.coordinates != null) {
-
-      //add triples map to object map
+ 
+ if(mapping.coordinates != null) {
+ 
+ //add triples map to object map
       val parenTriplesMapUri = uniqueUri + "/ParentTriplesMap"
       val parentTriplesMap = modelWrapper.addTriplesMap(parenTriplesMapUri)
       modelWrapper.addResourceAsPropertyToResource(objectMap, RdfNamespace.RR.namespace + "parentTriplesMap", parentTriplesMap)
-
-      //add logical source to paren triples map
+ 
+ //add logical source to paren triples map
       modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RML.namespace + "logicalSource", modelWrapper.logicalSource)
-
-      //add subject map to parent triples map
+ 
+ //add subject map to parent triples map
       modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RR.namespace + "subjectMap", modelWrapper.subjectMap)
-
-      val coordinatesUri = uniqueUri + "/coordinates"
-
-      //first case: pair of coordinates is given
+ 
+ val coordinatesUri = uniqueUri + "/coordinates"
+ 
+ //first case: pair of coordinates is given
       addLatitudeOrLongitude(parentTriplesMap, coordinatesUri, "lat")
       addLatitudeOrLongitude(parentTriplesMap, coordinatesUri, "long")
-
-
-    } else if (mapping.latitude != null && mapping.longitude != null) {
-
-      modelWrapper.addLiteralAsPropertyToResource(objectMap, RdfNamespace.RML.namespace + "reference" ,"latitude")
-
-    } else {
-
-      //add triples map to object map
+ 
+ 
+ } else if (mapping.latitude != null && mapping.longitude != null) {
+ 
+ modelWrapper.addLiteralAsPropertyToResource(objectMap, RdfNamespace.RML.namespace + "reference" ,"latitude")
+ 
+ } else {
+ 
+ //add triples map to object map
       val parenTriplesMapUri = uniqueUri + "/ParentTriplesMap"
       val parentTriplesMap = modelWrapper.addTriplesMap(parenTriplesMapUri)
       modelWrapper.addResourceAsPropertyToResource(objectMap, RdfNamespace.RR.namespace + "parentTriplesMap", parentTriplesMap)
-
-      //add logical source to paren triples map
+ 
+ //add logical source to paren triples map
       modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RML.namespace + "logicalSource", modelWrapper.logicalSource)
-
-      //add subject map to parent triples map
+ 
+ //add subject map to parent triples map
       modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RR.namespace + "subjectMap", modelWrapper.subjectMap)
-
-      val coordinatesUri = uniqueUri + "/degrees"
+ 
+ val coordinatesUri = uniqueUri + "/degrees"
       //third case: degrees are given for calculating longitude and latitude
-
-      addCoordinateProperties(parentTriplesMap, coordinatesUri, "lat")
-
-      addCoordinateProperties(parentTriplesMap, coordinatesUri, "long")
-
-    }
+ 
+ addCoordinateProperties(parentTriplesMap, coordinatesUri, "lat")
+ 
+ addCoordinateProperties(parentTriplesMap, coordinatesUri, "long")
+ 
+ }
+      /
+    //TODO: reimplement
   }
 
 
@@ -281,12 +283,12 @@ class GeoCoordinatesRMLMapper(modelWrapper: RMLModelWrapper, mapping: GeoCoordin
     }
   }
 
-  /**
-    * Returns the base name + name added
-    */
+  
+     Returns the base name + name added
+    /
   private def baseName(name : String): String =
   {
     "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/" + name
   }
-
+  **/
 }

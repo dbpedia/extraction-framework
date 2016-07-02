@@ -3,12 +3,13 @@ package org.dbpedia.extraction.server.resources.rml.mappings
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.DateIntervalMapping
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.server.resources.rml.model.RMLModelWrapper
+import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 
 /**
   * Creates RML Mapping from DateIntervalMappings and adds the triples to the given model
   */
-class DateIntervalRMLMapper(modelWrapper: RMLModelWrapper, mapping: DateIntervalMapping) {
+class DateIntervalRMLMapper(modelWrapper: RMLModel, mapping: DateIntervalMapping) {
+  /**
 
   def mapToModel() = {
     addDateIntervalMapping()
@@ -131,5 +132,7 @@ class DateIntervalRMLMapper(modelWrapper: RMLModelWrapper, mapping: DateInterval
   {
     "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/" + name
   }
+
+  **/
 
 }

@@ -65,7 +65,7 @@ object RdfNamespace {
   val MAPPINGS = ns("mappings", "http://mappings.dbpedia.org/wiki/", false)
   val D0 = ns("d0", "http://www.ontologydesignpatterns.org/ont/d0.owl#", false)
   val DUL = ns("dul", "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#", false)
-  val RR = ns("rr", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+  val RR = ns("rr", "http://www.w3.org/ns/r2rml#")
   val RML = ns("rml", "http://semweb.mmlab.be/ns/rml#")
   val QL = ns("ql", "http://semweb.mmlab.be/ns/ql#")
   val DBO = ns("dbo", "http://dbpedia.org/ontology/")

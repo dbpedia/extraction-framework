@@ -3,12 +3,14 @@ package org.dbpedia.extraction.server.resources.rml.mappings
 import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.server.resources.rml.model.RMLModelWrapper
+import org.dbpedia.extraction.server.resources.rml.model.{RMLModel, RMLResourceFactory}
 
 /**
   * Created by wmaroy on 30.06.16.
   */
-class IntermediateNodeMapper(modelWrapper: RMLModelWrapper, mapping: IntermediateNodeMapping) {
+class IntermediateNodeMapper(rmlFactory: RMLResourceFactory, modelWrapper: RMLModel, mapping: IntermediateNodeMapping) {
+
+  /**
 
   def mapToModel() = {
     addIntermediateNodeMapping()
@@ -48,7 +50,7 @@ class IntermediateNodeMapper(modelWrapper: RMLModelWrapper, mapping: Intermediat
   private def addPropertyMapping(mapping: PropertyMapping, triplesMap: Resource) =
   {
     mapping.getClass.getSimpleName match {
-      case "SimplePropertyMapping" => new SimplePropertyRMLMapper(modelWrapper, mapping.asInstanceOf[SimplePropertyMapping])addSimplePropertyMappingToTriplesMap(triplesMap.getNameSpace, triplesMap)
+      case "SimplePropertyMapping" => new SimplePropertyRMLMapper(rmlFactory, mapping.asInstanceOf[SimplePropertyMapping]).addSimplePropertyMappingToTriplesMap(triplesMap.getNameSpace, triplesMap)
       case "CalculateMapping" => println("Intermediate Calculate Mapping not supported.")
       case "CombineDateMapping" => println("Intermediate Combine Date Mapping not supported.")
       case "DateIntervalMapping" => new DateIntervalRMLMapper(modelWrapper, mapping.asInstanceOf[DateIntervalMapping]).addDateIntervalMappingToTriplesMap(triplesMap.getNameSpace, triplesMap)
@@ -66,5 +68,5 @@ class IntermediateNodeMapper(modelWrapper: RMLModelWrapper, mapping: Intermediat
   {
     "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/" + name
   }
-
+  **/
 }

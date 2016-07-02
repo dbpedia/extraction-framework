@@ -1,14 +1,19 @@
-package org.dbpedia.extraction.server.resources.rml.model
+package org.dbpedia.extraction.server.resources.rml.model.rmlresources
 
-import org.apache.jena.rdf.model.{Model, Property, Resource}
+import org.apache.jena.rdf.model.{Property, Resource}
+import org.dbpedia.extraction.server.resources.rml.model.RMLResourceFactory
 
 /**
   * Represents a wrapper around a model resource
   */
-class RMLResource(resource: Resource) {
+class RMLResource(val resource: Resource) {
 
   protected val model = resource.getModel
   protected val factory = new RMLResourceFactory(model)
+
+  private val _uri = new RMLUri(resource.getURI)
+
+  def uri = _uri
 
   def addLiteral(predicate: String, literal: String): RMLResource = {
     resource.addProperty(createProperty(predicate), literal)

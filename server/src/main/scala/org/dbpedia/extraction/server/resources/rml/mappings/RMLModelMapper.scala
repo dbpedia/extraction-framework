@@ -4,19 +4,16 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.server.resources.rml.model.RMLModelWrapper
+import org.dbpedia.extraction.server.resources.rml.model.{RMLModel, RMLResourceFactory}
 
 /**
   * Class that adds rml mappings to a ModelWrapper
   */
-class RMLModelMapper(modelWrapper: RMLModelWrapper) {
-
-
-  //TODO: this needs to be refactored into seperate classes
+class RMLModelMapper(rmlModel: RMLModel) {
 
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
-    new SimplePropertyRMLMapper(modelWrapper, mapping).mapToModel()
+    new SimplePropertyRMLMapper(rmlModel, mapping).mapToModel()
   }
 
   def addCalculateMapping(mapping: CalculateMapping) =
@@ -35,13 +32,13 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addDateIntervalMapping(mapping: DateIntervalMapping) =
   {
-    new DateIntervalRMLMapper(modelWrapper, mapping).mapToModel()
+    //new DateIntervalRMLMapper(modelWrapper, mapping).mapToModel()
   }
 
 
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
   {
-    new GeoCoordinatesRMLMapper(modelWrapper, mapping).mapToModel()
+    //new GeoCoordinatesRMLMapper(modelWrapper, mapping).mapToModel()
   }
 
 
@@ -54,7 +51,7 @@ class RMLModelMapper(modelWrapper: RMLModelWrapper) {
 
   def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) =
   {
-    new IntermediateNodeMapper(modelWrapper, mapping).mapToModel()
+    //new IntermediateNodeMapper(modelWrapper, mapping).mapToModel()
   }
 
 

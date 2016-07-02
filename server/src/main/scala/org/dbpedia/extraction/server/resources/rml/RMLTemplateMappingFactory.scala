@@ -4,6 +4,8 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.mappings.RMLModelMapper
+import org.dbpedia.extraction.server.resources.rml.model.RMLModel
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLPredicateObjectMap, RMLUri}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.PageNode
 
@@ -12,97 +14,73 @@ import org.dbpedia.extraction.wikiparser.PageNode
   */
 class RMLTemplateMappingFactory extends RMLMappingFactory {
 
-  private var templateMapping: TemplateMapping = null
-  private var mapper: RMLModelMapper = null
 
 
-  /**
-    * Creates the context in this factory and creates the mapping from it
-    */
   def createMapping(page: PageNode, language: Language, mappings: Mappings): RMLTemplateMapping =
   {
-    this.page = page
-    this.language = language
-    this.templateMapping = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping] // :|
-    createMapping()
+    val rmlModel = new RMLModel(page.title, page.sourceUri)
+    if(mappings.templateMappings.head._2.isInstanceOf[TemplateMapping]) {
+      val templateMapping = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping] // :|
+      setupMapping(rmlModel, templateMapping)
+    }
+    new RMLTemplateMapping(rmlModel)
   }
 
-  /**
-    * Create the mapping
-    */
-  private def createMapping(): RMLTemplateMapping =
+  private def setupMapping(rmlModel: RMLModel, templateMapping: TemplateMapping) =
   {
-    createNewModelWithTriplesMap()
-    defineTriplesMap() //sets details of the triples map
-    addPropertyMappings()
-    createRMLTemplateMapping
+    defineTriplesMap(rmlModel, templateMapping) //sets details of the triples map
+    addPropertyMappings(rmlModel, templateMapping)
   }
 
-  private def defineTriplesMap() =
+  private def defineTriplesMap(rMLModel: RMLModel, templateMapping: TemplateMapping) =
   {
-    defineSubjectMap()
-    defineLogicalSource()
+    defineSubjectMap(rMLModel, templateMapping)
+    defineLogicalSource(rMLModel)
   }
 
-  private def defineSubjectMap() =
+  private def defineSubjectMap(rmlModel: RMLModel, templateMapping: TemplateMapping) =
   {
-    modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, RdfNamespace.RR.namespace + "constant", page.title.resourceIri)
-    modelWrapper.addPropertyAsPropertyToResource(modelWrapper.subjectMap, RdfNamespace.RR.namespace + "class", templateMapping.mapToClass.uri)
-    addCorrespondingPropertyAndClassToSubjectMap()
+    rmlModel.subjectMap.addConstant(rmlModel.rmlFactory.createRMLUri(rmlModel.wikiTitle.resourceIri))
+    rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
+    addCorrespondingPropertyAndClassToSubjectMap(rmlModel, templateMapping)
   }
 
-  private def defineLogicalSource() =
+  private def defineLogicalSource(rMLModel: RMLModel) =
   {
-    modelWrapper.addPropertyAsPropertyToResource(modelWrapper.logicalSource, RdfNamespace.RML.namespace + "source", page.sourceUri)
+    rMLModel.logicalSource.addSource(rMLModel.rmlFactory.createRMLUri(rMLModel.sourceUri))
   }
 
-  private def addPropertyMappings() =
+  private def addPropertyMappings(rMLModel: RMLModel, templateMapping: TemplateMapping) =
   {
-    updateModelMapper()
+    val mapper = new RMLModelMapper(rMLModel)
     for(mapping <- templateMapping.mappings) {
-      addPropertyMapping(mapping)
+      addPropertyMapping(mapper, mapping)
     }
   }
 
-  private def updateModelMapper() =
-  {
-    mapper = new RMLModelMapper(modelWrapper)
-  }
-
-  private def addCorrespondingPropertyAndClassToSubjectMap() =
+  private def addCorrespondingPropertyAndClassToSubjectMap(rmlModel: RMLModel, templateMapping: TemplateMapping) =
   {
     if(templateMapping.correspondingProperty != null) {
-      val predicateObjectMap = modelWrapper.addPredicateObjectMap("correspondingProperty")
-      modelWrapper.addPropertyAsPropertyToResource(predicateObjectMap, RdfNamespace.RR.namespace + "predicate", templateMapping.correspondingProperty.uri)
-      addCorrespondingClassToPredicateObjectMap(predicateObjectMap)
+      val predicateObjectMap = rmlModel.triplesMap.addPredicateObjectMap(new RMLUri(rmlModel.wikiTitle.resourceIri + "/CorrespondingProperty"))
+      predicateObjectMap.addPredicate(new RMLUri(templateMapping.correspondingProperty.uri))
+      addCorrespondingClassToPredicateObjectMap(rmlModel, predicateObjectMap: RMLPredicateObjectMap, templateMapping: TemplateMapping)
     }
   }
 
-  private def addCorrespondingClassToPredicateObjectMap(predicateObjectMap: Resource) =
+  private def addCorrespondingClassToPredicateObjectMap(rMLModel: RMLModel, predicateObjectMap: RMLPredicateObjectMap, templateMapping: TemplateMapping) =
   {
     if(templateMapping.correspondingClass != null) {
-      val objectMap = modelWrapper.addBlankNode()
-      modelWrapper.addResourceAsPropertyToResource(predicateObjectMap, RdfNamespace.RR.namespace + "objectMap", objectMap)
-      val parentTriplesMap = modelWrapper.addBlankNode()
-      modelWrapper.addResourceAsPropertyToResource(objectMap, RdfNamespace.RR.namespace + "parentTriplesMap", parentTriplesMap)
-
-      //add subject map to parent triples map
-      val subjectMap = modelWrapper.addBlankNode()
-      modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RR.namespace + "subjectMap", subjectMap)
-
-      //add class to subject map
-      modelWrapper.addPropertyAsPropertyToResource(subjectMap, RdfNamespace.RR.namespace + "class", templateMapping.correspondingClass.uri)
-
-      //add logical source to subject to parent triples map
-      modelWrapper.addResourceAsPropertyToResource(parentTriplesMap, RdfNamespace.RML.namespace + "logicalSource", modelWrapper.logicalSource)
+      val objectMap = predicateObjectMap.addObjectMap(predicateObjectMap.uri.extend("/ObjectMap"))
+      val parentTriplesMap = objectMap.addParentTriplesMap(objectMap.uri.extend("/ParentTriplesMap"))
+      val subjectMap = parentTriplesMap.addSubjectMap(parentTriplesMap.uri.extend("/SubjectMap"))
+      subjectMap.addClass(new RMLUri(templateMapping.correspondingClass.uri))
+      parentTriplesMap.addLogicalSource(rMLModel.logicalSource)
     }
   }
 
 
-  private def addPropertyMapping(mapping: PropertyMapping) =
+  private def addPropertyMapping(mapper: RMLModelMapper, mapping: PropertyMapping) =
   {
-
-    //println(mapping.getClass.getSimpleName) //TODO: remove, this is for debug purposes
 
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => mapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])

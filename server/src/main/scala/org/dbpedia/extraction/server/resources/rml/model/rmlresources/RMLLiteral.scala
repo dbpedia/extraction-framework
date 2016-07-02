@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.server.resources.rml.model
+package org.dbpedia.extraction.server.resources.rml.model.rmlresources
 
 /**
   * Represents a literal
