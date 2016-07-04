@@ -34,6 +34,11 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
     subjectMapResource
   }
 
+  def addSubjectMap(subjectMap: RMLSubjectMap) =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RML.namespace + "subjectMap"), subjectMap.resource)
+  }
+
 
 
 

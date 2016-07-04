@@ -15,7 +15,7 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
 
   def addPredicate(literal: RMLLiteral) =
   {
-    resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "predicate"), literal)
+    resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "predicate"), literal.toString())
   }
 
   def addObjectMap(uri: RMLUri) : RMLObjectMap =
@@ -23,6 +23,13 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
     val objectMap = factory.createRMLObjectMap(uri)
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "objectMap"), objectMap.resource)
     objectMap
+  }
+
+  def addConditionalMap(uri: RMLUri) : RMLConditionalObjectMap =
+  {
+    val conditionalMap = factory.createRMLConditionalObjectMap(uri)
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "objectMap"), conditionalMap.resource)
+    conditionalMap
   }
 
   def addDCTermsType(literal: RMLLiteral) = {

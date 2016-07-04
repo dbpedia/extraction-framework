@@ -20,9 +20,28 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
     parentTriplesMap
   }
 
-  def addConstant(literal: RMLLiteral) =
+  def addConstant(literal: RMLLiteral) : RMLObjectMap =
   {
     resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "constant"), literal.toString())
+    this
+  }
+
+  def addConstant(uri: RMLUri) : RMLObjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "constant"), createProperty(uri.toString()))
+    this
+  }
+
+  def addIRITermType() : RMLObjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "IRI"))
+    this
+  }
+
+  def addLiteralTermType() : RMLObjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "Literal"))
+    this
   }
 
 }
