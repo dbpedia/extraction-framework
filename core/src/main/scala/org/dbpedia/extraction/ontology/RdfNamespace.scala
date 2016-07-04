@@ -72,6 +72,7 @@ object RdfNamespace {
   val FNML = ns("fnml", "http://semweb.mmlab.be/ns/fnml#")
   val FNO = ns("fno", "http://w3id.org/function/ontology/")
   val DBF = ns("dbf", "http://dbpedia.org/function/")
+  val CRML = ns("crml", "http://semweb.mmlab.be/ns/crml#")
 
   //the following namespaces are required for supporting the entries in the mappings Wiki as of 2014-07-15
   val CIDOCCRM = ns("cidoccrm", "http://purl.org/NET/cidoc-crm/core#", false)

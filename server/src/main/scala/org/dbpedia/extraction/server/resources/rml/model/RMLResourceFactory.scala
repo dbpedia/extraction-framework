@@ -39,6 +39,16 @@ class RMLResourceFactory(model: Model) {
     new RMLObjectMap(model.createResource(uri.toString(), createProperty(RdfNamespace.RR.namespace + "ObjectMap")))
   }
 
+  def createRMLConditionalObjectMap(uri: RMLUri) : RMLConditionalObjectMap =
+  {
+    new RMLConditionalObjectMap(model.createResource(uri.toString(), createProperty(RdfNamespace.RR.namespace + "ObjectMap")))
+  }
+
+  def createRMLFunctionTermMap(uri: RMLUri) : RMLFunctionTermMap =
+  {
+    new RMLFunctionTermMap(model.createResource(uri.toString(), createProperty(RdfNamespace.FNML.namespace + "FunctionTermMap")))
+  }
+
   def createRMLUri(uri: String) : RMLUri =
   {
     new RMLUri(uri)

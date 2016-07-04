@@ -20,4 +20,9 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
     parentTriplesMap
   }
 
+  def addConstant(literal: RMLLiteral) =
+  {
+    resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "constant"), literal.toString())
+  }
+
 }
