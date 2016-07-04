@@ -1,4 +1,4 @@
-package org.dbpedia.extraction.server.resources.rml
+package org.dbpedia.extraction.server.resources.rml.model
 
 /**
   * RMLMappings converted from DBpedia mappings

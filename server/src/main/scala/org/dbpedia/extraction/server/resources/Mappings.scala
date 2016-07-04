@@ -17,7 +17,7 @@ import java.lang.Exception
 import xml.{Elem, NodeBuffer, ProcInstr, XML}
 import java.io.StringWriter
 
-import org.dbpedia.extraction.server.resources.rml.RMLTemplateMappingFactory
+import org.dbpedia.extraction.server.resources.rml.model.factories.RMLTemplateMappingFactory
 
 /**
  * TODO: merge Extraction.scala and Mappings.scala

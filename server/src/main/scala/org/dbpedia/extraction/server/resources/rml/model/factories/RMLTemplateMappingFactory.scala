@@ -1,11 +1,9 @@
-package org.dbpedia.extraction.server.resources.rml
+package org.dbpedia.extraction.server.resources.rml.model.factories
 
-import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.mappings.RMLModelMapper
-import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLPredicateObjectMap, RMLUri}
+import org.dbpedia.extraction.server.resources.rml.model.{RMLModel, RMLTemplateMapping}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.PageNode
 
