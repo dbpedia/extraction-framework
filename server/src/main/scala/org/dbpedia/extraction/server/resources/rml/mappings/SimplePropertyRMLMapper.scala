@@ -12,8 +12,6 @@ import org.dbpedia.extraction.server.resources.rml.model.{RMLModel, RMLResourceF
   */
 class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping) {
 
-  private val rmlFactory = rmlModel.rmlFactory
-
   def mapToModel() = {
     addSimplePropertyMapping()
   }
@@ -68,6 +66,8 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
 
     //add unit if present
     if(mapping.unit != null) addUnitToPredicateObjectMap(simplePmPom, mapping.unit)
+
+    //TODO other parameters
 
   }
 

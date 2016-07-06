@@ -32,7 +32,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
 
   def addDateIntervalMapping(mapping: DateIntervalMapping) =
   {
-    //new DateIntervalRMLMapper(modelWrapper, mapping).mapToModel()
+    new DateIntervalRMLMapper(rmlModel, mapping).mapToModel()
   }
 
 
@@ -51,7 +51,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
 
   def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) =
   {
-    //new IntermediateNodeMapper(modelWrapper, mapping).mapToModel()
+    new IntermediateNodeMapper(rmlModel, mapping).mapToModel()
   }
 
 

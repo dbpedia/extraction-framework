@@ -4,12 +4,13 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.DateIntervalMapping
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLTriplesMap, RMLUri}
 
 /**
   * Creates RML Mapping from DateIntervalMappings and adds the triples to the given model
   */
-class DateIntervalRMLMapper(modelWrapper: RMLModel, mapping: DateIntervalMapping) {
-  /**
+class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
+
 
   def mapToModel() = {
     addDateIntervalMapping()
@@ -17,122 +18,68 @@ class DateIntervalRMLMapper(modelWrapper: RMLModel, mapping: DateIntervalMapping
 
   def addDateIntervalMapping() =
   {
-    val uniqueUri= baseName("")
-    addDateIntervalMappingToTriplesMap(uniqueUri, modelWrapper.triplesMap)
+    val uri = rmlModel.wikiTitle.resourceIri
+    addDateIntervalMappingToTriplesMap(uri, rmlModel.triplesMap)
   }
 
-  def addDateIntervalMappingToTriplesMap(uri: String, triplesMap : Resource) =
-  {
+  def addDateIntervalMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
 
-    //create predicate object map for date
-    val uniqueUri = uri + "dateInterval/" + mapping.startDateOntologyProperty.name + "/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name
-    val dateIntervalPom = modelWrapper.addPredicateObjectMap(uniqueUri)
-    modelWrapper.addResourceAsPropertyToResource(triplesMap, RdfNamespace.RR.namespace + "predicateObjectMap", dateIntervalPom)
+    val startUri = new RMLUri(uri + "/StartDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name)
+    val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
+    startDateIntervalPom.addDCTermsType(new RMLLiteral("dateInvervalMapping"))
+    startDateIntervalPom.addPredicate(new RMLUri(mapping.startDateOntologyProperty.uri))
 
-    //add dcterms:type to predicate
-    modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, RdfNamespace.DCTERMS.namespace + "type", RdfNamespace.DBF.namespace + "dateIntervalMapping")
+    val endUri = new RMLUri(uri + "/EndDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name)
+    val endDateIntervalPom = triplesMap.addPredicateObjectMap(endUri)
+    endDateIntervalPom.addDCTermsType(new RMLLiteral("dateIntervalMapping"))
+    endDateIntervalPom.addPredicate(new RMLUri(mapping.endDateOntologyProperty.uri))
 
-    //add predicate to start date pom
-    modelWrapper.addPropertyAsPropertyToResource(dateIntervalPom, RdfNamespace.RR.namespace + "predicate", RdfNamespace.DBF.namespace + "something")
+    startDateIntervalPom.addDBFEndDate(endDateIntervalPom)
+    endDateIntervalPom.addDBFStartDate(startDateIntervalPom)
 
-    //add object map to start date pom
-    val objectMapStartString= uniqueUri + "/" + "IntervalFunctionMap"
-    val objectMapStart = modelWrapper.addResourceWithPredicate(objectMapStartString, RdfNamespace.FNML.namespace + "FunctionTermMap")
-    modelWrapper.addResourceAsPropertyToResource(dateIntervalPom, RdfNamespace.RR.namespace + "objectMap", objectMapStart)
+    val startFunctionTermMapUri = startUri.extend("/FunctionTermMap")
+    val startFunctionTermMap = startDateIntervalPom.addFunctionTermMap(startFunctionTermMapUri)
 
-    //add triples map to object map
-    val triplesMapStartString = objectMapStartString + "/TriplesMap"
-    val triplesMapStart = modelWrapper.addTriplesMap(triplesMapStartString)
-    modelWrapper.addResourceAsPropertyToResource(objectMapStart, RdfNamespace.FNML.namespace + "functionValue", triplesMapStart)
+    val endFunctionTermMapUri = endUri.extend("/FunctionTermMap")
+    val endFunctionTermMap = endDateIntervalPom.addFunctionTermMap(endFunctionTermMapUri)
 
-    //add logical source to triples map
-    modelWrapper.addResourceAsPropertyToResource(triplesMapStart, RdfNamespace.RML.namespace + "logicalSource", modelWrapper.logicalSource)
+    val startFunctionValueUri = startFunctionTermMapUri.extend("/FunctionValue")
+    val startFunctionValue = startFunctionTermMap.addFunctionValue(startFunctionTermMapUri)
 
-    /**
-      * add subject map
-      */
+    val endFunctionValueUri = endFunctionTermMapUri.extend("/FunctionValue")
+    val endFunctionValue = endFunctionTermMap.addFunctionValue(endFunctionValueUri)
 
-    //add subject map to triples map
-    val subjectMapStartString = triplesMapStartString + "/SubjectMap"
-    val subjectMap = modelWrapper.addResource(subjectMapStartString)
-    modelWrapper.addResourceAsPropertyToResource(triplesMapStart, RdfNamespace.RR.namespace + "subjectMap", subjectMap)
+    startFunctionValue.addLogicalSource(rmlModel.logicalSource)
+    startFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
-    //add termtype and class to subject map
-    modelWrapper.addPropertyAsPropertyToResource(subjectMap, RdfNamespace.RR.namespace + "termType", RdfNamespace.RR.namespace + "BlankNode")
-    modelWrapper.addPropertyAsPropertyToResource(subjectMap, RdfNamespace.RR.namespace + "class", RdfNamespace.FNO.namespace + "Execution")
+    val startExecutePomUri = startFunctionValueUri.extend("/ExecutePOM")
+    val startExecutePom = startFunctionValue.addPredicateObjectMap(startExecutePomUri)
+    startExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    val startExecuteObjectMapUri = startExecutePomUri.extend("/ObjectMap")
+    startExecutePom.addObjectMap(startExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + "functionStartDate"))
 
-    /**
-      * add function pom
-      */
+    val startParameterPomUri = startFunctionValueUri.extend("/ParameterPOM")
+    val startParameterPom = startFunctionValue.addPredicateObjectMap(startParameterPomUri)
+    startParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace+ "parameter"))
+    val startParameterObjectMapUri = startParameterPomUri.extend("/ObjectMap")
+    startParameterPom.addObjectMap(startParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
 
-    //add pom blank node to triples map
-    val pomBlankNode = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(triplesMapStart, RdfNamespace.RR.namespace + "predicateObjectMap", pomBlankNode)
-    modelWrapper.addPropertyAsPropertyToResource(pomBlankNode, RdfNamespace.RR.namespace + "predicate", RdfNamespace.FNO.namespace + "executes")
+    endFunctionValue.addLogicalSource(rmlModel.logicalSource)
+    endFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
-    //add object map blank node to pom blank node
-    val omBlankNode = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(pomBlankNode, RdfNamespace.RR.namespace + "objectMap", omBlankNode)
-    modelWrapper.addPropertyAsPropertyToResource(omBlankNode, RdfNamespace.RR.namespace + "constant", RdfNamespace.DBF.namespace + "functionStartEndDate")
+    val endExecutePomUri = endFunctionValueUri.extend("/ExecutePOM")
+    val endExecutePom = endFunctionValue.addPredicateObjectMap(endExecutePomUri)
+    endExecutePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    val endExecuteObjectMapUri = endExecutePomUri.extend("/ObjectMap")
+    endExecutePom.addObjectMap(endExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + "functionEndDate"))
 
-    /**
-      * add start pom
-      */
-
-    //add pom blank node 2 to triples map
-    val pomBlankNode2 = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(triplesMapStart, RdfNamespace.RR.namespace + "predicateObjectMap", pomBlankNode2)
-
-    //add predicate to pom blank node 2
-    modelWrapper.addPropertyAsPropertyToResource(pomBlankNode2, RdfNamespace.RR.namespace + "predicate", RdfNamespace.DBF.namespace + "startParameter")
-
-    //add object map blank node to pom blank node 2
-    val omBlankNode2 = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(pomBlankNode2, RdfNamespace.RR.namespace + "objectMap", omBlankNode2)
-    modelWrapper.addLiteralAsPropertyToResource(omBlankNode2, RdfNamespace.RR.namespace + "constant", mapping.startDateOntologyProperty.uri)
-
-    /**
-      * add end property pom
-      */
-
-    //add pom blank node 3 to triples map
-    val pomBlankNode3 = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(triplesMapStart, RdfNamespace.RR.namespace + "predicateObjectMap", pomBlankNode3)
-
-    //add predicate to pom blank node 3
-    modelWrapper.addPropertyAsPropertyToResource(pomBlankNode3, RdfNamespace.RR.namespace + "predicate", RdfNamespace.DBF.namespace + "endParameter")
-
-    //add object map blank node to pom blank node 3
-    val omBlankNode3 = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(pomBlankNode3, RdfNamespace.RR.namespace + "objectMap", omBlankNode3)
-    modelWrapper.addLiteralAsPropertyToResource(omBlankNode3, RdfNamespace.RR.namespace + "constant", mapping.endDateOntologyProperty.uri)
-
-    /**
-      * add property pom
-      */
-
-    //add pom blank node 4 to triples map
-    val pomBlankNode4 = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(triplesMapStart, RdfNamespace.RR.namespace + "predicateObjectMap", pomBlankNode4)
-
-    //add predicate to pom blank node 4
-    modelWrapper.addPropertyAsPropertyToResource(pomBlankNode4, RdfNamespace.RR.namespace + "predicate", RdfNamespace.DBF.namespace + "propertyParameter")
-
-    //add object map blank node to pom blank node 4
-    val omBlankNode4 = modelWrapper.addBlankNode()
-    modelWrapper.addResourceAsPropertyToResource(pomBlankNode4, RdfNamespace.RR.namespace + "objectMap", omBlankNode4)
-    modelWrapper.addLiteralAsPropertyToResource(omBlankNode4, RdfNamespace.RR.namespace + "constant", mapping.templateProperty)
+    val endParameterPomUri = endFunctionValueUri.extend("/ParameterPOM")
+    val endParameterPom = endFunctionValue.addPredicateObjectMap(endParameterPomUri)
+    endParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace+ "parameter"))
+    val endParameterObjectMapUri = endParameterPomUri.extend("/ObjectMap")
+    endParameterPom.addObjectMap(endParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
 
   }
 
-  /**
-    * Returns the base name + name added
-    */
-  private def baseName(name : String): String =
-  {
-    "http://mappings.dbpedia.org/wiki/" + modelWrapper.wikiTitle.encodedWithNamespace + "/" + name
-  }
-
-  **/
 
 }

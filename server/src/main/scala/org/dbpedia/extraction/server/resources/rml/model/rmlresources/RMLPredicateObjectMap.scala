@@ -32,8 +32,30 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
     conditionalMap
   }
 
+  def addFunctionTermMap(uri: RMLUri) : RMLFunctionTermMap =
+  {
+    val functionTermMap = factory.createRMLFunctionTermMap(uri)
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "objectMap"), functionTermMap.resource)
+    functionTermMap
+  }
+
   def addDCTermsType(literal: RMLLiteral) = {
     resource.addLiteral(createProperty(RdfNamespace.DCTERMS.namespace + "type"), literal.toString())
+  }
+
+  def addDBFStartDate(predicateObjectMap: RMLPredicateObjectMap) =
+  {
+    resource.addProperty(createProperty(RdfNamespace.DBF.namespace + "startDate"), predicateObjectMap.resource)
+  }
+
+  def addDBFEndDate(predicateObjectMap: RMLPredicateObjectMap) =
+  {
+    resource.addProperty(createProperty(RdfNamespace.DBF.namespace + "endDate"), predicateObjectMap.resource)
+  }
+
+  def addPartner(predicateObjectMap: RMLPredicateObjectMap) =
+  {
+    resource.addProperty(createProperty(RdfNamespace.DBF.namespace + "partner"), predicateObjectMap.resource)
   }
 
 }
