@@ -4,7 +4,7 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.server.resources.rml.model.{RMLModel, RMLResourceFactory}
+import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 
 /**
   * Class that adds rml mappings to a ModelWrapper

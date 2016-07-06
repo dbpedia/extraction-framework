@@ -2,6 +2,7 @@ package org.dbpedia.extraction.server.resources.rml.model
 
 import org.apache.jena.rdf.model.{Property, Resource}
 import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.server.resources.rml.model.factories.RMLResourceFactory
 import org.dbpedia.extraction.server.resources.rml.model.rmlresources._
 import org.dbpedia.extraction.wikiparser.WikiTitle
 

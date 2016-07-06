@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server.resources.rml.model.rmlresources
 
 import org.apache.jena.rdf.model.{Property, Resource}
-import org.dbpedia.extraction.server.resources.rml.model.RMLResourceFactory
+import org.dbpedia.extraction.server.resources.rml.model.factories.RMLResourceFactory
 
 /**
   * Represents a wrapper around a model resource

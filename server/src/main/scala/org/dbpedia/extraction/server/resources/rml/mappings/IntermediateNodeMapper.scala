@@ -4,7 +4,7 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLTriplesMap, RMLUri}
-import org.dbpedia.extraction.server.resources.rml.model.{RMLModel, RMLResourceFactory}
+import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 
 /**
   * IntermediateNodeMapper
@@ -31,8 +31,11 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
     val parentTriplesMapUri = intermediateNodeObjectMapUri.extend("/ParentTriplesMap")
     val parentTriplesMap = interMediateNodeObjectMap.addParentTriplesMap(parentTriplesMapUri)
     parentTriplesMap.addLogicalSource(rmlModel.logicalSource)
-    parentTriplesMap.addSubjectMap(rmlModel.functionSubjectMap)
 
+    val parentSubjectMap = parentTriplesMap.addSubjectMap(parentTriplesMapUri.extend("/SubjectMap"))
+    parentSubjectMap.addClass(new RMLUri(mapping.nodeClass.uri))
+    parentSubjectMap.addTermTypeIRI()
+    parentSubjectMap.addConstant(new RMLLiteral(rmlModel.wikiTitle.resourceIri + "/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name))
 
     //create the intermediate mappings
     for(mapping <- mapping.mappings) {

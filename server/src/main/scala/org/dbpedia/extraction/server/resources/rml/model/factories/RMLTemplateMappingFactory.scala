@@ -39,8 +39,9 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
 
   private def defineSubjectMap(rmlModel: RMLModel, templateMapping: TemplateMapping) =
   {
-    rmlModel.subjectMap.addConstant(rmlModel.rmlFactory.createRMLUri(rmlModel.wikiTitle.resourceIri))
+    rmlModel.subjectMap.addConstant(rmlModel.rmlFactory.createRMLLiteral(rmlModel.wikiTitle.resourceIri))
     rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
+    rmlModel.subjectMap.addTermTypeIRI()
     addCorrespondingPropertyAndClassToSubjectMap(rmlModel, templateMapping)
   }
 
