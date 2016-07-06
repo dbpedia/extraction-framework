@@ -38,7 +38,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
 
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
   {
-    //new GeoCoordinatesRMLMapper(modelWrapper, mapping).mapToModel()
+    new GeoCoordinatesRMLMapper(rmlModel, mapping).mapToModel()
   }
 
 
@@ -57,8 +57,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
 
   def addConstantMapping(mapping: ConstantMapping) =
   {
-    //TODO: implement
-    println("Constant Mappings not supported")
+    new ConstantRMLMapper(rmlModel, mapping).mapToModel()
   }
 
 

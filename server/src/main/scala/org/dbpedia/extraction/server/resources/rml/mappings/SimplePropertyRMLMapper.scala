@@ -55,12 +55,14 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       val ExecuteObjectMapUri = executePomUri.extend("/ObjectMap")
       executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + "simplePropertyFunction"))
 
+      addParameterFunction("property", functionValue)
+
       if(mapping.factor != 1) {
-        addParameterFunction("function", functionValue)
+        addParameterFunction("factor", functionValue)
       }
 
       if(mapping.transform != null) {
-        addParameterFunction("factor", functionValue)
+        addParameterFunction("transform", functionValue)
       }
 
       if(mapping.select != null) {
@@ -83,13 +85,28 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
 
   }
 
-  private def addParameterFunction(param : String, functionValue: RMLTriplesMap)  =
+  private def addParameterFunction(param : String, functionValue: RMLTriplesMap) =
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
-    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace+ param + "Parameter"))
+    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
-    parameterPom.addObjectMap(parameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
+    parameterPom.addObjectMap(parameterObjectMapUri).addRMLReference(new RMLLiteral(getParameterValue(param)))
+
   }
+
+  private def getParameterValue(param: String) : String =
+  {
+    param match {
+      case "factor" => mapping.factor.toString
+      case "transform" => mapping.transform
+      case "select" => mapping.select
+      case "prefix" => mapping.prefix
+      case "suffix" => mapping.suffix
+      case "unit" => mapping.unit.name
+      case "property" => mapping.templateProperty
+    }
+  }
+
 
 }

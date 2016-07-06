@@ -19,8 +19,14 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
   def addGeoCoordinatesMapping() =
   {
-    val uri = rmlModel.wikiTitle.resourceIri + "/GeoCoordinatesMapping/" + checkForOntologyProperty
-    addGeoCoordinatesMappingToTriplesMap(uri, rmlModel.triplesMap)
+    val uri = rmlModel.wikiTitle.resourceIri + "/GeoCoordinatesMapping"
+    if(mapping.ontologyProperty != null) {
+      val triplesMap = addParentTriplesMapToTriplesMap(uri, rmlModel.triplesMap)
+      addGeoCoordinatesMappingToTriplesMap(uri, triplesMap)
+    } else {
+      addGeoCoordinatesMappingToTriplesMap(uri, rmlModel.triplesMap)
+    }
+
   }
 
   def addGeoCoordinatesMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
@@ -28,36 +34,24 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
     if(mapping.coordinates != null) {
 
-      addCoordinatesToTriplesMap(uri + "/" + mapping.coordinates, rmlModel.triplesMap)
+      addCoordinatesToTriplesMap(uri + "/" + mapping.coordinates, triplesMap)
 
     } else if(mapping.latitude != null && mapping.longitude != null) {
 
-      addLongituteLatitudeToTriplesMap(uri + "/" + mapping.latitude + "/" + mapping.latitude, rmlModel.triplesMap)
+      addLongituteLatitudeToTriplesMap(uri + "/" + mapping.latitude + "/" + mapping.latitude, triplesMap)
 
     } else {
 
-      addDegreesToTriplesMap(uri + "/Degrees", rmlModel.triplesMap)
+      addDegreesToTriplesMap(uri + "/Degrees", triplesMap)
 
     }
   }
 
   def addCoordinatesToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
   {
-    val coordinatesPomUri = new RMLUri(uri + "/CoordinatesPOM")
-    val coordinatesPom = triplesMap.addPredicateObjectMap(coordinatesPomUri)
-    coordinatesPom.addPredicate(new RMLUri(checkForOntologyProperty))
-    coordinatesPom.addDCTermsType(new RMLLiteral("coordinatesMapping"))
-
-    val coordinatesOmUri = coordinatesPomUri.extend("/ObjectMap")
-    val coordinatesOm = coordinatesPom.addObjectMap(coordinatesOmUri)
-
-    val parentTriplesMapUri = coordinatesOmUri.extend("/ParentTriplesMap")
-    val parentTriplesMap = coordinatesOm.addParentTriplesMap(parentTriplesMapUri)
-    parentTriplesMap.addLogicalSource(rmlModel.logicalSource)
-    parentTriplesMap.addSubjectMap(rmlModel.subjectMap)
-
-    val latPomUri = parentTriplesMapUri.extend("/LatitudePom")
-    val latPom = parentTriplesMap.addPredicateObjectMap(latPomUri)
+    val rmlUri = new RMLUri(uri)
+    val latPomUri = rmlUri.extend("/LatitudePom")
+    val latPom = triplesMap.addPredicateObjectMap(latPomUri)
     latPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lat"))
     val latOmUri = latPomUri.extend("/FunctionTermMap")
     val latOm = latPom.addFunctionTermMap(latOmUri)
@@ -78,8 +72,8 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     val latParameterOmUri = latParameterPomUri.extend("/ObjectMap")
     latParameterPom.addObjectMap(latParameterOmUri).addRMLReference(new RMLLiteral(mapping.coordinates))
 
-    val lonPomUri = parentTriplesMapUri.extend("/LongitudePom")
-    val lonPom = parentTriplesMap.addPredicateObjectMap(lonPomUri)
+    val lonPomUri = rmlUri.extend("/LongitudePom")
+    val lonPom = triplesMap.addPredicateObjectMap(lonPomUri)
     lonPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
     val lonOmUri = lonPomUri.extend("/FunctionTermMap")
     val lonOm = lonPom.addFunctionTermMap(lonOmUri)
@@ -203,12 +197,14 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
   }
 
-  private def checkForOntologyProperty : String = {
-    if(mapping.ontologyProperty == null) {
-      ""
-    } else {
-      mapping.ontologyProperty.name
-    }
+  private def addParentTriplesMapToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
+    val pomUri = new RMLUri(uri).extend("/" + mapping.ontologyProperty.name)
+    val pom = rmlModel.triplesMap.addPredicateObjectMap(pomUri)
+    pom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
+    val objectMapUri = pomUri.extend("/ObjectMap")
+    val objectMap = pom.addObjectMap(objectMapUri)
+    val parentTriplesMapUri = objectMapUri.extend("/ParentTriplesMap")
+    objectMap.addParentTriplesMap(parentTriplesMapUri)
   }
 
 }
