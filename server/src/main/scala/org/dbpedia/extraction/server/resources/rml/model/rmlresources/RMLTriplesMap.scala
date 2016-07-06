@@ -40,7 +40,4 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
   }
 
 
-
-
-
 }

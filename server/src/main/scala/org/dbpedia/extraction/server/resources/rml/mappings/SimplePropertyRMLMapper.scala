@@ -24,27 +24,72 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
 
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
   {
+    val executeFunction = mapping.factor != 1 || mapping.language != null ||
+                          mapping.select != null || mapping.prefix != null ||
+                          mapping.suffix != null || mapping.transform != null ||
+                          mapping.unit != null
+
     val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
 
     simplePmPom.addDCTermsType(new RMLLiteral("simplePropertyMapping"))
     simplePmPom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
 
-    val objectMapUri = simplePropertyMappingUri.extend("/ObjectMap")
-    val objectMap = simplePmPom.addConditionalMap(objectMapUri)
-    objectMap.addRMLReference(new RMLLiteral(mapping.templateProperty))
+    if (!executeFunction) {
+      val objectMapUri = simplePropertyMappingUri.extend("/ObjectMap")
+      val objectMap = simplePmPom.addObjectMap(objectMapUri)
+      objectMap.addRMLReference(new RMLLiteral(mapping.templateProperty))
+    }
+    else {
 
+      val functionTermMapUri = simplePropertyMappingUri.extend("/FunctionTermMap")
+      val functionTermMap = simplePmPom.addFunctionTermMap(functionTermMapUri)
+      val functionValueUri = functionTermMapUri.extend("/FunctionValue")
+      val functionValue = functionTermMap.addFunctionValue(functionValueUri)
+      functionValue.addLogicalSource(rmlModel.logicalSource)
+      functionValue.addSubjectMap(rmlModel.functionSubjectMap)
 
-    //add unit if present
-    if(mapping.unit != null) addUnitToPredicateObjectMap(simplePmPom, mapping.unit)
+      val executePomUri = functionValueUri.extend("/ExecutePOM")
+      val executePom = functionValue.addPredicateObjectMap(executePomUri)
+      executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
+      val ExecuteObjectMapUri = executePomUri.extend("/ObjectMap")
+      executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + "simplePropertyFunction"))
 
-    //TODO other parameters
+      if(mapping.factor != 1) {
+        addParameterFunction("function", functionValue)
+      }
+
+      if(mapping.transform != null) {
+        addParameterFunction("factor", functionValue)
+      }
+
+      if(mapping.select != null) {
+        addParameterFunction("select", functionValue)
+      }
+
+      if(mapping.prefix != null) {
+        addParameterFunction("prefix", functionValue)
+      }
+
+      if(mapping.suffix != null) {
+        addParameterFunction("suffix", functionValue)
+      }
+
+      if(mapping.unit != null) {
+        addParameterFunction("unit", functionValue)
+      }
+
+    }
 
   }
 
-
-  private def addUnitToPredicateObjectMap(predicateObjectMap: RMLPredicateObjectMap, unit : Datatype): Unit =
+  private def addParameterFunction(param : String, functionValue: RMLTriplesMap)  =
   {
-    //TODO
+    val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
+    val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
+    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace+ param + "Parameter"))
+    val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
+    parameterPom.addObjectMap(parameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
   }
+
 }
