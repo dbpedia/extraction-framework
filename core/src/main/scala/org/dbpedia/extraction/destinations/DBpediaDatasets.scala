@@ -42,6 +42,7 @@ object DBpediaDatasets
     val KMLFiles = new Dataset("kml_files", "Description of KML files from Commons")
     val AnchorText = new Dataset("anchor_text", "Texts used in links to refer to Wikipedia articles from other Wikipedia articles.")
     val SurfaceForms = new Dataset("surface_forms", "Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name.")
+    val Sounds = new Dataset("sounds", "audio files and sounds from Wikipedia articles.")
 
     /**
      * Mapping based

@@ -115,6 +115,7 @@ public class Constants{
     public static final String DBO_INDIVIDUALISED_PND = DB_ONTOLOGY_NS + "individualisedPnd";
     public static final String DBO_NON_INDIVIDUALISED_PND = DB_ONTOLOGY_NS + "nonIndividualisedPnd";
     public static final String DBO_THUMBNAIL = DB_ONTOLOGY_NS + "thumbnail";
+    public static final String DBO_MEDIA_ITEM = DB_ONTOLOGY_NS + "mediaItem";
     /*
      * ANNOTATION VOCABULARY:
      *
