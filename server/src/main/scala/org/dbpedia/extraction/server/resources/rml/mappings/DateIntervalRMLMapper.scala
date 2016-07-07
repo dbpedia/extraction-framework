@@ -29,7 +29,7 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
     startDateIntervalPom.addDCTermsType(new RMLLiteral("startDateInvervalMapping"))
     startDateIntervalPom.addPredicate(new RMLUri(mapping.startDateOntologyProperty.uri))
 
-    val endUri = new RMLUri(uri + "/EndDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.startDateOntologyProperty.name + "/" + mapping.templateProperty)
+    val endUri = new RMLUri(uri + "/EndDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name + "/" + mapping.templateProperty)
     val endDateIntervalPom = triplesMap.addPredicateObjectMap(endUri)
     endDateIntervalPom.addDCTermsType(new RMLLiteral("endDateIntervalMapping"))
     endDateIntervalPom.addPredicate(new RMLUri(mapping.endDateOntologyProperty.uri))

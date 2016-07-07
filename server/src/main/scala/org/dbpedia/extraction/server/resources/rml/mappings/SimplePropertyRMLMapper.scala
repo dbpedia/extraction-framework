@@ -24,7 +24,7 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
 
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
   {
-    val executeFunction = mapping.factor != 1 || mapping.language != null ||
+    val executeFunction = mapping.factor != 1 ||
                           mapping.select != null || mapping.prefix != null ||
                           mapping.suffix != null || mapping.transform != null ||
                           mapping.unit != null
