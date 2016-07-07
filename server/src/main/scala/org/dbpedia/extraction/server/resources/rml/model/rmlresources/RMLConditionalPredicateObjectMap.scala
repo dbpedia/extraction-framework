@@ -28,11 +28,16 @@ class RMLConditionalPredicateObjectMap(resource: Resource) extends RMLPredicateO
     functionTermMap
   }
 
-  def addFallbackMap(uri: RMLUri) : RMLConditionalObjectMap =
+  def addFallbackMap(uri: RMLUri) : RMLConditionalPredicateObjectMap =
   {
-    val conditionalObjectMap = factory.createRMLConditionalObjectMap(uri)
-    resource.addProperty(createProperty(RdfNamespace.CRML.namespace + "fallbackMap"), conditionalObjectMap.resource)
-    conditionalObjectMap
+    val conditionalPredicateObjectMap = factory.createRMLConditionalPredicateObjectMap(uri)
+    resource.addProperty(createProperty(RdfNamespace.CRML.namespace + "fallbackMap"), conditionalPredicateObjectMap.resource)
+    conditionalPredicateObjectMap
+  }
+
+  def addFallbackMap(conditionalPredicateObjectMap: RMLConditionalPredicateObjectMap) =
+  {
+    resource.addProperty(createProperty(RdfNamespace.CRML.namespace + "fallbackMap"), conditionalPredicateObjectMap.resource)
   }
 
 }

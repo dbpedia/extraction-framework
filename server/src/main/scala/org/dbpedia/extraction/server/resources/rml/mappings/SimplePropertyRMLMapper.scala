@@ -22,12 +22,18 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
     addSimplePropertyMappingToTriplesMap(uniqueUri, rmlModel.triplesMap)
   }
 
+  def addIndependentSimplePropertyMapper() : List[RMLPredicateObjectMap] =
+  {
+    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
+    val simplePropertyPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(uri)
+    addSimplePropertyToPredicateObjectMap(simplePropertyPom)
+
+    List(simplePropertyPom)
+  }
+
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
-    val executeFunction = mapping.factor != 1 ||
-                          mapping.select != null || mapping.prefix != null ||
-                          mapping.suffix != null || mapping.transform != null ||
-                          mapping.unit != null
+
 
     val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
@@ -35,14 +41,27 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
     simplePmPom.addDCTermsType(new RMLLiteral("simplePropertyMapping"))
     simplePmPom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
 
+    addSimplePropertyToPredicateObjectMap(simplePmPom)
+
+    List(simplePmPom)
+
+  }
+
+  private def addSimplePropertyToPredicateObjectMap(simplePmPom: RMLPredicateObjectMap) =
+  {
+    val executeFunction = mapping.factor != 1 ||
+      mapping.select != null || mapping.prefix != null ||
+      mapping.suffix != null || mapping.transform != null ||
+      mapping.unit != null
+
     if (!executeFunction) {
-      val objectMapUri = simplePropertyMappingUri.extend("/ObjectMap")
+      val objectMapUri = simplePmPom.uri.extend("/ObjectMap")
       val objectMap = simplePmPom.addObjectMap(objectMapUri)
       objectMap.addRMLReference(new RMLLiteral(mapping.templateProperty))
     }
     else {
 
-      val functionTermMapUri = simplePropertyMappingUri.extend("/FunctionTermMap")
+      val functionTermMapUri = simplePmPom.uri.extend("/FunctionTermMap")
       val functionTermMap = simplePmPom.addFunctionTermMap(functionTermMapUri)
       val functionValueUri = functionTermMapUri.extend("/FunctionValue")
       val functionValue = functionTermMap.addFunctionValue(functionValueUri)
@@ -81,8 +100,6 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
         addParameterFunction("unit", functionValue)
       }
     }
-
-    List(simplePmPom)
 
   }
 

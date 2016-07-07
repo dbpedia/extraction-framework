@@ -16,16 +16,34 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
     addIntermediateNodeMapping()
   }
 
-  def addIntermediateNodeMapping() : List[RMLPredicateObjectMap]=
+  def addIndependentIntermediateNodeMapping() : List[RMLPredicateObjectMap] =
+  {
+    //create the predicate object map and add it to the triples map
+    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/IntermediateNodeMapping/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name)
+    val intermediateNodePom = rmlModel.rmlFactory.createRMLPredicateObjectMap(uri)
+    addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom)
+
+    List(intermediateNodePom)
+  }
+
+  def addIntermediateNodeMapping() : List[RMLPredicateObjectMap] =
   {
 
-    //create the predicate object map and it to the triples map
     val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/IntermediateNodeMapping/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name)
     val intermediateNodePom = rmlModel.triplesMap.addPredicateObjectMap(uri)
+
+    addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom)
+
+    List(intermediateNodePom)
+
+  }
+
+  private def addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom: RMLPredicateObjectMap) =
+  {
     intermediateNodePom.addPredicate(new RMLUri(mapping.correspondingProperty.uri))
     intermediateNodePom.addDCTermsType(new RMLLiteral("intermediateNodeMapping"))
 
-    val intermediateNodeObjectMapUri = uri.extend("/ObjectMap")
+    val intermediateNodeObjectMapUri = intermediateNodePom.uri.extend("/ObjectMap")
     val interMediateNodeObjectMap = intermediateNodePom.addObjectMap(intermediateNodeObjectMapUri)
 
     val parentTriplesMapUri = intermediateNodeObjectMapUri.extend("/ParentTriplesMap")
@@ -35,15 +53,12 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
     val parentSubjectMap = parentTriplesMap.addSubjectMap(parentTriplesMapUri.extend("/SubjectMap"))
     parentSubjectMap.addClass(new RMLUri(mapping.nodeClass.uri))
     parentSubjectMap.addTermTypeIRI()
-    parentSubjectMap.addConstant(new RMLLiteral(rmlModel.wikiTitle.resourceIri + "/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name))
+    parentSubjectMap.addConstant(new RMLLiteral("http://en.dbpedia.org/resource/{{wikititle}}/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name))
 
     //create the intermediate mappings
     for(mapping <- mapping.mappings) {
       addPropertyMapping(mapping, parentTriplesMap)
     }
-
-    List(intermediateNodePom)
-
   }
 
   private def addPropertyMapping(mapping: PropertyMapping, triplesMap: RMLTriplesMap) =

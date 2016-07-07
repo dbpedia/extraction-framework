@@ -10,6 +10,9 @@ import org.dbpedia.extraction.server.resources.rml.model.rmlresources._
   */
 class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
+  private val rmlMapper = new RMLModelMapper(rmlModel)
+  private var rmlFactory = rmlModel.rmlFactory
+
   def mapToModel() = {
     defineTriplesMap()
     addDefaultMappings()
@@ -22,7 +25,6 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     val firstTemplateMapping = firstConditionMapping.mapping.asInstanceOf[TemplateMapping]
 
     //add first mapToClass
-
     val mapToClassPomUri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/ConditionalMapping" + "/" +
       firstConditionMapping.templateProperty + "_" + firstConditionMapping.operator + "_" + firstConditionMapping.value)
     val mapToClassPom = rmlModel.triplesMap.addConditionalPredicateObjectMap(mapToClassPomUri)
@@ -50,6 +52,38 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
   }
 
+  //recursively add conditions
+  def addCondition(index: Int, predicateObjectMap: RMLConditionalPredicateObjectMap) : Unit =
+  {
+
+    if(index == mapping.cases.size) {
+      return
+    }
+
+    val condition = mapping.cases(index)
+    val templateMapping = condition.mapping.asInstanceOf[TemplateMapping]
+
+    val mapToClassPomUri = new RMLUri(predicateObjectMap.resource.getURI).extend("/" + index)
+    val mapToClassPom = predicateObjectMap.addFallbackMap(mapToClassPomUri)
+    mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
+    val conditionFunctionTermMap = addEqualCondition(condition, mapToClassPom)
+
+    for(propertyMapping <- templateMapping.mappings)
+    {
+      val pomList = rmlMapper.addIndependentMapping(propertyMapping)
+      for(pom <- pomList)
+      {
+        val condPom = rmlFactory.transformToConditional(pom)
+        condPom.addEqualCondition(conditionFunctionTermMap)
+        mapToClassPom.addFallbackMap(condPom)
+      }
+
+    }
+
+    addCondition(index + 1, mapToClassPom)
+
+  }
+
   private def defineTriplesMap() =
   {
     defineSubjectMap()
@@ -66,13 +100,6 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     rmlModel.logicalSource.addSource(rmlModel.rmlFactory.createRMLUri(rmlModel.sourceUri))
   }
 
-  def addCondition(index: Int, predicateObjectMap: RMLPredicateObjectMap) : Unit =
-  {
-    val condition = mapping.cases(index)
-    val templateMapping = condition.mapping.asInstanceOf[TemplateMapping]
-
-  }
-
 
   def addDefaultMappings() =
   {
@@ -80,7 +107,6 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     for(defaultMapping <- mapping.defaultMappings) {
       rmlMapper.addMapping(defaultMapping)
     }
-
   }
 
 
@@ -89,11 +115,6 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     val functionTermMapUri = new RMLUri(pom.resource.getURI).extend("/FunctionTermMap")
     val functionTermMap = pom.addEqualCondition(functionTermMapUri)
     functionTermMap
-  }
-
-  private def addEqualCondition(functionTermMap: RMLFunctionTermMap, pom: RMLPredicateObjectMap) =
-  {
-    pom.addFunctionTermMap(functionTermMap)
   }
 
 }

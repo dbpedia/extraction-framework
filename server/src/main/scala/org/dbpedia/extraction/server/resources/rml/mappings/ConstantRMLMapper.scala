@@ -20,22 +20,34 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
     addConstantMappingToTriplesMap(uniqueUri, rmlModel.triplesMap)
   }
 
+  def addIndependentConstantMapping(uri: String) : List[RMLPredicateObjectMap] =
+  {
+    val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + mapping.ontologyProperty.name + "/" + mapping.value)
+    val constantPom = rmlModel.rmlFactory.createRMLPredicateObjectMap(constantMappingUri)
+    addConstantMappingToPredicateObjectMap(constantPom)
+    List(constantPom)
+  }
+
   def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] = {
     val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + mapping.ontologyProperty.name + "/" + mapping.value)
     val constantPom = triplesMap.addPredicateObjectMap(constantMappingUri)
+    addConstantMappingToPredicateObjectMap(constantPom)
+    List(constantPom)
+  }
 
+  private def addConstantMappingToPredicateObjectMap(constantPom: RMLPredicateObjectMap) = {
     constantPom.addDCTermsType(new RMLLiteral("constantMapping"))
     constantPom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
 
     val executeFunction = mapping.datatype != null
 
     if (!executeFunction) {
-      val objectMapUri = constantMappingUri.extend("/ObjectMap")
+      val objectMapUri = constantPom.uri.extend("/ObjectMap")
       constantPom.addObjectMap(objectMapUri).addConstant(new RMLLiteral(mapping.value))
     }
     else {
 
-      val functionTermMapUri = constantMappingUri.extend("/FunctionTermMap")
+      val functionTermMapUri = constantPom.uri.extend("/FunctionTermMap")
       val functionTermMap = constantPom.addFunctionTermMap(functionTermMapUri)
       val functionValueUri = functionTermMapUri.extend("/FunctionValue")
       val functionValue = functionTermMap.addFunctionValue(functionValueUri)
@@ -50,11 +62,7 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
 
       addParameterFunction("unit", functionValue)
       addParameterFunction("value", functionValue)
-
     }
-
-     List(constantPom)
-
   }
 
   private def addParameterFunction(param : String, functionValue: RMLTriplesMap) =
@@ -64,7 +72,6 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
     parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
     val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
     parameterPom.addObjectMap(parameterObjectMapUri).addRMLReference(new RMLLiteral(getParameterValue(param)))
-
   }
 
   private def getParameterValue(param: String) : String =

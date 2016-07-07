@@ -16,28 +16,42 @@ class RMLModelMapper(rmlModel: RMLModel) {
   
   def  addMappingToTriplesMap(mapping: Extractor[TemplateNode], triplesMap: RMLTriplesMap) =
   {
-    val rmlMapper = new RMLModelMapper(rmlModel)
     mapping.getClass.getSimpleName match {
-      case "SimplePropertyMapping" => rmlMapper.addSimplePropertyMappingToTriplesMap(mapping.asInstanceOf[SimplePropertyMapping], triplesMap)
+      case "SimplePropertyMapping" => addSimplePropertyMappingToTriplesMap(mapping.asInstanceOf[SimplePropertyMapping], triplesMap)
       case "CalculateMapping" => println("Intermediate Calculate Mapping not supported.")
       case "CombineDateMapping" => println("Intermediate Combine Date Mapping not supported.")
-      case "DateIntervalMapping" => rmlMapper.addDateIntervalMappingToTriplesMap(mapping.asInstanceOf[DateIntervalMapping], triplesMap)
-      case "GeoCoordinatesMapping" => rmlMapper.addGeoCoordinatesMappingToTriplesMap(mapping.asInstanceOf[GeoCoordinatesMapping], triplesMap)
-      case "ConstantMapping" => rmlMapper.addConstantMappingToTriplesMap(mapping.asInstanceOf[ConstantMapping], triplesMap)
+      case "DateIntervalMapping" => addDateIntervalMappingToTriplesMap(mapping.asInstanceOf[DateIntervalMapping], triplesMap)
+      case "GeoCoordinatesMapping" => addGeoCoordinatesMappingToTriplesMap(mapping.asInstanceOf[GeoCoordinatesMapping], triplesMap)
+      case "ConstantMapping" => addConstantMappingToTriplesMap(mapping.asInstanceOf[ConstantMapping], triplesMap)
     }
   }
   
   def addMapping(mapping: Extractor[TemplateNode]) :List[RMLPredicateObjectMap] =
   {
-    val rmlMapper = new RMLModelMapper(rmlModel)
     mapping.getClass.getSimpleName match {
-      case "SimplePropertyMapping" => rmlMapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
-      case "CalculateMapping" => rmlMapper.addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
-      case "CombineDateMapping" => rmlMapper.addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
-      case "DateIntervalMapping" => rmlMapper.addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
-      case "GeoCoordinatesMapping" => rmlMapper.addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
-      case "IntermediateNodeMapping" => rmlMapper.addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
-      case "ConstantMapping" => rmlMapper.addConstantMapping(mapping.asInstanceOf[ConstantMapping])
+      case "SimplePropertyMapping" => addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
+      case "CalculateMapping" => addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
+      case "CombineDateMapping" => addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
+      case "DateIntervalMapping" => addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
+      case "GeoCoordinatesMapping" => addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
+      case "IntermediateNodeMapping" => addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
+      case "ConstantMapping" => addConstantMapping(mapping.asInstanceOf[ConstantMapping])
+    }
+  }
+
+  /**
+    * Create mapping that is not linked yet to a triples map
+    */
+  def addIndependentMapping(mapping: Extractor[TemplateNode]) : List[RMLPredicateObjectMap] =
+  {
+    mapping.getClass.getSimpleName match {
+      case "SimplePropertyMapping" => addIndependentSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
+      case "CalculateMapping" => addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
+      case "CombineDateMapping" => addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
+      case "DateIntervalMapping" => addIndependentDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
+      case "GeoCoordinatesMapping" => addIndependentGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
+      case "IntermediateNodeMapping" => addIndependentIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
+      case "ConstantMapping" => addIndependentConstantMapping(mapping.asInstanceOf[ConstantMapping])
     }
   }
 
@@ -57,9 +71,15 @@ class RMLModelMapper(rmlModel: RMLModel) {
     new SimplePropertyRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addSimplePropertyMappingToTriplesMap(mapping: SimplePropertyMapping, triplesMap: RMLTriplesMap) = {
+  def addSimplePropertyMappingToTriplesMap(mapping: SimplePropertyMapping, triplesMap: RMLTriplesMap) =
+  {
     new SimplePropertyRMLMapper(rmlModel, mapping)
       .addSimplePropertyMappingToTriplesMap(rmlModel.wikiTitle.resourceIri,triplesMap)
+  }
+
+  def addIndependentSimplePropertyMapping(mapping: SimplePropertyMapping) : List[RMLPredicateObjectMap] =
+  {
+    new SimplePropertyRMLMapper(rmlModel, mapping).addIndependentSimplePropertyMapper()
   }
 
   def addCalculateMapping(mapping: CalculateMapping) : List[RMLPredicateObjectMap] =
@@ -83,9 +103,15 @@ class RMLModelMapper(rmlModel: RMLModel) {
     new DateIntervalRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addDateIntervalMappingToTriplesMap(mapping: DateIntervalMapping, triplesMap: RMLTriplesMap) = {
+  def addDateIntervalMappingToTriplesMap(mapping: DateIntervalMapping, triplesMap: RMLTriplesMap) =
+  {
     new DateIntervalRMLMapper(rmlModel, mapping)
       .addDateIntervalMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
+  }
+
+  def addIndependentDateIntervalMapping(mapping: DateIntervalMapping) : List[RMLPredicateObjectMap] =
+  {
+    new DateIntervalRMLMapper(rmlModel, mapping).addIndependentDateIntervalMapping()
   }
 
 
@@ -96,14 +122,25 @@ class RMLModelMapper(rmlModel: RMLModel) {
 
   def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, triplesMap: RMLTriplesMap) =
   {
-    new GeoCoordinatesRMLMapper(rmlModel, mapping)
-      .addGeoCoordinatesMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
+    //new GeoCoordinatesRMLMapper(rmlModel, mapping)
+      //.addGeoCoordinatesMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
+  }
+
+  def addIndependentGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) : List[RMLPredicateObjectMap] =
+  {
+    //new GeoCoordinatesRMLMapper(rmlModel, mapping)
+    null
   }
 
 
   def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) : List[RMLPredicateObjectMap] =
   {
     new IntermediateNodeMapper(rmlModel, mapping).mapToModel()
+  }
+
+  def addIndependentIntermediateNodeMapping(mapping: IntermediateNodeMapping) : List[RMLPredicateObjectMap] =
+  {
+    new IntermediateNodeMapper(rmlModel, mapping).addIndependentIntermediateNodeMapping()
   }
 
 
@@ -116,6 +153,12 @@ class RMLModelMapper(rmlModel: RMLModel) {
   {
     new ConstantRMLMapper(rmlModel, mapping)
         .addConstantMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
+  }
+
+  def addIndependentConstantMapping(mapping: ConstantMapping) : List[RMLPredicateObjectMap] =
+  {
+    new ConstantRMLMapper(rmlModel, mapping)
+        .addIndependentConstantMapping(rmlModel.wikiTitle.resourceIri)
   }
 
 
