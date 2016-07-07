@@ -15,6 +15,13 @@ class RMLTriplesMap(override val resource: Resource) extends RMLResource(resourc
     predicateObjectMapResource
   }
 
+  def addConditionalPredicateObjectMap(uri: RMLUri) : RMLConditionalPredicateObjectMap =
+  {
+    val condPom = factory.createRMLConditionalPredicateObjectMap(uri)
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "predicateObjectMap"), condPom.resource)
+    condPom
+  }
+
   def addLogicalSource(uri: RMLUri) : RMLLogicalSource =
   {
     val logicalSourceResource = factory.createRMLLogicalSource(uri)

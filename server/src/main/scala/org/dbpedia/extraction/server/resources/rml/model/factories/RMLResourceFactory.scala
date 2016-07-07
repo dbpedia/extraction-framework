@@ -44,6 +44,11 @@ class RMLResourceFactory(model: Model) {
     new RMLConditionalObjectMap(model.createResource(uri.toString(), createProperty(RdfNamespace.RR.namespace + "ObjectMap")))
   }
 
+  def createRMLConditionalPredicateObjectMap(uri: RMLUri) : RMLConditionalPredicateObjectMap =
+  {
+    new RMLConditionalPredicateObjectMap(model.createResource(uri.toString(), createProperty(RdfNamespace.RR.namespace + "PredicateObjectMap")))
+  }
+
   def createRMLFunctionTermMap(uri: RMLUri) : RMLFunctionTermMap =
   {
     new RMLFunctionTermMap(model.createResource(uri.toString(), createProperty(RdfNamespace.FNML.namespace + "FunctionTermMap")))
@@ -57,6 +62,11 @@ class RMLResourceFactory(model: Model) {
   def createRMLLiteral(literal: String) : RMLLiteral =
   {
     new RMLLiteral(literal)
+  }
+
+  def transformToConditional(pom : RMLPredicateObjectMap): RMLConditionalPredicateObjectMap =
+  {
+    new RMLConditionalPredicateObjectMap(pom.resource)
   }
 
   private def createProperty(s: String) : Property =

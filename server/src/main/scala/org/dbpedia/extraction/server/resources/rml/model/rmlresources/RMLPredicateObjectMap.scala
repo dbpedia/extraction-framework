@@ -39,6 +39,11 @@ class RMLPredicateObjectMap(override val resource: Resource) extends RMLResource
     functionTermMap
   }
 
+  def addFunctionTermMap(functionTermMap: RMLFunctionTermMap) =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "objectMap"), functionTermMap.resource)
+  }
+
   def addDCTermsType(literal: RMLLiteral) = {
     resource.addLiteral(createProperty(RdfNamespace.DCTERMS.namespace + "type"), literal.toString())
   }

@@ -4,15 +4,21 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**
-  * Represents a conditional object map
+  * Represents a conditional predicate object map
+  *
   */
-class RMLConditionalObjectMap(resource: Resource) extends RMLObjectMap(resource) {
+class RMLConditionalPredicateObjectMap(resource: Resource) extends RMLPredicateObjectMap(resource) {
 
   def addEqualCondition(uri: RMLUri) : RMLFunctionTermMap =
   {
     val functionTermMap = factory.createRMLFunctionTermMap(uri)
     resource.addProperty(createProperty(RdfNamespace.CRML.namespace + "equalCondition"), functionTermMap.resource)
     functionTermMap
+  }
+
+  def addEqualCondition(functionTermMap: RMLFunctionTermMap) =
+  {
+    resource.addProperty(createProperty(RdfNamespace.CRML.namespace + "equalCondition"), functionTermMap.resource)
   }
 
   def addTrueCondition(uri: RMLUri) : RMLFunctionTermMap =

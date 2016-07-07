@@ -27,7 +27,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
     }
   }
   
-  def addMapping(mapping: Extractor[TemplateNode]) =
+  def addMapping(mapping: Extractor[TemplateNode]) :List[RMLPredicateObjectMap] =
   {
     val rmlMapper = new RMLModelMapper(rmlModel)
     mapping.getClass.getSimpleName match {
@@ -36,7 +36,6 @@ class RMLModelMapper(rmlModel: RMLModel) {
       case "CombineDateMapping" => rmlMapper.addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
       case "DateIntervalMapping" => rmlMapper.addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
       case "GeoCoordinatesMapping" => rmlMapper.addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
-      case "ConditionalMapping" => rmlMapper.addConditionalMapping(mapping.asInstanceOf[ConditionalMapping])
       case "IntermediateNodeMapping" => rmlMapper.addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
       case "ConstantMapping" => rmlMapper.addConstantMapping(mapping.asInstanceOf[ConstantMapping])
     }
@@ -63,17 +62,19 @@ class RMLModelMapper(rmlModel: RMLModel) {
       .addSimplePropertyMappingToTriplesMap(rmlModel.wikiTitle.resourceIri,triplesMap)
   }
 
-  def addCalculateMapping(mapping: CalculateMapping) =
+  def addCalculateMapping(mapping: CalculateMapping) : List[RMLPredicateObjectMap] =
   {
     //TODO: implement
     println("Calculate Mappings not supported")
+    null
   }
 
 
-  def addCombineDateMapping(mapping: CombineDateMapping) =
+  def addCombineDateMapping(mapping: CombineDateMapping) : List[RMLPredicateObjectMap] =
   {
     //TODO: implement
     println("Combine Date Mappings not supported")
+    null
   }
 
 
