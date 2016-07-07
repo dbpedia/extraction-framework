@@ -12,17 +12,17 @@ import org.dbpedia.extraction.server.resources.rml.model.RMLModel
   */
 class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping) {
 
-  def mapToModel() = {
+  def mapToModel() : List[RMLPredicateObjectMap] = {
     addSimplePropertyMapping()
   }
 
-  def addSimplePropertyMapping() =
+  def addSimplePropertyMapping() : List[RMLPredicateObjectMap] =
   {
     val uniqueUri = rmlModel.wikiTitle.resourceIri
     addSimplePropertyMappingToTriplesMap(uniqueUri, rmlModel.triplesMap)
   }
 
-  def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
+  def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
     val executeFunction = mapping.factor != 1 ||
                           mapping.select != null || mapping.prefix != null ||
@@ -80,8 +80,9 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       if(mapping.unit != null) {
         addParameterFunction("unit", functionValue)
       }
-
     }
+
+    List(simplePmPom)
 
   }
 

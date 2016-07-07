@@ -3,24 +3,24 @@ package org.dbpedia.extraction.server.resources.rml.mappings
 import org.dbpedia.extraction.mappings.ConstantMapping
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 
 /**
   * Creates RML Mapping from Constant Mappings and adds the triples to the given model
   */
 class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
 
-  def mapToModel() = {
+  def mapToModel() : List[RMLPredicateObjectMap] = {
     addConstantMapping()
   }
 
-  def addConstantMapping() =
+  def addConstantMapping() : List[RMLPredicateObjectMap] =
   {
     val uniqueUri = rmlModel.wikiTitle.resourceIri
     addConstantMappingToTriplesMap(uniqueUri, rmlModel.triplesMap)
   }
 
-  def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) = {
+  def addConstantMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] = {
     val constantMappingUri = new RMLUri(uri + "/ConstantMapping/" + mapping.ontologyProperty.name + "/" + mapping.value)
     val constantPom = triplesMap.addPredicateObjectMap(constantMappingUri)
 
@@ -52,6 +52,8 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
       addParameterFunction("value", functionValue)
 
     }
+
+     List(constantPom)
 
   }
 

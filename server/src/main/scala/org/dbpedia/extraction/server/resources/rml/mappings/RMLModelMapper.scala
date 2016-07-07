@@ -5,26 +5,55 @@ import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMappin
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.RMLTriplesMap
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLPredicateObjectMap, RMLTriplesMap}
+import org.dbpedia.extraction.wikiparser.TemplateNode
 
 /**
   * Class that adds rml mappings to a ModelWrapper
   */
 class RMLModelMapper(rmlModel: RMLModel) {
-
+  
+  
+  def  addMappingToTriplesMap(mapping: Extractor[TemplateNode], triplesMap: RMLTriplesMap) =
+  {
+    val rmlMapper = new RMLModelMapper(rmlModel)
+    mapping.getClass.getSimpleName match {
+      case "SimplePropertyMapping" => rmlMapper.addSimplePropertyMappingToTriplesMap(mapping.asInstanceOf[SimplePropertyMapping], triplesMap)
+      case "CalculateMapping" => println("Intermediate Calculate Mapping not supported.")
+      case "CombineDateMapping" => println("Intermediate Combine Date Mapping not supported.")
+      case "DateIntervalMapping" => rmlMapper.addDateIntervalMappingToTriplesMap(mapping.asInstanceOf[DateIntervalMapping], triplesMap)
+      case "GeoCoordinatesMapping" => rmlMapper.addGeoCoordinatesMappingToTriplesMap(mapping.asInstanceOf[GeoCoordinatesMapping], triplesMap)
+      case "ConstantMapping" => rmlMapper.addConstantMappingToTriplesMap(mapping.asInstanceOf[ConstantMapping], triplesMap)
+    }
+  }
+  
+  def addMapping(mapping: Extractor[TemplateNode]) =
+  {
+    val rmlMapper = new RMLModelMapper(rmlModel)
+    mapping.getClass.getSimpleName match {
+      case "SimplePropertyMapping" => rmlMapper.addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
+      case "CalculateMapping" => rmlMapper.addCalculateMapping(mapping.asInstanceOf[CalculateMapping])
+      case "CombineDateMapping" => rmlMapper.addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
+      case "DateIntervalMapping" => rmlMapper.addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
+      case "GeoCoordinatesMapping" => rmlMapper.addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
+      case "ConditionalMapping" => rmlMapper.addConditionalMapping(mapping.asInstanceOf[ConditionalMapping])
+      case "IntermediateNodeMapping" => rmlMapper.addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
+      case "ConstantMapping" => rmlMapper.addConstantMapping(mapping.asInstanceOf[ConstantMapping])
+    }
+  }
 
   def addTemplateMapping(mapping: TemplateMapping) =
   {
     new TemplateRMLMapper(rmlModel, mapping).mapToModel()
   }
 
-  def addConditionalMapping(mapping: ConditionalMapping) =
+  def addConditionalMapping(mapping: ConditionalMapping) : Unit =
   {
     new ConditionalRMLMapper(rmlModel, mapping).mapToModel()
   }
 
 
-  def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
+  def addSimplePropertyMapping(mapping: SimplePropertyMapping) : List[RMLPredicateObjectMap] =
   {
     new SimplePropertyRMLMapper(rmlModel, mapping).mapToModel()
   }
@@ -48,7 +77,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
   }
 
 
-  def addDateIntervalMapping(mapping: DateIntervalMapping) =
+  def addDateIntervalMapping(mapping: DateIntervalMapping) : List[RMLPredicateObjectMap]  =
   {
     new DateIntervalRMLMapper(rmlModel, mapping).mapToModel()
   }
@@ -59,7 +88,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
   }
 
 
-  def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
+  def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) : List[RMLPredicateObjectMap] =
   {
     new GeoCoordinatesRMLMapper(rmlModel, mapping).mapToModel()
   }
@@ -71,13 +100,13 @@ class RMLModelMapper(rmlModel: RMLModel) {
   }
 
 
-  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) =
+  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) : List[RMLPredicateObjectMap] =
   {
     new IntermediateNodeMapper(rmlModel, mapping).mapToModel()
   }
 
 
-  def addConstantMapping(mapping: ConstantMapping) =
+  def addConstantMapping(mapping: ConstantMapping) : List[RMLPredicateObjectMap] =
   {
     new ConstantRMLMapper(rmlModel, mapping).mapToModel()
   }

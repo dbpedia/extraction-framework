@@ -4,7 +4,7 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.DateIntervalMapping
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 
 /**
   * Creates RML Mapping from DateIntervalMappings and adds the triples to the given model
@@ -12,17 +12,17 @@ import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLitera
 class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
 
 
-  def mapToModel() = {
+  def mapToModel() : List[RMLPredicateObjectMap] = {
     addDateIntervalMapping()
   }
 
-  def addDateIntervalMapping() =
+  def addDateIntervalMapping() : List[RMLPredicateObjectMap]  =
   {
     val uri = rmlModel.wikiTitle.resourceIri
     addDateIntervalMappingToTriplesMap(uri, rmlModel.triplesMap)
   }
 
-  def addDateIntervalMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
+  def addDateIntervalMappingToTriplesMap(uri: String, triplesMap : RMLTriplesMap) : List[RMLPredicateObjectMap] = {
 
     val startUri = new RMLUri(uri + "/StartDate/" + mapping.startDateOntologyProperty.name + "/" + mapping.endDateOntologyProperty.name + "/" + mapping.templateProperty)
     val startDateIntervalPom = triplesMap.addPredicateObjectMap(startUri)
@@ -82,6 +82,8 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
     endParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace+ "parameter"))
     val endParameterObjectMapUri = endParameterPomUri.extend("/ObjectMap")
     endParameterPom.addObjectMap(endParameterObjectMapUri).addRMLReference(new RMLLiteral(mapping.templateProperty))
+
+    List(startDateIntervalPom, endDateIntervalPom)
 
   }
 

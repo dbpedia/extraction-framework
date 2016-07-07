@@ -4,7 +4,7 @@ import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.GeoCoordinatesMapping
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 
   /**
   * Creates RML Mapping from GeoCoordinatesMapping and adds the triples to the given model
@@ -13,11 +13,11 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
   //TODO: refactor
 
-  def mapToModel() = {
+  def mapToModel() : List[RMLPredicateObjectMap] = {
     addGeoCoordinatesMapping()
   }
 
-  def addGeoCoordinatesMapping() =
+  def addGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
   {
     val uri = rmlModel.wikiTitle.resourceIri + "/GeoCoordinatesMapping"
     if(mapping.ontologyProperty != null) {
@@ -29,7 +29,7 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
   }
 
-  def addGeoCoordinatesMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
+  def addGeoCoordinatesMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap]  =
   {
 
     if(mapping.coordinates != null) {
@@ -47,7 +47,7 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     }
   }
 
-  def addCoordinatesToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
+  def addCoordinatesToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
     val rmlUri = new RMLUri(uri)
     val latPomUri = rmlUri.extend("/LatitudePom")
@@ -94,9 +94,11 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     val lonParameterOmUri = lonParameterPomUri.extend("/ObjectMap")
     lonParameterPom.addObjectMap(lonParameterOmUri).addRMLReference(new RMLLiteral(mapping.coordinates))
 
+    List(latPom, lonPom)
+
   }
 
-  def addLongituteLatitudeToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
+  def addLongituteLatitudeToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
     val latitudePomUri = new RMLUri(uri + "/LatitudePOM")
     val latitudePom = triplesMap.addPredicateObjectMap(latitudePomUri)
@@ -114,9 +116,12 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
     val longitudeOmUri = latitudePomUri.extend("/ObjectMap")
     latitudePom.addObjectMap(latitudeOmUri).addRMLReference(new RMLLiteral("longitude"))
+
+    List(latitudePom, longitudePom)
+
   }
 
-  def addDegreesToTriplesMap(uri: String, triplesMap: RMLTriplesMap) =
+  def addDegreesToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
     val latitudePomUri = new RMLUri(uri + "/LatitudePOM")
@@ -194,6 +199,8 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     lonDirectionParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + "lonDirectionParameter"))
     val lonDirectionParameterOmUri = lonDirectionParameterPomUri.extend("/ObjectMap")
     lonDirectionParameterPom.addObjectMap(lonDirectionParameterOmUri).addRMLReference(new RMLLiteral(mapping.longitudeDirection))
+
+    List(latitudePom, longitudePom)
 
   }
 
