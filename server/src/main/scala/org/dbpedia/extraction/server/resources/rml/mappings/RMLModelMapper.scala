@@ -5,6 +5,7 @@ import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMappin
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.RMLTriplesMap
 
 /**
   * Class that adds rml mappings to a ModelWrapper
@@ -14,6 +15,11 @@ class RMLModelMapper(rmlModel: RMLModel) {
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
     new SimplePropertyRMLMapper(rmlModel, mapping).mapToModel()
+  }
+
+  def addSimplePropertyMappingToTriplesMap(mapping: SimplePropertyMapping, triplesMap: RMLTriplesMap) = {
+    new SimplePropertyRMLMapper(rmlModel, mapping)
+      .addSimplePropertyMappingToTriplesMap(rmlModel.wikiTitle.resourceIri,triplesMap)
   }
 
   def addCalculateMapping(mapping: CalculateMapping) =
@@ -35,10 +41,21 @@ class RMLModelMapper(rmlModel: RMLModel) {
     new DateIntervalRMLMapper(rmlModel, mapping).mapToModel()
   }
 
+  def addDateIntervalMappingToTriplesMap(mapping: DateIntervalMapping, triplesMap: RMLTriplesMap) = {
+    new DateIntervalRMLMapper(rmlModel, mapping)
+      .addDateIntervalMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
+  }
+
 
   def addGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) =
   {
     new GeoCoordinatesRMLMapper(rmlModel, mapping).mapToModel()
+  }
+
+  def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, triplesMap: RMLTriplesMap) =
+  {
+    new GeoCoordinatesRMLMapper(rmlModel, mapping)
+      .addGeoCoordinatesMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
   }
 
 
@@ -58,6 +75,12 @@ class RMLModelMapper(rmlModel: RMLModel) {
   def addConstantMapping(mapping: ConstantMapping) =
   {
     new ConstantRMLMapper(rmlModel, mapping).mapToModel()
+  }
+
+  def addConstantMappingToTriplesMap(mapping: ConstantMapping, triplesMap: RMLTriplesMap) =
+  {
+    new ConstantRMLMapper(rmlModel, mapping)
+        .addConstantMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
   }
 
 

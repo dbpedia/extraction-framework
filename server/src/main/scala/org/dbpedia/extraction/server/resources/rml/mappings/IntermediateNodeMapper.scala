@@ -49,17 +49,14 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
     */
   private def addPropertyMapping(mapping: PropertyMapping, triplesMap: RMLTriplesMap) =
   {
+    val rmlMapper = new RMLModelMapper(rmlModel)
     mapping.getClass.getSimpleName match {
-      case "SimplePropertyMapping" => new SimplePropertyRMLMapper(rmlModel, mapping.asInstanceOf[SimplePropertyMapping])
-                                      .addSimplePropertyMappingToTriplesMap(rmlModel.wikiTitle.resourceIri,triplesMap)
+      case "SimplePropertyMapping" => rmlMapper.addSimplePropertyMappingToTriplesMap(mapping.asInstanceOf[SimplePropertyMapping], triplesMap)
       case "CalculateMapping" => println("Intermediate Calculate Mapping not supported.")
       case "CombineDateMapping" => println("Intermediate Combine Date Mapping not supported.")
-      case "DateIntervalMapping" => new DateIntervalRMLMapper(rmlModel, mapping.asInstanceOf[DateIntervalMapping])
-                                      .addDateIntervalMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
-      case "GeoCoordinatesMapping" => println("Intermediate Geo Mapping not supported.")
-      case "ConditionalMapping" => println("Intermediate Conditional Mapping not supported.")
-      case "IntermediateNodeMapping" => println("Intermediate Intermediate Mapping not supported.")
-      case "ConstantMapping" => println("Constant Mapping not supported.")
+      case "DateIntervalMapping" => rmlMapper.addDateIntervalMappingToTriplesMap(mapping.asInstanceOf[DateIntervalMapping], triplesMap)
+      case "GeoCoordinatesMapping" => rmlMapper.addGeoCoordinatesMappingToTriplesMap(mapping.asInstanceOf[GeoCoordinatesMapping], triplesMap)
+      case "ConstantMapping" => rmlMapper.addConstantMappingToTriplesMap(mapping.asInstanceOf[ConstantMapping], triplesMap)
     }
   }
 

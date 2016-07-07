@@ -5,9 +5,9 @@ import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.dataparser.StringParser
 
 class ConditionMapping(
-  templateProperty : String,
-  operator : String,
-  value : String,
+  val templateProperty : String,
+  val operator : String,
+  val value : String,
   val mapping : Extractor[TemplateNode] // must be public val for statistics
 ) 
 extends Extractor[TemplateNode]
