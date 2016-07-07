@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.server.resources.rml.mappings
 
-import be.ugent.mmlab.rml.model.TriplesMap
 import org.dbpedia.extraction.mappings.ConstantMapping
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel

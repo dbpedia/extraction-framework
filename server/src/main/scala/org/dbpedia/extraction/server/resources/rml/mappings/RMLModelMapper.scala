@@ -12,6 +12,18 @@ import org.dbpedia.extraction.server.resources.rml.model.rmlresources.RMLTriples
   */
 class RMLModelMapper(rmlModel: RMLModel) {
 
+
+  def addTemplateMapping(mapping: TemplateMapping) =
+  {
+    new TemplateRMLMapper(rmlModel, mapping).mapToModel()
+  }
+
+  def addConditionalMapping(mapping: ConditionalMapping) =
+  {
+    new ConditionalRMLMapper(rmlModel, mapping).mapToModel()
+  }
+
+
   def addSimplePropertyMapping(mapping: SimplePropertyMapping) =
   {
     new SimplePropertyRMLMapper(rmlModel, mapping).mapToModel()
@@ -56,13 +68,6 @@ class RMLModelMapper(rmlModel: RMLModel) {
   {
     new GeoCoordinatesRMLMapper(rmlModel, mapping)
       .addGeoCoordinatesMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
-  }
-
-
-  def addConditionalMapping(mapping: ConditionalMapping) =
-  {
-    //TODO: implement
-    println("Conditional Mappings not supported")
   }
 
 

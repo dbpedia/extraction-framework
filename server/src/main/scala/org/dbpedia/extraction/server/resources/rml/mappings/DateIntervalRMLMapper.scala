@@ -46,7 +46,7 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
     val endFunctionTermMap = endDateIntervalPom.addFunctionTermMap(endFunctionTermMapUri)
 
     val startFunctionValueUri = startFunctionTermMapUri.extend("/FunctionValue")
-    val startFunctionValue = startFunctionTermMap.addFunctionValue(startFunctionTermMapUri)
+    val startFunctionValue = startFunctionTermMap.addFunctionValue(startFunctionValueUri)
 
     val endFunctionValueUri = endFunctionTermMapUri.extend("/FunctionValue")
     val endFunctionValue = endFunctionTermMap.addFunctionValue(endFunctionValueUri)

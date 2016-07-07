@@ -77,7 +77,7 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     lonPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
     val lonOmUri = lonPomUri.extend("/FunctionTermMap")
     val lonOm = lonPom.addFunctionTermMap(lonOmUri)
-    val lonFunctionValueUri = lonOmUri
+    val lonFunctionValueUri = lonOmUri.extend("/FunctionValue")
     val lonFunctionValue = lonOm.addFunctionValue(lonFunctionValueUri)
     lonFunctionValue.addLogicalSource(rmlModel.logicalSource)
     lonFunctionValue.addSubjectMap(rmlModel.functionSubjectMap)

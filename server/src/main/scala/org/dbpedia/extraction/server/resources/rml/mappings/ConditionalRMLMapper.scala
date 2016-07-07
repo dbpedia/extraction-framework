@@ -8,16 +8,45 @@ import org.dbpedia.extraction.server.resources.rml.model.RMLModel
   */
 class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
-  def mapToMode() = {
+  def mapToModel() = {
+    defineTriplesMap()
     addDefaultMappings()
-    
+    addConditions()
+  }
+
+  def addConditions() = {
+    for(conditionMapping <- mapping.cases) {
+      addCondition(conditionMapping)
+    }
+  }
+
+  private def defineTriplesMap() =
+  {
+    defineSubjectMap()
+    defineLogicalSource()
+  }
+
+  private def defineSubjectMap() =
+  {
+    rmlModel.subjectMap.addConstant(rmlModel.rmlFactory.createRMLLiteral("http://mappings.dbpedia.org/wiki/resource/{{wikititle}}"))
+    rmlModel.subjectMap.addTermTypeIRI()
+  }
+
+  private def defineLogicalSource() =
+  {
+    rmlModel.logicalSource.addSource(rmlModel.rmlFactory.createRMLUri(rmlModel.sourceUri))
+  }
+
+  def addCondition(conditionMapping: ConditionMapping) =
+  {
+    println(conditionMapping.mapping.asInstanceOf[TemplateMapping].mapToClass)
   }
 
 
   def addDefaultMappings() = {
     val rmlModelMapper = new RMLModelMapper(rmlModel)
     for(defaultMapping <- mapping.defaultMappings) {
-      mapping.getClass.getSimpleName match {
+      defaultMapping.getClass.getSimpleName match {
         case "SimplePropertyMapping" => rmlModelMapper.addSimplePropertyMapping(defaultMapping.asInstanceOf[SimplePropertyMapping])
         case "CalculateMapping" => println("Intermediate Calculate Mapping not supported.")
         case "CombineDateMapping" => println("Intermediate Combine Date Mapping not supported.")
