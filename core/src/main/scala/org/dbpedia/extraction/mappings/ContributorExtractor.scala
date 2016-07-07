@@ -30,7 +30,7 @@ class ContributorExtractor( context : {
 
     if(node.contributorID <= 0) return Seq.empty
 
-    val pageURL = "http://" + context.language.wikiCode + ".wikipedia.org/wiki/" + node.title.encoded;
+    val pageURL = context.language.baseUri + "/wiki/" + node.title.encoded;
 
     //Required predicates
     val contributorPredicate = "http://dbpedia.org/meta/contributor";
