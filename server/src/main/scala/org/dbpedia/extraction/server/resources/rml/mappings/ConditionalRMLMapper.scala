@@ -131,7 +131,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
     if(conditionMapping.templateProperty != null) {
       val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
-      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + "ValueParameter"))
+      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + "PropertyParameter"))
       paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.templateProperty))
     }
 
