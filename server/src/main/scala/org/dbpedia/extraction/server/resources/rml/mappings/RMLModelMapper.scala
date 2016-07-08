@@ -122,14 +122,13 @@ class RMLModelMapper(rmlModel: RMLModel) {
 
   def addGeoCoordinatesMappingToTriplesMap(mapping: GeoCoordinatesMapping, triplesMap: RMLTriplesMap) =
   {
-    //new GeoCoordinatesRMLMapper(rmlModel, mapping)
-      //.addGeoCoordinatesMappingToTriplesMap(rmlModel.wikiTitle.resourceIri, triplesMap)
+    new GeoCoordinatesRMLMapper(rmlModel, mapping)
+      .addGeoCoordinatesMappingToTriplesMap(triplesMap)
   }
 
   def addIndependentGeoCoordinatesMapping(mapping: GeoCoordinatesMapping) : List[RMLPredicateObjectMap] =
   {
-    //new GeoCoordinatesRMLMapper(rmlModel, mapping)
-    null
+    new GeoCoordinatesRMLMapper(rmlModel, mapping).addIndependentGeoCoordinatesMapping()
   }
 
 

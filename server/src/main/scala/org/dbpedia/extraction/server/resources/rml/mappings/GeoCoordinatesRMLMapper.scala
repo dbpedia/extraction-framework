@@ -13,47 +13,124 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
   //TODO: refactor
 
+  private val rmlFactory = rmlModel.rmlFactory
+  private val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/GeoCoordinatesMapping")
+  private val latUri = uri.extend("/latitude")
+  private val lonUri = uri.extend("/longitude")
+
   def mapToModel() : List[RMLPredicateObjectMap] = {
     addGeoCoordinatesMapping()
   }
 
   def addGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
   {
-    val uri = rmlModel.wikiTitle.resourceIri + "/GeoCoordinatesMapping"
     if(mapping.ontologyProperty != null) {
-      val triplesMap = addParentTriplesMapToTriplesMap(uri, rmlModel.triplesMap)
-      addGeoCoordinatesMappingToTriplesMap(uri, triplesMap)
+      val pom = rmlModel.triplesMap.addPredicateObjectMap(uri)
+      val triplesMap = addParentTriplesMapToPredicateObjectMap(pom)
+      addGeoCoordinatesMappingToTriplesMap(triplesMap)
+      List(pom)
     } else {
-      addGeoCoordinatesMappingToTriplesMap(uri, rmlModel.triplesMap)
+      addGeoCoordinatesMappingToTriplesMap(rmlModel.triplesMap)
     }
-
   }
 
-  def addGeoCoordinatesMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap]  =
+  def addIndependentGeoCoordinatesMapping() : List[RMLPredicateObjectMap] =
+  {
+    if(mapping.ontologyProperty != null) {
+      val pom = rmlFactory.createRMLPredicateObjectMap(uri.extend("/" + mapping.ontologyProperty.name))
+      val triplesMap = addParentTriplesMapToPredicateObjectMap(pom)
+      addGeoCoordinatesMappingToTriplesMap(triplesMap)
+      List(pom)
+    } else {
+      addIndependentGeoCoordinatesMappingToPredicateObjectMap()
+    }
+  }
+
+  def addGeoCoordinatesMappingToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap]  =
   {
 
     if(mapping.coordinates != null) {
 
-      addCoordinatesToTriplesMap(uri + "/" + mapping.coordinates, triplesMap)
+      addCoordinatesToTriplesMap(triplesMap)
 
     } else if(mapping.latitude != null && mapping.longitude != null) {
 
-      addLongituteLatitudeToTriplesMap(uri + "/" + mapping.latitude + "/" + mapping.latitude, triplesMap)
+      addLongitudeLatitudeToTriplesMap(triplesMap)
 
     } else {
 
-      addDegreesToTriplesMap(uri + "/Degrees", triplesMap)
+      addDegreesToTriplesMap(triplesMap)
 
     }
   }
 
-  def addCoordinatesToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+
+
+  def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
-    val rmlUri = new RMLUri(uri)
-    val latPomUri = rmlUri.extend("/LatitudePom")
-    val latPom = triplesMap.addPredicateObjectMap(latPomUri)
+
+    val latPom = triplesMap.addPredicateObjectMap(latUri)
+
+    val lonPom = triplesMap.addPredicateObjectMap(lonUri)
+
+    addCoordinatesToPredicateObjectMap(latPom, lonPom)
+
+    List(latPom, lonPom)
+
+  }
+
+  def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  {
+
+    val latitudePom = triplesMap.addPredicateObjectMap(latUri)
+
+    val longitudePom = triplesMap.addPredicateObjectMap(lonUri)
+
+    addLongitudeLatitudeToPredicateObjectMap(latitudePom, longitudePom)
+
+    List(latitudePom, longitudePom)
+
+  }
+
+
+  def addDegreesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  {
+
+    val latitudePom = triplesMap.addPredicateObjectMap(latUri)
+    val longitudePom = triplesMap.addPredicateObjectMap(lonUri)
+
+    List(latitudePom, longitudePom)
+
+  }
+
+  private def addIndependentGeoCoordinatesMappingToPredicateObjectMap() : List[RMLPredicateObjectMap] =
+  {
+
+
+    if(mapping.coordinates != null) {
+      val latPom = rmlFactory.createRMLPredicateObjectMap(latUri)
+      val lonPom = rmlFactory.createRMLPredicateObjectMap(lonUri)
+      addCoordinatesToPredicateObjectMap(latPom, lonPom)
+      List(latPom, lonPom)
+    } else if(mapping.latitude != null && mapping.longitude != null) {
+      val latPom = rmlFactory.createRMLPredicateObjectMap(latUri)
+      val lonPom = rmlFactory.createRMLPredicateObjectMap(lonUri)
+      addLongitudeLatitudeToPredicateObjectMap(latPom, lonPom)
+      List(latPom, lonPom)
+    } else {
+      val latPom = rmlFactory.createRMLPredicateObjectMap(latUri)
+      val lonPom = rmlFactory.createRMLPredicateObjectMap(lonUri)
+      addDegreesToPredicateObjectMap(latPom, lonPom)
+      List(latPom, lonPom)
+    }
+  }
+
+
+  private def addCoordinatesToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) =
+  {
+
     latPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lat"))
-    val latOmUri = latPomUri.extend("/FunctionTermMap")
+    val latOmUri = latPom.uri.extend("/FunctionTermMap")
     val latOm = latPom.addFunctionTermMap(latOmUri)
     val latFunctionValueUri = latOmUri
     val latFunctionValue = latOm.addFunctionValue(latFunctionValueUri)
@@ -72,10 +149,8 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     val latParameterOmUri = latParameterPomUri.extend("/ObjectMap")
     latParameterPom.addObjectMap(latParameterOmUri).addRMLReference(new RMLLiteral(mapping.coordinates))
 
-    val lonPomUri = rmlUri.extend("/LongitudePom")
-    val lonPom = triplesMap.addPredicateObjectMap(lonPomUri)
     lonPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
-    val lonOmUri = lonPomUri.extend("/FunctionTermMap")
+    val lonOmUri = lonPom.uri.extend("/FunctionTermMap")
     val lonOm = lonPom.addFunctionTermMap(lonOmUri)
     val lonFunctionValueUri = lonOmUri.extend("/FunctionValue")
     val lonFunctionValue = lonOm.addFunctionValue(lonFunctionValueUri)
@@ -94,43 +169,30 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     val lonParameterOmUri = lonParameterPomUri.extend("/ObjectMap")
     lonParameterPom.addObjectMap(lonParameterOmUri).addRMLReference(new RMLLiteral(mapping.coordinates))
 
-    List(latPom, lonPom)
-
   }
 
-  def addLongituteLatitudeToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addLongitudeLatitudeToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) =
   {
-    val latitudePomUri = new RMLUri(uri + "/LatitudePOM")
-    val latitudePom = triplesMap.addPredicateObjectMap(latitudePomUri)
-    latitudePom.addDCTermsType(new RMLLiteral("latitudeMapping"))
-    latitudePom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lat"))
+    latPom.addDCTermsType(new RMLLiteral("latitudeMapping"))
+    latPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lat"))
 
-    val latitudeOmUri = latitudePomUri.extend("/ObjectMap")
-    latitudePom.addObjectMap(latitudeOmUri).addRMLReference(new RMLLiteral("latitude"))
+    val latitudeOmUri = latPom.uri.extend("/ObjectMap")
+    latPom.addObjectMap(latitudeOmUri).addRMLReference(new RMLLiteral("latitude"))
 
+    lonPom.addDCTermsType(new RMLLiteral("longitudeMapping"))
+    lonPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
 
-    val longitudePomUri = new RMLUri(uri + "/LongitudePOM")
-    val longitudePom = triplesMap.addPredicateObjectMap(longitudePomUri)
-    longitudePom.addDCTermsType(new RMLLiteral("longitudeMapping"))
-    longitudePom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
-
-    val longitudeOmUri = latitudePomUri.extend("/ObjectMap")
-    latitudePom.addObjectMap(latitudeOmUri).addRMLReference(new RMLLiteral("longitude"))
-
-    List(latitudePom, longitudePom)
-
+    val longitudeOmUri = lonPom.uri.extend("/ObjectMap")
+    lonPom.addObjectMap(latitudeOmUri).addRMLReference(new RMLLiteral("longitude"))
   }
 
-  def addDegreesToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
+  private def addDegreesToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) =
   {
+    latPom.addDCTermsType(new RMLLiteral("latitudeMapping"))
+    latPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lat"))
 
-    val latitudePomUri = new RMLUri(uri + "/LatitudePOM")
-    val latitudePom = triplesMap.addPredicateObjectMap(latitudePomUri)
-    latitudePom.addDCTermsType(new RMLLiteral("latitudeMapping"))
-    latitudePom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lat"))
-
-    val latitudeOmUri = latitudePomUri.extend("/ObjectMap")
-    val latitudeOm = latitudePom.addFunctionTermMap(latitudeOmUri)
+    val latitudeOmUri = latPom.uri.extend("/ObjectMap")
+    val latitudeOm = latPom.addFunctionTermMap(latitudeOmUri)
 
     val latitudeFunctionValueUri = latitudeOmUri.extend("/FunctionValue")
     val latitudeFunctionValue = latitudeOm.addFunctionValue(latitudeFunctionValueUri)
@@ -161,14 +223,12 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     latDirectionParameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + "latDirectionParameter"))
     val latDirectionParameterOmUri = latDirectionParameterPomUri.extend("/ObjectMap")
     latDirectionParameterPom.addObjectMap(latDirectionParameterOmUri).addRMLReference(new RMLLiteral(mapping.latitudeDirection))
-    
-    val longitudePomUri = new RMLUri(uri + "/LongitudePOM")
-    val longitudePom = triplesMap.addPredicateObjectMap(longitudePomUri)
-    longitudePom.addDCTermsType(new RMLLiteral("longitudeMapping"))
-    longitudePom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
 
-    val longitudeOmUri = longitudePomUri.extend("/ObjectMap")
-    val longitudeOm = longitudePom.addFunctionTermMap(longitudeOmUri)
+    lonPom.addDCTermsType(new RMLLiteral("longitudeMapping"))
+    lonPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
+
+    val longitudeOmUri = lonPom.uri.extend("/ObjectMap")
+    val longitudeOm = lonPom.addFunctionTermMap(longitudeOmUri)
 
     val longitudeFunctionValueUri = longitudeOmUri.extend("/FunctionValue")
     val longitudeFunctionValue = longitudeOm.addFunctionValue(longitudeFunctionValueUri)
@@ -200,18 +260,16 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     val lonDirectionParameterOmUri = lonDirectionParameterPomUri.extend("/ObjectMap")
     lonDirectionParameterPom.addObjectMap(lonDirectionParameterOmUri).addRMLReference(new RMLLiteral(mapping.longitudeDirection))
 
-    List(latitudePom, longitudePom)
-
   }
 
-  private def addParentTriplesMapToTriplesMap(uri: String, triplesMap : RMLTriplesMap) = {
-    val pomUri = new RMLUri(uri).extend("/" + mapping.ontologyProperty.name)
-    val pom = rmlModel.triplesMap.addPredicateObjectMap(pomUri)
+  private def addParentTriplesMapToPredicateObjectMap(pom: RMLPredicateObjectMap) = {
+
     pom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
-    val objectMapUri = pomUri.extend("/ObjectMap")
+    val objectMapUri = pom.uri.extend("/ObjectMap")
     val objectMap = pom.addObjectMap(objectMapUri)
     val parentTriplesMapUri = objectMapUri.extend("/ParentTriplesMap")
     objectMap.addParentTriplesMap(parentTriplesMapUri)
+
   }
 
 }
