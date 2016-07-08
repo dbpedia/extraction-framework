@@ -112,8 +112,29 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
   private def addEqualCondition(conditionMapping: ConditionMapping, pom: RMLConditionalPredicateObjectMap) : RMLFunctionTermMap =
   {
-    val functionTermMapUri = new RMLUri(pom.resource.getURI).extend("/FunctionTermMap")
+
+    val functionTermMapUri = pom.uri.extend("/FunctionTermMap")
     val functionTermMap = pom.addEqualCondition(functionTermMapUri)
+    val functionValue = functionTermMap.addFunctionValue(functionTermMap.uri.extend("/FunctionValue"))
+    functionValue.addLogicalSource(rmlModel.logicalSource)
+    functionValue.addSubjectMap(rmlModel.functionSubjectMap)
+
+    val executePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ExecutePOM"))
+    executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
+    executePom.addObjectMap(executePom.uri.extend("/ObjectMap")).addConstant(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator))
+
+    if(conditionMapping.value != null) {
+      val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
+      paramValuePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + "ValueParameter"))
+      paramValuePom.addObjectMap(paramValuePom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.value))
+    }
+
+    if(conditionMapping.templateProperty != null) {
+      val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
+      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + "ValueParameter"))
+      paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.templateProperty))
+    }
+
     functionTermMap
   }
 
