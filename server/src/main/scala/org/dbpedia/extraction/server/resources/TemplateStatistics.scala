@@ -131,7 +131,7 @@ class   TemplateStatistics(@PathParam("lang") langCode: String, @QueryParam("p")
 
                 <table class="table table-condensed" align="center" style="width:500px; margin:auto">
                     <caption>The color codes:</caption>
-                    <tr><td class={mappedSuccessClass}>template is mapped withl more than {"%2.0f".format(goodThreshold*100)}%</td></tr>
+                    <tr><td class={mappedSuccessClass}>template is mapped with more than {"%2.0f".format(goodThreshold*100)}%</td></tr>
                     <tr><td class={mappedActiveClass}>template is mapped with more than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
                     <tr><td class={mappedWarningClass}>template is mapped with less than {"%2.0f".format(mediumThreshold*100)}%</td></tr>
                     <tr><td class={mappedDangerClass}>template is not mapped</td></tr>

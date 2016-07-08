@@ -8,7 +8,7 @@ import org.dbpedia.extraction.util.WikiApi
 /**
  * Fetches pages from a MediaWiki.
  *
- * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
+ * @param url The URL of the MediaWiki API e.g. https://en.wikipedia.org/w/api.php
  * @param language The language of the MediaWiki
  * @param namespace The namespaces to fetch articles from
  */
@@ -18,7 +18,7 @@ object WikiSource
      * Fetches all pages from a list of page IDs.
      *
      * @param ids The page IDs of the pages
-     * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
+     * @param url The URL of the MediaWiki API e.g. https://en.wikipedia.org/w/api.php
      * @param language The language of the MediaWiki
      */
     def fromPageIDs(ids: Iterable[Long], url: URL, language: Language): Source =
@@ -30,7 +30,7 @@ object WikiSource
      * Fetches all pages from a list of revision IDs.
      *
      * @param ids The revision IDs of the pages
-     * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
+     * @param url The URL of the MediaWiki API e.g. https://en.wikipedia.org/w/api.php
      * @param language The language of the MediaWiki
      */
     def fromRevisionIDs(ids: Iterable[Long], url: URL, language: Language): Source =
@@ -43,7 +43,7 @@ object WikiSource
      *
      * @param param WikiApi.PageIDs ("pageids") or WikiApi.RevisionIDs ("revids") 
      * @param ids The page or revision IDs of the pages
-     * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
+     * @param url The URL of the MediaWiki API e.g. https://en.wikipedia.org/w/api.php
      * @param language The language of the MediaWiki
      */
     def fromIDs(param: String, ids: Iterable[Long], url: URL, language: Language): Source =
@@ -62,8 +62,8 @@ object WikiSource
     /**
      * Fetches all pages from a list of titles.
      *
-     * @param title The titles of the pages
-     * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
+     * @param titles The titles of the pages
+     * @param url The URL of the MediaWiki API e.g. https://en.wikipedia.org/w/api.php
      * @param language The language of the MediaWiki
      */
     def fromTitles(titles: Iterable[WikiTitle], url: URL, language: Language): Source =
@@ -82,8 +82,8 @@ object WikiSource
     /**
      * Source of all pages which belong to a specific namespace.
      *
-     * @param namespace The namespaces to fetch articles from
-     * @param url The URL of the MediaWiki API e.g. http://en.wikipedia.org/w/api.php
+     * @param namespaces The namespaces to fetch articles from
+     * @param url The URL of the MediaWiki API e.g. https://en.wikipedia.org/w/api.php
      * @param language The language of the MediaWiki
      */
     def fromNamespaces(namespaces: Set[Namespace], url: URL, language: Language): Source =

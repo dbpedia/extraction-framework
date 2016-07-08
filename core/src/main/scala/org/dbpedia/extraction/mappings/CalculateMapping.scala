@@ -12,8 +12,8 @@ import org.dbpedia.extraction.ontology.{OntologyClass, Ontology, DBpediaNamespac
 class CalculateMapping (
   val templateProperty1 : String,
   val templateProperty2 : String,
-  unit1 : Datatype,
-  unit2 : Datatype,
+  val unit1 : Datatype, // rml mappings require this to be public (e.g. ModelMapper)
+  val unit2 : Datatype, // rml mappings require this to be public (e.g. ModelMapper)
   operation : String,
   ontologyProperty : OntologyProperty,
   context : {

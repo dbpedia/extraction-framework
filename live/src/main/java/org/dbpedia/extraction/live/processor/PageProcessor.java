@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.live.processor;
 
+import org.dbpedia.extraction.util.Language;
 import org.slf4j.Logger;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.extraction.LiveExtractionConfigLoader;
@@ -43,11 +44,27 @@ public class PageProcessor extends Thread{
 
 
     private void processPage(LiveQueueItem item){
+        processPage(item, false);
+    }
+
+    private void processPageFromTitle(LiveQueueItem item){
+        processPage(item, true);
+    }
+
+    private void processPage(LiveQueueItem item, boolean isTitle) {
         try{
-            Boolean extracted = LiveExtractionConfigLoader.extractPage(
-                    item,
-                    LiveOptions.options.get("localApiURL"),
-                    LiveOptions.language);
+            Boolean extracted = false;
+            if (isTitle) {
+                extracted = LiveExtractionConfigLoader.extractPageFromTitle(
+                        item,
+                        Language.apply(LiveOptions.language).apiUri(),
+                        LiveOptions.language);
+            } else {
+                extracted = LiveExtractionConfigLoader.extractPage(
+                        item,
+                        Language.apply(LiveOptions.language).apiUri(),
+                        LiveOptions.language);
+            }
 
             if (!extracted)
                 JSONCache.setErrorOnCache(item.getItemID(), -1);
@@ -79,8 +96,13 @@ public class PageProcessor extends Thread{
                     JSONCache.deleteCacheItem(page.getItemID(),LiveExtractionConfigLoader.policies());
                     logger.info("Deleted page with ID: " + page.getItemID() + " (" + page.getItemName() + ")");
                 }
-                else
-                    processPage(page);
+                else {
+                    if (!page.getItemName().isEmpty()) {
+                        processPageFromTitle(page);
+                    } else {
+                        processPage(page);
+                    }
+                }
             }
             catch (Exception exp){
                 logger.error("Failed to process page " + currentPage.getItemID() + " reason: " + exp.getMessage(), exp);
