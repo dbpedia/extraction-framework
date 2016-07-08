@@ -86,8 +86,8 @@ object TypeConsistencyCheck {
     }
 
     val suffix = args(1)
-    val typesDataset = "instance-types." + suffix
-    val mappedTripleDataset = "mappingbased-objects-uncleaned." + suffix
+    val typesDataset = "instance-types" + suffix
+    val mappedTripleDataset = "mappingbased-objects-uncleaned" + suffix
 
     val relatedClasses = new mutable.HashSet[(OntologyClass, OntologyClass)]
 
