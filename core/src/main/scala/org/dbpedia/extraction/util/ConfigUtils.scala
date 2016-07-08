@@ -73,7 +73,7 @@ object ConfigUtils {
         // resolve only downloaded languages
         for(file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki")))
         {
-          Language.get(file.getName.replace("wiki", "")) match{
+          Language.get(file.getName.replace("wiki", "").replace("_", "-")) match{
             case Some(l) => languages += l
             case None =>
           }
