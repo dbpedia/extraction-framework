@@ -11,7 +11,7 @@ import org.dbpedia.extraction.server.resources.rml.model.rmlresources._
 class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
   private val rmlMapper = new RMLModelMapper(rmlModel)
-  private var rmlFactory = rmlModel.rmlFactory
+  private val rmlFactory = rmlModel.rmlFactory
 
   def mapToModel() = {
     defineTriplesMap()
@@ -66,6 +66,8 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     val mapToClassPomUri = new RMLUri(predicateObjectMap.resource.getURI).extend("/" + index)
     val mapToClassPom = predicateObjectMap.addFallbackMap(mapToClassPomUri)
     mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
+    val mapToClassOm = mapToClassPom.addObjectMap(mapToClassPom.uri.extend("/ObjectMap")).addConstant(new RMLUri(templateMapping.mapToClass.uri))
+
     val conditionFunctionTermMap = addEqualCondition(condition, mapToClassPom)
 
     for(propertyMapping <- templateMapping.mappings)
@@ -93,6 +95,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
   private def defineSubjectMap() =
   {
     rmlModel.subjectMap.addConstant(rmlModel.rmlFactory.createRMLLiteral("http://mappings.dbpedia.org/wiki/resource/{{wikititle}}"))
+    rmlModel.subjectMap.addTermTypeIRI()
   }
 
   private def defineLogicalSource() =
