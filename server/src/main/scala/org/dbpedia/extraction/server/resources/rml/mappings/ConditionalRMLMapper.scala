@@ -2,8 +2,10 @@ package org.dbpedia.extraction.server.resources.rml.mappings
 
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.server.resources.rml.dbf.DbfFunction
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 import org.dbpedia.extraction.server.resources.rml.model.rmlresources._
+import scala.language.reflectiveCalls
 
 /**
   * Creates RML Mapping from ConditionalMappings and adds the triples to the given model
@@ -128,13 +130,13 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
     if(conditionMapping.value != null) {
       val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
-      paramValuePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + "ValueParameter"))
+      paramValuePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + DbfFunction.operatorFunction.valueParameter))
       paramValuePom.addObjectMap(paramValuePom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.value))
     }
 
     if(conditionMapping.templateProperty != null) {
       val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
-      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + "PropertyParameter"))
+      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + DbfFunction.operatorFunction.propertyParameter))
       paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.templateProperty))
     }
 
