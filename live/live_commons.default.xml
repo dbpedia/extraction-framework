@@ -4,7 +4,7 @@
         <extractors>
             <extractor name ="org.dbpedia.extraction.mappings.DBpediaResourceExtractor" status="ACTIVE">
                 <produces>
-                    <matchPattern type="EXACT" pexact ="false">
+                    <matchPattern type="EXACT">
                         <s></s>
                         <p>OWL_SAMEAS</p>
                         <o></o>
@@ -234,27 +234,6 @@
                         <p>WIKI_PAGE_REVISION_ID</p>
                         <o></o>
                     </matchPattern>
-                </produces>
-            </extractor>
-
-            <extractor name="org.dbpedia.extraction.mappings.ContributorExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DBM_CONTRIBUTOR</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_CONTRIBUTOR_ID</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="STARTSWITH" pexact="true">
-                        <s></s>
-                        <p>DB_CONTRIBUTOR</p>
-                        <o></o>
-                    </matchPattern>
-
                 </produces>
             </extractor>
 
