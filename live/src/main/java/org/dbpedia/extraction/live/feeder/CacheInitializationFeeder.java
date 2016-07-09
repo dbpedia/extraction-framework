@@ -5,6 +5,7 @@ import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
+import org.dbpedia.extraction.live.storage.JDBCUtil;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,18 +18,25 @@ import java.net.URLEncoder;
 import java.util.*;
 
 /**
- * Created by Lukas on 02.07.2016.
+ * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
+ * date 02.07.2016.
  */
 public class CacheInitializationFeeder extends Feeder {
 
-    private boolean isFinished = false;
+    private int isFinished = 0;
     private String query_base =
-            "?action=query&format=json&list=allpages&aplimit=500&apnamespace=0&continue=%s&apcontinue=%s";
+            "?action=query&format=json&list=allpages&aplimit=500&apnamespace=%d&continue=%s&apcontinue=%s";
     private String continueString = "-||";
     private String continueTitle = "";
-    public CacheInitializationFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime, String folderBasePath) {
-        super(feederName, queuePriority, defaultStartTime, folderBasePath);
+    private ArrayList<Integer> allowedNamespaces = new ArrayList<>();
+    private int currentNamespace = 0;
 
+    public CacheInitializationFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
+        String folderBasePath) {
+        super(feederName, queuePriority, defaultStartTime, folderBasePath);
+        for (String namespace : LiveOptions.options.get("feeder.cache.allowedNamespaces").split("\\s*,\\s*")) {
+            allowedNamespaces.add(Integer.parseInt(namespace));
+        }
     }
 
     @Override
@@ -39,44 +47,61 @@ public class CacheInitializationFeeder extends Feeder {
     @Override
     protected Collection<LiveQueueItem> getNextItems() {
         ArrayList<LiveQueueItem> queue = new ArrayList<LiveQueueItem>();
-        if(!isFinished){
-            String apiURL = LiveOptions.options.get("feeder.cache.wikiapi");
-            try{
-                URL url = new URL(apiURL + String.format(query_base, continueString, continueTitle));
-                InputStream responseStream = url.openConnection().getInputStream();
-                java.util.Scanner s = new java.util.Scanner(responseStream).useDelimiter("\\A");
-                JSONObject response = new JSONObject(s.next());
+        if(isFinished != 2){
+            System.out.println(continueTitle);
+            JSONObject response = queryAllPagesAPI();
+            if (response != null) {
                 JSONArray pages = response.getJSONObject("query").getJSONArray("allpages");
-                for(Object pageObject : pages){
+                for (Object pageObject : pages) {
                     JSONObject page = (JSONObject) pageObject;
-                    queue.add(new LiveQueueItem(-1, page.getString("title"), DateUtil.transformToUTC(new Date()), false, ""));
+                    if(!pageIsInCache(page)) {
+                        queue.add(new LiveQueueItem(-1, page.getString("title"), DateUtil.transformToUTC(new Date()), false, ""));
+                    }
                 }
-                isFinished = !response.has("continue");
-                if(!isFinished){
+                if (response.has("continue")) {
                     continueString = response.getJSONObject("continue").getString("continue");
                     setContinueTitle(response.getJSONObject("continue").getString("apcontinue"));
+                } else {
+                    goToNextNamespace();
                 }
-                System.out.println(continueTitle);
-                /*JSONObject pages = response.getJSONObject("query").getJSONObject("pages");
-                System.out.println(query_continue + "----------" + pages.keySet().size());
-                for(String pageid: pages.keySet()){
-                    String title = (pages.getJSONObject(pageid)).getString("title");
-                    queue.add(new LiveQueueItem(-1, title, DateUtil.transformToUTC(new Date()), false, ""));
-                }
-                isFinished = !response.has("continue");
-                if(!isFinished){
-                    query_continue = "";
-                    JSONObject continueObject = response.getJSONObject("continue");
-                    for(String key : continueObject.keySet()){
-                        query_continue += "&" + key + "=" + continueObject.getString(key);
-                    }
-                }*/
-
-            } catch (java.io.IOException e) {
-                e.printStackTrace();
             }
         }
         return queue;
+    }
+
+    private boolean pageIsInCache(JSONObject page) {
+        long pageID = page.getLong("pageid");
+        String query = "SELECT * FROM dbpedialive_cache WHERE pageID = ?";
+        boolean test = JDBCUtil.getCacheContent(query, pageID) != null;
+        if (test){
+            System.out.println("already in cache");
+        }
+        return test;
+    }
+
+    private JSONObject queryAllPagesAPI() {
+        String apiURL = LiveOptions.options.get("feeder.cache.wikiapi");
+        URL url = null;
+        try {
+            url = new URL(apiURL + String.format(query_base, allowedNamespaces.get(currentNamespace), continueString, continueTitle));
+            InputStream responseStream = url.openConnection().getInputStream();
+            java.util.Scanner s = new java.util.Scanner(responseStream).useDelimiter("\\A");
+            return new JSONObject(s.next());
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+        goToNextNamespace();
+        return null;
+    }
+
+    private void goToNextNamespace(){
+        currentNamespace ++;
+        if(currentNamespace == allowedNamespaces.size()){
+            isFinished++;
+            currentNamespace = 0;
+        }
+        continueString = "";
+        continueTitle = "";
     }
 
     public void setContinueTitle(String continueTitle){
