@@ -9,8 +9,12 @@ import org.dbpedia.extraction.wikiparser.{PageNode, TextNode}
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by Lukas Faber, Sebastian Serth and Stephan Haarmann on 28.05.2016.
-*/
+ * Links non-commons DBpedia resources to their DBpedia Commons counterpart using owl:sameAs.
+ * This requires the the Wikipedia page to contain a {{Commons}} template.
+ *
+ * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
+ * date 28.05.2016.
+ */
 class CommonsResourceExtractor (
   context : {
     def ontology : Ontology

@@ -7,8 +7,12 @@ import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, PropertyNode, Tex
 import scala.language.reflectiveCalls
 
 /**
-  * Created by Lukas Faber, Sebastian Serth, Stephan Haarmann
-  */
+ * Links DBpedia Commons resources to their counterparts in other DBpedia languages (only en, de and fr) using owl:sameAs.
+ * This requires the the Wikimedia page to contain a {{VN}} template.
+ *
+ * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
+ * date 28.05.2016.
+ */
 class DBpediaResourceExtractor (
   context : {
     def ontology : Ontology
@@ -36,7 +40,14 @@ extends PageNodeExtractor {
     } {
       return template.children
         .filter((node : PropertyNode) => Seq("de", "en", "fr").contains(node.key))
-        .map((node : PropertyNode) => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, propertyUri, String.format(objectBaseUri, if (node.key == "en") "" else node.key + ".", WikiUtil.wikiEncode(node.children.head.asInstanceOf[TextNode].text.split(", ").head)), null, null))
+        .map((node : PropertyNode) =>
+          new Quad(
+            context.language,
+            DBpediaDatasets.PageLinks,
+            subjectUri, propertyUri,
+            String.format(objectBaseUri, if (node.key == "en") "" else node.key + ".", WikiUtil.wikiEncode(node.children.head.asInstanceOf[TextNode].text.split(", ").head)), null, null
+          )
+        )
 
     }
     Seq.empty
