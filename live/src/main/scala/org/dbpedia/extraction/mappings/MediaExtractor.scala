@@ -41,15 +41,13 @@ extends PageNodeExtractor
   private val encodedLinkRegex = """%[0-9a-fA-F][0-9a-fA-F]""".r
 
   private val imageClass = context.ontology.classes("Image")
+  private val soundClass = context.ontology.classes("Sound")
   private val dbpediaThumbnailProperty = context.ontology.properties("thumbnail")
   private val foafDepictionProperty = context.ontology.properties("foaf:depiction")
   private val foafThumbnailProperty = context.ontology.properties("foaf:thumbnail")
   private val dcRightsProperty = context.ontology.properties("dc:rights")
   private val rdfType = context.ontology.properties("rdf:type")
-
-  private val soundClass = context.ontology.classes("Sound")
-
-  private val mediaItem = new OntologyProperty("dbpedia-owl:mediaItem", Map(Language.English -> "mediaItem"), Map(), null, null, false, Set(), Set())
+  private val mediaItem = context.ontology.properties("mediaItem")
 
   private val commonsLang = Language.Commons
 
@@ -132,10 +130,13 @@ extends PageNodeExtractor
         // match Files included over galleries format("File:<filename>|<futherText>")
         case (textNode @ TextNode(text, line)) if (text.contains("|")) =>
         {
-          val filestring = text.split("\\|").head.replace("\n","").replace("<gallery>","").replace("File:", "")
-          val filename = MediaExtractorConfig.ImageRegex.findFirstIn(filestring)
-          if (filename != None){
-            media += Some((filename.get, textNode))
+          val textArray = text.split("\\|")
+          if (textArray.nonEmpty) {
+            val filestring = textArray.head.replace("\n", "").replaceAll(".*?<gallery.*?>", "").replace("File:", "")
+            val filename = MediaExtractorConfig.ImageRegex.findFirstIn(filestring)
+            if (filename != None) {
+              media += Some((filename.get, textNode))
+            }
           }
         }
         case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == Namespace.File =>
