@@ -1,9 +1,12 @@
 package org.dbpedia.extraction.scripts
 
 import java.lang.StringBuilder
+import java.nio.ByteBuffer
+import java.util.concurrent.atomic.AtomicInteger
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import org.dbpedia.extraction.util.FileLike
+import org.dbpedia.util.AsyncFileWriter
 import scala.Console.err
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.IOUtils.writer
@@ -12,6 +15,8 @@ import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
+
+import scala.io.Codec
 
 /**
  * Maps old quads/triples to new quads/triples.
@@ -33,6 +38,11 @@ object QuadMapper {
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, required: Boolean )(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
     mapQuads(finder.language.wikiCode, finder.find(input, false), finder.find(output), required)(map)
+  }
+
+  def mapQuadsParallel[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, required: Boolean )(map: Quad => Traversable[Quad]): Unit = {
+    // auto only makes sense on the first call to finder.find(), afterwards the date is set
+    mapQuadsParallel(finder.language.wikiCode, finder.find(input, false), finder.find(output), required)(map)
   }
     
   /**
@@ -74,6 +84,51 @@ object QuadMapper {
       }
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
       writer.write("# completed "+formatCurrentTimestamp+"\n")
+    }
+    finally writer.close()
+    err.println(tag+": mapped "+mapCount+" quads")
+  }
+
+  /**
+    * @deprecated use one of the map functions below
+    */
+  @Deprecated
+  def mapQuadsParallel(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
+
+    if (! inFile.exists) {
+      if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
+      err.println(tag+": WARNING - file "+inFile+" does not exist")
+      return
+    }
+
+    err.println(tag+": writing "+outFile+" ...")
+    var mapCount = new AtomicInteger()
+    val writer = new AsyncFileWriter(IOUtils.outputStream(outFile))
+    writer.open()
+    try {
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
+      writer.append("# started "+formatCurrentTimestamp+"\n")
+      QuadReader.readQuadsParallel(tag, inFile) { old =>
+        for (quad <- map(old)) {
+          val sb = new StringBuilder
+          sb append '<' append quad.subject append "> <" append quad.predicate append "> "
+          if (quad.datatype == null) {
+            sb append '<' append quad.value append "> "
+          }
+          else {
+            sb  append '"' append quad.value append '"'
+            if (quad.language != null) sb append '@' append quad.language append ' '
+            else if (quad.datatype != "http://www.w3.org/2001/XMLSchema#string") sb append "^^<" append quad.datatype append "> "
+          }
+          if (quad.context != null) sb append '<' append quad.context append "> "
+          sb append ".\n"
+          writer.append(sb.toString)
+
+          mapCount.incrementAndGet()
+        }
+      }
+      // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.header
+      writer.append("# completed " + mapCount.get + " quads at " +formatCurrentTimestamp)
     }
     finally writer.close()
     err.println(tag+": mapped "+mapCount+" quads")

@@ -1,7 +1,11 @@
 package org.dbpedia.extraction.scripts
 
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
+
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
+import scala.collection.mutable
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
@@ -101,9 +105,50 @@ object MapObjectUris {
     // Use all remaining args as keys or comma or whitespace separated lists of keys
     val languages = parseLanguages(baseDir, args.drop(6))
     require(languages.nonEmpty, "no languages")
-    
+
+    for (language <- languages)
+    {
+      val finder = new DateFinder(baseDir, language)
+
+      // Redirects can have only one target, so we don't really need a MultiMap here.
+      // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
+      val map = new mutable.HashMap[String, Set[String]] with mutable.SynchronizedMap[String, Set[String]] with MultiMap[String, String]
+        //new HashMap[String, Set[String]] with MultiMap[String, String]
+
+      for (mappping <- mappings) {
+        var count = new AtomicInteger()
+        QuadReader.readQuadsParallel(finder, mappping + mappingSuffix, auto = true) { quad =>
+          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
+          // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
+          // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
+          // line, which means that the character array for the whole line is kept in memory, which
+          // basically means that the whole redirects file is kept in memory. We should
+          // - only store the resource title in the map
+          // - use new String(quad.subject), new String(quad.value) to cut the link to the whole line
+          // - maybe use an index of titles as in ProcessInterLanguageLinks to avoid storing duplicate titles
+          map.addBinding(quad.subject, quad.value)
+          count.incrementAndGet()
+        }
+        err.println(language.wikiCode+": found "+count.get+" mappings")
+      }
+
+      for (input <- inputs; suffix <- suffixes) {
+        QuadMapper.mapQuadsParallel(finder, input + suffix, input + extension + suffix, required = false) { quad =>
+          if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
+          else map.get(quad.value) match {
+            case Some(uris) =>
+              for (uri <- uris)
+                yield quad.copy(
+                  value = uri, // change object URI
+                  context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom="+quad.value) // add change provenance
+            case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
+          }
+        }
+      }
+    }
+
     // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
-    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
+    /*val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
       
       val finder = new DateFinder(baseDir, language)
       
@@ -113,7 +158,7 @@ object MapObjectUris {
       
       for (mappping <- mappings) {
         var count = 0
-        QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
+        QuadReader.readQuadsParallel(finder, mappping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
@@ -142,12 +187,12 @@ object MapObjectUris {
         }
       }
       
-    }
-    
+    }*/
+    /*
     workers.start()
     for (language <- languages) workers.process(language)
     workers.stop()
-    
+    */
   }
   
 }

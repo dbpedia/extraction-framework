@@ -1,8 +1,11 @@
 package org.dbpedia.extraction.util
 
 import java.io.{IOException,File,FilenameFilter,InputStream,FileInputStream,OutputStream,FileOutputStream}
+import java.nio.channels.{AsynchronousChannel, AsynchronousFileChannel}
+import java.nio.file.StandardOpenOption
 import java.util.regex.Pattern
 import RichFile._
+import scala.io.Source
 import scala.language.implicitConversions
 
 object RichFile {
@@ -61,7 +64,8 @@ class RichFile(file: File) extends FileLike[File] {
   
   /**
    * Retrieves the relative path in respect to a given base directory.
-   * @param child
+    *
+    * @param child
    * @return path from parent to child. uses forward slashes as separators. may be empty.
    * does not end with a slash.
    * @throws IllegalArgumentException if parent is not a parent directory of child.
@@ -76,7 +80,8 @@ class RichFile(file: File) extends FileLike[File] {
   /**
    * Deletes this file or directory and, if this is a directory and recursive is true,
    * all contained file and sub directories.
-   * @throws IOException if the directory or any of its sub directories could not be deleted
+    *
+    * @throws IOException if the directory or any of its sub directories could not be deleted
    */
   override def delete(recursive: Boolean = false): Unit = {
     if (recursive && file.isDirectory) file.listFiles.foreach(_.delete(true))
@@ -92,5 +97,6 @@ class RichFile(file: File) extends FileLike[File] {
   override def inputStream(): InputStream = new FileInputStream(file)
   
   override def outputStream(append: Boolean = false): OutputStream = new FileOutputStream(file, append)
-  
+
+  override def getFile: File = file
 }

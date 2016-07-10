@@ -1,9 +1,12 @@
 package org.dbpedia.extraction.util
 
+import java.nio.channels.{AsynchronousChannel, AsynchronousFileChannel}
+import java.nio.file.StandardOpenOption
+
 import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream,BZip2CompressorOutputStream}
 import java.util.zip.{GZIPInputStream,GZIPOutputStream}
 import java.io.{InputStream,OutputStream,Reader,Writer,OutputStreamWriter,InputStreamReader}
-import scala.io.Codec
+import scala.io.{Source, Codec}
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import java.nio.charset.Charset
 
@@ -62,22 +65,37 @@ object IOUtils {
    * open input stream, wrap in unzipper stream if file suffix indicates compressed file,
    * wrap in reader.
    */
-  def reader(file: FileLike[_], charset: Charset = Codec.UTF8.charSet): Reader =
+  def reader(file: FileLike[_], charset: Charset = Codec.UTF8.charSet): Reader = {
     new InputStreamReader(inputStream(file), charset)
-  
+  }
+
+  /**
+    * get file as stream
+ *
+    * @param file
+    * @param charset
+    * @return
+    */
+  def stream(file: FileLike[_], charset: Charset = Codec.UTF8.charSet): Stream[String] = {
+    Source.fromInputStream(inputStream(file))(Codec.apply(charset)).getLines().toStream
+  }
+
   /**
    * open input stream, wrap in unzipper stream if file suffix indicates compressed file,
    * wrap in reader, wrap in buffered reader, process all lines. The last value passed to
    * proc will be null.
    */
   def readLines(file: FileLike[_], charset: Charset = Codec.UTF8.charSet)(proc: String => Unit): Unit = {
-    val reader = this.reader(file)
-    try {
-      for (line <- reader) {
-        proc(line)
-      }
-    }
-    finally reader.close()
+    this.stream(file, charset).foreach(proc)
+  }
+
+  /**
+    * open input stream, wrap in unzipper stream if file suffix indicates compressed file,
+    * wrap in reader, wrap in buffered reader, process all lines in parallel.
+    * The last value passed to proc will be null.
+    */
+  def readLinesParallel(file: FileLike[_], charset: Charset = Codec.UTF8.charSet)(proc: String => Unit): Unit = {
+    this.stream(file, charset).par.foreach(proc)
   }
 
   /**
