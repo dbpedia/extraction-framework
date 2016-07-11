@@ -2,7 +2,7 @@ package org.dbpedia.extraction.server.resources.rml.mappings
 
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLPredicateObjectMap, RMLUri}
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLUri}
 
 /**
   * Creates an RML Template Mapping
@@ -16,6 +16,7 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
 
   private def defineTriplesMap() =
   {
+    rmlModel.triplesMap.addDCTermsType(new RMLLiteral("templateMapping"))
     defineSubjectMap()
     defineLogicalSource()
   }
