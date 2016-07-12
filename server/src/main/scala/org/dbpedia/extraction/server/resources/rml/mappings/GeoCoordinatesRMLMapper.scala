@@ -102,6 +102,8 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     val latitudePom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/latitude"))
     val longitudePom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/longitude"))
 
+    addDegreesToPredicateObjectMap(latitudePom, longitudePom)
+
     List(latitudePom, longitudePom)
 
   }
