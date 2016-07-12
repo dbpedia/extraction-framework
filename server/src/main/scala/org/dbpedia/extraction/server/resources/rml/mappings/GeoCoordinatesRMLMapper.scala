@@ -16,8 +16,6 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
   private val rmlFactory = rmlModel.rmlFactory
   private val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/GeoCoordinatesMapping")
-  private val latUri = uri.extend("/latitude")
-  private val lonUri = uri.extend("/longitude")
 
   def mapToModel() : List[RMLPredicateObjectMap] = {
     addGeoCoordinatesMapping()
@@ -76,9 +74,8 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
   def addCoordinatesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latPom = triplesMap.addPredicateObjectMap(latUri)
-
-    val lonPom = triplesMap.addPredicateObjectMap(lonUri)
+    val latPom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/latitude"))
+    val lonPom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/longitude"))
 
     addCoordinatesToPredicateObjectMap(latPom, lonPom)
 
@@ -89,9 +86,8 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
   def addLongitudeLatitudeToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latitudePom = triplesMap.addPredicateObjectMap(latUri)
-
-    val longitudePom = triplesMap.addPredicateObjectMap(lonUri)
+    val latitudePom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/latitude"))
+    val longitudePom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/longitude"))
 
     addLongitudeLatitudeToPredicateObjectMap(latitudePom, longitudePom)
 
@@ -103,8 +99,8 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
   def addDegreesToTriplesMap(triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-    val latitudePom = triplesMap.addPredicateObjectMap(latUri)
-    val longitudePom = triplesMap.addPredicateObjectMap(lonUri)
+    val latitudePom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/latitude"))
+    val longitudePom = triplesMap.addPredicateObjectMap(triplesMap.uri.extend("/longitude"))
 
     List(latitudePom, longitudePom)
 
@@ -115,18 +111,18 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
 
     if(mapping.coordinates != null) {
-      val latPom = rmlFactory.createRMLPredicateObjectMap(latUri)
-      val lonPom = rmlFactory.createRMLPredicateObjectMap(lonUri)
+      val latPom = rmlFactory.createRMLPredicateObjectMap(uri.extend("/latitude"))
+      val lonPom = rmlFactory.createRMLPredicateObjectMap(uri.extend("/longitude"))
       addCoordinatesToPredicateObjectMap(latPom, lonPom)
       List(latPom, lonPom)
     } else if(mapping.latitude != null && mapping.longitude != null) {
-      val latPom = rmlFactory.createRMLPredicateObjectMap(latUri)
-      val lonPom = rmlFactory.createRMLPredicateObjectMap(lonUri)
+      val latPom = rmlFactory.createRMLPredicateObjectMap(uri.extend("/latitude"))
+      val lonPom = rmlFactory.createRMLPredicateObjectMap(uri.extend("/longitude"))
       addLongitudeLatitudeToPredicateObjectMap(latPom, lonPom)
       List(latPom, lonPom)
     } else {
-      val latPom = rmlFactory.createRMLPredicateObjectMap(latUri)
-      val lonPom = rmlFactory.createRMLPredicateObjectMap(lonUri)
+      val latPom = rmlFactory.createRMLPredicateObjectMap(uri.extend("/latitude"))
+      val lonPom = rmlFactory.createRMLPredicateObjectMap(uri.extend("/longitude"))
       addDegreesToPredicateObjectMap(latPom, lonPom)
       List(latPom, lonPom)
     }
