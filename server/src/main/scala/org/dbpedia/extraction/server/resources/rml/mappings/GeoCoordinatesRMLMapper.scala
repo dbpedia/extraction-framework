@@ -135,7 +135,7 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
 
   private def addCoordinatesToPredicateObjectMap(latPom: RMLPredicateObjectMap, lonPom: RMLPredicateObjectMap) =
   {
-
+    latPom.addDCTermsType(new RMLLiteral("latitudeMapping"))
     latPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lat"))
     val latOmUri = latPom.uri.extend("/FunctionTermMap")
     val latOm = latPom.addFunctionTermMap(latOmUri)
@@ -156,6 +156,7 @@ class GeoCoordinatesRMLMapper(rmlModel: RMLModel, mapping: GeoCoordinatesMapping
     val latParameterOmUri = latParameterPomUri.extend("/ObjectMap")
     latParameterPom.addObjectMap(latParameterOmUri).addRMLReference(new RMLLiteral(mapping.coordinates))
 
+    lonPom.addDCTermsType(new RMLLiteral("longitudeMapping"))
     lonPom.addPredicate(new RMLUri(RdfNamespace.GEO.namespace + "lon"))
     val lonOmUri = lonPom.uri.extend("/FunctionTermMap")
     val lonOm = lonPom.addFunctionTermMap(lonOmUri)
