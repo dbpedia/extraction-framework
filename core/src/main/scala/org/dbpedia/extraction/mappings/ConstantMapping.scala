@@ -21,9 +21,9 @@ import scala.language.reflectiveCalls
  * }}
  */
 class ConstantMapping (
-  ontologyProperty: OntologyProperty,
-  private var value : String,
-  datatype : Datatype,
+  val ontologyProperty: OntologyProperty,
+  var value : String,
+  val datatype : Datatype,
   context : {
     def language : Language
   } 
