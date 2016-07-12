@@ -53,7 +53,7 @@ class DateIntervalRMLMapper(rmlModel: RMLModel, mapping: DateIntervalMapping) {
 
   private def addDateIntervalMappingToPredicateObjectMaps(startDateIntervalPom: RMLPredicateObjectMap, endDateIntervalPom: RMLPredicateObjectMap) =
   {
-    startDateIntervalPom.addDCTermsType(new RMLLiteral("startDateInvervalMapping"))
+    startDateIntervalPom.addDCTermsType(new RMLLiteral("startDateIntervalMapping"))
     startDateIntervalPom.addPredicate(new RMLUri(mapping.startDateOntologyProperty.uri))
 
     endDateIntervalPom.addDCTermsType(new RMLLiteral("endDateIntervalMapping"))
