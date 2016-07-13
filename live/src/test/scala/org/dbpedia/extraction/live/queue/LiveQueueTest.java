@@ -11,26 +11,28 @@ public class LiveQueueTest {
 
     @Test
     public void queueTest() throws InterruptedException {
-        LiveQueueItem q1 = new LiveQueueItem(1, "item 1", "2016-07-13T10:29:43Z", false, "");
-        q1.setPriority(LiveQueuePriority.LivePriority);
-        LiveQueueItem q1a = new LiveQueueItem(2, "item 1a", "2016-07-13T10:29:50Z", false, "");
-        q1a.setPriority(LiveQueuePriority.LivePriority);
+        LiveQueueItem qL1 = new LiveQueueItem(1, "item L1", "2016-07-13T10:29:43Z", false, "");
+        qL1.setPriority(LiveQueuePriority.LivePriority);
+        LiveQueueItem qL2 = new LiveQueueItem(2, "item L2", "2016-07-13T10:29:50Z", false, "");
+        qL2.setPriority(LiveQueuePriority.LivePriority);
 
-        LiveQueueItem q2 = new LiveQueueItem(3, "item 3", "2016-07-13T10:29:55Z", false, "");
-        q2.setPriority(LiveQueuePriority.UnmodifiedPagePriority);
-        LiveQueueItem q2a = new LiveQueueItem(4, "item 3a", "2016-07-13T10:29:56Z", false, "");
-        q2a.setPriority(LiveQueuePriority.UnmodifiedPagePriority);
+        LiveQueueItem qU1 = new LiveQueueItem(3, "item U1", "2016-07-13T10:29:55Z", false, "");
+        qU1.setPriority(LiveQueuePriority.UnmodifiedPagePriority);
+        LiveQueueItem qU2 = new LiveQueueItem(4, "item U2", "2016-07-13T10:29:56Z", false, "");
+        qU2.setPriority(LiveQueuePriority.UnmodifiedPagePriority);
 
-        LiveQueue.add(q2);
-        LiveQueue.add(q2a);
-        LiveQueue.add(q1);
-        LiveQueue.add(q1a);
+        LiveQueue.add(qU1);
+        LiveQueue.add(qU2);
+        LiveQueue.add(qL1);
+        LiveQueue.add(qL2);
 
 
-        Assert.assertTrue(LiveQueue.take() == q1a) ;
-        Assert.assertTrue(LiveQueue.take() == q1) ;
-        Assert.assertTrue(LiveQueue.take() == q2) ;
-        Assert.assertTrue(LiveQueue.take() == q2a) ;
+        Assert.assertTrue(LiveQueue.take() == qL1) ;
+        Assert.assertTrue(LiveQueue.take() == qL2) ;
+
+        Assert.assertTrue(LiveQueue.take() == qU2) ;
+        Assert.assertTrue(LiveQueue.take() == qU1) ;
+
 
 
     }
