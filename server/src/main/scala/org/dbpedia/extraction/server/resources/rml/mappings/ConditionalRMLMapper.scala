@@ -30,12 +30,15 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
     val mapToClassPomUri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/ConditionalMapping" + "/" +
       firstConditionMapping.templateProperty + "_" + firstConditionMapping.operator + "_" + firstConditionMapping.value)
     val mapToClassPom = rmlModel.triplesMap.addConditionalPredicateObjectMap(mapToClassPomUri)
+    mapToClassPom.addDCTermsType(new RMLLiteral("conditionalMapping"))
     mapToClassPom.addPredicate(new RMLUri(RdfNamespace.RDF.namespace + "type"))
     val mapToClassOmUri = mapToClassPomUri.extend("/ObjectMap")
     val mapToClassOm = mapToClassPom.addObjectMap(mapToClassOmUri)
 
     mapToClassOm.addConstant(new RMLUri(firstTemplateMapping.mapToClass.uri))
     val conditionFunctionTermMap = addEqualCondition(firstConditionMapping, mapToClassPom)
+
+
 
     //add predicate object maps
     val rmlMapper = new RMLModelMapper(rmlModel)
