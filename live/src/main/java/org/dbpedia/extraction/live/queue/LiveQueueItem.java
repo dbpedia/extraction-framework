@@ -78,9 +78,9 @@ public class LiveQueueItem implements Comparable<LiveQueueItem>{
             // String compare should do for this (and it's thread safe)
             if (this.itemPriority == LiveQueuePriority.UnmodifiedPagePriority)
                 // When in unmodified do reverse ordering to prevent older from starvation
-                return this.modificationDate.compareTo(item.modificationDate);
-            else
                 return item.modificationDate.compareTo(this.modificationDate);
+            else
+                return this.modificationDate.compareTo(item.modificationDate);
         }
     }
 
