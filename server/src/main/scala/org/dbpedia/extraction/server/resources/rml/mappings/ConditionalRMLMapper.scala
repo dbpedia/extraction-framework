@@ -90,6 +90,7 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
   private def defineTriplesMap() =
   {
+    rmlModel.triplesMap.addDCTermsType(new RMLLiteral("conditionalMapping"))
     defineSubjectMap()
     defineLogicalSource()
   }
