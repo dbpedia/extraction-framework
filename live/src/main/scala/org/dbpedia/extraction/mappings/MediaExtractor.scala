@@ -125,7 +125,7 @@ extends PageNodeExtractor
           {
             media += Some((encodedFileName, textNode))
           }
-          searchMedia(children, sections).foreach(s => media :+ Some(s))
+          searchMedia(children, sections).foreach(s => media += s)
         }
         // match Files included over galleries format("File:<filename>|<futherText>")
         case (textNode @ TextNode(text, line)) if (text.contains("|")) =>
@@ -135,13 +135,14 @@ extends PageNodeExtractor
             val filestring = textArray.head.replace("\n", "").replaceAll(".*?<gallery.*?>", "").replace("File:", "")
             val filename = MediaExtractorConfig.ImageRegex.findFirstIn(filestring)
             if (filename != None) {
-              media += Some((filename.get, textNode))
+              val encodedFileName = WikiUtil.wikiEncode(filename.get).capitalize(language.locale)
+              media += Some((encodedFileName, textNode))
             }
           }
         }
         case (linkNode @ InternalLinkNode(destination, _, _, _)) if destination.namespace == Namespace.File =>
         {
-          for (fileName <- MediaExtractorConfig.ImageLinkRegex.findFirstIn(destination.encoded))
+          for (fileName <- MediaExtractorConfig.MediaLinkRegex.findFirstIn(destination.encoded))
           {
             media += Some((fileName, linkNode))
           }

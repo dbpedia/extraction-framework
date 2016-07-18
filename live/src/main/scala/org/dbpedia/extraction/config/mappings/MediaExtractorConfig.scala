@@ -15,8 +15,11 @@ object MediaExtractorConfig {
   val ImageLinkRegex = ImageExtractorConfig.ImageLinkRegex
 
   val SoundRegex = """(?i)[^\"/\*?<>|:]+\.(?:ogg|oga|ogx|flac|wav|mid)""".r
+  val SoundLinkRegex = """(?i).*\.(?:ogg|oga|ogx|flac|wav|mid)""".r
 
   val VideoRegex = """(?i)[^\"/\*?<>|:]+\.(?:ogv|webm)""".r
+  val VideoLinkRegex = """(?i).*\.(?:ogv|webm)""".r
 
   val MediaRegex = s"""($ImageRegex|$SoundRegex|$VideoRegex)""".r
+  val MediaLinkRegex = s"""($ImageLinkRegex|$SoundLinkRegex|$VideoLinkRegex)""".r
 }
