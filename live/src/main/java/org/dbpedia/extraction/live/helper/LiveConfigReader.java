@@ -87,7 +87,7 @@ public class LiveConfigReader {
     }
 
     /**
-     * Reads each langauge along with its set of extractors
+     * Reads each language along with its set of extractors
      */
     private static void readExtractors(){
         NodeList languageNodes = doc.getElementsByTagName(LANUAGE_TAGNAME);
