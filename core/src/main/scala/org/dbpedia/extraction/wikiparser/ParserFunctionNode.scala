@@ -14,4 +14,12 @@ case class ParserFunctionNode(title : String, override val children : List[Node]
     
     // parser functions are skipped for plain text
     def toPlainText = ""
+
+    override def equals(obj: Any) = obj match{
+
+        case otherParserFunctionNode : ParserFunctionNode => ( otherParserFunctionNode.title == title //&&  otherParserFunctionNode.line == line
+          && NodeUtil.removeEmptyTextNode(otherParserFunctionNode.children) == NodeUtil.removeEmptyTextNode(children))
+        case _ => false
+
+    }
 }

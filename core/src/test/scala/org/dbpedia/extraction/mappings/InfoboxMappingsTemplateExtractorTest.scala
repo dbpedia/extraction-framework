@@ -26,6 +26,8 @@ class InfoboxMappingsTemplateExtractorTest  extends FlatSpec with Matchers with 
 
         | data37    = {{#ifeq: temp_string1 | temp_string2 | temp_string3 | temp_string4 }}
         | data38    = {{#ifeq: string1 | string2 |{{#property:P1082}} | string4 }}
+        | website   = {{#invoke:Wikidata|property|p856}}
+
         }}
       """, "TestPage", lang, "all")
 
