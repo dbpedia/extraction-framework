@@ -521,7 +521,6 @@ final class SwebleWrapper extends WikiParser
 
     def defaultStart(node : WtNode) : String = node match {
         case i : WtListItem => "*"
-        case i : WtListItem => "#"
         case i : WtDefinitionListDef => ":"
         case i : WtDefinitionListTerm => ":"
         case _ => ""

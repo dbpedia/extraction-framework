@@ -15,7 +15,7 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class SwebleWrapperFailureTest extends FlatSpec with Matchers with PrivateMethodTester {
 
-  "SwebleWrapper" should """Fail for Template Nodes""" in {
+  "SwebleWrapper" should """Fail for fail for ParserFunctionNodes""" in {
     val swebleWikiParser = WikiParserWrapper.swebleWikiParser
     val simpleWikiParser = WikiParserWrapper.simpleWikiParser
     var body = """
@@ -29,7 +29,7 @@ class SwebleWrapperFailureTest extends FlatSpec with Matchers with PrivateMethod
     var page = new WikiPage(pgTitle, body);
     var simplePageNode: Option[PageNode] = simpleWikiParser.apply(page)
     var sweblePageNode: Option[PageNode] = swebleWikiParser.apply(page)
-
+    var h = 9
     (sweblePageNode) should not be (simplePageNode)
 
   }

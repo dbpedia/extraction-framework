@@ -122,4 +122,22 @@ class SwebleWrapperTest extends FlatSpec with Matchers with PrivateMethodTester 
     (sweblePageNode) should be (simplePageNode)
 
   }
+
+  "SwebleWrapper" should """return similar AST for TemplateNodes""" in {
+    val swebleWikiParser = WikiParserWrapper.swebleWikiParser
+    val simpleWikiParser = WikiParserWrapper.simpleWikiParser
+    var body = """
+        {{Infobox Test1
+
+                 | data37     = {{Example | temp_string1 | temp_string2  }}
+
+        }}
+               """
+    var pgTitle = WikiTitle.parse("Title", Language.English)
+    var page = new WikiPage(pgTitle, body);
+    var simplePageNode: Option[PageNode] = simpleWikiParser.apply(page)
+    var sweblePageNode: Option[PageNode] = swebleWikiParser.apply(page)
+    (sweblePageNode) should  be (simplePageNode)
+
+  }
 }

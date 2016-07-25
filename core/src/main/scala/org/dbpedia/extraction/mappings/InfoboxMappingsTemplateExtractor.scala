@@ -6,6 +6,7 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.{ExtractorUtils, InfoboxMappingsUtils, Language}
 import org.dbpedia.extraction.wikiparser._
+import scala.language.reflectiveCalls
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -199,7 +200,7 @@ class InfoboxMappingsTemplateExtractor (context: {
        var parserNode = node.asInstanceOf[ParserFunctionNode]
 
        // To absorb #invoke & #property but not #if
-       if ( parserNode.title.charAt(0) == "#" && parserNode.title.substring(0,3) != "#if"){
+       if ( parserNode.title.charAt(0) == '#' && parserNode.title.substring(0,3) != "#if"){
          if( parserNode.title == "#invoke")
            property = InfoboxMappingsUtils.extract_property(parserNode.children.head.toWikiText, parserNode.title)
          else if (parserNode.title == "#property")
