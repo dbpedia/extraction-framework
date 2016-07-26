@@ -1,6 +1,4 @@
-package org.dbpedia.extraction.server.resources.rml
-
-import org.dbpedia.extraction.server.resources.rml.model.ModelWrapper
+package org.dbpedia.extraction.server.resources.rml.model
 
 /**
   * RML Template Mapping converted from the DBpedia mappings

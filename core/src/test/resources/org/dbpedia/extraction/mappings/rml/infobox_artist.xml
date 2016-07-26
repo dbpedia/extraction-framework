@@ -1,0 +1,119 @@
+<mediawiki xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.mediawiki.org/xml/export-0.8/" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.8/ http://www.mediawiki.org/xml/export-0.8.xsd" version="0.8" xml:lang="en"><page><title>Mapping en:Infobox artist</title><ns>204</ns><id>28</id><revision><id>46609</id><timestamp>2015-03-20T06:36:39Z</timestamp><contributor><username>Jimkont</username><id>32</id></contributor><text xml:space="preserve">{{ConditionalMapping
+| cases =
+ {{Condition
+    | templateProperty = currentmembers
+    | operator = isSet
+    | mapping = {{TemplateMapping | header = 0
+                   | mapToClass = Band
+                }}
+ }}
+
+ {{Condition
+    | templateProperty = pastmembers
+    | operator = isSet
+    | mapping = {{TemplateMapping | header = 0
+                   | mapToClass = Band
+                }}
+ }}
+
+ {{Condition
+    | templateProperty = occupation
+    | operator = contains
+    | value = actor
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Actor
+                }}
+ }}
+
+ {{Condition
+    | templateProperty = occupation
+    | operator = contains
+    | value = actress
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Actor
+                }}
+ }}
+
+ {{Condition
+    | templateProperty = occupation
+    | operator = contains
+    | value = singer
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = MusicalArtist
+                }}
+ }}
+
+ {{Condition
+    | templateProperty = occupation
+    | operator = contains
+    | value = songwriter
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = MusicalArtist
+                }}
+ }}
+
+ {{Condition
+    | operator = otherwise
+    | mapping = {{TemplateMapping | header = 0
+                | mapToClass = Artist
+                }}
+ }}
+
+| defaultMappings =
+	{{PropertyMapping | templateProperty = field | ontologyProperty = field }}
+	{{PropertyMapping | templateProperty = training | ontologyProperty = training }}
+	{{PropertyMapping | templateProperty = movement | ontologyProperty = movement }}
+	{{PropertyMapping | templateProperty = genre | ontologyProperty = genre }}
+	{{PropertyMapping | templateProperty = instrument | ontologyProperty = instrument }}
+	{{PropertyMapping | templateProperty = voicetype | ontologyProperty = voiceType }}
+	{{PropertyMapping | templateProperty = label | ontologyProperty = recordLabel}}
+	{{PropertyMapping | templateProperty = currentmembers | ontologyProperty = currentMember }}
+	{{PropertyMapping | templateProperty = pastmembers | ontologyProperty = pastMember }}
+	{{PropertyMapping | templateProperty = associatedact | ontologyProperty = associatedAct }}
+	{{PropertyMapping | templateProperty = academyAward | ontologyProperty = academyAward }}
+	{{PropertyMapping | templateProperty = AFIAward | ontologyProperty = afiAward }}
+	{{PropertyMapping | templateProperty = BAFTAAward | ontologyProperty = baftaAward }}
+	{{PropertyMapping | templateProperty = cesarAward | ontologyProperty = cesarAward }}
+	{{PropertyMapping | templateProperty = emmyAward | ontologyProperty = emmyAward }}
+	{{PropertyMapping | templateProperty = filmfareAward | ontologyProperty = filmFareAward }}
+	{{PropertyMapping | templateProperty = grammyAward | ontologyProperty = grammyAward }}
+	{{PropertyMapping | templateProperty = goldenGlobeAward | ontologyProperty = goldenGlobeAward }}
+	{{PropertyMapping | templateProperty = goyaAward | ontologyProperty = goyaAward }}
+	{{PropertyMapping | templateProperty = tonyAward | ontologyProperty = tonyAward }}
+	{{PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = birth_name | ontologyProperty = birthName }}
+	{{PropertyMapping | templateProperty = birth_date | ontologyProperty = birthDate }}
+	{{PropertyMapping | templateProperty = birth_place | ontologyProperty = birthPlace }}
+	{{PropertyMapping | templateProperty = death_date | ontologyProperty = deathDate }}
+	{{PropertyMapping | templateProperty = death_place | ontologyProperty = deathPlace }}
+	{{PropertyMapping | templateProperty = nationality | ontologyProperty = nationality }}
+	{{PropertyMapping | templateProperty = influencedby | ontologyProperty = influencedBy }}
+	{{PropertyMapping | templateProperty = influenced by | ontologyProperty = influencedBy }}
+	{{PropertyMapping | templateProperty = influenced_by | ontologyProperty = influencedBy }}
+	{{PropertyMapping | templateProperty = influenced | ontologyProperty = influenced }}
+	{{PropertyMapping | templateProperty = awards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = chinesename | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = tradchinesename | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = simpchinesename | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = pinyinchinesename | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = jyutpingchinesename | ontologyProperty = foaf:name }}
+	{{PropertyMapping | templateProperty = resting_place | ontologyProperty = restingPlace }}
+	{{GeocoordinatesMapping | ontologyProperty = restingPlacePosition  | coordinates = restingplacecoordinates }}
+	{{PropertyMapping | templateProperty = othername | ontologyProperty = alias }}
+	{{PropertyMapping | templateProperty = occupation | ontologyProperty = occupation }}
+	{{DateIntervalMapping | templateProperty = yearsactive | startDateOntologyProperty = activeYearsStartYear | endDateOntologyProperty = activeYearsEndYear }}
+	{{PropertyMapping | templateProperty = spouse | ontologyProperty = spouse }}
+	{{PropertyMapping | templateProperty = partner | ontologyProperty = partner }}
+	{{PropertyMapping | templateProperty = children | ontologyProperty = child }}
+	{{PropertyMapping | templateProperty = parents | ontologyProperty = parent }}
+	{{PropertyMapping | templateProperty = influences | ontologyProperty = influencedBy }}
+	{{PropertyMapping | templateProperty = website | ontologyProperty = foaf:homepage }}
+	{{PropertyMapping | templateProperty = hongkongfilmwards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = goldenbauhiniaawards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = hkfcsawards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = goldenhorseawards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = goldenroosterawards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = mtvasiaawards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = goldenmelodyawards | ontologyProperty = award }}
+	{{PropertyMapping | templateProperty = ntsawards | ontologyProperty = award }}
+}}</text><format>text/x-wiki</format></revision></page></mediawiki>
