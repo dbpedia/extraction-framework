@@ -197,9 +197,9 @@ abstract class ExtractionManager(
     }
 
     protected def getExtractionContext(lang: Language) = {
-      new { val ontology = self.ontology;
-            val language = lang;
-            val mappings = self.mappings(lang);
+      new { val ontology = self.ontology
+            val language = lang
+            val mappings = self.mappings(lang)
             val redirects = self.redirects.getOrElse(lang, new Redirects(Map()))
             val disambiguations = self.disambiguations
       }
