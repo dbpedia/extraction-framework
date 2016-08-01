@@ -4,7 +4,7 @@ import java.util.logging.Logger
 
 import org.dbpedia.extraction.config.mappings.MediaExtractorConfig
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, WikiApi, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
