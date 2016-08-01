@@ -1,21 +1,19 @@
 package org.dbpedia.extraction.live.feeder;
 
-import com.google.gson.JsonObject;
 import org.dbpedia.extraction.live.core.LiveOptions;
-import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
-import org.dbpedia.extraction.live.storage.JDBCUtil;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 
 /**
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
@@ -48,17 +46,11 @@ public class AllPagesFeeder extends Feeder {
     protected Collection<LiveQueueItem> getNextItems() {
         ArrayList<LiveQueueItem> queue = new ArrayList<LiveQueueItem>();
         if (!isFinished) {
-            System.out.println(continueTitle);
             JSONObject response = queryAllPagesAPI();
             if (response != null) {
                 JSONArray pages = response.getJSONObject("query").getJSONArray("allpages");
                 for (Object pageObject : pages) {
                     JSONObject page = (JSONObject) pageObject;
-                    //if(!pageIsInCache(page)) {
-                    //    queue.add(new LiveQueueItem(-1, page.getString("title"), DateUtil.transformToUTC(new Date()), false, ""));
-                    //}
-
-                    //always hanndle each page in case of a restart
                     queue.add(new LiveQueueItem(page.getInt("pageid"), page.getString("title"), DateUtil.transformToUTC(new Date()), false, ""));
                 }
                 if (response.has("continue")) {
@@ -70,16 +62,6 @@ public class AllPagesFeeder extends Feeder {
             }
         }
         return queue;
-    }
-
-    private boolean pageIsInCache(JSONObject page) {
-        long pageID = page.getLong("pageid");
-        String query = "SELECT * FROM dbpedialive_cache WHERE pageID = ?";
-        boolean test = JDBCUtil.getCacheContent(query, pageID) != null;
-        if (test) {
-            System.out.println("already in cache");
-        }
-        return test;
     }
 
     private JSONObject queryAllPagesAPI() {
