@@ -2,7 +2,12 @@ package org.dbpedia.extraction.live.main;
 
 
 import org.dbpedia.extraction.live.core.LiveOptions;
-import org.dbpedia.extraction.live.feeder.*;
+import org.dbpedia.extraction.live.feeder.Feeder;
+import org.dbpedia.extraction.live.feeder.RCStreamFeeder;
+import org.dbpedia.extraction.live.feeder.AllPagesFeeder;
+import org.dbpedia.extraction.live.feeder.OAIFeeder;
+import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
+import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
 import org.dbpedia.extraction.live.publisher.DiffData;
 import org.dbpedia.extraction.live.queue.LiveQueue;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
@@ -60,8 +65,26 @@ public class Main {
         }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.cache.enabled")) == true) {
-            feeders .add(new CacheInitializationFeeder("CacheInitializationFeeder", LiveQueuePriority.LivePriority,
+            feeders .add(new AllPagesFeeder("AllPagesFeeder", LiveQueuePriority.LivePriority,
                     LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
+        }
+
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {
+            long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.pollInterval"));
+            long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.mappings.sleepInterval"));
+            feeders .add( new OAIFeederMappings("FeederMappings", LiveQueuePriority.MappingPriority,
+                LiveOptions.options.get("mappingsOAIUri"), LiveOptions.options.get("mappingsBaseWikiUri"), LiveOptions.options.get("mappingsOaiPrefix"),
+                pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
+                LiveOptions.options.get("working_directory")));
+        }
+
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.live.enabled")) == true) {
+            long pollInterval = Long.parseLong(LiveOptions.options.get("feeder.live.pollInterval"));
+            long sleepInterval = Long.parseLong(LiveOptions.options.get("feeder.live.sleepInterval"));
+            feeders .add( new OAIFeeder("FeederLive", LiveQueuePriority.LivePriority,
+                LiveOptions.options.get("oaiUri"), LiveOptions.options.get("baseWikiUri"), LiveOptions.options.get("oaiPrefix"),
+                pollInterval, sleepInterval, LiveOptions.options.get("uploaded_dump_date"),
+                LiveOptions.options.get("working_directory")));
         }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.unmodified.enabled")) == true) {
