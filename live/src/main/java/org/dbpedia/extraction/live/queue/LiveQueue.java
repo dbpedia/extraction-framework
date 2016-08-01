@@ -34,26 +34,16 @@ public class LiveQueue {
     private LiveQueue() {
     }
 
-    private static int countGood;
-    private static int countBad=1;
     public static void add(LiveQueueItem item) {
-
         // Simplified a lot to lower the complexity
         if (!uniqueSet.contains(item.getItemName()) ) {
-            countGood++;
             uniqueSet.add(item.getItemName());
             counts.put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
             queue.add(item);
         }
-        else{
-            countBad++;
-        }
-        System.out.println(uniqueSet.size() + "   " + queue.size());
-        System.out.println("Collision probability: " + ( 1 - countGood*1.0/(countGood + countBad)));
     }
 
     public static LiveQueueItem take() throws InterruptedException {
-       // System.out.println(uniqueSet.size() + "   " + queue.size());
         LiveQueueItem item = queue.take();
         uniqueSet.remove(item.getItemName());
         // update counts
