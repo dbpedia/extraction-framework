@@ -21,9 +21,9 @@ import java.util.*;
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 02.07.2016.
  */
-public class CacheInitializationFeeder extends Feeder {
+public class AllPagesFeeder extends Feeder {
 
-    private int isFinished = 0;
+    private boolean isFinished =false;
     private String query_base =
             "?action=query&format=json&list=allpages&aplimit=500&apnamespace=%d&continue=%s&apcontinue=%s";
     private String continueString = "-||";
@@ -31,7 +31,7 @@ public class CacheInitializationFeeder extends Feeder {
     private ArrayList<Integer> allowedNamespaces = new ArrayList<>();
     private int currentNamespace = 0;
 
-    public CacheInitializationFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
+    public AllPagesFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
         String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         for (String namespace : LiveOptions.options.get("feeder.cache.allowedNamespaces").split("\\s*,\\s*")) {
@@ -47,16 +47,19 @@ public class CacheInitializationFeeder extends Feeder {
     @Override
     protected Collection<LiveQueueItem> getNextItems() {
         ArrayList<LiveQueueItem> queue = new ArrayList<LiveQueueItem>();
-        if(isFinished != 2){
+        if(!isFinished){
             System.out.println(continueTitle);
             JSONObject response = queryAllPagesAPI();
             if (response != null) {
                 JSONArray pages = response.getJSONObject("query").getJSONArray("allpages");
                 for (Object pageObject : pages) {
                     JSONObject page = (JSONObject) pageObject;
-                    if(!pageIsInCache(page)) {
-                        queue.add(new LiveQueueItem(-1, page.getString("title"), DateUtil.transformToUTC(new Date()), false, ""));
-                    }
+                    //if(!pageIsInCache(page)) {
+                    //    queue.add(new LiveQueueItem(-1, page.getString("title"), DateUtil.transformToUTC(new Date()), false, ""));
+                    //}
+
+                    //always hanndle each page in case of a restart
+                    queue.add(new LiveQueueItem(page.getInt("pageid"), page.getString("title"), DateUtil.transformToUTC(new Date()), false, ""));
                 }
                 if (response.has("continue")) {
                     continueString = response.getJSONObject("continue").getString("continue");
@@ -97,7 +100,7 @@ public class CacheInitializationFeeder extends Feeder {
     private void goToNextNamespace(){
         currentNamespace ++;
         if(currentNamespace == allowedNamespaces.size()){
-            isFinished++;
+            isFinished=true;
             currentNamespace = 0;
         }
         continueString = "";
