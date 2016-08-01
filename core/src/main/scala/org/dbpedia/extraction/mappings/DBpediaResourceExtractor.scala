@@ -10,6 +10,19 @@ import scala.language.reflectiveCalls
  * Links DBpedia Commons resources to their counterparts in other DBpedia languages (only en, de and fr) using owl:sameAs.
  * This requires the the Wikimedia page to contain a {{VN}} template.
  *
+ * Example http://commons.wikimedia.org/wiki/Cyanistes_caeruleus:
+ *   Page contains node:
+ *   {{VN
+ *     |de=Blaumeise
+ *     |en=Blue Tit
+ *     |fr=Mésange bleue
+ *   }}
+ *
+ *   Produces triple:
+ *     <dbpedia-commons:Cyanistes caeruleus> <owl:sameAs> <dbr:Eurasian_blue_tit>.
+ *     <dbpedia-commons:Cyanistes caeruleus> <owl:sameAs> <dbpedia-de:Blaumeise>.
+ *     <dbpedia-commons:Cyanistes caeruleus> <owl:sameAs> <dbpedia-fr:Mésange_bleue>
+ *
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 28.05.2016.
  */

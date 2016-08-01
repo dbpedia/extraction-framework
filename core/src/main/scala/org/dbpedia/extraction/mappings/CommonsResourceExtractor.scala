@@ -12,6 +12,13 @@ import scala.collection.mutable.ArrayBuffer
  * Links non-commons DBpedia resources to their DBpedia Commons counterpart using owl:sameAs.
  * This requires the the Wikipedia page to contain a {{Commons}} template.
  *
+ * Example http://en.wikipedia.org/wiki/Eurasian_blue_tit:
+ *   Page contains node:
+ *     {{Commons|Cyanistes caeruleus}}
+ *
+ *   Produces triple:
+ *     <dbr:Eurasian_blue_tit> <owl:sameAs> <dbpedia-commons:Cyanistes caeruleus>.
+ *
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 28.05.2016.
  */
