@@ -19,11 +19,11 @@ import java.util.*;
 
 /**
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
- * date 02.07.2016.
+ *         date 02.07.2016.
  */
 public class AllPagesFeeder extends Feeder {
 
-    private boolean isFinished =false;
+    private boolean isFinished = false;
     private String query_base =
             "?action=query&format=json&list=allpages&aplimit=500&apnamespace=%d&continue=%s&apcontinue=%s";
     private String continueString = "-||";
@@ -32,7 +32,7 @@ public class AllPagesFeeder extends Feeder {
     private int currentNamespace = 0;
 
     public AllPagesFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
-        String folderBasePath) {
+                          String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
         for (String namespace : LiveOptions.options.get("feeder.cache.allowedNamespaces").split("\\s*,\\s*")) {
             allowedNamespaces.add(Integer.parseInt(namespace));
@@ -47,7 +47,7 @@ public class AllPagesFeeder extends Feeder {
     @Override
     protected Collection<LiveQueueItem> getNextItems() {
         ArrayList<LiveQueueItem> queue = new ArrayList<LiveQueueItem>();
-        if(!isFinished){
+        if (!isFinished) {
             System.out.println(continueTitle);
             JSONObject response = queryAllPagesAPI();
             if (response != null) {
@@ -76,7 +76,7 @@ public class AllPagesFeeder extends Feeder {
         long pageID = page.getLong("pageid");
         String query = "SELECT * FROM dbpedialive_cache WHERE pageID = ?";
         boolean test = JDBCUtil.getCacheContent(query, pageID) != null;
-        if (test){
+        if (test) {
             System.out.println("already in cache");
         }
         return test;
@@ -97,17 +97,17 @@ public class AllPagesFeeder extends Feeder {
         return null;
     }
 
-    private void goToNextNamespace(){
-        currentNamespace ++;
-        if(currentNamespace == allowedNamespaces.size()){
-            isFinished=true;
+    private void goToNextNamespace() {
+        currentNamespace++;
+        if (currentNamespace == allowedNamespaces.size()) {
+            isFinished = true;
             currentNamespace = 0;
         }
         continueString = "";
         continueTitle = "";
     }
 
-    public void setContinueTitle(String continueTitle){
+    public void setContinueTitle(String continueTitle) {
         try {
             this.continueTitle = URLEncoder.encode(continueTitle, "UTF-8");
         } catch (UnsupportedEncodingException e) {
