@@ -122,7 +122,7 @@ object ExtractorUtils {
     */
   def getDbpediaFileURL(filename: String, language: Language): String = {
     val fileNamespaceIdentifier = Namespace.File.name(language)
-    language.dbpediaUri + "/resource/" + fileNamespaceIdentifier + ":" + filename
+    WikiTitle.parse(fileNamespaceIdentifier + ":" + filename, language).resourceIri;
   }
 
   /**
