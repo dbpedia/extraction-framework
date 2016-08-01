@@ -3,7 +3,8 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.{Language, WikiUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, PropertyNode, TextNode}
+import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
 
 /**
@@ -35,7 +36,6 @@ class DBpediaResourceExtractor (
 extends PageNodeExtractor {
 
   private val propertyUri : OntologyProperty = context.ontology.properties("owl:sameAs")
-  private val objectBaseUri : String = "http://%sdbpedia.org/resource/%s"
 
   /**
     * @param page       The source node
@@ -49,7 +49,7 @@ extends PageNodeExtractor {
 
     for {
       template <- InfoboxExtractor.collectTemplates(page)
-      if (template.title.decoded == "VN")
+      if template.title.decoded == "VN"
     } {
       return template.children
         .filter((node : PropertyNode) => Seq("de", "en", "fr").contains(node.key))
@@ -57,8 +57,11 @@ extends PageNodeExtractor {
           new Quad(
             context.language,
             DBpediaDatasets.PageLinks,
-            subjectUri, propertyUri,
-            String.format(objectBaseUri, if (node.key == "en") "" else node.key + ".", WikiUtil.wikiEncode(node.children.head.asInstanceOf[TextNode].text.split(", ").head)), null, null
+            subjectUri,
+            propertyUri,
+            WikiTitle.parse(node.children.head.asInstanceOf[TextNode].text.split(", ").head, Language.apply(node.key)).resourceIri,
+            null,
+            null
           )
         )
 

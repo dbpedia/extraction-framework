@@ -4,7 +4,7 @@ import scala.language.reflectiveCalls
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{PageNode, TextNode}
+import org.dbpedia.extraction.wikiparser.{PageNode, TextNode, WikiTitle}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -29,8 +29,8 @@ class CommonsResourceExtractor (
   }
 ) extends PageNodeExtractor{
 
-  private val propertyUri = context.ontology.properties("owl:sameAs");
-  private val commonsBaseUri = "http://commons.dbpedia.org/resource/%s"
+  private val propertyUri = context.ontology.properties("owl:sameAs")
+  private val commonsLanguage = Language.apply("commons")
 
   override val datasets = Set(DBpediaDatasets.PageLinks)
 
@@ -43,12 +43,11 @@ class CommonsResourceExtractor (
     }
     {
       if (template.children.isEmpty){
-        return Seq(new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, propertyUri,
-          String.format(commonsBaseUri, node.title.encoded.asInstanceOf[String]), null, null))
+        val commonsResourceURL = WikiTitle.parse(node.title.encoded.asInstanceOf[String], commonsLanguage).resourceIri
+        return Seq(new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, propertyUri, commonsResourceURL, null, null))
       } else{
-        var commonsPageTitle = template.children.head.children.head.asInstanceOf[TextNode].text
-        return Seq(new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, propertyUri,
-          String.format(commonsBaseUri, commonsPageTitle), null, null))
+        val commonsResourceURL = WikiTitle.parse(template.children.head.children.head.asInstanceOf[TextNode].text, commonsLanguage).resourceIri
+        return Seq(new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, propertyUri, commonsResourceURL, null, null))
       }
     }
     Seq.empty
