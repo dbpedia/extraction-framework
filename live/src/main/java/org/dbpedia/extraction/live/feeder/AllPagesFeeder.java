@@ -34,7 +34,7 @@ public class AllPagesFeeder extends Feeder {
     public AllPagesFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
                           String folderBasePath) {
         super(feederName, queuePriority, defaultStartTime, folderBasePath);
-        for (String namespace : LiveOptions.options.get("feeder.cache.allowedNamespaces").split("\\s*,\\s*")) {
+        for (String namespace : LiveOptions.options.get("feeder.allpages.allowedNamespaces").split("\\s*,\\s*")) {
             allowedNamespaces.add(Integer.parseInt(namespace));
         }
     }
@@ -83,7 +83,7 @@ public class AllPagesFeeder extends Feeder {
     }
 
     private JSONObject queryAllPagesAPI() {
-        String apiURL = LiveOptions.options.get("feeder.cache.wikiapi");
+        String apiURL = LiveOptions.options.get("feeder.allpages.wikiapi");
         URL url = null;
         try {
             url = new URL(apiURL + String.format(query_base, allowedNamespaces.get(currentNamespace), continueString, continueTitle));

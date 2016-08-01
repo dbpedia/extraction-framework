@@ -64,7 +64,7 @@ public class Main {
                 LiveOptions.options.get("feeder.rcstream.room")));
         }
 
-        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.cache.enabled")) == true) {
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.allpages.enabled")) == true) {
             feeders .add(new AllPagesFeeder("AllPagesFeeder", LiveQueuePriority.LivePriority,
                     LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
         }
