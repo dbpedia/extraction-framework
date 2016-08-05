@@ -2,7 +2,7 @@
   #configuration file for the DataIdGenerator script - to automatically create DataIds for every language
 
 #the http-directory containing all languages (http://downloads.dbpedia.org/$version/)
-"webDir":"http://downloads.dbpedia.org/2015-10/core-i18n/",
+"webDir":"http://downloads.dbpedia.org/2015-10/",
 
 #the local file directory containing the current version of dbpedia (/.../.../.../$version)
 "localDir":"C:/Users/Chile/Desktop/Dbpedia",
@@ -42,7 +42,7 @@
 "sparqlEndpoint":"http://dbpedia.org/sparql",
 
 #add Data Management Plan notes to the root dataset?
-"addDmpProps":false,
+"addDmpProps":true,
 
 #define three associated agents - the creator (has all rights) should be the DBpedia Association (for more see DataId documentation)
 "creator":{
@@ -63,7 +63,13 @@
 "role":"Maintainer",
 "uri":"http://wiki.dbpedia.org/dbpedia-association/persons/Freudenberg",
 "name":"Markus Freudenberg",
-"mbox":"freudenberg@informatik.uni-leipzig.de"
+"mbox":"freudenberg@informatik.uni-leipzig.de",
+"identifier":{
+        "url":"http://www.researcherid.com/rid/L-2180-2016",
+        "literal":"L-2180-2016",
+        "scheme":"http://purl.org/spar/datacite/researcherid",
+        "issued":"2016-08-01"
+  }
 },
 "openLink":{
 "role":"Maintainer",
