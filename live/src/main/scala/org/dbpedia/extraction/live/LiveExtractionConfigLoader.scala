@@ -97,6 +97,18 @@ object LiveExtractionConfigLoader
     startExtraction(articlesSource,lang)
   }
 
+  def extractPageFromTitle(item: LiveQueueItem, apiURL :String, landCode :String): Boolean =
+  {
+    val lang = Language.apply(landCode)
+    val articlesSource : Source =
+      if (item.getXML.isEmpty)
+        WikiSource.fromTitles(List(WikiTitle.parse(item.getItemName,lang)), new URL(apiURL), lang)
+      else {
+        XMLSource.fromOAIXML(XML.loadString(item.getXML))
+      }
+    startExtraction(articlesSource,lang)
+  }
+
 
   /**
    * Loads the configuration and creates extraction jobs for all configured languages.
@@ -142,7 +154,7 @@ object LiveExtractionConfigLoader
 
         val extractorDiffDest = new JSONCacheExtractorDestination(liveCache, compositeDest) // filters triples to add/remove/leave
         // TODO get liveconfigReader permanently
-        val extractorRestrictDest = new ExtractorRestrictDestination ( LiveConfigReader.extractors.get(Language.apply(language.isoCode)), extractorDiffDest)
+        val extractorRestrictDest = new ExtractorRestrictDestination ( LiveConfigReader.extractors.get(language), extractorDiffDest)
 
         // We don't know in advance what parsers we will need so we initialize them as lazy and will be computed onfirst run
         lazy val pageNode = {

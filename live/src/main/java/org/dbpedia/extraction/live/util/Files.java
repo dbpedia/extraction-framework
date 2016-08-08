@@ -152,10 +152,8 @@ public class Files {
 	 */
 	public static synchronized void  createFile(File file, String content) {
 		
-		try {
-			FileOutputStream fos = new FileOutputStream(file);
+		try (FileOutputStream fos = new FileOutputStream(file)){
 			fos.write(content.getBytes());
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			if(debug){System.exit(0);}

@@ -45,15 +45,16 @@ extends PageNodeExtractor {
 
   private def splitRawGraph(rawGraph: Seq[Quad], mappedGraph: Seq[Quad]): Seq[Quad] = {
     // we store an index of (infobox, property, absolute-line) for each mapped fact and split raw facts with the same index
-    val mappedIndex = mappedGraph.map( q => extractTemplatePropertyAndLine(q.context)).toSet
+    val mappedIndex = mappedGraph.flatMap( q => extractTemplatePropertyAndLine(q.context)).toSet
 
     val newRawGraph = new ArrayBuffer[Quad]
     rawGraph
       .foreach( q => {
+        val tuple = extractTemplatePropertyAndLine(q.context)
         if (! q.dataset.equals(DBpediaDatasets.InfoboxProperties.name)) {
           newRawGraph += q.copy()
         }
-        else if (mappedIndex.contains( extractTemplatePropertyAndLine(q.context))) {
+        else if ( tuple.isDefined && mappedIndex.contains( tuple.get)) {
           newRawGraph += q.copy(context = q.context + "&mapped=")
         }
         else {
@@ -66,7 +67,7 @@ extends PageNodeExtractor {
 
   private def extractTemplatePropertyAndLine(quadContext: String): Option[Tuple3[String, String, String]] ={
     val splitted = quadContext.split('#') // go to the fragment
-    if (splitted.size != 2 ) {
+    if (splitted.length != 2 ) {
       None
     } else {
       // create a map from parameters

@@ -1,0 +1,78 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix  rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix mail: <http://example.com/mail#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ex: <http://www.example.com/> .
+@base <http://example.com/base> .
+
+<#FromToMaps>
+rml:logicalSource [ 
+	rml:source "example1.xml";
+        rml:referenceFormulation ql:XPath;
+	rml:iterator "/notes/note";
+];
+rr:subjectMap [
+        rr:template "http://www.example.com/note/{@id}"; 
+        rr:class mail:note;
+            ];
+	rr:predicateObjectMap [
+                     rr:predicate mail:when;
+                     rr:objectMap [ 
+			rr:template "{@year}-{@month}-{@day}";
+			rr:datatype xsd:date;
+			rr:termType rr:Literal;
+		];
+    ];
+        
+    rr:predicateObjectMap [
+        rr:predicate mail:from;
+        rr:objectMap [ rml:reference "from" ];
+    ];
+        
+        rr:predicateObjectMap [
+        rr:predicate mail:to;
+        rr:objectMap [ rml:reference "to" ];
+    ];
+        
+        rr:predicateObjectMap [
+        rr:predicate mail:heading;
+        rr:objectMap [ rml:reference "heading" ];
+    ];
+        
+    rr:predicateObjectMap [
+        rr:predicate mail:body;
+        rr:objectMap [ rml:reference "body" ];
+    ].
+        
+<#DateTime>
+    rml:logicalSource [ 
+	rml:source "example1.xml";
+	rml:iterator "/notes/note";
+	rml:referenceFormulation ql:XPath;
+	];
+	rr:subjectMap [
+		rr:template "http://www.example.com/DateTime/{@year}{@month}{@day}";
+		rr:class ex:DateTime
+	];
+        rr:predicateObjectMap [
+		rr:predicate ex:day;
+		rr:objectMap [
+			rr:template "---{@day}";
+                        rr:termType rr:Literal ;
+			rr:datatype xsd:gDay
+		]
+	],[
+                rr:predicate ex:month;
+                rr:objectMap [
+			rr:template "--{@month}";
+                        rr:termType rr:Literal;
+			rr:datatype xsd:gMonth
+		]
+	],[
+                rr:predicate ex:year;        
+                rr:objectMap [
+			rml:reference "@year";
+			rr:datatype xsd:gYear
+		]
+	].
