@@ -134,13 +134,13 @@ class ConditionalRMLMapper(rmlModel: RMLModel, mapping: ConditionalMapping) {
 
     if(conditionMapping.value != null) {
       val paramValuePom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/ValueParameterPOM"))
-      paramValuePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + DbfFunction.operatorFunction.valueParameter))
+      paramValuePom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator + DbfFunction.operatorFunction.valueParameter))
       paramValuePom.addObjectMap(paramValuePom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.value))
     }
 
     if(conditionMapping.templateProperty != null) {
       val paramPropertyPom = functionValue.addPredicateObjectMap(functionValue.uri.extend("/PropertyParameterPOM"))
-      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + conditionMapping.operator + DbfFunction.operatorFunction.propertyParameter))
+      paramPropertyPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + conditionMapping.operator + DbfFunction.operatorFunction.propertyParameter))
       paramPropertyPom.addObjectMap(paramPropertyPom.uri.extend("/ObjectMap")).addConstant(new RMLLiteral(conditionMapping.templateProperty))
     }
 
