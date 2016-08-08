@@ -198,18 +198,7 @@ class InfoboxMappingsTemplateExtractor (context: {
 
      } else if( node.isInstanceOf[ParserFunctionNode]){
        var parserNode = node.asInstanceOf[ParserFunctionNode]
-
-       // To absorb #invoke & #property but not #if
-       if ( parserNode.title.charAt(0) == '#' && parserNode.title.substring(0,3) != "#if"){
-         if( parserNode.title == "#invoke")
-           property = InfoboxMappingsUtils.extract_property(parserNode.children.head.toWikiText, parserNode.title)
-         else if (parserNode.title == "#property")
-           property = InfoboxMappingsUtils.extract_property(parserNode.toWikiText, parserNode.title)
-         return (answerList.toArray, property)
-       } else {
-         property = proccessChildren(parserNode, answerList, property, getProp)
-       }
-
+       property = proccessChildren(parserNode, answerList, property, getProp)
      } else if ( node.isInstanceOf[TextNode]){
       var text : String = ltrim(rtrim(node.asInstanceOf[TextNode].text))
       if(text == null || text == "" || text.length < 2 ){

@@ -131,7 +131,9 @@ final class SwebleWrapper extends WikiParser
                     if( n.get(0).isInstanceOf[WtText]){
                         var content = ""
                         for (i <- 0 to n.iterator().toList.length - 1) {
-                            content = content + n.get(i).asInstanceOf[WtText].getContent
+                            if(n.get(i).isInstanceOf[WtText]) {
+                                content = content + n.get(i).asInstanceOf[WtText].getContent
+                            }
                         }
                         wikiNodeFactory.text("'''" + content + "'''")
                     } else if(n.get(0).isInstanceOf[WtItalics]){
