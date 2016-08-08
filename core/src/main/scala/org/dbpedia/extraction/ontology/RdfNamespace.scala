@@ -35,7 +35,7 @@ object RdfNamespace {
     replacements('%', chars)
   }
 
-  private val prefixMap = new HashMap[String, RdfNamespace]
+  val prefixMap = new HashMap[String, RdfNamespace]
   
   private def ns(prefix: String, namespace: String, validate: Boolean = true): RdfNamespace = {
     val ns = new RdfNamespace(prefix, namespace, validate)
@@ -65,6 +65,14 @@ object RdfNamespace {
   val MAPPINGS = ns("mappings", "http://mappings.dbpedia.org/wiki/", false)
   val D0 = ns("d0", "http://www.ontologydesignpatterns.org/ont/d0.owl#", false)
   val DUL = ns("dul", "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#", false)
+  val RR = ns("rr", "http://www.w3.org/ns/r2rml#")
+  val RML = ns("rml", "http://semweb.mmlab.be/ns/rml#")
+  val QL = ns("ql", "http://semweb.mmlab.be/ns/ql#")
+  val DBO = ns("dbo", "http://dbpedia.org/ontology/")
+  val FNML = ns("fnml", "http://semweb.mmlab.be/ns/fnml#")
+  val FNO = ns("fno", "http://w3id.org/function/ontology/")
+  val DBF = ns("dbf", "http://dbpedia.org/function/")
+  val CRML = ns("crml", "http://semweb.mmlab.be/ns/crml#")
 
   //the following namespaces are required for supporting the entries in the mappings Wiki as of 2014-07-15
   val CIDOCCRM = ns("cidoccrm", "http://purl.org/NET/cidoc-crm/core#", false)

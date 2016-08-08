@@ -13,7 +13,7 @@ import scala.language.reflectiveCalls
  * Extracts geo-coodinates.
  */
 class GeoCoordinatesMapping( 
-  ontologyProperty : OntologyProperty,
+  val ontologyProperty : OntologyProperty,
   //TODO CreateMappingStats requires this properties to be public. Is there a better way?
   val coordinates : String,
   val latitude : String,

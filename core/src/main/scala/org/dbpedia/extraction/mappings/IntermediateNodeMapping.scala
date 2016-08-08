@@ -10,8 +10,8 @@ import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import scala.language.reflectiveCalls
 
 class IntermediateNodeMapping (
-  nodeClass : OntologyClass,
-  correspondingProperty : OntologyProperty,
+  val nodeClass : OntologyClass, // public for rml mappings
+  val correspondingProperty : OntologyProperty, //public for rml mappings
   val mappings : List[PropertyMapping], // must be public val for statistics
   context : {
     def ontology : Ontology
