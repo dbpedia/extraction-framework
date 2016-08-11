@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.server.resources.rml.mappings
 
-import org.apache.jena.rdf.model.Resource
-import org.dbpedia.extraction.mappings.{GeoCoordinatesMapping, SimplePropertyMapping}
+import org.dbpedia.extraction.mappings.{SimplePropertyMapping}
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.server.resources.rml.dbf.DbfFunction
 import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
+import scala.language.reflectiveCalls
 
 /**
   * Creates RML Mapping from SimplePropertyMappings and adds the triples to the given model
@@ -72,7 +72,7 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       val executePom = functionValue.addPredicateObjectMap(executePomUri)
       executePom.addPredicate(new RMLUri(RdfNamespace.FNO.namespace + "executes"))
       val ExecuteObjectMapUri = executePomUri.extend("/ObjectMap")
-      executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + "simplePropertyFunction"))
+      executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
 
       addParameterFunction("property", functionValue)
 

@@ -20,7 +20,7 @@ class RMLLogicalSource(override val resource: Resource) extends RMLResource(reso
 
   def addSource(uri: RMLUri) =
   {
-    resource.addProperty(createProperty(RdfNamespace.RML.namespace + "source"), createProperty(uri.toString()))
+    resource.addProperty(createProperty(RdfNamespace.RML.namespace + "source"), uri.toString())
   }
 
 }
