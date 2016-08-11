@@ -11,22 +11,19 @@ import org.dbpedia.extraction.live.queue.LiveQueueItem;
 import org.dbpedia.extraction.live.queue.LiveQueuePriority;
 import org.dbpedia.extraction.live.util.DateUtil;
 import org.dbpedia.extraction.live.util.ExceptionUtil;
-import org.dbpedia.extraction.util.Language;
-import org.dbpedia.extraction.wikiparser.Namespace;
-import org.dbpedia.extraction.wikiparser.WikiTitle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 /**
- * This class extends the default Feeder for RCStreem handling.
+ * This class extends the default Feeder for RCStream handling.
  * It registers at given socket and listens messages.
- * Those messages indicate changes in a specified mediawiki.
+ * Those messages indicate changes in a specified MediaWiki instance.
  *
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 07.05.2016.
@@ -35,6 +32,10 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static String WIKIMEDIA_RCSTREAM_URL = "http://stream.wikimedia.org/rc";
+    /** error handling, e.g. if connection is interrupted */
+    private static int MAX_RETRY_COUNT = 5;
+    private static int MAX_RETRY_COUNT_INTERVALL = 3; // in minutes
+
     /** The Socket used for receiving the RCStream */
     private SocketIO socket;
     /** The room describes the wiki, which RCStream will be processed e.G. https://en.wikipedia.org */
@@ -42,6 +43,9 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
     /** The array including all allowed namespaces to be added to the LiveQueue */
     private ArrayList<Integer> allowedNamespaces = new ArrayList<>();
     private Collection<LiveQueueItem> events;
+    /** error handling, e.g. if connection is interrupted */
+    private int retryCount = 0;
+    private long lastRetry = 0;
 
     public RCStreamFeeder(String feederName, LiveQueuePriority queuePriority, String defaultStartTime,
                           String folderBasePath, String room) {
@@ -142,6 +146,38 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
      */
     @Override
     public void onError(SocketIOException socketIOException) {
-        logger.error("An error in the RCStream connection occured: " + socketIOException.getMessage());
+        if (reconnectAllowed()) {
+            logger.warn("An error in the RCStream connection occurred: " + socketIOException.getMessage() + " Trying to reconnect...");
+            try {
+                TimeUnit.SECONDS.sleep(10);
+                connect();
+            } catch (MalformedURLException exp) {
+                logger.error(ExceptionUtil.toString(exp), exp);
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        } else {
+            logger.error("An error in the RCStream connection occurred "
+                    + MAX_RETRY_COUNT + " times in " + MAX_RETRY_COUNT_INTERVALL
+                    + " minutes. No reconnect attempt will be made.");
+        }
+    }
+
+    private boolean reconnectAllowed() {
+        long diffInMillies = Math.abs(lastRetry - System.currentTimeMillis());
+        long diffInMinutes = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        if (diffInMinutes < MAX_RETRY_COUNT_INTERVALL) {
+            if (retryCount < MAX_RETRY_COUNT) {
+                retryCount++;
+                return true;
+            } else {
+                // Exception repeated too many times...
+                return false;
+            }
+        } else {
+            retryCount = 1;
+            lastRetry = System.currentTimeMillis();
+            return true;
+        }
     }
 }
