@@ -17,7 +17,7 @@ import scala.collection.mutable.ArrayBuffer
  *     {{Commons|Cyanistes caeruleus}}
  *
  *   Produces triple:
- *     <dbr:Eurasian_blue_tit> <owl:sameAs> <dbpedia-commons:Cyanistes caeruleus>.
+ *     <dbr:Eurasian_blue_tit> <owl:sameAs> <dbpedia-commons:Cyanistes_caeruleus>.
  *
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 28.05.2016.

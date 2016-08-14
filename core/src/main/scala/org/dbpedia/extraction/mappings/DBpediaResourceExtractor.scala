@@ -20,9 +20,9 @@ import scala.language.reflectiveCalls
  *   }}
  *
  *   Produces triple:
- *     <dbpedia-commons:Cyanistes caeruleus> <owl:sameAs> <dbr:Eurasian_blue_tit>.
- *     <dbpedia-commons:Cyanistes caeruleus> <owl:sameAs> <dbpedia-de:Blaumeise>.
- *     <dbpedia-commons:Cyanistes caeruleus> <owl:sameAs> <dbpedia-fr:Mésange_bleue>
+ *     <dbpedia-commons:Cyanistes_caeruleus> <owl:sameAs> <dbr:Eurasian_blue_tit>.
+ *     <dbpedia-commons:Cyanistes_caeruleus> <owl:sameAs> <dbpedia-de:Blaumeise>.
+ *     <dbpedia-commons:Cyanistes_caeruleus> <owl:sameAs> <dbpedia-fr:Mésange_bleue>
  *
  * @author Lukas Faber, Stephan Haarmann, Sebastian Serth
  * date 28.05.2016.
