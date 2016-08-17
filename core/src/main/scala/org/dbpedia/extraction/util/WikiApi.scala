@@ -65,7 +65,7 @@ class WikiApi(url: URL, language: Language)
     def retrievePagesByNamespace[U](namespace : Namespace, f : WikiPage => U, fromPage : String = "")
     {
         // TODO: instead of first getting the page ids and then the pages, use something like 
-        // ?action=query&continue=&generator=allpages&prop=revisions&rvprop=ids|content&format=xml&gapnamespace=0
+        // ?action=query&continue=&generator=allpages&prop=revisions|info&rvprop=ids|content&format=xml&gapnamespace=0
         // -> "generator" instead of "list" and "gapnamespace" instead of "apnamespace" ("gap" is for "generator all pages")
  
         //Retrieve list of pages
@@ -118,7 +118,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(group <- ids.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&continue=&format=xml&prop=revisions&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&continue=&format=xml&prop=revisions|info&"+param+"=" + group.mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
@@ -135,7 +135,7 @@ class WikiApi(url: URL, language: Language)
         {
             for(titleGroup <- titles.grouped(pageDownloadLimit))
             {
-                val response = query("?action=query&continue=&format=xml&prop=revisions&titles=" + titleGroup.map(formatWikiTitle).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
+                val response = query("?action=query&continue=&format=xml&prop=revisions|info&titles=" + titleGroup.map(formatWikiTitle).mkString("|") + "&rvprop=ids|content|timestamp|user|userid")
                 processPages(response, proc)
             }
         }
