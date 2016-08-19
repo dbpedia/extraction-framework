@@ -36,6 +36,7 @@ object DataIdGenerator {
   //statements
   var stmtModel: Model = null
   var agentModel: Model = null
+  var checksumModel: Model = null
   var versionStatement: Resource = null
   var rightsStatement: Resource = null
   var dataidStandard: Resource = null
@@ -74,7 +75,6 @@ object DataIdGenerator {
       Source.fromFile(configMap.get("linesBytesPacked").getAsString.value)
     } catch {
       case fnf: FileNotFoundException => null
-      case f: BufferedSource => f
     })
     val lbpMap = lbp match {
       case Some(ld) => ld.getLines.map(_.split(";")).map(x => if(x.length > 4)
@@ -385,11 +385,14 @@ object DataIdGenerator {
             model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "uncompressedByteSize"), model.createTypedLiteral(bytes.get("bytes").get, model.getNsPrefixURI("xsd") + "integer"))
             //add checksum
             bytes.get("md5") match{
-              case Some(md5) =>{
-                val checksum = model.createResource(dist.getURI + "&checksum=" + "md5")
-                model.add(checksum, RDF.`type`, model.createResource(model.getNsPrefixURI("spdx") + "Checksum"))
-                model.add(checksum, model.createProperty(model.getNsPrefixURI("spdx"), "algorithm"), model.createResource(model.getNsPrefixURI("spdx") + "checksumAlgorithm_md5"))
-                model.add(checksum, model.createProperty(model.getNsPrefixURI("spdx"), "checksumValue"), model.createTypedLiteral(md5, model.getNsPrefixURI("xsd") + "hexBinary"))
+              case Some(md5) => {
+                if (checksumModel != null) {
+                  val checksum = model.createResource(dist.getURI + "&checksum=" + "md5")
+                  model.add(dist, model.createProperty(model.getNsPrefixURI("dataid"), "checksum"), checksum)
+                  checksumModel.add(checksum, RDF.`type`, model.createResource(model.getNsPrefixURI("spdx") + "Checksum"))
+                  checksumModel.add(checksum, model.createProperty(model.getNsPrefixURI("spdx"), "algorithm"), model.createResource(model.getNsPrefixURI("spdx") + "checksumAlgorithm_md5"))
+                  checksumModel.add(checksum, model.createProperty(model.getNsPrefixURI("spdx"), "checksumValue"), model.createTypedLiteral(md5, model.getNsPrefixURI("xsd") + "hexBinary"))
+                }
               }
               case None =>
             }
@@ -454,12 +457,14 @@ object DataIdGenerator {
           agentModel = ModelFactory.createDefaultModel()
           val mainModel = ModelFactory.createDefaultModel()
           stmtModel = ModelFactory.createDefaultModel()
+          checksumModel = ModelFactory.createDefaultModel()
 
           addPrefixes(currentDataid)
           addPrefixes(topsetModel)
           addPrefixes(mainModel)
           addPrefixes(agentModel)
           addPrefixes(stmtModel)
+          addPrefixes(checksumModel)
 
           val ttlOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
           val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
@@ -557,6 +562,12 @@ object DataIdGenerator {
           baos = new ByteArrayOutputStream()
           mainModel.write(baos, "TURTLE")
           outString += "\n#### Datasets & Distributions ####\n" +
+            new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
+
+          currentDataid.add(checksumModel)
+          baos = new ByteArrayOutputStream()
+          checksumModel.write(baos, "TURTLE")
+          outString += "\n#### Checksums ####\n" +
             new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
           currentDataid.add(stmtModel)
