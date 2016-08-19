@@ -70,7 +70,7 @@ object RdfNamespace {
   val QL = ns("ql", "http://semweb.mmlab.be/ns/ql#")
   val DBO = ns("dbo", "http://dbpedia.org/ontology/")
   val FNML = ns("fnml", "http://semweb.mmlab.be/ns/fnml#")
-  val FNO = ns("fno", "http://w3id.org/function/ontology/")
+  val FNO = ns("fno", "http://w3id.org/function/ontology#")
   val DBF = ns("dbf", "http://dbpedia.org/function/")
   val CRML = ns("crml", "http://semweb.mmlab.be/ns/crml#")
 

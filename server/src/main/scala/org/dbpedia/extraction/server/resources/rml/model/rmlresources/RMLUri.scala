@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.server.resources.rml.model.rmlresources
 
+import org.apache.jena.util.URIref
+
 /**
   * Represents a uri
   */
@@ -17,7 +19,7 @@ class RMLUri(uri: String) {
 
   private def encode(s : String) : String =
   {
-    s.replaceAll(" ", "%20")
+    URIref.encode(s)
   }
 
 }
