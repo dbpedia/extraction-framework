@@ -583,9 +583,9 @@ object DataIdGenerator {
           printStream.close()
 
           logger.log(Level.INFO, "finished DataId: " + ttlOutFile.getAbsolutePath)
+
         }
       }
-    }
 
     def addDmpStatements(model: Model, dataset: Resource): Unit = {
       model.add(dataset, model.createProperty(model.getNsPrefixURI("dataid"), "usefulness"), addSimpleStatement("stmt", "usefulness", configMap.get("dmpusefulness").getAsString.value, Language.English))
