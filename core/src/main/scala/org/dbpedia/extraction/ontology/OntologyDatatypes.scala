@@ -369,7 +369,7 @@ object OntologyDatatypes
         types :::= builder.build
 
         builder.addDimension("Length");
-        builder.addUnit(new StandardUnitDatatype("metre", Set("m","meter","metres","metre",/*el*/ "μ","μέτρα","μέτρο" )));
+        builder.addUnit(new StandardUnitDatatype("metre", Set("m","meter","meters","metres","metre",/*el*/ "μ","μέτρα","μέτρο" )));
         builder.addUnit(new FactorUnitDatatype("nanometre", Set("nm","nanometre",/*el*/ "νανόμετρο"), 1.0E-9));
         builder.addUnit(new FactorUnitDatatype("micrometre", Set("µm","micrometre",/*el*/ "μικρόμετρο"), 1.0E-6));
         builder.addUnit(new FactorUnitDatatype("millimetre", Set("mm","millimetre",/*el*/ "χιλιοστόμετρο"), 0.001));

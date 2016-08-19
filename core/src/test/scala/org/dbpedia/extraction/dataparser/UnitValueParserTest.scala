@@ -154,7 +154,40 @@ class UnitValueParserTest extends FlatSpec with Matchers
       parse("en", "Length", "{{height|m=1.77|frac=16}}") should equal (Some(1.77))
     }
 
-    // {{height|ft=6}}
+    // https://en.wikipedia.org/wiki/Template:Height#Template_data
+    /**
+     * {{height|meter=1.77}}
+     * {{height|meters=1.77}}
+     * {{height|metre=1.77}}
+     * {{height|metres=1.77}}
+     * {{height|foot=6|inch=1}}
+     * {{height|feet=6|inches=1}}
+     */
+    it should "return 1.77 m with {{height|meter=1.77}}" in {
+      parse("en", "Length", "{{height|meter=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.77 m with {{height|meters=1.77}}" in {
+      parse("en", "Length", "{{height|meters=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.77 m with {{height|metre=1.77}}" in {
+      parse("en", "Length", "{{height|metre=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.77 m with {{height|metres=1.77}}" in {
+      parse("en", "Length", "{{height|metres=1.77}}") should equal (Some(1.77))
+    }
+
+    it should "return 1.85 m with {{height|foot=6|inch=1}}" in {
+      parse("en", "Length", "{{height|foot=6|inch=1}}") should be (Some(1.8542))
+    }
+
+    it should "return 1.85 m with {{height|feet=6|inches=1}}" in {
+      parse("en", "Length", "{{height|foot=6|inch=1}}") should be (Some(1.8542))
+    }
+
+  // {{height|ft=6}}
     it should "return 1.8288 m with {{height|ft=6}}" in {
       parse("en", "Length", "{{height|ft=6}}") should equal (Some(1.8288))
     }

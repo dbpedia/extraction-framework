@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype, UnitDatatype}
-
 import org.dbpedia.extraction.wikiparser._
 import java.text.ParseException
 import java.util.logging.{Level, Logger}
@@ -85,6 +84,10 @@ class UnitValueParser( extractionContext : {
     private val PrefixUnitValueRegex1 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\,[0-9]{3})*(?:\.[0-9]+)?)""" + postfix).r
 
     private val PrefixUnitValueRegex2 = ("""(?iu)""" + prefix + """(""" + unitRegexLabels + """)\]?\]?\040*(?<!-)([\-0-9]+(?:\.[0-9]{3})*(?:\,[0-9]+)?)""" + postfix).r
+
+    private lazy val MeterUnitDataType = extractionContext.ontology.datatypes("metre").asInstanceOf[UnitDatatype]
+    private lazy val FeetUnitDataType = extractionContext.ontology.datatypes("foot").asInstanceOf[UnitDatatype]
+    private lazy val InchUnitDataType = extractionContext.ontology.datatypes("inch").asInstanceOf[UnitDatatype]
 
     override def parse(node : Node) : Option[(Double, UnitDatatype)] =
     {
@@ -222,7 +225,7 @@ class UnitValueParser( extractionContext : {
             // TODO: Should not be needed anymore, remove?
             for (property <- templateNode.property("1"))
             {
-                value = property.children.collect{case TextNode(text, _) => text}.headOption
+                value = property.children.collect { case TextNode(text, _) => text }.headOption
                 unit = Some(property.key)
             }
             // If the TemplateNode has a second PropertyNode ...
@@ -246,38 +249,39 @@ class UnitValueParser( extractionContext : {
                 }
             } */
 
-            val defaultValue : PropertyNode = PropertyNode("", List(TextNode("0", 0)), 0)
+            val defaultValue: PropertyNode = PropertyNode("", List(TextNode("0", 0)), 0)
 
             // Metre and foot/inch parameters cannot co-exist
-            if (templateNode.property("m").isDefined) {
-                for (metres <- templateNode.property("m"))
-                {
+            findUnitValueProperty(MeterUnitDataType, templateNode) match
+            {
+                case Some(metres) =>
                     try
                     {
-                        val mVal = metres.children.collect {case TextNode(text, _) => text}.headOption
+                        val mVal = metres.children.collect { case TextNode(text, _) => text }.headOption
                         val mToCm = mVal.get.toDouble * 100.0
-                        value = Some(mToCm.toString)
                         unit = Some("centimetre")
+                        value = Some(mToCm.toString)
                     }
-                    catch { case _ : Throwable => }
-                }
-            }
-            else {
-                for (feet <- templateNode.property("ft").orElse(Some(defaultValue));
-                     inch <- templateNode.property("in").orElse(Some(defaultValue)))
-                {
+                    catch
+                    {
+                        case _: Throwable =>
+                    }
+                case None =>
+                    val feet = findUnitValueProperty(FeetUnitDataType, templateNode).getOrElse(defaultValue)
+                    val inch = findUnitValueProperty(InchUnitDataType, templateNode).getOrElse(defaultValue)
                     try
                     {
-                        val ftVal =  feet.children.collect{case TextNode(text, _) => text}.headOption
+                        val ftVal = feet.children.collect { case TextNode(text, _) => text }.headOption
                         val ftToCm = ftVal.get.toDouble * 30.48
-                        val inVal =  inch.children.collect{case TextNode(text, _) => text}.headOption
+                        val inVal = inch.children.collect { case TextNode(text, _) => text }.headOption
                         val inToCm = inVal.get.toDouble * 2.54
-
-                        value = Some((ftToCm + inToCm).toString)
                         unit = Some("centimetre")
+                        value = Some((ftToCm + inToCm).toString)
                     }
-                catch { case _ : Throwable => }
-                }
+                    catch
+                    {
+                        case _: Throwable =>
+                    }
             }
         }
         // http://en.wikipedia.org/wiki/Template:Auto_in
@@ -484,6 +488,11 @@ class UnitValueParser( extractionContext : {
                 case _ => None
             }
         }
+    }
+
+    private def findUnitValueProperty(dataType: UnitDatatype, templateNode: TemplateNode): Option[PropertyNode] =
+    {
+        templateNode.keySet.find(dataType.unitLabels.contains).flatMap(templateNode.property)
     }
     
     /**
