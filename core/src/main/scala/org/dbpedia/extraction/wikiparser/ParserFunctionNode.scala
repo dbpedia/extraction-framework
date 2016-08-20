@@ -18,7 +18,7 @@ case class ParserFunctionNode(title : String, override val children : List[Node]
     override def equals(obj: Any) = obj match{
 
         case otherParserFunctionNode : ParserFunctionNode => ( otherParserFunctionNode.title == title //&&  otherParserFunctionNode.line == line
-          && NodeUtil.removeEmptyTextNode(otherParserFunctionNode.children) == NodeUtil.removeEmptyTextNode(children))
+          && NodeUtil.filterEmptyTextNodes(otherParserFunctionNode.children) == NodeUtil.filterEmptyTextNodes(children))
         case _ => false
 
     }

@@ -214,30 +214,17 @@ object NodeUtil
         splitNodes.reverse
     }
 
-    def removeEmptyTextNode(list : List[Node]) : List[Node] = {
-        var tempList = ListBuffer[Node]()
-
-        for( node <- list){
-            if(notEmpty(node)){
-                tempList += node
-            }
-        }
-        tempList.toList
+    def filterEmptyTextNodes(list : List[Node]) : List[Node] = {
+        return list.filter(x => isEmptyTextNode(x))
     }
 
-    def notEmpty(node : Node) : Boolean = {
+    def isEmptyTextNode(node : Node) : Boolean = {
 
         if(!node.isInstanceOf[TextNode]){
             return true;
         }
 
-        var content = node.asInstanceOf[TextNode].text.trim
-
-        if (content == "" || content == "\n"){
-            return false;
-        }
-
-        return true;
+        return ! node.asInstanceOf[TextNode].text.trim.isEmpty
 
     }
 

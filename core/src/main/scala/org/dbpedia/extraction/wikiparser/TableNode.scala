@@ -19,7 +19,7 @@ case class TableNode( caption : Option[String],
     override def equals(obj: scala.Any) = obj match
             {
             case otherTableNode : TableNode => (otherTableNode.caption.getOrElse("") == caption.getOrElse("")   //&& otherTableNode.line == line
-              && NodeUtil.removeEmptyTextNode(otherTableNode.children) == NodeUtil.removeEmptyTextNode( children))
+              && NodeUtil.filterEmptyTextNodes(otherTableNode.children) == NodeUtil.filterEmptyTextNodes( children))
             case _ => false
         }
 }
@@ -37,7 +37,7 @@ case class TableRowNode( override val children : List[TableCellNode],
     def toPlainText = ""  //TODO implement!!!
     override def equals(obj: scala.Any) = obj match
         {
-            case otherTableRowNode : TableRowNode => (NodeUtil.removeEmptyTextNode(otherTableRowNode.children) == NodeUtil.removeEmptyTextNode(children))
+            case otherTableRowNode : TableRowNode => (NodeUtil.filterEmptyTextNodes(otherTableRowNode.children) == NodeUtil.filterEmptyTextNodes(children))
             case _ => false
         }
 }
@@ -62,7 +62,7 @@ extends Node(children, line)
     override def equals(obj: scala.Any) = obj match
         {
         case otherTableCellNode : TableCellNode => (otherTableCellNode.rowSpan == rowSpan
-          && otherTableCellNode.colSpan == colSpan && NodeUtil.removeEmptyTextNode(otherTableCellNode.children) == NodeUtil.removeEmptyTextNode(children))
+          && otherTableCellNode.colSpan == colSpan && NodeUtil.filterEmptyTextNodes(otherTableCellNode.children) == NodeUtil.filterEmptyTextNodes(children))
             case _ => false
 
     }

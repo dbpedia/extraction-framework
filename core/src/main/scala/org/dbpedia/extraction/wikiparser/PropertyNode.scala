@@ -46,7 +46,7 @@ case class PropertyNode(key : String, override val children : List[Node], overri
   override def equals(obj: scala.Any) = obj match {
 
     case otherPropertyNode : PropertyNode => ( otherPropertyNode.key == key //&&  otherPropertyNode.line == line
-      && NodeUtil.removeEmptyTextNode(otherPropertyNode.children) == NodeUtil.removeEmptyTextNode(children))
+      && NodeUtil.filterEmptyTextNodes(otherPropertyNode.children) == NodeUtil.filterEmptyTextNodes(children))
     case _ => false
 
   }

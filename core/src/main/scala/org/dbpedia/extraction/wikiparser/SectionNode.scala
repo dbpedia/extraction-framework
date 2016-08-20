@@ -17,7 +17,7 @@ case class SectionNode(name : String, level : Int, override val children : List[
     override def equals(obj: scala.Any) = obj match {
 
         case otherSectionNode : SectionNode => (otherSectionNode.name == name && otherSectionNode.level == level //&& otherSectionNode.line == line
-          && NodeUtil.removeEmptyTextNode(otherSectionNode.children) == NodeUtil.removeEmptyTextNode(children))
+          && NodeUtil.filterEmptyTextNodes(otherSectionNode.children) == NodeUtil.filterEmptyTextNodes(children))
         case _ => false
 
     }

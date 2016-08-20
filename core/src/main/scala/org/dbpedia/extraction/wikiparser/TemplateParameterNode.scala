@@ -20,7 +20,7 @@ case class TemplateParameterNode(parameter : String, override val children : Lis
   override def equals(obj: scala.Any) = obj match {
 
     case otherTPN : TemplateParameterNode => (otherTPN.parameter == parameter  //&& otherTPN.line == line
-      && NodeUtil.removeEmptyTextNode(otherTPN.children) == NodeUtil.removeEmptyTextNode(children))
+      && NodeUtil.filterEmptyTextNodes(otherTPN.children) == NodeUtil.filterEmptyTextNodes(children))
     case _ => false
 
   }

@@ -41,7 +41,7 @@ extends Node(children, 0)
 
         case otherPageNode : PageNode => ( otherPageNode.title == title && otherPageNode.id == id && otherPageNode.revision == revision && otherPageNode.timestamp == timestamp
           && otherPageNode.contributorID == contributorID && otherPageNode.contributorName == contributorName && otherPageNode.isRedirect == isRedirect
-          && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.removeEmptyTextNode(otherPageNode.children) == NodeUtil.removeEmptyTextNode(children))
+          && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.filterEmptyTextNodes(otherPageNode.children) == NodeUtil.filterEmptyTextNodes(children))
         case _ => false
     }
 }

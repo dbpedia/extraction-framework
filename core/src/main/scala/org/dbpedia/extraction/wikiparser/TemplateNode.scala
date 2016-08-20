@@ -39,7 +39,7 @@ case class TemplateNode (
 
     override def equals(obj: scala.Any) = obj match {
 
-        case otherTemplateNode : TemplateNode => (otherTemplateNode.title == title && otherTemplateNode.line == line && NodeUtil.removeEmptyTextNode(otherTemplateNode.children) == NodeUtil.removeEmptyTextNode(children))
+        case otherTemplateNode : TemplateNode => (otherTemplateNode.title == title && otherTemplateNode.line == line && NodeUtil.filterEmptyTextNodes(otherTemplateNode.children) == NodeUtil.filterEmptyTextNodes(children))
         case _ => false
     }
 }
