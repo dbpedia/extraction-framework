@@ -6,7 +6,9 @@ import scala.xml.{XML, Elem}
 import scala.language.postfixOps
 import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import org.dbpedia.extraction.sources.WikiPage
-import java.net.{URLEncoder, URL}
+import java.net.{HttpURLConnection, URL, URLEncoder}
+import javax.net.ssl.HttpsURLConnection
+
 import WikiApi._
 
 object WikiApi
@@ -223,6 +225,25 @@ class WikiApi(url: URL, language: Language)
         }while(canContinue)
 
       pageList;
+    }
+
+    /**
+    * Checks if the file exists in the mediawiki instance specified by the language.
+    *
+    * @param fileName the name of the file whose existence has to be checked
+    * @param language the language which specifies the mediawiki instance to check on
+    * @return true iff the file exists else false
+    */
+    def fileExistsOnWiki(fileName : String, language: Language): Boolean = {
+      val fileNamespaceIdentifier = Namespace.File.name(language)
+
+      val queryURLString = language.baseUri.replace("http:", "https:") + "/wiki/" + fileNamespaceIdentifier + ":" + fileName
+      val connection = new URL(queryURLString).openConnection().asInstanceOf[HttpsURLConnection]
+      connection.setRequestMethod("HEAD")
+      val responseCode = connection.getResponseCode()
+      connection.disconnect()
+
+      responseCode == HttpURLConnection.HTTP_OK
     }
 
     /**

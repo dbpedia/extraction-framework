@@ -42,6 +42,7 @@ object DBpediaDatasets
     val KMLFiles = new Dataset("kml_files", "Description of KML files from Commons")
     val AnchorText = new Dataset("anchor_text", "Texts used in links to refer to Wikipedia articles from other Wikipedia articles.")
     val SurfaceForms = new Dataset("surface_forms", "Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name.")
+    val Sounds = new Dataset("sounds", "audio files and sounds from Wikipedia articles.")
 
     /**
      * Mapping based
@@ -96,6 +97,7 @@ object DBpediaDatasets
     val OutDegree = new Dataset("out_degree", "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.")
     val FreebaseLinks = new Dataset("freebase_links", "This file contains the back-links (owl:sameAs) to the Freebase dataset.")
     val GeonamesLinks = new Dataset("geonames_links", "This file contains the back-links (owl:sameAs) to the Geonames dataset.")
+    val CommonsLink = new Dataset("commons_page_links", "Dataset containing links between a language-locale DBpedia instance and DBpedia Commons.")
 
 
     /**

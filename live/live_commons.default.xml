@@ -1,12 +1,62 @@
 <?xml version="1.0"?>
 <configuration>
-    <language name ="en">
+    <language name ="commons">
         <extractors>
-            <extractor name ="org.dbpedia.extraction.mappings.CommonsResourceExtractor" status="ACTIVE">
+            <extractor name ="org.dbpedia.extraction.mappings.DBpediaResourceExtractor" status="ACTIVE">
                 <produces>
                     <matchPattern type="EXACT">
                         <s></s>
                         <p>OWL_SAMEAS</p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.CommonsKMLExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.ImageAnnotationExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.GalleryExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.FileTypeExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
+                        <o></o>
+                    </matchPattern>
+                </produces>
+            </extractor>
+
+            <extractor name ="org.dbpedia.extraction.mappings.TemplateParameterExtractor" status="ACTIVE">
+                <produces>
+                    <matchPattern type="STARTSWITH" pexact ="false">
+                        <s></s>
+                        <p></p>
                         <o></o>
                     </matchPattern>
                 </produces>
@@ -22,28 +72,6 @@
                 </produces>
             </extractor>
 
-            <extractor name ="org.dbpedia.extraction.mappings.WikiPageExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="STARTSWITH" pexact ="true">
-                        <s></s>
-                        <p>FOAF_PAGE</p>
-                        <o>http://en.wikipedia.org/wiki/</o>
-                    </matchPattern>
-                    <matchPattern type="STARTSWITH" pexact ="true">
-                        <s></s>
-                        <p>DC_LANGUAGE</p>
-                        <o>http://en.wikipedia.org/wiki/</o>
-                    </matchPattern>
-                    <matchPattern type="STARTSWITH" pexact ="true">
-                        <s></s>
-                        <p>FOAF_PRIMARY_TOPIC</p>
-                        <o>http://en.wikipedia.org/wiki/</o>
-                    </matchPattern>
-                </produces>
-                <!--Must be set in source code-->
-                <notice>set in source code</notice>
-            </extractor>
-
             <extractor name ="org.dbpedia.extraction.mappings.InfoboxExtractor" status="ACTIVE">
                 <produces>
                     <matchPattern type="STARTSWITH">
@@ -55,7 +83,7 @@
                 <notice>I deactivated warning output for catchObjectDataTypeFunctions, this was for a test run only</notice>
             </extractor>
 
-            <!-- This extarctor is not necessary-->
+            <!-- This extractor is not necessary-->
             <extractor name ="org.dbpedia.extraction.mappings.PageLinksExtractor" status="KEEP">
                 <produces>
                     <matchPattern type="EXACT">
@@ -117,91 +145,6 @@
                     <matchPattern type="EXACT">
                         <s></s>
                         <p>DB_WIKIPAGE_EXTERNAL_LINK</p>
-                        <o></o>
-                    </matchPattern>
-                </produces>
-            </extractor>
-
-            <extractor name ="org.dbpedia.extraction.mappings.HomepageExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>FOAF_HOMEPAGE</p>
-                        <o></o>
-                    </matchPattern>
-                </produces>
-            </extractor>
-
-            <extractor name ="org.dbpedia.extraction.mappings.DisambiguationExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_WIKIPAGE_DISAMBIGUATES</p>
-                        <o></o>
-                    </matchPattern>
-                </produces>
-            </extractor>
-
-            <extractor name ="org.dbpedia.extraction.mappings.PersondataExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>FOAF_NAME</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>FOAF_GIVENNAME</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>FOAF_SURNAME</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DC_DESCRIPTION</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>RDF_TYPE</p>
-                        <o>FOAF_PERSON</o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_BIRTH</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_BIRTHPLACE</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_DEATH</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_DEATHPLACE</p>
-                        <o></o>
-                    </matchPattern>
-                </produces>
-            </extractor>
-
-            <extractor name ="org.dbpedia.extraction.mappings.PndExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DBO_INDIVIDUALISED_PND</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DBO_NON_INDIVIDUALISED_PND</p>
                         <o></o>
                     </matchPattern>
                 </produces>
@@ -289,93 +232,6 @@
                     <matchPattern type="EXACT">
                         <s></s>
                         <p>WIKI_PAGE_REVISION_ID</p>
-                        <o></o>
-                    </matchPattern>
-                </produces>
-            </extractor>
-
-            <extractor name="org.dbpedia.extraction.mappings.AbstractExtractorWikipedia" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_ABSTRACT</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>RDFS_COMMENT</p>
-                        <o></o>
-                    </matchPattern>
-                </produces>
-            </extractor>
-
-            <extractor name="org.dbpedia.extraction.mappings.MetaInformationExtractor" status="ACTIVE">
-                <matchPattern type="EXACT">
-                    <s></s>
-                    <p>DC_MODIFIED</p>
-                    <o></o>
-                </matchPattern>
-                <matchPattern type="EXACT">
-                    <s></s>
-                    <p>DBM_EDITLINK</p>
-                    <o></o>
-                </matchPattern>
-                <matchPattern type="EXACT">
-                    <s></s>
-                    <p>DBM_REVISION</p>
-                    <o></o>
-                </matchPattern>
-
-                <produces>
-                </produces>
-            </extractor>
-
-            <extractor name="org.dbpedia.extraction.mappings.ContributorExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DBM_CONTRIBUTOR</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DB_CONTRIBUTOR_ID</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="STARTSWITH" pexact="true">
-                        <s></s>
-                        <p>DB_CONTRIBUTOR</p>
-                        <o></o>
-                    </matchPattern>
-
-                </produces>
-            </extractor>
-
-            <extractor name ="org.dbpedia.extraction.mappings.MediaExtractor" status="ACTIVE">
-                <produces>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>FOAF_DEPICTION</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>FOAF_THUMBNAIL</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DC_RIGHTS</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DBO_THUMBNAIL</p>
-                        <o></o>
-                    </matchPattern>
-                    <matchPattern type="EXACT">
-                        <s></s>
-                        <p>DBO_MEDIA_ITEM</p>
                         <o></o>
                     </matchPattern>
                 </produces>
