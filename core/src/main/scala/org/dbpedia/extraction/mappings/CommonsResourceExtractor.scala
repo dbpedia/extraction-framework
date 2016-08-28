@@ -39,7 +39,7 @@ class CommonsResourceExtractor (
     val quads = new ArrayBuffer[Quad]()
 
     for { template <- InfoboxExtractor.collectTemplates(node)
-      if template.title.decoded == "Commons"
+      if template.title.decoded.equalsIgnoreCase("Commons")
     }
     {
       if (template.children.isEmpty){
