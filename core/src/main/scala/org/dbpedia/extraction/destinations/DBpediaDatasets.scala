@@ -97,6 +97,7 @@ object DBpediaDatasets
     val OutDegree = new Dataset("out_degree", "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.")
     val FreebaseLinks = new Dataset("freebase_links", "This file contains the back-links (owl:sameAs) to the Freebase dataset.")
     val GeonamesLinks = new Dataset("geonames_links", "This file contains the back-links (owl:sameAs) to the Geonames dataset.")
+    val CommonsLink = new Dataset("commons_page_links", "Dataset containing links between a language-locale DBpedia instance and DBpedia Commons.")
 
 
     /**

@@ -56,7 +56,7 @@ extends PageNodeExtractor {
         .map((node : PropertyNode) =>
           new Quad(
             context.language,
-            DBpediaDatasets.PageLinks,
+            DBpediaDatasets.CommonsLink,
             subjectUri,
             propertyUri,
             WikiTitle.parse(node.children.head.asInstanceOf[TextNode].text.split(", ").head, Language.apply(node.key)).resourceIri,
@@ -69,5 +69,5 @@ extends PageNodeExtractor {
     Seq.empty
   }
 
-  override val datasets: Set[Dataset] = Set(DBpediaDatasets.PageLinks)
+  override val datasets: Set[Dataset] = Set(DBpediaDatasets.CommonsLink)
 }

@@ -32,7 +32,7 @@ class CommonsResourceExtractor (
   private val propertyUri = context.ontology.properties("owl:sameAs")
   private val commonsLanguage = Language.apply("commons")
 
-  override val datasets = Set(DBpediaDatasets.PageLinks)
+  override val datasets = Set(DBpediaDatasets.CommonsLink)
 
   override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] ={
 
@@ -44,10 +44,10 @@ class CommonsResourceExtractor (
     {
       if (template.children.isEmpty){
         val commonsResourceURL = WikiTitle.parse(node.title.encoded.asInstanceOf[String], commonsLanguage).resourceIri
-        return Seq(new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, propertyUri, commonsResourceURL, null, null))
+        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, null, null))
       } else{
         val commonsResourceURL = WikiTitle.parse(template.children.head.children.head.asInstanceOf[TextNode].text, commonsLanguage).resourceIri
-        return Seq(new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, propertyUri, commonsResourceURL, null, null))
+        return Seq(new Quad(context.language, DBpediaDatasets.CommonsLink, subjectUri, propertyUri, commonsResourceURL, null, null))
       }
     }
     Seq.empty
