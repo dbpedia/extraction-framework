@@ -33,8 +33,8 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static String WIKIMEDIA_RCSTREAM_URL = "http://stream.wikimedia.org/rc";
     /** error handling, e.g. if connection is interrupted */
-    private static int MAX_RETRY_COUNT = 5;
-    private static int MAX_RETRY_COUNT_INTERVALL = 3; // in minutes
+    private static int MAX_RETRY_COUNT = Integer.parseInt(LiveOptions.options.get("feeder.rcstream.maxRetryCount"));
+    private static int MAX_RETRY_COUNT_INTERVALL = Integer.parseInt(LiveOptions.options.get("feeder.rcstream.maxRetryCountIntervall")); // in minutes
 
     /** The Socket used for receiving the RCStream */
     private SocketIO socket;
