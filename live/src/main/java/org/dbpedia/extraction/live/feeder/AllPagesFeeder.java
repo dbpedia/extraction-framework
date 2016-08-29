@@ -59,7 +59,7 @@ public class AllPagesFeeder extends Feeder {
         if (!isFinished) {
             List<Node> pageList = queryAllPagesAPI();
             for (Node page : pageList) {
-                //queue.add(new LiveQueueItem(Long.parseLong(page.$bslash$at("pageid")), page.$bslash$at("title"), DateUtil.transformToUTC(new Date()), false, ""));
+                queue.add(new LiveQueueItem(Long.parseLong(page.$bslash$at("pageid")), page.$bslash$at("title"), DateUtil.transformToUTC(new Date()), false, ""));
             }
             if (continueTitle.isEmpty()) {
                 goToNextNamespace();
