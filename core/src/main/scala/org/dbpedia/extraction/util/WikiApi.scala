@@ -2,7 +2,8 @@ package org.dbpedia.extraction.util
 
 import java.util.logging.Logger
 import java.io.IOException
-import scala.xml.{XML, Elem}
+import scala.xml.{XML, Elem, Node}
+import scala.collection.immutable.Seq
 import scala.language.postfixOps
 import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
 import org.dbpedia.extraction.sources.WikiPage
@@ -244,6 +245,24 @@ class WikiApi(url: URL, language: Language)
       connection.disconnect()
 
       responseCode == HttpURLConnection.HTTP_OK
+    }
+
+    /**
+     * Retrieves all pages for a given namespace starting from a specific page and returning the next title to continue.
+     *
+     * @param namespace The namespace code of the requested pages.
+     * @param continueString The value to be used in the continue field, which is probably -||
+     *                       This value seems unused for listing all pages (but nevertheless it ss required).
+     * @param continueTitle The page title to start (or continue) enumerating from.
+     */
+    def retrieveAllPagesPerNamespace(namespace : Integer, continueString : String, continueTitle : String) : (String, String, Seq[Node]) =
+    {
+        val baseURL = "?action=query&format=xml&list=allpages&aplimit=500&apnamespace=%d&continue=%s&apcontinue=%s"
+        val response = query(String.format(baseURL, namespace, continueString, continueTitle))
+        val apcontinue = response \ "continue" \@ "apcontinue"
+        val continue = response \ "continue" \@ "continue"
+        val pages = (response \ "query" \ "allpages" \ "p").theSeq
+        (apcontinue, continue, pages)
     }
 
     /**
