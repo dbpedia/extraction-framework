@@ -159,7 +159,9 @@ public class RCStreamFeeder extends Feeder implements IOCallback {
         } else {
             logger.error("An error in the RCStream connection occurred "
                     + MAX_RETRY_COUNT + " times in " + MAX_RETRY_COUNT_INTERVALL
-                    + " minutes. No reconnect attempt will be made.");
+                    + " minutes. Exiting...");
+            Main.stopLive();
+            System.exit(1);
         }
     }
 
