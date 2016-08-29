@@ -35,7 +35,7 @@ extends WikiPageExtractor {
   override def extract(wikiPage: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
 
     //Only extract abstracts for pages from the Main namespace
-    if(pageNode.title.namespace != Namespace.Main) return Seq.empty
+    if(wikiPage.title.namespace != Namespace.Main) return Seq.empty
 
     val pageNodeOption = WikiParser.getInstance().apply(wikiPage)
     if (pageNodeOption.isEmpty) return Seq.empty
