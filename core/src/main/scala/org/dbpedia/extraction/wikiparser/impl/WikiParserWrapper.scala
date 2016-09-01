@@ -21,7 +21,7 @@ object WikiParserWrapper {
 
   private val simpleWikiParser = new SimpleWikiParser()
   private val jsonParser = new JsonWikiParser()
-  private val swebleWikiParser = new SwebleWrapper
+  private val swebleWikiParser = new SwebleWrapper()
 
 }
 

@@ -4,11 +4,11 @@ import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
 import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.{InfoboxMappingsUtils, ExtractorUtils, Language}
+import org.dbpedia.extraction.util.{ExtractorUtils, InfoboxMappingsUtils, Language}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.mappings.InfoboxMappingsExtractor
+import scala.language.reflectiveCalls
+
 import scala.collection.mutable.ArrayBuffer
-import scala.collection.mutable.ListBuffer
 
 class InfoboxMappingsTemplateExtractor (context: {
   def ontology: Ontology
@@ -69,7 +69,9 @@ class InfoboxMappingsTemplateExtractor (context: {
   }
 
   def isBlackListed( str : String) : Boolean = {
-    if (str == "FETCH_WIKIDATA")
+    // List all the black listed words in lower case only
+    var blacklistWords = Set("fetch_wikidata", "getvalue", "wikidata", "both", "property")
+    if (blacklistWords.contains(str.toLowerCase))
       return true
     return false
   }
@@ -79,7 +81,6 @@ class InfoboxMappingsTemplateExtractor (context: {
     var swebleParser = WikiParser.getInstance("sweble")
     var tempPageSweble = new WikiPage(page.title, page.source)
     var tempPageSimple = new WikiPage(page.title, cleanUp(page.source))
-    var swebleAST = swebleParser.apply(tempPageSweble).getOrElse(null)
     val templateNodesSweble = ExtractorUtils.collectTemplatesFromNodeTransitive(swebleParser.apply(tempPageSweble).getOrElse(null))
     val templateNodesSimple = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(tempPageSimple).getOrElse(null))
 
@@ -130,9 +131,12 @@ class InfoboxMappingsTemplateExtractor (context: {
       }
     })
 
-      (answerSimple ++  answerSweble).toList
+      (answerSimple ++ answerSweble).toList
   }
 
+  // tempNode is the node whose children is to be processed
+  // answerList is the list of terms extracted
+  // getProp is flag when set indicates to only extract the property and no more terms
   def proccessChildren(tempNode : Node, answerList : ArrayBuffer[String], prop : String, getProp : Boolean) :  String = {
 
     var property = prop
@@ -176,8 +180,12 @@ class InfoboxMappingsTemplateExtractor (context: {
            property = proccessChildren(templateNode, answerList, property, true)
 
        } else {
+
+         // Tricky, if the template name should be included in the list or not
+         // Since sometimes template names are uninformative words like "both" etc
          if ( templateNode.title.decoded.substring(0,3) != "#if" && !getProp)
           answerList += templateNode.title.decoded
+
          property = proccessChildren(templateNode, answerList, property, getProp)
        }
 
@@ -190,18 +198,7 @@ class InfoboxMappingsTemplateExtractor (context: {
 
      } else if( node.isInstanceOf[ParserFunctionNode]){
        var parserNode = node.asInstanceOf[ParserFunctionNode]
-
-       // To absorb #invoke & #property but not #if
-       if ( parserNode.title.charAt(0) == "#" && parserNode.title.substring(0,3) != "#"){
-         if( parserNode.title == "#invoke")
-           property = InfoboxMappingsUtils.extract_property(parserNode.children.head.toWikiText, parserNode.title)
-         else if (parserNode.title == "#property")
-           property = InfoboxMappingsUtils.extract_property(parserNode.toWikiText, parserNode.title)
-         return (answerList.toArray, property)
-       } else {
-         property = proccessChildren(parserNode, answerList, property, getProp)
-       }
-
+       property = proccessChildren(parserNode, answerList, property, getProp)
      } else if ( node.isInstanceOf[TextNode]){
       var text : String = ltrim(rtrim(node.asInstanceOf[TextNode].text))
       if(text == null || text == "" || text.length < 2 ){

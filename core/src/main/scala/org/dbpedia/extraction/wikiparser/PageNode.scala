@@ -24,6 +24,9 @@ class PageNode (
   val isRedirect: Boolean,
   val isDisambiguation: Boolean,
   children: List[Node] = List.empty
+
+
+
 ) 
 extends Node(children, 0)
 {
@@ -32,4 +35,13 @@ extends Node(children, 0)
     def toPlainText = children.map(_.toPlainText).mkString
 
     def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
+
+    override def equals(other : Any) = other match
+    {
+
+        case otherPageNode : PageNode => ( otherPageNode.title == title && otherPageNode.id == id && otherPageNode.revision == revision && otherPageNode.timestamp == timestamp
+          && otherPageNode.contributorID == contributorID && otherPageNode.contributorName == contributorName && otherPageNode.isRedirect == isRedirect
+          && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.filterEmptyTextNodes(otherPageNode.children) == NodeUtil.filterEmptyTextNodes(children))
+        case _ => false
+    }
 }

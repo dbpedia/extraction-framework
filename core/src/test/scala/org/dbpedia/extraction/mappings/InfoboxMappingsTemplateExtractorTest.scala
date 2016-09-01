@@ -10,6 +10,8 @@ import org.scalatest.{Matchers, PrivateMethodTester, FlatSpec}
 import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
+import scala.language.reflectiveCalls
+
 /**
   * Created by aditya on 6/21/16.
   */
@@ -26,6 +28,8 @@ class InfoboxMappingsTemplateExtractorTest  extends FlatSpec with Matchers with 
 
         | data37    = {{#ifeq: temp_string1 | temp_string2 | temp_string3 | temp_string4 }}
         | data38    = {{#ifeq: string1 | string2 |{{#property:P1082}} | string4 }}
+        | website   = {{#invoke:Wikidata|property|p856}}
+
         }}
       """, "TestPage", lang, "all")
 
@@ -104,9 +108,10 @@ class InfoboxMappingsTemplateExtractorTest  extends FlatSpec with Matchers with 
   "InfoboxMappingsTemplateExtractor" should """return correct property id's for real complex expressions 2  """ in {
 
     val lang = Language.English
-    val answer = List(("Infobox Test1","ISBN","P212"), ("Infobox Test1","website","P856"),
-      ("Infobox Test1","ISBN_note","P212"), ("Infobox Test1","pushpin_map","P625"), ("Infobox Test1","ISBNT","P212"), ("Infobox Test1","URL","P856"),
-      ("Infobox Test1","homepage","P856"), ("Infobox Test1","Url","P856"), ("Infobox Test1","location map","P625"))
+    val answer = List(("Infobox Test1","ISBN","P212"), ("Infobox Test1","website","P856"), ("Infobox Test1","ISBN_note","P212"), ("Infobox Test1","pushpin_map","P625"),
+      ("Infobox Test1","ISBNT","P212"), ("Infobox Test1","URL","P856"), ("Infobox Test1","homepage","P856"), ("Infobox Test1","coordinates_wikidata","P625"),
+      ("Infobox Test1","link","P212"), ("Infobox Test1","Url","P856"), ("Infobox Test1","location map","P625"),
+      ("Infobox Test1","longd","P625"), ("Infobox Test1","latd","P625"))
     val parsed = parse(
       """
         {{Infobox Test1

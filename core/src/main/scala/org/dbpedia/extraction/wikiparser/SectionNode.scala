@@ -13,4 +13,12 @@ case class SectionNode(name : String, level : Int, override val children : List[
     def toWikiText = ("="*level)+name+("="*level)+"\n"+children.map(_.toWikiText).mkString
     
     def toPlainText = name+"\n\n"+children.map(_.toPlainText).mkString
+
+    override def equals(obj: scala.Any) = obj match {
+
+        case otherSectionNode : SectionNode => (otherSectionNode.name == name && otherSectionNode.level == level //&& otherSectionNode.line == line
+          && NodeUtil.filterEmptyTextNodes(otherSectionNode.children) == NodeUtil.filterEmptyTextNodes(children))
+        case _ => false
+
+    }
 }
