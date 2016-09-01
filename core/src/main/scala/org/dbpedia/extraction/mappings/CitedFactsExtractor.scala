@@ -26,8 +26,6 @@ extends WikiPageExtractor {
   private val citationExtractor = new CitationExtractor(context)
   private val language = context.language
 
-  private val enableMappingExtractor = Namespace.mappings.contains(language)
-
   val dataset = new Dataset("citedFacts")
 
   override val datasets = Set(dataset)
@@ -47,6 +45,7 @@ extends WikiPageExtractor {
         .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypes.name))
         .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypesTransitive.name))
         .filterNot(_.dataset.equals(DBpediaDatasets.InfoboxPropertyDefinitions.name))
+        .filterNot(_.dataset.equals(DBpediaDatasets.InfoboxPropertiesMapped.name))
         .map(q => (getAbsoluteLineNumber(q), q))
         .groupBy(_._1)
         .mapValues(_.map(_._2))
@@ -65,9 +64,9 @@ extends WikiPageExtractor {
     // no need to check without citation data
     if (citationMap.isEmpty) return Seq.empty
 
-
     val graph = new ArrayBuffer[Quad]
     for ((line, quads) <- infoboxMap) {
+      // hack (quads.size <= 4) to exclude one line temnplates with references like {{See_also}}
       if (citationMap.contains(line) && quads.size <= 4) {
         for (c <- citationMap.get(line).get) {
           for (q <- quads) {
@@ -76,7 +75,6 @@ extends WikiPageExtractor {
         }
       }
     }
-
 
     return graph
   }
