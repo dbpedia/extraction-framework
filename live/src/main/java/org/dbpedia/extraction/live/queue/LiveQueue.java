@@ -23,7 +23,7 @@ public class LiveQueue {
 
     private static final PriorityBlockingQueue<LiveQueueItem> queue = new PriorityBlockingQueue<LiveQueueItem>(1000);
     // this is a Map<long,int>, long is the pageID and int the number of same items in the queue (see add())
-    private static final Set<Long> uniqueSet = new HashSet(1000);
+    private static final Set<String> uniqueSet = new HashSet(1000);
 
     // Keeps track of the size of each priority
     private static final HashMap<LiveQueuePriority,Long> counts = new HashMap<LiveQueuePriority, Long>(10);
@@ -35,20 +35,17 @@ public class LiveQueue {
     }
 
     public static void add(LiveQueueItem item) {
-
         // Simplified a lot to lower the complexity
-        if (!uniqueSet.contains(item.getItemID()) ) {
-
-            uniqueSet.add(item.getItemID());
+        if (!uniqueSet.contains(item.getItemName()) ) {
+            uniqueSet.add(item.getItemName());
             counts.put(item.getPriority(), getPrioritySize(item.getPriority()) + 1);
             queue.add(item);
         }
     }
 
     public static LiveQueueItem take() throws InterruptedException {
-
         LiveQueueItem item = queue.take();
-        uniqueSet.remove(item.getItemID());
+        uniqueSet.remove(item.getItemName());
         // update counts
         counts.put(item.getPriority(), getPrioritySize(item.getPriority()) - 1);
         modificationDate.put(item.getPriority(), item.getModificationDate());

@@ -205,4 +205,5 @@ object WikiTitle
         // we explicitly disable capitalization of the title here
         new WikiTitle(decodedName, namespace, language, false, null, false)
     }
+
 }

@@ -1,32 +1,32 @@
 package org.dbpedia.extraction.wikiparser.impl.sweble
 
+import java.io.{File, StringWriter}
 import java.net.URI
+import java.util
 import java.util.ArrayList
+
+import org.sweble.wikitext.engine.nodes.{EngPage, EngProcessedPage}
+import org.sweble.wikitext.parser.parser.PreprocessorToParserTransformer
+import org.sweble.wikitext.parser.preprocessor.PreprocessedWikitext
+import org.sweble.wikitext.parser.{WtEntityMap, WtEntityMapImpl, WtRtData, postprocessor}
+import org.sweble.wikitext.parser.nodes._
+import org.sweble.wikitext.parser.postprocessor.TreeBuilder
 
 import scala.collection.JavaConversions._
 import scala.language.implicitConversions
-import collection.mutable.{ListBuffer}
+import org.sweble.wikitext.engine.ExpansionVisitor
 
-import org.sweble.wikitext.engine.CompiledPage
-import org.sweble.wikitext.engine.Compiler
-import org.sweble.wikitext.engine.Page
-import org.sweble.wikitext.engine.PageId
-import org.sweble.wikitext.engine.PageTitle
-import org.sweble.wikitext.engine.utils.SimpleWikiConfiguration
-import org.sweble.wikitext.`lazy`.parser._
-import org.sweble.wikitext.`lazy`.preprocessor._
-import org.sweble.wikitext.`lazy`.postprocessor.AstCompressor
-import org.sweble.wikitext.`lazy`.encval.IllegalCodePoint
-import org.sweble.wikitext.`lazy`.AstNodeTypes
-import org.sweble.wikitext.`lazy`.utils.XmlAttribute
-
-import de.fau.cs.osr.ptk.common.ast.ContentNode
-import de.fau.cs.osr.ptk.common.ast.AstNode
-import de.fau.cs.osr.ptk.common.AstVisitor
-import de.fau.cs.osr.ptk.common.ast.NodeList
-import de.fau.cs.osr.ptk.common.ast.Text
-import de.fau.cs.osr.ptk.common.Warning
-import de.fau.cs.osr.ptk.common.EntityMap
+import collection.mutable.ListBuffer
+import org.sweble.wikitext.parser.nodes.WtNodeList.WtNodeListImpl
+import org.sweble.wikitext.engine.utils.DefaultConfigEnWp
+import org.sweble.wikitext.engine.config.WikiConfig
+import org.sweble.wikitext.engine.config.WikiConfigImpl
+import org.sweble.wikitext.engine._
+import de.fau.cs.osr.ptk.common.ast.{AstNode, RtData}
+import de.fau.cs.osr.ptk.common.{AstPrinter, AstVisitor, Warning}
+import org.sweble.wikitext.engine.ext.parser_functions.ParserFunctionIf
+import org.sweble.wikitext.parser.nodes.WtBody.WtBodyImpl
+import org.sweble.wikitext.parser.nodes.WtLinkTarget.LinkTargetType
 //import de.fau.cs.osr.ptk.nodegen.parser._
 
 
@@ -36,9 +36,9 @@ import org.dbpedia.extraction.util.{UriUtils, WikiUtil, Language}
 
 
 /**
- * this class transforms a Sweble AST to DBpedia AST.
- * the implementation is dirty
- */
+  * this class transforms a Sweble AST to DBpedia AST.
+  * the implementation is dirty
+  */
 final class SwebleWrapper extends WikiParser
 {
     var lastLine = 0
@@ -46,212 +46,314 @@ final class SwebleWrapper extends WikiParser
     var pageId : PageId = null
 
     // Set-up a simple wiki configuration
-	val config = new SimpleWikiConfiguration(
-		"classpath:/org/sweble/wikitext/engine/SimpleWikiConfiguration.xml"
-    )
-	
-	// Instantiate a compiler for wiki pages
-	val compiler = new Compiler(config)
-    var entityMap : EntityMap = new EntityMap()
+    var config: WikiConfigImpl = DefaultConfigEnWp.generate();
+    /*var config1 = new SimpleWikiConfiguration(
+        "classpath:/org/sweble/wikitext/engine/SimpleWikiConfiguration.xml");
+    var configFile = new File("classpath:/org/sweble/wikitext/engine/SimpleWikiConfiguration.xml")
+    var wikiConfig: WikiConfigImpl =  WikiConfigImpl.load(configFile)
+*/
+
+    // Instantiate a compiler for wiki pages
+    var engine = new WtEngineImpl(config)
+    var wikiNodeFactory = engine.getWikiConfig.getParserConfig.getNodeFactory
+    var entityMap : WtEntityMap = new WtEntityMapImpl()
 
     def apply(page : WikiPage) : Option[PageNode] =
     {
         //TODO refactor, not safe
         language = page.title.language
-        
-		// Retrieve a page
-		val pageTitle = PageTitle.make(config, page.title.decodedWithNamespace)
-		
-		pageId = new PageId(pageTitle, page.id)
-		
-		val wikitext : String = page.source
-		
-		val parsed = parse(pageId, wikitext)
+        lastLine = 0
+        // Retrieve a page
+        val pageTitle = PageTitle.make(config, page.title.decodedWithNamespace)
 
-        //print sweble AST for debugging
-        //val w = new StringWriter()
-		//val p = new AstPrinter(w)
-        //p.go(parsed)
-		//println(w.toString())
-    
+        pageId = new PageId(pageTitle, page.id)
+
+        val wikitext : String = page.source
+
+        val parsed = parse(pageId, wikitext)
+
+
         //TODO dont transform, refactor all extractors instead
         Some(transformAST(page, false, false, parsed))
     }
 
-    def parse(pageId : PageId, wikitext : String) : Page = {
+    def parse(pageId : PageId, wikitext : String) : EngPage = {
         // Compile the retrieved page
-		val cp = compiler.postprocess(pageId, wikitext, null)
+        var cp: EngProcessedPage = engine.postprocess(pageId, wikitext, null);
         if(cp.getEntityMap != null)
             entityMap = cp.getEntityMap
-        //println("after parsing "+entityMap)
         cp.getPage
     }
 
-
-    def transformAST(page: WikiPage, isRedirect : Boolean, isDisambiguation : Boolean, swebleTree : Page) : PageNode = {
-        //merge fragmented Text nodes
-        new AstCompressor().go(swebleTree)
+    // The start_line param is for cases when I am rerunning the parser on a subtext and hence need
+    // to adjust for the line numbers
+    def transformAST(page: WikiPage, isRedirect : Boolean, isDisambiguation : Boolean, swebleTree : EngPage, start_line : Int = 0) : PageNode = {
         //parse template arguments
-         new ParameterToDefaultValueResolver(pageId).go(swebleTree)
+
+       // new ParameterToDefaultValueResolver(pageId).go(swebleTree)
         //transform sweble nodes to DBpedia nodes
-        val nodes = transformNodes(swebleTree.getContent)
+        val nodes = transformNodes(swebleTree, start_line)
         //merge fragmented TextNodes (again... this time the DBpedia nodes)
         val nodesClean = mergeConsecutiveTextNodes(nodes)
         //println(nodesClean)
         new PageNode(page.title, page.id, page.revision, page.timestamp,
-                page.contributorID,  page.contributorName, isRedirect, isDisambiguation, nodesClean)
+            page.contributorID,  page.contributorName, isRedirect, isDisambiguation, nodesClean)
     }
 
-    def transformNodes(nl : NodeList) : List[Node] = {
-        transformNodes(nl.iterator.toList)
+    def transformNodes(nl : WtNodeListImpl, start_line : Int) : List[Node] = {
+        transformNodes(nl.iterator.toList, start_line)
     }
 
-    def transformNodes(nodes : List[AstNode]) : List[Node] = {
-        nodes.map( (node : AstNode) => 
+    // Extract Italic and Bold nodes and convert them to wikiformat
+    // Also handles nested cases
+    def transformFormattingNodes(nodes : List[WtNode]) : List[WtNode] = {
+        nodes.map( (node : WtNode) =>
             node match {
-                case nl : NodeList => transformNodes(nl.listIterator.toList)
-                case n : AstNode =>  transformNode(n)
+                case n: WtItalics => {
+                    if( n.get(0).isInstanceOf[WtText]){
+                        var content = ""
+                        for (i <- 0 to n.iterator().toList.length - 1) {
+                            content = content + n.get(i).asInstanceOf[WtText].getContent
+                        }
+                        wikiNodeFactory.text("''" + content + "''")
+                    } else if(n.get(0).isInstanceOf[WtBold]){
+                        var content = ""
+                        for (i <- 0 to n.get(0).asInstanceOf[WtBold].iterator().toList.length - 1 ) {
+                            content = content + n.get(0).asInstanceOf[WtBold].get(i).asInstanceOf[WtText].getContent
+                        }
+                        wikiNodeFactory.text("'''''" + content + "'''''")
+
+                    } else {
+                        n
+                    }
+                }
+                case n: WtBold => {
+                    if( n.get(0).isInstanceOf[WtText]){
+                        var content = ""
+                        for (i <- 0 to n.iterator().toList.length - 1) {
+                            if(n.get(i).isInstanceOf[WtText]) {
+                                content = content + n.get(i).asInstanceOf[WtText].getContent
+                            }
+                        }
+                        wikiNodeFactory.text("'''" + content + "'''")
+                    } else if(n.get(0).isInstanceOf[WtItalics]){
+                        var content = ""
+                        for (i <- 0 to n.get(0).asInstanceOf[WtItalics].iterator().toList.length - 1) {
+                            content = content + n.get(0).asInstanceOf[WtItalics].get(i).asInstanceOf[WtText].getContent
+                        }
+                        wikiNodeFactory.text("'''''" + content + "'''''")
+                    } else{
+                        n
+                    }
+                }
+                case _ => node
+            })
+    }
+    def transformNodes(nodes : List[WtNode], start_line : Int) : List[Node] = {
+
+        val nodesTransformed = transformFormattingNodes(nodes)
+
+        nodesTransformed.map( (node : WtNode) =>
+            node match {
+                case nl : WtNodeListImpl => transformNodes(nl.listIterator.toList, start_line)
+                case n : WtNode => {
+                    transformNode(n, start_line)
+                }
             }
         ).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {lb addAll nodes; lb} ).toList
     }
 
-    def transformNode(node : AstNode) : List[Node] = {
+    def getProperties( startingKey : Int , t :WtTemplate, line :Int , start_line : Int): List[PropertyNode] ={
+        var i = startingKey
+        t.getArgs.iterator.toList.map((n:WtNode) => {
+            i = i+1
+
+            n match {
+                case ta : WtTemplateArgument => new PropertyNode(if(ta.hasName){ta.getName.trim} else {i.toString}, transformNodes(ta.getValue, start_line), start_line + line)
+                case _ => throw new Exception("expected TemplateArgument as template child")
+            }
+        })
+    }
+
+    def transformNode(node : WtNode, start_line : Int) : List[Node] = {
         val line = if(node.getNativeLocation == null){lastLine} else {node.getNativeLocation.getLine}
         lastLine = line
         node match {
-            case s : Section => {
+            case s : WtSection => {
                 val nl = ListBuffer[Node]()
-                nl append new SectionNode(s.getTitle, s.getLevel, transformNodes(new NodeList(s.iterator.toList.head)), line)
+                nl append new SectionNode(s.getHeading.toString, s.getLevel, transformNodes(wikiNodeFactory.list(s.iterator.toList.head), start_line), start_line + line)
                 // add the children of this section
                 // makes it flat
-                nl appendAll transformNodes(s.iterator.toList.tail) //first NodeList is the section title again
+                nl appendAll transformNodes(s.iterator.toList.tail, start_line) //first NodeList is the section title again
                 nl.toList
             }
-            case p : Paragraph => transformNodes(p.getContent)
-            case t : Template => {
-                var i = 0
-                val properties = t.getArgs.iterator.toList.map( (n:AstNode) => {
-                    i = i+1
-                    n match {
-                        case ta : TemplateArgument => new PropertyNode(if(ta.getHasName){ta.getName} else {i.toString}, transformNodes(ta.getValue), line) 
-                        case _ => throw new Exception("expected TemplateArgument as template child")
+            case p : WtParagraph => transformNodes(p, start_line)
+            case t : WtTemplate => {
+
+                val name : String = nodeList2string(t.getName)
+
+                var nameClean = WikiUtil.cleanSpace(name)
+
+                var tpl = List[Node]()
+
+                // Parser Function Node
+                if(name.charAt(0) == '#'){
+                    var str : String = ""
+                    val title = name.substring(0, name.indexOf(':'))
+                    for ( node  <-  transformNode(t.getName.asInstanceOf[WtNode], start_line).iterator.toList){
+                        str = str + node.toWikiText
                     }
-                })
-                val name : String = nodeList2string(t.getName) 
-                val nameClean = WikiUtil.cleanSpace(name)
-                val title = new WikiTitle(nameClean, Namespace.Template, language)
-                val tpl = TemplateNode.transform(new TemplateNode(title, properties, line, transformNodes(t.getName)))
+                    nameClean = WikiUtil.cleanSpace(str)
+
+                    //Extract the body of the first argument
+                    var arg1 = str.substring(name.indexOf(':')+1)
+
+                    //Create an AST from the first argument
+                    val parsed = parse(pageId, arg1)
+                    val nodeList =transformNodes(parsed, line)
+                    val prop = new PropertyNode("1",nodeList.filter(p => p.toWikiText.length > 1),start_line + line  )
+
+                    tpl = List(new ParserFunctionNode(title, prop :: getProperties(1,t, line, start_line) , start_line + line))
+                } else {
+
+                    val title = new WikiTitle(nameClean, Namespace.Template, language)
+                    tpl =  TemplateNode.transform(new TemplateNode(title, getProperties(0,t, line, start_line), start_line + line, transformNodes(t.getName, start_line)))
+                }
+
                 tpl
             }
-            case tn : Text => List(new TextNode(tn.getContent, line))
-            case ws : Whitespace => List(new TextNode(ws.getContent.get(0).asInstanceOf[Text].getContent, line)) //as text
-            case il : InternalLink => {
+            case tn : WtText => List(new TextNode(tn.getContent, start_line + line))
+            case ws : WtWhitespace => List(new TextNode(ws, start_line + line)) //as text
+            case img : WtImageLink =>  {
+                val target = img.getTarget()
+                val destinationURL = WikiTitle.parse(target.asInstanceOf[WtPageName].get(0).asInstanceOf[WtText].getContent, language)
+                var options : String = ""
+                for( a: WtNode <- img.getOptions){
+                    if(a.isInstanceOf[WtLinkOptionKeyword]){
+                        options = options + "|" + a.asInstanceOf[WtLinkOptionKeyword].getKeyword.toString
+                    }
+                }
+                if(options != "") {
+                    options = options.substring(1)
+                }
+                val destinationNodes = List[Node](new TextNode(img.getTarget, start_line + line)) //parsing of target not yet supported
+                val titleNodes = List(new TextNode(options + "|" + img.getTitle.get(0).asInstanceOf[WtText].getContent, start_line + line))
+
+                if (destinationURL.language == language) {
+                    List(new InternalLinkNode(destinationURL, titleNodes, start_line + line, destinationNodes))
+                } else {
+                    List(new InterWikiLinkNode(destinationURL, titleNodes, start_line + line, destinationNodes))
+                }
+            }
+            case il : WtInternalLink => {
                 val target = il.getTarget()
                 val target2 = if(target != null && !target.equals("")){ if(target.startsWith("#")) target.substring(1) else target} else "none"
-                val destinationURL = WikiTitle.parse(target2, language)
+                val destinationURL = WikiTitle.parse(target2.asInstanceOf[WtPageName].get(0).asInstanceOf[WtText].getContent, language)
 
-                val destinationNodes = List[Node](new TextNode(il.getTarget, line)) //parsing of target not yet supported
-                val titleNodes = if(!il.getTitle.getContent.isEmpty){transformNodes(il.getTitle.getContent)} else {List(new TextNode(il.getTarget, line))}
+                val destinationNodes = List[Node](new TextNode(il.getTarget, start_line + line)) //parsing of target not yet supported
+                val titleNodes = if(!il.getTitle.isEmpty){transformNodes(il.getTitle, start_line)} else {List(new TextNode(il.getTarget, start_line + line))}
 
                 val postfix : List[Node] = if(il.getPostfix != null && il.getPostfix != ""){
-                    List(new TextNode(il.getPostfix, line))
+                    List(new TextNode(il.getPostfix, start_line + line))
                 } else List()
 
                 if (destinationURL.language == language) {
-                    List(new InternalLinkNode(destinationURL, titleNodes, line, destinationNodes)) ++ postfix
+                    List(new InternalLinkNode(destinationURL, titleNodes, start_line + line, destinationNodes)) ++ postfix
                 } else {
-                    List(new InterWikiLinkNode(destinationURL, titleNodes, line, destinationNodes)) ++ postfix
+                    List(new InterWikiLinkNode(destinationURL, titleNodes, start_line + line, destinationNodes)) ++ postfix
                 }
             }
-            case el : ExternalLink => {
-              var destinationURL : URI = null
-              try {
-                destinationURL = new URI(el.getTarget)
-              } catch {
-                case e : Exception => destinationURL = new URI("http://example.org")
-              }
-              val destinationNodes = List[Node](new TextNode(el.getTarget, line)) //parsing of target not yet supported
-              val titleNodes = transformNodes(el.getTitle)
-              List(new ExternalLinkNode(destinationURL, titleNodes, line, destinationNodes))
+            case el : WtExternalLink => {
+                var destinationURL : URI = null
+                try {
+                    destinationURL = new URI(el.getTarget)
+                } catch {
+                    case e : Exception => destinationURL = new URI("http://example.org")
+                }
+                val destinationNodes = List[Node](new TextNode(el.getTarget.toString, start_line + line)) //parsing of target not yet supported
+                val titleNodes = transformNodes(el.getTitle, start_line)
+                List(new ExternalLinkNode(destinationURL, titleNodes, start_line + line, destinationNodes))
             }
-            case url : Url => {
+            case url : WtUrl => {
                 val destinationURL = new URI(url)
-                val destinationNodes = List[Node](new TextNode(url, line)) //parsing of target not yet supported
-                List(new ExternalLinkNode(destinationURL, destinationNodes, line, destinationNodes))
+                val destinationNodes = List[Node](new TextNode(url, start_line + line)) //parsing of target not yet supported
+                List(new ExternalLinkNode(destinationURL, destinationNodes, start_line + line, destinationNodes))
             }
-            case items : Itemization => items.getContent.iterator.toList.map( (n:AstNode) => {
-                n match {   
-                    case item : ItemizationItem => wrap(item, line)
-                    case item : Text => List(new TextNode(item.getContent, line))
+            case items : WtUnorderedList => items.iterator.toList.map( (n:WtNode) => {
+                n match {
+                    case item : WtListItem => wrap(item,  line, start_line)
+                    case item : WtText => List(new TextNode(item.getContent, start_line + line))
                     case _ => throw new Exception("expected ItemizationItem as Itemization child")
                 }
             }).flatten
-            case items : Enumeration => {
+            case items : WtOrderedList => {
                 var i = 0
-                items.getContent.iterator.toList.map( (n:AstNode) => {
-                //TODO a EnumerationItem can contain Itemization - needs to be emitted as #* 
-                n match {   
-                    case item : EnumerationItem => wrap(item, line)
-                    case _ => throw new Exception("expected EnumerationItem as Enumeration child. found "+n.getClass.getName+" instead")
-                }
-            }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {
-                i = i+1; 
-                lb add nodes.head; //the # symbol hopefully :)
-                lb add new TemplateNode(
-                    new WikiTitle("enum-expanded", Namespace.Template, language), 
-                    List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line)));
-                lb addAll nodes.tail; 
-                lb} ).toList
+                items.iterator.toList.map( (n:WtNode) => {
+                    //TODO a EnumerationItem can contain Itemization - needs to be emitted as #*
+                    n match {
+                        case item : WtListItem => wrap(item, line, start_line)
+                        case _ => throw new Exception("expected EnumerationItem as Enumeration child. found "+n.getClass.getName+" instead")
+                    }
+                }).foldLeft(ListBuffer[Node]())( (lb : ListBuffer[Node], nodes : List[Node]) => {
+                    i = i+1;
+                    lb add nodes.head; //the # symbol hopefully :)
+                    lb add new TemplateNode(
+                        new WikiTitle("enum-expanded", Namespace.Template, language),
+                        List(new PropertyNode("1", List(new TextNode(i.toString, line)), line)), line, List(new TextNode("enum-expanded", line)));
+                    lb addAll nodes.tail;
+                    lb} ).toList
             }
-            case definitions : DefinitionList => definitions.getContent.iterator.toList.map( (n:AstNode) => {
-                n match {   
-                    case item : DefinitionDefinition => wrap(item, line)
-                    case item : DefinitionTerm => wrap(item, line)
-                    case a : AstNode =>  transformNodes(List(a))//throw new Exception("expected DefinitionDefinition as DefinitionList child. found "+n.getClass.getName+" instead")
+            case definitions : WtDefinitionList => definitions.iterator.toList.map( (n:WtNode) => {
+                n match {
+                    case item : WtDefinitionListDef => wrap(item, line, start_line)
+                    case item : WtDefinitionListTerm => wrap(item, line, start_line)
+                    case a : WtNode =>  transformNodes(List(a), start_line)//throw new Exception("expected DefinitionDefinition as DefinitionList child. found "+n.getClass.getName+" instead")
                 }
             }).flatten
-            case b : Bold => transformNodes(b.getContent) // ignore style
-            case i : Italics => transformNodes(i.getContent) // ignore style
-            case tplParam : TemplateParameter => {
-              if(tplParam != null && tplParam.getDefaultValue != null)
-                List(new TemplateParameterNode(tplParam.getName, transformNodes(tplParam.getDefaultValue.getValue()), line))
-              else List[Node]()
+            case tplParam : WtTemplateParameter => {
+                if(tplParam != null && tplParam.getDefault != null)
+                    List(new TemplateParameterNode(tplParam.getName, transformNodes(tplParam.getDefault, start_line), start_line + line))
+                else List[Node]()
             }
-            /*case pf : ParserFunctionBase => {
-                val title = new WikiTitle(pf.getName + ":", WikiTitle.Namespace.Template, language)
-                val children = List[Node]() //not implemented yet
-                List(new ParserFunctionNode(title, children, line))
-            }*/
-            case t : Table => {
-                val captionNodeOption = t.getBody.iterator.toList.find( (n:AstNode) => n.isInstanceOf[TableCaption])
-                val caption : Option[String] = if(captionNodeOption.isDefined){Some(captionNodeOption.get.asInstanceOf[TableCaption].getBody)} else {None}
-                val rows = t.getBody.iterator.toList.
-                    filter((n:AstNode) => n.isInstanceOf[TableRow]).
-                    map((n:AstNode) => {
-                        val tr = n.asInstanceOf[TableRow]
-                        val cells = tr.getBody.iterator.toList.map((re:AstNode) => { 
-                            re match { 
-                                case tableCell:TableCell => {
-                                    Some(new TableCellNode(transformNodes(tableCell.iterator.toList), line, getXMLAttribute(tableCell, "rowspan").getOrElse("1").toInt, getXMLAttribute(tableCell, "colspan").getOrElse("1").toInt))
+
+            case t : WtTable => {
+                val captionNodeOption = t.getBody.iterator.toList.find( (n:WtNode) => n.isInstanceOf[WtTableCaption])
+                val caption : Option[String] = if(captionNodeOption.isDefined){Some(captionNodeOption.get.asInstanceOf[WtTableCaption].getBody)} else {None}
+                for( tableBody <- t.getBody.iterator.toList.filter((n:WtNode) => n.isInstanceOf[WtTableImplicitTableBody])){
+                    var tableBodyObj = tableBody.asInstanceOf[WtTableImplicitTableBody].getBody
+                    val rows = tableBodyObj.iterator().toList.filter((n :WtNode) => n.isInstanceOf[WtTableRow]).iterator.toList.map((n : WtNode) => {
+                        val tr = n.asInstanceOf[WtTableRow]
+                        val cells = tr.getBody.iterator.toList.map((re:WtNode) => {
+                            re match {
+                                case tableCell: WtTableCell => {
+                                    Some(new TableCellNode(transformNodes(tableCell.iterator.toList, start_line), line, getXMLAttribute(tableCell, "rowspan").getOrElse("1").toInt, getXMLAttribute(tableCell, "colspan").getOrElse("1").toInt))
                                 }
                                 case _ => None
                             }
-}).filter(_.isDefined).map(_.get)
+                        }).filter(_.isDefined).map(_.get)
                         new TableRowNode(cells, line)
                     })
-                List(new TableNode(caption, rows, line))
+                    return List(new TableNode(caption, rows, line))
+                }
+                 List()
             }
-            case icp : IllegalCodePoint => List(new TextNode(icp.getCodePoint(), line))
-            case xml : XmlElement => List() //drop xml nodes - are they needed?
-            case cn : ContentNode => transformNodes(cn.getContent)
+            case icp : WtIllegalCodePoint => List(new TextNode(icp.getCodePoint(), line))
+            case xml : WtXmlElement => {
+                val body = xml.getBody
+                var content = ""
+                body.iterator().toList.filter((n : WtNode ) => n.isInstanceOf[WtText]).map((n : WtNode) => {
+                    content = content + n.asInstanceOf[WtText].getContent
+                })
+                List(new TextNode("<"+xml.getName+">"+content +"</"+xml.getName + ">", start_line + line))
+            }
+            case cn : WtContentNode => transformNodes(cn, start_line)
             //else
-            case _ => List(new TextNode(/*"else:"+node.getClass.getName+": "+*/nodeList2string(new NodeList(node)), line))
+            case _ => List(new TextNode(nodeList2string(wikiNodeFactory.list(node)), start_line + line))
         }
     }
 
-    implicit def nodeList2prepocessedPage(nl:NodeList) : PreprocessedWikitext = {
-        //println(entityMap)
-        val t = PreprocessorToParserTransformer.transform(new LazyPreprocessedPage(nl, new ArrayList[Warning]()), entityMap)
+    implicit def nodeList2prepocessedPage(nl: WtNodeList) : PreprocessedWikitext = {
+        val t = PreprocessorToParserTransformer.transform(wikiNodeFactory.preproPage(nl, entityMap))
         t
     }
 
@@ -260,16 +362,17 @@ final class SwebleWrapper extends WikiParser
         t
     }
 
-    implicit def nodeList2string(nl:NodeList) : String = {
+    implicit def nodeList2string(nl: WtNodeList) : String = {
+
         preprocessedPage2string(nodeList2prepocessedPage(nl))
     }
 
-    implicit def url2string(url:Url) : String = {
+    implicit def url2string(url: WtUrl) : String = {
         url.getProtocol +":"+ url.getPath
     }
 
-    implicit def nodes2nodeList(l : List[AstNode]) : NodeList = new NodeList(l.toSeq)
-    implicit def nodeList2nodes(l : NodeList) : List[AstNode] = l.iterator.toList
+    implicit def nodes2nodeList(l : List[WtNode]) : WtNodeList = wikiNodeFactory.list(l)
+    implicit def nodeList2nodes(l : WtNodeList) : List[WtNode] = l.iterator.toList
 
     def mergeConsecutiveTextNodes(nodes:List[Node]):List[Node] = {
         val ret = new ListBuffer[Node]()
@@ -300,94 +403,94 @@ final class SwebleWrapper extends WikiParser
         ret.toList
     }
 
-    class ParameterToDefaultValueResolver(pageId : PageId) extends AstVisitor {
+    class ParameterToDefaultValueResolver(pageId : PageId) extends AstVisitor[WtNode] {
 
-		var entityMap : EntityMap = new EntityMap()
-		
-		var warnings : java.util.List[Warning] = new ArrayList[Warning]()
-		
-		def visit(n : AstNode) : AstNode =
-		{
-			mapInPlace(n)
-			return n
-		}
-		
-		def  visit(n : CompiledPage) : AstNode =
-		{
-			this.warnings = n.getWarnings()
-			this.entityMap = n.getEntityMap()
-			mapInPlace(n)
-			return n
-		}
-		
-		def visit(n : TemplateParameter) : AstNode = 
-		{
-			val defValArg = n.getDefaultValue()
-			if (defValArg == null)
-				return n
-			
-			val defVal = defValArg.getValue();
-			
-			// Shortcut for all those empty default values
-			if (defVal.isEmpty())
-				return defValArg
-			
-			val pprAst = new LazyPreprocessedPage(
-					defVal, warnings, entityMap
-            )
-			
-			val parsed = compiler.postprocessPpOrExpAst(pageId, pprAst);
-			
-			val content = parsed.getPage().getContent()
-			
-			// The parser of course thinks that the given wikitext is a 
-			// individual page and will wrap even single line text into a 
-			// paragraph node. We try to catch at least simple cases to improve
-			// the resulting AST
-			val contentClean = if (content.size() == 1 && content.get(0).getNodeType() == AstNodeTypes.NT_PARAGRAPH)    
-				content.get(0).asInstanceOf[Paragraph].getContent()
-            else content
-			
-			content
-		}
-		def visit(n : TemplateArgument) : AstNode = 
-		{
-			val value = n.getValue()
-			if (value == null)
-				return n
-		
-			
-			// Shortcut for all those empty default values
-			if (value.isEmpty())
-				return n
-			
-			val pprAst = new LazyPreprocessedPage(
-					value, warnings, entityMap
-            )
-			
-			val parsed = compiler.postprocessPpOrExpAst(pageId, pprAst);
-			
-			val content = parsed.getPage().getContent()
-			
-			// The parser of course thinks that the given wikitext is a 
-			// individual page and will wrap even single line text into a 
-			// paragraph node. We try to catch at least simple cases to improve
-			// the resulting AST
-			val contentClean = if (content.size() == 1 && content.get(0).getNodeType() == AstNodeTypes.NT_PARAGRAPH)    
-				content.get(0).asInstanceOf[Paragraph].getContent()
-            else content
-			
-			n.setValue(contentClean)
-            n
-		}
-	}
+        var entityMap : WtEntityMap = new WtEntityMapImpl()
 
-    def getXMLAttribute(node : TableCell, name : String) : Option[String] = {
+        var warnings : java.util.List[Warning] = new ArrayList[Warning]()
+
+        def visit(n : WtNode) : WtNode =
+        {
+            mapInPlace(n)
+            return n
+        }
+
+        def  visit(n : WtPage) : WtNode =
+        {
+            this.warnings = n.getWarnings()
+            this.entityMap = n.getEntityMap()
+            mapInPlace(n)
+            return n
+        }
+
+        def visit(n : WtTemplateParameter) : WtNode =
+        {
+            val defValArg = n.getDefault()
+            if (defValArg == null)
+                return n
+
+            val defVal = defValArg;
+
+            // Shortcut for all those empty default values
+            if (defVal.isEmpty())
+                return defValArg
+
+            val pprAst = wikiNodeFactory.preproPage(
+                defVal, entityMap
+            )
+
+            val parsed = engine.postprocessPpOrExpAst(pageId, pprAst);
+
+            val content = parsed.getPage()
+
+            // The parser of course thinks that the given wikitext is a
+            // individual page and will wrap even single line text into a
+            // paragraph node. We try to catch at least simple cases to improve
+            // the resulting AST
+            val contentClean = if (content.size() == 1 && content.get(0).getNodeType() == WtNode.NT_PARAGRAPH)
+                content.get(0).asInstanceOf[WtParagraph]
+            else content
+
+            content
+        }
+        def visit(n : WtTemplateArgument) : WtNode =
+        {
+            val value = n.getValue()
+            if (value == null)
+                return n
+
+
+            // Shortcut for all those empty default values
+            if (value.isEmpty())
+                return n
+
+            val pprAst = wikiNodeFactory.preproPage(
+                value, entityMap
+            )
+
+            val parsed = engine.postprocessPpOrExpAst(pageId, pprAst);
+
+            val content = parsed.getPage
+
+            // The parser of course thinks that the given wikitext is a
+            // individual page and will wrap even single line text into a
+            // paragraph node. We try to catch at least simple cases to improve
+            // the resulting AST
+            val contentClean = if (content.size() == 1 && content.get(0).getNodeType() == WtNode.NT_PARAGRAPH)
+                content.get(0).asInstanceOf[WtParagraph]
+            else content
+
+            // n.setValue(content)
+            content
+        }
+    }
+
+    def getXMLAttribute(node : WtTableCell, name : String) : Option[String] = {
         val xmlAttrs = node.getXmlAttributes()
-        xmlAttrs.foreach((an:AstNode) => { 
-            an match { 
-                case (xmlAttr : XmlAttribute) => {
-                    if(xmlAttr.getName == name && xmlAttr.getHasValue()){
+        xmlAttrs.foreach((an:WtNode) => {
+            an match {
+                case (xmlAttr : WtXmlAttribute) => {
+                    if(xmlAttr.getName == name && xmlAttr.hasValue()){
                         return Some(nodeList2string(xmlAttr.getValue))
                     }
                 }
@@ -397,40 +500,39 @@ final class SwebleWrapper extends WikiParser
         None
     }
 
-    def getWrap(node : AstNode) : Tuple2[String, String]= {
+    def getWrap(node : WtNode) : Tuple2[String, String]= {
         val rtd = node.getAttribute("RTD").asInstanceOf[RtData]
 
-        val start = if(rtd != null && rtd.getRts() != null){
-                        val rts = rtd.getRts()
-                        if(rts.length > 0  && rts(0) != null && rts(0).length > 0){
-                            rts(0)(0).asInstanceOf[String]
-                        } else defaultStart(node)
-                    } else defaultStart(node)
+        val start = if(rtd != null && rtd.getFields() != null){
+            val rts = rtd.getFields()
+            if(rts.length > 0  && rts(0) != null && rts(0).length > 0){
+                rts(0)(0).asInstanceOf[String]
+            } else defaultStart(node)
+        } else defaultStart(node)
 
 
-        val end = if(rtd != null && rtd.getRts() != null){
-                        val rts = rtd.getRts()
-                        if(rts.length > 1 && rts(1) != null && rts(1).length > 0){
-                            rtd.getRts()(1)(0).asInstanceOf[String]
-                        } else ""
-                    } else ""
+        val end = if(rtd != null && rtd.getFields() != null){
+            val rts = rtd.getFields()
+            if(rts.length > 1 && rts(1) != null && rts(1).length > 0){
+                rtd.getFields()(1)(0).asInstanceOf[String]
+            } else ""
+        } else ""
 
         (start, end)
     }
 
-    def defaultStart(node : AstNode) : String = node match {
-        case i : ItemizationItem => "*"
-        case i : EnumerationItem => "#"
-        case i : DefinitionDefinition => ":"
-        case i : DefinitionTerm => ":"
+    def defaultStart(node : WtNode) : String = node match {
+        case i : WtListItem => "*"
+        case i : WtDefinitionListDef => ":"
+        case i : WtDefinitionListTerm => ":"
         case _ => ""
     }
 
-    def wrap(node : ContentNode, line : Int) : List[Node] = {
+    def wrap(node : WtContentNode, line : Int, start_line : Int) : List[Node] = {
         val w = getWrap(node)
         var hasExtraNL = false
-        val c = node.getContent.map((a:AstNode)=>{if(a.isInstanceOf[Enumeration] || a.isInstanceOf[Itemization] || a.isInstanceOf[DefinitionList]){hasExtraNL = true; List(new Text("\n"), a)} else {List(a)}}).flatten
-        List(new TextNode(w._1, line)) ++ transformNodes(c) ++ (if(!hasExtraNL){List(new TextNode(w._2, line))} else {List()})
+        val c: List[WtNode] = node.map((a:WtNode)=>{if(a.isInstanceOf[Enumeration] || a.isInstanceOf[WtListItem] || a.isInstanceOf[WtDefinitionList]){hasExtraNL = true; List( wikiNodeFactory.text("\n"), a)} else {List(a)}}).flatten
+        List(new TextNode(w._1, line)) ++ transformNodes(c, start_line ) ++ (if(!hasExtraNL){List(new TextNode(w._2, line))} else {List()})
     }
 }
 

@@ -36,6 +36,12 @@ case class TemplateNode (
     
     // templates are skipped for plain text
     def toPlainText = ""
+
+    override def equals(obj: scala.Any) = obj match {
+
+        case otherTemplateNode : TemplateNode => (otherTemplateNode.title == title && otherTemplateNode.line == line && NodeUtil.filterEmptyTextNodes(otherTemplateNode.children) == NodeUtil.filterEmptyTextNodes(children))
+        case _ => false
+    }
 }
 
 /**

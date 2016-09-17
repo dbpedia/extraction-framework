@@ -199,9 +199,10 @@ public class JDBCUtil {
 
             while (result.next()) {
                 long pageID = result.getLong("pageID");
+                String title = result.getString("title");
                 Timestamp t = result.getTimestamp("updated");
                 String timestamp = DateUtil.transformToUTC(t.getTime());
-                items.add(new LiveQueueItem(pageID, timestamp));
+                items.add(new LiveQueueItem(pageID, title, timestamp, false, ""));
             }
             return items;
         } catch (Exception e) {

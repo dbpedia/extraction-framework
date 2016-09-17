@@ -4,6 +4,7 @@ package org.dbpedia.extraction.live.main;
 import org.dbpedia.extraction.live.core.LiveOptions;
 import org.dbpedia.extraction.live.feeder.Feeder;
 import org.dbpedia.extraction.live.feeder.RCStreamFeeder;
+import org.dbpedia.extraction.live.feeder.AllPagesFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeeder;
 import org.dbpedia.extraction.live.feeder.OAIFeederMappings;
 import org.dbpedia.extraction.live.feeder.UnmodifiedFeeder;
@@ -61,6 +62,11 @@ public class Main {
             feeders .add(new RCStreamFeeder("RCStreamFeeder", LiveQueuePriority.LivePriority,
                 LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory"),
                 LiveOptions.options.get("feeder.rcstream.room")));
+        }
+
+        if (Boolean.parseBoolean(LiveOptions.options.get("feeder.allpages.enabled")) == true) {
+            feeders .add(new AllPagesFeeder("AllPagesFeeder", LiveQueuePriority.LivePriority,
+                    LiveOptions.options.get("uploaded_dump_date"), LiveOptions.options.get("working_directory")));
         }
 
         if (Boolean.parseBoolean(LiveOptions.options.get("feeder.mappings.enabled")) == true) {

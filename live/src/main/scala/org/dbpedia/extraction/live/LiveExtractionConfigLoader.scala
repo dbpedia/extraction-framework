@@ -7,7 +7,7 @@ import collection.immutable.ListMap
 import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.sources.{WikiPage, WikiSource, Source, XMLSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
@@ -37,6 +37,9 @@ object LiveExtractionConfigLoader
   private var extractors : List[Extractor[_]] = null;
   private var reloadOntologyAndMapping = true;
   private var ontologyAndMappingsUpdateTime : Long = 0;
+  private val language = Language.apply(LiveOptions.language)
+  private val namespaces = if (language == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata
+    else Set(Namespace.Main, Namespace.Template, Namespace.Category)
   val logger = LoggerFactory.getLogger("LiveExtractionConfigLoader");
 
   /** Ontology source */
@@ -47,7 +50,7 @@ object LiveExtractionConfigLoader
 
   /** Mappings source */
   val mappingsSource =  WikiSource.fromNamespaces(
-    namespaces = Set(Namespace.mappings(Language.apply(LiveOptions.language))),
+    namespaces = Set(Namespace.mappings(language)),
     url = new URL(Language.Mappings.apiUri),
     language = Language.Mappings );
 
@@ -136,12 +139,8 @@ object LiveExtractionConfigLoader
     for (wikiPage <- articlesSource)
     {
 
-      if(wikiPage.title.namespace == Namespace.Main ||
-        wikiPage.title.namespace == Namespace.Template ||
-        wikiPage.title.namespace == Namespace.Category)
+      if(namespaces.contains(wikiPage.title.namespace))
       {
-
-
 
         val liveCache = new JSONCache(wikiPage.id, wikiPage.title.decoded)
 
