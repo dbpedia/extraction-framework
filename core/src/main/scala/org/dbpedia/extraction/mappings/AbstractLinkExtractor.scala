@@ -29,7 +29,7 @@ class AbstractLinkExtractor(
 
   override val datasets = Set(DBpediaDatasets.LinkedAbstracts)
 
-  protected lazy val linkedAbstracts = QuadBuilder(context.language, DBpediaDatasets.LinkedAbstracts, super.longProperty, null) _
+  protected lazy val linkedAbstracts = QuadBuilder(context.language, DBpediaDatasets.LinkedAbstracts, context.ontology.properties(protectedParams.get("nifProperty").get), null) _
 
   override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {
