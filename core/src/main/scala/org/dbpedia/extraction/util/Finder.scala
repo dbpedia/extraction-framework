@@ -48,7 +48,7 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
       if (suffix == null) {date => true}
       else if (isSuffixRegex) {date => matchFiles(date, suffix).nonEmpty}
       else {date => file(date, suffix).exists}
-    
+
     val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
     
     if (required && dates.isEmpty) {
@@ -56,7 +56,7 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
       if (suffix != null) msg += " containing file "+wikiName+"-[YYYYMMDD]-"+suffix
       throw new IllegalArgumentException(msg)
     }
-    
+
     dates
   }
     
@@ -87,8 +87,9 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
    * @param pattern
    * @return
    */
-  def matchFiles(date: String, pattern: String): List[T] = {
+  def matchFiles(date: String, pattern: String) = {
     val regex = (wikiName + "-" + date + "-" + pattern).r
-    directory(date).list.sortBy(_.size()).reverse.map(_.name).filter(regex.findAllIn(_).matchData.nonEmpty).map(directory(date).resolve(_))
+    val list = directory(date).list.sortBy(_.size()).reverse.map(_.name).filter(regex.findAllIn(_).matchData.nonEmpty)
+    list.map(directory(date).resolve(_))
   }
 }

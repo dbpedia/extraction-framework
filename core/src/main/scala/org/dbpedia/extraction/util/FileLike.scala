@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.util
 
-import java.io.{InputStream,OutputStream}
+import java.io.{File, InputStream, OutputStream}
 
 /**
  * Allows common handling of java.io.File and java.nio.file.Path
@@ -39,5 +39,6 @@ abstract class FileLike[T] {
   def inputStream(): InputStream
   
   def outputStream(append: Boolean = false): OutputStream
-  
+
+  def getFile: File
 }

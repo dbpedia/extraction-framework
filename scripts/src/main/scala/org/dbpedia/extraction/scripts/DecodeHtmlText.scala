@@ -70,7 +70,7 @@ object DecodeHtmlText {
           val decoded = coder.code(quad.value)
           List(quad.copy(value = decoded))
         }
-        err.println(language.wikiCode+": "+finder.find(input + suffix)+" : found "+counter.errors()+" HTML character reference errors")
+        err.println(language.wikiCode+": "+finder.byName(input + suffix)+" : found "+counter.errors()+" HTML character reference errors")
         counter.reset()
         first = false
       }

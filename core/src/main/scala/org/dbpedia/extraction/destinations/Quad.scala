@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.destinations
 
+import java.net.URI
+
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.{OntologyProperty,OntologyType}
 import org.dbpedia.extraction.util.Language
@@ -167,7 +169,11 @@ with Equals
     // ignore dataset and context
     return hash
   }
-  
+
+  def hasObjectPredicate: Boolean =
+  {
+    datatype == null && language == null && URI.create(value).isAbsolute
+  }
 }
 
 object Quad

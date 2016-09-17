@@ -24,15 +24,15 @@ object QuadMapper {
   @Deprecated
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    mapQuads(finder.language.wikiCode, finder.find(input, false), finder.find(output), true)(map)
+    mapQuads(finder.language.wikiCode, finder.byName(input, false), finder.byName(output), true)(map)
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, auto: Boolean, required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    mapQuads(finder.language.wikiCode, finder.find(input, auto), finder.find(output), required)(map)
+    mapQuads(finder.language.wikiCode, finder.byName(input, auto), finder.byName(output), required)(map)
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, required: Boolean )(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    mapQuads(finder.language.wikiCode, finder.find(input, false), finder.find(output), required)(map)
+    mapQuads(finder.language.wikiCode, finder.byName(input, false), finder.byName(output), required)(map)
   }
     
   /**

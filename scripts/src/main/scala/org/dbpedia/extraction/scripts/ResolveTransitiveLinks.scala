@@ -68,7 +68,7 @@ object ResolveTransitiveLinks {
         err.println("length "+cycle.size+": ["+cycle.mkString(" ")+"]")
       }
       
-      val file = finder.find(output + suffix)
+      val file = finder.byName(output + suffix)
       err.println(language.wikiCode+": writing "+file+" ...")
       val writer = IOUtils.writer(file)
       try {
