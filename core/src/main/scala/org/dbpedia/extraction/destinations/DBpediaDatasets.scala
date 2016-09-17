@@ -85,6 +85,7 @@ object DBpediaDatasets
     val LongAbstracts = new Dataset("long_abstracts", "Full abstracts of Wikipedia articles, usually the first section.")
     val MissingShortAbstracts = new Dataset("missing_short_abstracts")
     val MissingLongAbstracts = new Dataset("missing_long_abstracts")
+    val LinkedAbstracts = new Dataset("linked_abstracts", "This is a temporary dataset for the NIF extraction of Abstracts. It shall be deleted after NIF extraction is finished.")
 
     /**
      * Links

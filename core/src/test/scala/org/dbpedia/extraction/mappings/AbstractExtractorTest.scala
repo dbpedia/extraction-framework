@@ -2,11 +2,11 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.sources.FileSource
-import io.Source
 import org.dbpedia.extraction.util.Language
 import java.io.{FilenameFilter, File}
-import java.lang.IllegalStateException
 import org.junit.{Ignore, Test}
+
+import scala.io.Source
 
 @Ignore  // unignore to test; MediaWiki server has to be in place
 class AbstractExtractorTest
