@@ -27,6 +27,8 @@ class AbstractLinkExtractor(
   //API parameters to geht HTML of first section
   override val apiParametersFormat = "uselang="+language + protectedParams.get("apiNifParametersFormat").get
 
+  override val xmlPath = protectedParams.get("apiNifXmlPath").get.split(",").map(_.trim)
+
   override val datasets = Set(DBpediaDatasets.LinkedAbstracts)
 
   protected lazy val linkedAbstracts = QuadBuilder(context.language, DBpediaDatasets.LinkedAbstracts, context.ontology.properties(protectedParams.get("nifProperty").get), null) _
@@ -40,7 +42,7 @@ class AbstractLinkExtractor(
     if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
     //Retrieve page text
-    var text = retrievePage(pageNode.title /*, abstractWikiText*/)
+    var text = super.retrievePage(pageNode.title /*, abstractWikiText*/)
 
     text = super.postProcess(pageNode.title, text)
 

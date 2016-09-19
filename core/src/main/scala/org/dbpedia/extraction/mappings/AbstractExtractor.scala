@@ -14,7 +14,7 @@ import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
 import scala.io.Source
 import scala.language.reflectiveCalls
-import scala.xml.XML
+import scala.xml.{NodeSeq, XML}
 
 /**
  * Extracts page abstracts.
@@ -37,9 +37,11 @@ class AbstractExtractor(
 )
 extends PageNodeExtractor
 {
-  protected val abstractParams = WikidataExtractorConfigFactory.createConfig("/mediawikiConfig.json").asInstanceOf[JsonConfig].configMap
+  protected val abstractParams = WikidataExtractorConfigFactory.createConfig("/mediawikiconfig.json").asInstanceOf[JsonConfig].configMap
   protected val publicParames = abstractParams.get("publicParams").get
   protected val protectedParams = abstractParams.get("protectedParams").get
+
+  protected val xmlPath = protectedParams.get("apiNormalXmlPath").get.split(",").map(_.trim)
 
   protected def apiUrl: URL = new URL(publicParames.get("apiUri").get)
 
@@ -238,9 +240,12 @@ extends PageNodeExtractor
     {
       // for XML format
       val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-      //val text = (XML.loadString(xmlAnswer) \ "parse" \ "text").text.trim
-      var text = (XML.loadString(xmlAnswer) \ "query" \ "pages" \ "page" \ "extract").text.trim
-      decodeHtml(text)
+      var text = XML.loadString(xmlAnswer).asInstanceOf[NodeSeq]
+
+      for(child <- xmlPath)
+        text = text \ child
+
+      decodeHtml(text.text.trim)
     }
 
     private def replacePatterns(abst: String): String= {
