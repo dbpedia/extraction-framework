@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.config.mappings.wikidata
 
+import java.net.URL
+
 import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.node.JsonNodeType
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
@@ -24,26 +26,25 @@ trait WikidataExtractorConfig {
 }
 
 object WikidataExtractorConfigFactory {
-  def createConfig(conf: String): WikidataExtractorConfig = {
-    val selection = conf.toLowerCase()
-    selection match {
-      case selection if selection.endsWith(".json") => {
+  def createConfig(fileUrl:URL): WikidataExtractorConfig = {
+    fileUrl match {
+      case selection if selection.getFile.endsWith(".json") => {
         new JsonConfig(selection)
       }
     }
   }
 }
 
-class JsonConfig(filePath:String) extends WikidataExtractorConfig {
-  val configMap = readConfiguration(filePath)
+class JsonConfig(fileUrl:URL) extends WikidataExtractorConfig {
+  val configMap = readConfiguration(fileUrl)
 
-  private final def readConfiguration(filePath:String):  mutable.Map[String, mutable.Map[String, String]] = {
+  private final def readConfiguration(fileUrl: URL):  mutable.Map[String, mutable.Map[String, String]] = {
     val configToMap = mutable.Map.empty[String, mutable.Map[String, String]]
 
-    val stream = Option(getClass.getResourceAsStream(filePath)) match
+    val stream = Option(fileUrl.openStream()) match
     {
       case Some(x) => new BufferedSource(x)
-      case None => scala.io.Source.fromFile(filePath)
+      case None => throw new NotImplementedError("This shouldn't have happened! If this exception occurred, please contact the Github Issue section of the extraction framework with the complete exception stack.")//scala.io.Source.fromFile(fileUrl)
     }
     val source = stream mkString
 

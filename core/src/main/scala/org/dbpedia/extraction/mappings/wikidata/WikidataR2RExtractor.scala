@@ -46,7 +46,7 @@ class WikidataR2RExtractor(
                             )
   extends JsonNodeExtractor {
 
-  val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig("config.json")
+  val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig(this.getClass.getResource("wikidatar2rconfig.json"))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
   val classMappings = readClassMappings("auto_generated_mapping.json")

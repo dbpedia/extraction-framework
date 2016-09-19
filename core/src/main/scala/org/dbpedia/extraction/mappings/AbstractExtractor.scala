@@ -37,7 +37,11 @@ class AbstractExtractor(
 )
 extends PageNodeExtractor
 {
-  protected val abstractParams = WikidataExtractorConfigFactory.createConfig("/mediawikiconfig.json").asInstanceOf[JsonConfig].configMap
+
+  protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
+  this.getClass.getClassLoader.getResource("myproperties.properties")
+  protected val abstractParams = WikidataExtractorConfigFactory.createConfig(this.getClass.getClassLoader.getResource("mediawikiconfig.json"))
+    .asInstanceOf[JsonConfig].configMap
   protected val publicParames = abstractParams.get("publicParams").get
   protected val protectedParams = abstractParams.get("protectedParams").get
 
@@ -57,8 +61,6 @@ extends PageNodeExtractor
   protected val sleepFactorMs = Integer.parseInt(publicParames.get("sleepFactorMs").get)
 
   protected val language = context.language.wikiCode
-
-  protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
   protected val apiParametersFormat = "uselang="+language + protectedParams.get("apiNormalParametersFormat").get
