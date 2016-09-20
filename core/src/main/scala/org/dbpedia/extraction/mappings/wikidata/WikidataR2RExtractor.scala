@@ -1,14 +1,13 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.{IOException, File}
+import java.io.{IOException}
 
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.config.mappings.wikidata._
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.JsonNode
+import org.dbpedia.extraction.util.{JsonConfig, Language, WikidataUtil}
 import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
@@ -16,7 +15,6 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
-import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import scala.language.postfixOps
@@ -46,7 +44,7 @@ class WikidataR2RExtractor(
                             )
   extends JsonNodeExtractor {
 
-  val config: WikidataExtractorConfig = WikidataExtractorConfigFactory.createConfig(this.getClass.getResource("wikidatar2rconfig.json"))
+  val config: JsonConfig = new JsonConfig(this.getClass.getResource("wikidatar2rconfig.json"))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
   val classMappings = readClassMappings("auto_generated_mapping.json")

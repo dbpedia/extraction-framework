@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.config.mappings.wikidata.{JsonConfig, WikidataExtractorConfigFactory}
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 import scala.collection.mutable.HashMap
@@ -80,13 +79,14 @@ private class NamespaceBuilder {
   ns(202, "OntologyProperty", true)
   ns(206, "Datatype", true)
 
-  val mappingsFile: JsonConfig = WikidataExtractorConfigFactory.createConfig(this.getClass.getClassLoader.getResource("mappinglanguages.json")).asInstanceOf[JsonConfig]
+  val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("mappinglanguages.json"))
   
-  for ((lang,properties) <- mappingsFile.configMap) {
-    val nns : Namespace = ns(new Integer(properties.get("code").get), "Mapping " + lang, true)
+  for (lang <- mappingsFile.keys()) {
+    val properties = mappingsFile.getMap(lang)
+    val nns : Namespace = ns(new Integer(properties.get("code").get.asText), "Mapping " + lang, true)
     mappings(Language(lang)) = nns
     properties.get("chapter") match{
-      case Some(b) => if(java.lang.Boolean.parseBoolean(b)) chapters(Language(lang)) = nns
+      case Some(b) => if(java.lang.Boolean.parseBoolean(b.asText)) chapters(Language(lang)) = nns
       case None =>
     }
   }

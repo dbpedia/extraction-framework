@@ -4,10 +4,9 @@ import java.io.{InputStream, OutputStreamWriter}
 import java.net.URL
 import java.util.logging.{Level, Logger}
 
-import org.dbpedia.extraction.config.mappings.wikidata.{WikidataExtractorConfigFactory, JsonConfig}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
@@ -40,25 +39,24 @@ extends PageNodeExtractor
 
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
-  protected val abstractParams = WikidataExtractorConfigFactory.createConfig(this.getClass.getClassLoader.getResource("mediawikiconfig.json"))
-    .asInstanceOf[JsonConfig].configMap
-  protected val publicParames = abstractParams.get("publicParams").get
-  protected val protectedParams = abstractParams.get("protectedParams").get
+  protected val abstractParams = new JsonConfig(this.getClass.getClassLoader.getResource("mediawikiconfig.json"))
+  protected val publicParames = abstractParams.getMap("publicParams")
+  protected val protectedParams = abstractParams.getMap("protectedParams")
 
-  protected val xmlPath = protectedParams.get("apiNormalXmlPath").get.split(",").map(_.trim)
+  protected val xmlPath = protectedParams.get("apiNormalXmlPath").get.asText().split(",").map(_.trim)
 
-  protected def apiUrl: URL = new URL(publicParames.get("apiUri").get)
+  protected def apiUrl: URL = new URL(publicParames.get("apiUri").get.asText())
 
-  protected val maxRetries = Integer.parseInt(publicParames.get("maxRetries").get)
+  protected val maxRetries = publicParames.get("maxRetries").get.asInt
 
     /** timeout for connection to web server, milliseconds */
-  protected val connectMs = Integer.parseInt(publicParames.get("connectMs").get)
+  protected val connectMs = publicParames.get("connectMs").get.asInt
 
     /** timeout for result from web server, milliseconds */
-  protected val readMs = Integer.parseInt(publicParames.get("readMs").get)
+  protected val readMs = publicParames.get("readMs").get.asInt
 
     /** sleep between retries, milliseconds, multiplied by CPU load */
-  protected val sleepFactorMs = Integer.parseInt(publicParames.get("sleepFactorMs").get)
+  protected val sleepFactorMs = publicParames.get("sleepFactorMs").get.asInt
 
   protected val language = context.language.wikiCode
 
@@ -66,10 +64,10 @@ extends PageNodeExtractor
   protected val apiParametersFormat = "uselang="+language + protectedParams.get("apiNormalParametersFormat").get
 
     // lazy so testing does not need ontology
-  protected lazy val shortProperty = context.ontology.properties(protectedParams.get("shortProperty").get)
+  protected lazy val shortProperty = context.ontology.properties(protectedParams.get("shortProperty").get.asText())
 
     // lazy so testing does not need ontology
-  protected lazy val longProperty = context.ontology.properties(protectedParams.get("longProperty").get)
+  protected lazy val longProperty = context.ontology.properties(protectedParams.get("longProperty").get.asText())
 
   protected lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
   protected lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _

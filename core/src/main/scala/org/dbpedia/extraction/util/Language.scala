@@ -3,7 +3,6 @@ package org.dbpedia.extraction.util
 import java.util.logging.{Level, Logger}
 import java.util.{MissingResourceException, Locale}
 
-import org.dbpedia.extraction.config.mappings.wikidata.{JsonConfig, WikidataExtractorConfigFactory}
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 
 import scala.collection.mutable.HashMap
@@ -89,24 +88,29 @@ object Language extends (String => Language)
     val source = Source.fromURL(wikipediaLanguageUrl)(Codec.UTF8)
     val wikiLanguageCodes = try source.getLines.toList finally source.close
 
-    val specialLangs: JsonConfig = WikidataExtractorConfigFactory.createConfig(this.getClass.getClassLoader.getResource("addonlangs.json")).asInstanceOf[JsonConfig]
+    val specialLangs: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("addonlangs.json"))
 
-    for ((lang,properties) <- specialLangs.configMap) {
+    for (lang <- specialLangs.keys()) {
       {
+        val properties = specialLangs.getMap(lang)
         properties.get("dbpediaDomain") match{
           case Some(dom) => languages(lang) = new Language(
-            properties.get("wikiCode").get,
-            properties.get("name").get,
-            properties.get("isoCode").get,
-            properties.get("iso639_3").get,
-            dom,
-            properties.get("dbpediaUri").get,
-            new DBpediaNamespace(properties.get("resourceUri").get),
-            new DBpediaNamespace(properties.get("propertyUri").get),
-            properties.get("baseUri").get,
-            properties.get("apiUri").get
+            properties.get("wikiCode").get.asText,
+            properties.get("name").get.asText,
+            properties.get("isoCode").get.asText,
+            properties.get("iso639_3").get.asText,
+            dom.asText,
+            properties.get("dbpediaUri").get.asText(),
+            new DBpediaNamespace(properties.get("resourceUri").get.asText),
+            new DBpediaNamespace(properties.get("propertyUri").get.asText),
+            properties.get("baseUri").get.asText,
+            properties.get("apiUri").get.asText
           )
-          case None => languages(lang) = language(properties.get("wikiCode").get, properties.get("name").get, properties.get("isoCode").get, properties.get("iso639_3").get)
+          case None => languages(lang) = language(
+            properties.get("wikiCode").get.asText,
+            properties.get("name").get.asText,
+            properties.get("isoCode").get.asText,
+            properties.get("iso639_3").get.asText)
         }
       }
     }

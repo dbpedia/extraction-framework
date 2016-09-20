@@ -27,11 +27,11 @@ class AbstractLinkExtractor(
   //API parameters to geht HTML of first section
   override val apiParametersFormat = "uselang="+language + protectedParams.get("apiNifParametersFormat").get
 
-  override val xmlPath = protectedParams.get("apiNifXmlPath").get.split(",").map(_.trim)
+  override val xmlPath = protectedParams.get("apiNifXmlPath").get.asText.split(",").map(_.trim)
 
   override val datasets = Set(DBpediaDatasets.LinkedAbstracts)
 
-  protected lazy val linkedAbstracts = QuadBuilder(context.language, DBpediaDatasets.LinkedAbstracts, context.ontology.properties(protectedParams.get("nifProperty").get), null) _
+  protected lazy val linkedAbstracts = QuadBuilder(context.language, DBpediaDatasets.LinkedAbstracts, context.ontology.properties(protectedParams.get("nifProperty").get.asText), null) _
 
   override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
   {

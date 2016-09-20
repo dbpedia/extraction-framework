@@ -5,13 +5,10 @@ import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import scala.collection.Set
-import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer,HashSet}
 import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.Finder
-import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.util.TurtleUtils

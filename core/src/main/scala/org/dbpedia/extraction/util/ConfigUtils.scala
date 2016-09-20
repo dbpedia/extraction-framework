@@ -1,7 +1,11 @@
 package org.dbpedia.extraction.util
 
+import java.net.URL
 import java.util.Properties
-import java.io.{File,FileInputStream,InputStreamReader}
+import java.io.{InputStream, File, FileInputStream, InputStreamReader}
+import com.fasterxml.jackson.core.JsonFactory
+import com.fasterxml.jackson.databind.{JsonNode, ObjectReader, ObjectMapper}
+
 import scala.collection.immutable.SortedSet
 import org.dbpedia.extraction.util.RichString.wrapString
 import scala.io.Codec
@@ -15,13 +19,35 @@ import org.dbpedia.extraction.util.Language.wikiCodeOrdering
  */
 object ConfigUtils {
   
-  def loadConfig(file: String, charset: String): Properties = {
+  def loadConfig(file: String, charset: String = "UTF-8"): Properties = {
+    loadFromStream(new FileInputStream(file), charset)
+  }
+
+  def loadConfig(url: URL) = {
+
+    url match {
+      case selection => {
+        if(selection.getFile.endsWith(".json"))
+          loadJsonComfig(url)
+        else
+          loadFromStream(url.openStream())
+      }
+    }
+  }
+
+  def loadJsonComfig(url: URL): JsonNode ={
+    val objectMapper = new ObjectMapper(new JsonFactory())
+    val objectReader: ObjectReader = objectMapper.reader()
+    val inputStream = url.openStream()
+    val res = objectReader.readTree(inputStream)
+    inputStream.close()
+    res
+  }
+
+  private def loadFromStream(file: InputStream, charset: String = "UTF-8"): Properties ={
     val config = new Properties()
-    
-    val in = new FileInputStream(file)
-    try config.load(new InputStreamReader(in, charset))
-    finally in.close()
-    
+    try config.load(new InputStreamReader(file, charset))
+    finally file.close()
     config
   }
   
@@ -56,7 +82,7 @@ object ConfigUtils {
   // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
   def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
     
-    var keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
+    val keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
         
     var languages = SortedSet[Language]()
     var excludedLanguages = SortedSet[Language]()
