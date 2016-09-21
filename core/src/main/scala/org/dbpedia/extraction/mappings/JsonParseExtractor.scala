@@ -32,4 +32,5 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 
   }
 
+  override def postProcess(context: PageContext): Seq[Quad] = extractors.postProcess(context)
 }

@@ -9,6 +9,7 @@ import org.dbpedia.extraction.sources.WikiPage
  */
 class RootExtractor(val extractor: Extractor[WikiPage])
 {
+  val context = new PageContext()
     /**
      * Processes a wiki page and returns the extracted data.
      *
@@ -21,6 +22,8 @@ class RootExtractor(val extractor: Extractor[WikiPage])
       val uri = page.title.language.resourceUri.append(page.title.decodedWithNamespace)
 
       //Extract
-      extractor.extract(page, uri, new PageContext())
+      extractor.extract(page, uri, context)
     }
+
+    final def postProcess() : Seq[Quad] = extractor.postProcess(context)
 }

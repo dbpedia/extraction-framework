@@ -47,6 +47,8 @@ class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Na
     workers.start()
     
     for (page <- source) workers.process(page)
+
+    destination.write(extractor.postProcess())
     
     workers.stop()
     

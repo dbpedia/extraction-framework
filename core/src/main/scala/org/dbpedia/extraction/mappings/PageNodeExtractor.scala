@@ -9,3 +9,4 @@ import org.dbpedia.extraction.wikiparser._
  * Class[_ <: Extractor] can be checked at runtime, but Class[_ <: Mapping[PageNode]] can not.
  */
 trait PageNodeExtractor extends Extractor[PageNode]
+

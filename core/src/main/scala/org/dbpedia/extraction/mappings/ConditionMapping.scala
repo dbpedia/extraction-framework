@@ -32,6 +32,8 @@ extends Extractor[TemplateNode]
     else Seq.empty
   }
 
+  override def postProcess(context: PageContext): Seq[Quad] = mapping.postProcess(context)
+
   def matches(node : TemplateNode) : Boolean =
   {
     if (operator == "otherwise") true

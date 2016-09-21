@@ -11,6 +11,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
+import scala.collection.mutable.ArrayBuffer
 import scala.io.Source
 import scala.language.reflectiveCalls
 import scala.xml.{NodeSeq, XML}
@@ -36,6 +37,8 @@ class AbstractExtractor(
 )
 extends PageNodeExtractor
 {
+
+  private var failedPages = Map[WikiTitle, (PageNode, String)]()
 
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
@@ -78,6 +81,12 @@ extends PageNodeExtractor
 
     private val availableProcessors = osBean.getAvailableProcessors
 
+  /**
+    * @param pageNode The source node
+    * @param subjectUri The subject URI of the generated triples
+    * @param pageContext The page context which holds the state of the extraction.
+    * @return A graph holding the extracted data
+    */
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
@@ -91,30 +100,45 @@ extends PageNodeExtractor
         // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
-        var text = retrievePage(pageNode.title /*, abstractWikiText*/)
-
-        text = postProcess(pageNode.title, replacePatterns(text))
-
-        if (text.trim.isEmpty)
-          return Seq.empty
-
-        //Create a short version of the abstract
-        val shortText = short(text)
-
-        //Create statements
-        val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
-        val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
-
-        if (shortText.isEmpty)
-        {
-            Seq(quadLong)
+        val text = retrievePage(pageNode.title) match{
+          case Some(t) => t
+          case None => {
+            failedPages += (pageNode.title -> (pageNode, subjectUri))
+            null
+          }
         }
-        else
-        {
-            Seq(quadLong, quadShort)
-        }
+        createTriples(text, pageNode, subjectUri)
     }
 
+  /**
+    * extracted from former extract function to be reused in postProcess(
+    * @param str the extracted String value
+    * @param pageNode The source node
+    * @param subjectUri The subject URI of the generated triples
+    * @return A graph holding the extracted data
+    */
+    def createTriples(str: String, pageNode: PageNode, subjectUri: String): Seq[Quad] = {
+      if(str == null)
+        return Seq()
+      val text = postProcessText(pageNode.title, replacePatterns(str))
+
+      if (text.trim.isEmpty)
+        return Seq.empty
+
+      //Create a short version of the abstract
+      val shortText = short(text)
+
+      //Create statements
+      val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
+      val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
+
+      if (shortText.isEmpty) {
+        Seq(quadLong)
+      }
+      else {
+        Seq(quadLong, quadShort)
+      }
+    }
 
     /**
      * Retrieves a Wikipedia page.
@@ -122,7 +146,7 @@ extends PageNodeExtractor
      * @param pageTitle The encoded title of the page
      * @return The page as an Option
      */
-    def retrievePage(pageTitle : WikiTitle/*, pageWikiText : String*/) : String =
+    def retrievePage(pageTitle : WikiTitle, firstPass: Boolean = true) : Option[String] =
     {
       // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
       // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
@@ -131,9 +155,9 @@ extends PageNodeExtractor
       AbstractExtractor.CHARACTERS_TO_ESCAPE foreach { case (search, replacement) =>
         titleParam = titleParam.replace(search, replacement);
       }
-      
+
       // Fill parameters
-      val parameters = apiParametersFormat.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)
+      val parameters = apiParametersFormat.format(titleParam)
 
       for(counter <- 1 to maxRetries)
       {
@@ -143,7 +167,8 @@ extends PageNodeExtractor
           val conn = apiUrl.openConnection
           conn.setDoOutput(true)
           conn.setConnectTimeout(connectMs)
-          conn.setReadTimeout(readMs)
+          //doubling read time when rerunning failed pages
+          conn.setReadTimeout(readMs*( if(firstPass) 1 else 2 ))
 
           val writer = new OutputStreamWriter(conn.getOutputStream)
           writer.write(parameters)
@@ -151,12 +176,12 @@ extends PageNodeExtractor
           writer.close()
 
           // Read answer
-          return readInAbstract(conn.getInputStream)
+          return Option(readInAbstract(conn.getInputStream))
         }
         catch
         {
           case ex: Exception => {
-            
+
             // The web server may still be trying to render the page. If we send new requests
             // at once, there will be more and more tasks running in the web server and the
             // system eventually becomes overloaded. So we wait a moment. The higher the load,
@@ -164,7 +189,7 @@ extends PageNodeExtractor
 
             var loadFactor = Double.NaN
             var sleepMs = sleepFactorMs
- 
+
             // if the load average is not available, a negative value is returned
             val load = osBean.getSystemLoadAverage()
             if (load >= 0) {
@@ -190,8 +215,8 @@ extends PageNodeExtractor
         }
 
       }
-
-      throw new Exception("Could not retrieve abstract for page: " + pageTitle)
+      None
+      //throw new Exception("Could not retrieve abstract for page: " + pageTitle)
     }
 
     /**
@@ -259,7 +284,7 @@ extends PageNodeExtractor
       ret
     }
 
-    protected def postProcess(pageTitle: WikiTitle, text: String): String =
+    protected def postProcessText(pageTitle: WikiTitle, text: String): String =
     {
       val startsWithLowercase =
       if (text.isEmpty) {
@@ -351,6 +376,18 @@ extends PageNodeExtractor
       coder.code(text)
     }
 
+  /**
+    * Optional function called after all Wikipages were processed
+    * Here we rerun all failed pages
+    * @param context The page context which holds the state of the extraction.
+    * @return A graph holding extracted data added to the result graph of all Wikipages processed
+    */
+  override def postProcess(context: PageContext): Seq[Quad] = {
+    failedPages.map(x =>
+      createTriples(retrievePage(x._1, firstPass = false).get, x._2._1, x._2._2)
+    ).foldLeft(Seq[Quad]())((z,y) => z.++(y))
+    //TODO maybe include the creation of a temp dataset with all twice failed pages
+  }
 }
 
 object AbstractExtractor {

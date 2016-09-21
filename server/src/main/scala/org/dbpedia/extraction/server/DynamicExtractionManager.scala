@@ -5,7 +5,6 @@ import org.dbpedia.extraction.mappings.{Extractor, Redirects, Mappings, RootExtr
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
-import java.io.File
 import scala.actors.Actor
 import scala.collection.immutable.Map
 

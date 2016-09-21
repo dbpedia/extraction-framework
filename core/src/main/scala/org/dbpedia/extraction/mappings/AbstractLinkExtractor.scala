@@ -44,7 +44,7 @@ class AbstractLinkExtractor(
     //Retrieve page text
     var text = super.retrievePage(pageNode.title /*, abstractWikiText*/)
 
-    text = super.postProcess(pageNode.title, text)
+    text = super.postProcessText(pageNode.title, text)
 
     if (text.trim.isEmpty)
       return Seq.empty
