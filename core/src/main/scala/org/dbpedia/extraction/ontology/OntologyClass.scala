@@ -55,3 +55,7 @@ extends OntologyType(name, labels, comments)
 
     val isExternalClass = ! uri.startsWith(DBpediaNamespace.ONTOLOGY.namespace)
 }
+
+object OntologyClass{
+  val owlThing = new OntologyClass("owl:Thing", Map(), Map(), List(), Set(), Set())
+}

@@ -1,7 +1,11 @@
 package org.dbpedia.extraction.util
 
+import java.io.Closeable
 import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.atomic.AtomicInteger
 import Workers._
+
+import scala.Console._
 
 trait Worker[T <: AnyRef] {
   def init(): Unit
@@ -105,6 +109,49 @@ object Workers {
    * By default, use one thread per logical processor.
    */
   private[util] val defaultThreads = Runtime.getRuntime().availableProcessors()
+
+
+  def work[T <: AnyRef](args : Seq[T])(proc : T => Unit) : Unit = {
+    val worker = SimpleWorkers(proc)
+    Workers.work[T](worker, args, null)
+  }
+
+  def work[T <: AnyRef](worker: Workers[T], args : Seq[T], showProgress: String = null) : Unit = {
+    val percent = new AtomicInteger()
+    try {
+      worker.start()
+      val startStamp = System.currentTimeMillis
+      for(arg <- args.indices)
+      {
+        worker.process(args(arg))
+        if(showProgress != null) {
+          val o = percent.get().toFloat
+          val n = percent.incrementAndGet().toFloat
+          if ((o * 100f / args.length.toFloat).toInt < (n * 100f / args.length.toFloat).toInt)
+            err.println(StringUtils.formatCurrentTimestamp + ": " + showProgress + " at: " + (n * 100f / args.length.toFloat).toInt + "% after " + (System.currentTimeMillis - startStamp) / 1000 + " seconds.")
+        }
+      }
+    }
+    finally {
+      worker.close()
+      if(showProgress != null)
+        err.println(StringUtils.formatCurrentTimestamp + ": " + showProgress + " is finished. Processed " + percent.get() + " instances of " + (if(args.nonEmpty) args.head.getClass.getName else "nothing"))
+    }
+  }
+
+  def workInParallel[T <: AnyRef](workers: Traversable[Workers[T]], args : Seq[T]) : Unit = {
+    try {
+      for(worker <- workers) {
+        worker.start()
+        for (arg <- args)
+          worker.process(arg)
+      }
+    }
+    finally {
+      for(worker <- workers)
+        worker.close()
+    }
+  }
 }
   
 /**
@@ -126,7 +173,7 @@ object Workers {
  * @param queueLength max length of work queue
  * @param factory called during initialization of this class to create a worker for each thread
  */
-class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]) {
+class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]) extends Closeable {
   
   private val queue = new ArrayBlockingQueue[AnyRef](queueLength)
   
@@ -155,7 +202,7 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
   final def start(): Unit = {
     for (worker <- workers) worker.start()
   }
-  
+
   /**
    * Add a value to the queue. A thread will take the value and let its worker process it.
    * If queue is full and all threads are busy, wait until a thread becomes available.
@@ -174,5 +221,6 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
     // wait for the threads to find the sentinels and finish
     for (worker <- workers) worker.join()
   }
-    
+
+  override def close(): Unit = stop()
 }

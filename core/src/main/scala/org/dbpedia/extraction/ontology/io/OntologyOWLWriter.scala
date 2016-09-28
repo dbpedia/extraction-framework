@@ -113,7 +113,7 @@ class OntologyOWLWriter(val version: String, val writeSpecificProperties: Boolea
           if (!ontologyClass.baseClasses.exists(_.uri.startsWith("http://dbpedia.org/")) &&
               !ontologyClass.baseClasses.exists(_.uri == "http://www.w3.org/2002/07/owl#Thing")
           ) {
-            List(new OntologyClass("owl:Thing", Map(), Map(), List(), Set(), Set()))
+            List(OntologyClass.owlThing)
           }
           else {
             List()

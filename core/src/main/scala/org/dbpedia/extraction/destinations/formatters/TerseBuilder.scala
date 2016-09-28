@@ -1,15 +1,10 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
-import java.net.URI
 import UriPolicy._
 
 /**
  * Helps to build one triple/quad line in Turtle/Turtle-Quads/N-Triples/N-Quads format.
- * 
- * Objects of this class are not re-usable - create a new object for each triple.
  * 
  * @param policies Mapping from URI positions (as defined in UriPolicy) to URI policy functions.
  * Must have five (UriPolicy.POSITIONS) elements. If null, URIs will not be modified.
@@ -18,10 +13,10 @@ class TerseBuilder(quads: Boolean, turtle: Boolean, policies: Array[Policy] = nu
 extends UriTripleBuilder(policies) {
   
   // Scala's StringBuilder doesn't have appendCodePoint
-  private val sb = new java.lang.StringBuilder
+  private var sb = new java.lang.StringBuilder()
   
-  override def start(context: String): Unit = { 
-    /* nothing to do */ 
+  override def start(context: String): Unit = {
+    sb = new java.lang.StringBuilder()
   }
   
   override def uri(str: String, pos: Int): Unit = {

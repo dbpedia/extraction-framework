@@ -97,7 +97,7 @@ object TypeConsistencyCheck {
       // create destination for this language
       val finder = new Finder[File](baseDir, lang, "wiki")
       val date = finder.dates().last
-      val destination = createDestination(finder, date, formats)
+      val destination= createDestination(finder, date, formats)
 
       val resourceTypes = new scala.collection.mutable.HashMap[String, OntologyClass]()
 

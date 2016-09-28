@@ -26,10 +26,14 @@ object QuadReader {
       readQuads(finder.language.wikiCode, file)(proc)
   }
 
-  def readSortedQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, auto: Boolean = false)(proc: Traversable[Quad] => Unit): Unit = {
+//  def readSortedQuads[T <% FileLike[T]](finder: DateFinder[T], pattern: String, auto: Boolean = false)(proc: Traversable[Quad] => Unit): Unit = {
+//    readSortedQuads(finder.language.wikiCode, finder.byName(pattern, auto))(proc)
+//  }
+
+  def readSortedQuads[T <% FileLike[T]](tag: String, file: FileLike[_])(proc: Traversable[Quad] => Unit): Unit = {
     val lastSubj = ""
     var seq = List[Quad]()
-    readQuads(finder, input, auto) { quad =>
+    readQuads(tag, file) { quad =>
       if(lastSubj != quad.subject)
       {
         proc(seq)
@@ -76,5 +80,4 @@ object QuadReader {
     val micros = (System.nanoTime - start) / 1000
     err.println(tag+": read "+lines+" lines in "+prettyMillis(micros / 1000)+" ("+(micros.toFloat / lines)+" micros per line)")
   }
-  
 }
