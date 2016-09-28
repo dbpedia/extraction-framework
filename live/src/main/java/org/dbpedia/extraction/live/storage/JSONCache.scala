@@ -208,7 +208,7 @@ object JSONCache {
                       val objType: String = obj.getOrElse("type", "")
                       val objLang: String = obj.getOrElse("lang", defaultLanguage)
                       val objDatatype: String = if (objType.equals("uri"))  null
-                                                else obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
+                                                else obj.getOrElse("datatype", "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
 
 
                       quads += new Quad(if (objLang.isEmpty) defaultLanguage else objLang , "", subject, predicate, objValue, "", objDatatype)
