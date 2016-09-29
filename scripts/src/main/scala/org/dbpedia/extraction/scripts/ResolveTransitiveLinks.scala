@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{TransitiveClosure, IOUtils}
+import org.dbpedia.extraction.util.{DateFinder, TransitiveClosure, IOUtils}
 import scala.collection.mutable.LinkedHashMap
 import java.io.File
 import scala.Console.err

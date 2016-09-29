@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{RichFile, Finder, IOUtils}
+import org.dbpedia.extraction.util.{DateFinder, RichFile, Finder, IOUtils}
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.wikiparser.Namespace

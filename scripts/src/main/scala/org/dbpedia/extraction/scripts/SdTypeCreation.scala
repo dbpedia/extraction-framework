@@ -2,7 +2,8 @@ package org.dbpedia.extraction.scripts
 
 import java.io.{Writer, File}
 
-import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty, Ontology}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.scripts.QuadMapper.QuadMapperFormatter
@@ -17,7 +18,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.util._
 
-import scala.collection.mutable.{HashMap, ArrayBuffer, ListBuffer}
+import scala.collection.mutable.{ListBuffer}
 
 /**
   * Created by Chile on 9/1/2016.
@@ -121,19 +122,6 @@ object SdTypeCreation {
     }
   }
 
-  private def createDestination(finder: DateFinder[File], formats: scala.collection.Map[String, Formatter], datasets: Dataset*) : Destination = {
-    val destination = new ArrayBuffer[Destination]()
-    for ((suffix, format) <- formats) {
-      val datasetDestinations = new HashMap[String, Destination]()
-      for (dataset <- datasets) {
-        val file = finder.byName(dataset.name.replace('_', '-') + suffix)
-        datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
-      }
-      destination += new DatasetDestination(datasetDestinations)
-    }
-    new CompositeDestination(destination.toSeq: _*)
-  }
-
   private def writer(file: File): () => Writer = {
     () => IOUtils.writer(file)
   }
@@ -141,16 +129,6 @@ object SdTypeCreation {
   def main(args: Array[String]): Unit = {
 
     require(args != null && args.length == 1, "One arguments required, extraction config file")
-/*    require(args != null && args.length >= 5,
-      "need at least seven args: " +
-        /*0*/ "base dir, " +
-        /*1*/ "sdTypes output file name, " +
-        /*2*/ "sdInvalid output file name, " +
-        /*3*/ "file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-        /*4*/ "sdType threshold as float (e.g. 0.4f)" +
-        /*5*/ "dbpedia ontology file path" +
-        /*6*/ "fitting domain/range multiplicator for further weighting exactly fitting domains and ranges of properties as float (e.g. 3.3f)" +
-        /*7*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")*/
 
     val config = ConfigUtils.loadConfig(args(0), "UTF-8")
 
@@ -162,19 +140,16 @@ object SdTypeCreation {
     require("\\.[a-zA-Z0-9]{2,3}\\.(gz|bz2)".r.replaceFirstIn(suffix, "") == "", "provide a valid serialization extension starting with a dot (e.g. .ttl.bz2)")
 
     //require(!args(1).contains("."), "Please specify a valid sdTypes file name without extensions (suffixes)!")
-    val dataset = ConfigUtils.getValue(config, "output", required=true)(x => x)
-    val sdTypes = new File(dataset + suffix)
-    sdTypes.createNewFile()
-
-/*    require(!args(2).contains("."), "Please specify a valid sdInvalid file name without extensions (suffixes)!")
-    val sdInvalid = new File(baseDir + args(2).trim + suffix)
-    sdInvalid.createNewFile()*/
+    val dataset = DBpediaDatasets.SDInstanceTypes
 
     val sdScoreThreshold =  ConfigUtils.getValue(config, "threshold", required=true)(x => x.toFloat)
     require(sdScoreThreshold >= 0.01f && sdScoreThreshold <= 0.99f, "Please specify a valid sdTypes score in the range of [0.01, 0.99].")
 
     val owlThingPenalty =  ConfigUtils.getValue(config, "owl-thing-penalty", required=true)(x => x.toFloat)
     require(owlThingPenalty >= 0.01f && owlThingPenalty <= 0.99f, "Please specify a valid owlThingPenalty score in the range of [0.01, 0.99].")
+
+    val inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",',', required=false)(x => x)
+    val outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",',', required=false)(x => x)
 
     val langConfString = ConfigUtils.getString(config, "languages", true)
     val language = ConfigUtils.parseLanguages(baseDir, langConfString.split(","))(0) //TODO
@@ -187,8 +162,8 @@ object SdTypeCreation {
       new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
     }
 
-    val formatter = new QuadMapperFormatter()
-    val destination = new WriterDestination(writer(finder.byName(sdTypes.name)), formatter)
+    val formats = parseFormats(config, "uri-policy", "format").map( x=> x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
+    val destination = DestinationUtils.createDestination(finder, Seq(dataset), formats)
 
    def getTypeScores(resource: String): List[(String, Float, Int, Float)] ={
       val ret = new ConcurrentHashMap[String, ListBuffer[(String, Float, Float, Int)]]().asScala
@@ -428,8 +403,8 @@ object SdTypeCreation {
           //newType.head._3 > 2 && //TODO
           //compare to score threshold
           destination.write(List(new Quad(
-            language = language.wikiCode,
-            dataset = dataset.trim,
+            language = language,
+            dataset = dataset,
             subject = resource,
             predicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
             value = newType.head._1,
@@ -441,28 +416,31 @@ object SdTypeCreation {
 
     val mappingWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
 
-      err.println("Starting to write " + dataset.trim + suffix)
+      err.println("Starting to write " + dataset.name + suffix)
       destination.open()
       val allResources = (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith("http://de.dbpedia.org/resource/")).distinct
       Workers.work[String](quadMappingWorker, allResources, "New type statements written")
       destination.close()
     }
 
+    //The actual main method:
+
+    //read all input files and process the content
     Workers.workInParallel[Language](Array(typesWorker, objectPropWorker, workerDisamb,literalWorker), Seq(language))
 
-    predStatisticsOut.remove("http://dbpedia.org/ontology/wikiPageOutDegree")
-    predStatisticsOut.remove("http://dbpedia.org/ontology/wikiPageID")
-    predStatisticsOut.remove("http://dbpedia.org/ontology/individualisedGnd")
-    predStatisticsOut.remove("http://dbpedia.org/ontology/viafId")
-    predStatisticsOut.remove("http://dbpedia.org/ontology/wikiPageRevisionID")
-    predStatisticsOut.remove("http://www.w3.org/2002/07/owl#sameAs")
-    predStatisticsOut.remove("http://dbpedia.org/ontology/lccn")
-    predStatisticsIn.remove("http://www.w3.org/2002/07/owl#sameAs")
-    resourceCount = (stat_resource_predicate_tf_in.keys.toList ::: stat_resource_predicate_tf_out.keys.toList).distinct.length
+    //delete properties exempted by the user
+    outPropertiesExceptions.map(x => predStatisticsOut.remove(x))
+    inPropertiesExceptions.map(x => predStatisticsIn.remove(x))
 
+    //count unique resources
+    resourceCount = (stat_resource_predicate_tf_in.keys.toList ::: stat_resource_predicate_tf_out.keys.toList).distinct.length
+    //get all predicates
     val allPreds = (predStatisticsIn.keys.toList ::: predStatisticsOut.keys.toList).distinct
 
+    //run the intermediate statistical calculations
     Workers.work[String](probabilityWorker, allPreds, "Type statistics calculation")
+
+    //do the type calculations and write to files(s)
     Workers.work[Language](mappingWorker, Seq(language))
   }
 }

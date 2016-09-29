@@ -78,6 +78,20 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>SdTypeCreator</id>
+                            <mainClass>org.dbpedia.extraction.scripts.SdTypeCreation</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx8G</jvmArg>
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <!--
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                                -->
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>CreateIriSameAsUriLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.CreateIriSameAsUriLinks</mainClass>
                             <jvmArgs>

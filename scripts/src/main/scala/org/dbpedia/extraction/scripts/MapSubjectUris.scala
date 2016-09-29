@@ -5,8 +5,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
-import org.dbpedia.extraction.util.SimpleWorkers
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{DateFinder, SimpleWorkers, Language}
 
 /**
  * Maps old subject URIs in triple files to new subject URIs:

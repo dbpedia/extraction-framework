@@ -1,13 +1,9 @@
-package org.dbpedia.extraction.scripts
-
-import org.dbpedia.extraction.util.{Finder,FileLike,Language}
-
-import scala.collection.immutable.LinearSeq
+package org.dbpedia.extraction.util
 
 
 /**
  */
-class DateFinder[T](finder: Finder[T]) {
+class DateFinder[T](val finder: Finder[T]){
   
   def this(baseDir: T, language: Language)(implicit wrap: T => FileLike[T]) = this(new Finder[T](baseDir, language, "wiki"))
   

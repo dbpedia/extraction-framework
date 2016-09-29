@@ -4,9 +4,8 @@ import java.lang.StringBuilder
 import java.net.{URLEncoder, URL, URI}
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
-import org.dbpedia.extraction.util.FileLike
+import org.dbpedia.extraction.util.{DateFinder, FileLike, IOUtils}
 import scala.Console.err
-import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.destinations.WriterDestination
@@ -153,8 +152,10 @@ object QuadMapper {
     err.println(tag+": mapped "+mapCount+" quads")
   }
 
-  class QuadMapperFormatter(quad: Boolean = true, turtle: Boolean = true, policies: Array[Policy]= null) extends Formatter {
-    private val builder = new TerseBuilder(quad, turtle, policies)
+  class QuadMapperFormatter(quad: Boolean = true, turtle: Boolean = true, policies: Array[Policy]= null) extends TerseFormatter(quad, turtle, policies) {
+    def this(formatter: TerseFormatter){
+      this(formatter.quads, formatter.turtle, formatter.policies)
+    }
     private var contextAdditions = Map[String, String]()
 
     def addContextAddition(paramName: String, paramValue: String): Unit ={
@@ -169,29 +170,14 @@ object QuadMapper {
       contextAdditions += ( param -> paramValue)
     }
 
-    override def header: String = "# started " + formatCurrentTimestamp + "\\n"
-
-    override def footer: String = "# completed " + formatCurrentTimestamp + "\\n"
-
     override def render(quad: Quad): String = {
-      builder.start(quad.context)
-      builder.subjectUri(quad.subject)
-      builder.predicateUri(quad.predicate)
-      if (quad.datatype == null)
-        builder.objectUri(quad.value)
-      else if (quad.datatype == "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
-        builder.plainLiteral(quad.value, quad.language)
-      else
-        builder.typedLiteral(quad.value, quad.datatype)
-
       var context = quad.context
       for(add <- contextAdditions)
         if(context.indexOf("#") > 0)
           context += "&" + add._1 + "=" + add._2
         else
           context += "#" + add._1 + "=" + add._2
-      builder.end(context)
-      builder.result()
+      super.render(quad.copy(context=context))
     }
   }
 }

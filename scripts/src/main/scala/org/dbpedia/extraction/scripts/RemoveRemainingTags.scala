@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils._
+import org.dbpedia.extraction.util.DateFinder
 
 import scala.Console._
 import scala.util.matching.Regex

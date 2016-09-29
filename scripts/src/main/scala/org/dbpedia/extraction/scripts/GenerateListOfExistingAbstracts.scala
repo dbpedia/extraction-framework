@@ -3,7 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io.{FileWriter, BufferedWriter, File}
 
 import org.dbpedia.extraction.util.ConfigUtils._
-import org.dbpedia.extraction.util.{SimpleWorkers, Language}
+import org.dbpedia.extraction.util.{DateFinder, SimpleWorkers, Language}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.Console._
