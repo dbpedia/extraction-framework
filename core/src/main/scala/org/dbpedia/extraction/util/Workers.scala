@@ -111,12 +111,12 @@ object Workers {
   private[util] val defaultThreads = Runtime.getRuntime().availableProcessors()
 
 
-  def work[T <: AnyRef](args : Seq[T])(proc : T => Unit) : Unit = {
+  def work[T <: AnyRef](args : List[T])(proc : T => Unit) : Unit = {
     val worker = SimpleWorkers(proc)
     Workers.work[T](worker, args, null)
   }
 
-  def work[T <: AnyRef](worker: Workers[T], args : Seq[T], showProgress: String = null) : Unit = {
+  def work[T <: AnyRef](worker: Workers[T], args : List[T], showProgress: String = null) : Unit = {
     val percent = new AtomicInteger()
     try {
       worker.start()
