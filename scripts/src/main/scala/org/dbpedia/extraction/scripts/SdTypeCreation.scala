@@ -429,21 +429,21 @@ object SdTypeCreation {
     val allPreds = (predStatisticsIn.keys.toList ::: predStatisticsOut.keys.toList).distinct
 
     //run the intermediate statistical calculations
-    Workers.work[String](probabilityWorker, allPreds, "Type statistics calculation")
+    Workers.work[String](probabilityWorker, allPreds, language.wikiCode + ": Type statistics calculation")
 
     //do the type calculations and write to files(s)
-    err.println("Starting to write " + dataset.name + suffix)
     val allResources = returnOnlyUntyped match{
       case true => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith("http://de.dbpedia.org/resource/")).diff[String](type_count.values.flatMap(x => x).toSeq).distinct
       case false => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith("http://de.dbpedia.org/resource/")).distinct
     }
-    Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, "New type statements written")
+    err.println(language.wikiCode + ": Starting to write " + dataset.name + suffix)
+    Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculated")
 
     //write results to file
     destination.open()
     Workers.work[List[Quad]](SimpleWorkers(1.5, 2.0){ quads: List[Quad] =>
       destination.write(quads)
-    }, resultMap.values.toList, "New type statements written")
+    }, resultMap.values.toList, language.wikiCode + ": New type statements written")
     destination.close()
   }
 }
