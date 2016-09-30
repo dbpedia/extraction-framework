@@ -433,10 +433,10 @@ object SdTypeCreation {
 
     //do the type calculations and write to files(s)
     val allResources = returnOnlyUntyped match{
-      case true => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith("http://de.dbpedia.org/resource/")).diff[String](type_count.values.flatMap(x => x).toSeq).distinct
-      case false => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith("http://de.dbpedia.org/resource/")).distinct
+      case true => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith(language.baseUri)).diff[String](type_count.values.flatMap(x => x).toSeq).distinct
+      case false => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith(language.baseUri)).distinct
     }
-    err.println(language.wikiCode + ": Starting to write " + dataset.name + suffix)
+    err.println(language.wikiCode + ": Starting to write " + dataset.name + suffix + "")
     Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculated")
 
     //write results to file
