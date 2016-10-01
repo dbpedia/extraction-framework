@@ -34,7 +34,7 @@ object RecodeUris {
     require(outSuffix.nonEmpty, "no output file suffix")
     
     // Use all remaining args as comma or whitespace separated paths
-    var inputs = args.drop(2).flatMap(_.split("[,\\s]")).map(_.trim).filter(_.nonEmpty)
+    val inputs = args.drop(2).flatMap(_.split("[,\\s]")).map(_.trim).filter(_.nonEmpty)
     require(inputs.nonEmpty, "no input file names")
     require(inputs.forall(_.endsWith(inSuffix)), "input file names must end with input file suffix")
     

@@ -50,8 +50,7 @@ object SdTypeCreation {
   stat_predicate_weight_apriori.put(PredicateDirection.In, new ConcurrentHashMap[String, Float]().asScala)
   stat_predicate_weight_apriori.put(PredicateDirection.Out, new ConcurrentHashMap[String, Float]().asScala)
   private var propertyMap = Map[String, OntologyProperty]()
-  private val resultMap = new ConcurrentHashMap[String, List[Quad]]().asScala
-
+  private var resultMap = new ConcurrentHashMap[String, List[Quad]]().asScala
   private var suffix:String = null
 
   val dataset = DBpediaDatasets.SDInstanceTypes
@@ -371,8 +370,8 @@ object SdTypeCreation {
           datatype = null)
         read = returnAllValid
       }
-      resultMap.put(resource,zw.toList)
     }
+
   }
 
   def main(args: Array[String]): Unit = {
@@ -434,10 +433,17 @@ object SdTypeCreation {
     //do the type calculations and write to files(s)
     val baseuri = if(language == Language.English) "http://dbpedia.org/resource/" else language.dbpediaUri
     val allResources = returnOnlyUntyped match{
-      case true => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith(baseuri)).diff[String](type_count.values.flatMap(x => x).toSeq).distinct
-      case false => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList).filter(x => x.startsWith(baseuri)).distinct
+      case true => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList)
+        .filter(x => x.startsWith(baseuri))
+        .diff[String](type_count.values.flatMap(x => x).toSeq)
+        .diff[String](disambiguations.keys.toSeq)
+        .distinct
+      case false => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList)
+        .filter(x => x.startsWith(baseuri))
+        .distinct
     }
-    Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculated")
+    resultMap = new ConcurrentHashMap[String, List[Quad]]((allResources.size/0.75f+1).toInt).asScala  //setting initial size for performance reasons
+    Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculation")
 
     //write results to file
     err.println(language.wikiCode + ": Starting to write " + dataset.name + suffix + " with " + resultMap.values.size + " instances.")
