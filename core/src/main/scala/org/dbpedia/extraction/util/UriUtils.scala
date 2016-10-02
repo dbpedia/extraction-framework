@@ -50,7 +50,7 @@ object UriUtils
         //TODO this needs some further testing
         if (DBPEDIA_URI.matcher(uri).matches()) {
 
-            // unescape all \u escaped characters
+            // unescape all \\u escaped characters
             val input = StringEscapeUtils.unescapeJava(uri)
 
             // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
