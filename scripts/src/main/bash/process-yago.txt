@@ -141,7 +141,7 @@ cp yagoTaxonomy.ttl.17 yago_taxonomy.ttl
 
 === yagoTransitiveType ===
 
-awk '{print $2" "$1}' yagoTransitiveType.ttl.9b > yagoTransitiveType.ttl.10
+awk '{print $2" "$1}' yagoTransitiveType.ttl.9 > yagoTransitiveType.ttl.10
 env LC_ALL=C sort yagoTransitiveType.ttl.10 > yagoTransitiveType.ttl.11
 env LC_ALL=C join yagoDBpediaClasses.ttl.11 yagoTransitiveType.ttl.11 > yagoTransitiveType.ttl.12
 # retain only resources starting with "<" (excludes "rdfs:label" etc.), exclude lower case names (e.g. "diedIn")
@@ -160,9 +160,11 @@ cp yagoDBpediaInstances.ttl.3 yago_links.ttl
 == convert from IRIs to URIs ==
 
 cd git/extraction-framework/scripts
-../run RecodeUris .ttl .nt  /data2/dbpedia-release/yago/39/yago_*.ttl
+../run RecodeUris .ttl .nt  /home/extractor/geonames/*/geonames_*.ttl
 
 == pack as GZip and BZip2 ==
 
 cd /data2/dbpedia-release/yago/39
 for i in * ; do echo $i.gz ; pigz -c <$i >$i.gz ; echo $i.bz2 ; pbzip2 -c <$i >$i.bz2 ; done
+only bz2:
+for i in * ; do echo $i.bz2 ; pbzip2 -c <$i >$i.bz2 ; done

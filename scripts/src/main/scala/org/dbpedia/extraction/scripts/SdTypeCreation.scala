@@ -371,7 +371,7 @@ object SdTypeCreation {
         read = returnAllValid
       }
     }
-
+    resultMap.put(resources.head, zw.toList)
   }
 
   def main(args: Array[String]): Unit = {
@@ -442,6 +442,7 @@ object SdTypeCreation {
         .filter(x => x.startsWith(baseuri))
         .distinct
     }
+    err.println(language.wikiCode + ": Starting to calculate new types for " + allResources.size + " instances.")
     resultMap = new ConcurrentHashMap[String, List[Quad]]((allResources.size/0.75f+1).toInt).asScala  //setting initial size for performance reasons
     Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculation")
 
