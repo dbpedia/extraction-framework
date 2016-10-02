@@ -139,7 +139,7 @@ object MapObjectUris {
                 yield quad.copy(
                   subject=UriUtils.uriToIri(quad.subject),
                   value = UriUtils.uriToIri(uri), // change object URI
-                  context = if (quad.context == null) UriUtils.uriToIri(quad.context) else UriUtils.uriToIri(quad.context) + "&objectMappedFrom=" + UriUtils.uriToIri(quad.value)) // add change provenance
+                  context = if (quad.context == null) quad.context else UriUtils.uriToIri(quad.context) + "&objectMappedFrom=" + UriUtils.uriToIri(quad.value)) // add change provenance
             case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
         }

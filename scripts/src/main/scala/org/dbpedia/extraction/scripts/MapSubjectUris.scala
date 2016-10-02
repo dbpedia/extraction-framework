@@ -100,7 +100,7 @@ object MapSubjectUris {
               yield quad.copy(
                 subject = UriUtils.uriToIri(uri),
                 value = UriUtils.uriToIri(quad.value),
-                context = UriUtils.uriToIri(quad.context) + "&subjectMappedFrom=" + UriUtils.uriToIri(quad.subject)) // change subject URI
+                context = if (quad.context == null) quad.context else UriUtils.uriToIri(quad.context) + "&subjectMappedFrom=" + UriUtils.uriToIri(quad.subject)) // change subject URI
             case None => List(quad) // just copy quad without mapping for subject URI. TODO: make this configurable
           }
         }
