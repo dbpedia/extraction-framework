@@ -1,19 +1,15 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
-import org.apache.commons.lang3.StringEscapeUtils
 
 import scala.Console.err
-import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
-import org.dbpedia.extraction.util.{Language,Finder}
+import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.IOUtils.{readLines,writer}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.util.text.uri.UriDecoder

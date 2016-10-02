@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.scripts
 
+import org.apache.commons.lang3.StringEscapeUtils
 import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import java.io.File
@@ -70,19 +71,19 @@ object RecodeUris {
     
     if (DBPEDIA_URI.matcher(uri).matches()) {
       
-      var input = uri
+      var input = StringEscapeUtils.unescapeJava(uri)
       
       // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
       // "#%<>?[\]^`{|}
       
       // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
-      if (uri.contains("\\")) throw new IllegalArgumentException("URI contains backslash: ["+uri+"]")
+      if (input.contains("\\")) throw new IllegalArgumentException("URI contains backslash: ["+uri+"]")
       
       // we can't handle queries, we re-encode question marks
-      if (uri.contains("?")) throw new IllegalArgumentException("URI contains query: ["+uri+"]")
+      if (input.contains("?")) throw new IllegalArgumentException("URI contains query: ["+uri+"]")
       
       // we can't handle fragments, we re-encode hash signs
-      if (uri.contains("#")) {
+      if (input.contains("#")) {
         err.println("URI contains fragment: ["+uri+"]")
         input = uri.substring(0, uri.indexOf('#'))
       }

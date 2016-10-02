@@ -177,6 +177,18 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>MapSubjectUris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.MapSubjectUris</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx10G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                                <jvmArg>-XX:+PrintGC</jvmArg>
+                                <jvmArg>-XX:+PrintGCTimeStamps</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>DecodeHtmlText</id>
                             <mainClass>org.dbpedia.extraction.scripts.DecodeHtmlText</mainClass>
                             <jvmArgs>

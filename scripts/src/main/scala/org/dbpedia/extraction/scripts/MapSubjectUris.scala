@@ -5,7 +5,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
-import org.dbpedia.extraction.util.{DateFinder, SimpleWorkers, Language}
+import org.dbpedia.extraction.util._
 
 /**
  * Maps old subject URIs in triple files to new subject URIs:
@@ -76,7 +76,6 @@ object MapSubjectUris {
       // Redirects can have only one target, so we don't really need a MultiMap here.
       // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
       val map = new HashMap[String, Set[String]] with MultiMap[String, String]
-
       for (mappping <- mappings) {
         var count = 0
         QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
@@ -97,7 +96,11 @@ object MapSubjectUris {
       for (input <- inputs; suffix <- suffixes) {
         QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
           map.get(quad.subject) match {
-            case Some(uris) => for (uri <- uris) yield quad.copy(subject = uri, context = quad.context + "&subjectMappedFrom="+quad.subject) // change subject URI
+            case Some(uris) => for (uri <- uris)
+              yield quad.copy(
+                subject = UriUtils.uriToIri(uri),
+                value = UriUtils.uriToIri(quad.value),
+                context = UriUtils.uriToIri(quad.context) + "&subjectMappedFrom=" + UriUtils.uriToIri(quad.subject)) // change subject URI
             case None => List(quad) // just copy quad without mapping for subject URI. TODO: make this configurable
           }
         }

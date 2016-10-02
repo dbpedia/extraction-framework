@@ -55,22 +55,42 @@ object WikiUtil
      */
     def wikiEncode(name : String): String =
     {
-      // TODO: all this replacing is inefficient, one loop over the string would be nicer.
-      
       // replace spaces by underscores.
       // Note: MediaWiki apparently replaces only spaces by underscores, not other whitespace.
-      var encoded = name.replace(' ', '_');
+      //var encoded = name.replace(' ', '_');
       
       // normalize duplicate underscores
-      encoded = encoded.replaceAll("_+", "_");
+      //encoded = encoded.replaceAll("_+", "_");
       
       // trim underscores from start 
-      encoded = encoded.replaceAll("^_", "");
-      
-      // trim underscores from end 
-      encoded = encoded.replaceAll("_$", "");
+      //encoded = encoded.replaceAll("^_+", "");
 
-      StringUtils.escape(encoded, replacements)
+        val sb = new StringBuilder()
+        val chars = name.toCharArray
+
+        var pos = 0
+        var l = '_'
+
+        while (pos < chars.length)
+        {
+            val c = chars(pos)
+            if(c == '_' || c == ' ')
+            {
+                if(l != '_')
+                    sb.append('_')
+                l = '_'
+            }
+            else
+            {
+                sb.append(c)
+                l = c
+            }
+            pos += 1
+        }
+
+        // trim underscores from end since i cant do this easily in the while
+        // escape all relevant characters
+        StringUtils.escape(sb.toString.replaceAll("_$", ""), replacements)
     }
     
         
