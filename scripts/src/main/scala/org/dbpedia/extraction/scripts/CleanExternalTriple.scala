@@ -52,7 +52,7 @@ object CleanExternalDataset {
         val obj = if (quad.datatype == null)
           UriUtils.uriToIri(quad.value)
         else if(quad.language != null || quad.datatype == "http://www.w3.org/2001/XMLSchema#string")
-          StringEscapeUtils.unescapeJava(quad.value) //revert numeric escape sequences
+          StringEscapeUtils.unescapeJava(quad.value)        //revert numeric escape sequences
         else
           quad.value
         changed = changed || obj != quad.value

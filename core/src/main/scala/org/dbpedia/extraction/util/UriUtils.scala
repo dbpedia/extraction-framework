@@ -48,7 +48,7 @@ object UriUtils
     // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
     if (input.contains("\\"))
       throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
-    new URI(StringUtils.escape(input, WikiUtil.iriReplacements))
+    new URI(StringUtils.escape(input, StringUtils.replacements('%', "\"<>[\\]^`{|}")))
   }
 
   /**
