@@ -18,32 +18,34 @@ object RecodeUris {
     
     require(args != null && args.length >= 3, 
       "need at least three args: "+
-      /*0*/ "input file suffix, "+
-      /*1*/ "output file suffix, "+
-      /*2*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup')" +
-      /*3*/ "recode to IRIs (default = false)"
+      /*0*/ "base directory, "+
+      /*1*/ "input file suffix, "+
+      /*2*/ "output file suffix, "+
+      /*3*/ "recode to IRIs (default = false)" +
+      /*4*/ "comma- or space-separated names of input files (e.g. 'bbcwildlife,bookmashup')"
     )
-    
+
+    val baseDir = new File(args(0))
+    require(baseDir.canRead, "specify valid baseDir")
+
     // Suffix of input/output files, for example ".nt.gz"
-    
-    val inSuffix = args(0)
+    val inSuffix = args(1).trim
     require(inSuffix.nonEmpty, "no input file suffix")
     
-    val outSuffix = args(1)
+    val outSuffix = args(2).trim
     require(outSuffix.nonEmpty, "no output file suffix")
+
+    val recodeToIris = try{ args(3).trim.toBoolean } catch{ case _: Throwable => false}
     
     // Use all remaining args as comma or whitespace separated paths
-    val inputs = args(2).split(",").map(_.trim).filter(_.nonEmpty)
+    val inputs = args.drop(4).flatMap(_.split("[,\\s]")).map(f => new File(baseDir, f.trim + inSuffix))
     require(inputs.nonEmpty, "no input file names")
-    require(inputs.forall(_.endsWith(inSuffix)), "input file names must end with input file suffix")
-
-    val recodeToIris = try{ args.last.trim.toBoolean } catch{ case _ => false}
+    require(inputs.forall(_.canRead), "Make sure that every input file exists and is readable. Provide only file names without path and suffix (extension).")
     
     for (input <- inputs) {
       var changeCount = 0
-      val inFile = new File(input)
-      val outFile = new File(input.substring(0, input.length - inSuffix.length) + outSuffix)
-      QuadMapper.mapQuads(input, inFile, outFile, required = true) { quad =>
+      val outFile = new File(baseDir, input.name.substring(0, input.name.length - inSuffix.length) + outSuffix)
+      QuadMapper.mapQuads(input.name, input, outFile, required = true) { quad =>
         var changed = false
         val subj = fixUri(quad.subject)
         changed = changed || subj != quad.subject
