@@ -95,7 +95,10 @@ object WikiUtil
 
         // replacing trailing underscore
         // escape all relevant characters
-        StringUtils.escape(if (l == '_') ret.substring(0, ret.length - 1) else ret, replacements)
+        if(ret.length == 0)
+            ret
+        else
+            StringUtils.escape(if (l == '_') ret.substring(0, ret.length - 1) else ret, replacements)
     }
     
         

@@ -59,7 +59,7 @@ object RecodeUris {
           changeCount += 1
         List(quad.copy(subject = subj, predicate = pred, value = obj, context = cont))
       }
-      err.println(input+": changed "+changeCount+" quads")
+      err.println(input.name + inSuffix + ": changed "+changeCount+" quads")
     }, inputs)
 
     def fixUri(uri: String): String =
