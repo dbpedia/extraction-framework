@@ -1,11 +1,9 @@
 package org.dbpedia.extraction.util
 
 import java.net._
-import java.util.regex.Pattern
 
 import org.apache.commons.lang3.StringEscapeUtils
 import org.dbpedia.extraction.util.WikiUtil._
-import org.dbpedia.util.text.uri.UriDecoder
 
 object UriUtils
 {
@@ -41,35 +39,50 @@ object UriUtils
 
     private val DBPEDIA_URI = "^http://([a-z-]+.)?dbpedia.org/resource/.*$".r.pattern
 
+  def createUri(uri: String): URI ={
+    // unescape all \\u escaped characters
+    val input = StringEscapeUtils.unescapeJava(uri)
+
+    // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
+    // "#%<>?[\]^`{|}
+
+    // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
+    if (input.contains("\\")) throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
+
+    new URI(input)
+  }
+
   /**
     * decodes (ASCII) uris and transforms them into iris with the DBpedia naming rules
     * @param uri
     * @return
     */
     def uriToIri(uri: String): String = {
-        //TODO this needs some further testing
-        if (DBPEDIA_URI.matcher(uri).matches()) {
+      uriToIri(createUri(uri))
+    }
 
-            // unescape all \\u escaped characters
-            val input = StringEscapeUtils.unescapeJava(uri)
+  /**
+    * see uriToIri(uri: String)
+    * @param uri
+    * @return
+    */
+  def uriToIri(uri: URI): String = {
 
-            // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
-            // "#%<>?[\]^`{|}
+    if(uri.getScheme == "http" && uri.getPath.startsWith("/resource/") && uri.getHost.replaceAll("([a-z-]+.)?dbpedia.org", "").length == 0)
+    {
+      // re-encode URI according to our own rules
+    uri.getScheme + "://" +
+        uri.getAuthority +
+        encodeAndClean(uri.getPath)  +
+        (if(uri.getQuery != null) "?" + encodeAndClean(uri.getQuery) else "")+
+        (if(uri.getFragment != null) "#" + encodeAndClean(uri.getFragment) else "")
 
-            // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
-            if (input.contains("\\")) throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
+    }
+    else
+      uri.toString
+  }
 
-            // decoding the whole URI is ugly, but should work for us.
-            var decoded = UriDecoder.decode(input)
-
-            decoded = cleanSpace(decoded)
-            decoded = decoded.replace('\n', ' ')
-            decoded = decoded.replace('\t', ' ')
-
-            // re-encode URI according to our own rules
-            wikiEncode(decoded)
-        }
-        else
-            uri
+    private def encodeAndClean(uriPart: String): String={
+      wikiEncode(cleanSpace(uriPart).replace('\n', ' ').replace('\t', ' '))
     }
 }
