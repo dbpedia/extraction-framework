@@ -51,6 +51,7 @@ object SdTypeCreation {
   stat_predicate_weight_apriori.put(PredicateDirection.Out, new ConcurrentHashMap[String, Float]().asScala)
   private var propertyMap = Map[String, OntologyProperty]()
   private var resultMap = new ConcurrentHashMap[String, List[Quad]]().asScala
+  private val contextMap = new ConcurrentHashMap[String, String]().asScala
   private var suffix:String = null
 
   val dataset = DBpediaDatasets.SDInstanceTypes
@@ -266,6 +267,10 @@ object SdTypeCreation {
 
   val typesWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
     QuadReader.readQuads(finder, "instance-types" + suffix, auto = true) { quad =>
+      contextMap.get(quad.subject) match{
+        case Some(l) =>
+        case None => contextMap.put(quad.subject, quad.context)
+      }
       if(quad.value.trim.startsWith("http://dbpedia.org/ontology/")) // TODO check if this is relevant
         type_count.get(quad.value) match {
           case Some(list) => type_count.put(quad.value, list += quad.subject)
@@ -319,6 +324,10 @@ object SdTypeCreation {
         case Some(c) => predStatisticsOut.put(quad.predicate, c +1)
         case None => predStatisticsOut.put(quad.predicate, 1)
       }
+      contextMap.get(quad.subject) match{
+        case Some(l) =>
+        case None => contextMap.put(quad.subject, quad.context)
+      }
     }
   }
 
@@ -354,6 +363,7 @@ object SdTypeCreation {
 
   val resultCalculator = SimpleWorkers(1.5, 5.0) { resources: List[String] =>
     val zw = new ListBuffer[Quad]()
+    val idPos = resources.head.lastIndexOf("/")+1
     for(resource <- resources) {
       val newType = getTypeScores(resource)
       val current = newType.head
@@ -366,7 +376,11 @@ object SdTypeCreation {
           subject = resource,
           predicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
           value = current._1,
-          context = resource + "#typeCalculatedBy=sdTypeAlgorithm&sdTypeScore=" + (if (current._2 > 1f) 1f else current._2) + "&sdTypeBasedOn=" + current._3,
+          context = (contextMap.get(resource) match{
+              case Some (c) => if(c.contains('#')) c.substring(0, c.indexOf('#')) else c
+              case None => resource + "?nowikientry=linktarget"}) +
+            "#typeCalculatedBy=sdTypeAlgorithm&sdTypeScore=" + (if (current._2 > 1f) 1f else current._2) +
+            "&sdTypeBasedOn=" + current._3,
           datatype = null)
         read = returnAllValid
       }
