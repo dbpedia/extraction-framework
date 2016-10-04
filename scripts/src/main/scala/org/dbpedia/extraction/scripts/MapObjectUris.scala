@@ -1,14 +1,11 @@
 package org.dbpedia.extraction.scripts
 
-import org.apache.commons.lang3.StringEscapeUtils
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.WikiUtil._
-import org.dbpedia.util.text.uri.UriDecoder
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
-import org.dbpedia.extraction.util.{UriUtils, DateFinder, SimpleWorkers, Language}
+import org.dbpedia.extraction.util.{DateFinder, SimpleWorkers, Language}
 
 /**
  * Maps old object URIs in triple files to new object URIs:
@@ -71,13 +68,13 @@ object MapObjectUris {
 
     require(args != null && args.length >= 7,
       "need at least seven args: " +
-        /*0*/ "base dir, " +
-        /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'transitive-redirects'), " +
-        /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-        /*3*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), " +
-        /*4*/ "output dataset name extension (e.g. '-redirected'), " +
-        /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
-        /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
+      /*0*/ "base dir, " +
+      /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'transitive-redirects'), "+
+      /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
+      /*3*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), "+
+      /*4*/ "output dataset name extension (e.g. '-redirected'), "+
+      /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
+      /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
 
     val baseDir = new File(args(0))
 
@@ -116,7 +113,7 @@ object MapObjectUris {
       for (mappping <- mappings) {
         var count = 0
         QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
-          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode + ": expected object uri, found object literal: " + quad)
+          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
           // line, which means that the character array for the whole line is kept in memory, which
@@ -127,7 +124,7 @@ object MapObjectUris {
           map.addBinding(quad.subject, quad.value)
           count += 1
         }
-        err.println(language.wikiCode + ": found " + count + " mappings")
+        err.println(language.wikiCode+": found "+count+" mappings")
       }
 
       for (input <- inputs; suffix <- suffixes) {
@@ -137,9 +134,8 @@ object MapObjectUris {
             case Some(uris) =>
               for (uri <- uris)
                 yield quad.copy(
-                  subject=UriUtils.uriToIri(quad.subject),
-                  value = UriUtils.uriToIri(uri), // change object URI
-                  context = if (quad.context == null) quad.context else UriUtils.uriToIri(quad.context) + "&objectMappedFrom=" + UriUtils.uriToIri(quad.value)) // add change provenance
+                  value = uri, // change object URI
+                  context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom="+quad.value) // add change provenance
             case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
         }

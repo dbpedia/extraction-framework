@@ -65,18 +65,21 @@ object WikiUtil
       // trim underscores from start 
       //encoded = encoded.replaceAll("^_+", "");
 
+        // trim underscores from end
+        //encoded = encoded.replaceAll("_+$", "");
+
         val sb = new StringBuilder()
         val chars = name.toCharArray
 
         var pos = 0
-        var l = '_'
+        var l = '_'                         // since l is a _ any prefix underscores/whitespce will be ignored (replaceAll("^_+"))
 
         while (pos < chars.length)
         {
             val c = chars(pos)
-            if(c == '_' || c == ' ')
+            if(c == '_' || c == ' ')        // replace(' ', '_')
             {
-                if(l != '_')
+                if(l != '_')                // replaceAll("_+", "_")
                     sb.append('_')
                 l = '_'
             }
@@ -88,9 +91,11 @@ object WikiUtil
             pos += 1
         }
 
-        // trim underscores from end since i cant do this easily in the while
+        val ret = sb.toString
+
+        // replacing trailing underscore
         // escape all relevant characters
-        StringUtils.escape(sb.toString.replaceAll("_$", ""), replacements)
+        StringUtils.escape(if (l == '_') ret.substring(0, ret.length - 1) else ret, replacements)
     }
     
         

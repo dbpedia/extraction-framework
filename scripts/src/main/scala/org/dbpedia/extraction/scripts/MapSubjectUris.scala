@@ -5,7 +5,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
-import org.dbpedia.extraction.util._
+import org.dbpedia.extraction.util.{DateFinder, SimpleWorkers, Language}
 
 /**
  * Maps old subject URIs in triple files to new subject URIs:
@@ -98,9 +98,8 @@ object MapSubjectUris {
           map.get(quad.subject) match {
             case Some(uris) => for (uri <- uris)
               yield quad.copy(
-                subject = UriUtils.uriToIri(uri),
-                value = UriUtils.uriToIri(quad.value),
-                context = if (quad.context == null) quad.context else UriUtils.uriToIri(quad.context) + "&subjectMappedFrom=" + UriUtils.uriToIri(quad.subject)) // change subject URI
+                subject = uri,
+                context = if (quad.context == null) quad.context else quad.context + "&subjectMappedFrom=" + quad.subject) // change subject URI
             case None => List(quad) // just copy quad without mapping for subject URI. TODO: make this configurable
           }
         }
