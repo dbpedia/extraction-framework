@@ -58,7 +58,14 @@ object UriUtils
     * @return
     */
     def uriToIri(uri: String): String = {
-      uriToIri(createUri(uri))
+      val u = if(uri.contains("dbpedia.org/resource"))
+      {
+        val fragment = uri.indexOf('#')
+        new URI(uri.substring(0, fragment) + "#" + encodeAndClean(uri.substring(fragment+1)))
+      }
+      else
+        createUri(uri)
+      u.toString
     }
 
   /**

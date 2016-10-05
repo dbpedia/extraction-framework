@@ -2,6 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
+import scala.collection.mutable
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
@@ -117,7 +118,7 @@ object MapObjectUris {
 
     for (language <- languages) {
       val finder = new DateFinder(baseDir, language)
-      val map = new HashMap[String, Set[String]] with MultiMap[String, String] with scala.collection.mutable.SynchronizedMap[String, Set[String]]
+      val map = new mutable.HashMap[String, mutable.Set[String]] with mutable.MultiMap[String, String] with mutable.SynchronizedMap[String, Set[String]]
 
       Workers.work(SimpleWorkers(1.5, 1.0) { mapping: String =>
         var count = 0
@@ -137,20 +138,24 @@ object MapObjectUris {
       }, mappings.toList)
 
       Workers.work(SimpleWorkers(1.5, 1.0) { input: (String, String) =>
+        var count = 0
         val inputFile = if(isExternal) new File(secondary, input._1 + input._2) else finder.byName(input._1 + input._2, auto = true)
         val outputFile = if(isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true)
         val tag = if(isExternal) input._1 else language.wikiCode
         QuadMapper.mapQuads(tag, inputFile, outputFile, required = true) { quad =>
           if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
           else map.get(quad.value) match {
-            case Some(uris) =>
+            case Some(uris) => {
+              count = count +1
               for (uri <- uris)
                 yield quad.copy(
                   value = uri, // change object URI
                   context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom=" + quad.value) // add change provenance
+            }
             case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
         }
+        err.println(input._1 + ": changed " + count + " quads.")
       }, inputs.flatMap(x => suffixes.map(y => (x, y))).toList)
     }
   }
