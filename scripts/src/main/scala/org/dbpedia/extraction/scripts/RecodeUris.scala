@@ -46,18 +46,26 @@ object RecodeUris {
       var changeCount = 0
       val outFile = new File(baseDir, input.name.substring(0, input.name.length - inSuffix.length) + outSuffix)
       QuadMapper.mapQuads(input.name, input, outFile, required = true) { quad =>
-        var changed = false
-        val subj = fixUri(quad.subject)
-        changed = changed || subj != quad.subject
-        val pred = fixUri(quad.predicate)
-        changed = changed || pred != quad.predicate
-        val obj = if (quad.datatype == null) fixUri(quad.value) else quad.value
-        changed = changed || obj != quad.value
-        val cont = if(quad.context != null) fixUri(quad.context) else quad.context
-        changed = changed || cont != quad.context
-        if (changed)
-          changeCount += 1
-        List(quad.copy(subject = subj, predicate = pred, value = obj, context = cont))
+        try {
+          var changed = false
+          val subj = fixUri(quad.subject)
+          changed = changed || subj != quad.subject
+          val pred = fixUri(quad.predicate)
+          changed = changed || pred != quad.predicate
+          val obj = if (quad.datatype == null) fixUri(quad.value) else quad.value
+          changed = changed || obj != quad.value
+          val cont = if (quad.context != null) fixUri(quad.context) else quad.context
+          changed = changed || cont != quad.context
+          if (changed)
+            changeCount += 1
+          List(quad.copy(subject = subj, predicate = pred, value = obj, context = cont))
+        }
+        catch{
+          case e : Throwable => {
+            err.println(input.name + inSuffix + ": a quad has produced an error: " + e.getMessage)
+            List()
+          }
+        }
       }
       err.println(input.name + inSuffix + ": changed "+changeCount+" quads")
     }, inputs)

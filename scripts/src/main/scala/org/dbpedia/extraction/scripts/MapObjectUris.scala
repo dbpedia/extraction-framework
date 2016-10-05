@@ -5,7 +5,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import scala.collection.mutable.{Set,HashMap,MultiMap}
 import java.io.File
 import scala.Console.err
-import org.dbpedia.extraction.util.{DateFinder, SimpleWorkers, Language}
+import org.dbpedia.extraction.util.{Language, DateFinder, Workers, SimpleWorkers}
 
 /**
  * Maps old object URIs in triple files to new object URIs:
@@ -57,6 +57,8 @@ import org.dbpedia.extraction.util.{DateFinder, SimpleWorkers, Language}
  * (specific-mappingbased-properties is not necessary, it has only literal values)
  * 
  * TODO: merge with CanonicalizeUris?
+  *
+  * Chile: added option (languages:@external) to use this script on datasets outside of language folders (like link sets) see param 6 and 7
  */
 object MapObjectUris {
 
@@ -68,13 +70,14 @@ object MapObjectUris {
 
     require(args != null && args.length >= 7,
       "need at least seven args: " +
-      /*0*/ "base dir, " +
-      /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'transitive-redirects'), "+
-      /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-      /*3*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), "+
-      /*4*/ "output dataset name extension (e.g. '-redirected'), "+
-      /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
-      /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
+        /*0*/ "base dir of the extraction" +
+        /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'transitive-redirects'), " +
+        /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
+        /*3*/ "comma-separated names of input datasets (e.g. 'infobox-properties,mappingbased-properties'), " +
+        /*4*/ "output dataset name extension (e.g. '-redirected'), " +
+        /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
+        /*6*/ "languages or article count ranges (e.g. 'en,fr' or '10000-') or choose '@external' to map external datasets from a secondary directory (see last argument)" +
+        /*7*/ "optional secondary directory (containing the input datasets to map if language option is '@external')")
 
     val baseDir = new File(args(0))
 
@@ -98,24 +101,30 @@ object MapObjectUris {
     require(suffixes.nonEmpty, "no input/output file suffixes")
 
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = parseLanguages(baseDir, args.drop(6))
+    var isExternal = false
+    val languages = if(args(6).trim == "@external") {
+      isExternal = true
+      Array(Language.English)
+    }
+    else
+      parseLanguages(baseDir, split(args(6)))
     require(languages.nonEmpty, "no languages")
 
-    // We really want to saturate CPUs and disk, so we use 50% more workers than CPUs
-    val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
+    val secondary = if(isExternal) new File(args(7)) else null
 
+    // Redirects can have only one target, so we don't really need a MultiMap here.
+    // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
+
+    for (language <- languages) {
       val finder = new DateFinder(baseDir, language)
+      val map = new HashMap[String, Set[String]] with MultiMap[String, String] with scala.collection.mutable.SynchronizedMap[String, Set[String]]
 
-      // Redirects can have only one target, so we don't really need a MultiMap here.
-      // But CanonicalizeUris also uses a MultiMap... TODO: Make this configurable.
-      val map = new HashMap[String, Set[String]] with MultiMap[String, String]
-
-      for (mappping <- mappings) {
+      Workers.work(SimpleWorkers(1.5, 1.0) { mapping: String =>
         var count = 0
-        QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
-          if (quad.datatype != null) throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
+        QuadReader.readQuads(finder, mapping + mappingSuffix, auto = true) { quad =>
+          if (quad.datatype != null) throw new IllegalArgumentException(mapping + ": expected object uri, found object literal: " + quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
-          // be enough. Also, the fields of the Quad are derived by calling substring() on the whole 
+          // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
           // line, which means that the character array for the whole line is kept in memory, which
           // basically means that the whole redirects file is kept in memory. We should
           // - only store the resource title in the map
@@ -124,28 +133,25 @@ object MapObjectUris {
           map.addBinding(quad.subject, quad.value)
           count += 1
         }
-        err.println(language.wikiCode+": found "+count+" mappings")
-      }
+        err.println(mapping + ": found " + count + " mappings")
+      }, mappings.toList)
 
-      for (input <- inputs; suffix <- suffixes) {
-        QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
+      Workers.work(SimpleWorkers(1.5, 1.0) { input: (String, String) =>
+        val inputFile = if(isExternal) new File(secondary, input._1 + input._2) else finder.byName(input._1 + input._2, auto = true)
+        val outputFile = if(isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true)
+        val tag = if(isExternal) input._1 else language.wikiCode
+        QuadMapper.mapQuads(tag, inputFile, outputFile, required = true) { quad =>
           if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
           else map.get(quad.value) match {
             case Some(uris) =>
               for (uri <- uris)
                 yield quad.copy(
                   value = uri, // change object URI
-                  context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom="+quad.value) // add change provenance
+                  context = if (quad.context == null) quad.context else quad.context + "&objectMappedFrom=" + quad.value) // add change provenance
             case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
         }
-      }
-
+      }, inputs.flatMap(x => suffixes.map(y => (x, y))).toList)
     }
-
-    workers.start()
-    for (language <- languages) workers.process(language)
-    workers.stop()
   }
-
 }
