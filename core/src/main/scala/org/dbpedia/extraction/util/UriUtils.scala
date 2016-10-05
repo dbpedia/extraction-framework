@@ -61,7 +61,10 @@ object UriUtils
       val u = if(uri.contains("dbpedia.org/resource"))
       {
         val fragment = uri.indexOf('#')
-        new URI(uri.substring(0, fragment) + "#" + encodeAndClean(uri.substring(fragment+1)))
+        if(fragment >= 0)
+          new URI(uri.substring(0, fragment) + "#" + encodeAndClean(uri.substring(fragment+1)))
+        else
+          new URI(uri)
       }
       else
         createUri(uri)
