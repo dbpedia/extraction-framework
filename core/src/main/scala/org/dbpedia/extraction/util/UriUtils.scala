@@ -58,17 +58,19 @@ object UriUtils
     * @return
     */
     def uriToIri(uri: String): String = {
-      val u = if(uri.contains("dbpedia.org/resource"))
+      val input = StringEscapeUtils.unescapeJava(uri)
+      val resource = input.indexOf("dbpedia.org/resource/") + 21
+      val u = if(resource > 20)
       {
-        val fragment = uri.indexOf('#')
+        val fragment = input.indexOf('#')
         if(fragment >= 0)
-          new URI(uri.substring(0, fragment) + "#" + encodeAndClean(uri.substring(fragment+1)))
+          new URI(input.substring(0, resource) +  encodeAndClean(input.substring(resource, fragment)) + "#" + encodeAndClean(input.substring(fragment+1)))
         else
-          new URI(uri)
+          new URI(input.substring(0, resource) +  encodeAndClean(input.substring(resource)))
       }
       else
-        createUri(uri)
-      u.toString
+        createUri(input)
+      uriToIri(u)
     }
 
   /**
@@ -93,7 +95,11 @@ object UriUtils
   }
 
   private def encodeAndClean(uriPart: String): String={
-      wikiEncode(cleanSpace(UriDecoder.decode(uriPart).replace('\n', ' ').replace('\t', ' ')))
+    var decoded = uriPart
+    while(UriDecoder.decode(decoded) != decoded)
+      decoded = UriDecoder.decode(decoded)
+
+      wikiEncode(cleanSpace(decoded.replace('\n', ' ').replace('\t', ' ')))
     }
 
   def encodeUriComponent(comp: String): String={
