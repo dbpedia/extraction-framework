@@ -44,28 +44,34 @@ object CleanExternalDataset {
       var changeCount = 0
       val outFile = new File(baseDir, input.name.substring(0, input.name.length - inSuffix.length) + outSuffix)
       QuadMapper.mapQuads(input.name, input, outFile, required = true) { quad =>
-        var changed = false
-        val subj = UriUtils.uriToIri(quad.subject)
-        changed = changed || subj != quad.subject
-        val pred = UriUtils.uriToIri(quad.predicate)
-        changed = changed || pred != quad.predicate
-        val obj = if (quad.datatype == null)
-          UriUtils.uriToIri(quad.value)
-        else if(quad.language != null || quad.datatype == "http://www.w3.org/2001/XMLSchema#string")
-          StringEscapeUtils.unescapeJava(quad.value)        //revert numeric escape sequences
-        else
-          quad.value
-        changed = changed || obj != quad.value
-        val cont = if(quad.context != null)
-          UriUtils.uriToIri(quad.context)
-        else
-          quad.context
-        changed = changed || cont != quad.context
-        if (changed)
-          changeCount += 1
-        List(quad.copy(subject = subj, predicate = pred, value = obj, context = cont))
+        try {
+          var changed = false
+          val subj = UriUtils.uriToIri(quad.subject)
+          changed = changed || subj != quad.subject
+          val pred = UriUtils.uriToIri(quad.predicate)
+          changed = changed || pred != quad.predicate
+          val obj = if (quad.datatype == null)
+            UriUtils.uriToIri(quad.value)
+          else if (quad.language != null || quad.datatype == "http://www.w3.org/2001/XMLSchema#string")
+            StringEscapeUtils.unescapeJava(quad.value) //revert numeric escape sequences
+          else
+            quad.value
+          changed = changed || obj != quad.value
+          val cont = if (quad.context != null)
+            UriUtils.uriToIri(quad.context)
+          else
+            quad.context
+          changed = changed || cont != quad.context
+          if (changed)
+            changeCount += 1
+          List(quad.copy(subject = subj, predicate = pred, value = obj, context = cont))
+        }
+        catch{
+          case e: Throwable => err.println(input.name + ": error at: " + quad.toString())
+            List()
+        }
       }
-      err.println(input.name + inSuffix + ": cleaned "+changeCount+" quads")
+      err.println(input.name + ": cleaned "+changeCount+" quads")
     }, inputs)
   }
 }

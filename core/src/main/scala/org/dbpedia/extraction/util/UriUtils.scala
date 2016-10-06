@@ -58,7 +58,8 @@ object UriUtils
     * @return
     */
     def uriToIri(uri: String): String = {
-      val input = StringEscapeUtils.unescapeJava(uri)
+      val sb = new java.lang.StringBuilder()
+      val input = StringUtils.replaceChars(sb, StringEscapeUtils.unescapeJava(uri), " \u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "_").toString
       val resource = input.indexOf("dbpedia.org/resource/") + 21
       val u = if(resource > 20)
       {

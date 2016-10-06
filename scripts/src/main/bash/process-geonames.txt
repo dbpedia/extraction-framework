@@ -59,13 +59,5 @@ mv en/geonames_links_en.ttl geonames_links_en.ttl
 sed 's%http://en\.dbpedia\.org%http://dbpedia\.org%g' geonames_links_en.ttl > en/geonames_links_en.ttl
 rm geonames_links_en.ttl
 
-# generate .nt from .ttl files
-cd ~/git/extraction-framework/scripts
-../run RecodeUris .ttl .nt /data/dbpedia-release/geonames/*/*.ttl
-
-# zip it
-for i in */*.{nt,ttl} ; do echo $i.gz ; pigz -c <$i >$i.gz ; echo $i.bz2 ; pbzip2 -c <$i >$i.bz2 ; done
-
-# rename and copy to main folders
-for i in */*.{gz,bz2} ; do suffix=${i#*.} ; wiki=${i%%/*}wiki ; path=$(echo /data/dbpedia-release/data/full/$wiki/2013*) ; date=${path##*/} ; cp $i $path/$wiki-$date-geonames-links.$suffix ; done
+#follow process-yago.txt file from == pack as GZip and BZip2 == onwards
 
