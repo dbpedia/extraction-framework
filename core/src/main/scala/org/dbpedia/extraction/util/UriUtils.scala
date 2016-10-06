@@ -60,14 +60,34 @@ object UriUtils
     def uriToIri(uri: String): String = {
       val sb = new java.lang.StringBuilder()
       val input = StringUtils.replaceChars(sb, StringEscapeUtils.unescapeJava(uri), " \u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "_").toString
-      val resource = input.indexOf("dbpedia.org/resource/") + 21
-      val u = if(resource > 20)
+      val respos = input.indexOf("dbpedia.org/resource/") + 21
+      var pos = 0
+      val u = if(respos > 20)
       {
+        val query = input.indexOf('?')
         val fragment = input.indexOf('#')
-        if(fragment >= 0)
-          new URI(input.substring(0, resource) +  encodeAndClean(input.substring(resource, fragment)) + "#" + encodeAndClean(input.substring(fragment+1)))
+        val prelude = input.substring(0, respos)
+        val resource = encodeAndClean(
+          if(query > respos)
+          input.substring(respos, query)
+        else if (fragment > respos)
+          input.substring(respos, fragment)
         else
-          new URI(input.substring(0, resource) +  encodeAndClean(input.substring(resource)))
+          input.substring(respos)
+        )
+
+        val qu = if(query > respos){
+          if(fragment > query)
+            "?" + encodeAndClean(input.substring(query+1, fragment))
+          else
+            "?" + encodeAndClean(input.substring(query+1))
+        } else ""
+
+        val frag = if(fragment > respos)
+            "#" + encodeAndClean(input.substring(fragment+1))
+          else ""
+
+        new URI(prelude + resource + qu + frag)
       }
       else
         createUri(input)
@@ -88,8 +108,8 @@ object UriUtils
       uri.getScheme + "://" +
         uri.getAuthority +
         uri.getPath  +
-        (if(uri.getQuery != null) "?" + encodeAndClean(uri.getQuery) else "")+
-        (if(uri.getFragment != null) "#" + encodeAndClean(uri.getFragment) else "")
+        (if(uri.getQuery != null) "?" + uri.getQuery else "")+
+        (if(uri.getFragment != null) "#" + uri.getFragment else "")
     }
     else
       uri.toString
@@ -100,8 +120,9 @@ object UriUtils
     while(UriDecoder.decode(decoded) != decoded)
       decoded = UriDecoder.decode(decoded)
 
-      wikiEncode(cleanSpace(decoded.replace('\n', ' ').replace('\t', ' ')))
-    }
+    decoded = decoded.replaceAll("(<|>)", "_")
+    StringUtils.escape(decoded, StringUtils.replacements('%', "\"#%?[\\]^`{|}"))
+  }
 
   def encodeUriComponent(comp: String): String={
     URLEncoder.encode(comp, "UTF-8")
