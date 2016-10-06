@@ -52,17 +52,14 @@ object UriUtils
   }
 
   /**
-    * decodes (ASCII) uris and transforms them into iris with the DBpedia naming rules
-    *
-    * @param uri
-    * @return
+
     */
-    def uriToIri(uri: String): String = {
+    def toDbpediaUri(uri: String): URI = {
       val sb = new java.lang.StringBuilder()
       val input = StringUtils.replaceChars(sb, StringEscapeUtils.unescapeJava(uri), " \u00A0\u200E\u200F\u2028\u202A\u202B\u202C\u3000", "_").toString
       val respos = input.indexOf("dbpedia.org/resource/") + 21
       var pos = 0
-      val u = if(respos > 20)
+      if(respos > 20)
       {
         val query = input.indexOf('?')
         val fragment = input.indexOf('#')
@@ -91,8 +88,18 @@ object UriUtils
       }
       else
         createUri(input)
-      uriToIri(u)
     }
+
+  /**
+    * decodes (ASCII) uris and transforms them into iris with the DBpedia naming rules
+    *
+    * @param uri
+    * @return
+    */
+  def uriToIri(uri: String): String = {
+    val urii = toDbpediaUri(uri)
+    uriToIri(urii)
+  }
 
   /**
     * see uriToIri(uri: String)
@@ -101,27 +108,27 @@ object UriUtils
     * @return
     */
   def uriToIri(uri: URI): String = {
-
-    if(uri.getScheme == "http" && uri.getPath.startsWith("/resource/") && uri.getHost.replaceAll("([a-z-]+.)?dbpedia.org", "").length == 0)
-    {
       // re-encode URI according to our own rules
       uri.getScheme + "://" +
         uri.getAuthority +
-        uri.getPath  +
-        (if(uri.getQuery != null) "?" + uri.getQuery else "")+
-        (if(uri.getFragment != null) "#" + uri.getFragment else "")
-    }
-    else
-      uri.toString
+        decode(uri.getPath)  +
+        (if(uri.getQuery != null) "?" + decode(uri.getQuery) else "")+
+        (if(uri.getFragment != null) "#" + decode(uri.getFragment) else "")
   }
 
   private def encodeAndClean(uriPart: String): String={
     var decoded = uriPart
     while(UriDecoder.decode(decoded) != decoded)
       decoded = UriDecoder.decode(decoded)
+    StringUtils.escape(decoded, StringUtils.replacements('%', "<>\"#%?[\\]^`{|}"))
+  }
 
-    decoded = decoded.replaceAll("(<|>)", "_")
-    StringUtils.escape(decoded, StringUtils.replacements('%', "\"#%?[\\]^`{|}"))
+  private def decode(uriPart: String): String={
+    var decoded = uriPart
+    while(UriDecoder.decode(decoded) != decoded)
+      decoded = UriDecoder.decode(decoded)
+
+    decoded.replaceAll("[<>#%\\?\\[\\\\\\]]", "_")
   }
 
   def encodeUriComponent(comp: String): String={
