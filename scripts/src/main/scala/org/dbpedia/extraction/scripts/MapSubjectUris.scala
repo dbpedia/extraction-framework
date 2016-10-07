@@ -106,14 +106,13 @@ object MapSubjectUris {
         val outputFile = if (isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true)
         val tag = if (isExternal) input._1 else language.wikiCode
         QuadMapper.mapQuads(tag, inputFile, outputFile, required = true) { quad =>
-          if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
-          else map.get(quad.value) match {
+          map.get(quad.subject) match {
             case Some(uris) => {
               count = count + 1
               for (uri <- uris)
                 yield quad.copy(
                   subject = uri, // change object URI
-                  context = if (quad.context == null) quad.context else quad.context + "&subjectMappedFrom=" + quad.value) // add change provenance
+                  context = if (quad.context == null) quad.context else quad.context + "&subjectMappedFrom=" + quad.subject) // add change provenance
             }
             case None => List(quad) // just copy quad without mapping for object URI. TODO: make this configurable
           }
