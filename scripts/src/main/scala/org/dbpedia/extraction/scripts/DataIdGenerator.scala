@@ -18,7 +18,7 @@ import org.openrdf.rio.RDFFormat
 
 import scala.Console._
 import scala.collection.JavaConverters._
-import scala.io.{BufferedSource, Source}
+import scala.io.Source
 import scala.reflect.runtime.currentMirror
 import scala.reflect.runtime.universe._
 
@@ -52,7 +52,7 @@ object DataIdGenerator {
     )
 
     val source = scala.io.Source.fromFile(args(0))
-    val jsonString = source.mkString.replaceAll("#.*", "")
+    val jsonString = source.mkString.replaceAll("#[^\"]+", "")
     source.close()
 
     val configMap = JSON.parse(jsonString)
@@ -130,22 +130,10 @@ object DataIdGenerator {
       .map(d => new Dataset(d.name.replace(d.name, d.name + "-en-uris-unredirected").replace("_", "-"), d.description + " Normalized resources matching English DBpedia. This dataset has Wikipedia redirects resolved.")).sortBy(x => x.name)
 
     def addPrefixes(model: Model): Unit = {
-      model.setNsPrefix("dataid", "http://dataid.dbpedia.org/ns/core#")       //DataID namespace
-      model.setNsPrefix("dataid-ld", "http://dataid.dbpedia.org/ns/ld#")      //ns for Linked Data extension
-      model.setNsPrefix("dataid-mt", "http://dataid.dbpedia.org/ns/mt#")      //ns for MediaTypes
-      model.setNsPrefix("dmp", "http://dataid.dbpedia.org/ns/dmp#")           //ns for Data Management Plans
-      model.setNsPrefix("dc", "http://purl.org/dc/terms/")
-      model.setNsPrefix("dcat", "http://www.w3.org/ns/dcat#")
-      model.setNsPrefix("void", "http://rdfs.org/ns/void#")
-      model.setNsPrefix("prov", "http://www.w3.org/ns/prov#")
-      model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#")
-      model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#")
-      model.setNsPrefix("foaf", "http://xmlns.com/foaf/0.1/")
-      model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#")
-      model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
-      model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#")
-      model.setNsPrefix("datacite", "http://purl.org/spar/datacite/")
-      model.setNsPrefix("spdx", "http://spdx.org/rdf/terms#")
+      val prefixMap = configMap.get("prefixMap").getAsObject
+      for(prefix <- prefixMap.keys().asScala){
+        model.setNsPrefix(prefix, prefixMap.get(prefix).getAsString.toString)
+      }
     }
 
     def addAgent(agentModel: Model, motherResource: Resource, agentMap: JsonObject, specialEntities: List[Resource] = List()): Resource = {
@@ -378,7 +366,7 @@ object DataIdGenerator {
       model.add(dist, model.createProperty(model.getNsPrefixURI("dc"), "conformsTo"), dataidStandard)
 
       if (outerDirectory != null && lang != null) {
-        lbpMap.get((outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile).replace(compression, ""))
+        lbpMap.get(outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile)
         match {
           case Some(bytes) => {
             model.add(dist, model.createProperty(model.getNsPrefixURI("dcat"), "byteSize"), model.createTypedLiteral(bytes.get("bz2").get, model.getNsPrefixURI("xsd") + "integer"))
@@ -657,9 +645,9 @@ object DataIdGenerator {
       if (lang.iso639_3 != null && lang.iso639_3.length > 0)
         model.add(dataset, model.createProperty(model.getNsPrefixURI("dc"), "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
 
-      lbpMap.get(("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile).replace(compression, "")) match {
+      lbpMap.get("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile) match {
         case Some(triples) =>
-          model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "triples"), model.createTypedLiteral((new Integer(triples.get("lines").get) - 2), model.getNsPrefixURI("xsd") + "integer"))
+          model.add(dataset, model.createProperty(model.getNsPrefixURI("void"), "triples"), model.createTypedLiteral(new Integer(triples.get("lines").get) - 2, model.getNsPrefixURI("xsd") + "integer"))
         case None =>
       }
       dataset
