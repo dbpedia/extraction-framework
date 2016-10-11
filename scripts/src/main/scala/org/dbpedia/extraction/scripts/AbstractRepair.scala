@@ -19,7 +19,7 @@ import org.dbpedia.extraction.util._
 object AbstractRepair {
 
 
-  private var  suffix: String = null
+  private val  suffix: String = ".tql.bz2"
   private var  baseDir: File = null
   private var oldFilePathPattern : String = null
   private var abstractFile : String = null
@@ -36,7 +36,7 @@ object AbstractRepair {
     val langMap = abstracts.get(language).get
     val destination = new CompositeDestination(
       new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix)), new TerseFormatter(quads = true, turtle = true, null)),
-      new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix)), new TerseFormatter(quads = false, turtle = true, null))
+      new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix.replace("tql", "ttl"))), new TerseFormatter(quads = false, turtle = true, null))
     )
     QuadMapper.mapQuads(language.wikiCode, faultyFile, destination, required=true) { quad =>
       if(quad.value.indexOf(templateString + ":") >= 0)
@@ -62,17 +62,13 @@ object AbstractRepair {
     baseDir = new File(args(0))
     require(baseDir.isDirectory, "basedir is not a directory")
 
-    suffix = args(1)
-    require(suffix.startsWith("."), "Please specify a valid file extension starting with a '.'!")
-    require("\\.[a-zA-Z0-9]{2,3}\\.(gz|bz2)".r.replaceFirstIn(suffix, "") == "", "provide a valid serialization extension starting with a dot (e.g. .ttl.bz2)")
-
-    abstractFile = args(2)
+    abstractFile = args(1)
     require(abstractFile.contains("abstracts"), "Please specify the abstracts file in queston ('short-abstracts' or 'long-abstracts'.")
 
-    oldFilePathPattern = args(3)
+    oldFilePathPattern = args(2)
     require(oldFilePathPattern.contains("%langcode"), "Please specify a valid path for the old abstracts files containing '%langcode' for every instance of a wiki language code.")
 
-    val languages = parseLanguages(baseDir, args(4).split(",").map(_.trim).filter(_.nonEmpty))
+    val languages = parseLanguages(baseDir, args(3).split(",").map(_.trim).filter(_.nonEmpty))
 
     for(lang <- languages)
       abstracts.put(lang, new ConcurrentHashMap[String, Int]().asScala)
