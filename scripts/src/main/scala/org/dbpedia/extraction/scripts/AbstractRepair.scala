@@ -11,14 +11,13 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 
 import scala.collection.convert.decorateAsScala._
 
+import scala.Console._
 import org.dbpedia.extraction.util._
 
 /**
   * Created by Chile on 10/11/2016.
   */
 object AbstractRepair {
-
-
   private val  suffix: String = ".tql.bz2"
   private var  baseDir: File = null
   private var oldFilePathPattern : String = null
@@ -26,36 +25,40 @@ object AbstractRepair {
   private val abstracts = new ConcurrentHashMap[Language, scala.collection.mutable.Map[String, Int]]().asScala
 
 
-  val workers = SimpleWorkers(1.5, 1.0) { language: Language =>
-    val templateString = Namespaces.names(language).get(Namespace.Template.code) match{
-      case Some(x) => x
-      case None => "Template"
-    }
-    val finder = new DateFinder(baseDir, language)
-    val faultyFile = finder.byName(abstractFile + suffix, auto = true)
-    val langMap = abstracts.get(language).get
-    val destination = new CompositeDestination(
-      new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix)), new TerseFormatter(quads = true, turtle = true, null)),
-      new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix.replace("tql", "ttl"))), new TerseFormatter(quads = false, turtle = true, null))
-    )
-    QuadMapper.mapQuads(language.wikiCode, faultyFile, destination, required=true) { quad =>
-      if(quad.value.indexOf(templateString + ":") >= 0)
-        {
+  val workers = SimpleWorkers(1.0, 1.0) { language: Language =>
+    val oldFile = new File(oldFilePathPattern.replaceAll("%langcode", language.wikiCode).replaceAll("%abstracts", abstractFile).replaceAll("%suffix", suffix))
+    if(oldFile.exists()) {
+      val templateString = Namespaces.names(language).get(Namespace.Template.code) match {
+        case Some(x) => x
+        case None => "Template"
+      }
+
+      val finder = new DateFinder(baseDir, language)
+      val faultyFile = finder.byName(abstractFile + suffix, auto = true)
+      val langMap = abstracts.get(language).get
+      val destination = new CompositeDestination(
+        new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix)), new TerseFormatter(quads = true, turtle = true, null)),
+        new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix.replace("tql", "ttl"))), new TerseFormatter(quads = false, turtle = true, null))
+      )
+      QuadMapper.mapQuads(language.wikiCode, faultyFile, destination, required = true, closeWriter = false) { quad =>
+        if (quad.value.indexOf(templateString + ":") >= 0) {
           langMap.put(quad.subject, 0)
           Seq()
         }
-      else
-        Seq(quad)
-    }
-    val path = oldFilePathPattern.replaceAll("%langcode", language.wikiCode).replaceAll("%abstracts", abstractFile).replaceAll("%suffix", suffix)
-    QuadMapper.mapQuads(language.wikiCode, new RichFile(new File(path)), destination, required=true) { quad =>
-      langMap.get(quad.subject) match{
-        case Some(x) => {
+        else
           Seq(quad)
+      }
+      QuadMapper.mapQuads(language.wikiCode, new RichFile(oldFile), destination, required = true) { quad =>
+        langMap.get(quad.subject) match {
+          case Some(x) => {
+            Seq(quad)
+          }
+          case None => Seq()
         }
-        case None => Seq()
       }
     }
+    else
+      err.println("Error: could not map langauge " + language.name + " since previous abstract file was found: " + oldFile.getAbsolutePath)
   }
 
   def main(args: Array[String]): Unit = {

@@ -299,6 +299,16 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>RepairAbstracts</id>
+                            <mainClass>org.dbpedia.extraction.scripts.AbstractRepair</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-Xms8G</jvmArg>
+                                <jvmArg>-Xmx16G</jvmArg>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>PostProcessingStats</id>
                             <mainClass>org.dbpedia.extraction.statistics.StatsPostProcessing</mainClass>
                             <jvmArgs>
