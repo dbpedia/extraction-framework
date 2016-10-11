@@ -14,6 +14,11 @@ import scala.collection.mutable
   * Created by Chile on 3/7/2016.
   */
 object TypeStatistics {
+
+  private var localized = false
+  private var writeProps = false
+  private var writeObjects = false
+
   def main(args: Array[String]): Unit = {
 
     val logger = Logger.getLogger(getClass.getName)
@@ -41,21 +46,21 @@ object TypeStatistics {
     require(inputs.forall(! _.endsWith(inSuffix)), "input file names shall not end with input file suffix")
     //require(inputs.forall(! _.contains("/")), "input file names shall not contain paths")
 
-    val statisticsDir = new File(baseDir + "/statistics/")
+    val statisticsDir = new File(baseDir, "statistics")
     if(!statisticsDir.exists())
-      statisticsDir.createNewFile()
-    val outfile = new File(statisticsDir + args(3))
+      statisticsDir.mkdir()
+    val outfile = new File(statisticsDir, args(3))
     if(!outfile.exists())
       outfile.createNewFile()
     require(outfile.isFile && outfile.canWrite, "output file is not writable")
 
-    val localized = if(args(4).toLowerCase == "localized") true else false
-    val writeProps = if(args(5).toLowerCase == "listproperties") true else false
-    val writeObjects = if(args(6).toLowerCase == "listobjects") true else false
+    localized = args(4).toLowerCase == "localized"
+    writeProps = args(5).toLowerCase == "listproperties"
+    writeObjects = args(6).toLowerCase == "listobjects"
 
     val canonicalStr = if(args.length == 7) "_en_uris" else args(7).trim
 
-    val results = new ConcurrentHashMap[String, (Int, mutable.HashMap[String, Int], mutable.HashMap[String, Int], mutable.HashMap[String, Int])]().asScala
+    val results = new ConcurrentHashMap[String, String]().asScala
 
     def getInputFileList(lang: Language, inputs: Array[String], append: String): List[RichFile] =
     {
@@ -80,7 +85,7 @@ object TypeStatistics {
       for(file <- inputFiles) {
         if(file.exists)
         {
-          QuadReader.readQuads("statistics", file) { quad =>
+          QuadReader.readQuads(lang.wikiCode, file) { quad =>
             statements = statements +1
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))
@@ -97,50 +102,54 @@ object TypeStatistics {
           }
         }
       }
-      results.put(lang.wikiCode, (statements, subjects, props, objects))
+      results.put(lang.wikiCode, writeLang(lang.wikiCode, statements, subjects, props, objects))
     }, Namespace.mappings.keySet.toList.sortBy(x => x))
 
     logger.log(Level.INFO, "finished calculations")
 
-    val writer = new PrintWriter(outfile)
-    writer.println("{")
+    val sb = new StringBuilder("{\n")
     for(langEntry <- results)
     {
-      writeLang(langEntry._1, langEntry._2._1, langEntry._2._2, langEntry._2._3, langEntry._2._4)
+      sb.append(langEntry._2)
+      sb.append(",\n")
     }
-    writer.println("}")
+
+    val writer = new PrintWriter(outfile)
+    val res = sb.toString()
+    writer.write(res.substring(0, res.length-1))
+    writer.write("\n}")
     writer.close()
     logger.log(Level.INFO, "finished writing output")
+  }
 
-    def writeLang(lang: String, statements: Int, subjects: mutable.HashMap[String, Int], props: mutable.HashMap[String, Int], objects: mutable.HashMap[String, Int]): Unit = {
-      writer.println("\t\"" + lang + "\": {")
-      writer.println("\t\t\"subjects\": {")
-      writeMap(subjects.toMap, writer, false)
-      writer.println("\t\t} ,")
-      writer.println("\t\t\"properties\": {")
-      writeMap(props.toMap, writer, writeProps)
-      writer.println("\t\t} ,")
-      writer.println("\t\t\"objects\": {")
-      writeMap(objects.toMap, writer, writeObjects)
-      writer.println("\t\t} ,")
-      writer.println("\t\t\"statements\": {")
-      writer.println("\"count\": " + statements)
-      writer.println("\t\t}")
-      writer.println("\t}")
-      if (lang != "zh") //TODO should work to figure out the last mapping lang?
-        writer.println(",")
-    }
+  def writeLang(lang: String, statements: Int, subjects: mutable.HashMap[String, Int], props: mutable.HashMap[String, Int], objects: mutable.HashMap[String, Int]): String = {
+    val sb = new StringBuilder()
+    sb.append("\t\"" + lang + "\": {")
+    sb.append("\t\t\"subjects\": {")
+    writeMap(subjects.toMap, sb, false)
+    sb.append("\t\t} ,")
+    sb.append("\t\t\"properties\": {")
+    writeMap(props.toMap, sb, writeProps)
+    sb.append("\t\t} ,")
+    sb.append("\t\t\"objects\": {")
+    writeMap(objects.toMap, sb, writeObjects)
+    sb.append("\t\t} ,")
+    sb.append("\t\t\"statements\": {")
+    sb.append("\"count\": " + statements)
+    sb.append("\t\t}")
+    sb.append("\t}\n")
+    sb.toString()
+  }
 
-    def writeMap(map: Map[String, Int], writer: PrintWriter, writeAll: Boolean = true, tabs: Int = 3): Unit =
-    {
-      val keymap = map.keySet.toList
-      if(writeAll)
-        for(i <- 0 until map.size)
-        {
-          writer.println("\"" + keymap(i).replace("http://", "") + "\": " + map.get(keymap(i)).get + (if(i == map.size-1) "" else " ,"))
-        }
-      else
-        writer.println("\"count\": " + map.size)
-    }
+  def writeMap(map: Map[String, Int], sb: StringBuilder, writeAll: Boolean = true, tabs: Int = 3): Unit =
+  {
+    val keymap = map.keySet.toList
+    if(writeAll)
+      for(i <- 0 until map.size)
+      {
+        sb.append("\"" + keymap(i).replace("http://", "") + "\": " + map.get(keymap(i)).get + (if(i == map.size-1) "" else " ,"))
+      }
+    else
+      sb.append("\"count\": " + map.size)
   }
 }

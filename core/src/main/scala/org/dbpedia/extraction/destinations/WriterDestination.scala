@@ -14,8 +14,11 @@ extends Destination
   private var writer: Writer = null
   
   override def open() = {
-    writer = factory()
-    writer.write(formatter.header)
+    if(writer == null) //to prevent errors when called twice
+    {
+      writer = factory()
+      writer.write(formatter.header)
+    }
   }
   
   /**

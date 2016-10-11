@@ -28,6 +28,8 @@ object StatsPostProcessing {
         /*8*/ "type statistics filename (saved in basedir)"
     )
 
+    logger.log(Level.INFO, "starting postprocessing")
+
     val baseDir = new File(args(0) + "/statistics")
     require(baseDir.isDirectory, "basedir is not a directory")
 
@@ -81,8 +83,6 @@ object StatsPostProcessing {
     val countsMap = new JsonObject()
     val propsMap = new JsonObject()
     val typesMap = new JsonObject()
-
-    logger.log(Level.INFO, "starting postprocessing")
     for(lang <- lim.keys().asScala)
     {
       val map = countsMap.get(lang) match {

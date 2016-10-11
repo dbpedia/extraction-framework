@@ -42,8 +42,8 @@ object IOUtils {
   /**
    * open output stream, wrap in zipper stream if file suffix indicates compressed file.
    */
-  def outputStream(file: FileLike[_]): OutputStream =
-    open(file, _.outputStream(), zippers)
+  def outputStream(file: FileLike[_], append: Boolean = false): OutputStream =
+    open(file, _.outputStream(append), zippers)
   
   /**
    * open input stream, wrap in unzipper stream if file suffix indicates compressed file.
@@ -55,8 +55,8 @@ object IOUtils {
    * open output stream, wrap in zipper stream if file suffix indicates compressed file,
    * wrap in writer.
    */
-  def writer(file: FileLike[_], charset: Charset = Codec.UTF8.charSet): Writer =
-    new OutputStreamWriter(outputStream(file), charset)
+  def writer(file: FileLike[_], append: Boolean = false, charset: Charset = Codec.UTF8.charSet): Writer =
+    new OutputStreamWriter(outputStream(file, append), charset)
   
   /**
    * open input stream, wrap in unzipper stream if file suffix indicates compressed file,

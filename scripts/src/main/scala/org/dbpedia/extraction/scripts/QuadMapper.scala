@@ -45,7 +45,7 @@ object QuadMapper {
    * @deprecated use one of the map functions below
    */
   @Deprecated
-  def mapQuads(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
+  def mapQuads(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean = true, append: Boolean = false)(map: Quad => Traversable[Quad]): Unit = {
     
     if (! inFile.exists) {
       if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
@@ -55,7 +55,7 @@ object QuadMapper {
 
     err.println(tag+": writing "+outFile+" ...")
     var mapCount = 0
-    val writer = IOUtils.writer(outFile)
+    val writer = IOUtils.writer(outFile, append)
     try {
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
       writer.write("# started "+formatCurrentTimestamp+"\n")
@@ -94,19 +94,24 @@ object QuadMapper {
 
   /**
    */
-  def mapQuads(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean, quads: Boolean, turtle: Boolean, policies: Array[Policy] = null)(map: Quad => Traversable[Quad]): Unit = {
+  def mapQuads(tag: String, inFile: FileLike[_], outFile: FileLike[_], required: Boolean, quads: Boolean, turtle: Boolean, policies: Array[Policy])(map: Quad => Traversable[Quad]): Unit = {
     err.println(tag+": writing "+outFile+" ...")
     val destination = new WriterDestination(() => writer(outFile), new QuadMapperFormatter(quads, turtle, policies))
     mapQuads(tag, inFile, destination, required)(map)
   }
-  
+
+  def mapQuads(tag: String, inFile: FileLike[_], destination: Destination, required: Boolean) (map: Quad => Traversable[Quad]): Unit = {
+    mapQuads(tag, inFile, destination, required, closeWriter = true)(map)
+  }
+
   /**
    * TODO: do we really want to open and close the destination here? Users may want to map quads
    * from multiple input files to one destination. On the other hand, if the input file doesn't
    * exist, we probably shouldn't open the destination at all, so it's ok that it's happening in
    * this method after checking the input file.
+    * Chile: made closing optional, also WriteDestination can only open Writer one now
    */
-  def mapQuads(tag: String, inFile: FileLike[_], destination: Destination, required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
+  def mapQuads(tag: String, inFile: FileLike[_], destination: Destination, required: Boolean, closeWriter: Boolean)(map: Quad => Traversable[Quad]): Unit = {
     
     if (! inFile.exists) {
       if (required) throw new IllegalArgumentException(tag+": file "+inFile+" does not exist")
@@ -122,7 +127,7 @@ object QuadMapper {
         mapCount += 1
       }
     }
-    finally destination.close()
+    finally if(closeWriter) destination.close()
     err.println(tag+": mapped "+mapCount+" quads")
   }
 
