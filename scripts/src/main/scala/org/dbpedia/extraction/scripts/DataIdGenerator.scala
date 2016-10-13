@@ -169,7 +169,6 @@ object DataIdGenerator {
 
       currentDataid.add(currentDataIdUri, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
       currentDataid.add(currentDataIdUri, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
-      currentDataid.add(currentDataIdUri, getProperty("dataid", "latestVersion"), currentDataIdUri)
       currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), creator)
       currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), maintainer)
       currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), contact)
@@ -520,7 +519,6 @@ object DataIdGenerator {
     model.add(dataset, getProperty("foaf", "page"), model.createResource(documentation))
     //TODO done by DataId Hub
     model.add(dataset, getProperty("dc", "hasVersion"), versionStatement)
-    //TODO model.add(dataset, getProperty("dataid", "latestVersion"), dataset)
     model.add(dataset, getProperty("dataid", "associatedAgent"), associatedAgent)
     model.add(dataset, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
     model.add(dataset, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
@@ -563,7 +561,6 @@ object DataIdGenerator {
     model.add(dist, getProperty("rdfs", "label"), createLiteral(currentFile))
     //TODO done by DataId Hub
     model.add(dist, getProperty("dc", "hasVersion"), versionStatement)
-    //TODO model.add(dist, getProperty("dataid", "latestVersion"), dist)
     model.add(dist, getProperty("dataid", "associatedAgent"), associatedAgent)
     model.add(dist, getProperty("dc", "publisher"), associatedAgent)
     model.add(dist, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
