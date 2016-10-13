@@ -681,7 +681,7 @@ object DataIdGenerator {
           case None =>
         }
         nextDataId = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
-        nextDataId = nextDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
+        nextDataId = nextDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map( y => y.asResource()).toList
         nextDataId = nextDataId ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
       }
       catch {
@@ -715,7 +715,7 @@ object DataIdGenerator {
           case None =>
         }
         latestDataId = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
-        latestDataId = latestDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
+        latestDataId = latestDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map( y => y.asResource()).toList
         latestDataId = latestDataId ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
         }
         catch {
