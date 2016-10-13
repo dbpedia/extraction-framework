@@ -168,7 +168,7 @@ object DataIdGenerator {
       require(creator != null, "Please define an dataid:Agent as a Creator in the dataid stump file (use dataid:Authorization).")
 
       currentDataid.add(currentDataIdUri, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-      currentDataid.add(currentDataIdUri, getProperty("dc", "issued"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+      currentDataid.add(currentDataIdUri, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
       currentDataid.add(currentDataIdUri, getProperty("dataid", "latestVersion"), currentDataIdUri)
       currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), creator)
       currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), maintainer)
@@ -446,7 +446,7 @@ object DataIdGenerator {
     sparql.add(dist, getProperty("rdfs", "label"), createLiteral("The official DBpedia sparql endpoint", "en"))
     sparql.add(dist, getProperty("dataid", "associatedAgent"), sparqlAgent)
     sparql.add(dist, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-    sparql.add(dist, getProperty("dc", "issued"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+    sparql.add(dist, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
     sparql.add(dist, getProperty("dc", "license"), sparql.createResource(license))
     sparql.add(dist, getProperty("dcat", "mediaType"), getMediaType("sparql", ""))
     sparql.add(dist, getProperty("dcat", "accessURL"), sparql.createResource(sparqlEndpoint))
@@ -523,7 +523,7 @@ object DataIdGenerator {
     //TODO model.add(dataset, getProperty("dataid", "latestVersion"), dataset)
     model.add(dataset, getProperty("dataid", "associatedAgent"), associatedAgent)
     model.add(dataset, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-    model.add(dataset, getProperty("dc", "issued"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+    model.add(dataset, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
     model.add(dataset, getProperty("dc", "license"), model.createResource(license))
     model.add(dataset, getProperty("dc", "publisher"), associatedAgent)
     model.add(dataset, getProperty("dcat", "keyword"), createLiteral("DBpedia", "en"))
@@ -567,7 +567,7 @@ object DataIdGenerator {
     model.add(dist, getProperty("dataid", "associatedAgent"), associatedAgent)
     model.add(dist, getProperty("dc", "publisher"), associatedAgent)
     model.add(dist, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-    model.add(dist, getProperty("dc", "issued"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+    model.add(dist, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
     model.add(dist, getProperty("dc", "license"), model.createResource(license))
     model.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
 
@@ -697,7 +697,6 @@ object DataIdGenerator {
           case Some(created) if releaseDate.before(created) => throw new InvalidParameterException("The creation date of the previous DataID catalog is before the current release Date.")
           case None =>
         }
-
         previousDataId = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
         previousDataId = previousDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map( y => y.asResource()).toList
         previousDataId = previousDataId ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
@@ -782,10 +781,24 @@ object DataIdGenerator {
     catalogModel.add(catalogInUse, getProperty("rdfs", "label"), createLiteral("DataId catalog for DBpedia version " + dbpVersion))
     catalogModel.add(catalogInUse, getProperty("dc", "description"), createLiteral("DataId catalog for DBpedia version " + dbpVersion + ". Every DataId represents a language dataset of DBpedia.", "en"))
     catalogModel.add(catalogInUse, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-    catalogModel.add(catalogInUse, getProperty("dc", "issued"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+    catalogModel.add(catalogInUse, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
     catalogModel.add(catalogInUse, getProperty("dc", "publisher"), catalogAgent)
     catalogModel.add(catalogInUse, getProperty("dc", "license"), catalogModel.createResource(license))
     catalogModel.add(catalogInUse, getProperty("foaf", "homepage"), catalogModel.createResource(configMap.get("creator").getAsObject.get("homepage").getAsString.value()))
+
+    // add prev/next/latest statements
+    getOtherVersionUri(previousDataId, catalogInUse) match{
+      case Some(uri) =>catalogModel.add(catalogInUse, getProperty("dataid", "previousVersion"), uri)
+      case None =>
+    }
+    getOtherVersionUri(nextDataId, catalogInUse) match{
+      case Some(uri) =>catalogModel.add(catalogInUse, getProperty("dataid", "nextVersion"), uri)
+      case None =>
+    }
+    getOtherVersionUri(latestDataId, catalogInUse) match{
+      case Some(uri) =>catalogModel.add(catalogInUse, getProperty("dataid", "latestVersion"), uri)
+      case None => catalogModel.add(catalogInUse, getProperty("dataid", "latestVersion"), catalogInUse)
+    }
   }
 
   def getProperty(prefix:String, propName: String): Property ={
@@ -813,7 +826,7 @@ object DataIdGenerator {
   def getCreationDate(fromModel: Model): Option[Date] ={
     Option(
     try {
-      val c = fromModel.listSubjectsWithProperty(fromModel.getProperty(fromModel.getNsPrefixURI("dc"), "created")).next().asLiteral().toString
+      val c = fromModel.listSubjectsWithProperty(fromModel.getProperty(fromModel.getNsPrefixURI("dc"), "issued")).next().asLiteral().toString
       dateformat.parse(c)
     }
     catch{
