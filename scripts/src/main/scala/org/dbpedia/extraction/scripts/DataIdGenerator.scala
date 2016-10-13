@@ -697,14 +697,8 @@ object DataIdGenerator {
   }
 
   def getProperty(prefix:String, propName: String): Property ={
-    Option(staticModel.getProperty(if (prefix.trim.endsWith(":")) prefix.trim else prefix.trim + ":", propName)) match{
-      case Some(x)
-      => x
-      case None => {
         val pre = staticModel.getNsPrefixURI(prefix)
         staticModel.createProperty(pre, propName)
-      }
-    }
   }
 
   def createLiteral(value: String, lang: String = null): RDFNode ={
