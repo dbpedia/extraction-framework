@@ -41,10 +41,14 @@
 #sparql endpoint address
 "sparqlEndpoint":"http://dbpedia.org/sparql",
 
-#point out the previous, next and latest DBpedia-DataID catalogs, which is used to generate dataid:previous, next and lastest for each dataset
-"previousDataID":null,
-"nextDataID":null,
-"latestDataID":null,
+#the original release date of this version (if non is provided, the current date is the release date)
+"releaseDate":"2016-10-13",
+
+#point out the previous, next and latest DBpedia-DataID catalog files , which is used to generate dataid:previous, next and lastest Version for each dataset/DataID
+#if you do not provide a catalog for the latestVersion, the geneator assumes that the current version is the latest
+"previousCatalog":{"path":"C:/Users/Chile/Desktop/Dbpedia/2015-10_dataid_catalog.ttl", "version":"2015-10"},
+"nextCatalog":{"path":"", "version":""},
+"latestCatalog":{"path":"", "version":""},
 
 #add Data Management Plan notes to the root dataset?
 "addDmpProps":true,
