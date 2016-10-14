@@ -180,7 +180,7 @@ object DataIdGenerator {
       currentDataid.add(currentDataIdUri, getProperty("dc", "hasVersion"), versionStatement)
       catalogModel.add(catalogInUse, getProperty("dcat", "record"), currentDataIdUri)
 
-      currentRootSet = addDataset(topsetModel, lang, "maindataset", creator, true)
+      currentRootSet = addDataset(topsetModel, lang, "maindataset", creator, toplevelSet = true)
       currentDataid.add(currentDataIdUri, getProperty("foaf", "primaryTopic"), currentRootSet)
       topsetModel.add(currentRootSet, getProperty("foaf", "isPrimaryTopicOf"), currentDataIdUri)
       topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary))
@@ -191,7 +191,7 @@ object DataIdGenerator {
       if (rights != null)
         topsetModel.add(currentRootSet, getProperty("dc", "rights"), rightsStatement)
 
-      if ((configMap.get("addDmpProps").getAsBoolean.value()))
+      if (configMap.get("addDmpProps").getAsBoolean.value())
         addDmpStatements(topsetModel, currentRootSet)
 
       var lastFile: String = null
@@ -199,7 +199,7 @@ object DataIdGenerator {
       for (dis <- distributions) {
         if(dis.contains("_" + dir.getName))
         {
-          if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {
+          if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {  //only add dataset once for all its distributions
             lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
             dataset = addDataset(mainModel, lang, dis, creator)
             topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
@@ -493,8 +493,6 @@ object DataIdGenerator {
     if (!toplevelSet) //not!
     {
       model.add(dataset, getProperty("void", "rootResource"), currentRootSet)
-
-
       datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, datasetName)) match {
         case Some(d) => {
           model.add(dataset, getProperty("dc", "title"), createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
@@ -514,29 +512,48 @@ object DataIdGenerator {
         }
       }
     }
-
-    model.add(dataset, getProperty("dcat", "landingPage"), model.createResource("http://dbpedia.org/"))
-    model.add(dataset, getProperty("foaf", "page"), model.createResource(documentation))
-    //TODO done by DataId Hub
-    model.add(dataset, getProperty("dc", "hasVersion"), versionStatement)
-    model.add(dataset, getProperty("dataid", "associatedAgent"), associatedAgent)
-    model.add(dataset, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-    model.add(dataset, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
-    model.add(dataset, getProperty("dc", "license"), model.createResource(license))
-    model.add(dataset, getProperty("dc", "publisher"), associatedAgent)
-    model.add(dataset, getProperty("dcat", "keyword"), createLiteral("DBpedia", "en"))
-    model.add(dataset, getProperty("dcat", "keyword"), createLiteral(datasetName, "en"))
-    model.add(dataset, getProperty("dc", "conformsTo"), dataidStandard)
-    model.add(dataset, getProperty("dc", "conformsTo"), dataidLdStandard)
+    if (!currentFile.contains("pages_articles")) //not!
+    {
+      model.add(dataset, getProperty("dcat", "landingPage"), model.createResource("http://dbpedia.org/"))
+      model.add(dataset, getProperty("foaf", "page"), model.createResource(documentation))
+      //TODO done by DataId Hub
+      model.add(dataset, getProperty("dc", "hasVersion"), versionStatement)
+      model.add(dataset, getProperty("dataid", "associatedAgent"), associatedAgent)
+      model.add(dataset, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+      model.add(dataset, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
+      model.add(dataset, getProperty("dc", "license"), model.createResource(license))
+      model.add(dataset, getProperty("dc", "publisher"), associatedAgent)
+      model.add(dataset, getProperty("dcat", "keyword"), createLiteral("DBpedia", "en"))
+      model.add(dataset, getProperty("dcat", "keyword"), createLiteral(datasetName, "en"))
+      model.add(dataset, getProperty("dc", "conformsTo"), dataidStandard)
+      model.add(dataset, getProperty("dc", "conformsTo"), dataidLdStandard)
+      lbpMap.get("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile) match {
+        case Some(triples) =>
+          model.add(dataset, getProperty("void", "triples"), createLiteral((new Integer(triples.get("lines").get) - 2).toString, "xsd", "integer"))
+        case None =>
+      }
+    }
+    else { //is wikipedia dump dataset
+      getWikipediaDownloadInfo(lang) match {
+        case Some(dlInfo) => {
+          val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
+          model.add(dataset, getProperty("dc", "hasVersion"), dlInfo._1.trim)
+          model.add(dataset, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
+        }
+        case None =>
+      }
+      val wikimedia = addAgent(agentModel, currentDataIdUri, configMap.get("wikimedia").getAsObject)
+      model.add(dataset, getProperty("dc", "license"), model.createResource(license))
+      model.add(dataset, getProperty("dc", "publisher"), wikimedia)
+      model.add(dataset, getProperty("dataid", "associatedAgent"), wikimedia)
+      model.add(dataset, getProperty("dcat", "keyword"), createLiteral("Wikipedia", "en"))
+      model.add(dataset, getProperty("dcat", "keyword"), createLiteral("XML dump file", "en"))
+      model.add(dataset, getProperty("dcat", "landingPage"), model.createResource("https://meta.wikimedia.org/wiki/Data_dumps"))
+    }
 
     if (lang.iso639_3 != null && lang.iso639_3.length > 0)
       model.add(dataset, getProperty("dc", "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
 
-    lbpMap.get("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile) match {
-      case Some(triples) =>
-        model.add(dataset, getProperty("void", "triples"), createLiteral((new Integer(triples.get("lines").get) - 2).toString, "xsd", "integer"))
-      case None =>
-    }
     dataset
   }
   def addDistribution(model: Model, dataset: Resource, lang: Language, outerDirectory: String, currentFile: String, associatedAgent: Resource): Resource = {
@@ -558,15 +575,34 @@ object DataIdGenerator {
       } else "") + " / " + currentFile)
     }
 
-    model.add(dist, getProperty("rdfs", "label"), createLiteral(currentFile))
-    //TODO done by DataId Hub
-    model.add(dist, getProperty("dc", "hasVersion"), versionStatement)
-    model.add(dist, getProperty("dataid", "associatedAgent"), associatedAgent)
-    model.add(dist, getProperty("dc", "publisher"), associatedAgent)
-    model.add(dist, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-    model.add(dist, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
-    model.add(dist, getProperty("dc", "license"), model.createResource(license))
-    model.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
+    if(currentFile.contains("pages_articles"))  //is Wikipedia file
+    {
+      val wikimedia = addAgent(agentModel, currentDataIdUri, configMap.get("wikimedia").getAsObject)
+      getWikipediaDownloadInfo(lang) match {
+        case Some(dlInfo) => {
+          val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
+          model.add(dataset, getProperty("dc", "hasVersion"), dlInfo._1.trim)
+          model.add(dataset, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
+          model.add(dist, getProperty("dcat", "downloadURL"), model.createResource(dlInfo._2.trim))
+        }
+        case None =>
+      }
+      model.add(dataset, getProperty("dc", "publisher"), wikimedia)
+      model.add(dataset, getProperty("dataid", "associatedAgent"), wikimedia)
+      model.add(dist, getProperty("rdfs", "label"), createLiteral(currentFile))
+      model.add(dist, getProperty("dc", "license"), model.createResource(license))
+    }
+    else {
+      model.add(dist, getProperty("rdfs", "label"), createLiteral(currentFile))
+      //TODO done by DataId Hub
+      model.add(dist, getProperty("dc", "hasVersion"), versionStatement)
+      model.add(dist, getProperty("dataid", "associatedAgent"), associatedAgent)
+      model.add(dist, getProperty("dc", "publisher"), associatedAgent)
+      model.add(dist, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+      model.add(dist, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
+      model.add(dist, getProperty("dc", "license"), model.createResource(license))
+      model.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
+    }
 
     if (outerDirectory != null && lang != null) {
       lbpMap.get(outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile)
@@ -827,7 +863,7 @@ object DataIdGenerator {
       dateformat.parse(c)
     }
     catch{
-      case _=> null
+      case _: Throwable => null
     }
     )
   }
@@ -843,5 +879,20 @@ object DataIdGenerator {
       }
     }
     Option(res)
+  }
+
+  def getWikipediaDownloadInfo(lang: Language): Option[(String, String)] ={
+    val dlFile = new File(dump + "/core-i18n/" + lang.wikiCode, "download_complete_" + lang.wikiCode + ".download-complete")
+    if(dlFile.exists())
+      {
+        try {
+          val lines = scala.io.Source.fromFile(dlFile).getLines()
+          Option((lines.next(), lines.next()))
+        } catch {
+          case _: Throwable => None
+        }
+      }
+    else
+      None
   }
 }
