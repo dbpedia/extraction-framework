@@ -63,7 +63,7 @@ extends PageNodeExtractor
   protected val language = context.language.wikiCode
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
-  protected val apiParametersFormat = "uselang="+language + protectedParams.get("apiNormalParametersFormat").get
+  protected val apiParametersFormat = "uselang="+language + protectedParams.get("apiNormalParametersFormat").get.asText()
 
     // lazy so testing does not need ontology
   protected lazy val shortProperty = context.ontology.properties(protectedParams.get("shortProperty").get.asText())

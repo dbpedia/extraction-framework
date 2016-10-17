@@ -48,7 +48,8 @@ public class LinkExtractor implements NodeVisitor {
 		if(node.nodeName().equals("#text")) {
 		  String tempText = node.toString(); 
 		  //replace no-break spaces because unescape doesn't deal with them
-		  tempText = StringEscapeUtils.unescapeHtml4(tempText).replace("\u00A0", " ");
+		  tempText = StringEscapeUtils.unescapeHtml4(tempText);
+          tempText = org.dbpedia.extraction.util.StringUtils.escape(tempText, replaceChars());
 		  
 		  //exclude spoken versions, citation numbers etc
 		  if(tempText.equals("Listen")) {
@@ -66,22 +67,11 @@ public class LinkExtractor implements NodeVisitor {
 			  }
 		  }
 		  
-		  if(tempText.contains("\\")) {
-			  tempText = tempText.replace("\\", "");
-		  }
-		  if(tempText.contains("\n")) {
-			  tempText = tempText.replace("\n", "");
-		  }
-		  int escapeCount = 0;
-		  if(tempText.contains("\"")) {
-		  	tempText = tempText.replace("\"", "\\\"");
-		  	escapeCount = StringUtils.countMatches(tempText, "\\");
-		  }
-		  int length = tempText.length();
-		  length = length - escapeCount;
-
+//          tempText = tempText.replace("\\", "");
+//          tempText = tempText.replace("\n", "");
+//          tempText = tempText.replace("\"", "\\\"");
 		  int beforeOffset = offset;
-		  offset += length; 
+		  offset += tempText.length() - StringUtils.countMatches(tempText, "\\");   //length - escape count
 	
 		  //specific fix when there are two paragraphs following each other and the whitespace is missing
 		  if(node.parent().nextSibling()!=null) {
@@ -105,7 +95,7 @@ public class LinkExtractor implements NodeVisitor {
 			  tempLink.setWordEnd(offset);
 		  }
           if(paragraph == null)
-              paragraph = new Paragraph(offset, "");
+              paragraph = new Paragraph(beforeOffset, "");   //set to 0 since this is the first paragraph
           paragraph.addText(tempText);
 		  text += tempText;
 
@@ -140,9 +130,15 @@ public class LinkExtractor implements NodeVisitor {
                 skipLevel = depth;
             }
         } else if(node.nodeName().equals("p")) {
-            if(paragraph != null)
-                paragraphs.add(paragraph);
-            paragraph = new Paragraph(offset, "");
+            if(paragraph != null) {
+                if(paragraph.getLength() > 0)
+                {
+                    paragraphs.add(paragraph);
+                    paragraph = new Paragraph(offset, "");
+                }
+            }
+            else
+                paragraph = new Paragraph(offset, "");
 		} else if(node.nodeName().equals("code")||node.nodeName().equals("sub")||node.nodeName().equals("em")
 				||node.nodeName().equals("i")||node.nodeName().equals("b")||node.nodeName().equals("dfn")||node.nodeName().equals("kbd")
 				||node.nodeName().equals("tt")||node.nodeName().equals("abbr")||node.nodeName().equals("li")) {
@@ -215,16 +211,21 @@ public class LinkExtractor implements NodeVisitor {
 			inLink = false;
 			paragraph.addLink(tempLink);
 			tempLink = new Link();
-		} 
-		
-		if(node.nodeName().equals("sup")&&inSup) {
+		}
+
+        if(node.nodeName().equals("p") && paragraph.getLength() > 0) {
+            paragraphs.add(paragraph);
+            paragraph = null;
+        }
+
+        if(node.nodeName().equals("sup")&&inSup) {
 			inSup = false;
 		}
 		    	
 	}
 	
 	public String getText() {
-		return text;
+		return  text;
 	}
 	
 	public List<Paragraph> getParagraphs() {
@@ -240,4 +241,13 @@ public class LinkExtractor implements NodeVisitor {
 		return offset;
 	}
 
+
+    private String[] replaceChars() {
+        String[] rep = new String[256];
+        rep['\n'] = "";
+        rep['\"'] = "\\\"";
+        rep['\\'] = "";
+        rep['\u00A0'] = " ";
+        return rep;
+    }
 }

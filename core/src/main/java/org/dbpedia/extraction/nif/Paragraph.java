@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.nif;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.LinkedList;
 
 /**
@@ -28,7 +30,7 @@ public class Paragraph {
     }
 
     public int getEnd() {
-        return begin + this.text.trim().length();
+        return begin + this.getLength();
     }
 
     public void addLink(Link link) {
@@ -41,5 +43,9 @@ public class Paragraph {
 
     public LinkedList<Link> getLinks() {
         return this.internalLinks;
+    }
+
+    public int getLength(){
+        return getText().length() - StringUtils.countMatches(getText(), "\\");
     }
 }

@@ -34,7 +34,7 @@ class AbstractLinkExtractor(
   extends AbstractExtractor(context)
 {
   //API parameters to geht HTML of first section
-  override val apiParametersFormat = "uselang="+language + protectedParams.get("apiNifParametersFormat").get
+  override val apiParametersFormat = "uselang="+language + protectedParams.get("apiNifParametersFormat").get.asText()
 
   override val xmlPath = protectedParams.get("apiNifXmlPath").get.asText.split(",").map(_.trim)
 
