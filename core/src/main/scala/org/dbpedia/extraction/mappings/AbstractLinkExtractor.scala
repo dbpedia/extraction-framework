@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.apache.commons.lang3.{StringUtils, StringEscapeUtils}
-import org.dbpedia.extraction.nif.{Paragraph, LinkExtractor, Link}
+import org.apache.commons.lang3.{StringEscapeUtils}
+import org.dbpedia.extraction.nif.{Paragraph, LinkExtractor}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -12,7 +12,7 @@ import scala.language.reflectiveCalls
 import org.dbpedia.extraction.destinations.{QuadBuilder, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{WikiUtil, StringUtils, Language}
+import org.dbpedia.extraction.util.{WikiUtil, Language}
 import scala.collection.convert.decorateAsScala._
 
 /**
@@ -38,7 +38,7 @@ class AbstractLinkExtractor(
 
   override val xmlPath = protectedParams.get("apiNifXmlPath").get.asText.split(",").map(_.trim)
 
-  protected val writeStrings = protectedParams.get("apiNifXmlPath").get.asBoolean()
+  protected val writeStrings = protectedParams.get("writeNifStrings").get.asBoolean()
   protected val shortAbstractLength = protectedParams.get("minShortAbstractLength").get.asInt()
 
   override val datasets = Set(DBpediaDatasets.LinkedAbstracts,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
