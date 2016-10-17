@@ -80,9 +80,11 @@ class AbstractLinkExtractor(
 
     var shortAbstract = ""
     for(p <- extractionResults._3) {
-      if (shortAbstract.length <= shortAbstractLength || shortAbstract.length + p.getText.length < shortAbstractLength + 200)  //create short Abstract between [shortAbstractLength, shortAbstractLength+200]
+      if (shortAbstract.length <= shortAbstractLength || shortAbstract.length + p.getText.length < shortAbstractLength*3)  //create short Abstract between [shortAbstractLength, shortAbstractLength*3]
         shortAbstract += p.getText
     }
+    if(shortAbstract.length > shortAbstractLength*4)                          //only cut abstract if the first paragraph is exceedingly long
+      shortAbstract = shortAbstract.substring(0, shortAbstractLength*4)
     if(!isTestRun && context.nonEmpty) {
       context += longQuad(subjectUri, extractionResults._1, sourceUrl)
       context += shortQuad(subjectUri, shortAbstract, sourceUrl)
@@ -164,11 +166,11 @@ class AbstractLinkExtractor(
           }
       }
       else {
-        val extractor: LinkExtractor = new LinkExtractor(offset, this.language)
+        val extractor: LinkExtractor = new LinkExtractor(offset, this.language, this.templateString)
         val traversor: NodeTraversor = new NodeTraversor(extractor)
         traversor.traverse(elementNode)
         val cleanedLinkText = WikiUtil.cleanSpace(extractor.getText).trim
-        if(!cleanedLinkText.contains(templateString + ":")) {               //not!
+        //if(!cleanedLinkText.contains(templateString + ":")) {               //not!
           if (cleanedLinkText.length > 0 && abstractText.length > 0) {
             offset = 1 + extractor.getOffset - (extractor.getText.length - cleanedLinkText.length)
             abstractText += " " + cleanedLinkText
@@ -178,7 +180,7 @@ class AbstractLinkExtractor(
             abstractText += cleanedLinkText
           }
           paragraphs ++= extractor.getParagraphs.asScala
-        }
+        //}
       }
     }
     var beforeTrim: Int = 0
