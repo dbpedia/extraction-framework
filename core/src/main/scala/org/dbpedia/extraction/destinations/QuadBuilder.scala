@@ -23,7 +23,10 @@ object QuadBuilder {
   
   def dynamicPredicate(language: Language, dataset: Dataset) (subject: String, predicate: String, value: String, context: String, datatype: Datatype) =
     new Quad(language, dataset, subject, predicate, value, context, datatype)
-  
+
+  def dynamicPredicate(language: String, dataset: String) (subject: String, predicate: String, value: String, context: String, datatype: String) =
+    new Quad(language, dataset, subject, predicate, value, context, datatype)
+
   def dynamicPredicate(language: Language, dataset: Dataset, datatype: Datatype) (subject: String, predicate: OntologyProperty, value: String, context: String) =
     new Quad(language, dataset, subject, predicate, value, context, datatype)
 }

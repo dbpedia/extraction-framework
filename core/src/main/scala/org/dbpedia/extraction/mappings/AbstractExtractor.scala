@@ -43,6 +43,8 @@ extends PageNodeExtractor
   protected val publicParames = abstractParams.getMap("publicParams")
   protected val protectedParams = abstractParams.getMap("protectedParams")
 
+  protected val isTestRun = protectedParams.get("isTestRun").get.asBoolean()
+
   protected val xmlPath = protectedParams.get("apiNormalXmlPath").get.asText().split(",").map(_.trim)
 
   protected def apiUrl: URL = new URL(publicParames.get("apiUri").get.asText())

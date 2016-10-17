@@ -192,7 +192,7 @@ object Quad
   
   private def safeHash(s: String): Int =
   {
-    if (s == null) 0 else s.hashCode;
+    if (s == null) 0 else s.hashCode
   }
   
   private def findType(datatype: Datatype, range: OntologyType): Datatype =

@@ -7,12 +7,14 @@
     "sleepFactorMs": 1000
   },
   "protectedParams":{
+    "isTestRun":false,
     "apiNormalParametersFormat": "&format=xml&action=query&prop=extracts&exintro=&explaintext=&titles=%s",
     "apiNifParametersFormat": "&format=xml&action=parse&prop=text&section=0&page=%s",
     "apiNormalXmlPath": "query, pages, page, extract",
     "apiNifXmlPath": "parse, text",
     "shortProperty": "rdfs:comment",
     "longProperty": "abstract",
-    "nifProperty": "abstract"
+    "writeNifStrings":true,
+    "minShortAbstractLength":400
   }
 }

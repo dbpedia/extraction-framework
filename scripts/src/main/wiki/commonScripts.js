@@ -5,7 +5,6 @@
 
 function prettify(input, format)
 {
-    var res = null;
     var agentUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+
         '/dataid/publisher/prettyprintid' + (format != null ? ('?format=' + encodeURI(format)) : '');
     var method = "POST";
@@ -81,6 +80,26 @@ function subArrayTest(sub, array)
     if(zw)
         return false;
     return true;
+}
+
+function getIfContains(valueArray, substring, field){
+    var arr = null
+    if(Array.isArray(valueArray))
+        arr= valueArray
+    else
+        arr = [valueArray]
+    for(var i in arr){
+        if(!field){
+            if(typeof arr[i] === 'string' && arr[i].indexOf(substring) >= 0)
+                return arr[i]
+        }
+        else{
+            if(typeof arr[i][field] === 'string' && arr[i][field].indexOf(substring) >= 0)
+                return arr[i][field]
+        }
+
+    }
+    return null
 }
 
 !function(a){"use strict";

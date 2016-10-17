@@ -138,7 +138,7 @@ function tabulate(columns) {
     function addDlLinks(column, row, id, isCononicalized)
     {
         var obj = datasets[column][id];
-        var dll = obj["dcat:downloadURL"]["@id"];
+        var dll = getIfContains(obj["dcat:downloadURL"], "http://downloads.dbpedia.org", "@id");
         var ret = "<small><a href=\"" + dll + "\" ";
         if(isCononicalized)
             ret += "title=\"Canonicalized&nbsp;version&nbsp;of&nbsp;" + row.replace(" en uris", "");

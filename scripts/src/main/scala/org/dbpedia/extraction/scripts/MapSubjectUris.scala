@@ -80,7 +80,7 @@ object MapSubjectUris {
 
     for (language <- languages) {
       val finder = new DateFinder(baseDir, language)
-      val map = new mutable.HashMap[String, mutable.Set[String]] with mutable.MultiMap[String, String] with mutable.SynchronizedMap[String, Set[String]]
+      val map = new HashMap[String, Set[String]] with MultiMap[String, String] with mutable.SynchronizedMap[String, Set[String]]
 
       Workers.work(SimpleWorkers(1.5, 1.0) { mapping: String =>
         var count = 0

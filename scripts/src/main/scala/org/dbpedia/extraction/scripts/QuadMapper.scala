@@ -84,8 +84,8 @@ object QuadMapper {
     }
     else {
       sb append '"' append quad.value append '"'
-      if (quad.language != null) sb append '@' append quad.language append ' '
-      else if (quad.datatype != "http://www.w3.org/2001/XMLSchema#string") sb append "^^<" append quad.datatype append "> "
+      if (quad.datatype != "http://www.w3.org/2001/XMLSchema#string") sb append "^^<" append quad.datatype append "> "
+      else if (quad.language != null) sb append '@' append quad.language append ' '
     }
     if (quad.context != null) sb append '<' append quad.context append "> "
     sb append ".\n"

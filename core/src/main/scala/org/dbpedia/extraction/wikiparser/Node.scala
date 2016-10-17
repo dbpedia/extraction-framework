@@ -45,10 +45,10 @@ abstract class Node(val children : List[Node], val line : Int)
         
         while(node.parent != null)
         {
-            node = node.parent;
+            node = node.parent
         }
         
-        node.asInstanceOf[PageNode];
+        node.asInstanceOf[PageNode]
     }
    
     /**
@@ -60,18 +60,18 @@ abstract class Node(val children : List[Node], val line : Int)
     
     private def findSection : SectionNode = {
       
-        var section : SectionNode = null;
+        var section : SectionNode = null
         
         for(node <- root.children)
         {
             if(node.line > line)
             {
-                return section;
+                return section
             }
 
             if(node.isInstanceOf[SectionNode])
             {
-                section = node.asInstanceOf[SectionNode];
+                section = node.asInstanceOf[SectionNode]
             }
         }
         

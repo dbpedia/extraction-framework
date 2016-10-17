@@ -3,7 +3,6 @@ package org.dbpedia.extraction.util
 import java.net._
 
 import org.apache.commons.lang3.StringEscapeUtils
-import org.dbpedia.extraction.util.WikiUtil._
 import org.dbpedia.util.text.uri.UriDecoder
 
 object UriUtils
