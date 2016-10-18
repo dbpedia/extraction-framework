@@ -9,6 +9,7 @@ import java.lang.StringBuilder
 import java.sql.Connection
 import java.sql.SQLException
 import scala.util.control.ControlThrowable
+import scala.Console._
 
 /**
  * This class is basically mwdumper's SqlWriter ported to Scala.
@@ -142,8 +143,8 @@ class Importer(conn: Connection) {
     }
     catch {
       // throw our own exception that our XML parser won't catch
-      case icv: MySQLIntegrityConstraintViolationException =>       //catch unique key violations (which will occur...)
-      case dce: MysqlDataTruncation =>                              //catch if data is too long for a column
+      case icv: MySQLIntegrityConstraintViolationException => err.println("MySQLIntegrityConstraintViolationException occurred: " + icv.getMessage)      //catch unique key violations (which will occur...)
+      case dce: MysqlDataTruncation =>  err.println("MysqlDataTruncation exception occurred: " + dce.getMessage)                             //catch if data is too long for a column
       case sqle: SQLException => throw new ImporterException(sqle)
     }
     finally stmt.close

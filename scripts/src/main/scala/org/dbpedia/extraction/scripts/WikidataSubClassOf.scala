@@ -185,7 +185,7 @@ object WikidataSubClassOf {
   def getWikidataSubClassOfMap(rawDataset: String, finder: Finder[File], date: String): mutable.Map[Int, mutable.Set[Int]] = {
     val wikidataSubClassMap = mutable.Map.empty[Int, mutable.Set[Int]]
     try {
-      QuadReader.readQuads("Reading subClassOf statements from " + rawDataset, finder.file(date, rawDataset)) { quad =>
+      QuadReader.readQuads("Reading subClassOf statements from " + rawDataset, finder.file(date, rawDataset).get) { quad =>
         if (quad.predicate.equals(subClassProperty)) {
 
           try {

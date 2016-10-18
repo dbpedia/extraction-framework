@@ -52,7 +52,7 @@ object WikidataSameAsToLanguageLinks {
     val formats: collection.Map[String, Formatter] = parseFormats(config, "uri-policy", "format")
 
     // find the input wikidata file
-    val wikiDataFile: RichFile = inputFinder.file(date, input + suffix)
+    val wikiDataFile: RichFile = inputFinder.file(date, input + suffix).get
 
     val processor = new WikidataSameAsToLanguageLinks(baseDir, wikiDataFile, output, language, formats)
     processor.processLinks()
@@ -191,7 +191,7 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
       val outputDate = outputFinder.dates().last
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
-        val file = outputFinder.file(outputDate, output + '.' + suffix)
+        val file = outputFinder.file(outputDate, output + '.' + suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
       destinations += currentLanguage.wikiCode -> new CompositeDestination(formatDestinations.toSeq: _*)

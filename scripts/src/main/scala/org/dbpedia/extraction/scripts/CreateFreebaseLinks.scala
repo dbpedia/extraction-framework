@@ -93,7 +93,7 @@ object CreateFreebaseLinks
     val date = finder.dates("download-complete").last
     
     def find(dataset: Dataset): File = {
-      val file = finder.file(date, dataset.name.replace('_', '-')+suffix)
+      val file = finder.file(date, dataset.name.replace('_', '-')+suffix).get
       if (! file.exists()) throw new FileNotFoundException(file.toString())
       file
     }

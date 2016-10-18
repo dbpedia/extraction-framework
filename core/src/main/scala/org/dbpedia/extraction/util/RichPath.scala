@@ -8,6 +8,8 @@ import scala.collection.JavaConversions.iterableAsScalaIterable
 import scala.language.implicitConversions
 import RichPath._
 
+import scala.util.{Failure, Success, Try}
+
 
 /**
  * This class requires the java.nio.file package, which is available since JDK 7.
@@ -53,7 +55,6 @@ class RichPath(path: Path) extends FileLike[Path] {
   }
   
   /**
-   * @throws NotDirectoryException if the path is not a directory
    */
   override def hasFiles: Boolean = {
     val stream = Files.newDirectoryStream(path)
@@ -65,7 +66,7 @@ class RichPath(path: Path) extends FileLike[Path] {
     else Files.delete(path)
   }
   
-  override def resolve(name: String): Path = path.resolve(name)
+  override def resolve(name: String): Try[Path] = Try(path.resolve(name))
   
   override def exists: Boolean = Files.exists(path)
   

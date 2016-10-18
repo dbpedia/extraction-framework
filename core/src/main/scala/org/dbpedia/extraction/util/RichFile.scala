@@ -4,6 +4,7 @@ import java.io.{IOException,File,FilenameFilter,InputStream,FileInputStream,Outp
 import java.util.regex.Pattern
 import RichFile._
 import scala.language.implicitConversions
+import scala.util.{Failure, Success, Try}
 
 object RichFile {
 
@@ -57,7 +58,7 @@ class RichFile(file: File) extends FileLike[File] {
     list.toList
   }
   
-  override def resolve(name: String): File = new File(file, name)
+  override def resolve(name: String): Try[File] = Try(new File(file, name))
   
   /**
    * Retrieves the relative path in respect to a given base directory.

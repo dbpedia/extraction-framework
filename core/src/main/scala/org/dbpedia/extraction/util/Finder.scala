@@ -3,6 +3,8 @@ package org.dbpedia.extraction.util
 import java.util.regex.Pattern
 import Finder._
 
+import scala.util.{Failure, Success}
+
 private object Finder {
   val datePattern = Pattern.compile("\\d{8}")
   def dateFilter(name: String) = datePattern.matcher(name).matches 
@@ -28,16 +30,26 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
   /**
    * Directory for language, e.g. "baseDir/enwiki"
    */
-  val wikiDir = baseDir.resolve(wikiName)
+  val wikiDir = baseDir.resolve(wikiName) match{
+    case Success (f) => f
+    case Failure(x) =>  throw x
+  }
   
   /**
    * date directory for language, e.g. "20120403" -> "baseDir/enwiki/20120403"
    */
-  def directory(date: String) = wikiDir.resolve(date)
+  def directory(date: String) = wikiDir.resolve(date) match{
+    case Success(f) => f
+    case Failure(x) => {
+      println("Error: could not find file/path: " + wikiDir.toString + "/" + date)
+      null.asInstanceOf[T]
+    }
+  }
   
   /**
    * Finds the names (which are dates in format YYYYMMDD) of dump directories for the language.
-   * @suffix Return only directories that contain a file with this suffix, 
+    *
+    * @suffix Return only directories that contain a file with this suffix,
    * e.g. "download-complete" -> "baseDir/enwiki/20120403/enwiki-20120403-download-complete". 
    * May be null, in which case we just look for date directories.
    * @return dates in ascending order
@@ -47,7 +59,10 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
     val suffixFilter: String => Boolean = 
       if (suffix == null) {date => true}
       else if (isSuffixRegex) {date => matchFiles(date, suffix).nonEmpty}
-      else {date => file(date, suffix).exists}
+      else {date => file(date, suffix)match{
+        case Some(y) => y.exists
+        case None => false
+      }}
 
     val dates = wikiDir.names.filter(dateFilter).filter(suffixFilter).sortBy(_.toInt)
     
@@ -64,20 +79,32 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
    * @return files in ascending date order
    */
   def files(suffix: String, required: Boolean = true): List[T] = {
-    dates(suffix, required).map(file(_, suffix))
+    dates(suffix, required).map(file(_, suffix)).collect{ case Some(i) => i}
   }
     
   /**
    * File with given name suffix in main directory for language, e.g. "download-running" ->
    * "baseDir/enwiki/enwiki-download-running"
    */
-  def file(suffix: String) = wikiDir.resolve(wikiName+'-'+suffix)
+  def file(suffix: String) = wikiDir.resolve(wikiName+'-'+suffix)match{
+    case Success(f) => Some(f)
+    case Failure(x) => {
+      println("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+suffix)
+      None
+    }
+  }
   
   /**
    * File with given name suffix in date directory for language, e.g. "pages-articles.xml" ->
    * "baseDir/enwiki/20120403/enwiki-20120403-pages-articles.xml"
    */
-  def file(date: String, suffix: String) = directory(date).resolve(wikiName+'-'+date+'-'+suffix)
+  def file(date: String, suffix: String) = directory(date).resolve(wikiName+'-'+date+'-'+suffix) match{
+    case Success(f) => Some(f)
+    case Failure(x) => {
+      println("Error: could not create file/path: " + wikiDir.toString + "/" + wikiName+'-'+date+'-'+suffix)
+      None
+    }
+  }
 
   /**
    * Files which match the supplied pattern in data directory for language.
@@ -87,9 +114,9 @@ class Finder[T](val baseDir: T, val language: Language, val wikiNameSuffix: Stri
    * @param pattern
    * @return
    */
-  def matchFiles(date: String, pattern: String) = {
+  def matchFiles(date: String, pattern: String): List[T] = {
     val regex = (wikiName + "-" + date + "-" + pattern).r
     val list = directory(date).list.sortBy(_.size()).reverse.map(_.name).filter(regex.findAllIn(_).matchData.nonEmpty)
-    list.map(directory(date).resolve(_))
+    list.map(directory(date).resolve(_)).collect{case Success(x) => x}
   }
 }

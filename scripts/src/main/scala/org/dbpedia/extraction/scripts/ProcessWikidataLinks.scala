@@ -179,7 +179,7 @@ class ProcessWikidataLinks(baseDir: File) {
     
     val finder = new Finder[File](baseDir, Language.Wikidata, "wiki")
     val date = finder.dates().last
-    val file = finder.file(date, fileName)
+    val file = finder.file(date, fileName).get
     
     var lineCount = -1
     IOUtils.readLines(file) { line =>
@@ -254,7 +254,7 @@ class ProcessWikidataLinks(baseDir: File) {
       
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
-        val file = finder.file(date, fileName+'.'+suffix)
+        val file = finder.file(date, fileName+'.'+suffix).get
         formatDestinations += new WriterDestination(writer(file), format)
       }
       destinations(lang) = new CompositeDestination(formatDestinations.toSeq: _*)

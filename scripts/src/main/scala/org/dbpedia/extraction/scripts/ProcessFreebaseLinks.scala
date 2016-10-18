@@ -50,7 +50,7 @@ object ProcessFreebaseLinks
 
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
-        val file = finder.file(date, output+'.'+suffix)
+        val file = finder.file(date, output+'.'+suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
       destinations(language.wikiCode) = new CompositeDestination(formatDestinations.toSeq: _*)

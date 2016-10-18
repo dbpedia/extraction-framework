@@ -25,30 +25,35 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     val firstDate = dateRange._1
     val lastDate = dateRange._2
 
-    val started = finder.file(Download.Started)
-    if (! started.createNewFile) throw new Exception("Another process may be downloading files to ["+mainDir+"] - stop that process and remove ["+started+"]")
-    try {
+    finder.file(Download.Started) match{
+      case None =>
+      case Some(started) =>{
+        if (! started.createNewFile) throw new Exception("Another process may be downloading files to ["+mainDir+"] - stop that process and remove ["+started+"]")
+        try {
 
-      // find all dates on the main page, sort them latest first
-      var dates = SortedSet.empty(Ordering[String].reverse)
+          // find all dates on the main page, sort them latest first
+          var dates = SortedSet.empty(Ordering[String].reverse)
 
-      downloader.downloadTo(mainPage, mainDir) // creates index.html, although it does not exist on the server
-      forEachLine(new File(mainDir, "index.html")) { line =>
-        DateLink.findAllIn(line).matchData.foreach(dates += _.group(1))
+          downloader.downloadTo(mainPage, mainDir) // creates index.html, although it does not exist on the server
+          forEachLine(new File(mainDir, "index.html")) { line =>
+            DateLink.findAllIn(line).matchData.foreach(dates += _.group(1))
+          }
+
+          if (dates.size == 0) throw new Exception("found no date - "+mainPage+" is probably broken or unreachable. check your network / proxy settings.")
+
+          var count = 0
+
+          // find date pages that have all files we want
+          for (date <- dates) {
+            if (count < dumpCount && date >= firstDate && date <= lastDate && downloadDate(date)) count += 1
+          }
+
+          if (count == 0) throw new Exception("found no date on "+mainPage+" in range "+firstDate+"-"+lastDate+" with files "+fileNames.mkString(","))
+        }
+        finally started.delete
       }
-
-      if (dates.size == 0) throw new Exception("found no date - "+mainPage+" is probably broken or unreachable. check your network / proxy settings.")
-
-      var count = 0
-
-      // find date pages that have all files we want
-      for (date <- dates) {
-        if (count < dumpCount && date >= firstDate && date <= lastDate && downloadDate(date)) count += 1
-      }
-
-      if (count == 0) throw new Exception("found no date on "+mainPage+" in range "+firstDate+"-"+lastDate+" with files "+fileNames.mkString(","))
     }
-    finally started.delete
+
   }
 
   private def expandFilenameRegex(date: String, index: File, filenameRegexes: Set[String]): Set[String] = {
@@ -74,76 +79,80 @@ class LanguageDownloader(baseUrl: URL, baseDir: File, wikiName: String, language
     val dateDir = new File(mainDir, date)
     if (! dateDir.exists && ! dateDir.mkdirs) throw new Exception("Target directory '"+dateDir+"' does not exist and cannot be created")
 
-    val complete = finder.file(date, Download.Complete)
+    finder.file(date, Download.Complete) match{
+      case None => false
+      case Some(complete) =>{
 
-    // First download the files list to expand regexes
-    downloader.downloadTo(datePage, dateDir) // creates index.html
+        // First download the files list to expand regexes
+        downloader.downloadTo(datePage, dateDir) // creates index.html
 
-    // Collect regexes
-    val regexes = fileNames.filter(_._2).map(_._1)
-    val fileNamesFromRegexes = expandFilenameRegex(date, new File(dateDir, "index.html"), regexes)
-    val staticFileNames = fileNames.filter(!_._2).map(_._1)
+        // Collect regexes
+        val regexes = fileNames.filter(_._2).map(_._1)
+        val fileNamesFromRegexes = expandFilenameRegex(date, new File(dateDir, "index.html"), regexes)
+        val staticFileNames = fileNames.filter(!_._2).map(_._1)
 
-    val allFileNames = fileNamesFromRegexes ++ staticFileNames
-    val urls = allFileNames.map {
-      fileName => new URL(baseUrl, wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName)
-    }
+        val allFileNames = fileNamesFromRegexes ++ staticFileNames
+        val urls = allFileNames.map {
+          fileName => new URL(baseUrl, wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName)
+        }
 
-    if (complete.exists) {
-      // Previous download process said that this dir is complete. Note that we MUST check the
-      // 'complete' file - the previous download may have crashed before all files were fully
-      // downloaded. Checking that the downloaded files exist is necessary but not sufficient.
-      // Checking the timestamps is sufficient but not efficient.
+        if (complete.exists) {
+          // Previous download process said that this dir is complete. Note that we MUST check the
+          // 'complete' file - the previous download may have crashed before all files were fully
+          // downloaded. Checking that the downloaded files exist is necessary but not sufficient.
+          // Checking the timestamps is sufficient but not efficient.
 
-      if (urls.forall(url => new File(dateDir, downloader.targetName(url)).exists)) {
-        println("did not download any files to '"+dateDir+"' - all files already complete")
-        return true
+          if (urls.forall(url => new File(dateDir, downloader.targetName(url)).exists)) {
+            println("did not download any files to '" + dateDir + "' - all files already complete")
+            return true
+          }
+
+          // Some files are missing. Maybe previous process was configured for different files.
+          // Download the files that are missing or have the wrong timestamp. Delete 'complete'
+          // file first in case this download crashes.
+          complete.delete
+        }
+
+        // all the links we need - only for non regexes (we have already checked regex ones)
+        val links = new HashMap[String, String]()
+        for (fileName <- staticFileNames) links(fileName) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
+        // Here we should set "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
+        // but "\"/"+wiki+"/"+date+"/" does not exists in incremental updates, keeping the trailing "\">" should do the trick
+        // for (fileName <- fileNames) links(fileName) = wiki+"-"+date+"-"+fileName+"\">"
+
+        // downloader.downloadTo(datePage, dateDir) // creates index.html
+
+        forEachLine(new File(dateDir, "index.html")) { line =>
+          links.foreach{ case (fileName, link) => if (line contains link) links -= fileName }
+        }
+
+        // did we find them all?
+        // Fail if:
+        // - the user specified static file names and not all of them have been found
+        // OR
+        // - the user specified regular expressions and no file has been found that satisfied them
+        if ((staticFileNames.nonEmpty && links.nonEmpty) || (regexes.nonEmpty && fileNamesFromRegexes.isEmpty)) {
+          // TODO: Fix message
+          val staticFilesMessage = if (links.nonEmpty) " has no links to ["+links.keys.mkString(",")+"]" else ""
+          val dynamicFilesMessage = if (fileNamesFromRegexes.isEmpty && regexes.nonEmpty) " has no links that satisfies ["+regexes.mkString(",")+"]" else ""
+          println("date page '"+datePage+ staticFilesMessage + dynamicFilesMessage)
+          false
+        }
+        else {
+          println("date page '"+datePage+"' has all files ["+allFileNames.mkString(",")+"]")
+
+          complete.createNewFile
+          val pw = new PrintWriter(complete)
+          pw.println(date)
+          // download all files
+          for (url <- urls) {
+            downloader.downloadTo(url, dateDir)
+            pw.println(url)
+          }
+          pw.close()
+          true
+        }
       }
-
-      // Some files are missing. Maybe previous process was configured for different files.
-      // Download the files that are missing or have the wrong timestamp. Delete 'complete' 
-      // file first in case this download crashes. 
-      complete.delete
-    }
-
-    // all the links we need - only for non regexes (we have already checked regex ones)
-    val links = new HashMap[String, String]()
-    for (fileName <- staticFileNames) links(fileName) = "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
-    // Here we should set "<a href=\"/"+wiki+"/"+date+"/"+wiki+"-"+date+"-"+fileName+"\">"
-    // but "\"/"+wiki+"/"+date+"/" does not exists in incremental updates, keeping the trailing "\">" should do the trick
-    // for (fileName <- fileNames) links(fileName) = wiki+"-"+date+"-"+fileName+"\">"
-
-    // downloader.downloadTo(datePage, dateDir) // creates index.html
-
-    forEachLine(new File(dateDir, "index.html")) { line =>
-      links.foreach{ case (fileName, link) => if (line contains link) links -= fileName }
-    }
-
-    // did we find them all?
-    // Fail if:
-    // - the user specified static file names and not all of them have been found
-    // OR
-    // - the user specified regular expressions and no file has been found that satisfied them
-    if ((staticFileNames.nonEmpty && links.nonEmpty) || (regexes.nonEmpty && fileNamesFromRegexes.isEmpty)) {
-      // TODO: Fix message
-      val staticFilesMessage = if (links.nonEmpty) " has no links to ["+links.keys.mkString(",")+"]" else ""
-      val dynamicFilesMessage = if (fileNamesFromRegexes.isEmpty && regexes.nonEmpty) " has no links that satisfies ["+regexes.mkString(",")+"]" else ""
-      println("date page '"+datePage+ staticFilesMessage + dynamicFilesMessage)
-      false
-    }
-    else {
-      println("date page '"+datePage+"' has all files ["+allFileNames.mkString(",")+"]")
-
-      complete.createNewFile
-      val pw = new PrintWriter(complete)
-      pw.println(date)
-      // download all files
-      for (url <- urls) {
-        downloader.downloadTo(url, dateDir)
-        pw.println(url)
-      }
-      pw.close()
-      true
     }
   }
 

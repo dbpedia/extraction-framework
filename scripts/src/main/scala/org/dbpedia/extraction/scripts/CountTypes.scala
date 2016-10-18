@@ -68,14 +68,14 @@ object CountTypes {
       }
       else {
         val date = dates.last
-        val file = finder.file(date, input + suffix)
+        val file = finder.file(date, input + suffix).get
         QuadReader.readQuads(language.wikiCode, file) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           if (quad.predicate != rdfType) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
           countType(quad.value, languageTypes)
           if (total) countType(quad.value, totalTypes)
         }
-        printTypes(finder.file(date, output), language.wikiCode+" "+input, languageTypes)
+        printTypes(finder.file(date, output).get, language.wikiCode+" "+input, languageTypes)
       }
     }
     if (total) printTypes(new File(baseDir, output), "total", totalTypes)

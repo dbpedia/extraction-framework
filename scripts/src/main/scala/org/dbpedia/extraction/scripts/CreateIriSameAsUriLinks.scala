@@ -39,11 +39,11 @@ object CreateIriSameAsUriLinks {
       val finder = new Finder[File](baseDir, language, "wiki")
       val date = finder.dates().last
       
-      val inputFile = finder.file(date, input)
+      val inputFile = finder.file(date, input).get
       
       val formatDestinations = new ArrayBuffer[Destination]()
       for ((suffix, format) <- formats) {
-        val file = finder.file(date, output+'.'+suffix)
+        val file = finder.file(date, output+'.'+suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
       val destination = new CompositeDestination(formatDestinations.toSeq: _*)

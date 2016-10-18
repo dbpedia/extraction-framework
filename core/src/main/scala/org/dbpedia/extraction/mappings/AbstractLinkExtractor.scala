@@ -78,18 +78,22 @@ class AbstractLinkExtractor(
 
     val words = if (context.nonEmpty) makeWordsFromLinks(extractionResults._3, context.head.subject).toList else List()
 
-    var shortAbstract = ""
-    for(p <- extractionResults._3) {
-      if (shortAbstract.length <= shortAbstractLength || shortAbstract.length + p.getText.length < shortAbstractLength*3)  //create short Abstract between [shortAbstractLength, shortAbstractLength*3]
-        shortAbstract += p.getText
-    }
-    if(shortAbstract.length > shortAbstractLength*4)                          //only cut abstract if the first paragraph is exceedingly long
-      shortAbstract = shortAbstract.substring(0, shortAbstractLength*4)
     if(!isTestRun && context.nonEmpty) {
       context += longQuad(subjectUri, extractionResults._1, sourceUrl)
-      context += shortQuad(subjectUri, shortAbstract, sourceUrl)
+      context += shortQuad(subjectUri, getShortAbstract(extractionResults._3), sourceUrl)
     }
     context.toList ::: words
+  }
+
+  private def getShortAbstract(paragraphs: List[Paragraph]): String = {
+    var shortAbstract = ""
+    for (p <- paragraphs) {
+      if (shortAbstract.length <= shortAbstractLength || shortAbstract.length + p.getText.length < shortAbstractLength * 3) //create short Abstract between [shortAbstractLength, shortAbstractLength*3]
+        shortAbstract += p.getText
+    }
+    if (shortAbstract.length > shortAbstractLength * 4) //only cut abstract if the first paragraph is exceedingly long
+      shortAbstract = shortAbstract.substring(0, shortAbstractLength * 4)
+    shortAbstract
   }
 
   private def makeContext(text: String, resource: String, sourceUrl: String, contextEnd: Int): ListBuffer[Quad] = {

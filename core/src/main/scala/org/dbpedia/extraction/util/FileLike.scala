@@ -2,6 +2,8 @@ package org.dbpedia.extraction.util
 
 import java.io.{File, InputStream, OutputStream}
 
+import scala.util.Try
+
 /**
  * Allows common handling of java.io.File and java.nio.file.Path
  */
@@ -17,7 +19,7 @@ abstract class FileLike[T] {
    */
   def name: String
   
-  def resolve(name: String): T
+  def resolve(name: String): Try[T]
   
   def names: List[String]
   

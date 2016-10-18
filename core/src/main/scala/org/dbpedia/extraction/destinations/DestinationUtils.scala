@@ -18,8 +18,10 @@ object DestinationUtils {
     for ((suffix, format) <- formats) {
       val datasetDestinations = new mutable.HashMap[String, Destination]()
       for (dataset <- datasets) {
-        val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix)
-        datasetDestinations(dataset.name) = new WriterDestination(() => IOUtils.writer(file), format)
+        finder.file(date, dataset.name.replace('_', '-')+'.'+suffix) match{
+          case Some(file) => datasetDestinations(dataset.name) = new WriterDestination(() => IOUtils.writer(file), format)
+          case None =>
+        }
       }
       destination += new DatasetDestination(datasetDestinations)
     }

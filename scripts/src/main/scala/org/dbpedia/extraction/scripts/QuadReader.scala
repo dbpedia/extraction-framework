@@ -14,7 +14,7 @@ object QuadReader {
    * @param proc process quad
    */
   def readQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {
-    readQuads(finder.language.wikiCode, finder.byName(input, auto))(proc)
+    readQuads(finder.language.wikiCode, finder.byName(input, auto).get)(proc)
   }
 
   /**

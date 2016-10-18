@@ -14,16 +14,16 @@ class AbstractLinkExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-    def language = Language.map.get("de").get
+    def language = Language.map.get("en").get
   }
   private val extractor = new AbstractLinkExtractor(context)
 
-  private val inFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\dewiki\\20160305\\linked_abstracts_snipped.ttl"))
-  private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\dewiki\\20160305\\linked_abstracts_test.ttl"))
+  private val inFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\enwiki\\20160305\\linked-abstracts-en.ttl"))
+  private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\enwiki\\20160305\\linked-abstracts.ttl"))
 
   test("testExtractNif") {
     QuadMapper.mapQuads("nifTest", inFile, outFile){ quad: Quad =>
-      extractor.extractNif("https://de.wikipedia.org/wiki/" + quad.subject.substring(quad.subject.indexOf("/resource/")+10), quad.subject, quad.value)
+      extractor.extractNif("https://wikipedia.org/wiki/" + quad.subject.substring(quad.subject.indexOf("/resource/")+10), quad.subject, quad.value)
     }
   }
 }

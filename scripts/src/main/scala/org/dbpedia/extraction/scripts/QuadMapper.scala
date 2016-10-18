@@ -23,22 +23,22 @@ object QuadMapper {
   @Deprecated
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    val destination = new WriterDestination(() => writer(finder.byName(output, auto = false)), new QuadMapperFormatter())
-    mapQuads(finder.language.wikiCode, finder.byName(input, auto = false), destination, required = true)(map)
+    val destination = new WriterDestination(() => writer(finder.byName(output, auto = false).get), new QuadMapperFormatter())
+    mapQuads(finder.language.wikiCode, finder.byName(input, auto = false).get, destination, required = true)(map)
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, auto: Boolean, required: Boolean)(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    val readFiles = finder.byName(input, auto = auto)
-    val destination = new WriterDestination(() => writer(finder.byName(output, auto)), new QuadMapperFormatter())
+    val readFiles = finder.byName(input, auto = auto).get
+    val destination = new WriterDestination(() => writer(finder.byName(output, auto).get), new QuadMapperFormatter())
     mapQuads(finder.language.wikiCode, readFiles, destination, required = required)(map)
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, required: Boolean )(map: Quad => Traversable[Quad]): Unit = {
     // auto only makes sense on the first call to finder.find(), afterwards the date is set
-    val destination = new WriterDestination(() => writer(finder.byName(output, auto = false)), new QuadMapperFormatter())
-    mapQuads(finder.language.wikiCode, finder.byName(input, auto = false), destination, required)(map)
+    val destination = new WriterDestination(() => writer(finder.byName(output, auto = false).get), new QuadMapperFormatter())
+    mapQuads(finder.language.wikiCode, finder.byName(input, auto = false).get, destination, required)(map)
   }
   def mapQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, output: String, required: Boolean, quads: Boolean, turtle: Boolean, policies: Array[Policy])(map: Quad => Traversable[Quad]): Unit = {
-    mapQuads(finder.language.wikiCode, finder.byName(input, auto = false), finder.byName(output, auto = false), required, quads, turtle, policies)(map)
+    mapQuads(finder.language.wikiCode, finder.byName(input, auto = false).get, finder.byName(output, auto = false).get, required, quads, turtle, policies)(map)
   }
 
   /**

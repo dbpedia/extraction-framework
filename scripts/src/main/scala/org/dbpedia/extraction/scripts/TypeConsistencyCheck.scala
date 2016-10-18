@@ -103,7 +103,7 @@ object TypeConsistencyCheck {
 
 
       try {
-        QuadReader.readQuads(lang.wikiCode+": Reading types from "+typesDataset, finder.file(date, typesDataset)) { quad =>
+        QuadReader.readQuads(lang.wikiCode+": Reading types from "+typesDataset, finder.file(date, typesDataset).get) { quad =>
           val q = quad.copy(language = lang.wikiCode) //set the language of the Quad
           computeType(quad, resourceTypes, ontology)
         }
@@ -117,7 +117,7 @@ object TypeConsistencyCheck {
 
       try {
         destination.open()
-        QuadReader.readQuads(lang.wikiCode+": Reading types from " + mappedTripleDataset, finder.file(date, mappedTripleDataset)) { quad =>
+        QuadReader.readQuads(lang.wikiCode+": Reading types from " + mappedTripleDataset, finder.file(date, mappedTripleDataset).get) { quad =>
 
           val rangeDataset = checkQuadRange(quad, resourceTypes, ontology)
           val domainDataset = checkQuadDomain(quad, resourceTypes, ontology)
@@ -305,7 +305,7 @@ object TypeConsistencyCheck {
     for ((suffix, format) <- formats) {
       val datasetDestinations = new HashMap[String, Destination]()
       for (dataset <- datasets) {
-        val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix)
+        val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix).get
         datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
       }
 

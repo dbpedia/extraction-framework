@@ -34,11 +34,11 @@ object AbstractRepair {
       }
 
       val finder = new DateFinder(baseDir, language)
-      val faultyFile = finder.byName(abstractFile + suffix, auto = true)
+      val faultyFile = finder.byName(abstractFile + suffix, auto = true).get
       val langMap = abstracts.get(language).get
       val destination = new CompositeDestination(
-        new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix)), new TerseFormatter(quads = true, turtle = true, null)),
-        new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix.replace("tql", "ttl"))), new TerseFormatter(quads = false, turtle = true, null))
+        new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix).get), new TerseFormatter(quads = true, turtle = true, null)),
+        new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix.replace("tql", "ttl")).get), new TerseFormatter(quads = false, turtle = true, null))
       )
       QuadMapper.mapQuads(language.wikiCode, new RichFile(faultyFile), destination, required = true, closeWriter = false) { quad =>
         if (quad.value.indexOf(templateString + ":") >= 0) {

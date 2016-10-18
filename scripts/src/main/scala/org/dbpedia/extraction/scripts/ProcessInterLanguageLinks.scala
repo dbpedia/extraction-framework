@@ -202,7 +202,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
       date = finder.dates(name).last
       dates(langKey) = date
     }
-    finder.file(date, name)
+    finder.file(date, name).get
   }
   
   /**
