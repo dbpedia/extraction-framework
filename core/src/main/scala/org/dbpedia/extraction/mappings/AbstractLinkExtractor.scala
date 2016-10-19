@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
 import org.apache.commons.lang3.{StringEscapeUtils}
-import org.dbpedia.extraction.nif.{Paragraph, LinkExtractor}
+import org.dbpedia.extraction.nif.LinkExtractor.LinkExtractorContext
+import org.dbpedia.extraction.nif.{LinkExtractor, Paragraph}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -72,7 +73,7 @@ class AbstractLinkExtractor(
   def extractNif(sourceUrl: String, subjectUri: String, html: String): List[Quad] = {
     val paragraphs = getRelevantParagraphs(html)
 
-    val extractionResults = getLinkAndText(paragraphs)
+    val extractionResults = getLinkAndText(paragraphs, new LinkExtractorContext(language, subjectUri, templateString))
 
     val context = makeContext(extractionResults._1, subjectUri, sourceUrl, extractionResults._2)
 
@@ -150,7 +151,7 @@ class AbstractLinkExtractor(
     words
   }
 
-  private def getLinkAndText(line: String): (String, Int, List[Paragraph]) = {
+  private def getLinkAndText(line: String, extractionContext: LinkExtractorContext): (String, Int, List[Paragraph]) = {
     var paragraphs = List[Paragraph]()
     val doc: Document = Jsoup.parse("<span>" + line + "</span>")
     var abstractText: String = ""
@@ -170,11 +171,10 @@ class AbstractLinkExtractor(
           }
       }
       else {
-        val extractor: LinkExtractor = new LinkExtractor(offset, this.language, this.templateString)
+        val extractor: LinkExtractor = new LinkExtractor(offset, extractionContext)
         val traversor: NodeTraversor = new NodeTraversor(extractor)
         traversor.traverse(elementNode)
         val cleanedLinkText = WikiUtil.cleanSpace(extractor.getText).trim
-        //if(!cleanedLinkText.contains(templateString + ":")) {               //not!
           if (cleanedLinkText.length > 0 && abstractText.length > 0) {
             offset = 1 + extractor.getOffset - (extractor.getText.length - cleanedLinkText.length)
             abstractText += " " + cleanedLinkText
@@ -184,7 +184,6 @@ class AbstractLinkExtractor(
             abstractText += cleanedLinkText
           }
           paragraphs ++= extractor.getParagraphs.asScala
-        //}
       }
     }
     var beforeTrim: Int = 0

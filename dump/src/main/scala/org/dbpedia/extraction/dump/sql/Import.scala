@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dump.sql
 import java.io._
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.sources.XMLSource
-import org.dbpedia.extraction.util.{Finder,Language,WikiInfo}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -11,7 +11,6 @@ import scala.io.Codec
 import scala.collection.mutable.Set
 import java.util.Properties
 import scala.io.Source
-import org.dbpedia.extraction.util.IOUtils
 
 object Import {
   
@@ -34,29 +33,30 @@ object Import {
     //With the new change in Abstract extractor we need all articles TODO FIX this sometime soon and use only categories
     val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
     val namespaceList = namespaces.map(_.name).mkString("[",",","]")
-    
-    val info = new Properties()
-    info.setProperty("allowMultiQueries", "true")
-    val conn = new com.mysql.jdbc.Driver().connect(url, info)
-    try {
-      for (language <- languages) {
-        val finder = new Finder[File](baseDir, language, "wiki")
-        val date = finder.dates(fileName).last
 
-        val completeExists = finder.file(date, Download.Complete) match {
-          case None => false
-          case Some(x) => x.exists()
-        }
+      org.dbpedia.extraction.util.Workers.work(SimpleWorkers(0.5, 1.0){ language : Language =>      //loadfactor: think about disk read speed and mysql processes
 
-        if (requireComplete && completeExists) {
-          finder.file(date, fileName) match {
-            case None =>
-            case Some(file) => {
-              val database = finder.wikiName
+        val info = new Properties()
+        info.setProperty("allowMultiQueries", "true")
+        val conn = new com.mysql.jdbc.Driver().connect(url, info)
+        try {
+          val finder = new Finder[File](baseDir, language, "wiki")
+          val date = finder.dates(fileName).last
 
-              println("importing pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
+          val completeExists = finder.file(date, Download.Complete) match {
+            case None => false
+            case Some(x) => x.exists()
+          }
 
-              /*
+          if (requireComplete && completeExists) {
+            finder.file(date, fileName) match {
+              case None =>
+              case Some(file) => {
+                val database = finder.wikiName
+
+                println("importing pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
+
+                /*
             Ignore the page if a different namespace is also given for the title.
             http://gd.wikipedia.org/?curid=4184 and http://gd.wikipedia.org/?curid=4185&redirect=no
             have the same title "Teamplaid:Gàidhlig", but they are in different namespaces: 4184 is
@@ -65,26 +65,24 @@ object Import {
             into the database, MySQL rightly complains about the duplicate title. As a workaround,
             we simply reject pages for which the <ns> namespace doesn't fit the <title> namespace.
             */
-              val source = XMLSource.fromReader(() => IOUtils.reader(file), language, title => title.otherNamespace == null && namespaces.contains(title.namespace))
+                val source = XMLSource.fromReader(() => IOUtils.reader(file), language, title => title.otherNamespace == null && namespaces.contains(title.namespace))
 
-              val stmt = conn.createStatement()
-              try {
-                stmt.execute("DROP DATABASE IF EXISTS " + database + "; CREATE DATABASE " + database + " CHARACTER SET binary; USE " + database + ";")
-                stmt.execute(tables)
+                val stmt = conn.createStatement()
+                try {
+                  stmt.execute("DROP DATABASE IF EXISTS " + database + "; CREATE DATABASE " + database + " CHARACTER SET binary; USE " + database + ";")
+                  stmt.execute(tables)
+                }
+                finally stmt.close()
+
+                val pages = new Importer(conn).process(source)
+
+                println("imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
               }
-              finally stmt.close()
-
-              new Importer(conn).process(source)
-
-              println("imported  pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
             }
           }
         }
-      }
-    }
-    finally conn.close()
-    
+          finally conn.close()
+      }, languages.toList)
   }
-  
 }
 

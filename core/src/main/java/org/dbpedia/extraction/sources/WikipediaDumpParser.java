@@ -222,12 +222,12 @@ public class WikipediaDumpParser
       try
       {
         Namespace expNs = new Namespace(nsCode, Namespaces.names(_language).get(nsCode).get(), false);
-        logger.log(Level.WARNING, "Error parsing title: found namespace " + title.namespace() + ", expected " + expNs + " in title " + titleStr);
+        logger.log(Level.WARNING, _language.wikiCode() + ": Error parsing title: found namespace " + title.namespace() + ", expected " + expNs + " in title " + titleStr);
         title.otherNamespace_$eq(expNs);
       }
       catch (NoSuchElementException e)
       {
-        logger.log(Level.WARNING, String.format("Error parsing title: found namespace %s, title %s , key %s", title.namespace(),titleStr, nsCode));
+        logger.log(Level.WARNING, String.format(_language.wikiCode() + ": Error parsing title: found namespace %s, title %s , key %s", title.namespace(),titleStr, nsCode));
         skipTitle();
         return;
       }
@@ -278,7 +278,7 @@ public class WikipediaDumpParser
         // emulate Scala exception handling. Ugly...
         if (e instanceof ControlThrowable) throw Exceptions.unchecked(e);
         if (e instanceof InterruptedException) throw (InterruptedException)e;
-        else logger.log(Level.WARNING, "error processing page  '"+title+"': "+Exceptions.toString(e, 200));
+        else logger.log(Level.WARNING, _language.wikiCode() + ": error processing page  '"+title+"': "+Exceptions.toString(e, 200));
       }
     }
     
@@ -391,7 +391,7 @@ public class WikipediaDumpParser
     }
     catch (Exception e)
     {
-      logger.log(Level.WARNING, "error parsing page title ["+titleString+"]: "+Exceptions.toString(e, 200));
+      logger.log(Level.WARNING, _language.wikiCode() + ": error parsing page title ["+titleString+"]: "+Exceptions.toString(e, 200));
       return null;
     }
   }

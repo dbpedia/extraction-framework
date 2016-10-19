@@ -21,14 +21,12 @@ public class LinkExtractor implements NodeVisitor {
     private Link tempLink;
 	private int offset;
 	private boolean inSup = false;
-	private String language = "";
-    private String templateString = null;
+    private LinkExtractorContext context;
 	
-	public LinkExtractor(int startOffset, String language, String templateString) {
+	public LinkExtractor(int startOffset, LinkExtractorContext context) {
         paragraphs = new ArrayList<Paragraph>();
 		offset = startOffset;
-		this.language = language;
-        this.templateString = templateString;
+		this.context = context;
 	}
 	
 	/**
@@ -87,7 +85,7 @@ public class LinkExtractor implements NodeVisitor {
 		 
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
-              if(!tempText.startsWith(templateString + ":"))  //not!
+              if(!tempText.startsWith(this.context.templateString + ":"))  //not!
               {
                   if(tempText.endsWith(" ")) {
 
@@ -99,12 +97,13 @@ public class LinkExtractor implements NodeVisitor {
                   tempLink.setWordEnd(offset);
               }
               else{                                            // -> filter out hidden links to the underlying template
+                  System.err.println(this.context.language + ": found Template in resource : " + this.context.resource + ": " + tempText);
                   offset = beforeOffset;
                   tempText = "";
               }
 		  }
           if(paragraph == null)
-              paragraph = new Paragraph(beforeOffset, "");  
+              paragraph = new Paragraph(beforeOffset, "");
           paragraph.addText(tempText);
 		  text += tempText;
 
@@ -178,9 +177,9 @@ public class LinkExtractor implements NodeVisitor {
 	
 	private String cleanLink(String uri, boolean external) {
 		if(!external) {
-			if(!this.language.equals("en")) {
+			if(!this.context.language.equals("en")) {
 
-				uri="http://"+this.language+".dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);
+				uri="http://"+this.context.language+".dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);
 				
 			} else {
 				uri="http://dbpedia.org/resource/"+uri.substring(uri.indexOf("?title=")+7);
@@ -258,5 +257,16 @@ public class LinkExtractor implements NodeVisitor {
         rep['\\'] = "";
         rep['\u00A0'] = " ";
         return rep;
+    }
+
+    public static class LinkExtractorContext{
+        private String language;
+        private String resource;
+        private String templateString;
+        public LinkExtractorContext(String language, String resource, String templateString){
+            this.language = language;
+            this.resource = resource;
+            this.templateString = templateString;
+        }
     }
 }

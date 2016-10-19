@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dump.sql
 import com.mysql.jdbc.MysqlDataTruncation
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException
 import org.dbpedia.extraction.sources.Source
-import org.dbpedia.extraction.util.StringUtils
+import org.dbpedia.extraction.util.{Language, StringUtils}
 import scala.collection.mutable.HashMap
 import java.lang.StringBuilder
 import java.sql.Connection
@@ -14,7 +14,7 @@ import scala.Console._
 /**
  * This class is basically mwdumper's SqlWriter ported to Scala.
  */
-class Importer(conn: Connection) {
+class Importer(conn: Connection, lang: Language = null) {
   
   private val builders = new HashMap[String, StringBuilder]()
   
@@ -24,7 +24,7 @@ class Importer(conn: Connection) {
   
   private val time = System.currentTimeMillis
     
-  def process(source: Source): Unit = {
+  def process(source: Source): Int = {
     
     for (page <- source) {
       
@@ -40,6 +40,7 @@ class Importer(conn: Connection) {
     
     flush()
     logPages()
+    pages
   }
   
   private def lengthUtf8(text: String): Int = {
@@ -143,8 +144,8 @@ class Importer(conn: Connection) {
     }
     catch {
       // throw our own exception that our XML parser won't catch
-      case icv: MySQLIntegrityConstraintViolationException => err.println("MySQLIntegrityConstraintViolationException occurred: " + icv.getMessage)      //catch unique key violations (which will occur...)
-      case dce: MysqlDataTruncation =>  err.println("MysqlDataTruncation exception occurred: " + dce.getMessage)                             //catch if data is too long for a column
+      case icv: MySQLIntegrityConstraintViolationException => err.println(if (lang != null) lang.wikiCode else "" + "MySQLIntegrityConstraintViolationException occurred: " + icv.getMessage)      //catch unique key violations (which will occur...)
+      case dce: MysqlDataTruncation =>  err.println(if (lang != null) lang.wikiCode else "" + "MysqlDataTruncation exception occurred: " + dce.getMessage)                             //catch if data is too long for a column
       case sqle: SQLException => throw new ImporterException(sqle)
     }
     finally stmt.close
@@ -152,7 +153,7 @@ class Importer(conn: Connection) {
   
   private def logPages(): Unit = {
     val millis = System.currentTimeMillis - time
-    println("imported "+pages+" pages in "+StringUtils.prettyMillis(millis)+" ("+(millis.toDouble/pages)+" millis per page)")
+    println(if (lang != null) lang.wikiCode else "" + "imported "+pages+" pages in "+StringUtils.prettyMillis(millis)+" ("+(millis.toDouble/pages)+" millis per page)")
   }
   
 }
