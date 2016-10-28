@@ -34,7 +34,7 @@ object Import {
     val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
     val namespaceList = namespaces.map(_.name).mkString("[",",","]")
 
-      org.dbpedia.extraction.util.Workers.work(SimpleWorkers(0.5, 1.0){ language : Language =>      //loadfactor: think about disk read speed and mysql processes
+      org.dbpedia.extraction.util.Workers.work(SimpleWorkers(0.3, 1.0){ language : Language =>      //loadfactor: think about disk read speed and mysql processes
 
         val info = new Properties()
         info.setProperty("allowMultiQueries", "true")
@@ -74,7 +74,7 @@ object Import {
                 }
                 finally stmt.close()
 
-                val pages = new Importer(conn).process(source)
+                val pages = new Importer(conn, language).process(source)
 
                 println("imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
               }

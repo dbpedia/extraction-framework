@@ -80,12 +80,10 @@ class AbstractLinkExtractor(
     val context = makeContext(extractionResults._1, subjectUri, sourceUrl, extractionResults._2)
 
     val words = if (context.nonEmpty) makeStructureElements(extractionResults._3, context.head.subject, extractionResults._2).toList else List()
-    val shortAbstract = getShortAbstract(extractionResults._3)
-    println(shortAbstract)
 
     if(!isTestRun && context.nonEmpty) {
       context += longQuad(subjectUri, extractionResults._1, sourceUrl)
-      context += shortQuad(subjectUri, shortAbstract, sourceUrl)
+      context += shortQuad(subjectUri, getShortAbstract(extractionResults._3), sourceUrl)
     }
     context.toList ::: words
   }
