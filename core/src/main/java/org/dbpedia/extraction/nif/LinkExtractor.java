@@ -41,7 +41,7 @@ public class LinkExtractor implements NodeVisitor {
 	
 	public void head(Node node, int depth) {
 
-		if(skipLevel>0) {
+		if(skipLevel>0 || node.attr("style").contains("display:none")) {
 			return;
 		}
 
@@ -66,26 +66,12 @@ public class LinkExtractor implements NodeVisitor {
 				  return;
 			  }
 		  }
-		  
-//          tempText = tempText.replace("\\", "");
-//          tempText = tempText.replace("\n", "");
-//          tempText = tempText.replace("\"", "\\\"");
 		  int beforeOffset = offset;
 		  offset += tempText.length() - StringUtils.countMatches(tempText, "\\");   //length - escape count
-	
-		  //specific fix when there are two paragraphs following each other and the whitespace is missing
-		  if(node.parent().nextSibling()!=null) {
-			  if(node.parent().nodeName().equals("p")
-					  &&node.parent().nextSibling().nodeName().equals("p")
-					  &&!tempText.endsWith(" ")) {
-				  tempText+=" ";
-				  offset++;
-			  }
-		  }
-		 
+
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
-              if(!tempText.startsWith(this.context.templateString + ":"))  //not!
+              if(!tempText.trim().startsWith(this.context.templateString + ":"))  //not!
               {
                   if(tempText.endsWith(" ")) {
 
@@ -151,6 +137,7 @@ public class LinkExtractor implements NodeVisitor {
 				||node.nodeName().equals("i")||node.nodeName().equals("b")||node.nodeName().equals("dfn")||node.nodeName().equals("kbd")
 				||node.nodeName().equals("tt")||node.nodeName().equals("abbr")||node.nodeName().equals("li")) {
 			//don't skip the text in code, sup or sub texts
+			//TODO make this configurable
 		} else if(node.nodeName().equals("sup")) {
 			inSup = true;
 		} else {
@@ -158,7 +145,8 @@ public class LinkExtractor implements NodeVisitor {
 			if(!node.nodeName().equals("span")) {
 					skipLevel = depth;
 			} else {
-				if(node.attr("id").equals("coordinates")||node.attr("class").equals("audio")||node.attr("class").equals("noprint"))
+				//TODO make this configurable
+				if(node.attr("id").equals("coordinates")||node.attr("class").equals("audio")||node.attr("class").equals("noprint")||node.attr("class").contains("error"))
 					skipLevel = depth;
 			}
 			
@@ -224,6 +212,11 @@ public class LinkExtractor implements NodeVisitor {
         if(node.nodeName().equals("p") && paragraph.getLength() > 0) {
             paragraphs.add(paragraph);
             paragraph = null;
+			//specific fix when there are two paragraphs following each other and the whitespace is missing
+			if(text.length() > 0 && !text.endsWith(" ")){
+				text += " ";
+				offset++;
+			}
         }
 
         if(node.nodeName().equals("sup")&&inSup) {
@@ -253,7 +246,6 @@ public class LinkExtractor implements NodeVisitor {
     private String[] replaceChars() {
         String[] rep = new String[256];
         rep['\n'] = "";
-        rep['\"'] = "\\\"";
         rep['\\'] = "";
         rep['\u00A0'] = " ";
         return rep;

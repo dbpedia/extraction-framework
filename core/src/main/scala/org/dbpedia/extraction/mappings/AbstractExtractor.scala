@@ -261,7 +261,7 @@ extends PageNodeExtractor
       ret
     }
 
-    protected def postProcess(pageTitle: WikiTitle, text: String): String =
+    def postProcess(pageTitle: WikiTitle, text: String): String =
     {
       val startsWithLowercase =
       if (text.isEmpty) {
