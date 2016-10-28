@@ -85,7 +85,9 @@ object DBpediaDatasets
     val LongAbstracts = new Dataset("long_abstracts", "Full abstracts of Wikipedia articles, usually the first section.")
     val MissingShortAbstracts = new Dataset("missing_short_abstracts")
     val MissingLongAbstracts = new Dataset("missing_long_abstracts")
-    val LinkedAbstracts = new Dataset("linked_abstracts", "This is a temporary dataset for the NIF extraction of Abstracts. It shall be deleted after NIF extraction is finished.")
+    val NifAbstractContext = new Dataset("nif_abstract_context", "This is a temporary dataset for the NIF extraction of abstracts. It shall be replaced with the full page context in upcoming releases")
+    val NifPageStructure = new Dataset("nif_page_structure", "This dataset contains the page structure of a Wikipedia page, divided in sections and paragraphs.")
+    val NifTextLinks = new Dataset("nif_text_links", "This dataset contains all text links of a Wikipedia page, detailed in the NIF format.")
 
     /**
      * Links

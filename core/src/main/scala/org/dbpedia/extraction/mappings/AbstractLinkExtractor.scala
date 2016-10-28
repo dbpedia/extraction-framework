@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.apache.commons.lang3.{StringEscapeUtils}
 import org.dbpedia.extraction.nif.LinkExtractor.LinkExtractorContext
-import org.dbpedia.extraction.nif.{LinkExtractor, Paragraph}
+import org.dbpedia.extraction.nif.{Link, LinkExtractor, Paragraph}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -42,9 +42,11 @@ class AbstractLinkExtractor(
   protected val writeStrings = protectedParams.get("writeNifStrings").get.asBoolean()
   protected val shortAbstractLength = protectedParams.get("minShortAbstractLength").get.asInt()
 
-  override val datasets = Set(DBpediaDatasets.LinkedAbstracts,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
+  override val datasets = Set(DBpediaDatasets.NifAbstractContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
-  protected lazy val linkedAbstracts = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.LinkedAbstracts.name) _
+  protected lazy val nifContext = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifAbstractContext.name) _
+  protected lazy val nifStructure = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifPageStructure.name) _
+  protected lazy val nifLinks = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifTextLinks.name) _
 
   private val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x
@@ -77,7 +79,7 @@ class AbstractLinkExtractor(
 
     val context = makeContext(extractionResults._1, subjectUri, sourceUrl, extractionResults._2)
 
-    val words = if (context.nonEmpty) makeWordsFromLinks(extractionResults._3, context.head.subject).toList else List()
+    val words = if (context.nonEmpty) makeStructureElements(extractionResults._3, context.head.subject, extractionResults._2).toList else List()
     val shortAbstract = getShortAbstract(extractionResults._3)
     println(shortAbstract)
 
@@ -102,54 +104,73 @@ class AbstractLinkExtractor(
   private def makeContext(text: String, resource: String, sourceUrl: String, contextEnd: Int): ListBuffer[Quad] = {
     var cont = ListBuffer[Quad]()
     //TODO: dbp version!
-    val res = resource + "#nif=context&section=abstract&dbpversion=2016-04&endindex=" + contextEnd
+    val res = resource + "#nif=context"
     if (contextEnd == 0)
       return ListBuffer()
-    cont += linkedAbstracts(res, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#String", null, null)
-    cont += linkedAbstracts(res, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#OffsetBasedString", null, null)
-    cont += linkedAbstracts(res, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Context", null, null)
-    cont += linkedAbstracts(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", "0", null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger" )
-    cont += linkedAbstracts(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", contextEnd.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger" )
-    cont += linkedAbstracts(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#sourceUrl", sourceUrl, null, null)
-    cont += linkedAbstracts(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#isString", text, null, "http://www.w3.org/2001/XMLSchema#string")
-    cont += linkedAbstracts(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#predLang", "http://lexvo.org/id/iso639-3/" + context.language.iso639_3, null, null)
+    cont += nifContext(res, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#String", null, null)
+    cont += nifContext(res, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#OffsetBasedString", null, null)
+    cont += nifContext(res, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Context", null, null)
+    cont += nifContext(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", "0", null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger" )
+    cont += nifContext(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", contextEnd.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger" )
+    cont += nifContext(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#sourceUrl", sourceUrl, null, null)
+    cont += nifContext(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#isString", text, null, "http://www.w3.org/2001/XMLSchema#string")
+    cont += nifContext(res, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#predLang", "http://lexvo.org/id/iso639-3/" + context.language.iso639_3, null, null)
     cont
   }
 
-  private def makeWordsFromLinks(paragraphs: List[Paragraph], contextUri: String): ListBuffer[Quad] = {
-    var words = ListBuffer[Quad]()
-    for(p <- paragraphs) {
-      val paragraph = contextUri.substring(0, contextUri.indexOf('#')) + "#nif=paragraph&section=abstract&dbpversion=2016-04&offset=" + p.getBegin + "_" + p.getEnd
-      words += linkedAbstracts(paragraph, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#String", null, null)
-      words += linkedAbstracts(paragraph, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#OffsetBasedString", null, null)
-      words += linkedAbstracts(paragraph, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Paragraph", null, null)
-      words += linkedAbstracts(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", p.getBegin.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
-      words += linkedAbstracts(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", p.getEnd.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
-      words += linkedAbstracts(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext", contextUri, null, null)
-      if(writeStrings)
-        words += linkedAbstracts(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", p.getText, null, "http://www.w3.org/2001/XMLSchema#string")
+  //TODO update this for whole page structure - at the moment we collect only paragraphs from the abstract - the abstract is section 0 while other sections are numbered by the TOC
+  private def makeStructureElements(paragraphs: List[Paragraph], contextUri: String, contextEnd: Int): ListBuffer[Quad] = {
+    var triples = ListBuffer[Quad]()
+    val abstractUri = contextUri.substring(0, contextUri.indexOf('#')) + "#nif=section&sec=0&dbpv=2016-04&offset=0" + "_" + contextEnd
+    triples += nifStructure(abstractUri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#String", null, null)
+    triples += nifStructure(abstractUri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#OffsetBasedString", null, null)
+    triples += nifStructure(abstractUri, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Section", null, null)
+    triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", "0", null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
+    triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", contextEnd.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
+    triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext", contextUri, null, null)
+    for(i <- paragraphs.indices) {
+      val paragraph = contextUri.substring(0, contextUri.indexOf('#')) + "#nif=paragraph&sec=0&dbpv=2016-04&offset=" + paragraphs(i).getBegin + "_" + paragraphs(i).getEnd
+      triples += nifStructure(paragraph, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#String", null, null)
+      triples += nifStructure(paragraph, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#OffsetBasedString", null, null)
+      triples += nifStructure(paragraph, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Paragraph", null, null)
+      triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", paragraphs(i).getBegin.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
+      triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", paragraphs(i).getEnd.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
+      triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext", contextUri, null, null)
+      if (writeStrings)
+        triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", paragraphs(i).getText, null, "http://www.w3.org/2001/XMLSchema#string")
+      triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#hasParagraph", paragraph, null, null)
+      if(i == 0)
+        triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#firstParagraph", paragraph, null, null)
+      if(i == paragraphs.indices.last)
+        triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#lastParagraph", paragraph, null, null)
 
-      for (link <- p.getLinks.asScala) {
+      triples ++= makeWordsFromLinks(paragraphs(i).getLinks.asScala.toList, contextUri, paragraph)
+    }
+    triples
+  }
+
+  private def makeWordsFromLinks(links: List[Link], contextUri: String, paragraphUri: String): ListBuffer[Quad] = {
+    var words = ListBuffer[Quad]()
+      for (link <- links) {
         if (link.getWordEnd - link.getWordStart > 0) {
           val typ = if (link.getLinkText.split(" ").length > 1)
             "Phrase"
           else
             "Word"
           //TODO: dbp version!
-          val word = contextUri.substring(0, contextUri.indexOf('#')) + "#nif=" + typ.toLowerCase + "&section=abstract&dbpversion=2016-04&offset=" + link.getWordStart + "_" + link.getWordEnd
-          words += linkedAbstracts(word, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#String", null, null)
-          words += linkedAbstracts(word, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#OffsetBasedString", null, null)
-          words += linkedAbstracts(word, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#" + typ, null, null)
-          words += linkedAbstracts(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext", contextUri, null, null)
-          words += linkedAbstracts(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", link.getWordStart.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
-          words += linkedAbstracts(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", link.getWordEnd.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
-          words += linkedAbstracts(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#superString", paragraph, null, null)
-          words += linkedAbstracts(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", link.getUri, null, null)
+          val word = contextUri.substring(0, contextUri.indexOf('#')) + "#nif=" + typ.toString.toLowerCase + "&sec=0&dbpv=2016-04&offset=" + link.getWordStart + "_" + link.getWordEnd
+          words += nifLinks(word, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#String", null, null)
+          words += nifLinks(word, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#OffsetBasedString", null, null)
+          words += nifLinks(word, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#" + typ, null, null)
+          words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext", contextUri, null, null)
+          words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", link.getWordStart.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
+          words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", link.getWordEnd.toString, null, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
+          words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#superString", paragraphUri, null, null)
+          words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", link.getUri, null, null)
           if(writeStrings)
-            words += linkedAbstracts(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", link.getLinkText, null, "http://www.w3.org/2001/XMLSchema#string")
+            words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", link.getLinkText, null, "http://www.w3.org/2001/XMLSchema#string")
         }
       }
-    }
     words
   }
 
