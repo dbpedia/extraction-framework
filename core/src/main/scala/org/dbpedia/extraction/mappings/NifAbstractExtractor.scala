@@ -22,11 +22,13 @@ import scala.collection.convert.decorateAsScala._
   * Based on AbstractExtractor, major difference is the parameter
   * apiParametersFormat = "action=parse&prop=text&section=0&format=xml&page=%s"
   *
-  * Should a new AbstractExtractor be developed, setting this api parameters
-  * should result in the same functionality.
+  * This class produces all nif related datasets for the abstract as well as the short-, long-abstracts datasets.
+  * Where the long abstracts is the nif:isString attribute of the nif instance representing the abstract section of a wikipage.
+  *
+  * We are going to to use this method for generating the abstracts from release 2016-10 onwards.
   */
 
-class AbstractLinkExtractor(
+class NifAbstractExtractor(
      context : {
        def ontology : Ontology
        def language : Language
@@ -81,7 +83,7 @@ class AbstractLinkExtractor(
 
     val words = if (context.nonEmpty) makeStructureElements(extractionResults._3, context.head.subject, extractionResults._2).toList else List()
 
-    if(!isTestRun && context.nonEmpty) {
+    if(!isTestRun && context.nonEmpty) {   //not!
       context += longQuad(subjectUri, extractionResults._1, sourceUrl)
       context += shortQuad(subjectUri, getShortAbstract(extractionResults._3), sourceUrl)
     }

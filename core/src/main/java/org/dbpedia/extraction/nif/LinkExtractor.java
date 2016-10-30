@@ -83,7 +83,7 @@ public class LinkExtractor implements NodeVisitor {
                   tempLink.setWordEnd(offset);
               }
               else{                                            // -> filter out hidden links to the underlying template
-                  System.err.println(this.context.language + ": found Template in resource : " + this.context.resource + ": " + tempText);
+                  System.err.println(this.context.language + ": found Template in resource: " + this.context.resource + ": " + tempText);
                   offset = beforeOffset;
                   tempText = "";
               }

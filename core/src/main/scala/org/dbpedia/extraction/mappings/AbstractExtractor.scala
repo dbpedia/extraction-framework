@@ -16,7 +16,11 @@ import scala.language.reflectiveCalls
 import scala.xml.{NodeSeq, XML}
 
 /**
- * Extracts page abstracts.
+ * Extracts wiki texts like abstracts or sections in html.
+  * NOTE: This class is not only used for abstract extraction but for extracting wiki text of the whole page
+  * The NifAbstract Extractor is extending this class.
+  * All configurations are now outsourced to //extraction-framework/core/src/main/resources/mediawikiconfig.json
+  * change the 'publicParams' entries for tweaking endpoint and time parameters
  *
  * From now on we use MobileFrontend for MW <2.21 and TextExtracts for MW > 2.22
  * The patched mw instance is no longer needed except from minor customizations in LocalSettings.php
@@ -83,10 +87,12 @@ extends PageNodeExtractor
     override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
-        if(pageNode.title.namespace != Namespace.Main) return Seq.empty
+        if(pageNode.title.namespace != Namespace.Main)
+          return Seq.empty
 
         //Don't extract abstracts from redirect and disambiguation pages
-        if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
+        if(pageNode.isRedirect || pageNode.isDisambiguation)
+          return Seq.empty
 
         //Reproduce wiki text for abstract
         //val abstractWikiText = getAbstractWikiText(pageNode)
@@ -94,7 +100,6 @@ extends PageNodeExtractor
 
         //Retrieve page text
         var text = retrievePage(pageNode.title /*, abstractWikiText*/)
-
         text = postProcess(pageNode.title, replacePatterns(text))
 
         if (text.trim.isEmpty)
