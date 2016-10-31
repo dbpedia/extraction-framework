@@ -5,19 +5,18 @@ import org.dbpedia.extraction.util.{Language, StringUtils}
 import java.lang.StringBuilder
 import java.sql.Connection
 import java.sql.SQLException
+import scala.util.{Success, Try}
 import scala.util.control.ControlThrowable
 import scala.Console._
 
 /**
  * This class is basically mwdumper's SqlWriter ported to Scala.
  */
-class Importer(conn: Connection, lang: Language = null) {
+class Importer(conn: Connection, lang: Language) {
   
   private var failedPages = Map[Long, String]()
   
   private var pages = 0
-
-  private var fails = 0
   
   private val time = System.currentTimeMillis
     
@@ -131,10 +130,18 @@ class Importer(conn: Connection, lang: Language = null) {
   }
   
   private def logPages(): Unit = {
-    val millis = System.currentTimeMillis - time
-    println(if (lang != null) lang.wikiCode else "" + "imported "+(pages - (failedPages.size - fails))+
-      " pages in "+StringUtils.prettyMillis(millis)+" ("+(millis.toDouble/pages)+" millis per page)")
-    fails = failedPages.size
+    val sizeQuery = conn.createStatement()
+    val tableSize = Try {
+      val rs = sizeQuery.executeQuery("SELECT TABLE_ROWS FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '" + lang.wikiCode + "wiki' AND TABLE_NAME = 'page';")
+      rs.getObject("TABLE_ROWS").asInstanceOf[Int]
+    }
+    tableSize match{
+      case Success(s) => {
+        val millis = System.currentTimeMillis - time
+        println(if (lang != null) lang.wikiCode else "" + ": imported "+ s + " pages (" + failedPages.size + " failed pages) in "+StringUtils.prettyMillis(millis)+" ("+(millis.toDouble/pages)+" millis per page)")
+      }
+    }
+
   }
 }
 
