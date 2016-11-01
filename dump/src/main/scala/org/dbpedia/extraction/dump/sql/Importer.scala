@@ -16,8 +16,6 @@ class Importer(conn: Connection, lang: Language = null) {
   private var failedPages = Map[Long, String]()
   
   private var pages = 0
-
-  private var fails = 0
   
   private val time = System.currentTimeMillis
     
@@ -30,9 +28,8 @@ class Importer(conn: Connection, lang: Language = null) {
     }
 
     logPages()
-    println("The following pages were not correctly imported:")
     for(fail <- failedPages)
-      println("page failed to import: " + fail._1)
+      println(lang.wikiCode + ": page failed to import: " + fail._1)
 
     pages
   }
@@ -124,7 +121,7 @@ class Importer(conn: Connection, lang: Language = null) {
     }
     catch {
       // throw our own exception that our XML parser won't catch
-      case e: Throwable => println((if (lang != null) lang.wikiCode else "") + ": " + e.getClass.getSimpleName + " occurred for page: " + page.id + " - " + e.getMessage)      //catch unique key violations (which will occur...)
+      case e: Throwable => println(lang.wikiCode + ": " + e.getClass.getSimpleName + " occurred for page: " + page.id + " - " + e.getMessage)      //catch unique key violations (which will occur...)
       failedPages += (page.id -> e.getMessage)
     }
     finally stmt.close()
@@ -132,9 +129,8 @@ class Importer(conn: Connection, lang: Language = null) {
   
   private def logPages(): Unit = {
     val millis = System.currentTimeMillis - time
-    println(if (lang != null) lang.wikiCode else "" + "imported "+(pages - (failedPages.size - fails))+
+    println(lang.wikiCode + ": imported "+(pages - failedPages.size)+
       " pages in "+StringUtils.prettyMillis(millis)+" ("+(millis.toDouble/pages)+" millis per page)")
-    fails = failedPages.size
   }
 }
 

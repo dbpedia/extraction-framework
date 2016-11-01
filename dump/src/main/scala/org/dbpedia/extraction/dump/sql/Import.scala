@@ -21,9 +21,10 @@ object Import {
     val url = args(2)
     val requireComplete = args(3).toBoolean
     val fileName = args(4)
+    val importThreads = args(5).toInt
 
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = parseLanguages(baseDir, args.drop(5))
+    val languages = parseLanguages(baseDir, args.drop(6))
     
     val source = Source.fromFile(tablesFile)(Codec.UTF8)
     val tables =
@@ -34,7 +35,7 @@ object Import {
     val namespaces = Set(Namespace.Template, Namespace.Category, Namespace.Main, Namespace.Module)
     val namespaceList = namespaces.map(_.name).mkString("[",",","]")
 
-      org.dbpedia.extraction.util.Workers.work(SimpleWorkers(0.3, 1.0){ language : Language =>      //loadfactor: think about disk read speed and mysql processes
+      org.dbpedia.extraction.util.Workers.work(SimpleWorkers(importThreads, importThreads){ language : Language =>      //loadfactor: think about disk read speed and mysql processes
 
         val info = new Properties()
         info.setProperty("allowMultiQueries", "true")
@@ -54,7 +55,7 @@ object Import {
               case Some(file) => {
                 val database = finder.wikiName
 
-                println("importing pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
+                println(language.wikiCode + ": importing pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
 
                 /*
             Ignore the page if a different namespace is also given for the title.
@@ -76,7 +77,7 @@ object Import {
 
                 val pages = new Importer(conn, language).process(source)
 
-                println("imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
+                println(language.wikiCode + ": imported " + pages + " pages in namespaces " + namespaceList + " from " + file + " to database " + database + " on server URL " + url)
               }
             }
           }
