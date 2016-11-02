@@ -45,7 +45,7 @@ public class LinkExtractor implements NodeVisitor {
 		if(skipLevel>0)
 			return;
 		//ignore all content inside invisible tags
-		if(invisible || node.attr("style").contains("display:none")) {
+		if(invisible || node.attr("style").matches(".*display\\s*:\\s*none.*")) {
 			invisible = true;
 			return;
 		}
@@ -228,7 +228,7 @@ public class LinkExtractor implements NodeVisitor {
 			inSup = false;
 		}
 
-		if(invisible && node.attr("style").contains("display:none")) {
+		if(invisible && node.attr("style").matches(".*display\\s*:\\s*none.*")) {
 			invisible = false;
 		}
 	}
