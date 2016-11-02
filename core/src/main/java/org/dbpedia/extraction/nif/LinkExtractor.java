@@ -21,6 +21,7 @@ public class LinkExtractor implements NodeVisitor {
     private Link tempLink;
 	private int offset;
 	private boolean inSup = false;
+	private boolean invisible = false;
     private LinkExtractorContext context;
 	
 	public LinkExtractor(int startOffset, LinkExtractorContext context) {
@@ -41,7 +42,11 @@ public class LinkExtractor implements NodeVisitor {
 	
 	public void head(Node node, int depth) {
 
-		if(skipLevel>0 || node.attr("style").contains("display:none")) {
+		if(skipLevel>0)
+			return;
+		//ignore all content inside invisible tags
+		if(invisible || node.attr("style").contains("display:none")) {
+			invisible = true;
 			return;
 		}
 
@@ -222,7 +227,10 @@ public class LinkExtractor implements NodeVisitor {
         if(node.nodeName().equals("sup")&&inSup) {
 			inSup = false;
 		}
-		    	
+
+		if(invisible && node.attr("style").contains("display:none")) {
+			invisible = false;
+		}
 	}
 	
 	public String getText() {
