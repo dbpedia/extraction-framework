@@ -24,6 +24,7 @@ extends UriTripleBuilder(policies) {
     // If URI is bad, comment out whole triple (may happen multiple times)
     if (uri.startsWith(BadUri)) sb.insert(0, "# ")
     this add '<' escape uri add ">"
+    this add ' '
   }
   
   /**
@@ -45,7 +46,8 @@ extends UriTripleBuilder(policies) {
     // do not write xsd:string datatype
     if (datatype != "http://www.w3.org/2001/XMLSchema#string")
       this add "^^" uri(datatype, DATATYPE)
-    this add ' '
+    else
+      this add ' '
   }
   
   override def end(context: String): Unit = {
