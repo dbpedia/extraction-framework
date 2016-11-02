@@ -52,7 +52,7 @@ object Download extends DownloadConfig
       val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
       
       // for all wikis in one of the desired ranges...
-      for (((from, to), files) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
+      for (((from, to), files) <- ranges; wiki <- wikis; if from <= wiki.pages && wiki.pages <= to)
       {
         // ...add files for this range to files for this language
         languages.getOrElseUpdate(wiki.language, new HashSet[(String, Boolean)]) ++= files

@@ -159,8 +159,7 @@ class NifAbstractExtractor(
           words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", link.getWordEnd.toString, sourceUrl, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
           words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#superString", paragraphUri, sourceUrl, null)
           words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", UriUtils.createUri(link.getUri).toString, sourceUrl, null)  //TODO IRI's might throw exception in org.dbpedia.extraction.destinations.formatters please check this
-          if(writeStrings)
-            words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", link.getLinkText, sourceUrl, "http://www.w3.org/2001/XMLSchema#string")
+          words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", link.getLinkText, sourceUrl, "http://www.w3.org/2001/XMLSchema#string")
         }
       }
     words

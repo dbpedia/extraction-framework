@@ -109,32 +109,39 @@ object DownloadConfig
         // "" and "-" are invalid
         if ((from == null || from.isEmpty) && (to == null || to.isEmpty)) throw Usage("invalid date range", arg)
         // "-to" means "min-to"
-        var lo = if (from == null || from.isEmpty) "00000000" else from
+        val lo = if (from == null || from.isEmpty) "00000000" else from
         // "from" means "from-from", "from-" means "from-max"
-        var hi = if (to == null) lo else if (to.isEmpty) "99999999" else to
+        val hi = if (to == null) lo else if (to.isEmpty) "99999999" else to
         if (lo > hi) throw Usage("invalid date range", arg)
         (lo, hi)
       case _ => throw Usage("invalid date range", arg)
     }
   }
   
-  def toInt(str: String, min: Int, max: Int, arg: String): Int =
-  try {
-    val result = str.toInt
-    if (result < min) throw new NumberFormatException(str+" < "+min)
-    if (result > max) throw new NumberFormatException(str+" > "+max)
-    result
+  def toInt(str: String, min: Int, max: Int, arg: String): Int = {
+    try {
+      val result = str.toInt
+      if (result < min) throw new NumberFormatException(str + " < " + min)
+      if (result > max) throw new NumberFormatException(str + " > " + max)
+      result
+    }
+    catch {
+      case nfe: NumberFormatException => throw Usage("invalid integer", arg, nfe)
+    }
   }
-  catch { case nfe: NumberFormatException => throw Usage("invalid integer", arg, nfe) }
-  
-  def toURL(s: String, arg: String): URL =
-  try new URL(s)
-  catch { case mue: MalformedURLException => throw Usage("Invalid URL", arg, mue) }
-  
+
+  def toURL(s: String, arg: String): URL = {
+    try new URL(s)
+    catch {
+      case mue: MalformedURLException => throw Usage("Invalid URL", arg, mue)
+    }
+  }
+
   /**
    * If path is absolute, return it as a File. Otherwise, resolve it against parent.
    * (This method does what the File(File, String) constructor should do. Like URL(URL, String))
-   * @param parent may be null
+    *
+    * @param parent may be null
    * @param path must not be null, may be empty
    */
   def resolveFile(parent: File, path: String): File = {

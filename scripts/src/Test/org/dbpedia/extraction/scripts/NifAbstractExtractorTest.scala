@@ -29,9 +29,9 @@ class NifAbstractExtractorTest extends FunSuite {
     def language = Language.map.get("en").get
   }
   private val extractor = new NifAbstractExtractor(context)
-  private val outFile = new RichFile(new File("/home/extractor/2016-04-extraction/nif-abstracts.ttl"))
+  private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
-  private val titles = List("Biological_warfare", "Bahá'í_Faith")
+  private val titles = List("SENAN", "Bahá'í_Faith")
 
   test("testExtractNif") {
     dest.open()
