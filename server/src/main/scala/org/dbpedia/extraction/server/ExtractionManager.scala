@@ -1,16 +1,17 @@
 package org.dbpedia.extraction.server
 
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.ontology.Ontology
-import scala.xml.Elem
-import java.util.logging.{Level, Logger}
-import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.sources.{XMLSource, WikiSource, Source, WikiPage}
-import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.wikiparser._
 import java.io.File
-import java.net.URL
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.destinations.Destination
+import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.sources.{Source, WikiPage, WikiSource, XMLSource}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
+
+import scala.xml.Elem
 
 /**
  * Base class for extraction managers.
@@ -61,7 +62,7 @@ abstract class ExtractionManager(
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
       val extract = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
       destination.open()
-      for (page <- source) destination.write(extract(page))
+      for (page <- source) destination.write(extract.extract(page))
       destination.close()
     }
 
