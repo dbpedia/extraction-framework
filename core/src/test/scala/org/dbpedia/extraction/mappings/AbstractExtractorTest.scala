@@ -51,12 +51,14 @@ class AbstractExtractorTest
         val page = new FileSource(testDataRootDir, Language.English, _ endsWith fileName).head
 
       //return empty Abstract in case that the parser Returned None
+      //val generatedAbstract = extractor.retrievePage(n.title)
       parser(page) match {
-        case Some(n) =>  val generatedAbstract = extractor.retrievePage(n.title)
-                         extractor.retrievePage(page.title/*, generatedAbstract*/)
+        case Some(n) => extractor.retrievePage(page.title, page.id/*, generatedAbstract*/) match{
+            case Some(l) => l
+            case None => ""
+        }
         case None => ""
       }
-
     }
 
     private def gold(fileName : String) : String =

@@ -15,6 +15,7 @@ import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{UriUtils, WikiUtil, Language}
 import scala.collection.convert.decorateAsScala._
+import scala.util.{Failure, Success, Try}
 
 /**
   * Extracts page abstract html.
@@ -66,30 +67,39 @@ class NifAbstractExtractor(
     if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
     //Retrieve page text
-    var html = super.retrievePage(pageNode.title /*, abstractWikiText*/)
+    val html = retrievePage(pageNode.title, pageNode.id) match{
+      case Some(t) => postProcess(pageNode.title, t)
+      case None => return Seq.empty
+    }
 
-    html = super.postProcess(pageNode.title, html)
-
-    if (html.trim.isEmpty)
-      return Seq.empty
-
-    extractNif(pageNode.sourceUri, subjectUri, html)
+    extractNif(pageNode, subjectUri, html)
   }
 
-  def extractNif(sourceUrl: String, subjectUri: String, html: String): List[Quad] = {
+  def extractNif(pageNode : PageNode, subjectUri: String, html: String): List[Quad] = {
+
     val paragraphs = getRelevantParagraphs(html)
 
-    val extractionResults = getLinkAndText(paragraphs, new LinkExtractorContext(language, subjectUri, templateString))
+    extractTextFromHtml(paragraphs, new LinkExtractorContext(language, subjectUri, templateString)) match {
+      case Success(extractionResults) => {
 
-    val context = makeContext(extractionResults._1, subjectUri, sourceUrl, extractionResults._2)
+        val context = makeContext(extractionResults.text, subjectUri, pageNode.sourceUri, extractionResults.length)
 
-    val words = if (context.nonEmpty) makeStructureElements(extractionResults._3, context.head.subject, sourceUrl, extractionResults._2).toList else List()
+        val words = if (context.nonEmpty)
+          makeStructureElements(extractionResults.paragraphs, context.head.subject, pageNode.sourceUri, extractionResults.length).toList
+        else List()
 
-    if(!isTestRun && context.nonEmpty) {   //not!
-      context += longQuad(subjectUri, extractionResults._1, sourceUrl)
-      context += shortQuad(subjectUri, getShortAbstract(extractionResults._3), sourceUrl)
+        if (!isTestRun && context.nonEmpty) {
+          //not!
+          context += longQuad(subjectUri, extractionResults.text, pageNode.sourceUri)
+          context += shortQuad(subjectUri, getShortAbstract(extractionResults.paragraphs), pageNode.sourceUri)
+        }
+        context.toList ::: words
+      }
+      case Failure(e) => {
+        super.storeFailedPage(pageNode.id, pageNode.title, e)
+        List.empty
+      }
     }
-    context.toList ::: words
   }
 
   private def getShortAbstract(paragraphs: List[Paragraph]): String = {
@@ -165,30 +175,30 @@ class NifAbstractExtractor(
     words
   }
 
-  private def getLinkAndText(line: String, extractionContext: LinkExtractorContext): (String, Int, List[Paragraph]) = {
-    var paragraphs = List[Paragraph]()
-    val doc: Document = Jsoup.parse("<span>" + line + "</span>")
-    var abstractText: String = ""
-    val nodes = doc.select("body").first.childNodes.asScala
-    var offset: Int = 0
-    for (elementNode <- nodes) {
-      if (elementNode.nodeName == "#text") {
-        val txtParagraph = extractTextParagraph(elementNode.toString.trim)
-        if(txtParagraph._1.length > 0 && abstractText.length > 0) {
-          abstractText += " " + txtParagraph._1
-          offset += 1 + txtParagraph._2
-        }
-        else
-          {
+  private def extractTextFromHtml(line: String, extractionContext: LinkExtractorContext): Try[TempHtmlExtractionResults] = {
+    Try {
+      var paragraphs = List[Paragraph]()
+      val doc: Document = Jsoup.parse("<span>" + line + "</span>")
+      var abstractText: String = ""
+      val nodes = doc.select("body").first.childNodes.asScala
+      var offset: Int = 0
+      for (elementNode <- nodes) {
+        if (elementNode.nodeName == "#text") {
+          val txtParagraph = extractTextParagraph(elementNode.toString.trim)
+          if (txtParagraph._1.length > 0 && abstractText.length > 0) {
+            abstractText += " " + txtParagraph._1
+            offset += 1 + txtParagraph._2
+          }
+          else {
             abstractText += txtParagraph._1
             offset += txtParagraph._2
           }
-      }
-      else {
-        val extractor: LinkExtractor = new LinkExtractor(offset, extractionContext)
-        val traversor: NodeTraversor = new NodeTraversor(extractor)
-        traversor.traverse(elementNode)
-        val cleanedLinkText = WikiUtil.cleanSpace(extractor.getText).trim
+        }
+        else {
+          val extractor: LinkExtractor = new LinkExtractor(offset, extractionContext)
+          val traversor: NodeTraversor = new NodeTraversor(extractor)
+          traversor.traverse(elementNode)
+          val cleanedLinkText = WikiUtil.cleanSpace(extractor.getText).trim
           if (cleanedLinkText.length > 0 && abstractText.length > 0) {
             offset = 1 + extractor.getOffset - (extractor.getText.length - cleanedLinkText.length)
             abstractText += " " + cleanedLinkText
@@ -198,21 +208,22 @@ class NifAbstractExtractor(
             abstractText += cleanedLinkText
           }
           paragraphs ++= extractor.getParagraphs.asScala
+        }
       }
-    }
-    var beforeTrim: Int = 0
-    var offsetReduce: Int = 0
-    if (!abstractText.startsWith(" ") && abstractText.endsWith(" ")) {
-      beforeTrim = abstractText.length
-      abstractText = abstractText.trim
-      if (beforeTrim > abstractText.length) {
-        offsetReduce = beforeTrim - abstractText.length
+      var beforeTrim: Int = 0
+      var offsetReduce: Int = 0
+      if (!abstractText.startsWith(" ") && abstractText.endsWith(" ")) {
+        beforeTrim = abstractText.length
+        abstractText = abstractText.trim
+        if (beforeTrim > abstractText.length) {
+          offsetReduce = beforeTrim - abstractText.length
+        }
       }
+      if (offsetReduce > 0) {
+        offset -= offsetReduce
+      }
+      new TempHtmlExtractionResults(abstractText, offset, paragraphs)
     }
-    if (offsetReduce > 0) {
-      offset -= offsetReduce
-    }
-    (abstractText, offset, paragraphs)
   }
 
   private def extractTextParagraph(text: String): (String, Int) ={
@@ -282,4 +293,10 @@ class NifAbstractExtractor(
 
     sb.toString.substring(1)   //delete first space (see init of l)
   }
+
+  private class TempHtmlExtractionResults(
+    val text: String,
+    val length: Int,
+    val paragraphs: List[Paragraph]
+  )
 }

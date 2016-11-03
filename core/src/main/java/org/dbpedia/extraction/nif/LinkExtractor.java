@@ -55,7 +55,10 @@ public class LinkExtractor implements NodeVisitor {
 		  //replace no-break spaces because unescape doesn't deal with them
 		  tempText = StringEscapeUtils.unescapeHtml4(tempText);
           tempText = org.dbpedia.extraction.util.StringUtils.escape(tempText, replaceChars());
-		  
+
+			if(tempText.trim().length() == 0 && (text.endsWith(" ") || text.endsWith("(") | text.endsWith("[") | text.endsWith("{")))
+				return;
+
 		  //exclude spoken versions, citation numbers etc
 		  if(tempText.equals("Listen")) {
 		  	return;
@@ -93,10 +96,11 @@ public class LinkExtractor implements NodeVisitor {
                   tempText = "";
               }
 		  }
-          if(paragraph == null)
-              paragraph = new Paragraph(beforeOffset, "");
-          paragraph.addText(tempText);
-		  text += tempText;
+
+			if(paragraph == null)
+			  paragraph = new Paragraph(beforeOffset, "");
+			paragraph.addText(tempText);
+			text += tempText;
 
 		} else if(node.nodeName().equals("a")) {
             String link = node.attr("href");
@@ -214,7 +218,7 @@ public class LinkExtractor implements NodeVisitor {
 			tempLink = new Link();
 		}
 
-        if(node.nodeName().equals("p") && paragraph.getLength() > 0) {
+        if(node.nodeName().equals("p") && paragraph != null && paragraph.getLength() > 0) {
             paragraphs.add(paragraph);
             paragraph = null;
 			//specific fix when there are two paragraphs following each other and the whitespace is missing

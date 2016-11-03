@@ -1,18 +1,19 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.{InputStream, OutputStreamWriter}
+import java.io.{File, InputStream, OutputStreamWriter}
 import java.net.URL
-import java.util.logging.{Level, Logger}
+import java.util.logging.Logger
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{JsonConfig, Language}
+import org.dbpedia.extraction.util.{RichFile, IOUtils, JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.util.text.ParseExceptionIgnorer
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
+import scala.collection.mutable
 import scala.io.Source
 import scala.language.reflectiveCalls
+import scala.util.{Failure, Success, Try}
 import scala.xml.{NodeSeq, XML}
 
 /**
@@ -41,28 +42,40 @@ class AbstractExtractor(
 extends PageNodeExtractor
 {
 
+  private var failedPages = Map[Language, scala.collection.mutable.Map[(Long, WikiTitle), Throwable]]()
+
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
   protected val abstractParams = new JsonConfig(this.getClass.getClassLoader.getResource("mediawikiconfig.json"))
   protected val publicParames = abstractParams.getMap("publicParams")
   protected val protectedParams = abstractParams.getMap("protectedParams")
 
-  protected val isTestRun = protectedParams.get("isTestRun").get.asBoolean()
+  protected val failLogFile = new File(publicParames.get("failedPagesLog").get.asText())
+  failLogFile.createNewFile()
 
-  protected val xmlPath = protectedParams.get("apiNormalXmlPath").get.asText().split(",").map(_.trim)
-
-  protected def apiUrl: URL = new URL(publicParames.get("apiUri").get.asText())
+  protected def apiUrl: URL = new URL(publicParames.get("apiUrl").get.asText())
+  require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
   protected val maxRetries = publicParames.get("maxRetries").get.asInt
+  require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
 
     /** timeout for connection to web server, milliseconds */
   protected val connectMs = publicParames.get("connectMs").get.asInt
+  require(connectMs > 200, "connectMs shall be more than 200 ms!")
 
     /** timeout for result from web server, milliseconds */
   protected val readMs = publicParames.get("readMs").get.asInt
+  require(readMs > 1000, "readMs shall be more than 1000 ms!")
 
     /** sleep between retries, milliseconds, multiplied by CPU load */
   protected val sleepFactorMs = publicParames.get("sleepFactorMs").get.asInt
+  require(sleepFactorMs > 200, "sleepFactorMs shall be more than 200 ms!")
+
+
+  /** protected params ... */
+  protected val isTestRun = protectedParams.get("isTestRun").get.asBoolean()
+
+  protected val xmlPath = protectedParams.get("apiNormalXmlPath").get.asText().split(",").map(_.trim)
 
   protected val language = context.language.wikiCode
 
@@ -99,11 +112,10 @@ extends PageNodeExtractor
         // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
-        var text = retrievePage(pageNode.title /*, abstractWikiText*/)
-        text = postProcess(pageNode.title, replacePatterns(text))
-
-        if (text.trim.isEmpty)
-          return Seq.empty
+        val text = retrievePage(pageNode.title, pageNode.id) match{
+          case Some(t) => postProcess(pageNode.title, replacePatterns(t))
+          case None => return Seq.empty
+        }
 
         //Create a short version of the abstract
         val shortText = short(text)
@@ -129,7 +141,7 @@ extends PageNodeExtractor
      * @param pageTitle The encoded title of the page
      * @return The page as an Option
      */
-    def retrievePage(pageTitle : WikiTitle/*, pageWikiText : String*/) : String =
+    def retrievePage(pageTitle : WikiTitle, pageId: Long) : Option[String] =
     {
       // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
       // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
@@ -158,7 +170,13 @@ extends PageNodeExtractor
           writer.close()
 
           // Read answer
-          return readInAbstract(conn.getInputStream)
+          return readInAbstract(conn.getInputStream) match{
+            case Success(str) => Option(str)
+            case Failure(e) =>{
+              storeFailedPage(pageId, pageTitle, e)
+              None
+            }
+          }
         }
         catch
         {
@@ -180,25 +198,24 @@ extends PageNodeExtractor
             }
 
             if (counter < maxRetries) {
-              logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
+              //logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
               Thread.sleep(sleepMs)
             }
             else {
               ex match {
-                case e : java.net.SocketTimeoutException => logger.log(Level.INFO,
-                  "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
-                    loadFactor, ex)
-                case _ => logger.log(Level.INFO,
-                  "Error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
-                    loadFactor, ex)
+                case e : java.net.SocketTimeoutException => storeFailedPage(pageId, pageTitle, new Exception(
+                  "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex))
+                case _ => storeFailedPage(pageId, pageTitle, new Exception(
+                  "Unknown error when retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
+                    loadFactor, ex))
               }
             }
           }
         }
 
       }
-
-      throw new Exception("Could not retrieve abstract for page: " + pageTitle)
+      storeFailedPage(pageId, pageTitle, new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded))
+      None
     }
 
     /**
@@ -243,7 +260,7 @@ extends PageNodeExtractor
      * <api> <query> <pages> <page> <extract> ABSTRACT_TEXT <extract> <page> <pages> <query> <api>
      *  ///  <api> <parse> <text> ABSTRACT_TEXT </text> </parse> </api>
      */
-    private def readInAbstract(inputStream : InputStream) : String =
+    private def readInAbstract(inputStream : InputStream) : Try[String] =
     {
       // for XML format
       val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
@@ -352,12 +369,37 @@ extends PageNodeExtractor
     }
     */
 
-    def decodeHtml(text: String): String = {
+    def decodeHtml(text: String): Try[String] = {
       val coder = new HtmlCoder(XmlCodes.NONE)
-      coder.setErrorHandler(ParseExceptionIgnorer.INSTANCE)
-      coder.code(text)
+      Try(coder.code(text))
     }
 
+  /**
+    * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
+    *
+    * @return the failed pages (id, title) for every Language
+    */
+  override def listFailedPages: Map[Language, mutable.Map[(Long, WikiTitle), Throwable]] = failedPages
+
+  protected def storeFailedPage(id: Long, title: WikiTitle, exception: Throwable): Unit={
+    failedPages.get(title.language) match{
+      case Some(map) => map += ((id,title) -> exception)
+      case None =>  failedPages += title.language -> mutable.Map[(Long, WikiTitle), Throwable]((id, title) -> exception)
+    }
+    System.err.println(title.language.wikiCode + ": Extraction failed for page " + id + ": " + title.encoded)
+  }
+
+  def writeFailLogFile(): Unit = {
+    val out = IOUtils.writer(new RichFile(failLogFile))
+
+    for(lanfFails <- failedPages)
+      for(fail <- lanfFails._2) {
+        out.write("page " + fail._1._1 + ": " + fail._1._2.encoded + ": " + fail._2.getMessage + "\n")
+        for(ste <- fail._2.getStackTrace)
+          out.write(ste.toString + "\n")
+      }
+    out.close()
+  }
 }
 
 object AbstractExtractor {

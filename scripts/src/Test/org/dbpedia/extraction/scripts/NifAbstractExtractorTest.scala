@@ -6,7 +6,7 @@ import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.mappings.NifAbstractExtractor
 import org.dbpedia.extraction.util.{IOUtils, RichFile, Language}
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{PageNode, Namespace, WikiTitle}
 import org.scalatest.FunSuite
 
 /**
@@ -26,23 +26,34 @@ class NifAbstractExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-    def language = Language.map.get("en").get
+    def language = Language.map.get("de").get
   }
   private val extractor = new NifAbstractExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
-  private val titles = List("SENAN", "Bahá'í_Faith")
+  private val titles = List("Dresden", "Liste_der_Gemeinden_in_der_Provinz_Asti")
 
   test("testExtractNif") {
     dest.open()
-    for(title <- titles)
-      dest.write(extractor.extractNif("https://wikipedia.org/wiki/" + title, "http://dbpedia.org/resource/" + title, getHtml(title)))
+    for(title <- titles){
+      val wt = new WikiTitle(title, Namespace.Main, context.language)
+      val pn = new PageNode(wt,0l, 0l,0l,0l,"", false, false)
+      dest.write(extractor.extractNif(pn, "http://dbpedia.org/resource/" + title, getHtml(wt)))
+    }
     dest.close()
+
+    extractor.listFailedPages.get(context.language) match{
+      case Some(fails)=> for(fail <- fails)
+        println("Filed Page: " + fail._1._2.encoded + " with exception: " + fail._2.getMessage)
+      case None =>
+    }
+    extractor.writeFailLogFile()
   }
 
-  private def getHtml(title:String): String={
-    val wt = new WikiTitle(title, Namespace.Main, context.language)
-    val html = extractor.postProcess(wt, extractor.retrievePage(wt))
-    html
+  private def getHtml(title:WikiTitle): String={
+    extractor.retrievePage(title, 0l) match{
+      case Some(pc) => extractor.postProcess(title, pc)
+      case None => ""
+    }
   }
 }
