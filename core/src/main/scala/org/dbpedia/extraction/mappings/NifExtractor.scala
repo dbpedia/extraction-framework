@@ -29,7 +29,7 @@ import scala.util.{Failure, Success, Try}
   * We are going to to use this method for generating the abstracts from release 2016-10 onwards.
   */
 
-class NifAbstractExtractor(
+class NifExtractor(
      context : {
        def ontology : Ontology
        def language : Language
@@ -96,7 +96,7 @@ class NifAbstractExtractor(
         context.toList ::: words
       }
       case Failure(e) => {
-        super.storeFailedPage(pageNode.id, pageNode.title, e)
+        super.recordFailedPage(pageNode.id, pageNode.title, e)
         List.empty
       }
     }

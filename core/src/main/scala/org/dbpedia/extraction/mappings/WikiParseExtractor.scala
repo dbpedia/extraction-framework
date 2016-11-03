@@ -2,9 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
-import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 
 /**
  * User: hadyelsahar
@@ -19,7 +17,7 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
  * @param extractors  Sequence of next level Extractors
  *
  * */
- class WikiParseExtractor(extractors: CompositePageNodeExtractor)extends Extractor[WikiPage]{
+ class WikiParseExtractor(extractors: CompositePageNodeExtractor)extends WikiPageExtractor{
 
   override val datasets: Set[Dataset] = extractors.datasets
 

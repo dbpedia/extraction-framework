@@ -278,7 +278,7 @@ extends Extractor[TableNode]
             }
 
             //Give up and consider this two matchings as equal
-            0;
+            0
         }
     }
 }

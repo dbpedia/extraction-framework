@@ -34,7 +34,9 @@ class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val 
       this(title, redirect, id, revision, timestamp, 0, "", source, "")
       
     override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
-    
+
+    def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+
     /**
      * Serializes this page to XML using the MediaWiki export format.
      * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.8.

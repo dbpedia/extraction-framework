@@ -32,20 +32,20 @@ extends WikiPageExtractor
 
         case _ :PageNodeExtractor =>  pageNodeExtractors  += extractor.asInstanceOf[PageNodeExtractor]           //select all extractors which take PageNode to wrap them in WikiParseExtractor
         case _ :JsonNodeExtractor =>  jsonNodeExtractors  += extractor.asInstanceOf[JsonNodeExtractor]
-        case _ :WikiPageExtractor =>  wikiPageExtractors  += extractor.asInstanceOf[Extractor[WikiPage]]           //select all extractors which take Wikipage to wrap them in a CompositeExtractor
+        case _ :WikiPageExtractor =>  wikiPageExtractors  += extractor.asInstanceOf[WikiPageExtractor]           //select all extractors which take Wikipage to wrap them in a CompositeExtractor
         case _ =>
       }
     }
 
-    if (!wikiPageExtractors.isEmpty)
+    if (wikiPageExtractors.nonEmpty)
       finalExtractors += new CompositeWikiPageExtractor(wikiPageExtractors :_*)
 
     //create and load WikiParseExtractor here
-    if (!pageNodeExtractors.isEmpty)
+    if (pageNodeExtractors.nonEmpty)
       finalExtractors += new WikiParseExtractor(new CompositePageNodeExtractor(pageNodeExtractors :_*))
 
     //create and load JsonParseExtractor here
-    if (!jsonNodeExtractors.isEmpty)
+    if (jsonNodeExtractors.nonEmpty)
       finalExtractors += new JsonParseExtractor(new CompositeJsonNodeExtractor(jsonNodeExtractors :_*))
 
     if (finalExtractors.isEmpty)

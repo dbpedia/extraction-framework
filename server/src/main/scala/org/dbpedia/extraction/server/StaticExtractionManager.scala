@@ -21,15 +21,15 @@ class StaticExtractionManager(
   customTestExtractors: Map[Language, Seq[Class[_ <: Extractor[_]]]])
 extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, customTestExtractors)
 {
-    @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
+    @volatile private lazy val _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages()
 
-    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
+    @volatile private lazy val _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages()
 
-    @volatile private lazy val _ontology : Ontology = loadOntology
+    @volatile private lazy val _ontology : Ontology = loadOntology()
 
-    @volatile private lazy val _mappings : Map[Language, Mappings] = loadMappings
+    @volatile private lazy val _mappings : Map[Language, Mappings] = loadMappings()
 
-    @volatile private lazy val _extractors : Map[Language, RootExtractor] = loadMappingTestExtractors
+    @volatile private lazy val _extractors : Map[Language, WikiPageExtractor] = loadMappingTestExtractors()
 
 
     def mappingExtractor(language : Language) = _extractors(language)

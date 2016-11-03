@@ -6,7 +6,6 @@ import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
-import scala.collection.immutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 import scala.language.{postfixOps, reflectiveCalls}
 
@@ -93,6 +92,4 @@ extends WikiPageExtractor {
       case e: NumberFormatException => -1
     }
   }
-
-
 }

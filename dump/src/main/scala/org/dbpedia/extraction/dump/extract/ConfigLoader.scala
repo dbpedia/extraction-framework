@@ -145,7 +145,7 @@ class ConfigLoader(config: Config)
 
         val extractionJobNS = if(lang == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
 
-        new ExtractionJob(new RootExtractor(extractor), context.articlesSource, extractionJobNS, destination, lang.wikiCode, description)
+        new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, lang.wikiCode, description)
     }
     
     private def writer(file: File): () => Writer = {

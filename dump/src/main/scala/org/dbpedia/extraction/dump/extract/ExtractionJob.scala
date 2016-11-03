@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.dump.extract
 
 import java.util.logging.{Level, Logger}
+
 import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.mappings.RootExtractor
-import org.dbpedia.extraction.sources.{Source,WikiPage}
-import org.dbpedia.extraction.wikiparser.{Namespace,WikiParser}
+import org.dbpedia.extraction.mappings.WikiPageExtractor
+import org.dbpedia.extraction.sources.{Source, WikiPage}
 import org.dbpedia.extraction.util.SimpleWorkers
+import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.util.Exceptions
 
 /**
@@ -17,7 +18,7 @@ import org.dbpedia.util.Exceptions
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
  * @param label user readable label of this extraction job.
  */
-class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String)
+class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String)
 {
   private val logger = Logger.getLogger(getClass.getName)
 
@@ -28,7 +29,7 @@ class ExtractionJob(extractor: RootExtractor, source: Source, namespaces: Set[Na
     try {
       if (namespaces.contains(page.title.namespace)) {
         //val graph = extractor(parser(page))
-        val graph = extractor(page)
+        val graph = extractor.extract(page)
         destination.write(graph)
       }
       success = true

@@ -24,9 +24,6 @@ class PageNode (
   val isRedirect: Boolean,
   val isDisambiguation: Boolean,
   children: List[Node] = List.empty
-
-
-
 ) 
 extends Node(children, 0)
 {
@@ -35,6 +32,9 @@ extends Node(children, 0)
     def toPlainText = children.map(_.toPlainText).mkString
 
     def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
+
+    //Generate the page URI
+    def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
 
     override def equals(other : Any) = other match
     {

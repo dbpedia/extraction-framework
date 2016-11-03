@@ -29,9 +29,6 @@ class SimplePropertyMapping (
     def language : Language
   }
 )
-
-
-
 extends PropertyMapping
 {
     val selector: List[_] => List[_] =

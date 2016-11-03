@@ -4,7 +4,7 @@ import java.io.File
 
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.WriterDestination
-import org.dbpedia.extraction.mappings.NifAbstractExtractor
+import org.dbpedia.extraction.mappings.NifExtractor
 import org.dbpedia.extraction.util.{IOUtils, RichFile, Language}
 import org.dbpedia.extraction.wikiparser.{PageNode, Namespace, WikiTitle}
 import org.scalatest.FunSuite
@@ -22,13 +22,13 @@ import org.scalatest.FunSuite
   *    - switch isTestRun to true (no ontology is loaded, short/long-abstracts datasets are skipped)
   *    - for debugging switch writeNifStrings to true so that every nif instance has a string representation (turn this to false in the extraction!!!)
   */
-class NifAbstractExtractorTest extends FunSuite {
+class NifExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
     def language = Language.map.get("de").get
   }
-  private val extractor = new NifAbstractExtractor(context)
+  private val extractor = new NifExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   private val titles = List("Dresden", "Liste_der_Gemeinden_in_der_Provinz_Asti")
@@ -47,7 +47,6 @@ class NifAbstractExtractorTest extends FunSuite {
         println("Filed Page: " + fail._1._2.encoded + " with exception: " + fail._2.getMessage)
       case None =>
     }
-    extractor.writeFailLogFile()
   }
 
   private def getHtml(title:WikiTitle): String={

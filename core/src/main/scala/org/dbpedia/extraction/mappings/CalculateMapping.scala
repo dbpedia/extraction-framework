@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.dataparser._
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
+import org.dbpedia.extraction.ontology.datatypes._
+import org.dbpedia.extraction.ontology.{DBpediaNamespace, Ontology, OntologyProperty}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.TemplateNode
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.ontology.datatypes._
-import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.wikiparser.TemplateNode
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.ontology.{OntologyClass, Ontology, DBpediaNamespace, OntologyProperty}
 
 class CalculateMapping (
   val templateProperty1 : String,
@@ -126,5 +127,4 @@ extends PropertyMapping
 
     graph
   }
-
 }

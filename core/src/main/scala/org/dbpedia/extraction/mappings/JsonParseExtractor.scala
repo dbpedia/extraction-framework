@@ -17,7 +17,7 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
  * @param extractors a Sequence of CompositeJsonNodeExtractor
  *
  * */
- class JsonParseExtractor(extractors: CompositeJsonNodeExtractor)extends Extractor[WikiPage]{
+ class JsonParseExtractor(extractors: CompositeJsonNodeExtractor)extends WikiPageExtractor{
 
   override val datasets: Set[Dataset] = extractors.datasets
 

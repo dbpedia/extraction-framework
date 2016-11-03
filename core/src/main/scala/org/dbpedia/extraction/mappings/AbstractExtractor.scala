@@ -6,11 +6,10 @@ import java.util.logging.Logger
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{RichFile, IOUtils, JsonConfig, Language}
+import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
-import scala.collection.mutable
 import scala.io.Source
 import scala.language.reflectiveCalls
 import scala.util.{Failure, Success, Try}
@@ -41,9 +40,6 @@ class AbstractExtractor(
 )
 extends PageNodeExtractor
 {
-
-  private var failedPages = Map[Language, scala.collection.mutable.Map[(Long, WikiTitle), Throwable]]()
-
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
   protected val abstractParams = new JsonConfig(this.getClass.getClassLoader.getResource("mediawikiconfig.json"))
@@ -173,7 +169,7 @@ extends PageNodeExtractor
           return readInAbstract(conn.getInputStream) match{
             case Success(str) => Option(str)
             case Failure(e) =>{
-              storeFailedPage(pageId, pageTitle, e)
+              recordFailedPage(pageId, pageTitle, e)
               None
             }
           }
@@ -203,9 +199,9 @@ extends PageNodeExtractor
             }
             else {
               ex match {
-                case e : java.net.SocketTimeoutException => storeFailedPage(pageId, pageTitle, new Exception(
+                case e : java.net.SocketTimeoutException => recordFailedPage(pageId, pageTitle, new Exception(
                   "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex))
-                case _ => storeFailedPage(pageId, pageTitle, new Exception(
+                case _ => recordFailedPage(pageId, pageTitle, new Exception(
                   "Unknown error when retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
                     loadFactor, ex))
               }
@@ -214,7 +210,7 @@ extends PageNodeExtractor
         }
 
       }
-      storeFailedPage(pageId, pageTitle, new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded))
+      recordFailedPage(pageId, pageTitle, new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded))
       None
     }
 
@@ -374,32 +370,7 @@ extends PageNodeExtractor
       Try(coder.code(text))
     }
 
-  /**
-    * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
-    *
-    * @return the failed pages (id, title) for every Language
-    */
-  override def listFailedPages: Map[Language, mutable.Map[(Long, WikiTitle), Throwable]] = failedPages
 
-  protected def storeFailedPage(id: Long, title: WikiTitle, exception: Throwable): Unit={
-    failedPages.get(title.language) match{
-      case Some(map) => map += ((id,title) -> exception)
-      case None =>  failedPages += title.language -> mutable.Map[(Long, WikiTitle), Throwable]((id, title) -> exception)
-    }
-    System.err.println(title.language.wikiCode + ": Extraction failed for page " + id + ": " + title.encoded)
-  }
-
-  def writeFailLogFile(): Unit = {
-    val out = IOUtils.writer(new RichFile(failLogFile))
-
-    for(lanfFails <- failedPages)
-      for(fail <- lanfFails._2) {
-        out.write("page " + fail._1._1 + ": " + fail._1._2.encoded + ": " + fail._2.getMessage + "\n")
-        for(ste <- fail._2.getStackTrace)
-          out.write(ste.toString + "\n")
-      }
-    out.close()
-  }
 }
 
 object AbstractExtractor {

@@ -29,9 +29,9 @@ abstract class ExtractionManager(
     
     private val logger = Logger.getLogger(classOf[ExtractionManager].getName)
 
-    def mappingExtractor(language : Language) : RootExtractor
+    def mappingExtractor(language : Language) : WikiPageExtractor
 
-    def customExtractor(language : Language) : RootExtractor
+    def customExtractor(language : Language) : WikiPageExtractor
 
     def ontology() : Ontology
 
@@ -175,25 +175,23 @@ abstract class ExtractionManager(
         new OntologyReader().read(ontologyPages.values)
     }
 
-    protected def loadMappingTestExtractors(): Map[Language, RootExtractor] =
+    protected def loadMappingTestExtractors(): Map[Language, WikiPageExtractor] =
     {
         val extractors = languages.map(lang => (lang, loadExtractors(lang, mappingTestExtractors))).toMap
         logger.info("All mapping test extractors loaded for languages "+languages.map(_.wikiCode).sorted.mkString(","))
         extractors
     }
 
-    protected def loadCustomTestExtractors(): Map[Language, RootExtractor] =
+    protected def loadCustomTestExtractors(): Map[Language, WikiPageExtractor] =
     {
       val extractors = languages.map(lang => (lang, loadExtractors(lang,customTestExtractors(lang)))).toMap
       logger.info("All custom extractors loaded for languages "+languages.map(_.wikiCode).sorted.mkString(","))
       extractors
     }
 
-    protected def loadExtractors(lang : Language, classes: Seq[Class[_ <: Extractor[_]]]): RootExtractor =
+    protected def loadExtractors(lang : Language, classes: Seq[Class[_ <: Extractor[_]]]): WikiPageExtractor =
     {
-      new RootExtractor(
         CompositeParseExtractor.load(classes,self.getExtractionContext(lang))
-      )
     }
 
     protected def getExtractionContext(lang: Language) = {

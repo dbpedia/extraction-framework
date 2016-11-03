@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser.{Node, TemplateNode}
+import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.destinations.Quad
-import org.dbpedia.extraction.dataparser.StringParser
 
 class ConditionalMapping( 
   val cases : List[ConditionMapping], // must be public val for statistics

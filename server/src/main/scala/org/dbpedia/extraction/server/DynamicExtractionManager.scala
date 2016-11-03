@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.server
 
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.mappings.{Extractor, Redirects, Mappings, RootExtractor}
+import org.dbpedia.extraction.mappings.{WikiPageExtractor, Extractor, Redirects, Mappings}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
@@ -31,19 +31,19 @@ extends ExtractionManager(languages, paths, redirects, mappingTestExtractors, cu
 {
     // TODO: remove this field. Clients should get the ontology pages directly from the
     // mappings wiki, not from here. We don't want to keep all ontology pages in memory.
-    private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages
+    private var _ontologyPages : Map[WikiTitle, PageNode] = loadOntologyPages()
 
-    private var _ontology : Ontology = loadOntology
+    private var _ontology : Ontology = loadOntology()
 
     // TODO: remove this field. Clients should get the mapping pages directly from the
     // mappings wiki, not from here. We don't want to keep all mapping pages in memory.
-    private var _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages
+    private var _mappingPages : Map[Language, Map[WikiTitle, WikiPage]] = loadMappingPages()
 
-    private var _mappings : Map[Language, Mappings] = loadMappings
+    private var _mappings : Map[Language, Mappings] = loadMappings()
 
-    private var _mappingTestExtractors : Map[Language, RootExtractor] = loadMappingTestExtractors
+    private var _mappingTestExtractors : Map[Language, WikiPageExtractor] = loadMappingTestExtractors()
 
-    private var _customTestExtractors : Map[Language, RootExtractor] = loadCustomTestExtractors
+    private var _customTestExtractors : Map[Language, WikiPageExtractor] = loadCustomTestExtractors()
 
     def mappingExtractor(language : Language) = synchronized { _mappingTestExtractors(language) }
 
