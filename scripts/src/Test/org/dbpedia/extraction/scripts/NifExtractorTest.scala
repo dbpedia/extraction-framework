@@ -26,19 +26,21 @@ class NifExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-    def language = Language.map.get("de").get
+    def language = Language.map.get("fr").get
   }
   private val extractor = new NifExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
-  private val titles = List("Dresden", "Liste_der_Gemeinden_in_der_Provinz_Asti")
+  private val titles = List("Timár", "Paris")
+  extractor.setLogFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\fails.log"))
 
   test("testExtractNif") {
     dest.open()
     for(title <- titles){
       val wt = new WikiTitle(title, Namespace.Main, context.language)
       val pn = new PageNode(wt,0l, 0l,0l,0l,"", false, false)
-      dest.write(extractor.extractNif(pn, "http://dbpedia.org/resource/" + title, getHtml(wt)))
+      val html = getHtml(wt)
+      dest.write(extractor.extractNif(pn, "http://dbpedia.org/resource/" + title, html))
     }
     dest.close()
 

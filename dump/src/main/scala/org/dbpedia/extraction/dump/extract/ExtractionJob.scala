@@ -1,13 +1,10 @@
 package org.dbpedia.extraction.dump.extract
 
-import java.util.logging.{Level, Logger}
-
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.WikiPageExtractor
 import org.dbpedia.extraction.sources.{Source, WikiPage}
 import org.dbpedia.extraction.util.SimpleWorkers
 import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.util.Exceptions
 
 /**
  * Executes a extraction.
@@ -20,9 +17,7 @@ import org.dbpedia.util.Exceptions
  */
 class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String)
 {
-  private val logger = Logger.getLogger(getClass.getName)
-
-  private val progress = new ExtractionProgress(label, description)
+  //private val progress = new ExtractionProgress(label, description)
 
   private val workers = SimpleWorkers { page: WikiPage =>
     var success = false
@@ -33,27 +28,34 @@ class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Se
         destination.write(graph)
       }
       success = true
+      extractor.recordExtractedPage(page.id, page.title)
     } catch {
-      case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"': "+Exceptions.toString(ex, 200))
+      case ex: Exception =>
+        //System.err.println("error processing page '" + page.title.encoded + "': "+Exceptions.toString(ex, 200))
+        extractor.recordFailedPage(page.id, page.title, ex)
     }
-    progress.countPage(success)
+    //progress.countPage(success)
   }
   
   def run(): Unit =
   {
-    progress.start()
+    //progress.start()
+
+    extractor.initializeExtractor()
     
     destination.open()
 
     workers.start()
-    
+
     for (page <- source) workers.process(page)
-    
+
     workers.stop()
     
     destination.close()
-    
-    progress.end()
+
+    extractor.finalizeExtractor()
+
+    //progress.end()
   }
   
 }

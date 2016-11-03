@@ -46,11 +46,17 @@ extends PageNodeExtractor
   protected val publicParames = abstractParams.getMap("publicParams")
   protected val protectedParams = abstractParams.getMap("protectedParams")
 
-  protected val failLogFile = new File(publicParames.get("failedPagesLog").get.asText())
-  failLogFile.createNewFile()
+  Option(publicParames.get("failedPagesLog").get.asText()) match{
+    case Some(f) => {
+      val file = new File(f)
+      file.createNewFile()
+      setLogFile(file)
+    }
+    case None => println("No log-file specified.")
+  }
 
   protected def apiUrl: URL = new URL(publicParames.get("apiUrl").get.asText())
-  require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
+  //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
   protected val maxRetries = publicParames.get("maxRetries").get.asInt
   require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
@@ -168,10 +174,7 @@ extends PageNodeExtractor
           // Read answer
           return readInAbstract(conn.getInputStream) match{
             case Success(str) => Option(str)
-            case Failure(e) =>{
-              recordFailedPage(pageId, pageTitle, e)
-              None
-            }
+            case Failure(e) => throw e
           }
         }
         catch
@@ -199,19 +202,15 @@ extends PageNodeExtractor
             }
             else {
               ex match {
-                case e : java.net.SocketTimeoutException => recordFailedPage(pageId, pageTitle, new Exception(
-                  "Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex))
-                case _ => recordFailedPage(pageId, pageTitle, new Exception(
-                  "Unknown error when retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " +
-                    loadFactor, ex))
+                case e : java.net.SocketTimeoutException => throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
+                case _ => throw new Exception("Unknown error when retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
               }
             }
           }
         }
 
       }
-      recordFailedPage(pageId, pageTitle, new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded))
-      None
+      throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
     }
 
     /**

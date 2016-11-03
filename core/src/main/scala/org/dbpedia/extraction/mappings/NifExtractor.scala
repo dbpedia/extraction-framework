@@ -95,10 +95,7 @@ class NifExtractor(
         }
         context.toList ::: words
       }
-      case Failure(e) => {
-        super.recordFailedPage(pageNode.id, pageNode.title, e)
-        List.empty
-      }
+      case Failure(e) => throw e
     }
   }
 
