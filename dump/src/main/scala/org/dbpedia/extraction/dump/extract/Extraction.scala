@@ -18,15 +18,20 @@ object Extraction {
     Authenticator.setDefault(new ProxyAuthenticator())
     
     // Load properties
-    val config = ConfigUtils.loadConfig(args(0), "UTF-8")
+    val configProperties = ConfigUtils.loadConfig(args(0), "UTF-8")
 
     // overwrite properties with CLI args
     // TODO arguments could be of the format a=b and then property a can be overwritten with "b"
 
     //Load extraction jobs from configuration
-    val jobs = new ConfigLoader(new Config(config)).getExtractionJobs()
+    val config = new Config(configProperties)
+    val configLoader = new ConfigLoader(config)
 
+    config.extractionRecorder.initialzeRecorder()
     //Execute the extraction jobs one by one
-    for (job <- jobs) job.run()
+    for (job <- configLoader.getExtractionJobs()) {
+      job.run()
+    }
+    config.extractionRecorder.finalizeRecorder()
   }
 }

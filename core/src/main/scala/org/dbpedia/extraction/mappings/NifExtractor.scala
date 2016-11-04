@@ -75,25 +75,24 @@ class NifExtractor(
     extractNif(pageNode, subjectUri, html)
   }
 
-  def extractNif(pageNode : PageNode, subjectUri: String, html: String): List[Quad] = {
+  def extractNif(pageNode : PageNode, subjectUri: String, html: String): Seq[Quad] = {
 
     val paragraphs = getRelevantParagraphs(html)
 
     extractTextFromHtml(paragraphs, new LinkExtractorContext(language, subjectUri, templateString)) match {
       case Success(extractionResults) => {
 
-        val context = makeContext(extractionResults.text, subjectUri, pageNode.sourceUri, extractionResults.length)
+        val quads = makeContext(extractionResults.text, subjectUri, pageNode.sourceUri, extractionResults.length)
 
-        val words = if (context.nonEmpty)
-          makeStructureElements(extractionResults.paragraphs, context.head.subject, pageNode.sourceUri, extractionResults.length).toList
-        else List()
+        quads ++= (if (quads.nonEmpty)
+          makeStructureElements(extractionResults.paragraphs, quads.head.subject, pageNode.sourceUri, extractionResults.length).toList
+        else List())
 
-        if (!isTestRun && context.nonEmpty) {
-          //not!
-          context += longQuad(subjectUri, extractionResults.text, pageNode.sourceUri)
-          context += shortQuad(subjectUri, getShortAbstract(extractionResults.paragraphs), pageNode.sourceUri)
+        if (!isTestRun && quads.nonEmpty) {          //not!
+          quads += longQuad(subjectUri, extractionResults.text, pageNode.sourceUri)
+          quads += shortQuad(subjectUri, getShortAbstract(extractionResults.paragraphs), pageNode.sourceUri)
         }
-        context.toList ::: words
+        quads.toSeq
       }
       case Failure(e) => throw e
     }

@@ -11,13 +11,15 @@ import scala.collection.mutable
 /**
   * Created by Chile on 11/3/2016.
   */
-trait ExtractionRecorder {
+class ExtractionRecorder(logFile: File = null, preamble: String = null) {
 
   private var failedPages = Map[Language, scala.collection.mutable.Map[(Long, WikiTitle), Throwable]]()
   private var successfulPages = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
 
   private var logWriter: FileWriter = null
   private val startTime = new AtomicLong()
+
+  setLogFile(logFile, preamble)
 
   /**
     * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
@@ -32,15 +34,21 @@ trait ExtractionRecorder {
     * @param logFile the target file
     * @param preamble the optional first line of the log file
     */
-  def setLogFile(logFile: File, preamble: String = null): Unit ={
+  private def setLogFile(logFile: File, preamble: String = null): Unit ={
     logWriter = new FileWriter(logFile)
     if(preamble != null)
       logWriter.append("# " + preamble + "\n")
   }
 
-  def successfulPageCount: Int = successfulPages.size
+  def successfulPageCount(lang: Language): Int = successfulPages.get(lang) match{
+    case Some(m) => m.size
+    case None => 0
+  }
 
-  def failedPageCount: Int = failedPages.size
+  def failedPageCount(lang: Language): Int = failedPages.get(lang) match{
+    case Some(m) => m.size
+    case None => 0
+  }
 
   /**
     * adds a new fail record for a wikipage which failed to extract; Optional: write fail to log file (if this has been set before)
@@ -76,9 +84,14 @@ trait ExtractionRecorder {
     if(logWriter != null && logSuccessfulPage) {
       logWriter.append("page " + id + ": " + title.encoded + " extracted\n")
     }
-    if(successfulPageCount % 2000 == 0){
+    val sfc = successfulPageCount(title.language)
+    if(sfc % 2000 == 0){
       val time = System.currentTimeMillis - startTime.get
-      System.out.println(title.language.wikiCode +": extracted "+successfulPageCount+" pages in "+StringUtils.prettyMillis(time)+" (per page: " + (time.toDouble / successfulPageCount) + " ms; failed pages: "+ failedPageCount +").")
+      val msg = title.language.wikiCode +": extracted "+sfc+" pages in "+StringUtils.prettyMillis(time)+
+        " (per page: " + (time.toDouble / sfc) + " ms; failed pages: "+ failedPageCount(title.language) +")."
+      System.out.println(msg)
+      if(logWriter != null)
+        logWriter.append(msg + "\n")
     }
   }
 

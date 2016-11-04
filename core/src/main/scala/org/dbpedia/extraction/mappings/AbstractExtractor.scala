@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.{File, InputStream, OutputStreamWriter}
+import java.io.{InputStream, OutputStreamWriter}
 import java.net.URL
 import java.util.logging.Logger
 
@@ -45,15 +45,6 @@ extends PageNodeExtractor
   protected val abstractParams = new JsonConfig(this.getClass.getClassLoader.getResource("mediawikiconfig.json"))
   protected val publicParames = abstractParams.getMap("publicParams")
   protected val protectedParams = abstractParams.getMap("protectedParams")
-
-  Option(publicParames.get("failedPagesLog").get.asText()) match{
-    case Some(f) => {
-      val file = new File(f)
-      file.createNewFile()
-      setLogFile(file)
-    }
-    case None => println("No log-file specified.")
-  }
 
   protected def apiUrl: URL = new URL(publicParames.get("apiUrl").get.asText())
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
