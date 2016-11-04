@@ -6,6 +6,7 @@ import java.util.logging.Logger
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
@@ -38,7 +39,7 @@ class AbstractExtractor(
     def language : Language
   }
 )
-extends PageNodeExtractor
+extends WikiPageExtractor
 {
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
@@ -90,7 +91,7 @@ extends PageNodeExtractor
 
     private val availableProcessors = osBean.getAvailableProcessors
 
-    override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
     {
         //Only extract abstracts for pages from the Main namespace
         if(pageNode.title.namespace != Namespace.Main)
@@ -105,7 +106,7 @@ extends PageNodeExtractor
         // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
-        val text = retrievePage(pageNode.title, pageNode.id) match{
+        val text = retrievePage(pageNode.title, pageNode.id, pageNode.isRetry) match{
           case Some(t) => postProcess(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
@@ -127,15 +128,15 @@ extends PageNodeExtractor
         }
     }
 
-
     /**
      * Retrieves a Wikipedia page.
      *
      * @param pageTitle The encoded title of the page
      * @return The page as an Option
      */
-    def retrievePage(pageTitle : WikiTitle, pageId: Long) : Option[String] =
+    def retrievePage(pageTitle : WikiTitle, pageId: Long, isRetry: Boolean = false) : Option[String] =
     {
+      val retryFactor = if(isRetry) 2 else 1
       // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
       // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
       // TODO: there may be other characters that need to be escaped.
@@ -151,11 +152,10 @@ extends PageNodeExtractor
       {
         try
         {
-
           val conn = apiUrl.openConnection
           conn.setDoOutput(true)
-          conn.setConnectTimeout(connectMs)
-          conn.setReadTimeout(readMs)
+          conn.setConnectTimeout(retryFactor * connectMs)
+          conn.setReadTimeout(retryFactor * readMs)
 
           val writer = new OutputStreamWriter(conn.getOutputStream)
           writer.write(parameters)
@@ -199,7 +199,6 @@ extends PageNodeExtractor
             }
           }
         }
-
       }
       throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
     }

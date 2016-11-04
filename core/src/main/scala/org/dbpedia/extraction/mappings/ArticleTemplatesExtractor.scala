@@ -26,7 +26,7 @@ class ArticleTemplatesExtractor(
 
   override val datasets = Set(DBpediaDatasets.ArticleTemplates, DBpediaDatasets.ArticleTemplatesNested)
 
-  override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(node: PageNode, subjectUri: String): Seq[Quad] = {
     var quads = new ArrayBuffer[Quad]()
 
     val seenTemplates = new HashSet[String]()

@@ -55,7 +55,7 @@ extends PropertyMapping
   
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals, DBpediaDatasets.SpecificProperties)
 
-  def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
       for( property1 <- node.property(templateProperty1);
            property2 <- node.property(templateProperty2);

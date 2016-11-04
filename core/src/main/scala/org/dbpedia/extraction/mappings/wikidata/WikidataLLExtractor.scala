@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 
 import scala.collection.JavaConversions._
@@ -33,7 +33,7 @@ class WikidataLLExtractor(
   private val datasetMap: Map[String, Dataset] = (for (lang <- mappingLanguages) yield (lang.wikiCode -> new Dataset("interlanguage_links-" + lang.wikiCode)))(collection.breakOut)
   override val datasets = datasetMap.values.toSet
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 

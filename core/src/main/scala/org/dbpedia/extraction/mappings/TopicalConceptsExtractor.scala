@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{WikiUtil, Language}
 import org.dbpedia.extraction.config.mappings.TopicalConceptsExtractorConfig
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
 
 /**
@@ -36,7 +37,7 @@ extends PageNodeExtractor
 
     override val datasets = Set(DBpediaDatasets.TopicalConcepts)
 
-    override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(page : PageNode, subjectUri : String): Seq[Quad] =
     {
         if (page.title.namespace == Namespace.Category)
         {

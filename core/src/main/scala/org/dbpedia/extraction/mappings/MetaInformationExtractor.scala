@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.StringUtils._
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import java.net.URI
+
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,7 +30,7 @@ class MetaInformationExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
 

@@ -22,7 +22,7 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
   
   private val quad = QuadBuilder.apply(context.language, DBpediaDatasets.InterLanguageLinks, interLanguageLinksProperty, null) _
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (! namespaces.contains(page.title.namespace)) return Seq.empty
     

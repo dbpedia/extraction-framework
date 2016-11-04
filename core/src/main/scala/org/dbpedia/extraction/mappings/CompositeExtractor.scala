@@ -10,7 +10,7 @@ class CompositeExtractor[N](mappings: Extractor[N]*) extends Extractor[N]
 {
   override val datasets: Set[Dataset] = mappings.flatMap(_.datasets).toSet
 
-  override def extract(input: N, subjectUri: String, context: PageContext): Seq[Quad] = {
-    mappings.flatMap(_.extract(input, subjectUri, context))
+  override def extract(input: N, subjectUri: String): Seq[Quad] = {
+    mappings.flatMap(_.extract(input, subjectUri))
   }
 }

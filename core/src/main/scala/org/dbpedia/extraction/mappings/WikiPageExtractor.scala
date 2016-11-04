@@ -11,7 +11,7 @@ import org.dbpedia.extraction.sources.WikiPage
 trait WikiPageExtractor extends Extractor[WikiPage]{
   def extract(page:WikiPage):Seq[Quad] = {
     if(this.state != ExtractorState.Finalized)
-      this.extract(page, page.uri, new PageContext())
+      this.extract(page, page.uri)
     else
       throw new IllegalStateException("Attempted extraction with finalized extractor.")
   }

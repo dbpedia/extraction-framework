@@ -185,7 +185,7 @@ extends PropertyMapping
     
     override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals, DBpediaDatasets.SpecificProperties)
 
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(node : TemplateNode, subjectUri : String): Seq[Quad] =
     {
         val graph = new ArrayBuffer[Quad]
 

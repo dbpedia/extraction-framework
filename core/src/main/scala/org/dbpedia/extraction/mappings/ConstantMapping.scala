@@ -2,11 +2,12 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URI
 
-import org.dbpedia.extraction.wikiparser.TemplateNode
-import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyObjectProperty}
-import org.dbpedia.extraction.util.{UriUtils, Language}
+import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.ontology.{OntologyObjectProperty, OntologyProperty}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.TemplateNode
+
 import scala.language.reflectiveCalls
 
 /**
@@ -52,7 +53,7 @@ extends PropertyMapping
 
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals)
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
     Seq(new Quad(context.language, dataset, subjectUri, ontologyProperty, value, node.sourceUri, datatype))
   }

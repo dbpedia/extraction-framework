@@ -35,7 +35,7 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.Pnd)
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (node.title.namespace != Namespace.Main) return Seq.empty
     

@@ -50,7 +50,7 @@ class FileTypeExtractor(context: {
      * Extract a single WikiPage. We guess the file type from the file extension
      * used by the page.
      */
-    override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
+    override def extract(page: WikiPage, subjectUri: String) : Seq[Quad] =
     {
         // This extraction only works on File:s.
         if(page.title.namespace != Namespace.File || page.redirect != null)

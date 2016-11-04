@@ -24,7 +24,7 @@ extends PageNodeExtractor
   
   override val datasets = Set(DBpediaDatasets.TemplateParameters)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String): Seq[Quad] =
   {
     if (page.title.namespace != Namespace.Template || page.isRedirect) return Seq.empty
 

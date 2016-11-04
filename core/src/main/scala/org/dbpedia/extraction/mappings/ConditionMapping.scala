@@ -23,12 +23,12 @@ extends Extractor[TemplateNode]
 
   override val datasets = mapping.datasets
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
     // Note: CompositeMapping will call extract() without calling matches() first, so we 
     // have to check matches() here. If we are part of a ConditionalMapping, this call of matches() 
     // will be redundant, but it's cheap, so it's not a problem.
-    if (matches(node)) mapping.extract(node, subjectUri, pageContext)
+    if (matches(node)) mapping.extract(node, subjectUri)
     else Seq.empty
   }
 

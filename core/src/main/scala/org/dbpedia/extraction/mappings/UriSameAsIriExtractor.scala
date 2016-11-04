@@ -28,7 +28,7 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.UriSameAsIri)
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
+  override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     // only extract triple if IRI is actually different from URI
     if (new URI(subjectUri).toASCIIString() == subjectUri) Seq.empty

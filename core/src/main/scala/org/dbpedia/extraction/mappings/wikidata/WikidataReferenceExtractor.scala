@@ -28,7 +28,7 @@ class WikidataReferenceExtractor(
 
   override val datasets = Set(DBpediaDatasets.WikidataReference)
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     for (statementGroup <- page.wikiDataDocument.getStatementGroups) {

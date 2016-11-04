@@ -44,7 +44,7 @@ class WikidataPropertyExtractor(
   override val datasets = Set(DBpediaDatasets.WikidataProperty)
 
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     val subject = WikidataUtil.getWikidataNamespace(subjectUri).replace("Property:", "")

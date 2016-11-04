@@ -94,7 +94,7 @@ extends WikiPageExtractor
     override val datasets = Set(DBpediaDatasets.CitationData, DBpediaDatasets.CitationLinks /*, DBpediaDatasets.CitationTypes*/)
 
 
-    override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
     {
         if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 

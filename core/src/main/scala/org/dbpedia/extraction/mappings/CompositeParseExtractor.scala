@@ -13,7 +13,7 @@ extends WikiPageExtractor
 {
   override val datasets: Set[Dataset] = extractors.flatMap(_.datasets).toSet
 
-  override def extract(input: WikiPage, subjectUri: String, context: PageContext): Seq[Quad] = {
+  override def extract(input: WikiPage, subjectUri: String): Seq[Quad] = {
 
     //val extractors = classes.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
 
@@ -51,7 +51,7 @@ extends WikiPageExtractor
     if (finalExtractors.isEmpty)
       Seq.empty
     else
-      new CompositeExtractor[WikiPage](finalExtractors :_*).extract(input, subjectUri, context)
+      new CompositeExtractor[WikiPage](finalExtractors :_*).extract(input, subjectUri)
   }
 }
 

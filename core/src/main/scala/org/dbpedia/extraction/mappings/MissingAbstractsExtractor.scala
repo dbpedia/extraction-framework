@@ -1,18 +1,20 @@
 package org.dbpedia.extraction.mappings
 
-import scala.collection.mutable
-import scala.xml.XML
-import scala.io.Source
-import scala.language.reflectiveCalls
 import java.io._
-import java.net.{URLEncoder, URL}
-import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.wikiparser._
+import java.net.URL
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.ParseExceptionIgnorer
+import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+
+import scala.collection.mutable
+import scala.io.Source
+import scala.language.reflectiveCalls
+import scala.xml.XML
 
 /**
  * Extracts page abstracts which are not yet extracted. For each page which is a candidate for extraction
@@ -71,7 +73,7 @@ extends PageNodeExtractor
 
     private val availableProcessors = osBean.getAvailableProcessors()
 
-    override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(pageNode : PageNode, subjectUri : String): Seq[Quad] =
     {
       // only run extraction if subjectUri is not in list of extracted data
         if (MissingAbstractsExtractor.existingAbstracts(subjectUri)) {

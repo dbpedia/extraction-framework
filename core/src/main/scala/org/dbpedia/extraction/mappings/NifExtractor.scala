@@ -3,6 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.apache.commons.lang3.{StringEscapeUtils}
 import org.dbpedia.extraction.nif.LinkExtractor.LinkExtractorContext
 import org.dbpedia.extraction.nif.{Link, LinkExtractor, Paragraph}
+import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -58,7 +59,7 @@ class NifExtractor(
     case None => "Template"
   }
 
-  override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
   {
     //Only extract abstracts for pages from the Main namespace
     if(pageNode.title.namespace != Namespace.Main) return Seq.empty
@@ -67,7 +68,7 @@ class NifExtractor(
     if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
     //Retrieve page text
-    val html = retrievePage(pageNode.title, pageNode.id) match{
+    val html = retrievePage(pageNode.title, pageNode.id, pageNode.isRetry) match{
       case Some(t) => postProcess(pageNode.title, t)
       case None => return Seq.empty
     }

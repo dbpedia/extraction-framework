@@ -54,7 +54,7 @@ extends WikiPageExtractor
     /**
      * Extract gallery tags from a WikiPage.
      */
-    override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+    override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
         // Iterate over each <gallery> set.
         val galleryQuads = galleryRegex.findAllMatchIn(page.source).flatMap(matchData => {
             // Figure out the line number by counting the newlines until the 

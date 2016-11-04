@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
-import org.dbpedia.extraction.util.{Language, WikiUtil}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
 import scala.language.reflectiveCalls
@@ -40,10 +40,9 @@ extends PageNodeExtractor {
   /**
     * @param page       The source node
     * @param subjectUri The subject URI of the generated triples
-    * @param pageContext    The page context which holds the state of the extraction.
     * @return A graph holding the extracted data
     */
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: PageNode, subjectUri: String): Seq[Quad] = {
 
     if(page.title.namespace != Namespace.Main) return Seq.empty
 

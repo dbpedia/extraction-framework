@@ -12,7 +12,7 @@ trait PageNodeExtractor extends Extractor[PageNode] {
 
   def extract(page: PageNode): Seq[Quad] = {
     if (this.state != ExtractorState.Finalized)
-      this.extract(page, page.uri, new PageContext())
+      this.extract(page, page.uri)
     else
       throw new IllegalStateException("Attempted extraction with finalized extractor.")
   }

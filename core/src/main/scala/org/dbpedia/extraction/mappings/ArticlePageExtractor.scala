@@ -27,7 +27,7 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.LinksToWikipediaArticle)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String): Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) 
         return Seq.empty

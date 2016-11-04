@@ -27,7 +27,7 @@ extends Extractor[TableNode]
 
     override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesObjects,DBpediaDatasets.OntologyTypes)
 
-    override def extract(tableNode : TableNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(tableNode : TableNode, subjectUri : String): Seq[Quad] =
     {
         val tableHeader = extractTableHeader(tableNode)
 
@@ -49,7 +49,7 @@ extends Extractor[TableNode]
             val correspondingInstance = findCorrespondingInstance(tableNode)
 
             //Generate instance URI
-            val instanceUri = pageContext.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head);
+            val instanceUri = tableNode.generateUri(correspondingInstance.getOrElse(subjectUri), rowNode.children.head)
 
             //Add new ontology instance
             for (cls <- mapToClass.relatedClasses)
@@ -63,7 +63,7 @@ extends Extractor[TableNode]
             }
 
             //Extract properties
-            graph ++= mappings.flatMap(_.extract(templateNode, instanceUri, pageContext))
+            graph ++= mappings.flatMap(_.extract(templateNode, instanceUri))
         }
 
         graph

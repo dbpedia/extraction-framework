@@ -31,12 +31,10 @@ class WikiTitle (
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Wiki-encoded page name (without namespace) e.g. Automobile_generation */
-    val encoded = if (capitalizeLink) {
+    val encoded = if (capitalizeLink)
         WikiUtil.wikiEncode(decoded).capitalize(language.locale)
-    }
-    else {
-        WikiUtil.wikiEncode(decoded)
-    }
+        else
+            WikiUtil.wikiEncode(decoded)
 
     /** Canonical page name with namespace e.g. "Template talk:Automobile generation" */
     val decodedWithNamespace = withNamespace(false)

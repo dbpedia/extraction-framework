@@ -29,7 +29,7 @@ extends WikiPageExtractor {
 
   override val datasets = Set(dataset)
 
-  override def extract(wikiPage: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(wikiPage: WikiPage, subjectUri: String): Seq[Quad] = {
 
     //Only extract abstracts for pages from the Main namespace
     if(wikiPage.title.namespace != Namespace.Main) return Seq.empty
@@ -40,7 +40,7 @@ extends WikiPageExtractor {
 
     // map with line -> Quads for that line
     val infoboxMap =
-      hybridInfoboxExtractor.extract(pageNodeOption.get, subjectUri, pageContext)
+      hybridInfoboxExtractor.extract(pageNodeOption.get, subjectUri)
         .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypes.name))
         .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypesTransitive.name))
         .filterNot(_.dataset.equals(DBpediaDatasets.InfoboxPropertyDefinitions.name))
@@ -54,7 +54,7 @@ extends WikiPageExtractor {
 
     // citations Map with line -> citation (without ditation data, only links)
     val citationMap =
-      citationExtractor.extract(wikiPage, subjectUri, pageContext)
+      citationExtractor.extract(wikiPage, subjectUri)
         .filterNot(_.dataset.equals(DBpediaDatasets.CitationData.name))
         .map(q => (getAbsoluteLineNumber(q), q))
         .groupBy(_._1)

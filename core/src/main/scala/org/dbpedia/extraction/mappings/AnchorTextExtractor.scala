@@ -24,7 +24,7 @@ class AnchorTextExtractor(
 
   override val datasets = Set(DBpediaDatasets.AnchorText)
 
-  override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(node: PageNode, subjectUri: String): Seq[Quad] = {
     if (node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) {
       return Seq.empty
     }

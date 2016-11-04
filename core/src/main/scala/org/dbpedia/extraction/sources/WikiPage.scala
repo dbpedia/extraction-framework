@@ -1,10 +1,8 @@
 package org.dbpedia.extraction.sources
 
-import org.dbpedia.extraction.wikiparser.WikiTitle
 import org.dbpedia.extraction.sources.WikiPage._
 import org.dbpedia.extraction.util.StringUtils._
-import java.lang.StringBuilder
-import org.dbpedia.extraction.util.WikiUtil
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 
 /**
  * Represents a wiki page
@@ -20,30 +18,44 @@ import org.dbpedia.extraction.util.WikiUtil
  * @param source The WikiText source of this page
  * @param format e.g. "text/x-wiki"
  */
-class WikiPage(val title: WikiTitle, val redirect: WikiTitle, val id: Long, val revision: Long, val timestamp: Long,
-               val contributorID: Long, val contributorName: String, val source : String, val format: String)
+class WikiPage(
+    title: WikiTitle,
+    val redirect: WikiTitle,
+    id: Long,
+    revision: Long,
+    timestamp: Long,
+    contributorID: Long,
+    contributorName: String,
+    val source : String,
+    val format: String)
+  extends PageNode(title,id,revision,timestamp,contributorID,contributorName, redirect != null, false)
 {
+  def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
+    this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, format)
 
-    def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
-      this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, format)
+  def this(title: WikiTitle, source : String) =
+    this(title, null, -1, -1, -1, 0, "", source, "")
 
-    def this(title: WikiTitle, source : String) =
-      this(title, null, -1, -1, -1, 0, "", source, "")
-    
-     def this(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String) = 
-      this(title, redirect, id, revision, timestamp, 0, "", source, "")
-      
-    override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
+   def this(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String) =
+    this(title, redirect, id, revision, timestamp, 0, "", source, "")
 
-    def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+  private var isRetryy = false
 
-    /**
-     * Serializes this page to XML using the MediaWiki export format.
-     * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.8.
-     */
-    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
+  def setRetry(retry: Boolean) = {
+    this.isRetryy = retry
+  }
 
-    def sourceUri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
+  def isRetry = this.isRetryy
+
+  override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
+
+  /**
+   * Serializes this page to XML using the MediaWiki export format.
+   * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.8.
+   */
+  override def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
+
+  override def sourceUri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
 }
 
 object WikiPage {

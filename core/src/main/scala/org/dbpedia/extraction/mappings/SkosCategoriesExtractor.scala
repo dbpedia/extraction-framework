@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
+
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 
@@ -30,7 +30,7 @@ extends PageNodeExtractor
   
   override val datasets = Set(DBpediaDatasets.SkosCategories)
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(node : PageNode, subjectUri : String): Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Category) return Seq.empty
 

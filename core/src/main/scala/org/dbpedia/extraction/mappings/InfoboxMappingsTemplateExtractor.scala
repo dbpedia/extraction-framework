@@ -24,7 +24,7 @@ class InfoboxMappingsTemplateExtractor (context: {
   val hintDataset = new Dataset("template_mapping_hints")
   val mapDataset = new Dataset("template_mappings")
   override val datasets = Set(hintDataset, mapDataset)
-  override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
+  override def extract(page : WikiPage, subjectUri : String): Seq[Quad] = {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) ) return Seq.empty
 
     var simpleParser = WikiParser.getInstance("simple")

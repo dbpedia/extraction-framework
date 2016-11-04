@@ -29,7 +29,7 @@ extends PropertyMapping
   override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive, DBpediaDatasets.OntologyPropertiesObjects)
     
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
     var graph = new ArrayBuffer[Quad]()
 
@@ -46,7 +46,7 @@ extends PropertyMapping
       //require their values to be all singles
       if(valueNodes.forall(_.size <= 1))
       {
-        createInstance(graph, node, subjectUri, pageContext)
+        createInstance(graph, node, subjectUri)
       }
       else
       {
@@ -68,19 +68,19 @@ extends PropertyMapping
       //allow multiple values in this property
       for(valueNodesForOneProperty <- valueNodes; value <- valueNodesForOneProperty)
       {
-        createInstance(graph, value.parent.asInstanceOf[TemplateNode], subjectUri, pageContext)
+        createInstance(graph, value.parent.asInstanceOf[TemplateNode], subjectUri)
       }
     }
 
     graph
   }
 
-  private def createInstance(graph: Buffer[Quad], node : TemplateNode, originalSubjectUri : String, pageContext : PageContext): Unit =
+  private def createInstance(graph: Buffer[Quad], node : TemplateNode, originalSubjectUri : String): Unit =
   {
-    val instanceUri = pageContext.generateUri(originalSubjectUri, node)
+    val instanceUri = node.generateUri(originalSubjectUri, node)
     
     // extract quads
-    val values = mappings.flatMap(_.extract(node, instanceUri, pageContext))
+    val values = mappings.flatMap(_.extract(node, instanceUri))
 
     // only generate triples if we actually extracted some values
     if(! values.isEmpty)

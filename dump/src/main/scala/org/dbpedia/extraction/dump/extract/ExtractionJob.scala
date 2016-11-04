@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, WikiPageExtractor}
 import org.dbpedia.extraction.sources.{Source, WikiPage}
-import org.dbpedia.extraction.util.SimpleWorkers
+import org.dbpedia.extraction.util.{Language, SimpleWorkers}
 import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
@@ -13,9 +13,17 @@ import org.dbpedia.extraction.wikiparser.Namespace
  * @param source The extraction source
  * @param namespaces Only extract pages in these namespaces
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
- * @param label user readable label of this extraction job.
+ * @param language the language of this extraction.
  */
-class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String, recorder: ExtractionRecorder)
+class ExtractionJob(
+   extractor: WikiPageExtractor,
+   source: Source,
+   namespaces: Set[Namespace],
+   destination: Destination,
+   language: Language,
+   description: String,
+   retryFailedPages: Boolean,
+   recorder: ExtractionRecorder)
 {
   private val workers = SimpleWorkers { page: WikiPage =>
     var success = false
@@ -29,13 +37,13 @@ class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Se
       recorder.recordExtractedPage(page.id, page.title)
     } catch {
       case ex: Exception =>
-        recorder.recordFailedPage(page.id, page.title, ex)
+        recorder.recordFailedPage(page.id, page, ex)
     }
   }
   
   def run(): Unit =
   {
-    recorder.initialzeRecorder(label)
+    recorder.initialzeRecorder(language.wikiCode)
 
     extractor.initializeExtractor()
     
@@ -43,7 +51,17 @@ class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Se
 
     workers.start()
 
-    for (page <- source) workers.process(page)
+    for (page <- source)
+      workers.process(page)
+
+    if(retryFailedPages){
+      val fails = recorder.listFailedPages.get(language).get.keys.map(_._2)
+      recorder.resetFailedPages(language)
+      for(page <- fails) {
+        page.setRetry(true)
+        workers.process(page)
+      }
+    }
 
     workers.stop()
     

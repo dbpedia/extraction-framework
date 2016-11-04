@@ -2,12 +2,11 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable.ArrayBuffer
-import scala.language.reflectiveCalls
-import scala.language.postfixOps
+import scala.language.{postfixOps, reflectiveCalls}
 
 /**
  *  Combines the raw infobox and mappings extractor and tries to split the triples of the raw infobox extractor
@@ -30,15 +29,15 @@ extends PageNodeExtractor {
 
   override val datasets = (rawinfoboxExtractor.datasets ++ mappingExtractor.datasets) + DBpediaDatasets.InfoboxPropertiesMapped
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: PageNode, subjectUri: String): Seq[Quad] = {
 
 
     val mappedGraph =
       // check if the mappings exist for a language
-      if (enableMappingExtractor) mappingExtractor.extract(page, subjectUri, pageContext)
+      if (enableMappingExtractor) mappingExtractor.extract(page, subjectUri)
       else Seq.empty
 
-    val rawGraph = rawinfoboxExtractor.extract(page, subjectUri, pageContext)
+    val rawGraph = rawinfoboxExtractor.extract(page, subjectUri)
 
     return mappedGraph ++ splitRawGraph(rawGraph, mappedGraph)
   }

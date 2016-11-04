@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
-import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
+import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
 import scala.collection.JavaConversions._
@@ -44,7 +44,7 @@ class WikidataRawExtractor(
 
   override val datasets = Set(DBpediaDatasets.WikidataRaw, DBpediaDatasets.WikidataRawReified, DBpediaDatasets.WikidataRawReifiedQualifiers)
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {

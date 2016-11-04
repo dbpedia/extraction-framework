@@ -21,7 +21,7 @@ class CategoryLabelExtractor( context : {
 
     override val datasets = Set(DBpediaDatasets.CategoryLabels)
 
-    override def extract(node : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(node : WikiPage, subjectUri : String) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Category) Seq.empty
         else Seq(quad(subjectUri, node.title.decoded, node.sourceUri))

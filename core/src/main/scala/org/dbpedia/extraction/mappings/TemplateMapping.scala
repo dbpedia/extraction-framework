@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser.{Node, PropertyNode, TemplateNode}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
-import scala.collection.mutable.{Buffer,ArrayBuffer}
-import org.dbpedia.extraction.wikiparser.AnnotationKey
+import org.dbpedia.extraction.wikiparser.{AnnotationKey, PropertyNode, TemplateNode}
+
+import scala.collection.mutable.{ArrayBuffer, Buffer}
 import scala.language.reflectiveCalls
 
 class TemplateMapping( 
@@ -25,7 +25,7 @@ extends Extractor[TemplateNode]
     private val classOwlThing = context.ontology.classes("owl:Thing")
     private val propertyRdfType = context.ontology.properties("rdf:type")
 
-    override def extract(node: TemplateNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
+    override def extract(node: TemplateNode, subjectUri: String): Seq[Quad] =
     {
         val pageNode = node.root
         val graph = new ArrayBuffer[Quad]
@@ -41,7 +41,7 @@ extends Extractor[TemplateNode]
                 node.setAnnotation(TemplateMapping.TEMPLATELIST_ANNOTATION, Seq(node.title.decoded))
 
                 //Extract properties
-                graph ++= mappings.flatMap(_.extract(node, subjectUri, pageContext))
+                graph ++= mappings.flatMap(_.extract(node, subjectUri))
             }
             case Some(pageClass) => //This page already has a root template.
             {
@@ -69,7 +69,7 @@ extends Extractor[TemplateNode]
                 // If all above conditions are met then use the main resource, otherwise create a new one
                 val instanceUri =
                   if ( (!condition1_createCorrespondingProperty) && (!condition2_template_exists) && condition3_subclass ) subjectUri
-                  else generateUri(subjectUri, node, pageContext)
+                  else generateUri(subjectUri, node)
 
                 //Add ontology instance
                 if (instanceUri == subjectUri) {
@@ -86,7 +86,7 @@ extends Extractor[TemplateNode]
                 }
 
                 //Extract properties
-                graph ++= mappings.flatMap(_.extract(node, instanceUri, pageContext))
+                graph ++= mappings.flatMap(_.extract(node, instanceUri))
             }
         }
         
@@ -142,18 +142,17 @@ extends Extractor[TemplateNode]
      *
      * @param subjectUri The base string of the generated URI
      * @param templateNode The template for which the URI is to be generated
-     * @param pageContext The current page context
      *
      * @return The generated URI
      */
-    private def generateUri(subjectUri : String, templateNode : TemplateNode, pageContext : PageContext) : String =
+    private def generateUri(subjectUri : String, templateNode : TemplateNode) : String =
     {
         val properties = templateNode.children
 
         //Cannot generate URIs for empty templates
         if(properties.isEmpty)
         {
-            return pageContext.generateUri(subjectUri, templateNode.title.decoded)
+            return templateNode.generateUri(subjectUri, templateNode.title.decoded)
         }
 
         //Try to find a property which contains 'name'
@@ -172,7 +171,7 @@ extends Extractor[TemplateNode]
             nameProperty = properties.head
         }
 
-        pageContext.generateUri(subjectUri, nameProperty)
+        templateNode.generateUri(subjectUri, nameProperty)
     }
 }
 

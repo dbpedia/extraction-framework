@@ -30,7 +30,7 @@ class InfoboxMappingsExtractor(context: {
   val mapDataset = new Dataset("template_mappings")
   override val datasets = Set(hintDataset, mapDataset)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
+  override def extract(page : PageNode, subjectUri : String): Seq[Quad] = {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) || page.isRedirect) return Seq.empty
 
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(page)

@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.util.ExtractorUtils
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+
 import scala.language.reflectiveCalls
 
 /**
@@ -24,11 +24,11 @@ extends PageNodeExtractor
 
   override val datasets = templateMappings.values.flatMap(_.datasets).toSet ++ tableMappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
-  override def extract(page : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(page : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
-    val graph = extractNode(page, subjectUri, pageContext)
+    val graph = extractNode(page, subjectUri)
 
     if (graph.isEmpty) Seq.empty
     else splitInferredFromDirectTypes(graph, page, subjectUri)
@@ -38,7 +38,7 @@ extends PageNodeExtractor
    * Extracts a data from a node.
    * Recursively traverses it children if the node itself does not contain any useful data.
    */
-  private def extractNode(node : Node, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  private def extractNode(node : Node, subjectUri : String) : Seq[Quad] =
   {
     //Try to extract data from the node itself
     val graph = node match
@@ -47,13 +47,13 @@ extends PageNodeExtractor
       {
         resolvedMappings.get(templateNode.title.decoded) match
         {
-          case Some(mapping) => mapping.extract(templateNode, subjectUri, pageContext)
+          case Some(mapping) => mapping.extract(templateNode, subjectUri)
           case None => Seq.empty
         }
       }
       case tableNode : TableNode =>
       {
-        tableMappings.flatMap(_.extract(tableNode, subjectUri, pageContext))
+        tableMappings.flatMap(_.extract(tableNode, subjectUri))
       }
       case _ => Seq.empty
     }
@@ -62,7 +62,7 @@ extends PageNodeExtractor
     //Otherwise continue with extracting the children of the current node.
     if(graph.isEmpty)
     {
-      node.children.flatMap(child => extractNode(child, subjectUri, pageContext))
+      node.children.flatMap(child => extractNode(child, subjectUri))
     }
     else
     {

@@ -32,7 +32,6 @@ class NifExtractorTest extends FunSuite {
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   private val titles = List("Timár", "Paris")
-  extractor.setLogFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\fails.log"))
 
   test("testExtractNif") {
     dest.open()
@@ -43,12 +42,6 @@ class NifExtractorTest extends FunSuite {
       dest.write(extractor.extractNif(pn, "http://dbpedia.org/resource/" + title, html))
     }
     dest.close()
-
-    extractor.listFailedPages.get(context.language) match{
-      case Some(fails)=> for(fail <- fails)
-        println("Filed Page: " + fail._1._2.encoded + " with exception: " + fail._2.getMessage)
-      case None =>
-    }
   }
 
   private def getHtml(title:WikiTitle): String={

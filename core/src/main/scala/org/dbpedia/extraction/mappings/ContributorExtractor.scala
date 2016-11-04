@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
-import org.dbpedia.extraction.wikiparser._
+import java.net.URLEncoder
+
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import java.net.{URLEncoder, URI}
-import scala.language.reflectiveCalls
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.extraction.wikiparser._
+
+import scala.language.reflectiveCalls
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,7 +27,7 @@ class ContributorExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(node : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : WikiPage, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty

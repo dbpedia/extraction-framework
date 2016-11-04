@@ -1,17 +1,18 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.{FileSource,XMLSource}
-import org.dbpedia.extraction.destinations.{Quad, DBpediaDatasets, Dataset}
+import java.io.{File, FilenameFilter}
+
+import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
-import org.dbpedia.extraction.ontology.io.OntologyReader
-import io.Source
-import org.dbpedia.extraction.util.Language
-import java.io.{FilenameFilter, File}
-import java.lang.IllegalStateException
-import scala.collection.mutable.ArrayBuffer
-import org.junit.{Ignore, Test}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.sources.XMLSource
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
+import org.junit.Test
+
+import scala.collection.mutable.ArrayBuffer
+import scala.io.Source
 import scala.language.reflectiveCalls
 
 /**
@@ -120,7 +121,7 @@ class InfoboxExtractorTest
 		println("resourceIri : " + page.title.resourceIri)
 
     parser(page) match {
-      case Some(n) => extractor.extract(n,page.title.resourceIri,new PageContext())
+      case Some(n) => extractor.extract(n,page.title.resourceIri)
       case None => Seq.empty
 
     }

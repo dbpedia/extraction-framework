@@ -3,7 +3,8 @@ package org.dbpedia.extraction.mappings
 import java.io.{File, FileWriter}
 import java.util.concurrent.atomic.{AtomicInteger, AtomicLong}
 
-import org.dbpedia.extraction.util.{StringUtils, Language}
+import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser.WikiTitle
 
 import scala.collection.mutable
@@ -13,7 +14,7 @@ import scala.collection.mutable
   */
 class ExtractionRecorder(logFile: FileWriter = null, preamble: String = null) {
 
-  private var failedPages = Map[Language, scala.collection.mutable.Map[(Long, WikiTitle), Throwable]]()
+  private var failedPages = Map[Language, scala.collection.mutable.Map[(Long, WikiPage), Throwable]]()
   private var successfulPages = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
 
   private var logWriter: FileWriter = logFile
@@ -27,7 +28,7 @@ class ExtractionRecorder(logFile: FileWriter = null, preamble: String = null) {
     *
     * @return the failed pages (id, title) for every Language
     */
-  def listFailedPages: Map[Language, mutable.Map[(Long, WikiTitle), Throwable]] = failedPages
+  def listFailedPages: Map[Language, mutable.Map[(Long, WikiPage), Throwable]] = failedPages
 
   /**
     * define the log file destination
@@ -55,20 +56,20 @@ class ExtractionRecorder(logFile: FileWriter = null, preamble: String = null) {
     * adds a new fail record for a wikipage which failed to extract; Optional: write fail to log file (if this has been set before)
     *
     * @param id - page id
-    * @param title - WikiTitle of page
+    * @param node - PageNode of page
     * @param exception  - the Throwable responsible for the fail
     */
-  def recordFailedPage(id: Long, title: WikiTitle, exception: Throwable): Unit = synchronized{
-    failedPages.get(title.language) match{
-      case Some(map) => map += ((id,title) -> exception)
-      case None =>  failedPages += title.language -> mutable.Map[(Long, WikiTitle), Throwable]((id, title) -> exception)
+  def recordFailedPage(id: Long, node: WikiPage, exception: Throwable): Unit = synchronized{
+    failedPages.get(node.title.language) match{
+      case Some(map) => map += ((id,node) -> exception)
+      case None =>  failedPages += node.title.language -> mutable.Map[(Long, WikiPage), Throwable]((id, node) -> exception)
     }
     if(logWriter != null) {
-      logWriter.append(label + ": extraction failed for page " + id + ": " + title.encoded + ": " + exception.getMessage() + "\n")
+      logWriter.append(label + ": extraction failed for page " + id + ": " + node.title.encoded + ": " + exception.getMessage() + "\n")
       for (ste <- exception.getStackTrace)
         "\t" + logWriter.write(ste.toString + "\n")
     }
-    System.err.println(label + ": extraction failed for page " + id + ": " + title.encoded)
+    System.err.println(label + ": extraction failed for page " + id + ": " + node.title.encoded)
   }
 
   /**
@@ -114,5 +115,10 @@ class ExtractionRecorder(logFile: FileWriter = null, preamble: String = null) {
     if(logWriter != null)
       logWriter.close()
     logWriter = null
+  }
+
+  def resetFailedPages(lang: Language) = failedPages.get(lang) match{
+    case Some(m) => m.clear()
+    case None =>
   }
 }

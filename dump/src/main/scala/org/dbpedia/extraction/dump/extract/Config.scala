@@ -29,6 +29,7 @@ class Config(config: Properties)
 
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
+
   val extractionRecorder = Option(config.getProperty("log-file")) match{
     case Some(p) => {
       val file = new File(p)
@@ -37,6 +38,8 @@ class Config(config: Properties)
     }
     case None => new ExtractionRecorder()
   }
+
+  val retryFailedPages = config.getProperty("retry-failed-pages", "false").toBoolean
 
   // Watch out, this could be a regex
   val source = config.getProperty("source", "pages-articles.xml.bz2")

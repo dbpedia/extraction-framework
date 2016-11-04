@@ -31,7 +31,7 @@ class WikidataAliasExtractor(
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.WikidataAliasMappingsWiki, DBpediaDatasets.WikidataAliasRest)
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 

@@ -34,7 +34,7 @@ class CommonsResourceExtractor (
 
   override val datasets = Set(DBpediaDatasets.CommonsLink)
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] ={
+  override def extract(node : PageNode, subjectUri : String) : Seq[Quad] ={
 
     val quads = new ArrayBuffer[Quad]()
 
