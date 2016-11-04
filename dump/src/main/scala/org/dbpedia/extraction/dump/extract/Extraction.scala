@@ -27,9 +27,8 @@ object Extraction {
     val config = new Config(configProperties)
     val configLoader = new ConfigLoader(config)
 
-    config.extractionRecorder.initialzeRecorder()
     //Execute the extraction jobs one by one
-    for (job <- configLoader.getExtractionJobs()) {
+    for (job <- configLoader.getExtractionJobs) {
       job.run()
     }
     config.extractionRecorder.finalizeRecorder()

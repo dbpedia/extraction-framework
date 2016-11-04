@@ -35,6 +35,8 @@ class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Se
   
   def run(): Unit =
   {
+    recorder.initialzeRecorder(label)
+
     extractor.initializeExtractor()
     
     destination.open()
@@ -49,5 +51,4 @@ class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Se
 
     extractor.finalizeExtractor()
   }
-  
 }

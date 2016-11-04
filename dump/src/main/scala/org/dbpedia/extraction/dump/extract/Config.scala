@@ -3,7 +3,7 @@ package org.dbpedia.extraction.dump.extract
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, Extractor}
 import java.util.Properties
-import java.io.File
+import java.io.{FileWriter, File}
 import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.Map
 import org.dbpedia.extraction.util.{ConfigUtils, ExtractorUtils, Language}
@@ -30,7 +30,7 @@ class Config(config: Properties)
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
   val extractionRecorder = Option(config.getProperty("log-file")) match{
-    case Some(p) => new ExtractionRecorder(new File(p), config.getProperty("log-preamble", ""))
+    case Some(p) => new ExtractionRecorder(new FileWriter(p), config.getProperty("log-preamble", ""))
     case None => new ExtractionRecorder()
   }
 

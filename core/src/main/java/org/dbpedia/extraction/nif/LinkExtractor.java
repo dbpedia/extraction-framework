@@ -1,15 +1,15 @@
 package org.dbpedia.extraction.nif;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dbpedia.extraction.util.UriUtils;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeVisitor;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LinkExtractor implements NodeVisitor {
 
@@ -91,10 +91,10 @@ public class LinkExtractor implements NodeVisitor {
                   tempLink.setWordEnd(offset);
               }
               else{                                            // -> filter out hidden links to the underlying template
-                  System.err.println(this.context.language + ": found Template in resource: " + this.context.resource + ": " + tempText);
                   offset = beforeOffset;
                   tempText = "";
-              }
+				  System.err.println(this.context.language + ": found Template in resource: " + this.context.resource + ": " + tempText);
+			  }
 		  }
 
 			if(paragraph == null)

@@ -29,11 +29,9 @@ class ConfigLoader(config: Config)
 
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
-     *
-     * @param configFile The configuration file
      * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
      */
-    def getExtractionJobs(): Traversable[ExtractionJob] =
+    def getExtractionJobs: Traversable[ExtractionJob] =
     {
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
