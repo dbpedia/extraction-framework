@@ -30,7 +30,11 @@ class Config(config: Properties)
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
   val extractionRecorder = Option(config.getProperty("log-file")) match{
-    case Some(p) => new ExtractionRecorder(new FileWriter(p), config.getProperty("log-preamble", ""))
+    case Some(p) => {
+      val file = new File(p)
+      file.createNewFile()
+      new ExtractionRecorder(new FileWriter(file), config.getProperty("log-preamble", ""))
+    }
     case None => new ExtractionRecorder()
   }
 

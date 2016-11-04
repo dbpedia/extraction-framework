@@ -236,7 +236,6 @@ extends Extractor[TableNode]
         }
 
         //Check if found template has been mapped to corresponding Class
-        var correspondingInstance : Option[String] = None
         for( correspondingTemplate <- lastPageTemplate;
              templateClass <- correspondingTemplate.getAnnotation(TemplateMapping.CLASS_ANNOTATION);
              currentClass <- templateClass.relatedClasses;
