@@ -19,7 +19,7 @@ import scala.collection.convert.decorateAsScala._
 import scala.util.{Failure, Success, Try}
 
 /**
-  * Extracts page abstract html.
+  * Extracts page html.
   *
   * Based on AbstractExtractor, major difference is the parameter
   * apiParametersFormat = "action=parse&prop=text&section=0&format=xml&page=%s"
@@ -28,6 +28,7 @@ import scala.util.{Failure, Success, Try}
   * Where the long abstracts is the nif:isString attribute of the nif instance representing the abstract section of a wikipage.
   *
   * We are going to to use this method for generating the abstracts from release 2016-10 onwards.
+  * It will be expanded to cover the whole wikipage in the future.
   */
 
 class NifExtractor(
@@ -141,6 +142,7 @@ class NifExtractor(
       triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", paragraphs(i).getBegin.toString, sourceUrl, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
       triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", paragraphs(i).getEnd.toString, sourceUrl, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
       triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext", contextUri, sourceUrl, null)
+      triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#superString", abstractUri, sourceUrl, null)
       if (writeStrings)
         triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", paragraphs(i).getText, sourceUrl, "http://www.w3.org/2001/XMLSchema#string")
       triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#hasParagraph", paragraph, sourceUrl, null)
@@ -149,7 +151,7 @@ class NifExtractor(
       if(i == paragraphs.indices.last)
         triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#lastParagraph", paragraph, sourceUrl, null)
 
-      triples ++= makeWordsFromLinks(paragraphs(i).getLinks.asScala.toList, contextUri, sourceUrl, paragraph)
+      triples ++= makeWordsFromLinks(paragraphs(i).getLinks.asScala.toList, contextUri, paragraph, sourceUrl)
     }
     triples
   }
