@@ -118,7 +118,10 @@ class ExtractionRecorder(logFile: FileWriter = null, preamble: String = null) {
   }
 
   def resetFailedPages(lang: Language) = failedPages.get(lang) match{
-    case Some(m) => m.clear()
+    case Some(m) => {
+      m.clear()
+      successfulPageCount.get(lang).get.set(0)
+    }
     case None =>
   }
 }

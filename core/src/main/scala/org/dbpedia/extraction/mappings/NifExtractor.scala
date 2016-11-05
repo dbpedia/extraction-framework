@@ -223,7 +223,7 @@ class NifExtractor(
     }
   }
 
-  private def extractTextParagraph(text: String): (String, Int) ={
+  private def extractTextParagraph(text: String): (String, Int) = {
     var tempText: String = StringEscapeUtils.unescapeHtml4(text)
     tempText = WikiUtil.cleanSpace(tempText).trim
     if (tempText.contains("\\")) {
@@ -240,9 +240,14 @@ class NifExtractor(
     (cleanUpWhiteSpaces(tempText), tempText.length - escapeCount)
   }
 
-  private def cleanHtml(str: String): String ={
+  private def cleanHtml(str: String): String = {
     var text = StringEscapeUtils.unescapeHtml4(str)
-    text = text.replace("&apos;", "'").replace("<b>", "").replace("</b>", "").replace("<i>", "").replace("</i>", "").replace("<p></p>", "")
+    text = text.replace("&apos;", "'")
+      .replace("<b>", "")
+      .replace("</b>", "")
+      .replace("<i>", "")
+      .replace("</i>", "")
+      .replace("<p></p>", "")
     StringEscapeUtils.unescapeJava(text)
   }
 
