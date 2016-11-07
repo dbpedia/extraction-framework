@@ -62,7 +62,8 @@ abstract class ExtractionManager(
     def extract(source: Source, destination: Destination, language: Language, useCustomExtraction: Boolean = false): Unit = {
       val extract = if (useCustomExtraction) customExtractor(language) else mappingExtractor(language)
       destination.open()
-      for (page <- source) destination.write(extract.extract(page))
+      for (page <- source)
+        destination.write(extract.extract(page, page.uri))
       destination.close()
     }
 

@@ -54,11 +54,10 @@ extends WikiPageExtractor
     /**
      * Extract gallery tags from a WikiPage.
      */
-    override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
-        val page = input.asInstanceOf[WikiPage]
+    override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
         // Iterate over each <gallery> set.
         val galleryQuads = galleryRegex.findAllMatchIn(page.source).flatMap(matchData => {
-            // Figure out the line number by counting the newlines until the 
+            // Figure out the line number by counting the newlines until the
             // start of the gallery tag.
             val lineNumber = page.source.substring(0, matchData.start).count(_ == '\n')
 
@@ -73,22 +72,22 @@ extends WikiPageExtractor
 
                 // Other lines have names of files.
                 case fileLine => {
-                    val fileLineOption = fileLineRegex.findFirstMatchIn(fileLine) 
+                    val fileLineOption = fileLineRegex.findFirstMatchIn(fileLine)
 
                     // If the regular expression doesn't match, ignore it:
                     // it probably won't be read correctly by MediaWiki either.
-                    if (fileLineOption.isEmpty) 
+                    if (fileLineOption.isEmpty)
                         Seq.empty
                     else {
                         val fileLineMatch = fileLineOption.get
 
                         val sourceWithLineNumber = page.sourceIri + "#absolute-line=" +
-                            lineNumber
-                        
+                          lineNumber
+
                         try {
                             // Parse the filename in the file line match.
                             val fileWikiTitle = WikiTitle.parse(
-                                fileLineMatch.group("filename"), 
+                                fileLineMatch.group("filename"),
                                 context.language
                             )
 
@@ -97,17 +96,17 @@ extends WikiPageExtractor
                                 subjectUri,
                                 galleryItemProperty,
                                 context.language.resourceUri.append(fileWikiTitle.decodedWithNamespace),
-                                  //                                fileWikiTitle.pageIri,
+                                //                                fileWikiTitle.pageIri,
                                 sourceWithLineNumber,
                                 null
                             ))
                         } catch {
-                            case e:WikiParserException => {
+                            case e: WikiParserException => {
                                 // If there's a WikiParserException, report the
                                 // error and keep going.
                                 logger.warning("Could not parse file line '" +
-                                    fileLineMatch.group("filename") + 
-                                    "' in gallery on page '" + subjectUri + "': " + e.getMessage
+                                  fileLineMatch.group("filename") +
+                                  "' in gallery on page '" + subjectUri + "': " + e.getMessage
                                 )
 
                                 // Just skip this line and keep going.

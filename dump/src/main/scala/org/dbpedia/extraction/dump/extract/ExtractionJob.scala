@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, PageNodeExtractor, RecordEntry}
-import org.dbpedia.extraction.sources.Source
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, WikiPageExtractor}
+import org.dbpedia.extraction.sources.{Source, WikiPage}
 import org.dbpedia.extraction.util.{Language, SimpleWorkers}
-import org.dbpedia.extraction.wikiparser.{Namespace, PageNode}
+import org.dbpedia.extraction.wikiparser.Namespace
 
 /**
  * Executes a extraction.
@@ -16,7 +16,7 @@ import org.dbpedia.extraction.wikiparser.{Namespace, PageNode}
  * @param language the language of this extraction.
  */
 class ExtractionJob(
-   extractor: PageNodeExtractor,
+   extractor: WikiPageExtractor,
    source: Source,
    namespaces: Set[Namespace],
    destination: Destination,
@@ -25,12 +25,12 @@ class ExtractionJob(
    retryFailedPages: Boolean,
    extractionRecorder: ExtractionRecorder)
 {
-  private val workers = SimpleWorkers { page: PageNode =>
+  private val workers = SimpleWorkers { page: WikiPage =>
     var success = false
     try {
       if (namespaces.contains(page.title.namespace)) {
         //val graph = extractor(parser(page))
-        val graph = extractor.extract(page)
+        val graph = extractor.extract(page, page.uri)
         destination.write(graph)
       }
       success = true
@@ -67,7 +67,10 @@ class ExtractionJob(
       extractionRecorder.resetFailedPages(language)
       for(page <- fails) {
         page.toggleRetry()
-        workers.process(page)
+        page match{
+          case p: WikiPage => workers.process(p)
+          case _ =>
+        }
       }
       extractionRecorder.printLabeledLine("all failed pages were retried.", language)
     }

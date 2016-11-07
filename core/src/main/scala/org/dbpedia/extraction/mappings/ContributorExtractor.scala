@@ -27,9 +27,8 @@ class ContributorExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(input : PageNode, subjectUri : String) : Seq[Quad] =
+  override def extract(node : WikiPage, subjectUri : String) : Seq[Quad] =
   {
-    val node = input.asInstanceOf[WikiPage]
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
 

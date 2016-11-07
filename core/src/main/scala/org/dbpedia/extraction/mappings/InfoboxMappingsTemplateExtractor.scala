@@ -24,14 +24,14 @@ class InfoboxMappingsTemplateExtractor (context: {
   val hintDataset = new Dataset("template_mapping_hints")
   val mapDataset = new Dataset("template_mappings")
   override val datasets = Set(hintDataset, mapDataset)
-  override def extract(input : PageNode, subjectUri : String): Seq[Quad] = {
-    val page = input.asInstanceOf[WikiPage]
+
+  override def extract(page : WikiPage, subjectUri : String): Seq[Quad] = {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) ) return Seq.empty
 
-    var simpleParser = WikiParser.getInstance("simple")
+    val simpleParser = WikiParser.getInstance("simple")
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(simpleParser.apply(page).getOrElse(null))
 
-    val propertyParserFuncions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from")))
+    val propertyParserFuncions = parserFunctions.filter(p => p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from"))
     val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
     val propertyParserFuncionsMappings = getTemplateMappingsFromPropertyParserFunc(propertyParserFuncions)
     val invokeFunc = parserFunctions.filter(p => p.title.equalsIgnoreCase("#invoke"))

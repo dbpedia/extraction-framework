@@ -91,9 +91,8 @@ extends WikiPageExtractor
 
     private val availableProcessors = osBean.getAvailableProcessors
 
-    override def extract(input : PageNode, subjectUri: String): Seq[Quad] =
+    override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
-      val pageNode = input.asInstanceOf[WikiPage]
         //Only extract abstracts for pages from the Main namespace
         if(pageNode.title.namespace != Namespace.Main)
           return Seq.empty

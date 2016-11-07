@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.Dataset
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.wikiparser.PageNode
+
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -14,7 +13,7 @@ extends WikiPageExtractor
 {
   override val datasets: Set[Dataset] = extractors.flatMap(_.datasets).toSet
 
-  override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
+  override def extract(input: WikiPage, subjectUri: String): Seq[Quad] = {
 
     //val extractors = classes.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
 
@@ -22,7 +21,7 @@ extends WikiPageExtractor
     val wikiPageExtractors = new ArrayBuffer[Extractor[WikiPage]]()
     val pageNodeExtractors = new ArrayBuffer[PageNodeExtractor]()
     val jsonNodeExtractors = new ArrayBuffer[JsonNodeExtractor]()
-    val finalExtractors    = new ArrayBuffer[PageNodeExtractor]()
+    val finalExtractors    = new ArrayBuffer[Extractor[WikiPage]]()
     //to do: add json extractors
 
     val quads = new ArrayBuffer[Quad]()
@@ -52,7 +51,7 @@ extends WikiPageExtractor
     if (finalExtractors.isEmpty)
       Seq.empty
     else
-      new CompositeExtractor[PageNode](finalExtractors :_*).extract(input, subjectUri)
+      new CompositeExtractor[WikiPage](finalExtractors :_*).extract(input, subjectUri)
   }
 }
 

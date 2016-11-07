@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.ExtractorUtils
-import scala.language.reflectiveCalls
 import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.extraction.wikiparser._
+
+import scala.language.reflectiveCalls
 
 /**
  * Extracts labels to articles based on their title.
@@ -23,9 +23,8 @@ extends WikiPageExtractor
   
   override val datasets = Set(DBpediaDatasets.Labels)
 
-  override def extract(input: PageNode, subjectUri: String) : Seq[Quad] =
+  override def extract(page: WikiPage, subjectUri: String) : Seq[Quad] =
   {
-    val page = input.asInstanceOf[WikiPage]
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
     // TODO: use templates like {{lowercase}}, magic words like {{DISPLAYTITLE}}, 

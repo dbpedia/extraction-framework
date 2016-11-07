@@ -2,7 +2,6 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 
 /**
@@ -22,15 +21,12 @@ import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 
   override val datasets: Set[Dataset] = extractors.datasets
 
-  override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
-    val page = input.asInstanceOf[WikiPage]
+  override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
     val parser = new JsonWikiParser()
     val node = parser(page)
     node match {
-      case Some(n) =>  extractors.extract(n, subjectUri)
-      case None =>  Seq.empty
+      case Some(n) => extractors.extract(n, subjectUri)
+      case None => Seq.empty
     }
-
   }
-
 }

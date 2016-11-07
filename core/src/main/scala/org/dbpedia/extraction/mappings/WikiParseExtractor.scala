@@ -2,7 +2,6 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{Dataset, Quad}
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
 /**
@@ -22,9 +21,8 @@ import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
   override val datasets: Set[Dataset] = extractors.datasets
 
-  override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
+  override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
 
-    val page = input.asInstanceOf[WikiPage]
     val parser = new SimpleWikiParser()
     val node = parser(page)
     node match {

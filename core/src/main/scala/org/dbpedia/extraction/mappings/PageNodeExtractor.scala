@@ -1,7 +1,5 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.Quad
-import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.wikiparser._
 
 /**
@@ -9,19 +7,4 @@ import org.dbpedia.extraction.wikiparser._
  * Necessary to get some type safety in CompositeExtractor: 
  * Class[_ <: Extractor] can be checked at runtime, but Class[_ <: Mapping[PageNode]] can not.
  */
-trait PageNodeExtractor extends Extractor[PageNode] {
-
-  def extract(page: WikiPage): Seq[Quad] = {
-    if (this.state != ExtractorState.Finalized)
-      this.extract(page, page.uri)
-    else
-      throw new IllegalStateException("Attempted extraction with finalized extractor.")
-  }
-
-  def extract(page: PageNode): Seq[Quad] = {
-    if (this.state != ExtractorState.Finalized)
-      this.extract(page, page.uri)
-    else
-      throw new IllegalStateException("Attempted extraction with finalized extractor.")
-  }
-}
+trait PageNodeExtractor extends Extractor[PageNode]

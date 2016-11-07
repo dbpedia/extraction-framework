@@ -1,21 +1,21 @@
 package org.dbpedia.extraction.mappings
 
-import org.apache.commons.lang3.{StringEscapeUtils}
+import org.apache.commons.lang3.StringEscapeUtils
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.nif.LinkExtractor.LinkExtractorContext
 import org.dbpedia.extraction.nif.{Link, LinkExtractor, Paragraph}
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.util.{Language, UriUtils, WikiUtil}
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.NodeTraversor
 
+import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable.ListBuffer
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.destinations.{QuadBuilder, DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{UriUtils, WikiUtil, Language}
-import scala.collection.convert.decorateAsScala._
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -60,9 +60,8 @@ class NifExtractor(
     case None => "Template"
   }
 
-  override def extract(input : PageNode, subjectUri : String): Seq[Quad] =
+  override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
   {
-    val pageNode = input.asInstanceOf[WikiPage]
     //Only extract abstracts for pages from the Main namespace
     if(pageNode.title.namespace != Namespace.Main) return Seq.empty
 

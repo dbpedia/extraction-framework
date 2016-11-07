@@ -29,13 +29,17 @@ extends WikiPageExtractor {
 
   override val datasets = Set(dataset)
 
-  override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
-    val wikiPage = input.asInstanceOf[WikiPage]
+  override def extract(wikiPage: WikiPage, subjectUri: String): Seq[Quad] = {
     //Only extract abstracts for pages from the Main namespace
     if(wikiPage.title.namespace != Namespace.Main) return Seq.empty
 
-    val pageNodeOption = WikiParser.getInstance().apply(wikiPage)
-    if (pageNodeOption.isEmpty) return Seq.empty
+    val pageNodeOption = wikiPage match{
+      case page: WikiPage => WikiParser.getInstance().apply(page)
+      case _ => throw new IllegalArgumentException("Input is no WikiPage")
+    }
+
+    if (pageNodeOption.isEmpty)
+      return Seq.empty
 
 
     // map with line -> Quads for that line

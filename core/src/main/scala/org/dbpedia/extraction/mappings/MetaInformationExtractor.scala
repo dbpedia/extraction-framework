@@ -30,9 +30,8 @@ class MetaInformationExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(input : PageNode, subjectUri : String) : Seq[Quad] =
+  override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
   {
-    val page = input.asInstanceOf[WikiPage]
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
     val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"

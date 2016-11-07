@@ -2,8 +2,8 @@ package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.PageNode
 
 import scala.language.reflectiveCalls
 
@@ -25,7 +25,7 @@ extends WikiPageExtractor
 
   private val quad = QuadBuilder.stringPredicate(context.language, DBpediaDatasets.RevisionUris, derivedFromProperty, null) _
 
-  override def extract(page: PageNode, subjectUri: String): Seq[Quad] = {
+  override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
     Seq(quad(subjectUri, page.sourceIri, page.sourceIri))
   }
 }

@@ -24,9 +24,8 @@ extends WikiPageExtractor
 
   override val datasets = Set(DBpediaDatasets.PageLength)
 
-  override def extract(input : PageNode, subjectUri : String) : Seq[Quad] =
+  override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
   {
-    val page = input.asInstanceOf[WikiPage]
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) 
         return Seq.empty
     
