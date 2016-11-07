@@ -48,7 +48,7 @@ extends PropertyMapping
     
     try {
       val mergedDate = Date.merge(dates, datatype)
-      Seq(quad(subjectUri, mergedDate.toString, node.sourceUri))
+      Seq(quad(subjectUri, mergedDate.toString, node.sourceIri))
     } catch {
       case ex : Exception => Seq.empty // TODO: logging
     }

@@ -90,7 +90,7 @@ class WikidataR2RExtractor(
                 val PV = property + " " + value;
                 if (duplicateList.contains(PV)) {
                   val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId.toString)
-                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceUri, null)
+                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceIri, null)
                 }
 
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
@@ -120,13 +120,13 @@ class WikidataR2RExtractor(
           val ontologyProperty = context.ontology.properties(propertyValue._1)
           val datatype = findType(null, ontologyProperty.range)
           if (propertyValue._2.startsWith("http:") && datatype != null && datatype.name == "xsd:string") {
-            quads += new Quad(context.language, WikidataR2RErrorDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
+            quads += new Quad(context.language, WikidataR2RErrorDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceIri, datatype)
           } else {
 
             //split to literal / object datasets
             val mapDataset = if (ontologyProperty.isInstanceOf[OntologyObjectProperty]) DBpediaDatasets.WikidataR2R_objects else DBpediaDatasets.WikidataR2R_literals
             //Wikidata R2R mapping without reification
-            val quad = new Quad(context.language, mapDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceUri, datatype)
+            val quad = new Quad(context.language, mapDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceIri, datatype)
             quads += quad
 
             //Reification added to R2R mapping
@@ -144,10 +144,10 @@ class WikidataR2RExtractor(
   def getReificationQuads(page: JsonNode, statementUri: String, datatype: Datatype, quad: Quad): ArrayBuffer[Quad] = {
     val quads = new ArrayBuffer[Quad]()
 
-    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfType, rdfStatement, page.wikiPage.sourceUri)
-    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfSubject, quad.subject, page.wikiPage.sourceUri, null)
-    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfPredicate, quad.predicate, page.wikiPage.sourceUri, null)
-    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfObject, quad.value, page.wikiPage.sourceUri, datatype)
+    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfType, rdfStatement, page.wikiPage.sourceIri)
+    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfSubject, quad.subject, page.wikiPage.sourceIri, null)
+    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfPredicate, quad.predicate, page.wikiPage.sourceIri, null)
+    quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2R, statementUri, rdfObject, quad.value, page.wikiPage.sourceIri, datatype)
 
     quads
   }
@@ -181,7 +181,7 @@ class WikidataR2RExtractor(
                     val ontologyProperty = context.ontology.properties(mappedQualifierValue._1)
                     val datatype = if (ontologyProperty.range.isInstanceOf[Datatype]) ontologyProperty.range.asInstanceOf[Datatype] else null
                     quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2RQualifier,
-                      statementUri, ontologyProperty, mappedQualifierValue._2, page.wikiPage.sourceUri, datatype)
+                      statementUri, ontologyProperty, mappedQualifierValue._2, page.wikiPage.sourceIri, datatype)
                   } catch {
                     case e: Exception => println("exception caught: " + e)
                   }
@@ -303,7 +303,7 @@ class WikidataR2RExtractor(
                 context.ontology.classes.get(q.value.replace("http://dbpedia.org/ontology/", "")) match {
                   case Some(clazz) =>
                     for (cls <- clazz.relatedClasses.filter(_ != clazz))
-                      adjustedGraph += new Quad(context.language, DBpediaDatasets.OntologyTypesTransitive, subjectUri, rdfType, cls.uri, page.wikiPage.sourceUri)
+                      adjustedGraph += new Quad(context.language, DBpediaDatasets.OntologyTypesTransitive, subjectUri, rdfType, cls.uri, page.wikiPage.sourceIri)
                   case None =>
                 }
             }

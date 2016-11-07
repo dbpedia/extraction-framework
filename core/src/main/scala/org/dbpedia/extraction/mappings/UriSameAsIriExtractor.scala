@@ -32,6 +32,6 @@ extends PageNodeExtractor
   {
     // only extract triple if IRI is actually different from URI
     if (new URI(subjectUri).toASCIIString() == subjectUri) Seq.empty
-    else Seq(quad(subjectUri, subjectUri, page.sourceUri))
+    else Seq(quad(subjectUri, subjectUri, page.sourceIri))
   }
 }

@@ -91,8 +91,9 @@ extends WikiPageExtractor
 
     private val availableProcessors = osBean.getAvailableProcessors
 
-    override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
+    override def extract(input : PageNode, subjectUri: String): Seq[Quad] =
     {
+      val pageNode = input.asInstanceOf[WikiPage]
         //Only extract abstracts for pages from the Main namespace
         if(pageNode.title.namespace != Namespace.Main)
           return Seq.empty
@@ -115,8 +116,8 @@ extends WikiPageExtractor
         val shortText = short(text)
 
         //Create statements
-        val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
-        val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
+        val quadLong = longQuad(pageNode.uri, text, pageNode.sourceIri)
+        val quadShort = shortQuad(pageNode.uri, shortText, pageNode.sourceIri)
 
         if (shortText.isEmpty)
         {
@@ -358,8 +359,6 @@ extends WikiPageExtractor
       val coder = new HtmlCoder(XmlCodes.NONE)
       Try(coder.code(text))
     }
-
-
 }
 
 object AbstractExtractor {

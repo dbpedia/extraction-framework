@@ -1,19 +1,19 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.destinations._
-import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{WikiPage, XMLSource, WikiSource, Source}
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.dump.download.Download
-import org.dbpedia.extraction.util.{Language, Finder, ExtractorUtils}
-import org.dbpedia.extraction.util.RichFile.wrapFile
-import scala.collection.mutable.{ArrayBuffer,HashMap}
 import java.io._
 import java.net.URL
-import scala.io.Codec.UTF8
 import java.util.logging.Logger
-import org.dbpedia.extraction.util.IOUtils
+
+import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.dump.download.Download
+import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.sources.{WikiPage, WikiSource, XMLSource}
+import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.{ExtractorUtils, Finder, IOUtils, Language}
+import org.dbpedia.extraction.wikiparser._
+
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 
 /**
  * Loads the dump extraction configuration.
@@ -121,7 +121,7 @@ class ConfigLoader(config: Config)
         //Extractors
         val extractor = CompositeParseExtractor.load(extractorClasses, context)
         val datasets = extractor.datasets
-        
+
         val formatDestinations = new ArrayBuffer[Destination]()
         for ((suffix, format) <- config.formats) {
           
@@ -143,7 +143,7 @@ class ConfigLoader(config: Config)
 
         val extractionJobNS = if(lang == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
 
-        new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, lang, description, false, config.extractionRecorder)
+        new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, lang, description, config.retryFailedPages, config.extractionRecorder)
     }
     
     private def writer(file: File): () => Writer = {

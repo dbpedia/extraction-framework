@@ -34,7 +34,7 @@ class InterLanguageLinksExtractor(context: { def ontology : Ontology; def langua
           val dst = link.destination
           if (dst.isInterLanguageLink) {
             val dstLang = dst.language
-            quads += quad(subjectUri, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceUri)
+            quads += quad(subjectUri, dstLang.resourceUri.append(dst.decodedWithNamespace), link.sourceIri)
           }
         }
         case _ => // ignore

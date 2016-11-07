@@ -29,8 +29,8 @@ extends WikiPageExtractor {
 
   override val datasets = Set(dataset)
 
-  override def extract(wikiPage: WikiPage, subjectUri: String): Seq[Quad] = {
-
+  override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
+    val wikiPage = input.asInstanceOf[WikiPage]
     //Only extract abstracts for pages from the Main namespace
     if(wikiPage.title.namespace != Namespace.Main) return Seq.empty
 

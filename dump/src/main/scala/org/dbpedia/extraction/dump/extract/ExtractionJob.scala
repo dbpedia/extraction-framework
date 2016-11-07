@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, WikiPageExtractor}
-import org.dbpedia.extraction.sources.{Source, WikiPage}
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, PageNodeExtractor, RecordEntry}
+import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.{Language, SimpleWorkers}
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode}
 
 /**
  * Executes a extraction.
@@ -16,16 +16,16 @@ import org.dbpedia.extraction.wikiparser.Namespace
  * @param language the language of this extraction.
  */
 class ExtractionJob(
-   extractor: WikiPageExtractor,
+   extractor: PageNodeExtractor,
    source: Source,
    namespaces: Set[Namespace],
    destination: Destination,
    language: Language,
    description: String,
    retryFailedPages: Boolean,
-   recorder: ExtractionRecorder)
+   extractionRecorder: ExtractionRecorder)
 {
-  private val workers = SimpleWorkers { page: WikiPage =>
+  private val workers = SimpleWorkers { page: PageNode =>
     var success = false
     try {
       if (namespaces.contains(page.title.namespace)) {
@@ -34,16 +34,21 @@ class ExtractionJob(
         destination.write(graph)
       }
       success = true
-      recorder.recordExtractedPage(page.id, page.title)
+      val records = page.getExtractionRecords() match{
+        case seq :Seq[RecordEntry] if seq.nonEmpty => seq
+        case _ => Seq(new RecordEntry(page))
+      }
+      extractionRecorder.record(records:_*)
     } catch {
       case ex: Exception =>
-        recorder.recordFailedPage(page.id, page, ex)
+        page.addExtractionRecord(null, ex)
+        extractionRecorder.record(page.getExtractionRecords():_*)
     }
   }
   
   def run(): Unit =
   {
-    recorder.initialzeRecorder(language.wikiCode)
+    extractionRecorder.initialzeRecorder(language.wikiCode)
 
     extractor.initializeExtractor()
     
@@ -54,13 +59,17 @@ class ExtractionJob(
     for (page <- source)
       workers.process(page)
 
+    extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", language)
+
     if(retryFailedPages){
-      val fails = recorder.listFailedPages.get(language).get.keys.map(_._2)
-      recorder.resetFailedPages(language)
+      val fails = extractionRecorder.listFailedPages.get(language).get.keys.map(_._2)
+      extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", language)
+      extractionRecorder.resetFailedPages(language)
       for(page <- fails) {
-        page.setRetry(true)
+        page.toggleRetry()
         workers.process(page)
       }
+      extractionRecorder.printLabeledLine("all failed pages were retried.", language)
     }
 
     workers.stop()

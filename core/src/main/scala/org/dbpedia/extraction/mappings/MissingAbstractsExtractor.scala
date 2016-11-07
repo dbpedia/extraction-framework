@@ -110,8 +110,8 @@ extends PageNodeExtractor
           val shortText = short(text)
 
           //Create statements
-          val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
-          val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
+          val quadLong = longQuad(subjectUri, text, pageNode.sourceIri)
+          val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceIri)
 
           if (shortText.isEmpty) {
             Seq(quadLong)

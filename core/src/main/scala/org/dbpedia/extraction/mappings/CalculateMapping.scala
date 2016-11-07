@@ -71,7 +71,7 @@ extends PropertyMapping
                   {
                       case "add" => unit1.toStandardUnit(value1) + unit2.toStandardUnit(value2)
                   }
-                  return writeUnitValue(value, unit1, subjectUri, node.sourceUri)
+                  return writeUnitValue(value, unit1, subjectUri, node.sourceIri)
               }
               //DoubleParser
               case (value1 : Double, value2 : Double) =>
@@ -80,7 +80,7 @@ extends PropertyMapping
                   {
                       case "add" => (value1 + value2).toString
                   }
-                  staticType(subjectUri, value, node.sourceUri)
+                  staticType(subjectUri, value, node.sourceIri)
               }
               //IntegerParser
               case (value1 : Int, value2 : Int) =>
@@ -89,7 +89,7 @@ extends PropertyMapping
                   {
                       case "add" => (value1 + value2).toString
                   }
-                  staticType(subjectUri, value, node.sourceUri)
+                  staticType(subjectUri, value, node.sourceIri)
               }
           }
 

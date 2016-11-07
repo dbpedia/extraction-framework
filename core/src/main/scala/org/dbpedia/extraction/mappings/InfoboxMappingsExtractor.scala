@@ -47,17 +47,17 @@ class InfoboxMappingsExtractor(context: {
     val mappingQuads = propertyParserFuncionsMappings.map( p => {
       val value = p._1.toString + "=>" + p._2.toString
       new Quad(context.language, mapDataset, subjectUri, templateParameterProperty,
-        value, page.sourceUri, context.ontology.datatypes("xsd:string")) })
+        value, page.sourceIri, context.ontology.datatypes("xsd:string")) })
 
     val parserFuncQuads = (propertyParserFuncions ++ wikidataParserFunc ++ propertyLinkParserFunc).map( p =>
       new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
-        p.toWikiText, page.sourceUri, context.ontology.datatypes("xsd:string"))
+        p.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string"))
     )
 
     val templateQuads = ExtractorUtils.collectTemplatesFromNodeTransitive(page)
       .filter(t => List("conditionalurl",/* "official_website",*/ "wikidatacheck").contains(t.title.encoded.toString.toLowerCase))
       .map(t => new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
-        t.toWikiText, page.sourceUri, context.ontology.datatypes("xsd:string")))
+        t.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string")))
 
 
 

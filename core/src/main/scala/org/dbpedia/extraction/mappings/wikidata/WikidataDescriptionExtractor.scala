@@ -40,10 +40,10 @@ class WikidataDescriptionExtractor(
           case Some(dbpedia_lang) => {
             if (mappingLanguages.contains(dbpedia_lang))
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataDescriptionMappingsWiki, subjectUri,
-                descriptionProperty, description, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                descriptionProperty, description, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
             else
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataDescriptionRest, subjectUri,
-                descriptionProperty, description, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                descriptionProperty, description, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }

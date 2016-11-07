@@ -32,7 +32,7 @@ extends PageNodeExtractor
     for(link <- collectExternalLinks(node);
         uri <- UriUtils.cleanLink(link.destination))
     {
-      quads += new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceUri, null)
+      quads += new Quad(context.language, DBpediaDatasets.ExternalLinks, subjectUri, wikiPageExternalLinkProperty, uri, link.sourceIri, null)
     }
     
     quads

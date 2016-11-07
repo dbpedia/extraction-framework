@@ -30,7 +30,6 @@ trait Extractor[-N] {
      * does not return all datasets it produces, serialization may fail.
      */
     val datasets: Set[Dataset]
-
 }
 
 object ExtractorState extends Enumeration {

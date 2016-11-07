@@ -92,7 +92,7 @@ class RMLMapping(page: PageNode, lang: Language, mappings: org.dbpedia.extractio
   private def replaceParams(in: String): String =
   {
     var out = in.replaceAllLiterally("{TITLE}", page.title.encoded.toString().trim)
-    out = out.replaceAllLiterally("{PAGE-URI}", page.sourceUri.trim)
+    out = out.replaceAllLiterally("{PAGE-URI}", page.sourceIri.trim)
     out = out.replaceAllLiterally("{LANG}", lang.wikiCode.trim)
     val mapToClass = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping].mapToClass.name
 

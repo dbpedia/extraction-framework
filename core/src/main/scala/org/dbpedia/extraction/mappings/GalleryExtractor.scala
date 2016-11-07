@@ -54,7 +54,8 @@ extends WikiPageExtractor
     /**
      * Extract gallery tags from a WikiPage.
      */
-    override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
+    override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
+        val page = input.asInstanceOf[WikiPage]
         // Iterate over each <gallery> set.
         val galleryQuads = galleryRegex.findAllMatchIn(page.source).flatMap(matchData => {
             // Figure out the line number by counting the newlines until the 
@@ -81,7 +82,7 @@ extends WikiPageExtractor
                     else {
                         val fileLineMatch = fileLineOption.get
 
-                        val sourceWithLineNumber = page.sourceUri + "#absolute-line=" +
+                        val sourceWithLineNumber = page.sourceIri + "#absolute-line=" +
                             lineNumber
                         
                         try {

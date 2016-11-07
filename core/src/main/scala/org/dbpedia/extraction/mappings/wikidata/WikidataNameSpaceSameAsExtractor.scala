@@ -34,7 +34,7 @@ class WikidataNameSpaceSameAsExtractor(
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       val objectUri = subjectUri.replace(WikidataUtil.wikidataDBpNamespace,"http://www.wikidata.org/entity/")
 
-      quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.sourceUri,null)
+      quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.sourceIri,null)
     }
 
     quads

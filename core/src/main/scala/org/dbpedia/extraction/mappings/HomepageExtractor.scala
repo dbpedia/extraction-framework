@@ -116,7 +116,7 @@ extends PageNodeExtractor
     {
       for(link <- UriUtils.cleanLink(new URI(url)))
       {
-        return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri))
+        return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceIri))
       }
     }
     catch

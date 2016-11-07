@@ -33,6 +33,6 @@ extends PageNodeExtractor
     
     val ìnternalLinks = ExtractorUtils.collectInternalLinksFromNode(node)
 
-    Seq(new Quad(context.language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, ìnternalLinks.size.toString, node.sourceUri, nonNegativeInteger) )
+    Seq(new Quad(context.language, DBpediaDatasets.OutDegree, subjectUri, wikiPageOutDegreeProperty, ìnternalLinks.size.toString, node.sourceIri, nonNegativeInteger) )
   }
 }

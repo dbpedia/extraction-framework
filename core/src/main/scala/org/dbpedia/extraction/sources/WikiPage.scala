@@ -39,14 +39,6 @@ class WikiPage(
    def this(title: WikiTitle, redirect: WikiTitle, id: Long, revision: Long, timestamp: Long, source: String) =
     this(title, redirect, id, revision, timestamp, 0, "", source, "")
 
-  private var isRetryy = false
-
-  def setRetry(retry: Boolean) = {
-    this.isRetryy = retry
-  }
-
-  def isRetry = this.isRetryy
-
   override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
 
   /**
@@ -55,7 +47,7 @@ class WikiPage(
    */
   override def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
 
-  override def sourceUri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
+  override def sourceIri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
 }
 
 object WikiPage {

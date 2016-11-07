@@ -3,6 +3,7 @@ package org.dbpedia.extraction.mappings
 import org.dbpedia.extraction.destinations.Dataset
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.wikiparser.PageNode
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -13,7 +14,7 @@ extends WikiPageExtractor
 {
   override val datasets: Set[Dataset] = extractors.flatMap(_.datasets).toSet
 
-  override def extract(input: WikiPage, subjectUri: String): Seq[Quad] = {
+  override def extract(input: PageNode, subjectUri: String): Seq[Quad] = {
 
     //val extractors = classes.map(_.getConstructor(classOf[AnyRef]).newInstance(context))
 
@@ -21,7 +22,7 @@ extends WikiPageExtractor
     val wikiPageExtractors = new ArrayBuffer[Extractor[WikiPage]]()
     val pageNodeExtractors = new ArrayBuffer[PageNodeExtractor]()
     val jsonNodeExtractors = new ArrayBuffer[JsonNodeExtractor]()
-    val finalExtractors    = new ArrayBuffer[Extractor[WikiPage]]()
+    val finalExtractors    = new ArrayBuffer[PageNodeExtractor]()
     //to do: add json extractors
 
     val quads = new ArrayBuffer[Quad]()
@@ -30,15 +31,15 @@ extends WikiPageExtractor
     extractors foreach { extractor =>
       extractor match {
 
+        case _ :WikiPageExtractor =>  wikiPageExtractors  += extractor.asInstanceOf[WikiPageExtractor]           //select all extractors which take Wikipage to wrap them in a CompositeExtractor
         case _ :PageNodeExtractor =>  pageNodeExtractors  += extractor.asInstanceOf[PageNodeExtractor]           //select all extractors which take PageNode to wrap them in WikiParseExtractor
         case _ :JsonNodeExtractor =>  jsonNodeExtractors  += extractor.asInstanceOf[JsonNodeExtractor]
-        case _ :WikiPageExtractor =>  wikiPageExtractors  += extractor.asInstanceOf[WikiPageExtractor]           //select all extractors which take Wikipage to wrap them in a CompositeExtractor
         case _ =>
       }
     }
 
     if (wikiPageExtractors.nonEmpty)
-      finalExtractors += new CompositeWikiPageExtractor(wikiPageExtractors :_*)
+      finalExtractors += new CompositeWikiPageExtractor(new CompositeExtractor[WikiPage](wikiPageExtractors :_*))
 
     //create and load WikiParseExtractor here
     if (pageNodeExtractors.nonEmpty)
@@ -51,7 +52,7 @@ extends WikiPageExtractor
     if (finalExtractors.isEmpty)
       Seq.empty
     else
-      new CompositeExtractor[WikiPage](finalExtractors :_*).extract(input, subjectUri)
+      new CompositeExtractor[PageNode](finalExtractors :_*).extract(input, subjectUri)
   }
 }
 

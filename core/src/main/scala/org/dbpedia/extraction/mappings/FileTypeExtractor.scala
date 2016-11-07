@@ -50,8 +50,9 @@ class FileTypeExtractor(context: {
      * Extract a single WikiPage. We guess the file type from the file extension
      * used by the page.
      */
-    override def extract(page: WikiPage, subjectUri: String) : Seq[Quad] =
+    override def extract(input: PageNode, subjectUri: String) : Seq[Quad] =
     {
+        val page = input.asInstanceOf[WikiPage]
         // This extraction only works on File:s.
         if(page.title.namespace != Namespace.File || page.redirect != null)
             return Seq.empty
@@ -65,7 +66,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 dboFileURLProperty,
                 fileURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             )
         )
@@ -99,7 +100,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 foafDepictionProperty,
                 fileURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             ), 
             // 2. <resource> thumbnail <image>
@@ -108,7 +109,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 dboThumbnailProperty,
                 thumbnailURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             ),
             // 3. <image> foaf:thumbnail <image>
@@ -117,7 +118,7 @@ class FileTypeExtractor(context: {
                 fileURL,
                 foafThumbnailProperty,
                 thumbnailURL,
-                page.sourceUri,
+                page.sourceIri,
                 null
             )
         )
@@ -125,6 +126,7 @@ class FileTypeExtractor(context: {
 
     /**
      * Determine the extension of a WikiPage.
+ *
      * @returns None if no extension exists, Some[String] if an extension was found.
      */
     def extractExtension(page: WikiPage): Option[String] =
@@ -162,7 +164,7 @@ class FileTypeExtractor(context: {
             subjectUri,
             fileExtensionProperty,
             extension,
-            page.sourceUri,
+            page.sourceIri,
             xsdString
         )
 
@@ -179,7 +181,7 @@ class FileTypeExtractor(context: {
             subjectUri,
             dctTypeProperty,
             fileTypeClass.uri,
-            page.sourceUri,
+            page.sourceIri,
             null
         )
             
@@ -189,7 +191,7 @@ class FileTypeExtractor(context: {
             subjectUri,
             dctFormatProperty,
             mimeType,
-            page.sourceUri,
+            page.sourceIri,
             xsdString
         )
 
@@ -200,7 +202,7 @@ class FileTypeExtractor(context: {
           subjectUri,
           rdfTypeProperty,
           dboFile.uri,
-          page.sourceUri,
+          page.sourceIri,
           null
         )
 
@@ -212,7 +214,7 @@ class FileTypeExtractor(context: {
                 subjectUri,
                 rdfTypeProperty,
                 rdfClass.uri,
-                page.sourceUri,
+                page.sourceIri,
                 null
             )
         )

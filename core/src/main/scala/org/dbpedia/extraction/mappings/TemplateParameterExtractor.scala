@@ -51,7 +51,7 @@ extends PageNodeExtractor
     for (parameter <- parameters.distinct if parameter.nonEmpty) {
       // TODO: page.sourceUri does not include the line number
       quads += new Quad(context.language, DBpediaDatasets.TemplateParameters, subjectUri, templateParameterProperty,
-          parameter, page.sourceUri, context.ontology.datatypes("xsd:string"))
+          parameter, page.sourceIri, context.ontology.datatypes("xsd:string"))
     }
 
     quads

@@ -36,8 +36,8 @@ extends PageNodeExtractor
 
     var quads = new ArrayBuffer[Quad]()
 
-    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceUri)
-    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceUri, new Datatype("rdf:langString"))
+    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, rdfTypeProperty, skosConceptClass.uri, node.sourceIri)
+    quads += new Quad(language, DBpediaDatasets.SkosCategories, subjectUri, skosPrefLabelProperty, node.title.decoded, node.sourceIri, new Datatype("rdf:langString"))
 
     for(link <- collectCategoryLinks(node))
     {
@@ -50,7 +50,7 @@ extends PageNodeExtractor
       
       val objectUri = language.resourceUri.append(link.destination.decodedWithNamespace)
 
-      quads += quad(subjectUri, property, objectUri, link.sourceUri)
+      quads += quad(subjectUri, property, objectUri, link.sourceIri)
     }
 
     quads

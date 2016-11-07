@@ -54,7 +54,7 @@ class WikidataLLExtractor(
                       val title1 = dbpedia_lang1.resourceUri.append(siteLink1.getPageTitle)
                       val title2 = dbpedia_lang2.resourceUri.append(siteLink2.getPageTitle)
                       quads += new Quad(context.language, datasetMap(lang1), title1,
-                        sameAsProperty, title2, page.wikiPage.sourceUri, null)
+                        sameAsProperty, title2, page.wikiPage.sourceIri, null)
                     }
                     case _ =>
                   }

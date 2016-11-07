@@ -94,8 +94,9 @@ extends WikiPageExtractor
     override val datasets = Set(DBpediaDatasets.CitationData, DBpediaDatasets.CitationLinks /*, DBpediaDatasets.CitationTypes*/)
 
 
-    override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
+    override def extract(input : PageNode, subjectUri : String) : Seq[Quad] =
     {
+        val page = input.asInstanceOf[WikiPage]
         if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
         val quads = new ArrayBuffer[Quad]()
@@ -115,7 +116,7 @@ extends WikiPageExtractor
             for (citationIri <- getCitationIRI(template) )
             {
 
-                quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceUri, null)
+                quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
 
                 for (property <- template.children; if (!property.key.forall(_.isDigit))) {
                     // exclude numbered properties
@@ -127,7 +128,7 @@ extends WikiPageExtractor
                     for (splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode)) {
                         val propertyUri = getPropertyUri(property.key)
                         try {
-                            quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceIri, datatype)
 
 
                         }

@@ -55,7 +55,7 @@ extends PageNodeExtractor
           {
             for (pnd <- getPnd(property)) 
             {
-                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceIri, new Datatype("xsd:string"))
             }
           }
         }
@@ -66,7 +66,7 @@ extends PageNodeExtractor
           {
             for (pnd <- getPnd(property))
             {
-                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceIri, new Datatype("xsd:string"))
             }
           }
         }

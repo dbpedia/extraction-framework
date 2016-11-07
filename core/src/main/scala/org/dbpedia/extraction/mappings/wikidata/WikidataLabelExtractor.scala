@@ -41,10 +41,10 @@ class WikidataLabelExtractor(
           case Some(dbpedia_lang) => {
             if (mappingLanguages.contains(dbpedia_lang))
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLabelsMappingsWiki,
-                subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
             else
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLabelsRest,
-                subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }

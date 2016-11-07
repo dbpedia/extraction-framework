@@ -82,7 +82,7 @@ extends Extractor[TemplateNode]
                 if (condition1_createCorrespondingProperty)
                 {
                     //Connect new instance to the instance created from the root template
-                    graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, instanceUri, correspondingProperty, subjectUri, node.sourceUri)
+                    graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, instanceUri, correspondingProperty, subjectUri, node.sourceIri)
                 }
 
                 //Extract properties
@@ -112,7 +112,7 @@ extends Extractor[TemplateNode]
         // Here we do not split the transitive and the direct types because different types may come from different mappings
         // Splitting the types of the main resource is done at the MappingExtractor.extract()
         for (cls <- diffSet)
-          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, propertyRdfType, cls.uri, node.sourceUri+"&mappedTemplate="+node.title.encoded)
+          graph += new Quad(context.language, DBpediaDatasets.OntologyTypes, uri, propertyRdfType, cls.uri, node.sourceIri+"&mappedTemplate="+node.title.encoded)
 
     }
 
@@ -133,7 +133,7 @@ extends Extractor[TemplateNode]
         for (cls <- classes) {
           // Here we split the transitive types from the direct type assignment
           val typeDataset = if (cls.equals(mapToClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
-          graph += new Quad(context.language, typeDataset, uri, propertyRdfType, cls.uri, node.sourceUri+"&mappedTemplate="+node.title.encoded)
+          graph += new Quad(context.language, typeDataset, uri, propertyRdfType, cls.uri, node.sourceIri+"&mappedTemplate="+node.title.encoded)
         }
     }
 
@@ -142,7 +142,6 @@ extends Extractor[TemplateNode]
      *
      * @param subjectUri The base string of the generated URI
      * @param templateNode The template for which the URI is to be generated
-     *
      * @return The generated URI
      */
     private def generateUri(subjectUri : String, templateNode : TemplateNode) : String =

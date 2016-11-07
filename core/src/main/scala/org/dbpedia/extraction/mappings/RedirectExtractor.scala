@@ -29,10 +29,11 @@ class RedirectExtractor (
 
   private val quad = QuadBuilder(language, DBpediaDatasets.Redirects, wikiPageRedirectsProperty, null) _
 
-  override def extract(page : WikiPage, subjectUri : String): Seq[Quad] =
+  override def extract(input : PageNode, subjectUri : String): Seq[Quad] =
   {
+    val page = input.asInstanceOf[WikiPage]
     if (page.redirect != null && page.title.namespace == page.redirect.namespace) {
-      return Seq(quad(subjectUri, language.resourceUri.append(page.redirect.decodedWithNamespace), page.sourceUri))
+      return Seq(quad(subjectUri, language.resourceUri.append(page.redirect.decodedWithNamespace), page.sourceIri))
     }
 
     Seq.empty

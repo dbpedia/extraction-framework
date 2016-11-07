@@ -42,10 +42,10 @@ class WikidataAliasExtractor(
           case Some(dbpedia_lang) => {
             if (mappingLanguages.contains(dbpedia_lang))
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataAliasMappingsWiki, subjectUri, aliasProperty, alias,
-                page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
             else
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataAliasRest, subjectUri, aliasProperty, alias,
-                page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }

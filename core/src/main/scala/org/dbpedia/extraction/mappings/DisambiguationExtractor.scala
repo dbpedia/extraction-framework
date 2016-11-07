@@ -49,7 +49,7 @@ extends PageNodeExtractor
           subjectUri,
           wikiPageDisambiguatesProperty,
           language.resourceUri.append(link.destination.decodedWithNamespace),
-          link.sourceUri,
+          link.sourceIri,
           null
         )
       }

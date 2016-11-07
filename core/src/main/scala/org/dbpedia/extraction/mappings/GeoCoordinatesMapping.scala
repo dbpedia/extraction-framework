@@ -55,7 +55,7 @@ extends PropertyMapping
   {
     extractGeoCoordinate(node) match
     {
-      case Some(coord) => writeGeoCoordinate(node, coord, subjectUri, node.sourceUri)
+      case Some(coord) => writeGeoCoordinate(node, coord, subjectUri, node.sourceIri)
       case None => Seq.empty
     }
   }

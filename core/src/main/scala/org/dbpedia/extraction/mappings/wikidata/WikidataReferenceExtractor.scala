@@ -44,7 +44,7 @@ class WikidataReferenceExtractor(
                     val value = snak.getValue
                     val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
                     val datatype = if (WikidataUtil.getDatatype(value) != null) context.ontology.datatypes(WikidataUtil.getDatatype(value)) else null
-                    quads += new Quad(context.language, DBpediaDatasets.WikidataReference, statementUri, referenceProperty, WikidataUtil.getValue(value), page.wikiPage.sourceUri, datatype)
+                    quads += new Quad(context.language, DBpediaDatasets.WikidataReference, statementUri, referenceProperty, WikidataUtil.getValue(value), page.wikiPage.sourceIri, datatype)
                   }
                   case _ =>
                 }

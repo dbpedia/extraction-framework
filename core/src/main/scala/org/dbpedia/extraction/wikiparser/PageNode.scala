@@ -1,5 +1,9 @@
 package org.dbpedia.extraction.wikiparser
+
+import org.dbpedia.extraction.mappings.RecordEntry
 import org.dbpedia.extraction.sources.WikiPage
+
+import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a page.
@@ -27,6 +31,8 @@ class PageNode (
 ) 
 extends Node(children, 0)
 {
+    private val extractionRecords = ListBuffer[RecordEntry]()
+
     def toWikiText = children.map(_.toWikiText).mkString
 
     def toPlainText = children.map(_.toPlainText).mkString
@@ -44,4 +50,18 @@ extends Node(children, 0)
           && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.filterEmptyTextNodes(otherPageNode.children) == NodeUtil.filterEmptyTextNodes(children))
         case _ => false
     }
+
+    def addExtractionRecord(errorMsg: String = null, error: Throwable = null, pushToStd: Boolean = false): Unit ={
+        extractionRecords.append(new RecordEntry(this, errorMsg, error, pushToStd))
+    }
+
+    def getExtractionRecords() = this.extractionRecords.seq
+
+    private var isRetryy = false
+
+    def toggleRetry() = {
+        this.isRetryy = !this.isRetryy
+    }
+
+    def isRetry = this.isRetryy
 }

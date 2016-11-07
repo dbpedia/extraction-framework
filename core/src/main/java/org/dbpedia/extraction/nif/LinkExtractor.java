@@ -23,6 +23,7 @@ public class LinkExtractor implements NodeVisitor {
 	private boolean inSup = false;
 	private boolean invisible = false;
     private LinkExtractorContext context;
+	private ArrayList<String> errors = new ArrayList<>();
 	
 	public LinkExtractor(int startOffset, LinkExtractorContext context) {
         paragraphs = new ArrayList<Paragraph>();
@@ -91,9 +92,9 @@ public class LinkExtractor implements NodeVisitor {
                   tempLink.setWordEnd(offset);
               }
               else{                                            // -> filter out hidden links to the underlying template
+				  errors.add("found Template in resource: " + this.context.resource + ": " + tempText);
                   offset = beforeOffset;
                   tempText = "";
-				  System.err.println(this.context.language + ": found Template in resource: " + this.context.resource + ": " + tempText);
 			  }
 		  }
 
@@ -254,6 +255,9 @@ public class LinkExtractor implements NodeVisitor {
 		return offset;
 	}
 
+	public ArrayList<String> getErrors(){
+		return errors;
+	}
 
     private String[] replaceChars() {
         String[] rep = new String[256];

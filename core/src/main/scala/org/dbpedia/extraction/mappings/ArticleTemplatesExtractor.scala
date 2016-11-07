@@ -44,7 +44,7 @@ class ArticleTemplatesExtractor(
     templates.map( t => {
       val templateUri = context.language.resourceUri.append(t.title.decodedWithNamespace)
       new Quad(context.language, dataset, subjectUri, usesTemplateProperty,
-        templateUri, t.sourceUri, null)
+        templateUri, t.sourceIri, null)
     })
   }
 

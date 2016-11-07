@@ -22,6 +22,9 @@ abstract class Node(val children : List[Node], val line : Int)
 
     private val annotations = new HashMap[AnnotationKey[_], Any]()
 
+  /**
+    * TODO the UriGenerator class needs to be replaced (see bottom)
+    */
     private val uriGenerator = new UriGenerator()
 
     def generateUri(baseUri : String, node : Node) = uriGenerator.generate(baseUri, node)
@@ -120,9 +123,8 @@ abstract class Node(val children : List[Node], val line : Int)
     
     /**
      * IRI of source page and line number.
-     * TODO: rename to sourceIri.
      */
-    def sourceUri : String =
+    def sourceIri : String =
     {
         val sb = new java.lang.StringBuilder
         

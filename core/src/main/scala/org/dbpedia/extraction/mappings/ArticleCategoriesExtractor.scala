@@ -25,7 +25,7 @@ class ArticleCategoriesExtractor( context : {
         
         val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
-        links.map(link => new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri))
+        links.map(link => new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceIri))
     }
 
     private def isCategoryForArticle(linkNode : InternalLinkNode) = linkNode.destinationNodes match

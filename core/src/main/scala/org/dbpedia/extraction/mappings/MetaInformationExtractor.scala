@@ -30,8 +30,9 @@ class MetaInformationExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
+  override def extract(input : PageNode, subjectUri : String) : Seq[Quad] =
   {
+    val page = input.asInstanceOf[WikiPage]
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
     val editLink     = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=edit"
@@ -39,19 +40,19 @@ class MetaInformationExtractor( context : {
     val historyLink  = context.language.baseUri + "/w/index.php?title=" + page.title.encodedWithNamespace + "&action=history"
 
     val quadModificationDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, modificationDatePredicate,
-      formatTimestamp(page.timestamp), page.sourceUri, datetime )
+      formatTimestamp(page.timestamp), page.sourceIri, datetime )
 
     val quadExtractionDate = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, extractionDatePredicate,
-      formatCurrentTimestamp, page.sourceUri, datetime )
+      formatCurrentTimestamp, page.sourceIri, datetime )
 
     val quadEditlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, editLinkPredicate,
-      editLink, page.sourceUri, null )
+      editLink, page.sourceIri, null )
 
     val quadRevisionlink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, revisionPredicate,
-      revisionLink, page.sourceUri, null )
+      revisionLink, page.sourceIri, null )
 
     val quadHistorylink = new Quad(context.language, DBpediaDatasets.RevisionMeta, subjectUri, historyPredicate,
-      historyLink, page.sourceUri, null )
+      historyLink, page.sourceIri, null )
 
 
     Seq(quadModificationDate, quadExtractionDate, quadEditlink, quadRevisionlink, quadHistorylink)

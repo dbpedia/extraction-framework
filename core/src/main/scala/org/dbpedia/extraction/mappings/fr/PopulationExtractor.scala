@@ -36,7 +36,7 @@ extends PageNodeExtractor {
 			    if (!isAllDigits(city)) {
 		    	        val newUri = context.language.resourceUri.append(city)
 			    
-			        return Seq (new Quad(context.language, DBpediaDatasets.FrenchPopulation, newUri, populationProperty, m.group(1), node.sourceUri))
+			        return Seq (new Quad(context.language, DBpediaDatasets.FrenchPopulation, newUri, populationProperty, m.group(1), node.sourceIri))
 			    }
 		        }
 	            }

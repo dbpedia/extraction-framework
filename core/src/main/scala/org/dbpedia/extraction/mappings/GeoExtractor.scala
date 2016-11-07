@@ -42,7 +42,7 @@ extends PageNodeExtractor
       coordinate <- geoCoordinateParser.parse(templateNode) 
     )
     {
-      return writeGeoCoordinate(coordinate, subjectUri, page.sourceUri)
+      return writeGeoCoordinate(coordinate, subjectUri, page.sourceIri)
     }
 
     Seq.empty

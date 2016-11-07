@@ -85,12 +85,12 @@ extends PropertyMapping
     // only generate triples if we actually extracted some values
     if(! values.isEmpty)
     {
-      graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+      graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, originalSubjectUri, correspondingProperty, instanceUri, node.sourceIri);
       
       for (cls <- nodeClass.relatedClasses) {
         // Here we split the transitive types from the direct type assignment
         val typeDataset = if (cls.equals(nodeClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
-        graph += new Quad(context.language, typeDataset, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+        graph += new Quad(context.language, typeDataset, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceIri)
       }
       
       graph ++= values

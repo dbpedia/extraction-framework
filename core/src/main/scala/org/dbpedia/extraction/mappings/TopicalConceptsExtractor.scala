@@ -54,13 +54,13 @@ extends PageNodeExtractor
                         subjectUri,
                         skosSubjectProperty,
                         mainResource,
-                        template.sourceUri) ::
+                        template.sourceIri) ::
                     new Quad(context.language,
                         DBpediaDatasets.TopicalConcepts,
                         mainResource,
                         rdfTypeProperty,
                         skosSubjectClass.uri,
-                        template.sourceUri)
+                        template.sourceIri)
                     :: Nil)
                 }
 

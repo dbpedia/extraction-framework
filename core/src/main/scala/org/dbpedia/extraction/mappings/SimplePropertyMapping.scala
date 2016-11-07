@@ -241,8 +241,8 @@ extends PropertyMapping
                     (if (isHashIri) "&objectHasFragment=" else "")
                 val g = parseResult match
                 {
-                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
-                    case value => writeValue(value, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
+                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
+                    case value => writeValue(value, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
                 }
 
                 graph ++= g

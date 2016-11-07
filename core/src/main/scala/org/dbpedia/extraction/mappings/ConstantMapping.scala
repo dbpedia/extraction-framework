@@ -55,7 +55,7 @@ extends PropertyMapping
 
   override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
-    Seq(new Quad(context.language, dataset, subjectUri, ontologyProperty, value, node.sourceUri, datatype))
+    Seq(new Quad(context.language, dataset, subjectUri, ontologyProperty, value, node.sourceIri, datatype))
   }
 
 

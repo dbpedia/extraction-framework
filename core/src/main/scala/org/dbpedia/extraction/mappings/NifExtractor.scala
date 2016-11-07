@@ -60,8 +60,9 @@ class NifExtractor(
     case None => "Template"
   }
 
-  override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
+  override def extract(input : PageNode, subjectUri : String): Seq[Quad] =
   {
+    val pageNode = input.asInstanceOf[WikiPage]
     //Only extract abstracts for pages from the Main namespace
     if(pageNode.title.namespace != Namespace.Main) return Seq.empty
 
@@ -84,16 +85,18 @@ class NifExtractor(
     extractTextFromHtml(paragraphs, new LinkExtractorContext(language, subjectUri, templateString)) match {
       case Success(extractionResults) => {
 
-        val quads = makeContext(extractionResults.text, subjectUri, pageNode.sourceUri, extractionResults.length)
+        val quads = makeContext(extractionResults.text, subjectUri, pageNode.sourceIri, extractionResults.length)
 
         quads ++= (if (quads.nonEmpty)
-          makeStructureElements(extractionResults.paragraphs, quads.head.subject, pageNode.sourceUri, extractionResults.length).toList
+          makeStructureElements(extractionResults.paragraphs, quads.head.subject, pageNode.sourceIri, extractionResults.length).toList
         else List())
 
         if (!isTestRun && quads.nonEmpty) {          //not!
-          quads += longQuad(subjectUri, extractionResults.text, pageNode.sourceUri)
-          quads += shortQuad(subjectUri, getShortAbstract(extractionResults.paragraphs), pageNode.sourceUri)
+          quads += longQuad(subjectUri, extractionResults.text, pageNode.sourceIri)
+          quads += shortQuad(subjectUri, getShortAbstract(extractionResults.paragraphs), pageNode.sourceIri)
         }
+        for(err <- extractionResults.errors)
+          pageNode.addExtractionRecord(err, null, true)
         quads.toSeq
       }
       case Failure(e) => throw e
@@ -177,6 +180,7 @@ class NifExtractor(
   private def extractTextFromHtml(line: String, extractionContext: LinkExtractorContext): Try[TempHtmlExtractionResults] = {
     Try {
       var paragraphs = List[Paragraph]()
+      var errors = List[String]()
       val doc: Document = Jsoup.parse("<span>" + line + "</span>")
       var abstractText: String = ""
       val nodes = doc.select("body").first.childNodes.asScala
@@ -207,6 +211,8 @@ class NifExtractor(
             abstractText += cleanedLinkText
           }
           paragraphs ++= extractor.getParagraphs.asScala
+
+          errors ++= extractor.getErrors.asScala
         }
       }
       var beforeTrim: Int = 0
@@ -221,7 +227,7 @@ class NifExtractor(
       if (offsetReduce > 0) {
         offset -= offsetReduce
       }
-      new TempHtmlExtractionResults(abstractText, offset, paragraphs)
+      new TempHtmlExtractionResults(abstractText, offset, paragraphs, errors)
     }
   }
 
@@ -301,6 +307,7 @@ class NifExtractor(
   private class TempHtmlExtractionResults(
     val text: String,
     val length: Int,
-    val paragraphs: List[Paragraph]
+    val paragraphs: List[Paragraph],
+    val errors: List[String]
   )
 }

@@ -36,7 +36,7 @@ class AnchorTextExtractor(
         val concated = nodes.children.map(_.toPlainText).mkString("")
         buffer += new
             Quad(context.language, DBpediaDatasets.AnchorText, getUri(nodes.destination), wikiPageWikiLinkProperty,
-              concated, nodes.sourceUri, context.ontology.datatypes("rdf:langString"))
+              concated, nodes.sourceIri, context.ontology.datatypes("rdf:langString"))
       }
       for (child <- nodes.children) {
         child match {
@@ -44,7 +44,7 @@ class AnchorTextExtractor(
             buffer += new
                 Quad(context.language, DBpediaDatasets.AnchorText, getUri(intlink.destination),
                   wikiPageWikiLinkProperty,
-                  intlink.children(0).toPlainText, nodes.sourceUri, context.ontology.datatypes("rdf:langString"))
+                  intlink.children(0).toPlainText, nodes.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }
