@@ -138,8 +138,14 @@ class NifExtractor(
     triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#referenceContext", contextUri, sourceUrl, null)
     triples += nifStructure(contextUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#hasSection", abstractUri, sourceUrl, null)
     //TODO add logic for nif:firstSection and nif:lastSection when extracting the whole page also use this for sub-sections as well
+
+    var lastParagraph: String = null
     for(i <- paragraphs.indices) {
       val paragraph = contextUri.substring(0, contextUri.indexOf('?')) + "?dbpv=" + dbpediaVersion + "&nif=paragraph_" + paragraphs(i).getBegin + "_" + paragraphs(i).getEnd
+
+      if(lastParagraph != null) //provide the nextParagraph triple
+        triples += nifStructure(lastParagraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#nextParagraph", paragraph, sourceUrl, null)
+
       triples += nifStructure(paragraph, "http://www.w3.org/1999/02/22-rdf-syntax-ns#type", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#Paragraph", sourceUrl, null)
       triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#beginIndex", paragraphs(i).getBegin.toString, sourceUrl, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
       triples += nifStructure(paragraph, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", paragraphs(i).getEnd.toString, sourceUrl, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
@@ -152,6 +158,8 @@ class NifExtractor(
         triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#firstParagraph", paragraph, sourceUrl, null)
       if(i == paragraphs.indices.last)
         triples += nifStructure(abstractUri, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#lastParagraph", paragraph, sourceUrl, null)
+
+      lastParagraph = paragraph
 
       triples ++= makeWordsFromLinks(paragraphs(i).getLinks.asScala.toList, contextUri, paragraph, sourceUrl)
     }
