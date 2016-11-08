@@ -4,7 +4,7 @@ import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, WikiPageExtractor}
 import org.dbpedia.extraction.sources.{Source, WikiPage}
 import org.dbpedia.extraction.util.{Language, SimpleWorkers}
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.{PageNode, Namespace}
 
 /**
  * Executes a extraction.
@@ -21,9 +21,8 @@ class ExtractionJob(
    namespaces: Set[Namespace],
    destination: Destination,
    language: Language,
-   description: String,
    retryFailedPages: Boolean,
-   extractionRecorder: ExtractionRecorder)
+   extractionRecorder: ExtractionRecorder[PageNode])
 {
   private val workers = SimpleWorkers { page: WikiPage =>
     var success = false
@@ -35,8 +34,8 @@ class ExtractionJob(
       }
       success = true
       val records = page.getExtractionRecords() match{
-        case seq :Seq[RecordEntry] if seq.nonEmpty => seq
-        case _ => Seq(new RecordEntry(page))
+        case seq :Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
+        case _ => Seq(new RecordEntry[PageNode](page, page.title.language))
       }
       extractionRecorder.record(records:_*)
     } catch {
@@ -48,7 +47,7 @@ class ExtractionJob(
   
   def run(): Unit =
   {
-    extractionRecorder.initialzeRecorder(language.wikiCode)
+    extractionRecorder.initialize(language)
 
     extractor.initializeExtractor()
     

@@ -7,7 +7,7 @@ import java.util.logging.Logger
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.{JsonConfig, Language}
+import org.dbpedia.extraction.util.{Config, Language}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
@@ -37,50 +37,46 @@ class AbstractExtractor(
   context : {
     def ontology : Ontology
     def language : Language
+    def config : Config
   }
 )
 extends WikiPageExtractor
 {
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
-  protected val abstractParams = new JsonConfig(this.getClass.getClassLoader.getResource("mediawikiconfig.json"))
-  protected val publicParames = abstractParams.getMap("publicParams")
-  protected val protectedParams = abstractParams.getMap("protectedParams")
 
-  protected def apiUrl: URL = new URL(publicParames.get("apiUrl").get.asText())
+  protected def apiUrl: URL = context.config.mediawikiConnection.apiUrl
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
-  protected val maxRetries = publicParames.get("maxRetries").get.asInt
+  protected val maxRetries = context.config.mediawikiConnection.maxRetries
   require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
 
     /** timeout for connection to web server, milliseconds */
-  protected val connectMs = publicParames.get("connectMs").get.asInt
+  protected val connectMs = context.config.mediawikiConnection.connectMs
   require(connectMs > 200, "connectMs shall be more than 200 ms!")
 
     /** timeout for result from web server, milliseconds */
-  protected val readMs = publicParames.get("readMs").get.asInt
+  protected val readMs = context.config.mediawikiConnection.readMs
   require(readMs > 1000, "readMs shall be more than 1000 ms!")
 
     /** sleep between retries, milliseconds, multiplied by CPU load */
-  protected val sleepFactorMs = publicParames.get("sleepFactorMs").get.asInt
+  protected val sleepFactorMs = context.config.mediawikiConnection.sleepFactor
   require(sleepFactorMs > 200, "sleepFactorMs shall be more than 200 ms!")
 
 
   /** protected params ... */
-  protected val isTestRun = protectedParams.get("isTestRun").get.asBoolean()
-
-  protected val xmlPath = protectedParams.get("apiNormalXmlPath").get.asText().split(",").map(_.trim)
+  protected val xmlPath = context.config.abstractParameters.abstractTags.split(",").map(_.trim)
 
   protected val language = context.language.wikiCode
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
-  protected val apiParametersFormat = "uselang="+language + protectedParams.get("apiNormalParametersFormat").get.asText()
+  protected val apiParametersFormat = "uselang="+language + context.config.abstractParameters.abstractQuery
 
     // lazy so testing does not need ontology
-  protected lazy val shortProperty = context.ontology.properties(protectedParams.get("shortProperty").get.asText())
+  protected lazy val shortProperty = context.ontology.properties(context.config.abstractParameters.shortAbstractsProperty)
 
     // lazy so testing does not need ontology
-  protected lazy val longProperty = context.ontology.properties(protectedParams.get("longProperty").get.asText())
+  protected lazy val longProperty = context.ontology.properties(context.config.abstractParameters.longAbstractsProperty)
 
   protected lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
   protected lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _

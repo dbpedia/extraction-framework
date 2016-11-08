@@ -10,7 +10,7 @@ import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.{WikiPage, WikiSource, XMLSource}
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{ExtractorUtils, Finder, IOUtils, Language}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable.{ArrayBuffer, HashMap}
@@ -116,6 +116,8 @@ class ConfigLoader(config: Config)
             }
 
             def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
+
+            def config: Config = config
         }
 
         //Extractors
@@ -138,12 +140,21 @@ class ConfigLoader(config: Config)
         }
         
         val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete).get, false)
-        
+
         val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
+
+        val extractionRecorder = config.logDir match{
+          case Some(p) => {
+            val file = new File(p)
+            file.createNewFile()
+            new ExtractionRecorder[PageNode](new FileWriter(file), description)
+          }
+          case None => new ExtractionRecorder[PageNode]()
+        }
 
         val extractionJobNS = if(lang == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
 
-        new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, lang, description, config.retryFailedPages, config.extractionRecorder)
+        new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, lang, config.retryFailedPages, extractionRecorder)
     }
     
     private def writer(file: File): () => Writer = {

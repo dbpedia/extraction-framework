@@ -1,13 +1,15 @@
-package org.dbpedia.extraction.dump.extract
+package org.dbpedia.extraction.util
+
+import java.io.File
+import java.net.URL
+import java.util.Properties
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, Extractor}
-import java.util.Properties
-import java.io.{FileWriter, File}
+import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.util.ConfigUtils.{getStrings, getValue}
 import org.dbpedia.extraction.wikiparser.Namespace
+
 import scala.collection.Map
-import org.dbpedia.extraction.util.{ConfigUtils, ExtractorUtils, Language}
-import org.dbpedia.extraction.util.ConfigUtils.{getValue,getStrings}
 
 
 class Config(config: Properties)
@@ -27,17 +29,11 @@ class Config(config: Properties)
       dir
   }
 
+  val dbPediaVersion = Option(config.getProperty("dbpedia-version"))
+
   val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
-
-  val extractionRecorder = Option(config.getProperty("log-file")) match{
-    case Some(p) => {
-      val file = new File(p)
-      file.createNewFile()
-      new ExtractionRecorder(new FileWriter(file), config.getProperty("log-preamble", ""))
-    }
-    case None => new ExtractionRecorder()
-  }
+  val logDir = Option(config.getProperty("log-dir"))
 
   val retryFailedPages = config.getProperty("retry-failed-pages", "false").toBoolean
 
@@ -95,4 +91,30 @@ class Config(config: Properties)
     new IllegalArgumentException(message, cause)
   }
 
+  case class MediaWikiConnection(apiUrl: URL, maxRetries: Int, connectMs: Int, readMs: Int, sleepFactor: Int)
+  val mediawikiConnection = MediaWikiConnection(
+    apiUrl=new URL(config.getProperty("mwc-apiUrl", "")),
+    maxRetries = config.getProperty("mwc-maxRetries", "4").toInt,
+    connectMs = config.getProperty("mwc-connectMs", "2000").toInt,
+    readMs = config.getProperty("mwc-readMs", "5000").toInt,
+    sleepFactor = config.getProperty("mwc-sleepFactor", "1000").toInt
+  )
+
+  case class AbstractParameters(abstractQuery: String, abstractTags: String, shortAbstractsProperty: String, longAbstractsProperty: String, shortAbstractMinLength: Int)
+  val abstractParameters = AbstractParameters(
+    abstractQuery=config.getProperty("abstract-query", ""),
+    abstractTags = config.getProperty("abstract-tags", "query,pages,page,extract"),
+    shortAbstractsProperty = config.getProperty("short-abstracts-property", "rdfs:comment"),
+    longAbstractsProperty = config.getProperty("long-abstracts-property", "abstract"),
+    shortAbstractMinLength = config.getProperty("short-abstract-min-length", "200").toInt
+  )
+
+  case class NifParameters(nifQuery: String, nifTags: String, isTestRun: Boolean, writeAnchor: Boolean, writeLinkAnchor: Boolean)
+  val nifParameters = NifParameters(
+    nifQuery=config.getProperty("nif-query", ""),
+    nifTags = config.getProperty("nif-tags", "parse,text"),
+    isTestRun = config.getProperty("nif-isTestRun", "false").toBoolean,
+    writeAnchor = config.getProperty("nif-write-anchor", "false").toBoolean,
+    writeLinkAnchor = config.getProperty("nif-write-link-anchor", "true").toBoolean
+  )
 }

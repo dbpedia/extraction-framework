@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.dump.extract
 
-import org.dbpedia.extraction.util.ProxyAuthenticator
+import org.dbpedia.extraction.util.{Config, ProxyAuthenticator, ConfigUtils}
 import java.net.Authenticator
-import org.dbpedia.extraction.util.ConfigUtils
 
 /**
  * Dump extraction script.
@@ -31,6 +30,5 @@ object Extraction {
     for (job <- configLoader.getExtractionJobs) {
       job.run()
     }
-    config.extractionRecorder.finalizeRecorder()
   }
 }

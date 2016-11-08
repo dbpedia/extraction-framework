@@ -6,7 +6,7 @@ import org.dbpedia.extraction.nif.LinkExtractor.LinkExtractorContext
 import org.dbpedia.extraction.nif.{Link, LinkExtractor, Paragraph}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.{Language, UriUtils, WikiUtil}
+import org.dbpedia.extraction.util.{Config, Language, UriUtils, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.Jsoup
@@ -35,19 +35,23 @@ class NifExtractor(
      context : {
        def ontology : Ontology
        def language : Language
+       def config : Config
      }
    )
   extends AbstractExtractor(context)
 {
   //API parameters to geht HTML of first section
-  override val apiParametersFormat = "uselang="+language + protectedParams.get("apiNifParametersFormat").get.asText()
+  override val apiParametersFormat = "uselang="+language + context.config.nifParameters.nifQuery
 
-  override val xmlPath = protectedParams.get("apiNifXmlPath").get.asText.split(",").map(_.trim)
+  override val xmlPath = context.config.nifParameters.nifTags.split(",").map(_.trim)
 
-  protected val writeStrings = protectedParams.get("writeNifStrings").get.asBoolean()
-  protected val shortAbstractLength = protectedParams.get("minShortAbstractLength").get.asInt()
+  protected val isTestRun = context.config.nifParameters.isTestRun
+  protected val writeLinkAnchors = context.config.nifParameters.writeLinkAnchor
+  protected val writeStrings = context.config.nifParameters.writeAnchor
+  protected val shortAbstractLength = context.config.abstractParameters.shortAbstractMinLength
 
-  protected val dbpediaVersion = publicParames.get("dbpediaVersion").get.asText()
+  require(context.config.dbPediaVersion.isDefined, "dbpedia-version parameter undefined in config document")
+  protected val dbpediaVersion = context.config.dbPediaVersion.get
 
   override val datasets = Set(DBpediaDatasets.NifAbstractContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
@@ -178,7 +182,8 @@ class NifExtractor(
           words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#endIndex", link.getWordEnd.toString, sourceUrl, "http://www.w3.org/2001/XMLSchema#nonNegativeInteger")
           words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#superString", paragraphUri, sourceUrl, null)
           words += nifLinks(word, "http://www.w3.org/2005/11/its/rdf#taIdentRef", UriUtils.createUri(link.getUri).toString, sourceUrl, null)  //TODO IRI's might throw exception in org.dbpedia.extraction.destinations.formatters please check this
-          words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", link.getLinkText, sourceUrl, "http://www.w3.org/2001/XMLSchema#string")
+          if(writeLinkAnchors)
+            words += nifLinks(word, "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#anchorOf", link.getLinkText, sourceUrl, "http://www.w3.org/2001/XMLSchema#string")
         }
       }
     words

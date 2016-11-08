@@ -31,7 +31,7 @@ class PageNode (
 ) 
 extends Node(children, 0)
 {
-    private val extractionRecords = ListBuffer[RecordEntry]()
+    private val extractionRecords = ListBuffer[RecordEntry[PageNode]]()
 
     def toWikiText = children.map(_.toWikiText).mkString
 
@@ -52,7 +52,7 @@ extends Node(children, 0)
     }
 
     def addExtractionRecord(errorMsg: String = null, error: Throwable = null, pushToStd: Boolean = false): Unit ={
-        extractionRecords.append(new RecordEntry(this, errorMsg, error, pushToStd))
+        extractionRecords.append(new RecordEntry(this, this.title.language, errorMsg, error, pushToStd))
     }
 
     def getExtractionRecords() = this.extractionRecords.seq

@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import java.net.URL
 
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.util.{Config, Language}
 
 import scala.language.reflectiveCalls
 
@@ -16,6 +16,7 @@ class AbstractExtractorWikipedia(
   context : {
     def ontology : Ontology
     def language : Language
+    def config : Config
   })
   extends AbstractExtractor (context)
 {

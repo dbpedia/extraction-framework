@@ -1,6 +1,9 @@
 package org.dbpedia.extraction.scripts
 
+import java.io.File
+
 import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.mappings.{RecordEntry, ExtractionRecorder}
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import scala.Console.err
@@ -8,13 +11,25 @@ import scala.Console.err
 /**
  */
 object QuadReader {
-  
+
+  private var recorder = new ExtractionRecorder[Quad]()
+
+  def getRecorder = recorder
+
+  def setLogFile(file: FileLike[File], preamble: String = null): Unit ={
+    recorder = new ExtractionRecorder[Quad](IOUtils.writer(file, append = true), preamble)
+  }
+
+  def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
+    recorder.record(new RecordEntry[Quad](quad, lang, errorMsg, error))
+  }
+
   /**
    * @param input file name, e.g. interlanguage-links-same-as.nt.gz
    * @param proc process quad
    */
   def readQuads[T <% FileLike[T]](finder: DateFinder[T], input: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {
-    readQuads(finder.language.wikiCode, finder.byName(input, auto).get)(proc)
+    readQuads(finder.language, finder.byName(input, auto).get)(proc)
   }
 
   /**
@@ -23,17 +38,14 @@ object QuadReader {
     */
   def readQuadsOfMultipleFiles[T <% FileLike[T]](finder: DateFinder[T], pattern: String, auto: Boolean = false)(proc: Quad => Unit): Unit = {
     for(file <- finder.byPattern(pattern, auto))
-      readQuads(finder.language.wikiCode, file)(proc)
+      readQuads(finder.language, file)(proc)
   }
 
-//  def readSortedQuads[T <% FileLike[T]](finder: DateFinder[T], pattern: String, auto: Boolean = false)(proc: Traversable[Quad] => Unit): Unit = {
-//    readSortedQuads(finder.language.wikiCode, finder.byName(pattern, auto))(proc)
-//  }
-
-  def readSortedQuads[T <% FileLike[T]](tag: String, file: FileLike[_])(proc: Traversable[Quad] => Unit): Unit = {
+  def readSortedQuads[T <% FileLike[T]](language: Language, file: FileLike[_])(proc: Traversable[Quad] => Unit): Unit = {
+    //TODO needs extraction-recorder syntax!
     val lastSubj = ""
     var seq = List[Quad]()
-    readQuads(tag, file) { quad =>
+    readQuads(language, file) { quad =>
       if(lastSubj != quad.subject)
       {
         proc(seq)
@@ -47,33 +59,30 @@ object QuadReader {
   }
 
   /**
-   * @param tag for logging
+   * @param language for logging
    * @param file input file
    * @param proc process quad
    */
-  def readQuads(tag: String, file: FileLike[_])(proc: Quad => Unit): Unit = {
-    var lineCount = 0
-    val start = System.nanoTime
+  def readQuads(language: Language, file: FileLike[_])(proc: Quad => Unit): Unit = {
     val dataset = "(?<=(.*wiki-\\d{8}-))([^\\.]+)".r.findFirstIn(file.toString) match {
       case Some(x) => x
       case None => null
     }
-      err.println(tag+": reading "+file+" ...")
-      IOUtils.readLines(file) { line =>
-        line match {
-          case null => // ignore last value
-          case Quad(quad) => {
-            val copy = quad.copy (
-              dataset = dataset
-            )
-            proc(copy)
-            lineCount += 1
-            if (lineCount % 100000 == 0) logRead("dataset: " + dataset + " " + tag, lineCount, start)
-          }
-          case str => if (str.nonEmpty && !str.startsWith("#")) throw new IllegalArgumentException("line did not match quad or triple syntax: " + line)
+    getRecorder.initialize(language, dataset)
+    IOUtils.readLines(file) { line =>
+      line match {
+        case null => // ignore last value
+        case Quad(quad) => {
+          val copy = quad.copy (
+            dataset = dataset
+          )
+          proc(copy)
+          addQuadRecord(copy, Language.map.get(language.wikiCode).get)
         }
+        case str => if (str.nonEmpty && !str.startsWith("#"))
+          addQuadRecord(null, Language.map.get(language.wikiCode).get, null, new IllegalArgumentException("line did not match quad or triple syntax: " + line))
       }
-    logRead("dataset: " + dataset + " " + tag, lineCount, start)
+    }
   }
   
   private def logRead(tag: String, lines: Int, start: Long): Unit = {
