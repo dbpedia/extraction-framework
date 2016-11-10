@@ -104,8 +104,7 @@ object MapSubjectUris {
         var count = 0
         val inputFile = if (isExternal) new File(secondary, input._1 + input._2) else finder.byName(input._1 + input._2, auto = true).get
         val outputFile = if (isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true).get
-        val tag = if (isExternal) input._1 else language.wikiCode
-        QuadMapper.mapQuads(tag, inputFile, outputFile, required = true) { quad =>
+        QuadMapper.mapQuads(language, inputFile, outputFile, required = true) { quad =>
           map.get(quad.subject) match {
             case Some(uris) => {
               count = count + 1

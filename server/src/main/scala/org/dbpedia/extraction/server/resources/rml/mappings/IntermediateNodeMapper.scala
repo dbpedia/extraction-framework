@@ -1,8 +1,6 @@
 package org.dbpedia.extraction.server.resources.rml.mappings
 
-import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 

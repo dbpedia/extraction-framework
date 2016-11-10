@@ -103,7 +103,7 @@ object TypeConsistencyCheck {
 
 
       try {
-        QuadReader.readQuads(lang.wikiCode+": Reading types from "+typesDataset, finder.file(date, typesDataset).get) { quad =>
+        QuadReader.readQuads(lang, finder.file(date, typesDataset).get) { quad =>
           val q = quad.copy(language = lang.wikiCode) //set the language of the Quad
           computeType(quad, resourceTypes, ontology)
         }
@@ -117,7 +117,7 @@ object TypeConsistencyCheck {
 
       try {
         destination.open()
-        QuadReader.readQuads(lang.wikiCode+": Reading types from " + mappedTripleDataset, finder.file(date, mappedTripleDataset).get) { quad =>
+        QuadReader.readQuads(lang, finder.file(date, mappedTripleDataset).get) { quad =>
 
           val rangeDataset = checkQuadRange(quad, resourceTypes, ontology)
           val domainDataset = checkQuadDomain(quad, resourceTypes, ontology)

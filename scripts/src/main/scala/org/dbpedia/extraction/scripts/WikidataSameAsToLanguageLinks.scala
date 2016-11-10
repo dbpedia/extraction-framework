@@ -87,7 +87,7 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
     var currentWikidataEntity: Option[String] = None
     // all entities assigned to the current wikidata entity by means of sameAs
     var currentSameEntities: Map[String, EntityContext] = Map()
-    QuadReader.readQuads(Language.Wikidata.wikiCode, wikiDataFile) { quad =>
+    QuadReader.readQuads(Language.Wikidata, wikiDataFile) { quad =>
       val currentSubject = quad.subject
 
       currentWikidataEntity match {
@@ -176,7 +176,7 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
    */
   private def writeQuads(wikiDataEntity: String, sameEntities: Map[String, EntityContext]) : Unit = {
     relevantLanguages.foreach { language =>
-      workers.process(language, wikiDataEntity, sameEntities)
+      workers.process((language, wikiDataEntity, sameEntities))
     }
   }
 

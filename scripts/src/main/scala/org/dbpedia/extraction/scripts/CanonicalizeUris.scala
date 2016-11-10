@@ -182,7 +182,7 @@ object CanonicalizeUris {
           }
         }
       }
-      
+
     }
     
     workers.start()

@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.server.resources.rml.model.rmlresources
 
-import org.apache.jena.rdf.model.Resource
+import com.hp.hpl.jena.rdf.model.Resource
 import org.dbpedia.extraction.ontology.RdfNamespace
 
 /**

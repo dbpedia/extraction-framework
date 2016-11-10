@@ -1,5 +1,4 @@
 package org.dbpedia.extraction.destinations
-
 /**
  * Defines the datasets which are extracted by DBpedia.
  * TODO: add references to the extractor classes.
@@ -139,4 +138,5 @@ object DBpediaDatasets
     val CitationLinks = new Dataset("citation_links", "Links from a citation to a DBpedia article using the dbp:isCitedBy property")
     val CitationData = new Dataset("citation_data", "Raw data extracted from Wikipedia citation templates")
     //val CitationTypes = new Dataset("citation_types")
+
 }

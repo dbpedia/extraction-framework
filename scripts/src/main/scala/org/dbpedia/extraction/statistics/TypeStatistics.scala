@@ -85,7 +85,7 @@ object TypeStatistics {
       for(file <- inputFiles) {
         if(file.exists)
         {
-          QuadReader.readQuads(lang.wikiCode, file) { quad =>
+          QuadReader.readQuads(lang, file) { quad =>
             statements = statements +1
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))

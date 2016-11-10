@@ -48,7 +48,7 @@ object CreateIriSameAsUriLinks {
       }
       val destination = new CompositeDestination(formatDestinations.toSeq: _*)
       
-      QuadMapper.mapQuads(language.wikiCode, inputFile, destination, true) { quad =>
+      QuadMapper.mapQuads(language, inputFile, destination, true) { quad =>
         val iri = quad.subject
         val uri = new URI(iri).toASCIIString
         if (uri == iri) List.empty

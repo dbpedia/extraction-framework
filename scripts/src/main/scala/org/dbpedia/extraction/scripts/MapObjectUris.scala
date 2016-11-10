@@ -141,8 +141,7 @@ object MapObjectUris {
         var count = 0
         val inputFile = if(isExternal) new File(secondary, input._1 + input._2) else finder.byName(input._1 + input._2, auto = true).get
         val outputFile = if(isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true).get
-        val tag = if(isExternal) input._1 else language.wikiCode
-        QuadMapper.mapQuads(tag, inputFile, outputFile, required = true) { quad =>
+        QuadMapper.mapQuads(language, inputFile, outputFile, required = true) { quad =>
           if (quad.datatype != null) List(quad) // just copy quad with literal values. TODO: make this configurable
           else map.get(quad.value) match {
             case Some(uris) => {
