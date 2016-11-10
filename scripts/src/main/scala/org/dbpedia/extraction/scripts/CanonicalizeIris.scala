@@ -25,7 +25,7 @@ object CanonicalizeIris {
   private var baseDir: File = null
 
   private var genericLanguage: Language = Language.English
-  private val dbpPrefix = "http://dbpedia.org/"
+  private val dbpPrefix = "http://dbpedia.org"
   private var newLanguage: Language = null
   private var newPrefix: String = null
   private var newResource: String = null
@@ -69,7 +69,7 @@ object CanonicalizeIris {
       if (quad.datatype != null)
         QuadReader.addQuadRecord(quad, langFile.language, null, new IllegalArgumentException("expected object uri, found object literal: " + quad))
       if (quad.value.startsWith(newResource)) {
-        map(new String(quad.subject.replace(oldReource, ""))) = new String(quad.value.replace(newPrefix, ""))
+        map(new String(quad.subject.replace(oldReource, ""))) = new String(quad.value.replace(newResource, ""))
       }
     }
   }

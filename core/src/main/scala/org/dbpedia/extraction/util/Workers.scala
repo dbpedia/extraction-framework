@@ -228,12 +228,10 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
    */
   final def process(value: T, dependentOn: Int = -1): Unit = {
     if (value == null) throw new NullPointerException("value")
-    {
       if(dependentOn >= 0)
         queueDependency(value.hashCode()) = dependentOn
       queue.put(value)
       processLog(value.hashCode()) = WorkerState.queued
-    }
   }
   
   /**

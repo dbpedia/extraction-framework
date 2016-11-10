@@ -17,7 +17,7 @@ object QuadReader {
   def getRecorder = recorder
 
   def setLogFile(file: FileLike[File], preamble: String = null): Unit ={
-    recorder = new ExtractionRecorder[Quad](IOUtils.writer(file, append = true), preamble)
+    recorder = new ExtractionRecorder[Quad](IOUtils.writer(file, append = true), 100000, preamble)
   }
 
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
@@ -68,7 +68,9 @@ object QuadReader {
       case Some(x) => x
       case None => null
     }
+    recorder = new ExtractionRecorder[Quad](recorder)
     getRecorder.initialize(language, dataset)
+
     IOUtils.readLines(file) { line =>
       line match {
         case null => // ignore last value

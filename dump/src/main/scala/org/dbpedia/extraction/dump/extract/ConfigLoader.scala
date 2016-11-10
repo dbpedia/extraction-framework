@@ -147,7 +147,7 @@ class ConfigLoader(config: Config)
           case Some(p) => {
             val file = new File(p)
             file.createNewFile()
-            new ExtractionRecorder[PageNode](new FileWriter(file), description)
+            new ExtractionRecorder[PageNode](new FileWriter(file), 2000, description)
           }
           case None => new ExtractionRecorder[PageNode]()
         }

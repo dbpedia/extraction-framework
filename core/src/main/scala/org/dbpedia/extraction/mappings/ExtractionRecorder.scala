@@ -12,7 +12,9 @@ import scala.collection.mutable
 /**
   * Created by Chile on 11/3/2016.
   */
-class ExtractionRecorder[T](logFile: Writer = null, preamble: String = null) {
+class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 100000, val preamble: String = null) {
+
+  def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble)
 
   private var failedPageMap = Map[Language, scala.collection.mutable.Map[(Long, T), Throwable]]()
   private var successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
@@ -167,7 +169,7 @@ class ExtractionRecorder[T](logFile: Writer = null, preamble: String = null) {
       }
       printLabeledLine("page " + id + ": " + title.encoded + " extracted", title.language, Seq(PrinterDestination.file))
     }
-    if(increaseAndGetSuccessfulPages(title.language) % 2000 == 0)
+    if(increaseAndGetSuccessfulPages(title.language) % reportInterval == 0)
       printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", title.language)
   }
 
@@ -177,7 +179,7 @@ class ExtractionRecorder[T](logFile: Writer = null, preamble: String = null) {
     * @param lang
     */
   def recordQuad(quad: Quad, lang:Language): Unit = synchronized {
-    if(increaseAndGetSuccessfulPages(lang) % 2000 == 0)
+    if(increaseAndGetSuccessfulPages(lang) % reportInterval == 0)
       printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", lang)
   }
 
@@ -196,7 +198,7 @@ class ExtractionRecorder[T](logFile: Writer = null, preamble: String = null) {
     val time = System.currentTimeMillis - startTime.get
     val replacedLine = ((if(noLabel) "" else lang.wikiCode  + ": extraction at {time}{data}; ") + line)
       .replaceAllLiterally("{time}", StringUtils.prettyMillis(time))
-      .replaceAllLiterally("{mspp}", (time.toDouble / pages).toString + " ms")
+      .replaceAllLiterally("{mspp}", Math.floor((time.toDouble * 100) / (pages * 100)).toString + " ms")
       .replaceAllLiterally("{page}", pages.toString)
       .replaceAllLiterally("{fail}", failedPages(lang).toString)
       .replaceAllLiterally("{data}", if(defaultDataset != null) " for dataset " + defaultDataset else "")
@@ -205,6 +207,7 @@ class ExtractionRecorder[T](logFile: Writer = null, preamble: String = null) {
         case PrinterDestination.err => System.err.println(replacedLine)
         case PrinterDestination.out => System.out.println(replacedLine)
         case PrinterDestination.file if logWriter != null => logWriter.append(replacedLine + "\n")
+        case _ =>
       }
   }
 
