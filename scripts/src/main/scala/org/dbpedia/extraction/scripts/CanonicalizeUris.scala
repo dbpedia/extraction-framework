@@ -124,7 +124,7 @@ object CanonicalizeUris {
       
       for (mappping <- mappings) {
         var count = 0
-        QuadReader.readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
+        new QuadMapper().readQuads(finder, mappping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null)
             throw new IllegalArgumentException(language.wikiCode+": expected object uri, found object literal: "+quad)
           if (quad.value.startsWith(newResource)) {
@@ -159,7 +159,7 @@ object CanonicalizeUris {
       }
       
       for (input <- inputs; suffix <- suffixes) {
-        QuadMapper.mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
+        new QuadMapper().mapQuads(finder, input + suffix, input + extension + suffix, required = false) { quad =>
           val pred = newUri(quad.predicate)
           val subj = mapUri(quad.subject)
           if (subj == null) {

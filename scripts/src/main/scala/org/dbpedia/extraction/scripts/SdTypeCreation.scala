@@ -6,7 +6,6 @@ import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty, Ontology}
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.scripts.QuadMapper.QuadMapperFormatter
 import org.dbpedia.extraction.sources.XMLSource
 
 import scala.Console._
@@ -266,7 +265,7 @@ object SdTypeCreation {
   }
 
   val typesWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "instance-types" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "instance-types" + suffix, auto = true) { quad =>
       contextMap.get(quad.subject) match{
         case Some(l) =>
         case None => contextMap.put(quad.subject, quad.context)
@@ -284,13 +283,13 @@ object SdTypeCreation {
   }
 
   val workerDisamb = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "disambiguations-unredirected" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "disambiguations-unredirected" + suffix, auto = true) { quad =>
       disambiguations.put(quad.subject, 1)
     }
   }
 
   val objectPropWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "mappingbased-objects-uncleaned" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "mappingbased-objects-uncleaned" + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_in.get(quad.value) match {
         case Some(m) => m.get(quad.predicate) match {
           case Some(c) =>
@@ -332,7 +331,7 @@ object SdTypeCreation {
   }
 
   val literalWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "mappingbased-literals" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "mappingbased-literals" + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_out.get(quad.subject) match {
         case Some(m) => m.get(quad.predicate) match {
           case Some(c) =>
@@ -427,7 +426,7 @@ object SdTypeCreation {
     val formats = parseFormats(config, "uri-policy", "format").map( x=>
       x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
 
-    val destination = DestinationUtils.createDestination(finder, Seq(dataset), formats)
+    val destination = DestinationUtils.createDestination(finder, Array(dataset), formats)
 
     //read all input files and process the content
     Workers.workInParallel[Language](Array(typesWorker, objectPropWorker, workerDisamb,literalWorker), Seq(language))

@@ -180,7 +180,7 @@ object WikidataSubClassOf {
   def getWikidataSubClassOfMap(rawDataset: String, finder: DateFinder[File], date: String): mutable.Map[Int, mutable.Set[Int]] = {
     val wikidataSubClassMap = mutable.Map.empty[Int, mutable.Set[Int]]
     try {
-      QuadReader.readQuads(finder, rawDataset) { quad =>
+      new QuadMapper().readQuads(finder, rawDataset) { quad =>
         if (quad.predicate.equals(subClassProperty)) {
 
           try {

@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.io.Writer
+import java.text.DecimalFormat
 import java.util.concurrent.atomic.AtomicLong
 
 import org.dbpedia.extraction.destinations.Quad
@@ -29,6 +30,8 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
   private var openConnections = 0
 
+  private val decForm = new DecimalFormat("#.##")
+
   setLogFile(logFile, preamble)
 
   /**
@@ -52,6 +55,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
   /**
     * successful page count
+    *
     * @param lang - for this language
     * @return
     */
@@ -62,6 +66,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
   /**
     * get successful page count after increasing it by one
+    *
     * @param lang - for this language
     * @return
     */
@@ -77,6 +82,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
   /**
     * number of failed pages
+    *
     * @param lang - for this language
     * @return
     */
@@ -87,6 +93,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
   /**
     * the current accumulated page number
+    *
     * @param lang - for this language
     * @return
     */
@@ -175,6 +182,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
   /**
     * record (successful) quad
+    *
     * @param quad
     * @param lang
     */
@@ -198,7 +206,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
     val time = System.currentTimeMillis - startTime.get
     val replacedLine = ((if(noLabel) "" else lang.wikiCode  + ": extraction at {time}{data}; ") + line)
       .replaceAllLiterally("{time}", StringUtils.prettyMillis(time))
-      .replaceAllLiterally("{mspp}", Math.floor((time.toDouble * 100) / (pages * 100)).toString + " ms")
+      .replaceAllLiterally("{mspp}", decForm.format(time.toDouble / pages) + " ms")
       .replaceAllLiterally("{page}", pages.toString)
       .replaceAllLiterally("{fail}", failedPages(lang).toString)
       .replaceAllLiterally("{data}", if(defaultDataset != null) " for dataset " + defaultDataset else "")

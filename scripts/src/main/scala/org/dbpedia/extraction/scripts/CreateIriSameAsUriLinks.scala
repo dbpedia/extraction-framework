@@ -47,8 +47,8 @@ object CreateIriSameAsUriLinks {
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
       val destination = new CompositeDestination(formatDestinations.toSeq: _*)
-      
-      QuadMapper.mapQuads(language, inputFile, destination, true) { quad =>
+
+      new QuadMapper().mapQuads(language, inputFile, destination, true) { quad =>
         val iri = quad.subject
         val uri = new URI(iri).toASCIIString
         if (uri == iri) List.empty

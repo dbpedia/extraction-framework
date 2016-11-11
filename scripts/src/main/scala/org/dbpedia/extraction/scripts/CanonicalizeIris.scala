@@ -3,12 +3,12 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
-import org.dbpedia.extraction.destinations.WriterDestination
-import org.dbpedia.extraction.scripts.QuadMapper.QuadMapperFormatter
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.destinations.formatters.{Formatter, TerseFormatter}
+import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, DestinationUtils}
 import org.dbpedia.extraction.util.ConfigUtils._
-import org.dbpedia.extraction.util.IOUtils._
-import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util._
 
 import scala.collection.concurrent
 import scala.collection.convert.decorateAsScala._
@@ -30,9 +30,9 @@ object CanonicalizeIris {
   private var newPrefix: String = null
   private var newResource: String = null
 
-  private val formatter = new QuadMapperFormatter()
+  private var formats: Map[String, Formatter] = null
 
-  case class WorkParameters(language: Language, source: FileLike[_], destination: WriterDestination)
+  case class WorkParameters(language: Language, source: FileLike[_], destination: Dataset)
 
   def uriPrefix(language: Language): String = {
     val zw = if (language == genericLanguage)
@@ -55,7 +55,7 @@ object CanonicalizeIris {
     }
   }
 
-  val mappingsReader = SimpleWorkers(1.5, 1.0) { langFile: WorkParameters =>
+  val mappingsReader = { langFile: WorkParameters =>
     val map = mappings.get(langFile.language) match {
       case Some(m) => m
       case None => {
@@ -65,20 +65,23 @@ object CanonicalizeIris {
       }
     }
     val oldReource = uriPrefix(langFile.language)+"resource/"
-    QuadReader.readQuads(langFile.language, langFile.source) { quad =>
+    val qReader = new QuadReader()
+    qReader.readQuads(langFile.language, langFile.source) { quad =>
       if (quad.datatype != null)
-        QuadReader.addQuadRecord(quad, langFile.language, null, new IllegalArgumentException("expected object uri, found object literal: " + quad))
+        qReader.addQuadRecord(quad, langFile.language, null, new IllegalArgumentException("expected object uri, found object literal: " + quad))
       if (quad.value.startsWith(newResource)) {
         map(new String(quad.subject.replace(oldReource, ""))) = new String(quad.value.replace(newResource, ""))
       }
     }
   }
 
-  val mappingExecutor = SimpleWorkers(1.5, 1.0) { langSourceDest: WorkParameters =>
+  val mappingExecutor = { langSourceDest: WorkParameters =>
 
     val oldPrefix = uriPrefix(langSourceDest.language)
     val oldResource = oldPrefix+"resource/"
 
+    val destination = DestinationUtils.createDestination(finder(langSourceDest.language), Seq(langSourceDest.destination), formats)
+    val destName = langSourceDest.destination.name
     val map = mappings.get(langSourceDest.language).get //if this fails something is really wrong
 
     def newUri(oldUri: String): String = {
@@ -99,7 +102,7 @@ object CanonicalizeIris {
       else newUri(oldUri)
     }
 
-    QuadMapper.mapQuads(langSourceDest.language, langSourceDest.source, langSourceDest.destination, required = false) { quad =>
+    new QuadMapper().mapQuads(langSourceDest.language, langSourceDest.source, destination, required = false) { quad =>
       val pred = newUri(quad.predicate)
       val subj = mapUri(quad.subject)
       if (subj == null) {
@@ -114,72 +117,72 @@ object CanonicalizeIris {
           List()
         } else {
           // map subject, predicate and object URI, copy everything else
-          List(quad.copy(subject = subj, predicate = pred, value = obj))
+          List(quad.copy(subject = subj, predicate = pred, value = obj, dataset = destName))
         }
       } else {
         // literal value - change subject and predicate URI, copy everything else
-        List(quad.copy(subject = subj, predicate = pred))
+        List(quad.copy(subject = subj, predicate = pred, dataset = destName))
       }
     }
   }
 
   def main(args: Array[String]): Unit = {
 
-    require(args != null && args.length >= 9,
-      "need at least nine args: " +
-        /*0*/ "base dir, " +
-        /*1*/ "comma-separated names of datasets mapping old URIs to new URIs (e.g. 'interlanguage-links-same-as,interlanguage-links-see-also'), " +
-        /*2*/ "mapping file suffix (e.g. '.nt.gz', '.ttl', '.ttl.bz2'), " +
-        /*3*/ "comma-separated names of input datasets (e.g. 'labels,short-abstracts,long-abstracts'), " +
-        /*4*/ "output dataset name extension (e.g. '-en-uris'), " +
-        /*5*/ "comma-separated input/output file suffixes (e.g. '.nt.gz,.nq.bz2', '.ttl', '.ttl.bz2'), " +
-        /*6*/ "wiki code of generic domain (e.g. 'en', use '-' to disable), " +
-        /*7*/ "wiki code of new URIs (e.g. 'en'), " +
-        /*8*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
+    require(args != null && args.length == 1, "One arguments required, extraction config file")
 
-    baseDir = new File(args(0))
+    val config = ConfigUtils.loadConfig(args(0), "UTF-8")
 
-    val mappings = split(args(1))
+    baseDir = ConfigUtils.getValue(config, "base-dir", required=true)(new File(_))
+
+    val mappings = ConfigUtils.getValues(config, "mapping-files",',', required=true)(x => x)
     require(mappings.nonEmpty, "no mapping datasets")
 
     // Suffix of mapping files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val mappingSuffix = args(2)
+    val mappingSuffix = ConfigUtils.getString(config, "mapping-suffix",required=true)
     require(mappingSuffix.nonEmpty, "no mapping file suffix")
 
-    val inputs = split(args(3))
+    val inputs = ConfigUtils.getValues(config, "input-files",',', required=true)(x => x)
     require(inputs.nonEmpty, "no input datasets")
 
-    val extension = args(4)
+    val extension = ConfigUtils.getString(config, "name-extension",required=true)
     require(extension.nonEmpty, "no result name extension")
 
     // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val suffixes = split(args(5))
+    val suffixes = ConfigUtils.getValues(config, "input-suffixes",',', required=true)(x => x)
     require(suffixes.nonEmpty, "no input/output file suffixes")
 
-    // Language using generic domain (usually en)
-    genericLanguage = if (args(6) == "-") null else Language(args(6))
+    val threads = Option(ConfigUtils.getValue[String](config, "parallel-threads",required=false)(x => x)) match{
+      case Some(i) => Integer.parseInt(i)
+      case None => 1
+    }
 
-    newLanguage = Language(args(7))
+    // Language using generic domain (usually en)
+    genericLanguage = ConfigUtils.getValue(config, "generic-language",required=false)(x => Language(x))
+
+    newLanguage = ConfigUtils.getValue(config, "mapping-language",required=true)(x => Language(x))
     newPrefix = uriPrefix(newLanguage)
     newResource = newPrefix+"resource/"
 
-    val languages = parseLanguages(baseDir, args.drop(8))
+    val languages = parseLanguages(baseDir, ConfigUtils.getValues(config, "languages",',',required=true)(x => x))
     require(languages.nonEmpty, "no languages")
+
+    formats = parseFormats(config, "uri-policy", "format").map( x=>
+      x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
 
     // load all mappings
     val loadParameters = for (lang <- languages; mapping <- mappings)
       yield
         new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(mapping+mappingSuffix, auto = true).get), null)
 
-    Workers.work[WorkParameters](mappingsReader, loadParameters.toList, "language mappings loading")
+    Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingsReader), loadParameters.toList, "language mappings loading")
 
+    //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs; suffix <- suffixes)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get),
-          new WriterDestination(() => writer(finder(lang).byName(input + extension + suffix, auto = false).get), formatter))
+        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input + extension).orNull)
 
-    Workers.work[WorkParameters](mappingExecutor, parameters.toList)
+    Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
   }
 }

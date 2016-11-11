@@ -84,7 +84,7 @@ object MapSubjectUris {
 
       Workers.work(SimpleWorkers(1.5, 1.0) { mapping: String =>
         var count = 0
-        QuadReader.readQuads(finder, mapping + mappingSuffix, auto = true) { quad =>
+        new QuadMapper().readQuads(finder, mapping + mappingSuffix, auto = true) { quad =>
           if (quad.datatype != null) throw new IllegalArgumentException(mapping + ": expected object uri, found object literal: " + quad)
           // TODO: this wastes a lot of space. Storing the part after ...dbpedia.org/resource/ would
           // be enough. Also, the fields of the Quad are derived by calling substring() on the whole
@@ -104,7 +104,7 @@ object MapSubjectUris {
         var count = 0
         val inputFile = if (isExternal) new File(secondary, input._1 + input._2) else finder.byName(input._1 + input._2, auto = true).get
         val outputFile = if (isExternal) new File(secondary, input._1 + extension + input._2) else finder.byName(input._1 + extension + input._2, auto = true).get
-        QuadMapper.mapQuads(language, inputFile, outputFile, required = true) { quad =>
+        new QuadMapper().mapQuads(language, inputFile, outputFile, required = true) { quad =>
           map.get(quad.subject) match {
             case Some(uris) => {
               count = count + 1

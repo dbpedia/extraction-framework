@@ -14,10 +14,7 @@ import scala.Console.err
 /**
  * Maps old quads/triples to new quads/triples.
  */
-object QuadMapper {
-
-  //use the same recorder as Reader
-  def getRecorder = QuadReader.getRecorder
+class QuadMapper extends QuadReader {
 
   /**
    * @deprecated use one of the map functions below 
@@ -61,7 +58,7 @@ object QuadMapper {
     try {
       // copied from org.dbpedia.extraction.destinations.formatters.TerseFormatter.footer
       writer.write("# started "+formatCurrentTimestamp+"\n")
-      QuadReader.readQuads(language, inFile) { old =>
+      readQuads(language, inFile) { old =>
         for (quad <- map(old)) {
           writer.write(quadToString(quad))
           mapCount += 1
@@ -124,7 +121,7 @@ object QuadMapper {
     var mapCount = 0
     destination.open()
     try {
-      QuadReader.readQuads(language, inFile) { old =>
+      readQuads(language, inFile) { old =>
         destination.write(map(old))
         mapCount += 1
       }
@@ -150,7 +147,7 @@ object QuadMapper {
     var mapCount = 0
     destination.open()
     try {
-      QuadReader.readSortedQuads(language, inFile) { old =>
+      readSortedQuads(language, inFile) { old =>
         destination.write(map(old))
         mapCount += old.size
       }
@@ -158,26 +155,26 @@ object QuadMapper {
     finally destination.close()
     err.println(language.wikiCode+": mapped "+mapCount+" quads")
   }
+}
 
-  class QuadMapperFormatter(quad: Boolean = true, turtle: Boolean = true, policies: Array[Policy]= null) extends TerseFormatter(quad, turtle, policies) {
-    def this(formatter: TerseFormatter){
-      this(formatter.quads, formatter.turtle, formatter.policies)
-    }
-    private var contextAdditions = Map[String, String]()
+class QuadMapperFormatter(quad: Boolean = true, turtle: Boolean = true, policies: Array[Policy]= null) extends TerseFormatter(quad, turtle, policies) {
+  def this(formatter: TerseFormatter){
+    this(formatter.quads, formatter.turtle, formatter.policies)
+  }
+  private var contextAdditions = Map[String, String]()
 
-    def addContextAddition(paramName: String, paramValue: String): Unit ={
-      val param = paramName.replaceAll("\\s", "").toLowerCase()
-      contextAdditions += ( param -> UriUtils.encodeUriComponent(paramValue))
-    }
+  def addContextAddition(paramName: String, paramValue: String): Unit ={
+    val param = paramName.replaceAll("\\s", "").toLowerCase()
+    contextAdditions += ( param -> UriUtils.encodeUriComponent(paramValue))
+  }
 
-    override def render(quad: Quad): String = {
-      var context = quad.context
-      for(add <- contextAdditions)
-        if(context.indexOf("#") > 0)
-          context += "&" + add._1 + "=" + add._2
-        else
-          context += "#" + add._1 + "=" + add._2
-      super.render(quad.copy(context=context))
-    }
+  override def render(quad: Quad): String = {
+    var context = quad.context
+    for(add <- contextAdditions)
+      if(context.indexOf("#") > 0)
+        context += "&" + add._1 + "=" + add._2
+      else
+        context += "#" + add._1 + "=" + add._2
+    super.render(quad.copy(context=context))
   }
 }

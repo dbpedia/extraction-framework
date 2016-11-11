@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{DateFinder, RichFile, Finder, IOUtils}
+import java.io.File
+
+import org.apache.commons.lang.StringEscapeUtils
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
+import org.dbpedia.extraction.util.{DateFinder, IOUtils}
 import org.dbpedia.extraction.wikiparser.Namespace
-import org.apache.commons.lang.StringEscapeUtils
-import java.io.File
-import scala.Long
 
 
 /**
@@ -47,7 +47,7 @@ object UnmodifiedFeederCacheGenerator {
       val writer = IOUtils.writer(new File(language.wikiCode + "-cache_generate.sql"))
 
       try {
-        QuadReader.readQuads(finder, "page-ids" + suffix, auto = true) {
+        new QuadMapper().readQuads(finder, "page-ids" + suffix, auto = true) {
           quad =>
             val pageID = quad.value.toInt
             var pageTitle = StringEscapeUtils.escapeSql(quad.subject.split("dbpedia.org/resource/", 2)(1))

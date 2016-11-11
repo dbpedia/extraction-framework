@@ -80,8 +80,8 @@ object DBpediaDatasets
     /**
      * Abstracts
      */
-    val ShortAbstracts = new Dataset("short_abstracts", "Short Abstracts (max. 500 characters long, of Wikipedia articles.")
-    val LongAbstracts = new Dataset("long_abstracts", "Full abstracts of Wikipedia articles, usually the first section.")
+    val ShortAbstracts = new Dataset("short_abstracts", "Short Abstracts (about 600 characters long) of Wikipedia articles.")
+    val LongAbstracts = new Dataset("long_abstracts", "Long abstracts (full abstracts) of Wikipedia articles, usually the first section.")
     val MissingShortAbstracts = new Dataset("missing_short_abstracts")
     val MissingLongAbstracts = new Dataset("missing_long_abstracts")
     val NifAbstractContext = new Dataset("nif_abstract_context", "This is a temporary dataset for the NIF extraction of abstracts. It shall be replaced with the full page context in upcoming releases")
@@ -139,4 +139,16 @@ object DBpediaDatasets
     val CitationData = new Dataset("citation_data", "Raw data extracted from Wikipedia citation templates")
     //val CitationTypes = new Dataset("citation_types")
 
+  /**
+    * en-uris versions
+    */
+  val ShortAbstractsEnUris = new Dataset("short_abstracts_en_uris", "English normalized version of Short Abstracts (about 600 characters long) of Wikipedia articles.")
+  val LongAbstractsEnUris = new Dataset("long_abstracts_en_uris", "English normalized version of Long abstracts (full abstracts) of Wikipedia articles, usually the first section.")
+
+  /**
+    * get members by name
+    */
+  private val members = DestinationUtils.getDatasets(this)
+
+  def getDataset(name: String) = members.get(name.replaceAll("-", "_").replaceAll("\\s+", "_"))
 }

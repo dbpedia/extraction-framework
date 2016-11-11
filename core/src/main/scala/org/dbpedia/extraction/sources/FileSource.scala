@@ -2,7 +2,7 @@ package org.dbpedia.extraction.sources
 
 import org.dbpedia.extraction.wikiparser.WikiTitle
 import java.util.logging.{Logger, Level}
-import java.io.File
+import java.io.{FileNotFoundException, File}
 import util.control.ControlThrowable
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.util.{WikiUtil, FileProcessor}

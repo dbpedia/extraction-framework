@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.statistics
 
-import java.io.{PrintWriter, File}
+import java.io.{File, PrintWriter}
 import java.util.concurrent.ConcurrentHashMap
-import org.dbpedia.extraction.scripts.QuadReader
-import org.dbpedia.extraction.util.{SimpleWorkers, Workers, RichFile, Language}
-import org.dbpedia.extraction.wikiparser.Namespace
 import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.scripts.QuadMapper
+import org.dbpedia.extraction.util.{Language, RichFile, SimpleWorkers, Workers}
+import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
@@ -85,7 +86,7 @@ object TypeStatistics {
       for(file <- inputFiles) {
         if(file.exists)
         {
-          QuadReader.readQuads(lang, file) { quad =>
+          new QuadMapper().readQuads(lang, file) { quad =>
             statements = statements +1
             subjects.get(quad.subject) match {
               case Some(s) => subjects += ((quad.subject, s + 1))

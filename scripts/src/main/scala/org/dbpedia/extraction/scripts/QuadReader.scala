@@ -10,9 +10,9 @@ import scala.Console.err
 
 /**
  */
-object QuadReader {
+class QuadReader {
 
-  private var recorder = new ExtractionRecorder[Quad]()
+  private var recorder = new ExtractionRecorder[Quad](null, 100000, null)
 
   def getRecorder = recorder
 
