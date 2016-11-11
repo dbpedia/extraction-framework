@@ -181,7 +181,7 @@ object CanonicalizeIris {
     //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs; suffix <- suffixes)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input + extension))
+        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input, extension))
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
   }

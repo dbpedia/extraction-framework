@@ -157,8 +157,13 @@ object DBpediaDatasets
     */
   private val members = DestinationUtils.getDatasets(this)
 
-  def getDataset(name: String) = members.get(name.replaceAll("-", "_").replaceAll("\\s+", "_")) match{
-    case Some(d) => d
+  def getDataset(name: String, extension: String = null) = members.get(name.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_")) match{
+    case Some(d) => {
+      if(extension != null)
+        new Dataset(d.name + extension.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_"), "Temp- or Extension Dataset of " + d.name)
+      else
+        d
+    }
     case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
   }
 }
