@@ -79,12 +79,13 @@ class QuadReader {
             dataset = dataset
           )
           proc(copy)
-          addQuadRecord(copy, Language.map.get(language.wikiCode).get)
+          addQuadRecord(copy, language)
         }
         case str => if (str.nonEmpty && !str.startsWith("#"))
-          addQuadRecord(null, Language.map.get(language.wikiCode).get, null, new IllegalArgumentException("line did not match quad or triple syntax: " + line))
+          addQuadRecord(null, language, null, new IllegalArgumentException("line did not match quad or triple syntax: " + line))
       }
     }
+    addQuadRecord(null, language, "reading quads completed with {page} pages", null)
   }
   
   private def logRead(tag: String, lines: Int, start: Long): Unit = {

@@ -131,7 +131,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
               else "an undefined error occurred at quad: " + successfulPages(record.language)
             }
           }
-          printLabeledLine(msg, Language.English, Seq(PrinterDestination.err, PrinterDestination.file))
+          printLabeledLine(msg, record.language, Seq(PrinterDestination.err, PrinterDestination.file))
         }
       }
     }
@@ -193,8 +193,8 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
     /**
     * print a line to std out, err or the log file
-      *
-      * @param line - the line in question
+    *
+    * @param line - the line in question
     * @param lang - langauge of current page
     * @param print - enum values for printer destinations (err, out, file - null mean all of them)
     * @param noLabel - the initial label (lang: time passed) is omitted

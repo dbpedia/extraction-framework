@@ -51,6 +51,7 @@ object CanonicalizeIris {
     case None => {
       val f = new DateFinder(baseDir, lang)
       finders.put(lang, f)
+      f.byName("download-complete", auto = true) //get date workaround
       f
     }
   }
@@ -76,7 +77,6 @@ object CanonicalizeIris {
   }
 
   val mappingExecutor = { langSourceDest: WorkParameters =>
-
     val oldPrefix = uriPrefix(langSourceDest.language)
     val oldResource = oldPrefix+"resource/"
 
@@ -181,7 +181,7 @@ object CanonicalizeIris {
     //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs; suffix <- suffixes)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input + extension).orNull)
+        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input + extension))
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
   }

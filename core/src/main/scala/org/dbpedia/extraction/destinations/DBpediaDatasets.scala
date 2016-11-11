@@ -146,9 +146,19 @@ object DBpediaDatasets
   val LongAbstractsEnUris = new Dataset("long_abstracts_en_uris", "English normalized version of Long abstracts (full abstracts) of Wikipedia articles, usually the first section.")
 
   /**
+    * wkd-uris versions
+    */
+  val ShortAbstractsWkdUris = new Dataset("short_abstracts_wkd_uris", "Wikidata normalized version of Short Abstracts (about 600 characters long) of Wikipedia articles.")
+  val LongAbstractsWkdUris = new Dataset("long_abstracts_wkd_uris", "Wikidata normalized version of Long abstracts (full abstracts) of Wikipedia articles, usually the first section.")
+
+
+  /**
     * get members by name
     */
   private val members = DestinationUtils.getDatasets(this)
 
-  def getDataset(name: String) = members.get(name.replaceAll("-", "_").replaceAll("\\s+", "_"))
+  def getDataset(name: String) = members.get(name.replaceAll("-", "_").replaceAll("\\s+", "_")) match{
+    case Some(d) => d
+    case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
+  }
 }
