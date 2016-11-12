@@ -493,7 +493,7 @@ object DataIdGenerator {
     if (!toplevelSet) //not!
     {
       model.add(dataset, getProperty("void", "rootResource"), currentRootSet)
-      datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, datasetName)) match {
+      datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, datasetName)) match {
         case Some(d) => {
           model.add(dataset, getProperty("dc", "title"), createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
           model.add(dataset, getProperty("rdfs", "label"), createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
@@ -504,8 +504,8 @@ object DataIdGenerator {
         }
       }
 
-      datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, datasetName) && x.description != null) match {
-        case Some(d) => model.add(dataset, getProperty("dc", "description"), createLiteral(d.description, "en"))
+      datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, datasetName) && x.description.nonEmpty) match {
+        case Some(d) => model.add(dataset, getProperty("dc", "description"), createLiteral(d.description.get, "en"))
         case None => {
           model.add(dataset, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
           err.println("Could not find description for dataset: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
@@ -562,14 +562,14 @@ object DataIdGenerator {
     model.add(dataset, getProperty("dcat", "distribution"), dist)
     model.add(dist, getProperty("dataid", "isDistributionOf"), dataset)
 
-    datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, currentFile.substring(0, currentFile.lastIndexOf("_")))) match {
+    datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, currentFile.substring(0, currentFile.lastIndexOf("_")))) match {
       case Some(d) => model.add(dist, getProperty("dc", "title"), createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
       case None => model.add(dist, getProperty("dc", "title"), createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset", "en"))
     }
 
-    datasetDescriptions.find(x => stringCompareIgnoreDash(x.name, currentFile.substring(0, currentFile.lastIndexOf("_"))) && x.description != null) match {
+    datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, currentFile.substring(0, currentFile.lastIndexOf("_"))) && x.description.nonEmpty) match {
       case Some(d) =>
-        model.add(dist, getProperty("dc", "description"), createLiteral(d.description, "en"))
+        model.add(dist, getProperty("dc", "description"), createLiteral(d.description.getOrElse(""), "en"))
       case None => err.println("Could not find description for distribution: " + (if (lang != null) {
         "_" + lang.wikiCode.replace("-", "_")
       } else "") + " / " + currentFile)
@@ -762,16 +762,14 @@ object DataIdGenerator {
     val datasetDescriptionsOriginal = r.symbol.typeSignature.members.toStream
       .collect { case s: TermSymbol if !s.isMethod => r.reflectField(s) }
       .map(t => t.get match {
-        case y: Dataset => y
-        case _ =>
-      }).toList.asInstanceOf[List[Dataset]]
+        case y: Dataset => Option(y)
+        case _ => None
+      }).toList.collect{case Some(d) if d.isInstanceOf[Dataset] => d}
 
     datasetDescriptions = datasetDescriptionsOriginal
-      .map(d => new Dataset(d.name.replace("_", "-"), d.description)) ++ datasetDescriptionsOriginal
-      .filter(_.name.endsWith("unredirected"))
-      .map(d => new Dataset(d.name.replace("_unredirected", "").replace("_", "-"), d.description + " This dataset has Wikipedia redirects resolved.")) ++ datasetDescriptionsOriginal
-      .map(d => new Dataset(d.name.replace(d.name, d.name + "-en-uris").replace("_", "-"), d.description + " Normalized resources matching English DBpedia.")) ++ datasetDescriptionsOriginal
-      .map(d => new Dataset(d.name.replace(d.name, d.name + "-en-uris-unredirected").replace("_", "-"), d.description + " Normalized resources matching English DBpedia. This dataset has Wikipedia redirects resolved.")).sortBy(x => x.name)
+      .filter(_.encoded.endsWith("unredirected")).map(d => new Dataset(d.name, d.description.getOrElse("") + " This dataset has Wikipedia redirects resolved.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace("_unredirected", ""))) ++
+      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-en-uris", d.description.getOrElse("") + " Normalized resources matching English DBpedia.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-en-uris"))) ++
+      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-en-uris-unredirected", d.description.getOrElse("") + " Normalized resources matching English DBpedia. This dataset has Wikipedia redirects resolved.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-en-uris-unredirected")))
 
     //model for all type statements will be merged with submodels before write...
     staticModel = ModelFactory.createDefaultModel()

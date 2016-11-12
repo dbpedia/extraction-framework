@@ -42,8 +42,8 @@ object WikidataSubClassOf {
 
     val config = ConfigUtils.loadConfig(args(0), "UTF-8")
     val suffix = args(1)
-    val subClassOfDataset = DBpediaDatasets.WikidataR2R_ontology.name + "." + suffix
-    val rawDataset = DBpediaDatasets.WikidataRawRedirected.name + "." + suffix
+    val subClassOfDataset = DBpediaDatasets.WikidataR2R_ontology.encoded + "." + suffix
+    val rawDataset = DBpediaDatasets.WikidataRawRedirected.encoded + "." + suffix
 
     val baseDir = ConfigUtils.getValue(config, "base-dir", true)(new File(_))
     if (!baseDir.exists)

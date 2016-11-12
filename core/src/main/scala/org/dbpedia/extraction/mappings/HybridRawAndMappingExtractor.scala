@@ -50,14 +50,14 @@ extends PageNodeExtractor {
     rawGraph
       .foreach( q => {
         val tuple = extractTemplatePropertyAndLine(q.context)
-        if (! q.dataset.equals(DBpediaDatasets.InfoboxProperties.name)) {
+        if (! q.dataset.equals(DBpediaDatasets.InfoboxProperties.encoded)) {
           newRawGraph += q.copy()
         }
         else if ( tuple.isDefined && mappedIndex.contains( tuple.get)) {
           newRawGraph += q.copy(context = q.context + "&mapped=")
         }
         else {
-          newRawGraph += q.copy(context = q.context + "&unmapped=", dataset = DBpediaDatasets.InfoboxPropertiesMapped.name)
+          newRawGraph += q.copy(context = q.context + "&unmapped=", dataset = DBpediaDatasets.InfoboxPropertiesMapped.encoded)
         }
     })
 

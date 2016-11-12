@@ -52,7 +52,7 @@ with Equals
     datatype: Datatype
   ) = this(
     if (language == null) null else language.isoCode,
-      dataset.name,
+      dataset.encoded,
       subject,
       predicate,
       value,

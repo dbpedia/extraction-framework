@@ -460,7 +460,7 @@ object SdTypeCreation {
     Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculation")
 
     //write results to file
-    err.println(language.wikiCode + ": Starting to write " + dataset.name + suffix + " with " + resultMap.values.size + " instances.")
+    err.println(language.wikiCode + ": Starting to write " + dataset.encoded + suffix + " with " + resultMap.values.size + " instances.")
     destination.open()
     Workers.work[List[Quad]](SimpleWorkers(1.5, 2.0){ quads: List[Quad] =>
       destination.write(quads)

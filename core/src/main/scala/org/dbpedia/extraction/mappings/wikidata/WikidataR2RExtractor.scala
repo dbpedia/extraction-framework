@@ -289,16 +289,16 @@ class WikidataR2RExtractor(
     val adjustedGraph = new ArrayBuffer[Quad]
 
     originalGraph.map(q => {
-      if (q.dataset.equals(DBpediaDatasets.WikidataR2R_literals.name) || q.dataset.equals(DBpediaDatasets.WikidataR2R_objects.name)) {
+      if (q.dataset.equals(DBpediaDatasets.WikidataR2R_literals.encoded) || q.dataset.equals(DBpediaDatasets.WikidataR2R_objects.encoded)) {
         q.predicate match {
 
             // split type statements, some types e.g. cordinates go to separate datasets
           case "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" =>
             q.value match {
               case "http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"
-                   => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.name)
+                   => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.encoded)
               case _ => // This is the deafult types we get
-                adjustedGraph += q.copy(dataset = DBpediaDatasets.OntologyTypes.name)
+                adjustedGraph += q.copy(dataset = DBpediaDatasets.OntologyTypes.encoded)
                 // Generate inferred types
                 context.ontology.classes.get(q.value.replace("http://dbpedia.org/ontology/", "")) match {
                   case Some(clazz) =>
@@ -309,23 +309,23 @@ class WikidataR2RExtractor(
             }
 
           case "http://www.w3.org/2000/01/rdf-schema#subClassOf"
-                => adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataR2R_ontology.name)
+                => adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataR2R_ontology.encoded)
 
             // coordinates dataset
           case "http://www.w3.org/2003/01/geo/wgs84_pos#lat" | "http://www.w3.org/2003/01/geo/wgs84_pos#long" | "http://www.georss.org/georss/point"
-                => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.name)
+                => adjustedGraph += q.copy(dataset = DBpediaDatasets.GeoCoordinates.encoded)
 
             //Images dataset
           case  "http://xmlns.com/foaf/0.1/thumbnail" | "http://xmlns.com/foaf/0.1/depiction" | "http://dbpedia.org/ontology/thumbnail"
-                => adjustedGraph += q.copy(dataset = DBpediaDatasets.Images.name)
+                => adjustedGraph += q.copy(dataset = DBpediaDatasets.Images.encoded)
 
             // sameAs links
           case "http://www.w3.org/2002/07/owl#sameAs" =>
             // We get the commons:Creator links
             if (q.value.startsWith("http://commons.dbpedia.org")) {
-              adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataNameSpaceSameAs.name)
+              adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataNameSpaceSameAs.encoded)
             } else {
-              adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataSameAsExternal.name)
+              adjustedGraph += q.copy(dataset = DBpediaDatasets.WikidataSameAsExternal.encoded)
             }
 
           case _ => adjustedGraph += q

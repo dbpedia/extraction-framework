@@ -114,20 +114,19 @@ class QuadMapper extends QuadReader {
     
     if (! inFile.exists) {
       if (required) throw new IllegalArgumentException(language.wikiCode+": file "+inFile+" does not exist")
-      err.println(language.wikiCode+": WARNING - file "+inFile+" does not exist")
       return
     }
 
-    var mapCount = 0
     destination.open()
     try {
       readQuads(language, inFile) { old =>
         destination.write(map(old))
-        mapCount += 1
       }
     }
-    finally if(closeWriter) destination.close()
-    err.println(language.wikiCode+": mapped "+mapCount+" quads")
+    finally
+      if(closeWriter)
+        destination.close()
+    //err.println(language.wikiCode+": mapped "+mapCount+" quads")
   }
 
   /**

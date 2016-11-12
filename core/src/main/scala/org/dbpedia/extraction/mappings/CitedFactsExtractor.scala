@@ -45,10 +45,10 @@ extends WikiPageExtractor {
     // map with line -> Quads for that line
     val infoboxMap =
       hybridInfoboxExtractor.extract(pageNodeOption.get, subjectUri)
-        .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypes.name))
-        .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypesTransitive.name))
-        .filterNot(_.dataset.equals(DBpediaDatasets.InfoboxPropertyDefinitions.name))
-        .filterNot(_.dataset.equals(DBpediaDatasets.InfoboxPropertiesMapped.name))
+        .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypes.encoded))
+        .filterNot(_.dataset.equals(DBpediaDatasets.OntologyTypesTransitive.encoded))
+        .filterNot(_.dataset.equals(DBpediaDatasets.InfoboxPropertyDefinitions.encoded))
+        .filterNot(_.dataset.equals(DBpediaDatasets.InfoboxPropertiesMapped.encoded))
         .map(q => (getAbsoluteLineNumber(q), q))
         .groupBy(_._1)
         .mapValues(_.map(_._2))
@@ -59,7 +59,7 @@ extends WikiPageExtractor {
     // citations Map with line -> citation (without ditation data, only links)
     val citationMap =
       citationExtractor.extract(wikiPage, subjectUri)
-        .filterNot(_.dataset.equals(DBpediaDatasets.CitationData.name))
+        .filterNot(_.dataset.equals(DBpediaDatasets.CitationData.encoded))
         .map(q => (getAbsoluteLineNumber(q), q))
         .groupBy(_._1)
         .mapValues(_.map(_._2))
@@ -73,13 +73,12 @@ extends WikiPageExtractor {
       if (citationMap.contains(line) && quads.size <= 4) {
         for (c <- citationMap.get(line).get) {
           for (q <- quads) {
-            graph += q.copy(dataset = dataset.name, context = c.subject)
+            graph += q.copy(dataset = dataset.encoded, context = c.subject)
           }
         }
       }
     }
-
-    return graph
+    graph
   }
 
   private def getAbsoluteLineNumber(quad: Quad): Int = {

@@ -8,17 +8,17 @@ object DBpediaDatasets
     /**
       * Source
       */
-    val WikipediaDump = new Dataset("pages_articles", "The Wikipedia dump file, which is the source for all other extracted datasets.")
+    val PagesArticles = new Dataset("pages_articles", "The Wikipedia dump file, which is the source for all other extracted datasets.")
 
     /**
      * General
      */
     val Labels = new Dataset("labels", "Titles of all Wikipedia Articles in the corresponding language.")
-    val CategoryLabels = new Dataset("category_labels", "Labels for Categories.")
+    val CategoryLabels = new Dataset("category_labels","Labels for Categories.")
     val Images = new Dataset("images", "Main image and corresponding thumbnail from Wikipedia article.")
     val GeoCoordinates = new Dataset("geo_coordinates", "Geographic coordinates extracted from Wikipedia.")
     val Persondata = new Dataset("persondata_unredirected", "Information about persons (date and place of birth etc., extracted from the English and German Wikipedia, represented using the FOAF vocabulary.")
-    val Pnd = new Dataset("pnd")
+    val Pnd = new Dataset("pnd", "")
     val Redirects = new Dataset("redirects", "Dataset containing redirects between articles in Wikipedia.")
     val RedirectsTransitive = new Dataset("transitive-redirects", "Dataset containing transitively resolved redirects between articles in Wikipedia.")
     val ArticleCategories = new Dataset("article_categories", "Links from concepts to categories using the SKOS vocabulary.")
@@ -160,7 +160,7 @@ object DBpediaDatasets
   def getDataset(name: String, extension: String = null) = members.get(name.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_")) match{
     case Some(d) => {
       if(extension != null)
-        new Dataset(d.name + extension.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_"), "Temp- or Extension Dataset of " + d.name)
+        new Dataset(d.name, "Temp- or Extension Dataset of " + d.name, d.language.orNull, d.version.getOrElse(null), d.encoded + extension.trim, d, Seq() )
       else
         d
     }

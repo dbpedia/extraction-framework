@@ -674,7 +674,7 @@ object WiktionaryPageExtractor {
       } else {
         null
       },
-      datasetURI.name,
+      datasetURI.encoded,
       s.getSubject.toString(),
       s.getPredicate.toString(),
       s.getObject.toString(),

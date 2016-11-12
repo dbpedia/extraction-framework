@@ -37,7 +37,7 @@ class AbstractExtractor(
   context : {
     def ontology : Ontology
     def language : Language
-    def config : Config
+    def configFile : Config
   }
 )
 extends WikiPageExtractor
@@ -45,38 +45,38 @@ extends WikiPageExtractor
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
 
-  protected def apiUrl: URL = context.config.mediawikiConnection.apiUrl
+  protected def apiUrl: URL = context.configFile.mediawikiConnection.apiUrl
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
-  protected val maxRetries = context.config.mediawikiConnection.maxRetries
+  protected val maxRetries = context.configFile.mediawikiConnection.maxRetries
   require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
 
     /** timeout for connection to web server, milliseconds */
-  protected val connectMs = context.config.mediawikiConnection.connectMs
+  protected val connectMs = context.configFile.mediawikiConnection.connectMs
   require(connectMs > 200, "connectMs shall be more than 200 ms!")
 
     /** timeout for result from web server, milliseconds */
-  protected val readMs = context.config.mediawikiConnection.readMs
+  protected val readMs = context.configFile.mediawikiConnection.readMs
   require(readMs > 1000, "readMs shall be more than 1000 ms!")
 
     /** sleep between retries, milliseconds, multiplied by CPU load */
-  protected val sleepFactorMs = context.config.mediawikiConnection.sleepFactor
+  protected val sleepFactorMs = context.configFile.mediawikiConnection.sleepFactor
   require(sleepFactorMs > 200, "sleepFactorMs shall be more than 200 ms!")
 
 
   /** protected params ... */
-  protected val xmlPath = context.config.abstractParameters.abstractTags.split(",").map(_.trim)
+  protected val xmlPath = context.configFile.abstractParameters.abstractTags.split(",").map(_.trim)
 
   protected val language = context.language.wikiCode
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
-  protected val apiParametersFormat = "uselang="+language + context.config.abstractParameters.abstractQuery
+  protected val apiParametersFormat = "uselang="+language + context.configFile.abstractParameters.abstractQuery
 
     // lazy so testing does not need ontology
-  protected lazy val shortProperty = context.ontology.properties(context.config.abstractParameters.shortAbstractsProperty)
+  protected lazy val shortProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
 
     // lazy so testing does not need ontology
-  protected lazy val longProperty = context.ontology.properties(context.config.abstractParameters.longAbstractsProperty)
+  protected lazy val longProperty = context.ontology.properties(context.configFile.abstractParameters.longAbstractsProperty)
 
   protected lazy val longQuad = QuadBuilder(context.language, DBpediaDatasets.LongAbstracts, longProperty, null) _
   protected lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _

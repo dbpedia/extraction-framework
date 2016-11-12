@@ -100,7 +100,7 @@ class ProcessInterLanguageLinks(baseDir: File, dumpFile: File, fileSuffix: Strin
   val sameAsUri = RdfNamespace.OWL.append("sameAs")
   val seeAlsoUri = RdfNamespace.RDFS.append("seeAlso")
 
-  val interLinkExtension = DBpediaDatasets.InterLanguageLinks.name.replace('_', '-')
+  val interLinkExtension = DBpediaDatasets.InterLanguageLinks.encoded.replace('_', '-')
   val sameAsExtension = interLinkExtension+"-same-as"+extension
   val seeAlsoExtension = interLinkExtension+"-see-also"+extension
     

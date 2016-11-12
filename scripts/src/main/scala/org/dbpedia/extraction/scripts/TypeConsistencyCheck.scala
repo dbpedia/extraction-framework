@@ -122,13 +122,13 @@ object TypeConsistencyCheck {
           val rangeDataset = checkQuadRange(quad, resourceTypes, ontology)
           val domainDataset = checkQuadDomain(quad, resourceTypes, ontology)
 
-          val datasetList = List(rangeDataset.name, domainDataset.name).distinct
+          val datasetList = List(rangeDataset.encoded, domainDataset.encoded).distinct
           val verifiedDatasets : List[String] = {
-            if (datasetList.size == 1 && datasetList.contains(correctDataset.name)) {
+            if (datasetList.size == 1 && datasetList.contains(correctDataset.encoded)) {
               datasetList
             }
             else {
-              datasetList.filter(_ != correctDataset.name)
+              datasetList.filter(_ != correctDataset.encoded)
             }
           }
           for (d <- verifiedDatasets) {
@@ -305,8 +305,8 @@ object TypeConsistencyCheck {
     for ((suffix, format) <- formats) {
       val datasetDestinations = new HashMap[String, Destination]()
       for (dataset <- datasets) {
-        val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix).get
-        datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
+        val file = finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix).get
+        datasetDestinations(dataset.encoded) = new WriterDestination(writer(file), format)
       }
 
       destination += new DatasetDestination(datasetDestinations)

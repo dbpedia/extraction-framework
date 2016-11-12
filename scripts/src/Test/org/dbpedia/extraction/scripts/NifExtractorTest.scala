@@ -2,10 +2,11 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
+import org.apache.commons.codec.language.bm.Languages
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.mappings.NifExtractor
-import org.dbpedia.extraction.util.{IOUtils, RichFile, Language}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.{PageNode, Namespace, WikiTitle}
 import org.scalatest.FunSuite
 
@@ -22,11 +23,13 @@ import org.scalatest.FunSuite
   *    - switch isTestRun to true (no ontology is loaded, short/long-abstracts datasets are skipped)
   *    - for debugging switch writeNifStrings to true so that every nif instance has a string representation (turn this to false in the extraction!!!)
   */
+
 class NifExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
     def language = Language.map.get("fr").get
+    def config = new Config(ConfigUtils.loadConfig("C:\\Users\\Chile\\IdeaProjects\\extraction-framework\\dump\\extraction.nif.abstracts.properties", "UTF-8"))
   }
   private val extractor = new NifExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
@@ -44,10 +47,15 @@ class NifExtractorTest extends FunSuite {
     dest.close()
   }
 
+  Languages
   private def getHtml(title:WikiTitle): String={
     extractor.retrievePage(title, 0l) match{
       case Some(pc) => extractor.postProcess(title, pc)
       case None => ""
     }
   }
+
+  override def convertToLegacyEqualizer[T](left: T): LegacyEqualizer[T] = ???
+
+  override def convertToLegacyCheckingEqualizer[T](left: T): LegacyCheckingEqualizer[T] = ???
 }

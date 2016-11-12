@@ -35,29 +35,29 @@ class NifExtractor(
      context : {
        def ontology : Ontology
        def language : Language
-       def config : Config
+       def configFile : Config
      }
    )
   extends AbstractExtractor(context)
 {
   //API parameters to geht HTML of first section
-  override val apiParametersFormat = "uselang="+language + context.config.nifParameters.nifQuery
+  override val apiParametersFormat = "uselang="+language + context.configFile.nifParameters.nifQuery
 
-  override val xmlPath = context.config.nifParameters.nifTags.split(",").map(_.trim)
+  override val xmlPath = context.configFile.nifParameters.nifTags.split(",").map(_.trim)
 
-  protected val isTestRun = context.config.nifParameters.isTestRun
-  protected val writeLinkAnchors = context.config.nifParameters.writeLinkAnchor
-  protected val writeStrings = context.config.nifParameters.writeAnchor
-  protected val shortAbstractLength = context.config.abstractParameters.shortAbstractMinLength
+  protected val isTestRun = context.configFile.nifParameters.isTestRun
+  protected val writeLinkAnchors = context.configFile.nifParameters.writeLinkAnchor
+  protected val writeStrings = context.configFile.nifParameters.writeAnchor
+  protected val shortAbstractLength = context.configFile.abstractParameters.shortAbstractMinLength
 
-  require(context.config.dbPediaVersion.isDefined, "dbpedia-version parameter undefined in config document")
-  protected val dbpediaVersion = context.config.dbPediaVersion.get
+  require(context.configFile.dbPediaVersion.isDefined, "dbpedia-version parameter undefined in config document")
+  protected val dbpediaVersion = context.configFile.dbPediaVersion.get
 
   override val datasets = Set(DBpediaDatasets.NifAbstractContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
-  protected lazy val nifContext = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifAbstractContext.name) _
-  protected lazy val nifStructure = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifPageStructure.name) _
-  protected lazy val nifLinks = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifTextLinks.name) _
+  protected lazy val nifContext = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifAbstractContext.encoded) _
+  protected lazy val nifStructure = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifPageStructure.encoded) _
+  protected lazy val nifLinks = QuadBuilder.dynamicPredicate(context.language.isoCode, DBpediaDatasets.NifTextLinks.encoded) _
 
   private val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x

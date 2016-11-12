@@ -117,7 +117,7 @@ class ConfigLoader(config: Config)
 
             def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
 
-            def config: Config = config
+            def configFile: Config = config
         }
 
         //Extractors
@@ -129,8 +129,8 @@ class ConfigLoader(config: Config)
           
           val datasetDestinations = new HashMap[String, Destination]()
           for (dataset <- datasets) {
-            finder.file(date, dataset.name.replace('_', '-')+'.'+suffix) match{
-              case Some(file)=> datasetDestinations(dataset.name) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
+            finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
+              case Some(file)=> datasetDestinations(dataset.encoded) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
               case None =>
             }
 
@@ -145,7 +145,7 @@ class ConfigLoader(config: Config)
 
         val extractionRecorder = config.logDir match{
           case Some(p) => {
-            val file = new File(p)
+            val file = new File(p, "testExtraction")
             file.createNewFile()
             new ExtractionRecorder[PageNode](new FileWriter(file), 2000, description)
           }
