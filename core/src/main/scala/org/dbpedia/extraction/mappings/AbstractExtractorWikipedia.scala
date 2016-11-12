@@ -16,7 +16,7 @@ class AbstractExtractorWikipedia(
   context : {
     def ontology : Ontology
     def language : Language
-    def config : Config
+    def configFile : Config
   })
   extends AbstractExtractor (context)
 {
