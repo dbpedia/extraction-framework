@@ -168,14 +168,16 @@ class QuadMapperFormatter(quad: Boolean = true, turtle: Boolean = true, policies
   }
 
   override def render(quad: Quad): String = synchronized {
-    var context = quad.context
-    for(add <- contextAdditions)
+    var context = Option(quad.context) match{
+      case Some(c) if c.trim.nonEmpty => c.trim
+      case None => null
+      case _ => null
+    }
+    for(add <- contextAdditions if context != null)
       if(context.indexOf("#") > 0)
         context += "&" + add._1 + "=" + add._2
       else
         context += "#" + add._1 + "=" + add._2
-    val zw = super.render(quad.copy(context=context))
-    println(zw)
-    zw
+    super.render(quad.copy(context=context))
   }
 }
