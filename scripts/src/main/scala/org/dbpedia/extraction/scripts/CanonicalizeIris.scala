@@ -69,7 +69,7 @@ object CanonicalizeIris {
   /**
     * this worker reads the mapping file into a concurrent HashMap
     */
-  val mappingsReader = { langFile: WorkParameters =>
+  val mappingsReader = SimpleWorkers(4, 4){ langFile: WorkParameters =>
     val map = mappings.get(langFile.language) match {
       case Some(m) => m
       case None => {
@@ -92,7 +92,7 @@ object CanonicalizeIris {
   /**
     * this worker does the actual mapping of URIs
     */
-  val mappingExecutor = { langSourceDest: WorkParameters =>
+  val mappingExecutor = SimpleWorkers(4, 4){ langSourceDest: WorkParameters =>
     val oldPrefix = uriPrefix(langSourceDest.language)
     val oldResource = oldPrefix+"resource/"
 
@@ -197,9 +197,9 @@ object CanonicalizeIris {
       yield
         new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input, extension))
 
-    Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingsReader), loadParameters.toList, "language mappings loading")
+    Workers.work[WorkParameters](mappingsReader, loadParameters.toList, "language mappings loading")
 
 
-    Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
+    Workers.work[WorkParameters](mappingExecutor, parameters.toList, "executing language mappings")
   }
 }
