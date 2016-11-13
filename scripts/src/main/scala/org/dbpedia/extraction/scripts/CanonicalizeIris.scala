@@ -38,7 +38,10 @@ object CanonicalizeIris {
     * produces a copy of the Formatter map (necessary to guarantee concurrent processing)
     * @return
     */
-  def formats = frmts.map(x => x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x.asInstanceOf[TerseFormatter]) else x._2))
+  def formats = frmts.map(x => x._1 -> (x._2 match {
+    case formatter: TerseFormatter => new QuadMapperFormatter(formatter)
+    case _ => x._2.getClass.newInstance()
+  }))
 
   def uriPrefix(language: Language): String = {
     val zw = if (language == genericLanguage)
