@@ -23,7 +23,7 @@ object CanonicalizeIris {
   private val finders = new ConcurrentHashMap[Language, DateFinder[File]]().asScala
 
   //TODO make this configurable
-  private val inputSuffix = ".tql"
+  private val inputSuffix = ".tql.bz2"
 
   private var baseDir: File = null
 
