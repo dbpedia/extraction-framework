@@ -3,8 +3,8 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
+import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, Formatter}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.destinations.formatters.{Formatter, TerseFormatter}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, DestinationUtils}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.util.RichFile.wrapFile
@@ -30,9 +30,15 @@ object CanonicalizeIris {
   private var newPrefix: String = null
   private var newResource: String = null
 
-  private var formats: Map[String, Formatter] = null
-
   case class WorkParameters(language: Language, source: FileLike[_], destination: Dataset)
+
+  private var frmts: Map[String, Formatter] = null
+
+  /**
+    * produces a copy of the Formatter map (necessary to guarantee concurrent processing)
+    * @return
+    */
+  def formats = frmts.map(x => x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x.asInstanceOf[TerseFormatter]) else x._2))
 
   def uriPrefix(language: Language): String = {
     val zw = if (language == genericLanguage)
@@ -42,10 +48,11 @@ object CanonicalizeIris {
     zw+"/"
   }
 
-  private def split(arg: String): Array[String] = {
-    arg.split(",").map(_.trim).filter(_.nonEmpty)
-  }
-
+  /**
+    * get finder specific to a language directory
+    * @param lang
+    * @return
+    */
   def finder(lang: Language) = finders.get(lang) match{
     case Some(f) => f
     case None => {
@@ -56,6 +63,9 @@ object CanonicalizeIris {
     }
   }
 
+  /**
+    * this worker reads the mapping file into a concurrent HashMap
+    */
   val mappingsReader = { langFile: WorkParameters =>
     val map = mappings.get(langFile.language) match {
       case Some(m) => m
@@ -76,6 +86,9 @@ object CanonicalizeIris {
     }
   }
 
+  /**
+    * this worker does the actual mapping of URIs
+    */
   val mappingExecutor = { langSourceDest: WorkParameters =>
     val oldPrefix = uriPrefix(langSourceDest.language)
     val oldResource = oldPrefix+"resource/"
@@ -169,8 +182,7 @@ object CanonicalizeIris {
     val languages = parseLanguages(baseDir, ConfigUtils.getValues(config, "languages",',',required=true)(x => x))
     require(languages.nonEmpty, "no languages")
 
-    formats = parseFormats(config, "uri-policy", "format").map( x=>
-      x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
+    frmts = parseFormats(config, "uri-policy", "format").map( x=> x._1 -> x._2).toMap
 
     // load all mappings
     val loadParameters = for (lang <- languages; mapping <- mappings)
