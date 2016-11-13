@@ -22,6 +22,9 @@ object CanonicalizeIris {
 
   private val finders = new ConcurrentHashMap[Language, DateFinder[File]]().asScala
 
+  //TODO make this configurable
+  private val inputSuffix = ".tql"
+
   private var baseDir: File = null
 
   private var genericLanguage: Language = Language.English
@@ -69,7 +72,7 @@ object CanonicalizeIris {
   /**
     * this worker reads the mapping file into a concurrent HashMap
     */
-  val mappingsReader = synchronized { langFile: WorkParameters =>
+  val mappingsReader = { langFile: WorkParameters =>
     val map = mappings.get(langFile.language) match {
       case Some(m) => m
       case None => {
@@ -92,7 +95,7 @@ object CanonicalizeIris {
   /**
     * this worker does the actual mapping of URIs
     */
-  val mappingExecutor = synchronized { langSourceDest: WorkParameters =>
+  val mappingExecutor = { langSourceDest: WorkParameters =>
     val oldPrefix = uriPrefix(langSourceDest.language)
     val oldResource = oldPrefix+"resource/"
 
@@ -165,11 +168,6 @@ object CanonicalizeIris {
     val extension = ConfigUtils.getString(config, "name-extension",required=true)
     require(extension.nonEmpty, "no result name extension")
 
-    // Suffixes of input/output files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
-    // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val suffixes = ConfigUtils.getValues(config, "input-suffixes",',', required=true)(x => x)
-    require(suffixes.nonEmpty, "no input/output file suffixes")
-
     val threads = Option(ConfigUtils.getValue[String](config, "parallel-threads",required=false)(x => x)) match{
       case Some(i) => Integer.parseInt(i)
       case None => 1
@@ -193,9 +191,9 @@ object CanonicalizeIris {
         new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(mapping+mappingSuffix, auto = true).get), null)
 
     //execute all file mappings
-    val parameters = for (lang <- languages; input <- inputs; suffix <- suffixes)
+    val parameters = for (lang <- languages; input <- inputs)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input, extension))
+        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get), DBpediaDatasets.getDataset(input, extension))
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingsReader), loadParameters.toList, "language mappings loading")
 
