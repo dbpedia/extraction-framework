@@ -162,18 +162,20 @@ class QuadMapperFormatter(quad: Boolean = true, turtle: Boolean = true, policies
   }
   private var contextAdditions = Map[String, String]()
 
-  def addContextAddition(paramName: String, paramValue: String): Unit ={
+  def addContextAddition(paramName: String, paramValue: String): Unit = synchronized {
     val param = paramName.replaceAll("\\s", "").toLowerCase()
     contextAdditions += ( param -> UriUtils.encodeUriComponent(paramValue))
   }
 
-  override def render(quad: Quad): String = {
+  override def render(quad: Quad): String = synchronized {
     var context = quad.context
     for(add <- contextAdditions)
       if(context.indexOf("#") > 0)
         context += "&" + add._1 + "=" + add._2
       else
         context += "#" + add._1 + "=" + add._2
-    super.render(quad.copy(context=context))
+    val zw = super.render(quad.copy(context=context))
+    println(zw)
+    zw
   }
 }

@@ -140,7 +140,6 @@ object CanonicalizeIris {
         List(quad.copy(subject = subj, predicate = pred, dataset = destName))
       }
     }
-    destination.close()
   }
 
   def main(args: Array[String]): Unit = {
@@ -192,12 +191,13 @@ object CanonicalizeIris {
       yield
         new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(mapping+mappingSuffix, auto = true).get), null)
 
-    Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingsReader), loadParameters.toList, "language mappings loading")
-
     //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs; suffix <- suffixes)
       yield
         new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+suffix, auto = true).get), DBpediaDatasets.getDataset(input, extension))
+
+    Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingsReader), loadParameters.toList, "language mappings loading")
+
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
   }
