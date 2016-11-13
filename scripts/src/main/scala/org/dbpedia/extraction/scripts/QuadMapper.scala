@@ -178,6 +178,7 @@ class QuadMapperFormatter(quad: Boolean = true, turtle: Boolean = true, policies
         context += "&" + add._1 + "=" + add._2
       else
         context += "#" + add._1 + "=" + add._2
-    super.render(quad.copy(context=context))
+    val value = org.dbpedia.extraction.util.TurtleUtils.unescapeTurtle(quad.value)  //TODO unescaping turtle escapes
+    super.render(quad.copy(value=value,context=context))
   }
 }

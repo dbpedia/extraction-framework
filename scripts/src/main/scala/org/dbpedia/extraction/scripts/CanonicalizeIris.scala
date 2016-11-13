@@ -111,10 +111,11 @@ object CanonicalizeIris {
     }
 
     def mapUri(oldUri: String): String = {
-      if (oldUri.startsWith(oldResource)) map.get(oldUri.replace(oldResource, "")) match{
-        case Some(r) => newResource+r
-        case None => null
-      }
+      if (oldUri.startsWith(oldResource))
+        map.get(oldUri.replace(oldResource, "")) match{
+          case Some(r) => newResource+r
+          case None => null
+        }
       else newUri(oldUri)
     }
 
@@ -125,7 +126,7 @@ object CanonicalizeIris {
         // no mapping for this subject URI - discard the quad. TODO: make this configurable
         List()
       }
-      else if (quad.datatype == null) {
+      else if (quad.datatype == null && quad.language == null) {
         // URI value - change subject and object URIs, copy everything else
         val obj = mapUri(quad.value)
         if (obj == null) {
