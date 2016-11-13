@@ -157,6 +157,7 @@ object DBpediaDatasets
     */
   private val members = DestinationUtils.getDatasets(this)
 
+  //TODO update this when getting temp datasets
   def getDataset(name: String, extension: String = null) = members.get(name.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_")) match{
     case Some(d) => {
       if(extension != null)

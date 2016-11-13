@@ -29,7 +29,7 @@ class NifExtractorTest extends FunSuite {
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
     def language = Language.map.get("fr").get
-    def config = new Config(ConfigUtils.loadConfig("C:\\Users\\Chile\\IdeaProjects\\extraction-framework\\dump\\extraction.nif.abstracts.properties", "UTF-8"))
+    def configFile = new Config(ConfigUtils.loadConfig("C:\\Users\\Chile\\IdeaProjects\\extraction-framework\\dump\\extraction.nif.abstracts.properties", "UTF-8"))
   }
   private val extractor = new NifExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))

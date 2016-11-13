@@ -157,7 +157,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
     }
     printLabeledLine("extraction failed for " + tag + " " + id + ": " + name + ": " + exception.getMessage(), lang, Seq(PrinterDestination.file))
     for (ste <- exception.getStackTrace)
-      printLabeledLine("\t" + ste.toString + "\n", lang, Seq(PrinterDestination.file), noLabel = true)
+      printLabeledLine("\t" + ste.toString, lang, Seq(PrinterDestination.file), noLabel = true)
     printLabeledLine("extraction failed for " + tag + " " + id + ": " + name, lang, Seq(PrinterDestination.err, PrinterDestination.file))
   }
 

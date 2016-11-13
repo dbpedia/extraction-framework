@@ -124,6 +124,7 @@ object CanonicalizeIris {
         List(quad.copy(subject = subj, predicate = pred, dataset = destName))
       }
     }
+    destination.close()
   }
 
   def main(args: Array[String]): Unit = {
