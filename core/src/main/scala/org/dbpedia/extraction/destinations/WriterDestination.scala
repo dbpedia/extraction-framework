@@ -3,6 +3,8 @@ package org.dbpedia.extraction.destinations
 import java.io.Writer
 import org.dbpedia.extraction.destinations.formatters.Formatter
 
+import scala.collection.mutable.{ListBuffer, ArrayBuffer}
+
 /**
  * Writes quads to a writer.
  * 

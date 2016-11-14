@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.destinations
 
+import java.util.MissingFormatArgumentException
+
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
 import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser.WikiParserException
@@ -58,6 +60,14 @@ class Dataset(
   def isCanonical = language match {
     case Some(lang) => false
     case None => true
+  }
+
+  def getDistributionUri(distType: String, extension: String) ={
+    val lang = this.language match{
+      case Some(l) => l
+      case None => throw new MissingFormatArgumentException("Dataset is language unspecific and can therefore not provide distribution URIs. Please specify a language first!.")
+    }
+    this.versionUri + "&" + distType  + "=" + this.encoded +"_" + lang.wikiCode + extension
   }
 
   override def toString = name

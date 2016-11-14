@@ -17,7 +17,7 @@ object DBpediaDatasets
     val CategoryLabels = new Dataset("category_labels","Labels for Categories.")
     val Images = new Dataset("images", "Main image and corresponding thumbnail from Wikipedia article.")
     val GeoCoordinates = new Dataset("geo_coordinates", "Geographic coordinates extracted from Wikipedia.")
-    val Persondata = new Dataset("persondata_unredirected", "Information about persons (date and place of birth etc., extracted from the English and German Wikipedia, represented using the FOAF vocabulary.")
+    val Persondata = new Dataset("persondata", "Information about persons (date and place of birth etc., extracted from the English and German Wikipedia, represented using the FOAF vocabulary.")
     val Pnd = new Dataset("pnd", "")
     val Redirects = new Dataset("redirects", "Dataset containing redirects between articles in Wikipedia.")
     val RedirectsTransitive = new Dataset("transitive-redirects", "Dataset containing transitively resolved redirects between articles in Wikipedia.")
@@ -32,7 +32,7 @@ object DBpediaDatasets
     val InterLanguageLinks = new Dataset("interlanguage_links", "Dataset linking a DBpedia resource to the same resource in other languages and in Wikidata.") // Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
     val InterLanguageLinksChapter = new Dataset("interlanguage_links_chapters", "Chapter specific interlanguage links only contains the interlanguage links between those languages for which a DBpedia mapping chapter exists and provides dereferencable URIs. (a subset of interlanguage links)")
     val Genders = new Dataset("genders", "Dataset trying to identify the gender of a resource")
-    val TopicalConcepts = new Dataset("topical_concepts_unredirected", "Resources that describe a category")
+    val TopicalConcepts = new Dataset("topical_concepts", "Resources that describe a category")
     val UriSameAsIri = new Dataset("uri_same_as_iri", "The owl:sameAs links between the IRI and URI format of DBpedia resources. Only extracted when IRI and URI are actually different.")
     //deprecated!  val FlickrWrapprLinks = new Dataset("flickr_wrappr_links")
     val PageLength = new Dataset("page_length", "Numbers of characters contained in a Wikipedia article's source.")
@@ -48,7 +48,7 @@ object DBpediaDatasets
      */
     val OntologyTypes = new Dataset("instance_types", "Contains triples of the form $object rdf:type $class from the mapping-based extraction.")
     val OntologyTypesTransitive = new Dataset("instance_types_transitive", "Contains transitive rdf:type $class based on the DBpedia ontology.")
-    val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned_unredirected")
+    val OntologyPropertiesObjects = new Dataset("mappingbased_objects_uncleaned")
     val OntologyPropertiesLiterals = new Dataset("mappingbased_literals", "High-quality data extracted from Infoboxes using the mapping-based extraction (Literal properties only). The predicates in this dataset are in the ontology namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace.")  //For example, there are three different raw Wikipedia infobox properties for the birth date of a person. In the the /ontology/ namespace, they are all **mapped onto one relation** http://dbpedia.org/ontology/birthDate. It is a strong point of DBpedia to unify these relations.")
     val OntologyPropertiesGeo = new Dataset("geo_coordinates_mappingbased", "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki")
     val SpecificProperties = new Dataset("specific_mappingbased_properties", "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.")
@@ -71,8 +71,8 @@ object DBpediaDatasets
     /**
      *  Infobox
      */
-    val InfoboxProperties = new Dataset("infobox_properties_unredirected", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data.")
-    val InfoboxPropertiesMapped = new Dataset("infobox_properties-mapped_unredirected", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data. This dataset contains facts that have equivalent mapped facts in the mapping-based datasets. ")
+    val InfoboxProperties = new Dataset("infobox_properties", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data.")
+    val InfoboxPropertiesMapped = new Dataset("infobox_properties_mapped", "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data. This dataset contains facts that have equivalent mapped facts in the mapping-based datasets. ")
     val InfoboxPropertyDefinitions = new Dataset("infobox_property_definitions", "All properties predicates used in infoboxes.")
     val TemplateParameters = new Dataset("template_parameters", "Dataset describing names of template parameters.")
     val InfoboxTest = new Dataset("infobox_test")
@@ -93,8 +93,8 @@ object DBpediaDatasets
      */
     val LinksToWikipediaArticle = new Dataset("wikipedia_links", "Dataset linking DBpedia resource to corresponding article in Wikipedia.")
     val ExternalLinks = new Dataset("external_links", "Links to external web pages about a concept.")
-    val PageLinks = new Dataset("page_links_unredirected", "Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.")
-    val DisambiguationLinks  = new Dataset("disambiguations_unredirected", "Links extracted from Wikipedia disambiguation pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.")
+    val PageLinks = new Dataset("page_links", "Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.")
+    val DisambiguationLinks  = new Dataset("disambiguations", "Links extracted from Wikipedia disambiguation pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.")
     val Homepages = new Dataset("homepages", "Links to homepages of persons, organizations etc.")
     val OutDegree = new Dataset("out_degree", "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.")
     val FreebaseLinks = new Dataset("freebase_links", "This file contains the back-links (owl:sameAs) to the Freebase dataset.")
@@ -139,17 +139,11 @@ object DBpediaDatasets
     val CitationData = new Dataset("citation_data", "Raw data extracted from Wikipedia citation templates")
     //val CitationTypes = new Dataset("citation_types")
 
-  /**
-    * en-uris versions
-    */
-  val ShortAbstractsEnUris = new Dataset("short_abstracts_en_uris", "English normalized version of Short Abstracts (about 600 characters long) of Wikipedia articles.")
-  val LongAbstractsEnUris = new Dataset("long_abstracts_en_uris", "English normalized version of Long abstracts (full abstracts) of Wikipedia articles, usually the first section.")
 
   /**
-    * wkd-uris versions
+    * misc
     */
-  val ShortAbstractsWkdUris = new Dataset("short_abstracts_wkd_uris", "Wikidata normalized version of Short Abstracts (about 600 characters long) of Wikipedia articles.")
-  val LongAbstractsWkdUris = new Dataset("long_abstracts_wkd_uris", "Wikidata normalized version of Long abstracts (full abstracts) of Wikipedia articles, usually the first section.")
+  val MainDataset = new Dataset("main_dataset", "DBpedia root dataset for representing all datasets of e certain language and version of DBpedia")
 
 
   /**

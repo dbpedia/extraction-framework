@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.scripts
 
 import java.io._
-import java.net.{URLEncoder, URI}
+import java.net.{URI, URLEncoder}
 import java.nio.charset.Charset
 import java.security.InvalidParameterException
 import java.text.SimpleDateFormat
@@ -11,19 +11,19 @@ import java.util.logging.{Level, Logger}
 import com.hp.hpl.jena.rdf.model._
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.commons.lang3.SystemUtils
-import org.apache.jena.atlas.json.{JsonValue, JSON, JsonObject}
+import org.apache.jena.atlas.json.{JSON, JsonObject, JsonValue}
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.util.{OpenRdfUtils, Language}
+import org.dbpedia.extraction.util.{Language, OpenRdfUtils}
 import org.openrdf.rio.RDFFormat
 
 import scala.Console._
 import scala.collection.JavaConverters._
 import scala.io.Source
+import scala.language.postfixOps
 import scala.reflect.runtime.currentMirror
 import scala.reflect.runtime.universe._
-
-import scala.language.postfixOps
-import sys.process._
+import scala.sys.process._
+import scala.util.{Failure, Success}
 
 
 /**
@@ -71,7 +71,6 @@ object DataIdGenerator {
   private var license: String = null
   private var sparqlEndpoint: String = null
   private var extensions: List[JsonValue] = null
-  private var datasetDescriptions: List[Dataset] = null
   private var coreList: List[String] = null
 
   private var releaseDate: Date = null
@@ -180,7 +179,7 @@ object DataIdGenerator {
       currentDataid.add(currentDataIdUri, getProperty("dc", "hasVersion"), versionStatement)
       catalogModel.add(catalogInUse, getProperty("dcat", "record"), currentDataIdUri)
 
-      currentRootSet = addDataset(topsetModel, lang, "maindataset", creator, toplevelSet = true)
+      currentRootSet = addDataset(topsetModel, lang, "main_dataset", creator, toplevelSet = true)
       currentDataid.add(currentDataIdUri, getProperty("foaf", "primaryTopic"), currentRootSet)
       topsetModel.add(currentRootSet, getProperty("foaf", "isPrimaryTopicOf"), currentDataIdUri)
       topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary))
@@ -469,67 +468,101 @@ object DataIdGenerator {
     model.add(dataset, getProperty("dataid", "openness"), addSimpleStatement("stmt", "openness", configMap.get("dmpopenness").getAsString.value, Language.English))
   }
 
+  def getDBpediaDataset(fileName: String, lang: Language, dbpv: String): Option[Dataset] ={
+
+    def internalGet(name:String, ext: String): Option[Dataset] = scala.util.Try {
+      DBpediaDatasets.getDataset(name, ext)
+    } match{
+      case Success(s) => Some(s)
+      case Failure(e) => None
+    }
+    internalGet(fileName, null) match{
+      case Some(d) => return Some(new Dataset(d.name, d.description.orNull, lang, dbpv, fileName, d.origin.orNull, d.sources))
+      case None =>
+    }
+    val splits = fileName.split("_")
+    for(i <- (1 until splits.length).reverse)
+    {
+      val name = splits.slice(0, i).foldLeft("")(_ + "_" + _).substring(1)
+      val ext = splits.slice(i, splits.length).foldLeft("")(_ + "_" + _)
+      internalGet(name, ext) match{
+        case Some(d) => {
+          val zw = internalGet(name, null).get.description match{
+            case Some(desc) => {
+              desc + (ext match {
+                case "_en_uris" => " Normalized dataset matching English DBpedia resources."
+                case "_wkd_uris" => " Normalized dataset matching Wikidata DBpedia resources."
+                case "_unredirected" => " This datasets resources were not resolved along Wikipedia redirects."
+                case _ => " A sub dataset."
+              })
+            }
+            case None => "An undescribed dataset."
+          }
+          return Some(new Dataset(d.name, zw, lang, dbpv, fileName, d.origin.orNull, d.sources))
+        }
+        case None =>
+      }
+    }
+    None
+  }
+
   def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Resource = {
-    val datasetName = if (currentFile.contains("_")) currentFile.substring(0, currentFile.lastIndexOf("_")) else currentFile
-    val dataset = model.createResource(currentDataIdUri.getURI + "?set=" + datasetName)
+
+    val datasetName = if(currentFile.contains("_" + lang.wikiCode.replace("-", "_"))) currentFile.substring(0, currentFile.lastIndexOf("_" + lang.wikiCode.replace("-", "_"))) else currentFile
+    val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
+      case Some(d) => d
+      case None => throw new Exception("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
+    }
+    val datasetUri = model.createResource(dataset.versionUri)
     //add dataset to catalog
-    catalogModel.add(catalogInUse, getProperty("dcat", "dataset"), dataset)
-    model.add(dataset, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
+    catalogModel.add(catalogInUse, getProperty("dcat", "dataset"), datasetUri)
+    model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
 
     // add prev/next/latest statements
-    getOtherVersionUri(previousDataId, dataset) match{
-      case Some(uri) =>model.add(dataset, getProperty("dataid", "previousVersion"), uri)
+    getOtherVersionUri(previousDataId, datasetUri) match{
+      case Some(uri) =>model.add(datasetUri, getProperty("dataid", "previousVersion"), uri)
       case None =>
     }
-    getOtherVersionUri(nextDataId, dataset) match{
-      case Some(uri) =>model.add(dataset, getProperty("dataid", "nextVersion"), uri)
+    getOtherVersionUri(nextDataId, datasetUri) match{
+      case Some(uri) =>model.add(datasetUri, getProperty("dataid", "nextVersion"), uri)
       case None =>
     }
-    getOtherVersionUri(latestDataId, dataset) match{
-      case Some(uri) =>model.add(dataset, getProperty("dataid", "latestVersion"), uri)
-      case None => model.add(dataset, getProperty("dataid", "latestVersion"), dataset)
+    getOtherVersionUri(latestDataId, datasetUri) match{
+      case Some(uri) =>model.add(datasetUri, getProperty("dataid", "latestVersion"), uri)
+      case None => model.add(datasetUri, getProperty("dataid", "latestVersion"), datasetUri)
     }
 
     if (!toplevelSet) //not!
     {
-      model.add(dataset, getProperty("void", "rootResource"), currentRootSet)
-      datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, datasetName)) match {
-        case Some(d) => {
-          model.add(dataset, getProperty("dc", "title"), createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
-          model.add(dataset, getProperty("rdfs", "label"), createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
-        }
+      model.add(datasetUri, getProperty("void", "rootResource"), currentRootSet)
+      model.add(datasetUri, getProperty("dc", "title"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
+      model.add(datasetUri, getProperty("rdfs", "label"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
+      dataset.description match{
+        case Some(desc) => model.add(datasetUri, getProperty("dc", "description"), createLiteral(desc, "en"))
         case None => {
-          model.add(dataset, getProperty("dc", "title"), createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset", "en"))
-          model.add(dataset, getProperty("rdfs", "label"), createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset", "en"))
-        }
-      }
-
-      datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, datasetName) && x.description.nonEmpty) match {
-        case Some(d) => model.add(dataset, getProperty("dc", "description"), createLiteral(d.description.get, "en"))
-        case None => {
-          model.add(dataset, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
+          model.add(datasetUri, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
           err.println("Could not find description for dataset: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
         }
       }
     }
     if (!currentFile.contains("pages_articles")) //not!
     {
-      model.add(dataset, getProperty("dcat", "landingPage"), model.createResource("http://dbpedia.org/"))
-      model.add(dataset, getProperty("foaf", "page"), model.createResource(documentation))
+      model.add(datasetUri, getProperty("dcat", "landingPage"), model.createResource("http://dbpedia.org/"))
+      model.add(datasetUri, getProperty("foaf", "page"), model.createResource(documentation))
       //TODO done by DataId Hub
-      model.add(dataset, getProperty("dc", "hasVersion"), versionStatement)
-      model.add(dataset, getProperty("dataid", "associatedAgent"), associatedAgent)
-      model.add(dataset, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-      model.add(dataset, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
-      model.add(dataset, getProperty("dc", "license"), model.createResource(license))
-      model.add(dataset, getProperty("dc", "publisher"), associatedAgent)
-      model.add(dataset, getProperty("dcat", "keyword"), createLiteral("DBpedia", "en"))
-      model.add(dataset, getProperty("dcat", "keyword"), createLiteral(datasetName, "en"))
-      model.add(dataset, getProperty("dc", "conformsTo"), dataidStandard)
-      model.add(dataset, getProperty("dc", "conformsTo"), dataidLdStandard)
+      model.add(datasetUri, getProperty("dc", "hasVersion"), versionStatement)
+      model.add(datasetUri, getProperty("dataid", "associatedAgent"), associatedAgent)
+      model.add(datasetUri, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+      model.add(datasetUri, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
+      model.add(datasetUri, getProperty("dc", "license"), model.createResource(license))
+      model.add(datasetUri, getProperty("dc", "publisher"), associatedAgent)
+      model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral("DBpedia", "en"))
+      model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral(datasetName, "en"))
+      model.add(datasetUri, getProperty("dc", "conformsTo"), dataidStandard)
+      model.add(datasetUri, getProperty("dc", "conformsTo"), dataidLdStandard)
       lbpMap.get("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile) match {
         case Some(triples) =>
-          model.add(dataset, getProperty("void", "triples"), createLiteral((new Integer(triples.get("lines").get) - 2).toString, "xsd", "integer"))
+          model.add(datasetUri, getProperty("void", "triples"), createLiteral((new Integer(triples.get("lines").get) - 2).toString, "xsd", "integer"))
         case None =>
       }
     }
@@ -537,42 +570,45 @@ object DataIdGenerator {
       getWikipediaDownloadInfo(lang) match {
         case Some(dlInfo) => {
           val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
-          model.add(dataset, getProperty("dc", "hasVersion"), dlInfo._1.trim)
-          model.add(dataset, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
+          model.add(datasetUri, getProperty("dc", "hasVersion"), dlInfo._1.trim)
+          model.add(datasetUri, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
         }
         case None =>
       }
       val wikimedia = addAgent(agentModel, currentDataIdUri, configMap.get("wikimedia").getAsObject)
-      model.add(dataset, getProperty("dc", "license"), model.createResource(license))
-      model.add(dataset, getProperty("dc", "publisher"), wikimedia)
-      model.add(dataset, getProperty("dataid", "associatedAgent"), wikimedia)
-      model.add(dataset, getProperty("dcat", "keyword"), createLiteral("Wikipedia", "en"))
-      model.add(dataset, getProperty("dcat", "keyword"), createLiteral("XML dump file", "en"))
-      model.add(dataset, getProperty("dcat", "landingPage"), model.createResource("https://meta.wikimedia.org/wiki/Data_dumps"))
+      model.add(datasetUri, getProperty("dc", "license"), model.createResource(license))
+      model.add(datasetUri, getProperty("dc", "publisher"), wikimedia)
+      model.add(datasetUri, getProperty("dataid", "associatedAgent"), wikimedia)
+      model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral("Wikipedia", "en"))
+      model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral("XML dump file", "en"))
+      model.add(datasetUri, getProperty("dcat", "landingPage"), model.createResource("https://meta.wikimedia.org/wiki/Data_dumps"))
     }
 
     if (lang.iso639_3 != null && lang.iso639_3.length > 0)
-      model.add(dataset, getProperty("dc", "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
+      model.add(datasetUri, getProperty("dc", "language"), model.createResource("http://lexvo.org/id/iso639-3/" + lang.iso639_3))
 
-    dataset
+    datasetUri
   }
-  def addDistribution(model: Model, dataset: Resource, lang: Language, outerDirectory: String, currentFile: String, associatedAgent: Resource): Resource = {
-    val dist = model.createResource(currentDataIdUri.getURI + "?file=" + currentFile)
-    model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
-    model.add(dataset, getProperty("dcat", "distribution"), dist)
-    model.add(dist, getProperty("dataid", "isDistributionOf"), dataset)
 
-    datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, currentFile.substring(0, currentFile.lastIndexOf("_")))) match {
-      case Some(d) => model.add(dist, getProperty("dc", "title"), createLiteral(d.name.replace("-", " ").replace("_", " "), "en"))
-      case None => model.add(dist, getProperty("dc", "title"), createLiteral(currentFile.substring(0, currentFile.lastIndexOf("_")).replace("-", " ").replace("_", " ") + " dataset", "en"))
+  def addDistribution(model: Model, datasetUri: Resource, lang: Language, outerDirectory: String, currentFile: String, associatedAgent: Resource): Resource = {
+    val datasetName = if(currentFile.contains("_" + lang.wikiCode.replace("-", "_"))) currentFile.substring(0, currentFile.lastIndexOf("_" + lang.wikiCode.replace("-", "_"))) else currentFile
+    val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
+      case Some(d) => d
+      case None => throw new Exception("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
     }
+    val dist = model.createResource(dataset.getDistributionUri("file", currentFile.substring(currentFile.indexOf('.'))))
+    model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
+    model.add(datasetUri, getProperty("dcat", "distribution"), dist)
+    model.add(dist, getProperty("dataid", "isDistributionOf"), datasetUri)
 
-    datasetDescriptions.find(x => stringCompareIgnoreDash(x.encoded, currentFile.substring(0, currentFile.lastIndexOf("_"))) && x.description.nonEmpty) match {
-      case Some(d) =>
-        model.add(dist, getProperty("dc", "description"), createLiteral(d.description.getOrElse(""), "en"))
-      case None => err.println("Could not find description for distribution: " + (if (lang != null) {
-        "_" + lang.wikiCode.replace("-", "_")
-      } else "") + " / " + currentFile)
+    model.add(dist, getProperty("dc", "title"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
+    model.add(dist, getProperty("rdfs", "label"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
+    dataset.description match{
+      case Some(desc) => model.add(dist, getProperty("dc", "description"), createLiteral(desc, "en"))
+      case None => {
+        model.add(dist, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
+        err.println("Could not find description for distribution: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
+      }
     }
 
     if(currentFile.contains("pages_articles"))  //is Wikipedia file
@@ -581,14 +617,14 @@ object DataIdGenerator {
       getWikipediaDownloadInfo(lang) match {
         case Some(dlInfo) => {
           val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
-          model.add(dataset, getProperty("dc", "hasVersion"), dlInfo._1.trim)
-          model.add(dataset, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
+          model.add(dist, getProperty("dc", "hasVersion"), dlInfo._1.trim)
+          model.add(dist, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
           model.add(dist, getProperty("dcat", "downloadURL"), model.createResource(dlInfo._2.trim))
         }
         case None =>
       }
-      model.add(dataset, getProperty("dc", "publisher"), wikimedia)
-      model.add(dataset, getProperty("dataid", "associatedAgent"), wikimedia)
+      model.add(dist, getProperty("dc", "publisher"), wikimedia)
+      model.add(dist, getProperty("dataid", "associatedAgent"), wikimedia)
       model.add(dist, getProperty("rdfs", "label"), createLiteral(currentFile))
       model.add(dist, getProperty("dc", "license"), model.createResource(license))
     }
@@ -766,10 +802,13 @@ object DataIdGenerator {
         case _ => None
       }).toList.collect{case Some(d) if d.isInstanceOf[Dataset] => d}
 
-    datasetDescriptions = datasetDescriptionsOriginal
-      .filter(_.encoded.endsWith("unredirected")).map(d => new Dataset(d.name, d.description.getOrElse("") + " This dataset has Wikipedia redirects resolved.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace("_unredirected", ""))) ++
-      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-en-uris", d.description.getOrElse("") + " Normalized resources matching English DBpedia.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-en-uris"))) ++
+/*
+    datasetDescriptions = datasetDescriptionsOriginal ++
+      //.filter(_.encoded.endsWith("unredirected")).map(d => new Dataset(d.name, d.description.getOrElse("") + " This dataset has Wikipedia redirects resolved.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace("_unredirected", ""))) ++
+      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-en-uris", d.description.getOrElse("") + " Normalized dataset matching English DBpedia resources.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-en-uris"))) ++
+      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-wkd-uris", d.description.getOrElse("") + " Normalized dataset matching Wikidata DBpedia resources.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-wkd-uris"))) ++
       datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-en-uris-unredirected", d.description.getOrElse("") + " Normalized resources matching English DBpedia. This dataset has Wikipedia redirects resolved.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-en-uris-unredirected")))
+*/
 
     //model for all type statements will be merged with submodels before write...
     staticModel = ModelFactory.createDefaultModel()
