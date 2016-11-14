@@ -506,12 +506,20 @@ object DataIdGenerator {
     None
   }
 
+  def getDatasetName(fileName: String, lang: Language) =
+    if(fileName.contains("_" + lang.wikiCode.replace("-", "_") + "."))
+      fileName.substring(0, fileName.lastIndexOf("_" + lang.wikiCode.replace("-", "_") + "."))
+    else fileName.replaceAll("\\.\\w+", "")
+
   def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Resource = {
 
-    val datasetName = if(currentFile.contains("_" + lang.wikiCode.replace("-", "_"))) currentFile.substring(0, currentFile.lastIndexOf("_" + lang.wikiCode.replace("-", "_"))) else currentFile
+    val datasetName = getDatasetName(currentFile, lang)
     val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
       case Some(d) => d
-      case None => throw new Exception("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
+      case None => {
+        err.println("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
+        return null
+      }
     }
     val datasetUri = model.createResource(dataset.versionUri)
     //add dataset to catalog
@@ -591,10 +599,13 @@ object DataIdGenerator {
   }
 
   def addDistribution(model: Model, datasetUri: Resource, lang: Language, outerDirectory: String, currentFile: String, associatedAgent: Resource): Resource = {
-    val datasetName = if(currentFile.contains("_" + lang.wikiCode.replace("-", "_"))) currentFile.substring(0, currentFile.lastIndexOf("_" + lang.wikiCode.replace("-", "_"))) else currentFile
+    val datasetName =  getDatasetName(currentFile, lang)
     val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
       case Some(d) => d
-      case None => throw new Exception("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
+      case None => {
+        err.println("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
+        return null
+      }
     }
     val dist = model.createResource(dataset.getDistributionUri("file", currentFile.substring(currentFile.indexOf('.'))))
     model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
@@ -674,7 +685,7 @@ object DataIdGenerator {
   def main(args: Array[String]) {
 
     require(args != null && args.length >= 1,
-      "need three args: " +
+      "we need on argument: " +
         /*0*/ "config file location"
     )
 
