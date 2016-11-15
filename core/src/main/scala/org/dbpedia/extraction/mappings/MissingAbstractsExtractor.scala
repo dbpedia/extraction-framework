@@ -4,8 +4,9 @@ import java.io._
 import java.net.URL
 import java.util.logging.{Level, Logger}
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.ParseExceptionIgnorer
@@ -208,7 +209,8 @@ extends PageNodeExtractor
      * TODO: probably doesn't work for most non-European languages.
      * TODO: analyse ActiveAbstractExtractor, I think this works  quite well there,
      * because it takes the first two or three sentences
-     * @param text
+      *
+      * @param text
      * @param max max length
      * @return result string
      */

@@ -7,7 +7,7 @@ import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{Source, WikiPage, WikiSource, XMLSource}
+import org.dbpedia.extraction.sources.{Source, WikiSource, XMLSource}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 

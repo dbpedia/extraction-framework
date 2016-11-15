@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.sources
 
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{WikiPage, Namespace, WikiTitle}
 import java.io.{File,FileInputStream,InputStreamReader}
 import scala.xml.Elem
 import org.dbpedia.extraction.util.Language

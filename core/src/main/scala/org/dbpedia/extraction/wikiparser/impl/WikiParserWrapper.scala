@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.wikiparser.impl
 
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiParser}
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.wikiparser.{WikiPage, PageNode, WikiParser}
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
 import json.JsonWikiParser

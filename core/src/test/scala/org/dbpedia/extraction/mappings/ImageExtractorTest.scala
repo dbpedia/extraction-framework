@@ -5,8 +5,8 @@ import org.scalatest.Matchers
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.collection.mutable.{Set => MutableSet, HashSet}
-import org.dbpedia.extraction.sources.{WikiPage, MemorySource}
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
+import org.dbpedia.extraction.sources.MemorySource
+import org.dbpedia.extraction.wikiparser.{WikiPage, Namespace, WikiTitle}
 import org.dbpedia.extraction.util.Language
 
 /**

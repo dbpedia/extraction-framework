@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.{OntologyProperty, Ontology}
 import org.scalatest.FlatSpec
@@ -151,19 +150,19 @@ object HomepageExtractorTest {
 
   /**
    *   val classes : Map[String, OntologyClass],
-  val properties : Map[String, OntologyProperty],
-  val datatypes : Map[String, Datatype],
-  val specializations : Map[(OntologyClass, OntologyProperty), UnitDatatype],
-  val equivalentPropertiesMap : Map[OntologyProperty,Set[OntologyProperty]],
-  val equivalentClassesMap : Map[OntologyProperty,Set[OntologyProperty]]
+  *val properties : Map[String, OntologyProperty],
+  *val datatypes : Map[String, Datatype],
+  *val specializations : Map[(OntologyClass, OntologyProperty), UnitDatatype],
+  *val equivalentPropertiesMap : Map[OntologyProperty,Set[OntologyProperty]],
+  *val equivalentClassesMap : Map[OntologyProperty,Set[OntologyProperty]]
 
-  name: String,
-  labels: Map[Language, String],
-  comments: Map[Language, String],
-  val domain: OntologyClass,
-  val range: OntologyType,
-  val isFunctional: Boolean,
-  val equivalentProperties: Set[OntologyProperty]
+  *name: String,
+  *labels: Map[Language, String],
+  *comments: Map[Language, String],
+  *val domain: OntologyClass,
+  *val range: OntologyType,
+  *val isFunctional: Boolean,
+  *val equivalentProperties: Set[OntologyProperty]
    */
   private val ontology = new Ontology(
     Map(),

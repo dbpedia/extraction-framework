@@ -5,9 +5,10 @@ import java.util.regex.Matcher
 
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, Quad, WriterDestination}
+import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.scripts.WikidataSameAsToLanguageLinks.{DBPEDIA_URI_PATTERN, error, sameAs}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.util.IOUtils._
 import org.dbpedia.extraction.util.RichFile.wrapFile
@@ -234,6 +235,7 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
   /**
    * Represents the combination of an entity URI which is assigned to some wikidata entity by means
    * of owl:sameAs and the context in which this statement is made.
+ *
    * @param entityUri URI of the entity
    * @param context context in which this entity's sameAs statement is given
    */

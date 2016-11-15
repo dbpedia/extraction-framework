@@ -2,6 +2,7 @@ package org.dbpedia.extraction.destinations
 
 import java.io.File
 
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{DateFinder, Finder, IOUtils}

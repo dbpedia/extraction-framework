@@ -2,9 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 import org.dbpedia.extraction.config.mappings.FileTypeExtractorConfig
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
 import org.dbpedia.extraction.wikiparser._
 import scala.language.reflectiveCalls

@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
 import org.dbpedia.extraction.mappings.RecordEntry
-import org.dbpedia.extraction.sources.WikiPage
 
 import scala.collection.mutable.ListBuffer
 

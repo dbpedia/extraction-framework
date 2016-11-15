@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import java.io.File
 
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{WikiPage, XMLSource}
+import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.junit.runner.RunWith

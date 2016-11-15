@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings
 
 import org.apache.commons.lang3.StringEscapeUtils
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
+import org.dbpedia.extraction.annotations.ExtractorAnnotation
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.nif.LinkExtractor.LinkExtractorContext
 import org.dbpedia.extraction.nif.{Link, LinkExtractor, Paragraph}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.util.{Config, Language, UriUtils, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
@@ -31,6 +32,7 @@ import scala.util.{Failure, Success, Try}
   * It will be expanded to cover the whole wikipage in the future.
   */
 
+@ExtractorAnnotation("nif extractor")
 class NifExtractor(
      context : {
        def ontology : Ontology

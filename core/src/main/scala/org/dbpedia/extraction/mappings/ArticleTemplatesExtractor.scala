@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.transform.Quad
+
 import collection.mutable.HashSet
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer

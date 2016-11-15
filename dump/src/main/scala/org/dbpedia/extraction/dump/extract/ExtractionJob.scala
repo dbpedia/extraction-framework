@@ -2,9 +2,9 @@ package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.Destination
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, WikiPageExtractor}
-import org.dbpedia.extraction.sources.{Source, WikiPage}
+import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.{Language, SimpleWorkers}
-import org.dbpedia.extraction.wikiparser.{PageNode, Namespace}
+import org.dbpedia.extraction.wikiparser.{WikiPage, Namespace, PageNode}
 
 /**
  * Executes a extraction.
@@ -24,19 +24,29 @@ class ExtractionJob(
    retryFailedPages: Boolean,
    extractionRecorder: ExtractionRecorder[PageNode])
 {
+/*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
+  val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
+  val result = annotation.flatMap { a =>
+    a.tree.children.tail.collect({ case Literal(Constant(name: String)) => name }).headOption
+  }
+
+  result.foreach( x => println(x.toString))*/
+
   private val workers = SimpleWorkers { page: WikiPage =>
-    var success = false
     try {
       if (namespaces.contains(page.title.namespace)) {
-        //val graph = extractor(parser(page))
         val graph = extractor.extract(page, page.uri)
         destination.write(graph)
       }
-      success = true
+      else
+        page.addExtractionRecord("Namespace did not match: " + page.title.namespace)
+
+      //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
       val records = page.getExtractionRecords() match{
         case seq :Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
         case _ => Seq(new RecordEntry[PageNode](page, page.title.language))
       }
+      //forward all records to the recorder
       extractionRecorder.record(records:_*)
     } catch {
       case ex: Exception =>

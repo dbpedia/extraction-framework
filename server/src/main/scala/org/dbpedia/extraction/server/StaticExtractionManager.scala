@@ -4,7 +4,7 @@ import org.dbpedia.extraction.sources._
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{WikiPage, PageNode, WikiTitle}
 import java.io.File
 
 /**

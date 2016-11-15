@@ -2,7 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.io.{File, FileNotFoundException}
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.{formatCurrentTimestamp, prettyMillis}
 import org.dbpedia.extraction.util.{Finder, IOUtils, Language}

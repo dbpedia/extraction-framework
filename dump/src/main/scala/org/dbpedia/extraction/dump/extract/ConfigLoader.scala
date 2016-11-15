@@ -8,7 +8,7 @@ import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{WikiPage, WikiSource, XMLSource}
+import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._

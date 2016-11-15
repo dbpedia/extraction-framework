@@ -3,9 +3,8 @@
   import java.util
 
   import org.dbpedia.extraction.wikiparser.impl.WikiParserWrapper
-  import org.dbpedia.extraction.sources.WikiPage
   import org.dbpedia.extraction.util.Language
-  import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+  import org.dbpedia.extraction.wikiparser.{WikiPage, PageNode, WikiTitle}
   import org.junit.Test
   import java.util.Collection
   import org.junit.runner.RunWith

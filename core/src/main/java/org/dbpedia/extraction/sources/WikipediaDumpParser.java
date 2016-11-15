@@ -7,7 +7,6 @@ import org.dbpedia.util.Exceptions;
 import org.dbpedia.util.text.xml.XMLStreamUtils;
 
 import scala.Function1;
-import scala.Option;
 import scala.util.control.ControlThrowable;
 
 import javax.xml.stream.XMLInputFactory;

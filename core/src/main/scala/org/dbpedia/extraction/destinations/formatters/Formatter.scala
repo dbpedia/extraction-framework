@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.transform.Quad
 
 /**
  * Serializes statements.

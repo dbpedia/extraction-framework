@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.{Buffer,ArrayBuffer}

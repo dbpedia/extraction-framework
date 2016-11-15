@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.dataparser.StringParser
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.TemplateNode
 
 class ConditionMapping(

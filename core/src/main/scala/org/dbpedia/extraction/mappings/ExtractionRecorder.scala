@@ -3,8 +3,7 @@ package org.dbpedia.extraction.mappings
 import java.io.Writer
 import java.text.DecimalFormat
 import java.util.concurrent.atomic.AtomicLong
-
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 

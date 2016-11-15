@@ -1,8 +1,6 @@
-package org.dbpedia.extraction.sources
+package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.sources.WikiPage._
 import org.dbpedia.extraction.util.StringUtils._
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
 
 /**
  * Represents a wiki page
@@ -31,7 +29,7 @@ class WikiPage(
   extends PageNode(title,id,revision,timestamp,contributorID,contributorName, redirect != null, false)
 {
   def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
-    this(title, redirect, parseLong(id), parseLong(revision), parseTimestamp(timestamp), parseLong(contributorID), contributorName, source, format)
+    this(title, redirect, WikiPage.parseLong(id), WikiPage.parseLong(revision), parseTimestamp(timestamp), WikiPage.parseLong(contributorID), contributorName, source, format)
 
   def this(title: WikiTitle, source : String) =
     this(title, null, -1, -1, -1, 0, "", source, "")

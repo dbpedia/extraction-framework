@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{Dataset, Quad}
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.wikiparser.WikiPage
 import org.dbpedia.extraction.wikiparser.impl.json.JsonWikiParser
 
 /**

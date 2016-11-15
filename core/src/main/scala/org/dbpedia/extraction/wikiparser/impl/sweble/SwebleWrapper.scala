@@ -31,7 +31,6 @@ import org.sweble.wikitext.parser.nodes.WtLinkTarget.LinkTargetType
 
 
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.{UriUtils, WikiUtil, Language}
 
 

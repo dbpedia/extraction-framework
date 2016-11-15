@@ -1,11 +1,12 @@
-package org.dbpedia.extraction.destinations
+package org.dbpedia.extraction.transform
 
 import java.net.URI
 
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.ontology.{OntologyProperty,OntologyType}
+import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyType}
+import org.dbpedia.extraction.transform.Quad._
 import org.dbpedia.extraction.util.Language
-import Quad._
 
 /**
  * Represents a statement.

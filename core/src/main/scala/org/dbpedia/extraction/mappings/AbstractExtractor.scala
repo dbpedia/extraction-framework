@@ -4,9 +4,10 @@ import java.io.{InputStream, OutputStreamWriter}
 import java.net.URL
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
+import org.dbpedia.extraction.annotations.ExtractorAnnotation
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.util.{Config, Language}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
@@ -33,6 +34,7 @@ import scala.xml.{NodeSeq, XML}
  * We leave the old code commented since we might re-use it soon
  */
 
+@ExtractorAnnotation("abstract extractor")
 class AbstractExtractor(
   context : {
     def ontology : Ontology

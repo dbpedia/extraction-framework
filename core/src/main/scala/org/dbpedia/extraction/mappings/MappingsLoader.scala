@@ -10,7 +10,6 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 import java.lang.IllegalArgumentException
 import org.dbpedia.extraction.util.Language
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Loads the mappings from the configuration and builds a MappingExtractor instance.

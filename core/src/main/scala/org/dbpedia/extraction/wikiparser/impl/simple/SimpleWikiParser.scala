@@ -3,7 +3,6 @@ package org.dbpedia.extraction.wikiparser.impl.simple
 import org.dbpedia.extraction.util.{UriUtils, Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
-import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.RichString.wrapString
 import java.net.{URI, URISyntaxException}
 import java.util.logging.{Level, Logger}

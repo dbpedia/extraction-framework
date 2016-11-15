@@ -2,6 +2,8 @@ package org.dbpedia.extraction.scripts
 
 import java.util.Arrays.{copyOf,sort}
 import java.io.{File,Writer}
+import org.dbpedia.extraction.transform.Quad
+
 import scala.Console.err
 import scala.collection.Map
 import scala.collection.mutable.{HashMap,ArrayBuffer}
@@ -12,7 +14,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.RichReader.wrapReader
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.destinations.{Destination,Quad,WriterDestination}
+import org.dbpedia.extraction.destinations.{Destination,WriterDestination}
 import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import org.dbpedia.extraction.destinations.formatters.Formatter

@@ -1,8 +1,8 @@
 package org.dbpedia.extraction.destinations
 
-import org.apache.commons.lang3.concurrent.ConcurrentException
+import org.dbpedia.extraction.transform.Quad
 
-import scala.collection.{mutable, Map}
+import scala.collection.{Map, mutable}
 
 /**
  * A destination which groups quads by dataset and writes them to different destinations.
@@ -20,7 +20,7 @@ extends Destination
     for(dest <- destinations)
     {
       DatasetDestination.openedDatasets.get(dest._1) match{
-        case Some(x) => throw new ConcurrentException("The following Dataset is already in progress: " + dest._1, null)
+        case Some(x) => throw new Exception("The following Dataset is already in progress: " + dest._1)
         case None => {
           dest._2.open()
           DatasetDestination.openedDatasets(dest._1) = true

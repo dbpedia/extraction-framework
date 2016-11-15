@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.dataparser
 
-import _root_.org.dbpedia.extraction.sources.WikiPage
 import _root_.org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._
@@ -14,26 +13,26 @@ class LinkParserTest extends FlatSpec with Matchers
 {
   /**
    *  {{ URL }}	{{URL|example.com|optional display text}}
-        {{ URL | }}	{{URL|example.com|optional display text}}
-        {{ URL | EXAMPLE.com }}
-        {{ URL | example.com }}
-        {{ URL | www.example.com }}	www.example.com
-        {{ URL | http://www.example.com }}	www.example.com
-        {{ URL | https://www.example.com }}	www.example.com
-        {{ URL | ftp://www.example.com }}	www.example.com
-        {{ URL | ftp://ftp.example.com }}	ftp.example.com
-        {{ URL | http://www.example.com/ }}	www.example.com
-        {{ URL | http://www.example.com/path }}	www.example.com/path
-        {{ URL | irc://irc.example.com/channel }}	irc.example.com/channel
-        {{ URL | www.example.com/foo }}	www.example.com/foo
-        {{ URL | http://www.example.com/path/ }}	www.example.com/path/
-        {{ URL | www.example.com/foo/ }}	www.example.com/foo/
-        {{ URL | 1=http://www.example.com/path?section=17 }}	www.example.com/path?section=17
-        {{ URL | 1=www.example.com/foo?page=42 }}	www.example.com/foo?page=42
-        {{ URL | http://www.example.com/foo | link }}	link (Deprecated)
-        {{ URL | www.example.com/foo | link }}	link (Deprecated)
-        {{ URL | http://www.example.com/foo/ | link }}	link (Deprecated)
-        {{ URL | www.example.com/foo/ | link }}	link (Deprecated)
+        *{{ URL | }}	{{URL|example.com|optional display text}}
+        *{{ URL | EXAMPLE.com }}
+        *{{ URL | example.com }}
+        *{{ URL | www.example.com }}	www.example.com
+        *{{ URL | http://www.example.com }}	www.example.com
+        *{{ URL | https://www.example.com }}	www.example.com
+        *{{ URL | ftp://www.example.com }}	www.example.com
+        *{{ URL | ftp://ftp.example.com }}	ftp.example.com
+        *{{ URL | http://www.example.com/ }}	www.example.com
+        *{{ URL | http://www.example.com/path }}	www.example.com/path
+        *{{ URL | irc://irc.example.com/channel }}	irc.example.com/channel
+        *{{ URL | www.example.com/foo }}	www.example.com/foo
+        *{{ URL | http://www.example.com/path/ }}	www.example.com/path/
+        *{{ URL | www.example.com/foo/ }}	www.example.com/foo/
+        *{{ URL | 1=http://www.example.com/path?section=17 }}	www.example.com/path?section=17
+        *{{ URL | 1=www.example.com/foo?page=42 }}	www.example.com/foo?page=42
+        *{{ URL | http://www.example.com/foo | link }}	link (Deprecated)
+        *{{ URL | www.example.com/foo | link }}	link (Deprecated)
+        *{{ URL | http://www.example.com/foo/ | link }}	link (Deprecated)
+        *{{ URL | www.example.com/foo/ | link }}	link (Deprecated)
    */
   "LinkParser" should "http://www.example.com/" in {
     parse("{{URL|http://www.example.com/}}") should equal (Some(build("http://www.example.com/")))

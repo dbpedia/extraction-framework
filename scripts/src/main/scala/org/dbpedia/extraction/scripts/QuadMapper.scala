@@ -2,9 +2,10 @@ package org.dbpedia.extraction.scripts
 
 import java.lang.StringBuilder
 
-import org.dbpedia.extraction.destinations.{Destination, Quad, WriterDestination}
+import org.dbpedia.extraction.destinations.{Destination, WriterDestination}
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import org.dbpedia.extraction.util._

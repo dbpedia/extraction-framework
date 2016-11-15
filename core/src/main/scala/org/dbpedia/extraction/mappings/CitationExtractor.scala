@@ -4,11 +4,11 @@ import java.net.URI
 
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._

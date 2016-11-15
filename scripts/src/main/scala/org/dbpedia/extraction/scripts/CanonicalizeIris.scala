@@ -3,9 +3,10 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, Formatter}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, DestinationUtils}
+import org.dbpedia.extraction.destinations.DestinationUtils
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
@@ -39,6 +40,7 @@ object CanonicalizeIris {
 
   /**
     * produces a copy of the Formatter map (necessary to guarantee concurrent processing)
+ *
     * @return
     */
   def formats = frmts.map(x => x._1 -> (x._2 match {
@@ -56,6 +58,7 @@ object CanonicalizeIris {
 
   /**
     * get finder specific to a language directory
+ *
     * @param lang
     * @return
     */
@@ -195,7 +198,7 @@ object CanonicalizeIris {
     //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get), DBpediaDatasets.getDataset(input, extension))
+        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get), DBpediaDatasets.getDataset(input+ (if(extension != null) extension else "")))
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
   }

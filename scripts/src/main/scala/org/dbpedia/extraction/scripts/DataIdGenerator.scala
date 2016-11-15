@@ -12,7 +12,7 @@ import com.hp.hpl.jena.rdf.model._
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.commons.lang3.SystemUtils
 import org.apache.jena.atlas.json.{JSON, JsonObject, JsonValue}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.{Language, OpenRdfUtils}
 import org.openrdf.rio.RDFFormat
 
@@ -20,8 +20,6 @@ import scala.Console._
 import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.language.postfixOps
-import scala.reflect.runtime.currentMirror
-import scala.reflect.runtime.universe._
 import scala.sys.process._
 import scala.util.{Failure, Success}
 
@@ -471,7 +469,7 @@ object DataIdGenerator {
   def getDBpediaDataset(fileName: String, lang: Language, dbpv: String): Option[Dataset] ={
 
     def internalGet(name:String, ext: String): Option[Dataset] = scala.util.Try {
-      DBpediaDatasets.getDataset(name, ext)
+      DBpediaDatasets.getDataset(name + (if(ext != null) ext else ""))
     } match{
       case Success(s) => Some(s)
       case Failure(e) => None
@@ -803,23 +801,6 @@ object DataIdGenerator {
         }
       case None =>
     }
-
-    //get all available DBpedia Datsets with scala.reflect
-    val r = currentMirror.reflect(DBpediaDatasets)
-    val datasetDescriptionsOriginal = r.symbol.typeSignature.members.toStream
-      .collect { case s: TermSymbol if !s.isMethod => r.reflectField(s) }
-      .map(t => t.get match {
-        case y: Dataset => Option(y)
-        case _ => None
-      }).toList.collect{case Some(d) if d.isInstanceOf[Dataset] => d}
-
-/*
-    datasetDescriptions = datasetDescriptionsOriginal ++
-      //.filter(_.encoded.endsWith("unredirected")).map(d => new Dataset(d.name, d.description.getOrElse("") + " This dataset has Wikipedia redirects resolved.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace("_unredirected", ""))) ++
-      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-en-uris", d.description.getOrElse("") + " Normalized dataset matching English DBpedia resources.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-en-uris"))) ++
-      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-wkd-uris", d.description.getOrElse("") + " Normalized dataset matching Wikidata DBpedia resources.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-wkd-uris"))) ++
-      datasetDescriptionsOriginal.map(d => new Dataset(d.name + "-en-uris-unredirected", d.description.getOrElse("") + " Normalized resources matching English DBpedia. This dataset has Wikipedia redirects resolved.", d.language.orNull, d.version.getOrElse(null), d.encoded.replace(d.encoded, d.encoded+"-en-uris-unredirected")))
-*/
 
     //model for all type statements will be merged with submodels before write...
     staticModel = ModelFactory.createDefaultModel()

@@ -1,7 +1,8 @@
-package org.dbpedia.extraction.destinations
+package org.dbpedia.extraction.transform
 
-import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.util.Language
 
 /**

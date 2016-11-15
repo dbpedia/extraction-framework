@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.destinations
 
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.scalatest.FunSuite
 
 /**

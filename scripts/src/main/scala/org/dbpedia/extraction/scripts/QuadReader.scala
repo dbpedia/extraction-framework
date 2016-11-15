@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
-
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.mappings.{RecordEntry, ExtractionRecorder}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import scala.Console.err

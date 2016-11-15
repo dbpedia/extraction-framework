@@ -2,11 +2,13 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty, Ontology}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
+import org.dbpedia.extraction.transform.Quad
 
 import scala.Console._
 import scala.collection._

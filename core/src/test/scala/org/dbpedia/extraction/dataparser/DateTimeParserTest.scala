@@ -5,7 +5,7 @@ import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
+import org.dbpedia.extraction.sources.MemorySource
 import org.dbpedia.extraction.util.Language
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner

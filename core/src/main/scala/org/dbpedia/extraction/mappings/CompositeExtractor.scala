@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.Dataset
-import org.dbpedia.extraction.destinations.Quad
+import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.transform.Quad
 
 /**
  * TODO: generic type may not be optimal.

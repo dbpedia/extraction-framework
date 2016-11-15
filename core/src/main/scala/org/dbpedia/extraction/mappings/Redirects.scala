@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.{Level, Logger}
-import org.dbpedia.extraction.sources.{WikiPage, Source}
+import org.dbpedia.extraction.sources.Source
 import collection.mutable.{HashSet, HashMap}
 import java.io._
 import util.control.ControlThrowable

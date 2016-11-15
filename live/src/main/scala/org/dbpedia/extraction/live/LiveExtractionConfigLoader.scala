@@ -8,7 +8,7 @@ import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
-import org.dbpedia.extraction.sources.{WikiPage, WikiSource, Source, XMLSource}
+import org.dbpedia.extraction.sources.{WikiSource, Source, XMLSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy

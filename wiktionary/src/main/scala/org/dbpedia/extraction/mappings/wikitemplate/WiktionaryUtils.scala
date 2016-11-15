@@ -4,7 +4,6 @@ import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
 import org.dbpedia.extraction.mappings.wikitemplate.MyLinkNode._
 import org.dbpedia.extraction.mappings.wikitemplate.MyNode._
 import org.dbpedia.extraction.mappings.wikitemplate.MyNodeList._
-import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.util.{Language, UriUtils}
 import org.dbpedia.extraction.wikiparser._
 

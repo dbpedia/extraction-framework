@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.sources
 
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.wikiparser.{WikiTitle,Namespace}
+import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle, Namespace}
 import java.net.URL
 import org.dbpedia.extraction.util.WikiApi
 

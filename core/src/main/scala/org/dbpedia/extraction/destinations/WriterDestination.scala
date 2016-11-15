@@ -2,6 +2,7 @@ package org.dbpedia.extraction.destinations
 
 import java.io.Writer
 import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.transform.Quad
 
 import scala.collection.mutable.{ListBuffer, ArrayBuffer}
 

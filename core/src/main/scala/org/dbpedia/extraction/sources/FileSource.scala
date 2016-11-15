@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.sources
 
-import org.dbpedia.extraction.wikiparser.WikiTitle
+import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle}
 import java.util.logging.{Logger, Level}
 import java.io.{FileNotFoundException, File}
 import util.control.ControlThrowable

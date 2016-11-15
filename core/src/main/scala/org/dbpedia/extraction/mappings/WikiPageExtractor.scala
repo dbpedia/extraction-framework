@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.wikiparser.WikiPage
 
 /**
  * Extractors are mappings that extract data from a WikiPage.

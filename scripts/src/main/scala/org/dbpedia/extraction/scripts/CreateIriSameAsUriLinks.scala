@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
 import scala.collection.mutable.ArrayBuffer
-import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.Finder
 import java.net.URI

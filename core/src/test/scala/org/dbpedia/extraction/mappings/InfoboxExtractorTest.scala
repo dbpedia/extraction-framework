@@ -1,12 +1,11 @@
 package org.dbpedia.extraction.mappings
 
 import java.io.{File, FilenameFilter}
-
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.junit.Test

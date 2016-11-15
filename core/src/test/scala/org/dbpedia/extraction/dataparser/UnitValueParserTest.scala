@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.{WikiPage,MemorySource}
+import org.dbpedia.extraction.sources.MemorySource
 import org.dbpedia.extraction.util.Language
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers

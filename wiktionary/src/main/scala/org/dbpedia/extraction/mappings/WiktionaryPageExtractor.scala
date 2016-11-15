@@ -2,8 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URL
 
-import org.dbpedia.extraction.destinations.{Dataset, Quad}
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.mappings.wikitemplate._
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.openrdf.model.impl.ValueFactoryImpl

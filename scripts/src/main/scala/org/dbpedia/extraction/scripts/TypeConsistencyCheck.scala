@@ -3,12 +3,14 @@ package org.dbpedia.extraction.scripts
 import java.io.{File, Writer}
 import java.net.URL
 
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.{ConfigUtils, Finder, IOUtils, Language}
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -148,7 +150,8 @@ object TypeConsistencyCheck {
 
     /**
      * Chacks a Quad for range violations and returns the new dataset where it should be written depending on the state
-     * @param quad
+      *
+      * @param quad
      * @return
      */
     def checkQuadRange(quad: Quad, resourceTypes: scala.collection.mutable.Map[String, OntologyClass], ontology: Ontology): Dataset =
@@ -191,6 +194,7 @@ object TypeConsistencyCheck {
 
     /**
       * Chacks a Quad for domain violations and returns the new dataset where it should be written depending on the state
+      *
       * @param quad
       * @return
       */
@@ -230,7 +234,8 @@ object TypeConsistencyCheck {
 
     /**
      * checks if two classes ar disjoint by testing any base-classes recursively for disjointnes
-     * @param objClass      the type of an object
+      *
+      * @param objClass      the type of an object
      * @param rangeClass    the range of the pertaining property
      * @param clear         new disjoint tests have to clear the relatedClasses cache, keeps already tested combinations of this cycle
      * @return
