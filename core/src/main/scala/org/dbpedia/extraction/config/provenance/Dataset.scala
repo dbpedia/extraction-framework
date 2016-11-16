@@ -49,7 +49,7 @@ class Dataset private[provenance](
   val deprecatedSince = testVersionString(depr)
 
   private def testVersionString(str: String): Try[String] =Try {
-    Option(depr) match {
+    Option(str) match {
       case Some(v) => "2\\d{3}-\\d{2}".r.findFirstMatchIn(v.trim) match {
         case Some(y) => if (y.end == 7) v.trim else throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
         case None => throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
@@ -58,8 +58,15 @@ class Dataset private[provenance](
     }
   }
 
-  //TODO
   lazy val canonicalVersion = if(isCanonical) this else copyDataset(lang = null, versionEntry = null)
+
+  def getLanguageVersion(language: Language, version: String = null): Dataset ={
+    testVersionString(version) match
+    {
+      case Success(v) => this.copyDataset(lang = language, versionEntry = v)
+      case Failure(e) => this.copyDataset(lang = language)
+    }
+  }
 
   def languageUri = this.language match{
     case Some(lang) => canonicalUri + "?lang=" + lang.wikiCode

@@ -475,7 +475,7 @@ object DataIdGenerator {
       case Failure(e) => None
     }
     internalGet(fileName, null) match{
-      case Some(d) => return Some(DBpediaDatasets.getDataset(d, lang, dbpv))
+      case Some(d) => return Some(d.getLanguageVersion(lang, dbpv))
       case None =>
     }
     val splits = fileName.split("_")
@@ -484,7 +484,7 @@ object DataIdGenerator {
       val name = splits.slice(0, i).foldLeft("")(_ + "_" + _).substring(1)
       val ext = splits.slice(i, splits.length).foldLeft("")(_ + "_" + _)
       internalGet(name, ext) match{
-        case Some(d) => return Some(DBpediaDatasets.getDataset(d, lang, dbpv))
+        case Some(d) => return Some(d.getLanguageVersion(lang, dbpv))
         case None =>
       }
     }
