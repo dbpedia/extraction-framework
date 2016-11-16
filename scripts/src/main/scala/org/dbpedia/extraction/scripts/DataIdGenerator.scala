@@ -469,7 +469,7 @@ object DataIdGenerator {
   def getDBpediaDataset(fileName: String, lang: Language, dbpv: String): Option[Dataset] ={
 
     def internalGet(name:String, ext: String): Option[Dataset] = scala.util.Try {
-      DBpediaDatasets.getDataset(name + (if(ext != null) ext else ""))
+      DBpediaDatasets.getUnofficialDataset(name + (if(ext != null) ext else ""))
     } match{
       case Success(s) => Some(s)
       case Failure(e) => None

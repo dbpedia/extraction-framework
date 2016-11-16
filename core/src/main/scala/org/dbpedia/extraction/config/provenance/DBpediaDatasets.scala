@@ -4,6 +4,7 @@ import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.mutable
+import scala.util.{Failure, Success, Try}
 
 /**
  * Defines the datasets which are extracted by DBpedia.
@@ -274,4 +275,9 @@ object DBpediaDatasets
         }
         case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
     }
+
+  def getUnofficialDataset(name: String, language: Language = null, version: String = null) = Try{getDataset(name, language, version)} match{
+    case Success(s) => s
+    case Failure(e) => new Dataset(name, "Unofficial DBpedia Dataset", language, version, null, Seq(), null, Seq(),null, DatasetTrait.ValueSet.empty )
+  }
 }
