@@ -18,11 +18,11 @@ import scala.language.reflectiveCalls
  * <http://wikidata.dbpedia.org/resource/Q18>  owl:sameAs <http://co.dbpedia.org/resource/London>
  */
 class WikidataSameAsExtractor(
-                               context: {
-                                 def ontology: Ontology
-                                 def language: Language
-                               }
-                               )
+       context: {
+         def ontology: Ontology
+         def language: Language
+       }
+       )
   extends JsonNodeExtractor {
   // Here we define all the ontology predicates we will use
   private val sameAsProperty = context.ontology.properties("owl:sameAs")

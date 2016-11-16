@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.destinations
 
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.scalatest.FunSuite
 
 /**
@@ -8,10 +8,10 @@ import org.scalatest.FunSuite
   */
 class DatasetTest extends FunSuite {
 
-  //val dataset = new Dataset("Long-Abstracts-temporary-wikidata-normalized", "some test description here", Language.English, null, null, DBpediaDatasets.LongAbstracts, Seq(DBpediaDatasets.PagesArticles))
-val dataset = new Dataset("wiktionary.dbpedia.org")
+val dataset = DBpediaDatasets.TestDataset
   test("testVersionUri") {
     println(dataset.versionUri)
+    println(dataset.canonicalVersion.versionUri)
   }
 
   test("testEncodedWithLanguage") {

@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.{IOException}
+import java.io.IOException
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.config.mappings.wikidata._
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.Quad
@@ -15,10 +17,7 @@ import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import scala.language.reflectiveCalls
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import scala.language.postfixOps
+import scala.language.{postfixOps, reflectiveCalls}
 
 /**
  * Created by ali on 10/26/14.
@@ -58,8 +57,8 @@ class WikidataR2RExtractor(
   private val rdfObject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#object"
 
   // this is where we will store the output
-  val WikidataR2RErrorDataset = new Dataset("wikidata-r2r-mapping-errors")
-  val WikidataDuplicateIRIDataset = new Dataset("wikidata-duplicate-iri-split")
+  val WikidataR2RErrorDataset = DBpediaDatasets.WikidataR2R_mappingerrors
+  val WikidataDuplicateIRIDataset = DBpediaDatasets.WikidataDublicateIriSplit
   override val datasets = Set(DBpediaDatasets.WikidataR2R_literals, DBpediaDatasets.WikidataR2R_objects, WikidataR2RErrorDataset,WikidataDuplicateIRIDataset,
                               DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier, DBpediaDatasets.GeoCoordinates,
                               DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,

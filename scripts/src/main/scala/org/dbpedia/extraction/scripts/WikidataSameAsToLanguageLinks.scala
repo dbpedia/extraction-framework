@@ -14,6 +14,7 @@ import org.dbpedia.extraction.util.IOUtils._
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -69,6 +70,10 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
   private val relevantLanguages: Set[String] = languages.map(_.wikiCode).toSet
   private val destinations = setupDestinations()
 
+
+  // all entities assigned to the current wikidata entity by means of sameAs
+  private var currentSameEntities = new mutable.HashMap[String, EntityContext]()
+
   private val workers: Workers[(String, String, Map[String, EntityContext])] = setupWorkers()
 
   /**
@@ -84,8 +89,6 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
 
     // stores the currently processed wikidata entity to recognize when the current block is fully read
     var currentWikidataEntity: Option[String] = None
-    // all entities assigned to the current wikidata entity by means of sameAs
-    var currentSameEntities: Map[String, EntityContext] = Map()
     new QuadMapper().readQuads(Language.Wikidata, wikiDataFile) { quad =>
       val currentSubject = quad.subject
 
@@ -94,77 +97,50 @@ class WikidataSameAsToLanguageLinks(val baseDir: File, val wikiDataFile: FileLik
           // we have not yet read any data, start from scratch
           currentWikidataEntity = Some(currentSubject)
 
-          val matcher: Matcher = DBPEDIA_URI_PATTERN.matcher(quad.value)
-          if (!matcher.matches()) {
-            error("Non-DBpedia URI found in sameAs statement of Wikidata sameAs links!")
-          }
-          else {
-            val lang = matcher.group(1)
-            if (lang == null) {
-              // no language part in URI ==> store English entity
-              currentSameEntities += "en" -> new EntityContext(quad.value, quad.context)
-            }
-            else {
-              // non-English URI ==> store entity and context in list
-              if (relevantLanguages.contains(lang.replace(".", ""))) {
-                currentSameEntities += lang.replace(".", "") -> new EntityContext(quad.value, quad.context)
-              }
-            }
-          }
+          matchAndSore(quad)
         case Some(subj) if subj == currentSubject =>
           // still at the current subject, collect object
-          val matcher: Matcher = DBPEDIA_URI_PATTERN.matcher(quad.value)
-          if (!matcher.matches()) {
-            error("Non-DBpedia URI found in sameAs statement of Wikidata sameAs links!")
-          }
-          else {
-            val lang = matcher.group(1)
-            if (lang == null) {
-              // URI starts with http://dbpedia.org..
-              currentSameEntities += "en" -> new EntityContext(quad.value, quad.context)
-            }
-            else {
-              // non-English URI ==> store entity and context in list
-              if (relevantLanguages.contains(lang.replace(".", ""))) {
-                currentSameEntities += lang.replace(".", "") -> new EntityContext(quad.value, quad.context)
-              }
-            }
-          }
+          matchAndSore(quad)
         case Some(subj) =>
           // we are at the next subject, write out already collected links
-          writeQuads(subj, currentSameEntities)
+          writeQuads(subj, currentSameEntities.toMap)
 
           // now we can set the variables wrt the current line
           currentWikidataEntity = Some(currentSubject)
-          currentSameEntities = Map()
+          currentSameEntities = new mutable.HashMap[String, EntityContext]()
 
-          val matcher: Matcher = DBPEDIA_URI_PATTERN.matcher(quad.value)
-          if (!matcher.matches()) {
-            error("Non-DBpedia URI found in sameAs statement of Wikidata sameAs links!")
-          }
-          else {
-            val lang = matcher.group(1)
-            if (lang == null) {
-              // URI starts with http://dbpedia.org..
-              currentSameEntities += "en" -> new EntityContext(quad.value, quad.context)
-            }
-            else {
-              // non-English URI ==> store entity and context in list
-              if (relevantLanguages.contains(lang.replace(".", ""))) {
-                currentSameEntities += lang.replace(".", "") -> new EntityContext(quad.value, quad.context)
-              }
-            }
-          }
+          matchAndSore(quad)
+
       }
     }
 
     if (currentWikidataEntity.isDefined) {
-      writeQuads(currentWikidataEntity.get, currentSameEntities)
+      writeQuads(currentWikidataEntity.get, currentSameEntities.toMap)
     }
     // wait for all workers to finish writing
     workers.stop()
     // close all destinations
     destinations.foreach(_._2.close())
+  }
+
+  def matchAndSore(quad: Quad): Unit = {
+    val matcher: Matcher = DBPEDIA_URI_PATTERN.matcher(quad.value)
+    if (!matcher.matches()) {
+      error("Non-DBpedia URI found in sameAs statement of Wikidata sameAs links!")
+    }
+    else {
+      val lang = matcher.group(1)
+      if (lang == null) {
+        // URI starts with http://dbpedia.org..
+        currentSameEntities("en") = new EntityContext(quad.value, quad.context)
+      }
+      else {
+        // non-English URI ==> store entity and context in list
+        if (relevantLanguages.contains(lang.replace(".", ""))) {
+          currentSameEntities(lang.replace(".", "")) = new EntityContext(quad.value, quad.context)
+        }
+      }
+    }
   }
 
   /**

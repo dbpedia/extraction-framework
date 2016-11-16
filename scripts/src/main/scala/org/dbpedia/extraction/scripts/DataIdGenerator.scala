@@ -475,7 +475,7 @@ object DataIdGenerator {
       case Failure(e) => None
     }
     internalGet(fileName, null) match{
-      case Some(d) => return Some(new Dataset(d.name, d.description.orNull, lang, dbpv, fileName, d.origin.orNull, d.sources))
+      case Some(d) => return Some(DBpediaDatasets.getDataset(d, lang, dbpv))
       case None =>
     }
     val splits = fileName.split("_")
@@ -484,20 +484,7 @@ object DataIdGenerator {
       val name = splits.slice(0, i).foldLeft("")(_ + "_" + _).substring(1)
       val ext = splits.slice(i, splits.length).foldLeft("")(_ + "_" + _)
       internalGet(name, ext) match{
-        case Some(d) => {
-          val zw = internalGet(name, null).get.description match{
-            case Some(desc) => {
-              desc + (ext match {
-                case "_en_uris" => " Normalized dataset matching English DBpedia resources."
-                case "_wkd_uris" => " Normalized dataset matching Wikidata DBpedia resources."
-                case "_unredirected" => " This datasets resources were not resolved along Wikipedia redirects."
-                case _ => " A sub dataset."
-              })
-            }
-            case None => "An undescribed dataset."
-          }
-          return Some(new Dataset(d.name, zw, lang, dbpv, fileName, d.origin.orNull, d.sources))
-        }
+        case Some(d) => return Some(DBpediaDatasets.getDataset(d, lang, dbpv))
         case None =>
       }
     }
@@ -711,9 +698,9 @@ object DataIdGenerator {
     })
     lbpMap = lbp match {
       case Some(ld) => ld.getLines.map(_.split(";")).map(x => if(x.length > 4)
-          x(0) -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3), "md5" -> x(4))
+          x.head -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3), "md5" -> x(4))
       else if (x.length == 4)
-          x(0) -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))
+          x.head -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))
       else
         throw new InvalidParameterException("Lines-bytes-packed.csv file is not in an expected format!")
       ).toMap

@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, Language, InfoboxMappingsUtils}
@@ -26,9 +26,9 @@ class InfoboxMappingsExtractor(context: {
 {
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesWikidataProperty")
 
-  val hintDatasetInst = new Dataset("template_mapping_hints_instance")
-  val hintDataset = new Dataset("template_mapping_hints")
-  val mapDataset = new Dataset("template_mappings")
+  val hintDatasetInst = DBpediaDatasets.TemplateMappingsHintsInstance
+  val hintDataset = DBpediaDatasets.TemplateMappingsHints
+  val mapDataset = DBpediaDatasets.TemplateMappings
   override val datasets = Set(hintDataset, mapDataset)
 
   override def extract(page : PageNode, subjectUri : String): Seq[Quad] = {

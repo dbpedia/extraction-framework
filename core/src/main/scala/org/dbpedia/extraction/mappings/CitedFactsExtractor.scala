@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
@@ -25,7 +25,7 @@ extends WikiPageExtractor {
   private val citationExtractor = new CitationExtractor(context)
   private val language = context.language
 
-  val dataset = new Dataset("citedFacts")
+  val dataset = DBpediaDatasets.CitatedFacts
 
   override val datasets = Set(dataset)
 

@@ -2,7 +2,7 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URL
 
-import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.mappings.wikitemplate._
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
@@ -530,7 +530,7 @@ object WiktionaryPageExtractor {
   /**
   * the name of the dataset
   */
-  val datasetURI : Dataset = new Dataset("wiktionary.dbpedia.org")
+  val datasetURI : Dataset = DBpediaDatasets.WiktionaryDataset
   
   /**
   * the graph of all produced quads
