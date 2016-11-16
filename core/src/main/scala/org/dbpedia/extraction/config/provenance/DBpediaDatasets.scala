@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.config.provenance
 
+import org.dbpedia.extraction.ontology.DBpediaNamespace
 import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.Namespace
 
@@ -55,6 +56,10 @@ object DBpediaDatasets
                 Option(properties.get("traits")) match {
                   case Some(n) => DatasetTrait.ValueSet(n.asText().split(",").map(x => DatasetTrait.withName(x.trim)):_*)
                   case None => DatasetTrait.ValueSet.empty
+                },
+                Option(properties.get("keywords")) match {
+                  case Some(n) => n.asText().split(",").map(_.trim)
+                  case None => Seq()
                 }
             )
         }
@@ -261,20 +266,26 @@ object DBpediaDatasets
   def getDataset(dataset: Dataset, language: Language, version: String): Dataset = getDataset(dataset.encoded, language, version)
 
   def getDataset(name: String, language: Language = null, version: String = null) =
-      datasets.get(name.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_")) match{
-        case Some(d) => {
-          Option(language) match{
-            case Some(l) => {
-              Option(version) match{
-                case Some(v) => d.copyDataset(lang = l, versionEntry = v)
-                case None => d.copyDataset(lang = l)
-              }
+  {
+    val n = if(name.startsWith(DBpediaNamespace.DATASET.toString))
+      name.substring(DBpediaNamespace.DATASET.toString.length, if(name.indexOf("?") >= 0) name.indexOf("?") else name.length)
+    else
+      name.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_")
+    datasets.get(n) match {
+      case Some(d) => {
+        Option(language) match {
+          case Some(l) => {
+            Option(version) match {
+              case Some(v) => d.copyDataset(lang = l, versionEntry = v)
+              case None => d.copyDataset(lang = l)
             }
-            case None => d
           }
+          case None => d
         }
-        case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
+      }
+      case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
     }
+  }
 
   def getUnofficialDataset(name: String, language: Language = null, version: String = null) = Try{getDataset(name, language, version)} match{
     case Success(s) => s

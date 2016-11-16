@@ -4,11 +4,13 @@ import java.lang.StringBuilder
 
 import org.dbpedia.extraction.util.StringUtils.{escape, replacements}
 
-class DBpediaNamespace(namespace: String) extends RdfNamespace(null, namespace, true) {
+class DBpediaNamespace private (namespace: String) extends RdfNamespace(null, namespace, true) {
   
   override protected def append(sb: StringBuilder, suffix: String): Unit = {
     escape(sb, suffix, DBpediaNamespace.iriEscapes)
   }
+
+  override def toString: String = namespace
 }
 
 object DBpediaNamespace {

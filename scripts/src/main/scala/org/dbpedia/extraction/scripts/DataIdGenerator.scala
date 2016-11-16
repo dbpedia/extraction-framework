@@ -11,9 +11,10 @@ import java.util.logging.{Level, Logger}
 import com.hp.hpl.jena.rdf.model._
 import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.commons.lang3.SystemUtils
+import org.apache.http.client.utils.URLEncodedUtils
 import org.apache.jena.atlas.json.{JSON, JsonObject, JsonValue}
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.util.{Language, OpenRdfUtils}
+import org.dbpedia.extraction.util.{ConfigUtils, Language, OpenRdfUtils}
 import org.openrdf.rio.RDFFormat
 
 import scala.Console._
@@ -40,9 +41,9 @@ object DataIdGenerator {
   private var catalogModel: Model = null
   private var defaultAgentModel: Model = null
   private var staticModel: Model = null
-  private var latestDataId: List[Resource] = null
-  private var previousDataId: List[Resource] = null
-  private var nextDataId: List[Resource] = null
+  private var latestDataId: Option[(List[Resource], String)] = None
+  private var previousDataId: Option[(List[Resource], String)] = None
+  private var nextDataId: Option[(List[Resource], String)] = None
   private var versionStatement: Resource = null
   private var rightsStatement: Resource = null
   private var dataidStandard: Resource = null
@@ -140,18 +141,7 @@ object DataIdGenerator {
       currentDataid.add(currentDataIdUri, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DataId"))
 
       // add prev/next/latest statements
-      getOtherVersionUri(previousDataId, currentDataIdUri) match{
-        case Some(uri) =>currentDataid.add(currentDataIdUri, getProperty("dataid", "previousVersion"), uri)
-        case None =>
-      }
-      getOtherVersionUri(nextDataId, currentDataIdUri) match{
-        case Some(uri) =>currentDataid.add(currentDataIdUri, getProperty("dataid", "nextVersion"), uri)
-        case None =>
-      }
-      getOtherVersionUri(latestDataId, currentDataIdUri) match{
-        case Some(uri) => currentDataid.add(currentDataIdUri, getProperty("dataid", "latestVersion"), uri)
-        case None => currentDataid.add(currentDataIdUri, getProperty("dataid", "latestVersion"), currentDataIdUri)
-      }
+      addVersionPointers(currentDataid, currentDataIdUri)
 
       //statements
       versionStatement = addSimpleStatement("version", idVersion, idVersion)
@@ -512,18 +502,7 @@ object DataIdGenerator {
     model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
 
     // add prev/next/latest statements
-    getOtherVersionUri(previousDataId, datasetUri) match{
-      case Some(uri) =>model.add(datasetUri, getProperty("dataid", "previousVersion"), uri)
-      case None =>
-    }
-    getOtherVersionUri(nextDataId, datasetUri) match{
-      case Some(uri) =>model.add(datasetUri, getProperty("dataid", "nextVersion"), uri)
-      case None =>
-    }
-    getOtherVersionUri(latestDataId, datasetUri) match{
-      case Some(uri) =>model.add(datasetUri, getProperty("dataid", "latestVersion"), uri)
-      case None => model.add(datasetUri, getProperty("dataid", "latestVersion"), datasetUri)
-    }
+    addVersionPointers(model, datasetUri)
 
     if (!toplevelSet) //not!
     {
@@ -550,7 +529,9 @@ object DataIdGenerator {
       model.add(datasetUri, getProperty("dc", "license"), model.createResource(license))
       model.add(datasetUri, getProperty("dc", "publisher"), associatedAgent)
       model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral("DBpedia", "en"))
-      model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral(datasetName, "en"))
+      model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral(dataset.name, "en"))
+      for(key <- dataset.keywords)
+        model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral(key, "en"))
       model.add(datasetUri, getProperty("dc", "conformsTo"), dataidStandard)
       model.add(datasetUri, getProperty("dc", "conformsTo"), dataidLdStandard)
       lbpMap.get("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile) match {
@@ -606,6 +587,9 @@ object DataIdGenerator {
         err.println("Could not find description for distribution: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
       }
     }
+
+    // add prev/next/latest statements
+    addVersionPointers(model, dist)
 
     if(currentFile.contains("pages_articles"))  //is Wikipedia file
     {
@@ -737,57 +721,9 @@ object DataIdGenerator {
     }
 
     //load pre/next/latest DataID catalogs, get all datasets and Dataids
-    Option(configMap.get("nextCatalog").getAsObject.get("path").getAsString.value()) match{
-      case Some(x) => try {
-        val m = ModelFactory.createDefaultModel()
-        m.read(x, "TURTLE")
-        getCreationDate(m) match{
-          case Some(created) if releaseDate.after(created) => throw new InvalidParameterException("The creation date of the next DataID catalog is after the current release Date.")
-          case None =>
-        }
-        nextDataId = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
-        nextDataId = nextDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map( y => y.asResource()).toList
-        nextDataId = nextDataId ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
-      }
-      catch {
-        case _: Throwable => logger.log(Level.INFO, "No next version catalog provided.")
-      }
-      case None =>
-    }
-    Option(configMap.get("previousCatalog").getAsObject.get("path").getAsString.value()) match{
-      case Some(x) => try {
-        val m = ModelFactory.createDefaultModel()
-        m.read(x, "TURTLE")
-        getCreationDate(m) match{
-          case Some(created) if releaseDate.before(created) => throw new InvalidParameterException("The creation date of the previous DataID catalog is before the current release Date.")
-          case None =>
-        }
-        previousDataId = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
-        previousDataId = previousDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map( y => y.asResource()).toList
-        previousDataId = previousDataId ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
-      }
-      catch {
-        case e : Throwable => logger.log(Level.INFO, "No previous version catalog provided: " + e.getMessage)
-      }
-      case None =>
-    }
-    Option(configMap.get("latestCatalog").getAsObject.get("path").getAsString.value()) match{
-      case Some(x) => try {
-        val m = ModelFactory.createDefaultModel()
-        m.read(x, "TURTLE")
-        getCreationDate(m) match{
-          case Some(created) if created.before(releaseDate) => throw new InvalidParameterException("The creation date of the previous DataID catalog is before the current release Date.")
-          case None =>
-        }
-        latestDataId = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map( y => y.asResource()).toList
-        latestDataId = latestDataId ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map( y => y.asResource()).toList
-        latestDataId = latestDataId ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
-        }
-        catch {
-          case _: Throwable =>
-        }
-      case None =>
-    }
+    previousDataId = getOtherDataId("previousCatalog")
+    nextDataId = getOtherDataId("nextCatalog")
+    latestDataId = getOtherDataId("latestCatalog")
 
     //model for all type statements will be merged with submodels before write...
     staticModel = ModelFactory.createDefaultModel()
@@ -823,6 +759,34 @@ object DataIdGenerator {
     printStream.close()
   }
 
+  def getOtherDataId(catalogTag: String): Option[(List[Resource], String)] = {
+    Option(configMap.get(catalogTag).getAsObject.get("path").getAsString.value()) match {
+      case Some(x) => try {
+        val m = ModelFactory.createDefaultModel()
+        m.read(x, "TURTLE")
+        getCreationDate(m) match {
+          case Some(created) if releaseDate.after(created) => throw new InvalidParameterException("The creation date of the next DataID catalog is after the current release Date.")
+          case None =>
+        }
+        var dataid = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map(y => y.asResource()).toList
+        dataid = dataid ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map(y => y.asResource()).toList
+        dataid = dataid ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
+
+        val version = ConfigUtils.parseVersionString(configMap.get(catalogTag).getAsObject.get("version").getAsString.value()) match {
+          case Success(s) => s
+          case Failure(e) => logger.log(Level.INFO, "Faulty version string provided for: " + catalogTag)
+            return None
+        }
+        Option((dataid, version))
+      }
+      catch {
+        case e : Throwable => logger.log(Level.INFO, "No next version catalog provided.")
+          None
+      }
+      case None => None
+    }
+  }
+
   def createCatalogInstance: Model = {
     val catalogAgent = addAgent(catalogModel, catalogInUse, configMap.get("creator").getAsObject)
     catalogModel.add(catalogInUse, RDF.`type`, catalogModel.createResource(catalogModel.getNsPrefixURI("dcat") + "Catalog"))
@@ -836,18 +800,8 @@ object DataIdGenerator {
     catalogModel.add(catalogInUse, getProperty("foaf", "homepage"), catalogModel.createResource(configMap.get("creator").getAsObject.get("homepage").getAsString.value()))
 
     // add prev/next/latest statements
-    getOtherVersionUri(previousDataId, catalogInUse) match{
-      case Some(uri) =>catalogModel.add(catalogInUse, getProperty("dataid", "previousVersion"), uri)
-      case None =>
-    }
-    getOtherVersionUri(nextDataId, catalogInUse) match{
-      case Some(uri) =>catalogModel.add(catalogInUse, getProperty("dataid", "nextVersion"), uri)
-      case None =>
-    }
-    getOtherVersionUri(latestDataId, catalogInUse) match{
-      case Some(uri) =>catalogModel.add(catalogInUse, getProperty("dataid", "latestVersion"), uri)
-      case None => catalogModel.add(catalogInUse, getProperty("dataid", "latestVersion"), catalogInUse)
-    }
+    addVersionPointers(catalogModel, catalogInUse)
+    catalogModel
   }
 
   def getProperty(prefix:String, propName: String): Property ={
@@ -884,15 +838,50 @@ object DataIdGenerator {
     )
   }
 
-  def getOtherVersionUri(targetModel: List[Resource], currentUri: Resource): Option[Resource] = {
+  def addVersionPointers(model: Model, currentUri: Resource): Unit = {
+    previousDataId match{
+      case Some(t) => getOtherVersionUri(t._1, t._2, currentUri) match{
+        case Some(uri) => model.add(currentUri, getProperty("dataid", "previousVersion"), uri)
+        case None =>
+      }
+      case None =>
+    }
+    nextDataId match{
+      case Some(t) => getOtherVersionUri(t._1, t._2, currentUri) match{
+        case Some(uri) => model.add(currentUri, getProperty("dataid", "nextVersion"), uri)
+        case None =>
+      }
+      case None =>
+    }
+    latestDataId match{
+      case Some(t) => getOtherVersionUri(t._1, t._2, currentUri) match{
+        case Some(uri) => model.add(currentUri, getProperty("dataid", "latestVersion"), uri)
+        case None => model.add(currentUri, getProperty("dataid", "latestVersion"), currentUri)
+      }
+      case None =>
+    }
+  }
+
+  def getOtherVersionUri(targetModel: List[Resource], version: String, currentUri: Resource): Option[Resource] = {
     var res: Resource = null
-    if (targetModel != null) {
-      val target = currentUri.getURI.substring(currentUri.getURI.lastIndexOf(dbpVersion) + 7)
-      for(uri <- targetModel)
+    if (targetModel != null && version != null) {
+      val uri = new URI(currentUri.getURI)
+      val params = URLEncodedUtils.parse(uri, "UTF-8").asScala
+      var target = uri.getScheme + "://" + uri.getHost + uri.getPath
+      for(i <- params.indices)
       {
+        if(i == 0)
+          target += "?"
+        else
+          target += "&"
+        if(params(i).getName == "dbpv")
+          target += params(i).getName + "=" + version
+        else
+          target += params(i).getName + "=" + params(i).getValue
+      }
+      for(uri <- targetModel)
         if(uri.getURI.endsWith(target))
           res = uri.asResource()
-      }
     }
     Option(res)
   }

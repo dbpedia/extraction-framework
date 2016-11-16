@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.destinations
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.util.Language
 import org.scalatest.FunSuite
 
 /**
@@ -8,7 +9,7 @@ import org.scalatest.FunSuite
   */
 class DatasetTest extends FunSuite {
 
-val dataset = DBpediaDatasets.TestDataset
+val dataset = DBpediaDatasets.TestDataset.getLanguageVersion(Language("de"), "2016-10")
   test("testVersionUri") {
     println(dataset.versionUri)
     println(dataset.canonicalVersion.versionUri)

@@ -4,7 +4,7 @@ import java.net.URI
 import java.util.MissingFormatArgumentException
 
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, RdfNamespace}
-import org.dbpedia.extraction.util.{Language, WikiUtil}
+import org.dbpedia.extraction.util.{ConfigUtils, Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser.WikiParserException
 
 import scala.util.{Failure, Success, Try}
@@ -22,7 +22,8 @@ class Dataset private[provenance](
    result: String = null,       //Uri of the Extractor/script which produced this dataset (see class DBpediaAnnotations)
    input: Seq[String] = Seq.empty[String],    //Uris of the Extractors/scripts which use this dataset as in input (see class DBpediaAnnotations)
    depr: String = null,         //last DBpedia version the dataset was in use (and now deprecated): e.g. 2015-10
-   traits: DatasetTrait.ValueSet = DatasetTrait.ValueSet.empty  //The set of traits the dataset has. According to these traits a dataset will be post-processed.
+   traits: DatasetTrait.ValueSet = DatasetTrait.ValueSet.empty,  //The set of traits the dataset has. According to these traits a dataset will be post-processed.
+   var keywords: Seq[String] = Seq.empty[String]  //also for documentation
    )
 {
 
@@ -44,24 +45,14 @@ class Dataset private[provenance](
 
   val canonicalUri = RdfNamespace.fullUri(DBpediaNamespace.DATASET, encoded)
 
-  val version = testVersionString(versionEntry)
+  val version = ConfigUtils.parseVersionString(versionEntry)
 
-  val deprecatedSince = testVersionString(depr)
-
-  private def testVersionString(str: String): Try[String] =Try {
-    Option(str) match {
-      case Some(v) => "2\\d{3}-\\d{2}".r.findFirstMatchIn(v.trim) match {
-        case Some(y) => if (y.end == 7) v.trim else throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
-        case None => throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
-      }
-      case None => throw new IllegalArgumentException("No version string was provided.")
-    }
-  }
+  val deprecatedSince = ConfigUtils.parseVersionString(depr)
 
   lazy val canonicalVersion = if(isCanonical) this else copyDataset(lang = null, versionEntry = null)
 
   def getLanguageVersion(language: Language, version: String = null): Dataset ={
-    testVersionString(version) match
+    ConfigUtils.parseVersionString(version) match
     {
       case Success(v) => this.copyDataset(lang = language, versionEntry = v)
       case Failure(e) => this.copyDataset(lang = language)
@@ -115,7 +106,8 @@ class Dataset private[provenance](
     result: String = this.result,       
     input: Seq[String] = this.input,   
     depr: String = this.depr,         
-    traits: DatasetTrait.ValueSet = this.traits
+    traits: DatasetTrait.ValueSet = this.traits,
+    keywords: Seq[String] = this.keywords
   ) : Dataset = new Dataset(
     naturalName,
     descr,
@@ -126,6 +118,7 @@ class Dataset private[provenance](
     result,
     input,
     depr,
-    traits
+    traits,
+    keywords
   )
 }

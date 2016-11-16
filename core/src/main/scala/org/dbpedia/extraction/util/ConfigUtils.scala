@@ -1,17 +1,19 @@
 package org.dbpedia.extraction.util
 
+import java.io.{File, FileInputStream, InputStream, InputStreamReader}
 import java.net.URL
 import java.util.Properties
-import java.io.{InputStream, File, FileInputStream, InputStreamReader}
+
 import com.fasterxml.jackson.core.JsonFactory
-import com.fasterxml.jackson.databind.{JsonNode, ObjectReader, ObjectMapper}
+import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+import org.dbpedia.extraction.util.RichString.wrapString
+import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.immutable.SortedSet
-import org.dbpedia.extraction.util.RichString.wrapString
+import scala.collection.mutable.HashSet
 import scala.io.Codec
-import org.dbpedia.extraction.wikiparser.Namespace
-import scala.collection.mutable.{HashSet,HashMap}
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+import scala.util.Try
 
 
 /**
@@ -155,5 +157,14 @@ object ConfigUtils {
     if (lo > hi) throw new NumberFormatException
     (lo, hi)
   }
-  
+
+  def parseVersionString(str: String): Try[String] =Try {
+    Option(str) match {
+      case Some(v) => "2\\d{3}-\\d{2}".r.findFirstMatchIn(v.trim) match {
+        case Some(y) => if (y.end == 7) v.trim else throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
+        case None => throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
+      }
+      case None => throw new IllegalArgumentException("No version string was provided.")
+    }
+  }
 }
