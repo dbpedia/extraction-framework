@@ -161,7 +161,7 @@ function tabulate(columns) {
         ret += "</a>&nbsp;";
 
         if(obj["dataid:preview"])
-            ret += "<a href=\"" + obj["dataid:preview"]["@id"] + "\" title=\"preview&nbsp;file\">?</a>";
+            ret += "<a target=\"_blank\" href=\"" + obj["dataid:preview"]["@id"] + "\" title=\"preview&nbsp;file\">?</a>";
 
         ret += "</small><br/>";
         return ret;

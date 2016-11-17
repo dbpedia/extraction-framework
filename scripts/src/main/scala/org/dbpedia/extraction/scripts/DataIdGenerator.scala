@@ -856,34 +856,34 @@ object DataIdGenerator {
     latestDataId match{
       case Some(t) => getOtherVersionUri(t._1, t._2, currentUri) match{
         case Some(uri) => model.add(currentUri, getProperty("dataid", "latestVersion"), uri)
-        case None => model.add(currentUri, getProperty("dataid", "latestVersion"), currentUri)
+        case None =>
       }
-      case None =>
+      case None => model.add(currentUri, getProperty("dataid", "latestVersion"), currentUri)
     }
   }
 
   def getOtherVersionUri(targetModel: List[Resource], version: String, currentUri: Resource): Option[Resource] = {
-    var res: Resource = null
-    if (targetModel != null && version != null) {
-      val uri = new URI(currentUri.getURI)
-      val params = URLEncodedUtils.parse(uri, "UTF-8").asScala
-      var target = uri.getScheme + "://" + uri.getHost + uri.getPath
-      for(i <- params.indices)
-      {
-        if(i == 0)
-          target += "?"
-        else
-          target += "&"
-        if(params(i).getName == "dbpv")
-          target += params(i).getName + "=" + version
-        else
-          target += params(i).getName + "=" + params(i).getValue
-      }
-      for(uri <- targetModel)
-        if(uri.getURI.endsWith(target))
-          res = uri.asResource()
+    if (targetModel == null || targetModel.size == 0)
+      return None
+
+    val uri = new URI(currentUri.getURI)
+    val params = URLEncodedUtils.parse(uri, "UTF-8").asScala
+    var target = uri.getScheme + "://" + uri.getHost + uri.getPath
+    for(i <- params.indices)
+    {
+      if(i == 0)
+        target += "?"
+      else
+        target += "&"
+      if(params(i).getName == "dbpv")
+        target += params(i).getName + "=" + version
+      else
+        target += params(i).getName + "=" + params(i).getValue
     }
-    Option(res)
+    for(uri <- targetModel)
+      if(uri.getURI.endsWith(target))
+        return Option(uri.asResource())
+    None
   }
 
   def getWikipediaDownloadInfo(lang: Language): Option[(String, String)] ={
