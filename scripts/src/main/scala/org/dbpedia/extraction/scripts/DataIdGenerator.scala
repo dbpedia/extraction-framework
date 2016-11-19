@@ -78,7 +78,7 @@ object DataIdGenerator {
 
   def extractDataID(outer: File, dir: File): Unit =
   {
-    val innerPath = if(outer.getName == "core") "" else outer.getName
+    val innerPath = if(dir.getName == "core") "" else outer.getName+"/"
     val lang = Language.get(dir.getName.replace("_", "-")) match {
       case Some(l) => l
       case _ =>
@@ -136,7 +136,7 @@ object DataIdGenerator {
       val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
       logger.log(Level.INFO, "started DataId: " + ttlOutFile.getAbsolutePath)
 
-      currentDataIdUri = currentDataid.createResource(webDir + innerPath + "/" + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
+      currentDataIdUri = currentDataid.createResource(webDir + innerPath + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
       require(currentDataIdUri != null, "Please provide a valid directory")
       currentDataid.add(currentDataIdUri, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DataId"))
 
