@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.util
 
 import java.io.File
-import java.net.URL
 import java.util.Properties
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
@@ -91,9 +90,9 @@ class Config(config: Properties)
     new IllegalArgumentException(message, cause)
   }
 
-  case class MediaWikiConnection(apiUrl: URL, maxRetries: Int, connectMs: Int, readMs: Int, sleepFactor: Int)
+  case class MediaWikiConnection(apiUrl: String, maxRetries: Int, connectMs: Int, readMs: Int, sleepFactor: Int)
   val mediawikiConnection = MediaWikiConnection(
-    apiUrl=new URL(config.getProperty("mwc-apiUrl", "")),
+    apiUrl=config.getProperty("mwc-apiUrl", ""),
     maxRetries = config.getProperty("mwc-maxRetries", "4").toInt,
     connectMs = config.getProperty("mwc-connectMs", "2000").toInt,
     readMs = config.getProperty("mwc-readMs", "5000").toInt,

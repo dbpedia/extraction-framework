@@ -47,7 +47,7 @@ extends WikiPageExtractor
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
 
-  protected def apiUrl: URL = context.configFile.mediawikiConnection.apiUrl
+  protected def apiUrl: URL = new URL(context.configFile.mediawikiConnection.apiUrl)
   //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
 
   protected val maxRetries = context.configFile.mediawikiConnection.maxRetries
