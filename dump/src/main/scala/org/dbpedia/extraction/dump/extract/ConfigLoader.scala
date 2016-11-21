@@ -2,6 +2,7 @@ package org.dbpedia.extraction.dump.extract
 
 import java.io._
 import java.net.URL
+import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
 import org.dbpedia.extraction.destinations._
@@ -14,6 +15,7 @@ import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable.{ArrayBuffer, HashMap}
+import scala.collection.convert.decorateAsScala._
 
 /**
  * Loads the dump extraction configuration.
@@ -27,135 +29,140 @@ class ConfigLoader(config: Config)
 {
     private val logger = Logger.getLogger(classOf[ConfigLoader].getName)
 
+    private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob]().asScala
+
+  /**
+    * Creates ab extraction job for a specific language.
+    */
+  val extractionJobWorker = SimpleWorkers(8,8) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
+    val finder = new Finder[File](config.dumpDir, input._1, config.wikiName)
+
+    val date = latestDate(finder)
+
+    //Extraction Context
+    val context = new DumpExtractionContext
+    {
+      def ontology = _ontology
+
+      def commonsSource = _commonsSource
+
+      def language = input._1
+
+      private lazy val _mappingPageSource =
+      {
+        val namespace = Namespace.mappings(language)
+
+        if (config.mappingsDir != null && config.mappingsDir.isDirectory)
+        {
+          val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
+          XMLSource.fromFile(file, Language.Mappings)
+        }
+        else
+        {
+          val namespaces = Set(namespace)
+          val url = new URL(Language.Mappings.apiUri)
+          WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
+        }
+      }
+
+      def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
+
+      private lazy val _mappings =
+      {
+        MappingsLoader.load(this)
+      }
+      def mappings : Mappings = _mappings
+
+      private val _articlesSource =
+      {
+        val articlesReaders = readers(config.source, finder, date)
+
+        XMLSource.fromReaders(articlesReaders, language,
+          title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
+            title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
+            title.namespace == Namespace.WikidataProperty || ExtractorUtils.titleContainsCommonsMetadata(title))
+      }
+
+      def articlesSource = _articlesSource
+
+      private val _redirects =
+      {
+        finder.file(date, "template-redirects.obj") match{
+          case Some(cache) => Redirects.load(articlesSource, cache, language)
+          case None => new Redirects(Map())
+        }
+
+      }
+
+      def redirects : Redirects = _redirects
+
+      private val _disambiguations =
+      {
+        try {
+          Disambiguations.load(reader(finder.file(date, config.disambiguations).get), finder.file(date, "disambiguations-ids.obj").get, language)
+        } catch {
+          case ex: Exception =>
+            logger.info("Could not load disambiguations - error: " + ex.getMessage)
+            null
+        }
+      }
+
+      def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
+
+      def configFile: Config = config
+    }
+
+    //Extractors
+    val extractor = CompositeParseExtractor.load(input._2, context)
+    val datasets = extractor.datasets
+
+    val formatDestinations = new ArrayBuffer[Destination]()
+    for ((suffix, format) <- config.formats) {
+
+      val datasetDestinations = new HashMap[String, Destination]()
+      for (dataset <- datasets) {
+        finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
+          case Some(file)=> datasetDestinations(dataset.encoded) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
+          case None =>
+        }
+
+      }
+
+      formatDestinations += new DatasetDestination(datasetDestinations)
+    }
+
+    val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete).get, false)
+
+    val description = input._1.wikiCode+": "+input._2.size+" extractors ("+input._2.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
+
+    val extractionRecorder = config.logDir match{
+      case Some(p) => {
+        val file = new File(p, "testExtraction")
+        file.createNewFile()
+        new ExtractionRecorder[PageNode](new FileWriter(file), 2000, description)
+      }
+      case None => new ExtractionRecorder[PageNode]()
+    }
+
+    val extractionJobNS = if(input._1 == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
+
+    extractionJobs.put(input._1, new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, input._1, config.retryFailedPages, extractionRecorder))
+  }
+
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
-     * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
+      *
+      * @return Non-strict Traversable over all configured extraction jobs i.e. an extractions job will not be created until it is explicitly requested.
      */
     def getExtractionJobs: Traversable[ExtractionJob] =
     {
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
-      config.extractorClasses.view.map(e => createExtractionJob(e._1, e._2))
+      val zw = config.extractorClasses.view.map(e => (e._1, e._2)).toList
+      Workers.work[(Language,  Seq[Class[_ <: Extractor[_]]])](extractionJobWorker, zw)
+      extractionJobs.values
     }
-    
-    /**
-     * Creates ab extraction job for a specific language.
-     */
-    private def createExtractionJob(lang : Language, extractorClasses: Seq[Class[_ <: Extractor[_]]]) : ExtractionJob =
-    {
-        val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
 
-        val date = latestDate(finder)
-        
-        //Extraction Context
-        val context = new DumpExtractionContext
-        {
-            def ontology = _ontology
-    
-            def commonsSource = _commonsSource
-    
-            def language = lang
-    
-            private lazy val _mappingPageSource =
-            {
-                val namespace = Namespace.mappings(language)
-                
-                if (config.mappingsDir != null && config.mappingsDir.isDirectory)
-                {
-                    val file = new File(config.mappingsDir, namespace.name(Language.Mappings).replace(' ','_')+".xml")
-                    XMLSource.fromFile(file, Language.Mappings)
-                }
-                else
-                {
-                    val namespaces = Set(namespace)
-                    val url = new URL(Language.Mappings.apiUri)
-                    WikiSource.fromNamespaces(namespaces,url,Language.Mappings)
-                }
-            }
-            
-            def mappingPageSource : Traversable[WikiPage] = _mappingPageSource
-    
-            private lazy val _mappings =
-            {
-                MappingsLoader.load(this)
-            }
-            def mappings : Mappings = _mappings
-    
-            private val _articlesSource =
-            {
-              val articlesReaders = readers(config.source, finder, date)
-
-              XMLSource.fromReaders(articlesReaders, language,
-                    title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
-                             title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
-                             title.namespace == Namespace.WikidataProperty || ExtractorUtils.titleContainsCommonsMetadata(title))
-            }
-            
-            def articlesSource = _articlesSource
-    
-            private val _redirects =
-            {
-              finder.file(date, "template-redirects.obj") match{
-                case Some(cache) => Redirects.load(articlesSource, cache, language)
-                case None => new Redirects(Map())
-              }
-
-            }
-            
-            def redirects : Redirects = _redirects
-
-            private val _disambiguations =
-            {
-              try {
-                Disambiguations.load(reader(finder.file(date, config.disambiguations).get), finder.file(date, "disambiguations-ids.obj").get, language)
-              } catch {
-                case ex: Exception =>
-                  logger.info("Could not load disambiguations - error: " + ex.getMessage)
-                  null
-              }
-            }
-
-            def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
-
-            def configFile: Config = config
-        }
-
-        //Extractors
-        val extractor = CompositeParseExtractor.load(extractorClasses, context)
-        val datasets = extractor.datasets
-
-        val formatDestinations = new ArrayBuffer[Destination]()
-        for ((suffix, format) <- config.formats) {
-          
-          val datasetDestinations = new HashMap[String, Destination]()
-          for (dataset <- datasets) {
-            finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-              case Some(file)=> datasetDestinations(dataset.encoded) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
-              case None =>
-            }
-
-          }
-          
-          formatDestinations += new DatasetDestination(datasetDestinations)
-        }
-        
-        val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete).get, false)
-
-        val description = lang.wikiCode+": "+extractorClasses.size+" extractors ("+extractorClasses.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-
-        val extractionRecorder = config.logDir match{
-          case Some(p) => {
-            val file = new File(p, "testExtraction")
-            file.createNewFile()
-            new ExtractionRecorder[PageNode](new FileWriter(file), 2000, description)
-          }
-          case None => new ExtractionRecorder[PageNode]()
-        }
-
-        val extractionJobNS = if(lang == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
-
-        new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, lang, config.retryFailedPages, extractionRecorder)
-    }
     
     private def writer(file: File): () => Writer = {
       () => IOUtils.writer(file)
