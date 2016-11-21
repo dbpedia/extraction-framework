@@ -8,7 +8,7 @@ import scala.Console.err
 import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.RichFile.wrapFile
@@ -38,7 +38,8 @@ object ProcessFreebaseLinks
 
     val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
 
-    val formats = parseFormats(config, "uri-policy", "format")
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
 
     // destinations for all languages
     val destinations = new HashMap[String, Destination]() {

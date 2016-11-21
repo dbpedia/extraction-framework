@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.wikiparser._
+import java.io.{File, FilenameFilter}
+
 import org.dbpedia.extraction.sources.FileSource
-import org.dbpedia.extraction.util.{Config, ConfigUtils, Language}
-import java.io.{FilenameFilter, File}
+import org.dbpedia.extraction.util.{Config, Language}
+import org.dbpedia.extraction.wikiparser._
 import org.junit.{Ignore, Test}
 
 import scala.io.Source
@@ -42,7 +43,7 @@ class AbstractExtractorTest
     private val context = new {
         def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
         def language = Language.English
-        def configFile : Config = new Config(ConfigUtils.loadConfig(configFilePath, "UTF-8"))
+        def configFile : Config = new Config(configFilePath)
     }
     private val extractor = new AbstractExtractor(context)
 

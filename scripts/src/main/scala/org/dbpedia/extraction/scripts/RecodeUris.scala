@@ -61,6 +61,7 @@ object RecodeUris {
           List(quad.copy(subject = subj, predicate = pred, value = obj, context = cont))
         }
         catch{
+          //TODO remove this catch, this is covered by the ExtarctionRecorder
           case e : Throwable => {
             err.println(input.name + inSuffix + ": a quad has produced an error: " + e.getMessage)
             List()

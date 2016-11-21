@@ -4,10 +4,8 @@ import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, Formatter}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.DestinationUtils
-import org.dbpedia.extraction.util.ConfigUtils._
+import org.dbpedia.extraction.destinations.formatters.{Formatter, TerseFormatter}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 
@@ -153,40 +151,37 @@ object CanonicalizeIris {
 
     require(args != null && args.length == 1, "One arguments required, extraction config file")
 
-    val config = ConfigUtils.loadConfig(args(0), "UTF-8")
+    val config = new Config(args.head)
 
-    baseDir = ConfigUtils.getValue(config, "base-dir", required=true)(new File(_))
+    baseDir = config.dumpDir
 
-    val mappings = ConfigUtils.getValues(config, "mapping-files",',', required=true)(x => x)
+    val mappings = ConfigUtils.getValues(config.config, "mapping-files",',', required=true)(x => x)
     require(mappings.nonEmpty, "no mapping datasets")
 
     // Suffix of mapping files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val mappingSuffix = ConfigUtils.getString(config, "mapping-suffix",required=true)
+    val mappingSuffix = ConfigUtils.getString(config.config, "mapping-suffix",required=true)
     require(mappingSuffix.nonEmpty, "no mapping file suffix")
 
-    val inputs = ConfigUtils.getValues(config, "input-files",',', required=true)(x => x)
+    val inputs = ConfigUtils.getValues(config.config, "input-files",',', required=true)(x => x)
     require(inputs.nonEmpty, "no input datasets")
 
-    val extension = ConfigUtils.getString(config, "name-extension",required=true)
+    val extension = ConfigUtils.getString(config.config, "name-extension",required=true)
     require(extension.nonEmpty, "no result name extension")
 
-    val threads = Option(ConfigUtils.getValue[String](config, "parallel-threads",required=false)(x => x)) match{
-      case Some(i) => Integer.parseInt(i)
-      case None => 1
-    }
+    val threads = config.parallelProcesses
 
     // Language using generic domain (usually en)
-    genericLanguage = ConfigUtils.getValue(config, "generic-language",required=false)(x => Language(x))
+    genericLanguage = ConfigUtils.getValue(config.config, "generic-language",required=false)(x => Language(x))
 
-    newLanguage = ConfigUtils.getValue(config, "mapping-language",required=true)(x => Language(x))
+    newLanguage = ConfigUtils.getValue(config.config, "mapping-language",required=true)(x => Language(x))
     newPrefix = uriPrefix(newLanguage)
     newResource = newPrefix+"resource/"
 
-    val languages = parseLanguages(baseDir, ConfigUtils.getValues(config, "languages",',',required=true)(x => x))
+    val languages = config.languages
     require(languages.nonEmpty, "no languages")
 
-    frmts = parseFormats(config, "uri-policy", "format").map( x=> x._1 -> x._2).toMap
+    frmts = config.formats.toMap
 
     // load all mappings
     val loadParameters = for (lang <- languages; mapping <- mappings)

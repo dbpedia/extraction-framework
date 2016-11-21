@@ -3,17 +3,33 @@ package org.dbpedia.extraction.util
 import java.io.File
 import java.util.Properties
 
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.util.ConfigUtils.{getStrings, getValue}
+import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.Map
+import scala.util.{Failure, Success}
 
 
-class Config(config: Properties)
+class Config(configPath: String)
 {
-  // TODO: get rid of all config file parsers, use Spring
+  /**
+    * load two config files:
+    * 1. the universal config containing properties universal for a release
+    * 2. the extraction job specific config provided by the user
+    */
+  val universalConfig = ConfigUtils.loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
+  val config = ConfigUtils.loadConfig(configPath)
+
+  def checkOverride(key: String) = if(config.containsKey(key))
+    config
+  else
+    universalConfig
+
+  /**
+    * get all universal properties, check if there is an override in the provided config file
+    */
 
   /**
    * Dump directory
@@ -21,53 +37,67 @@ class Config(config: Properties)
    * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
    * and overrides this val to null because it is not needed)
    */
-  lazy val dumpDir = getValue(config, "base-dir", true){
+  lazy val dumpDir = getValue(checkOverride("base-dir"), "base-dir", true){
     x =>
       val dir = new File(x)
       if (! dir.exists) throw error("dir "+dir+" does not exist")
       dir
   }
 
-  val dbPediaVersion = Option(config.getProperty("dbpedia-version"))
+  lazy val parallelProcesses = checkOverride("parallel-processes").getProperty("parallel-processes", "4").toInt
 
-  val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
+  lazy val dbPediaVersion = parseVersionString(getString(checkOverride("dbpedia-version"), "dbpedia-version")) match{
+    case Success(s) => s
+    case Failure(e) => throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
+  }
 
-  val logDir = Option(config.getProperty("log-dir"))
+  lazy val logDir = Option(checkOverride("log-dir").getProperty("log-dir"))
 
-  val retryFailedPages = config.getProperty("retry-failed-pages", "false").toBoolean
+  // TODO Watch out, this could be a regex
+  lazy val source = checkOverride("source").getProperty("source", "pages-articles.xml.bz2")
 
-  // Watch out, this could be a regex
-  val source = config.getProperty("source", "pages-articles.xml.bz2")
-  val disambiguations = config.getProperty("disambiguations", "page_props.sql.gz")
-
-  val wikiName = config.getProperty("wikiName", "wiki")
-
-  val parser = config.getProperty("parser", "simple")
+  lazy val wikiName = checkOverride("wiki-name").getProperty("wiki-name", "wiki")
 
   /**
-   * Local ontology file, downloaded for speed and reproducibility
-   * Note: This is lazy to defer initialization until actually called (eg. this class is not used
-   * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
-   * and overrides this val to null because it is not needed)
-   */
-  lazy val ontologyFile = getValue(config, "ontology", false)(new File(_))
+    * Local ontology file, downloaded for speed and reproducibility
+    * Note: This is lazy to defer initialization until actually called (eg. this class is not used
+    * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
+    * and overrides this val to null because it is not needed)
+    */
+  lazy val ontologyFile = getValue(checkOverride("ontology"), "ontology", false)(new File(_))
 
   /**
-   * Local mappings files, downloaded for speed and reproducibility
-   * Note: This is lazy to defer initialization until actually called (eg. this class is not used
-   * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
-   * and overrides this val to null because it is not needed)
-   */
-  lazy val mappingsDir = getValue(config, "mappings", false)(new File(_))
+    * Local mappings files, downloaded for speed and reproducibility
+    * Note: This is lazy to defer initialization until actually called (eg. this class is not used
+    * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
+    * and overrides this val to null because it is not needed)
+    */
+  lazy val mappingsDir = getValue(checkOverride("mappings"), "mappings", false)(new File(_))
 
-  val formats = parseFormats(config, "uri-policy", "format")
+  lazy val policies = parsePolicies(checkOverride("uri-policy"), "uri-policy")
 
-  val extractorClasses = loadExtractorClasses()
+  lazy val formats = parseFormats(checkOverride("format"), "format", policies)
 
-  val namespaces = loadNamespaces()
+  lazy val disambiguations = checkOverride("disambiguations").getProperty("disambiguations", "page_props.sql.gz")
+
+  /**
+    *
+    *
+    * all non universal properties...
+    */
+
+  lazy val languages = parseLanguages(dumpDir, getStrings(config, "languages", ','))
+
+  lazy val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
+
+  lazy val retryFailedPages = config.getProperty("retry-failed-pages", "false").toBoolean
+
+  lazy val extractorClasses = loadExtractorClasses()
+
+  lazy val namespaces = loadNamespaces()
 
   private def loadNamespaces(): Set[Namespace] = {
-    val names = getStrings(config, "namespaces", ',', false)
+    val names = getStrings(config, "namespaces", ',')
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
@@ -81,8 +111,6 @@ class Config(config: Properties)
    */
   private def loadExtractorClasses() : Map[Language, Seq[Class[_ <: Extractor[_]]]] =
   {
-    val languages = ConfigUtils.parseLanguages(dumpDir,getStrings(config, "languages", ',', false))
-
     ExtractorUtils.loadExtractorsMapFromConfig(languages, config)
   }
 
@@ -91,7 +119,7 @@ class Config(config: Properties)
   }
 
   case class MediaWikiConnection(apiUrl: String, maxRetries: Int, connectMs: Int, readMs: Int, sleepFactor: Int)
-  val mediawikiConnection = MediaWikiConnection(
+  lazy val mediawikiConnection = MediaWikiConnection(
     apiUrl=config.getProperty("mwc-apiUrl", ""),
     maxRetries = config.getProperty("mwc-maxRetries", "4").toInt,
     connectMs = config.getProperty("mwc-connectMs", "2000").toInt,
@@ -100,7 +128,7 @@ class Config(config: Properties)
   )
 
   case class AbstractParameters(abstractQuery: String, abstractTags: String, shortAbstractsProperty: String, longAbstractsProperty: String, shortAbstractMinLength: Int)
-  val abstractParameters = AbstractParameters(
+  lazy val abstractParameters = AbstractParameters(
     abstractQuery=config.getProperty("abstract-query", ""),
     abstractTags = config.getProperty("abstract-tags", "query,pages,page,extract"),
     shortAbstractsProperty = config.getProperty("short-abstracts-property", "rdfs:comment"),
@@ -109,7 +137,7 @@ class Config(config: Properties)
   )
 
   case class NifParameters(nifQuery: String, nifTags: String, isTestRun: Boolean, writeAnchor: Boolean, writeLinkAnchor: Boolean)
-  val nifParameters = NifParameters(
+  lazy val nifParameters = NifParameters(
     nifQuery=config.getProperty("nif-query", ""),
     nifTags = config.getProperty("nif-tags", "parse,text"),
     isTestRun = config.getProperty("nif-isTestRun", "false").toBoolean,

@@ -425,7 +425,8 @@ object SdTypeCreation {
       new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
     }
 
-    val formats = parseFormats(config, "uri-policy", "format").map( x=>
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies).map( x=>
       x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
 
     val destination = DestinationUtils.createDestination(finder, Array(dataset), formats)

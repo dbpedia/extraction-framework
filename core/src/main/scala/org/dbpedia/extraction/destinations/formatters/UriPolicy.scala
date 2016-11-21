@@ -106,17 +106,6 @@ object UriPolicy {
   )
 
   /**
-   * Parse all URI policy and format lines.
-   * @param uriPolicyPrefix property key prefix, e.g. "uri-policy"
-   * @param formatPrefix format key prefix, e.g. "format"
-   * @return map from file suffix (without '.' dot) to formatter
-   */
-  def parseFormats(config: Properties, uriPolicyPrefix: String, formatPrefix: String): Map[String, Formatter] = {
-    val policies = parsePolicies(config, uriPolicyPrefix)
-    parseFormats(config, formatPrefix, policies)
-  }
-
-  /**
    * Parse all format lines.
    * @param prefix format key prefix, e.g. "format"
    * @return map from file suffix (without '.' dot) to formatter

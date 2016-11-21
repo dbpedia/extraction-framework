@@ -6,7 +6,7 @@ import scala.Console.err
 import java.io.File
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import scala.collection.mutable.{ArrayBuffer,HashSet}
 import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
@@ -47,9 +47,9 @@ object CreateFlickrWrapprLinks {
     val objPrefix = getString(config, "object-prefix", true)
     
     val generic = getValue(config, "generic", false)(Language(_))
-    
-    val formats = parseFormats(config, "uri-policy", "format")
-    
+
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
     // store our own private copy of the mutable array
     val replacements = WikiUtil.iriReplacements
     

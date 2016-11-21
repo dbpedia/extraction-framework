@@ -52,24 +52,25 @@ object ConfigUtils {
     finally file.close()
     config
   }
-  
-  def getValues[T](config: Properties, key: String, sep: Char, required: Boolean)(map: String => T): Seq[T] = {
+
+
+  def getValues[T](config: Properties, key: String, sep: Char, required: Boolean = false)(map: String => T): Seq[T] = {
     getStrings(config, key, sep, required).map(map(_))
   }
 
-  def getStrings(config: Properties, key: String, sep: Char, required: Boolean): Seq[String] = {
+  def getStrings(config: Properties, key: String, sep: Char, required: Boolean = false): Seq[String] = {
     val string = getString(config, key, required)
     if (string == null) Seq.empty
     else string.trimSplit(sep)
   }
 
-  def getValue[T](config: Properties, key: String, required: Boolean)(map: String => T): T = {
+  def getValue[T](config: Properties, key: String, required: Boolean = false)(map: String => T): T = {
     val string = getString(config, key, required)
     if (string == null) null.asInstanceOf[T]
     else map(string)
   }
   
-  def getString(config: Properties, key: String, required: Boolean): String = {
+  def getString(config: Properties, key: String, required: Boolean = false): String = {
     val string = config.getProperty(key)
     if (string != null) string
     else if (! required) null

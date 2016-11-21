@@ -4,7 +4,7 @@ import java.io.File
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import scala.collection.mutable.ArrayBuffer
 import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
@@ -29,8 +29,9 @@ object CreateIriSameAsUriLinks {
     val output = getString(config, "output", true)
     
     val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
-    
-    val formats = parseFormats(config, "uri-policy", "format")
+
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
 
     val sameAs = RdfNamespace.OWL.append("sameAs")
     

@@ -71,7 +71,8 @@ object TypeConsistencyCheck {
     val langConfString = ConfigUtils.getString(config, "languages", false)
     val languages = ConfigUtils.parseLanguages(baseDir, Seq(langConfString))
 
-    val formats = parseFormats(config, "uri-policy", "format")
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
 
     lazy val ontology = {
       val ontologyFile = ConfigUtils.getValue(config, "ontology", false)(new File(_))

@@ -34,7 +34,7 @@ class ConfigLoader(config: Config)
   /**
     * Creates ab extraction job for a specific language.
     */
-  val extractionJobWorker = SimpleWorkers(8,8) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
+  val extractionJobWorker = SimpleWorkers(config.parallelProcesses,config.parallelProcesses) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
     val finder = new Finder[File](config.dumpDir, input._1, config.wikiName)
 
     val date = latestDate(finder)

@@ -52,8 +52,7 @@ class NifExtractor(
   protected val writeStrings = context.configFile.nifParameters.writeAnchor
   protected val shortAbstractLength = context.configFile.abstractParameters.shortAbstractMinLength
 
-  require(context.configFile.dbPediaVersion.isDefined, "dbpedia-version parameter undefined in config document")
-  protected val dbpediaVersion = context.configFile.dbPediaVersion.get
+  protected val dbpediaVersion = context.configFile.dbPediaVersion
 
   override val datasets = Set(DBpediaDatasets.NifAbstractContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
