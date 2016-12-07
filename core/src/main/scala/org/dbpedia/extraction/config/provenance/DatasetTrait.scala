@@ -10,4 +10,5 @@ object DatasetTrait extends Enumeration {
   val Validated = Value
   val Publicised = Value
   val Provenance = Value
+  val LinkedData = Value
 }

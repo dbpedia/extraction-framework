@@ -17,15 +17,18 @@
     },
     "main_dataset": {
       "name": "Main Dataset",
+      "traits":"LinkedData",
       "desc":"DBpedia root dataset for representing all datasets of e certain language and version of DBpedia"
     },
     "wiktionary_dbpedia_org": {
-      "name": "wiktionary.dbpedia.org"
+      "name": "wiktionary.dbpedia.org",
+      "traits":"LinkedData"
     }
   },
   "general": {
     "short_abstracts": {
       "name": "Short abstract literals",
+      "traits":"LinkedData",
       "desc": "Short Abstracts (about 600 characters long) from the first section of Wikipedia articles.",
       "sources": [
         "pages_articles"
@@ -33,6 +36,7 @@
     },
     "short_abstracts_en_uris": {
       "name": "Short abstract literals",
+      "traits":"LinkedData",
       "desc": "Short Abstracts (about 600 characters long) from the first section of Wikipedia articles, mapped to the corresponding English resources.",
       "sources": [
         "short_abstracts"
@@ -41,364 +45,461 @@
     },
     "flickr_wrappr_links": {
       "name": "Flickr Wrappr Links",
+      "traits":"LinkedData",
       "desc": "Contains links to flickr wrappr.",
       "depr": "2015-10"
     },
     "labels": {
       "name": "Labels",
+      "traits":"LinkedData",
       "desc": "Titles of all Wikipedia Articles in the corresponding language."
     },
     "category_labels": {
       "name": "Category Labels.",
+      "traits":"LinkedData",
       "desc": "Labels for Categories."
     },
     "images": {
       "name": "Images",
+      "traits":"LinkedData",
       "desc": "Main image and corresponding thumbnail from Wikipedia article."
     },
     "geo_coordinates": {
       "name": "Geo Coordinates",
+      "traits":"LinkedData",
       "desc": "Geographic coordinates extracted from Wikipedia."
     },
     "persondata": {
       "name": "Person data",
+      "traits":"LinkedData",
       "desc": "Information about persons (date and place of birth etc., extracted from the English and German Wikipedia, represented using the FOAF vocabulary."
     },
     "pnd": {
-      "name": "pnd"
+      "name": "pnd",
+      "traits":"LinkedData"
     },
     "redirects": {
       "name": "Redirects",
+      "traits":"LinkedData",
       "desc": "Dataset containing redirects between articles in Wikipedia."
     },
     "transitive_redirects": {
       "name": "Rransitive Redirects",
+      "traits":"LinkedData",
       "desc": "Dataset containing transitively resolved redirects between articles in Wikipedia."
     },
     "article_categories": {
       "name": "Article Categories",
+      "traits":"LinkedData",
       "desc": "Links from concepts to categories using the SKOS vocabulary."
     },
     "article_templates": {
       "name": "Article Templates",
+      "traits":"LinkedData",
       "desc": "Templates used in an article (top-level)."
     },
     "article_templates_nested": {
       "name": "Nested Article Templates",
+      "traits":"LinkedData",
       "desc": "Templates used in an article (nested)."
     },
     "skos_categories": {
       "name": "SKOS Categories",
+      "traits":"LinkedData",
       "desc": "Information which concept is a category and how categories are related using the SKOS Vocabulary."
     },
     "revision_uris": {
       "name": "Revision Uris",
+      "traits":"LinkedData",
       "desc": "Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release."
     },
     "revision_ids": {
       "name": "Revision Ids",
+      "traits":"LinkedData",
       "desc": "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from."
     },
     "revision_meta": {
       "name": "Revision Meta Data",
+      "traits":"LinkedData",
       "desc": "Dataset containing additional revision information"
     },
     "page_ids": {
       "name": "Page Ids",
+      "traits":"LinkedData",
       "desc": "Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from."
     },
     "interlanguage_links": {
       "name": "Interlanguage Links",
+      "traits":"LinkedData",
       "desc": "Dataset linking a DBpedia resource to the same resource in other languages and in Wikidata."
     },
     "interlanguage_links_chapters": {
       "name": "Interlanguage Links between DBpedia Chapters",
+      "traits":"LinkedData",
       "desc": "Chapter specific interlanguage links only contains the interlanguage links between those languages for which a DBpedia mapping chapter exists and provides dereferencable URIs. (a subset of interlanguage links)"
     },
     "genders": {
       "name": "Genders",
+      "traits":"LinkedData",
       "desc": "Dataset trying to identify the gender of a resource"
     },
     "topical_concepts": {
       "name": "Topical Concepts",
+      "traits":"LinkedData",
       "desc": "Resources that describe a category"
     },
     "uri_same_as_iri": {
       "name": "Uri Same As Iri",
+      "traits":"LinkedData",
       "desc": "The owl:sameAs links between the IRI and URI format of DBpedia resources. Only extracted when IRI and URI are actually different."
     },
     "page_length": {
       "name": "Page Length",
+      "traits":"LinkedData",
       "desc": "Numbers of characters contained in a Wikipedia article's source."
     },
     "image_galleries": {
       "name": "Image Galleries",
+      "traits":"LinkedData",
       "desc": "An image gallery for a resource"
     },
     "image_annotations": {
       "name": "Image Annotations",
+      "traits":"LinkedData",
       "desc": "Annotations of image regions"
     },
     "kml_files": {
       "name": "Kml Files",
+      "traits":"LinkedData",
       "desc": "Description of KML files from Commons"
     },
     "anchor_text": {
       "name": "Anchor Texts",
+      "traits":"LinkedData",
       "desc": "Texts used in links to refer to Wikipedia articles from other Wikipedia articles."
     },
     "surface_forms": {
       "name": "Surface Forms",
+      "traits":"LinkedData",
       "desc": "Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name."
     },
     "sounds": {
       "name": "sounds",
+      "traits":"LinkedData",
       "desc": "Audio files and sounds from Wikipedia articles."
     },
     "french_population": {
       "name": "French Population",
+      "traits":"LinkedData",
       "desc": "French dataset about population."
     }
   },
   "mappings_based":{
     "instance_types": {
       "name": "Instance Types",
+      "traits":"LinkedData",
       "desc": "Contains triples of the form $object rdf:type $class from the mapping-based extraction."
     },
     "instance_types_transitive": {
       "name": "Instance Types Transitive",
+      "traits":"LinkedData",
       "desc": "Contains transitive rdf:type $class based on the DBpedia ontology."
     },
     "mappingbased_objects_uncleaned": {
       "name": "mappingbased_objects_uncleaned",
+      "traits":"LinkedData",
       "depr": "2015-10"
     },
     "mappingbased_literals": {
       "name": "Mappingbased Literals",
+      "traits":"LinkedData",
       "desc": "High-quality data extracted from Infoboxes using the mapping-based extraction (Literal properties only). The predicates in this dataset are in the ontology namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace."
     },
     "geo_coordinates_mappingbased": {
       "name": "Geo Coordinates Mappingbased",
+      "traits":"LinkedData",
       "desc": "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki"
     },
     "specific_mappingbased_properties": {
       "name": "Specific Mappingbased Properties",
+      "traits":"LinkedData",
       "desc": "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city."
     },
     "mappingbased_objects": {
       "name": "Mappingbased Objects",
+      "traits":"LinkedData",
       "desc": "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the 'ontology' namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace."
     },
     "mappingbased_objects_disjoint_range": {
       "name": "Mappingbased Objects Disjoint Range",
+      "traits":"LinkedData",
       "desc": "Errors detected in the mapping based properties (disjoint range)."
     },
     "mappingbased_objects_disjoint_domain": {
       "name": "Mappingbased Objects Disjoint Domain",
+      "traits":"LinkedData",
       "desc": "Errors detected in the mapping based properties (disjoint domain)."
     },
     "instance_types_lhd_dbo": {
       "name": "Instance Types Lhd Dbo",
+      "traits":"LinkedData",
       "desc": "Linked Hypernyms Inference dataset attaches entity articles with a DBpedia ontology concept as their type. The types are hypernyms mined from articles' free text using hand-crafted lexico-syntactic patterns, the mapping to DBpedia ontology type was performed with exact string matching and type co-occurrence analysis."
     },
     "instance_types_lhd_ext": {
       "name": "Instance Types Lhd Ext",
+      "traits":"LinkedData",
       "desc": "Linked Hypernym Extension dataset attaches entity articles with a DBpedia resource as their type. The types are hypernyms mined from articles' free text using hand-crafted lexicosyntactic patterns. Unlike the  Inference dataset the Extension dataset contains more specific types, since the set of types is not constrained to DBpedia Ontology - any DBpedia resource can serve as a type."
     },
     "instance_types_dbtax_dbo": {
       "name": "Instance Types Dbtax Dbo",
+      "traits":"LinkedData",
       "desc": "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology."
     },
     "instance_types_dbtax_ext": {
       "name": "Instance Types Dbtax Ext",
+      "traits":"LinkedData",
       "desc": "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology."
     },
     "instance_types_sdtyped_dbo": {
       "name": "Instance Types Sdtyped Dbo",
+      "traits":"LinkedData",
       "desc": "The SDType heuristic can extract probable type information in large, cross-domain databases on noisy data. This is its result for DBpedia which supplements the normally gathered instance types. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology."
     }
   },
   "infobox":{
     "infobox_properties": {
       "name": "Infobox Properties",
+      "traits":"LinkedData",
       "desc": "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data."
     },
     "infobox_properties_mapped": {
       "name": "Infobox Properties Mapped",
+      "traits":"LinkedData",
       "desc": "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data. This dataset contains facts that have equivalent mapped facts in the mapping-based datasets. "
     },
     "infobox_property_definitions": {
       "name": "Infobox Property Definitions",
+      "traits":"LinkedData",
       "desc": "All properties predicates used in infoboxes."
     },
     "template_parameters": {
       "name": "Template Parameters",
+      "traits":"LinkedData",
       "desc": "Dataset describing names of template parameters."
     },
     "infobox_test": {
-      "name": "infobox_test"
+      "name": "infobox_test",
+      "traits":"LinkedData"
     },
     "template_mappings": {
       "name": "Template Mappings",
+      "traits":"LinkedData",
       "desc": "Todo."
     },
     "template_mapping_hints_instance": {
       "name": "Template Mapping Hints Instance",
+      "traits":"LinkedData",
       "desc": "Todo"
     },
     "template_mapping_hints": {
       "name": "Template Mapping Hints",
+      "traits":"LinkedData",
       "desc": "Todo"
     }
   },
   "abstracts":{
     "short_abstracts": {
       "name": "Short Abstracts",
+      "traits":"LinkedData",
       "desc": "Short Abstracts (about 600 characters long) of Wikipedia articles."
     },
     "long_abstracts": {
       "name": "Long Abstracts",
+      "traits":"LinkedData",
       "desc": "Long abstracts (full abstracts) of Wikipedia articles, usually the first section."
     },
     "missing_short_abstracts": {
       "name": "Missing Short Abstracts",
+      "traits":"LinkedData",
       "depr": "2015-04"
     },
     "missing_long_abstracts": {
       "name": "Missing Long Abstracts",
+      "traits":"LinkedData",
       "depr": "2015-04"
     },
     "nif_abstract_context": {
       "name": "Nif Abstract Context",
-      "desc": "This is a temporary dataset for the NIF extraction of abstracts. It shall be replaced with the full page context in upcoming releases"
+      "traits":"LinkedData",
+      "desc": "This is a temporary dataset for the NIF extraction of abstracts. It shall be replaced with the full page context in upcoming releases",
+      "defaultgraph":"nif"
     },
     "nif_page_structure": {
       "name": "Template Parameters",
-      "desc": "This dataset contains the page structure of a Wikipedia page, divided in sections and paragraphs."
+      "traits":"LinkedData",
+      "desc": "This dataset contains the page structure of a Wikipedia page, divided in sections and paragraphs.",
+      "defaultgraph":"nif"
     },
     "nif_text_links": {
       "name": "Template Parameters",
-      "desc": "This dataset contains all text links of a Wikipedia page, detailed in the NIF format."
+      "traits":"LinkedData",
+      "desc": "This dataset contains all text links of a Wikipedia page, detailed in the NIF format.",
+      "defaultgraph":"nif"
     },
     "nif_context": {
       "name": "NIF Context",
-      "desc": "Contains the full text of a Wikipedia page in the NLP Interchange Format (NIF). All other NIF resources will reference the context of its Wikipedia page."
+      "traits":"LinkedData",
+      "desc": "Contains the full text of a Wikipedia page in the NLP Interchange Format (NIF). All other NIF resources will reference the context of its Wikipedia page.",
+      "defaultgraph":"nif"
     }
   },
   "links":{
     "wikipedia_links": {
       "name": "Wikipedia Links",
+      "traits":"LinkedData",
       "desc": "Dataset linking DBpedia resource to corresponding article in Wikipedia."
     },
     "external_links": {
       "name": "External Links",
+      "traits":"LinkedData",
       "desc": "Links to external web pages about a concept."
     },
     "page_links": {
       "name": "Page Links",
+      "traits":"LinkedData",
       "desc": "Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms."
     },
     "disambiguations": {
       "name": "Disambiguations",
+      "traits":"LinkedData",
       "desc": "Links extracted from Wikipedia disambiguation pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics."
     },
     "homepages": {
       "name": "Homepages",
+      "traits":"LinkedData",
       "desc": "Links to homepages of persons, organizations etc."
     },
     "out_degree": {
       "name": "Out Degree",
+      "traits":"LinkedData",
       "desc": "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article."
     },
     "freebase_links": {
       "name": "Freebase Links",
+      "traits":"LinkedData",
       "desc": "This file contains the back-links (owl:sameAs) to the Freebase dataset."
     },
     "geonames_links": {
       "name": "Geonames Links",
+      "traits":"LinkedData",
       "desc": "This file contains the back-links (owl:sameAs) to the Geonames dataset."
     },
     "commons_page_links": {
       "name": "Commons Page Links",
+      "traits":"LinkedData",
       "desc": "Dataset containing links between a language-locale DBpedia instance and DBpedia Commons."
     }
   },
   "wikidata":{
     "wikidata_labels": {
-      "name": "Wikidata Labels"
+      "name": "Wikidata Labels",
+      "traits":"LinkedData"
     },
     "wikidata_labels_nmw": {
-      "name": "wikidata_labels_nmw"
+      "name": "wikidata_labels_nmw",
+      "traits":"LinkedData"
     },
     "sameas_all_wikis": {
-      "name": "sameas_all_wikis"
+      "name": "sameas_all_wikis",
+      "traits":"LinkedData"
     },
     "sameas_wikidata": {
-      "name": "sameas_wikidata"
+      "name": "sameas_wikidata",
+      "traits":"LinkedData"
     },
     "sameas_external": {
-      "name": "sameas_external"
+      "name": "sameas_external",
+      "traits":"LinkedData"
     },
     "alias": {
-      "name": "alias"
+      "name": "alias",
+      "traits":"LinkedData"
     },
     "alias_nmw": {
-      "name": "alias_nmw"
+      "name": "alias_nmw",
+      "traits":"LinkedData"
     },
     "description": {
-      "name": "description"
+      "name": "description",
+      "traits":"LinkedData"
     },
     "description_nmw": {
-      "name": "description_nmw"
+      "name": "description_nmw",
+      "traits":"LinkedData"
     },
     "properties": {
-      "name": "properties"
+      "name": "properties",
+      "traits":"LinkedData"
     },
     "ontology_subclassof": {
-      "name": "ontology_subclassof"
+      "name": "ontology_subclassof",
+      "traits":"LinkedData"
     },
     "wikidata_r2r_mapping_errors": {
-      "name": "wikidata_r2r_mapping_errors"
+      "name": "wikidata_r2r_mapping_errors",
+      "traits":"LinkedData"
     },
     "mappingbased_properties_reified": {
-      "name": "mappingbased_properties_reified"
+      "name": "mappingbased_properties_reified",
+      "traits":"LinkedData"
     },
     "mappingbased_properties_reified_qualifiers": {
-      "name": "mappingbased_properties_reified_qualifiers"
+      "name": "mappingbased_properties_reified_qualifiers",
+      "traits":"LinkedData"
     },
     "raw_unredirected": {
-      "name": "raw_unredirected"
+      "name": "raw_unredirected",
+      "traits":"LinkedData"
     },
     "raw": {
-      "name": "raw"
+      "name": "raw",
+      "traits":"LinkedData"
     },
     "raw_reified": {
-      "name": "raw_reified"
+      "name": "raw_reified",
+      "traits":"LinkedData"
     },
     "raw_reified_qualifiers": {
-      "name": "raw_reified_qualifiers"
+      "name": "raw_reified_qualifiers",
+      "traits":"LinkedData"
     },
     "references": {
-      "name": "references"
+      "name": "references",
+      "traits":"LinkedData"
     },
     "wikidata_duplicate_iri_split": {
-      "name": "wikidata_duplicate_iri_split"
+      "name": "wikidata_duplicate_iri_split",
+      "traits":"LinkedData"
     }
   },
   "citations":{
     "citation_links": {
       "name": "Citation Links",
+      "traits":"LinkedData",
       "desc": "Links from a citation to a DBpedia article using the dbp:isCitedBy property"
     },
     "citation_data": {
       "name": "Citation Data",
+      "traits":"LinkedData",
       "desc": "Raw data extracted from Wikipedia citation templates"
     },
     "cited_facts": {
-      "name": "Cited Facts"
+      "name": "Cited Facts",
+      "traits":"LinkedData"
     },
     "citation_types": {
-      "name": "Citation Types"
+      "name": "Citation Types",
+      "traits":"LinkedData"
     }
   }
 }

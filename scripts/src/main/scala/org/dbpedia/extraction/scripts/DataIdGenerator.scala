@@ -39,8 +39,8 @@ object DataIdGenerator {
   private var agentModel: Model = null
   private var checksumModel: Model = null
   private var catalogModel: Model = null
-  private var defaultAgentModel: Model = null
   private var staticModel: Model = null
+  private var relationModel: Model = null
   private var latestDataId: Option[(List[Resource], String)] = None
   private var previousDataId: Option[(List[Resource], String)] = None
   private var nextDataId: Option[(List[Resource], String)] = None
@@ -122,6 +122,7 @@ object DataIdGenerator {
       val topsetModel = ModelFactory.createDefaultModel()
       agentModel = ModelFactory.createDefaultModel()
       val mainModel = ModelFactory.createDefaultModel()
+      relationModel = ModelFactory.createDefaultModel()
       stmtModel = ModelFactory.createDefaultModel()
       checksumModel = ModelFactory.createDefaultModel()
 
@@ -131,6 +132,7 @@ object DataIdGenerator {
       addPrefixes(agentModel)
       addPrefixes(stmtModel)
       addPrefixes(checksumModel)
+      addPrefixes(relationModel)
 
       val ttlOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
       val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
@@ -149,9 +151,9 @@ object DataIdGenerator {
       dataidStandard = addSimpleStatement(null, null, "DataID - dataset metadata ontology", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/core"))
       dataidLdStandard = addSimpleStatement(null, null, "DataID-LD - dataset metadata ontology with linked data extension", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/ld"))
 
-      val creator = addAgent(agentModel, currentDataIdUri, configMap.get("creator").getAsObject)
-      val maintainer = addAgent(agentModel, currentDataIdUri, configMap.get("maintainer").getAsObject)
-      val contact = addAgent(agentModel, currentDataIdUri, configMap.get("contact").getAsObject)
+      val creator = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("creator").getAsObject)
+      val maintainer = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("maintainer").getAsObject)
+      val contact = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("contact").getAsObject)
       require(creator != null, "Please define an dataid:Agent as a Creator in the dataid stump file (use dataid:Authorization).")
 
       currentDataid.add(currentDataIdUri, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
@@ -167,7 +169,7 @@ object DataIdGenerator {
       currentDataid.add(currentDataIdUri, getProperty("dc", "hasVersion"), versionStatement)
       catalogModel.add(catalogInUse, getProperty("dcat", "record"), currentDataIdUri)
 
-      currentRootSet = addDataset(topsetModel, lang, "main_dataset", creator, toplevelSet = true)
+      currentRootSet = addDataset(topsetModel, lang, "main_dataset", creator, superset = true)
       currentDataid.add(currentDataIdUri, getProperty("foaf", "primaryTopic"), currentRootSet)
       topsetModel.add(currentRootSet, getProperty("foaf", "isPrimaryTopicOf"), currentDataIdUri)
       topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary))
@@ -183,12 +185,15 @@ object DataIdGenerator {
 
       var lastFile: String = null
       var dataset: Resource = null
+      var pagesArticles: Dataset = null
       for (dis <- distributions) {
         if(dis.contains("_" + dir.getName))
         {
           if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {  //only add dataset once for all its distributions
             lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
             dataset = addDataset(mainModel, lang, dis, creator)
+            if(dis.contains("pages_articles"))
+              pagesArticles = DBpediaDatasets.getDataset(dataset.getURI, lang, this.dbpVersion)
             topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
             mainModel.add(dataset, getProperty("dc", "isPartOf"), currentRootSet)
           }
@@ -199,6 +204,33 @@ object DataIdGenerator {
             case None =>
           }
           addDistribution(mainModel, dataset, lang, outer.getName, dis, creator)
+        }
+      }
+      //run through all dataset again to add dataset relations
+      if(pagesArticles != null) {
+        val pagesArticlesResource = mainModel.createResource(pagesArticles.versionUri)
+        for (dis <- distributions) {
+          if (dis.contains("_" + dir.getName)) {
+            if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {
+              //only add dataset once for all its distributions
+              lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
+              val datasetName = getDatasetName(dis, lang)
+              getDBpediaDataset(datasetName, lang, this.dbpVersion) match {
+                case Some(d) => {
+                  val dResource = mainModel.createResource(d.versionUri)
+                  val relation = mainModel.createResource(d.getRelationUri("source", pagesArticles))
+                  mainModel.add(dResource, getProperty("dataid", "relatedDataset"), pagesArticlesResource)
+                  mainModel.add(dResource, getProperty("dataid", "qualifiedDatasetRelation"), relation)
+
+                  relationModel.add(relation, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DatasetRelationship"))
+                  relationModel.add(relation, getProperty("dataid", "qualifiedRelationOf"), dResource)
+                  relationModel.add(relation, getProperty("dataid", "qualifiedRelationTo"), pagesArticlesResource)
+                  relationModel.add(relation, getProperty("dataid", "datasetRelationRole"), currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "SourceRole"))
+                }
+                case None =>
+              }
+            }
+          }
         }
       }
 
@@ -213,11 +245,6 @@ object DataIdGenerator {
       outString = "\n#### Agents & Authorizations ####\n" +
         outString.replaceAll("(@prefix).*\\n", "")
 
-      currentDataid.add(defaultAgentModel)
-      baos = new ByteArrayOutputStream()
-      defaultAgentModel.write(baos, "TURTLE")
-      outString += new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
-
       currentDataid.add(topsetModel)
       baos = new ByteArrayOutputStream()
       topsetModel.write(baos, "TURTLE")
@@ -228,6 +255,12 @@ object DataIdGenerator {
       baos = new ByteArrayOutputStream()
       mainModel.write(baos, "TURTLE")
       outString += "\n#### Datasets & Distributions ####\n" +
+        new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
+
+      currentDataid.add(relationModel)
+      baos = new ByteArrayOutputStream()
+      relationModel.write(baos, "TURTLE")
+      outString += "\n#### Relations ####\n" +
         new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
 
       currentDataid.add(checksumModel)
@@ -271,7 +304,7 @@ object DataIdGenerator {
     }
   }
 
-  def addAgent(agentModel: Model, motherResource: Resource, agentMap: JsonObject, specialEntities: List[Resource] = List()): Resource = {
+  def addAgent(agentModel: Model, parentResource: Resource, parentModel: Model, agentMap: JsonObject, specialEntities: List[Resource] = List()): Resource = {
     val agent = agentModel.createResource(agentMap.get("uri").getAsString.value())
     agentModel.add(agent, RDF.`type`, agentModel.createResource(agentModel.getNsPrefixURI("dataid") + "Agent"))
     agentModel.add(agent, getProperty("foaf", "name"), createLiteral(agentMap.get("name").getAsString.value()))
@@ -280,7 +313,7 @@ object DataIdGenerator {
     agentModel.add(agent, getProperty("foaf", "mbox"), createLiteral(agentMap.get("mbox").getAsString.value()))
 
 
-    val context = agentModel.createResource(motherResource.getURI + (if(motherResource.getURI.contains("?")) "&" else "?") + "auth=" + agentMap.get("role").getAsString.value().toLowerCase + "Authorization")
+    val context = agentModel.createResource(parentResource.getURI + (if(parentResource.getURI.contains("?")) "&" else "?") + "auth=" + agentMap.get("role").getAsString.value().toLowerCase + "Authorization")
     agentModel.add(context, RDF.`type`, agentModel.createResource(agentModel.getNsPrefixURI("dataid") + "Authorization"))
     agentModel.add(context, getProperty("dataid", "authorizedAgent"), agent)
     agentModel.add(agent, getProperty("dataid", "hasAuthorization"), context)
@@ -288,16 +321,16 @@ object DataIdGenerator {
     agentModel.add(context, getProperty("dataid", "isInheritable"), createLiteral("true", "xsd", "boolean"))
 
     //distribute authorizations
-    if (specialEntities.isEmpty && currentDataid != null) //no special entities -> we assume its valid for whole DataID
+    if (specialEntities.isEmpty) //no special entities -> we assume its valid for whole DataID
     {
-      agentModel.add(context, getProperty("dataid", "authorizedFor"), motherResource)
-      currentDataid.add(motherResource, getProperty("dataid", "underAuthorization"), context)
+      agentModel.add(context, getProperty("dataid", "authorizedFor"), parentResource)
+      parentModel.add(parentResource, getProperty("dataid", "underAuthorization"), context)
     }
-    else if(currentDataid != null){
+    else{
       for (ent <- specialEntities) //with special entities -> we assume they need dataid:needsSpecialAuthorization
       {
         agentModel.add(context, getProperty("dataid", "authorizedFor"), ent)
-        currentDataid.add(ent, getProperty("dataid", "needsSpecialAuthorization"), context)
+        parentModel.add(ent, getProperty("dataid", "needsSpecialAuthorization"), context)
       }
     }
 
@@ -422,7 +455,7 @@ object DataIdGenerator {
     val sparql: Model = ModelFactory.createDefaultModel()
     addPrefixes(sparql)
     val dist = sparql.createResource(currentDataIdUri.getURI + "?sparql=DBpediaSparqlEndpoint")
-    val sparqlAgent = addAgent(defaultAgentModel, dist, configMap.get("openLink").getAsObject )
+    val sparqlAgent = addAgent(agentModel, dist, sparql, configMap.get("openLink").getAsObject )
     sparql.add(dist, RDF.`type`, sparql.createResource(sparql.getNsPrefixURI("dataid-ld") + "SparqlEndpoint"))
     sparql.add(dataset, getProperty("dcat", "distribution"), dist)
     sparql.add(dist, getProperty("dataid", "isDistributionOf"), dataset)
@@ -437,7 +470,6 @@ object DataIdGenerator {
     sparql.add(dist, getProperty("dcat", "mediaType"), getMediaType("sparql", ""))
     sparql.add(dist, getProperty("dcat", "accessURL"), sparql.createResource(sparqlEndpoint))
     sparql.add(dist, getProperty("void", "sparqlEndpoint"), sparql.createResource(sparqlEndpoint))
-    sparql.add(dist, getProperty("dataid-ld", "graphName"), sparql.createResource("http://dbpedia.org"))
     sparql.add(dist, getProperty("dataid", "accessProcedure"), addSimpleStatement("stmt", "sparqlaccproc", "An endpoint for sparql queries: provide valid queries."))
     sparql.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
     sparql.add(dist, getProperty("dc", "conformsTo"), dataidLdStandard)
@@ -486,9 +518,9 @@ object DataIdGenerator {
       fileName.substring(0, fileName.lastIndexOf("_" + lang.wikiCode.replace("-", "_") + "."))
     else fileName.replaceAll("\\.\\w+", "")
 
-  def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, toplevelSet: Boolean = false): Resource = {
+  def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, superset: Boolean = false): Resource = {
 
-    val datasetName = getDatasetName(currentFile, lang)
+    val datasetName = getDatasetName(currentFile, lang)  //TODO check if we can get this from Dataset?
     val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
       case Some(d) => d
       case None => {
@@ -499,14 +531,21 @@ object DataIdGenerator {
     val datasetUri = model.createResource(dataset.versionUri)
     //add dataset to catalog
     catalogModel.add(catalogInUse, getProperty("dcat", "dataset"), datasetUri)
-    model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
+    if(superset)
+      model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Superset"))
+    else if(currentFile.contains("pages_articles")){
+      model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
+    }
+    else {
+      model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
+      model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid-ld") + "LinkedDataDataset"))
+    }
 
     // add prev/next/latest statements
     addVersionPointers(model, datasetUri)
 
-    if (!toplevelSet) //not!
+    if (!superset) //not!
     {
-      model.add(datasetUri, getProperty("void", "rootResource"), currentRootSet)
       model.add(datasetUri, getProperty("dc", "title"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
       model.add(datasetUri, getProperty("rdfs", "label"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
       dataset.description match{
@@ -516,8 +555,15 @@ object DataIdGenerator {
           err.println("Could not find description for dataset: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
         }
       }
+      if(dataset.isLinkedDataDataset) {
+        model.add(datasetUri, getProperty("void", "rootResource"), currentRootSet)
+        dataset.defaultGraph match {
+          case Some(dg) => model.add(datasetUri, getProperty("sd", "defaultGraph"), model.createResource(dg))
+          case None =>
+        }
+      }
     }
-    if (!currentFile.contains("pages_articles")) //not!
+    if (dataset.isLinkedDataDataset)
     {
       model.add(datasetUri, getProperty("dcat", "landingPage"), model.createResource("http://dbpedia.org/"))
       model.add(datasetUri, getProperty("foaf", "page"), model.createResource(documentation))
@@ -539,8 +585,9 @@ object DataIdGenerator {
           model.add(datasetUri, getProperty("void", "triples"), createLiteral((new Integer(triples.get("lines").get) - 2).toString, "xsd", "integer"))
         case None =>
       }
+
     }
-    else { //is wikipedia dump dataset
+    else if(currentFile.contains("pages_articles")) { //is wikipedia dump dataset
       getWikipediaDownloadInfo(lang) match {
         case Some(dlInfo) => {
           val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
@@ -549,7 +596,7 @@ object DataIdGenerator {
         }
         case None =>
       }
-      val wikimedia = addAgent(agentModel, currentDataIdUri, configMap.get("wikimedia").getAsObject)
+      val wikimedia = addAgent(agentModel, datasetUri, model, configMap.get("wikimedia").getAsObject)
       model.add(datasetUri, getProperty("dc", "license"), model.createResource(license))
       model.add(datasetUri, getProperty("dc", "publisher"), wikimedia)
       model.add(datasetUri, getProperty("dataid", "associatedAgent"), wikimedia)
@@ -593,7 +640,7 @@ object DataIdGenerator {
 
     if(currentFile.contains("pages_articles"))  //is Wikipedia file
     {
-      val wikimedia = addAgent(agentModel, currentDataIdUri, configMap.get("wikimedia").getAsObject)
+      val wikimedia = addAgent(agentModel, dist, model, configMap.get("wikimedia").getAsObject)
       getWikipediaDownloadInfo(lang) match {
         case Some(dlInfo) => {
           val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
@@ -727,9 +774,7 @@ object DataIdGenerator {
 
     //model for all type statements will be merged with submodels before write...
     staticModel = ModelFactory.createDefaultModel()
-    defaultAgentModel =  ModelFactory.createDefaultModel()
     addPrefixes(staticModel)
-    addPrefixes(defaultAgentModel)
 
     //creating a dcat:Catalog pointing to all DataIds
     catalogModel = ModelFactory.createDefaultModel()
@@ -788,7 +833,7 @@ object DataIdGenerator {
   }
 
   def createCatalogInstance: Model = {
-    val catalogAgent = addAgent(catalogModel, catalogInUse, configMap.get("creator").getAsObject)
+    val catalogAgent = addAgent(catalogModel, catalogInUse, catalogModel, configMap.get("creator").getAsObject)
     catalogModel.add(catalogInUse, RDF.`type`, catalogModel.createResource(catalogModel.getNsPrefixURI("dcat") + "Catalog"))
     catalogModel.add(catalogInUse, getProperty("dc", "title"), createLiteral("DataId catalog for DBpedia version " + dbpVersion))
     catalogModel.add(catalogInUse, getProperty("rdfs", "label"), createLiteral("DataId catalog for DBpedia version " + dbpVersion))

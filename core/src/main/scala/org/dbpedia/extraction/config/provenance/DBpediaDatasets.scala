@@ -57,6 +57,10 @@ object DBpediaDatasets
                   case Some(n) => DatasetTrait.ValueSet(n.asText().split(",").map(x => DatasetTrait.withName(x.trim)):_*)
                   case None => DatasetTrait.ValueSet.empty
                 },
+                Option(properties.get("defaultgraph")) match {
+                    case Some(n) => n.asText()
+                    case None => null
+                },
                 Option(properties.get("keywords")) match {
                   case Some(n) => n.asText().split(",").map(_.trim)
                   case None => Seq()

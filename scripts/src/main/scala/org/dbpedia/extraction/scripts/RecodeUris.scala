@@ -41,10 +41,10 @@ object RecodeUris {
     val inputs = args.drop(4).flatMap(_.split("[,\\s]")).map(f => new File(baseDir, f.trim + inSuffix)).toList
     require(inputs.nonEmpty, "no input file names")
     require(inputs.forall(_.canRead), "Make sure that every input file exists and is readable. Provide only file names without path and suffix (extension).")
-    
+
     Workers.work(SimpleWorkers(1.5, 1.0) { input:File =>
       var changeCount = 0
-      val outFile = new File(baseDir, input.name.substring(0, input.name.length - inSuffix.length) + outSuffix)
+      val outFile = new File(baseDir, input.name.substring(0, input.name.length - outSuffix.length) + outSuffix)
       new QuadMapper().mapQuads(Language.Core, input, outFile, required = true) { quad =>
         try {
           var changed = false
