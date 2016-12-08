@@ -66,6 +66,7 @@ object DataIdGenerator {
   private var vocabulary: String = null
   private var idVersion: String = null
   private var dbpVersion: String = null
+  private var preamble: String = null
   private var rights: String = null
   private var license: String = null
   private var sparqlEndpoint: String = null
@@ -199,8 +200,10 @@ object DataIdGenerator {
           }
           dumpFile.findFirstIn(dis) match {
             case Some(l) =>
-              if(coreList.contains(l))
+              if(coreList.contains(l)) {
                 mainModel.add(addSparqlEndpoint(dataset))
+                mainModel.add(dataset, getProperty("void", "sparqlEndpoint"), mainModel.createResource(sparqlEndpoint))
+              }
             case None =>
           }
           addDistribution(mainModel, dataset, lang, outer.getName, dis, creator)
@@ -236,64 +239,49 @@ object DataIdGenerator {
 
       //TODO validate & publish DataIds online!!!
 
-      //dataidModel.add(staticModel)                                                     //adding type statements
-      currentDataid.write(new FileOutputStream(ttlOutFile), "TURTLE")
-      currentDataid.add(agentModel)
-      var baos = new ByteArrayOutputStream()
-      agentModel.write(baos, "TURTLE")
-      var outString = new String(baos.toByteArray(), Charset.defaultCharset())
-      outString = "\n#### Agents & Authorizations ####\n" +
-        outString.replaceAll("(@prefix).*\\n", "")
+      def writeModel(model:Model, headline: String) : String = {
+        val baos = new ByteArrayOutputStream()
+        currentDataid.add(model)
+        model.write(baos, "TURTLE")
+        val zw = Option(headline) match{
+          case Some(h) => "\n########### " + h + " ###########\n"
+          case None => ""
+        }
+        zw + new Predef.String(baos.toByteArray, Charset.defaultCharset())
+      }
 
-      currentDataid.add(topsetModel)
-      baos = new ByteArrayOutputStream()
-      topsetModel.write(baos, "TURTLE")
-      outString += "\n########## Main Dataset ##########\n" +
-        new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
-
-      currentDataid.add(mainModel)
-      baos = new ByteArrayOutputStream()
-      mainModel.write(baos, "TURTLE")
-      outString += "\n#### Datasets & Distributions ####\n" +
-        new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
-
-      currentDataid.add(relationModel)
-      baos = new ByteArrayOutputStream()
-      relationModel.write(baos, "TURTLE")
-      outString += "\n#### Relations ####\n" +
-        new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
-
-      currentDataid.add(checksumModel)
-      baos = new ByteArrayOutputStream()
-      checksumModel.write(baos, "TURTLE")
-      outString += "\n#### Checksums ####\n" +
-        new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
-
-      currentDataid.add(stmtModel)
-      baos = new ByteArrayOutputStream()
-      stmtModel.write(baos, "TURTLE")
-      outString += "\n########### Statements ###########\n" +
-        new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
-
-      currentDataid.add(staticModel)
-      baos = new ByteArrayOutputStream()
-      staticModel.write(baos, "TURTLE")
-      outString += "\n########### MediaTypes ###########\n" +
-        new String(baos.toByteArray(), Charset.defaultCharset()).replaceAll("(@prefix).*\\n", "")
-
-      var os = new FileOutputStream(ttlOutFile, true)
+      var os = new FileOutputStream(ttlOutFile)
       var printStream = new PrintStream(os)
-      printStream.print(outString)
+
+      Option(preamble) match{
+        case Some(p) => if(p.trim.length > 0) printStream.print("# " + p.replaceAll("\\$version", dbpVersion).replaceAll("\\$language", lang.name).replaceAll("\\$landingpage", documentation).replaceAll("\\n", "\n# ") + "\n\n")
+        case None =>
+      }
+      printStream.print(writeModel(currentDataid, null))
+      currentDataid.add(agentModel)
+      printStream.print(writeModel(agentModel, "Agents & Authorizations").replaceAll("(@prefix).*\\n", ""))
+      currentDataid.add(topsetModel)
+      printStream.print(writeModel(topsetModel, "Main Dataset").replaceAll("(@prefix).*\\n", ""))
+      currentDataid.add(mainModel)
+      printStream.print(writeModel(mainModel, "Datasets & Distributions").replaceAll("(@prefix).*\\n", ""))
+      currentDataid.add(relationModel)
+      printStream.print(writeModel(relationModel, "Relations").replaceAll("(@prefix).*\\n", ""))
+      currentDataid.add(checksumModel)
+      printStream.print(writeModel(checksumModel, "Checksums").replaceAll("(@prefix).*\\n", ""))
+      currentDataid.add(stmtModel)
+      printStream.print(writeModel(stmtModel, "Statements").replaceAll("(@prefix).*\\n", ""))
+      currentDataid.add(staticModel)
+      printStream.print(writeModel(staticModel, "MediaTypes").replaceAll("(@prefix).*\\n", ""))
+
       printStream.close()
 
-      outString = OpenRdfUtils.writeSerialization(OpenRdfUtils.convertToOpenRdfModel(currentDataid), RDFFormat.JSONLD)
-      os = new FileOutputStream(jldOutFile, false)
+      val jsonStr = OpenRdfUtils.writeSerialization(OpenRdfUtils.convertToOpenRdfModel(currentDataid), RDFFormat.JSONLD)
+      os = new FileOutputStream(jldOutFile)
       printStream = new PrintStream(os)
-      printStream.print(outString)
+      printStream.print(jsonStr)
       printStream.close()
 
       logger.log(Level.INFO, "finished DataId: " + ttlOutFile.getAbsolutePath)
-
     }
   }
 
@@ -469,7 +457,6 @@ object DataIdGenerator {
     sparql.add(dist, getProperty("dc", "license"), sparql.createResource(license))
     sparql.add(dist, getProperty("dcat", "mediaType"), getMediaType("sparql", ""))
     sparql.add(dist, getProperty("dcat", "accessURL"), sparql.createResource(sparqlEndpoint))
-    sparql.add(dist, getProperty("void", "sparqlEndpoint"), sparql.createResource(sparqlEndpoint))
     sparql.add(dist, getProperty("dataid", "accessProcedure"), addSimpleStatement("stmt", "sparqlaccproc", "An endpoint for sparql queries: provide valid queries."))
     sparql.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
     sparql.add(dist, getProperty("dc", "conformsTo"), dataidLdStandard)
@@ -531,8 +518,10 @@ object DataIdGenerator {
     val datasetUri = model.createResource(dataset.versionUri)
     //add dataset to catalog
     catalogModel.add(catalogInUse, getProperty("dcat", "dataset"), datasetUri)
-    if(superset)
+    if(superset) {
       model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Superset"))
+      model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
+    }
     else if(currentFile.contains("pages_articles")){
       model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
     }
@@ -761,6 +750,7 @@ object DataIdGenerator {
     require(URI.create(license) != null, "Please enter a valid license uri (odrl license)")
 
     rights = configMap.get("rightsStatement").getAsString.value
+    preamble = configMap.get("preamble").getAsString.value
 
     releaseDate = Option(configMap.get("releaseDate").getAsString.value) match{
       case Some(x) => try{ dateformat.parse(x)}
