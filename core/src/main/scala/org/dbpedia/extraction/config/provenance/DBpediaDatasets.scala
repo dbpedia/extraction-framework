@@ -224,7 +224,7 @@ object DBpediaDatasets
      * Wikidata
      */
     val WikidataLabelsMappingsWiki = datasets.get("wikidata_labels").get
-    val WikidataLabelsRest = datasets.get("wikidata_labels_nmw").get
+    val WikidataLabelsRest = datasets.get("labels_nmw").get
     val WikidataSameAs = datasets.get("sameas_all_wikis").get
     val WikidataNameSpaceSameAs = datasets.get("sameas_wikidata").get
     val WikidataSameAsExternal = datasets.get("sameas_external").get
