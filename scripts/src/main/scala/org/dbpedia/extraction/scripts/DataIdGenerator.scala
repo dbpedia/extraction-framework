@@ -478,13 +478,13 @@ object DataIdGenerator {
   def getDBpediaDataset(fileName: String, lang: Language, dbpv: String): Option[Dataset] ={
 
     def internalGet(name:String, ext: String): Option[Dataset] = scala.util.Try {
-      DBpediaDatasets.getUnofficialDataset(name + (if(ext != null) ext else ""))
+      DBpediaDatasets.getDataset(name + (if(ext != null) ext else ""), lang, dbpv)
     } match{
       case Success(s) => Some(s)
       case Failure(e) => None
     }
     internalGet(fileName, null) match{
-      case Some(d) => return Some(d.getLanguageVersion(lang, dbpv))
+      case Some(d) => return Some(d)
       case None =>
     }
     val splits = fileName.split("_")

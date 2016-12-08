@@ -5,7 +5,6 @@ import org.dbpedia.extraction.util.{JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.mutable
-import scala.util.{Failure, Success, Try}
 
 /**
  * Defines the datasets which are extracted by DBpedia.
@@ -81,28 +80,25 @@ object DBpediaDatasets
 
         //TODO make the next lines configurable or define them all in the config file!
         //-en-uris
-        datasets(set.encoded + "_en_uris") = new Dataset(
-            set.name + " English Uris",
-            set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching English DBpedia resources.",
-            null, null,
-            set.encoded + "_en_uris",
-            Seq(set)
+        datasets(set.encoded + "_en_uris") = set.copyDataset(
+            naturalName = set.name + " English Uris",
+            descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching English DBpedia resources.",
+            fileName = set.encoded + "_en_uris",
+            sources = Seq(set)
         )
         //wkd uris
-        datasets(set.encoded + "_wkd_uris") = new Dataset(
-            set.name + " Wikidata Uris",
-            set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching Wikidata DBpedia resources.",
-            null, null,
-            set.encoded + "_wkd_uris",
-            Seq(set)
+        datasets(set.encoded + "_wkd_uris") = set.copyDataset(
+            naturalName = set.name + " Wikidata Uris",
+            descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching Wikidata DBpedia resources.",
+            fileName = set.encoded + "_wkd_uris",
+            sources = Seq(set)
         )
-        //wkd uris
-        datasets(set.encoded + "_unredirected") = new Dataset(
-            set.name + " Unredirected",
-            set.description.getOrElse("Undescribed Dataset") + " This datasets resources were not resolved along Wikipedia redirects.",
-            null, null,
-            set.encoded + "_unredirected",
-            Seq(set)
+        //unredirected
+        datasets(set.encoded + "_unredirected") = set.copyDataset(
+            naturalName = set.name + " Unredirected",
+            descr = set.description.getOrElse("Undescribed Dataset") + " This datasets resources were not resolved along Wikipedia redirects.",
+            fileName = set.encoded + "_unredirected",
+            sources = Seq(set)
         )
     }
 
@@ -289,10 +285,5 @@ object DBpediaDatasets
       }
       case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
     }
-  }
-
-  def getUnofficialDataset(name: String, language: Language = null, version: String = null) = Try{getDataset(name, language, version)} match{
-    case Success(s) => s
-    case Failure(e) => new Dataset(name, "Unofficial DBpedia Dataset", language, version, null, Seq(), null, Seq(),null, DatasetTrait.ValueSet.empty )
   }
 }

@@ -233,37 +233,44 @@
     "mappingbased_objects_disjoint_range": {
       "name": "Mappingbased Objects Disjoint Range",
       "traits":"LinkedData",
-      "desc": "Errors detected in the mapping based properties (disjoint range)."
+      "desc": "Errors detected in the mapping based properties (disjoint range).",
+      "defaultgraph":"dataset"
     },
     "mappingbased_objects_disjoint_domain": {
       "name": "Mappingbased Objects Disjoint Domain",
       "traits":"LinkedData",
-      "desc": "Errors detected in the mapping based properties (disjoint domain)."
+      "desc": "Errors detected in the mapping based properties (disjoint domain).",
+      "defaultgraph":"dataset"
     },
     "instance_types_lhd_dbo": {
       "name": "Instance Types Lhd Dbo",
       "traits":"LinkedData",
-      "desc": "Linked Hypernyms Inference dataset attaches entity articles with a DBpedia ontology concept as their type. The types are hypernyms mined from articles' free text using hand-crafted lexico-syntactic patterns, the mapping to DBpedia ontology type was performed with exact string matching and type co-occurrence analysis."
+      "desc": "Linked Hypernyms Inference dataset attaches entity articles with a DBpedia ontology concept as their type. The types are hypernyms mined from articles' free text using hand-crafted lexico-syntactic patterns, the mapping to DBpedia ontology type was performed with exact string matching and type co-occurrence analysis.",
+      "defaultgraph":"alttype"
     },
     "instance_types_lhd_ext": {
       "name": "Instance Types Lhd Ext",
       "traits":"LinkedData",
-      "desc": "Linked Hypernym Extension dataset attaches entity articles with a DBpedia resource as their type. The types are hypernyms mined from articles' free text using hand-crafted lexicosyntactic patterns. Unlike the  Inference dataset the Extension dataset contains more specific types, since the set of types is not constrained to DBpedia Ontology - any DBpedia resource can serve as a type."
+      "desc": "Linked Hypernym Extension dataset attaches entity articles with a DBpedia resource as their type. The types are hypernyms mined from articles' free text using hand-crafted lexicosyntactic patterns. Unlike the  Inference dataset the Extension dataset contains more specific types, since the set of types is not constrained to DBpedia Ontology - any DBpedia resource can serve as a type.",
+      "defaultgraph":"alttype"
     },
     "instance_types_dbtax_dbo": {
       "name": "Instance Types Dbtax Dbo",
       "traits":"LinkedData",
-      "desc": "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology."
+      "desc": "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology.",
+      "defaultgraph":"alttype"
     },
     "instance_types_dbtax_ext": {
       "name": "Instance Types Dbtax Ext",
       "traits":"LinkedData",
-      "desc": "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology."
+      "desc": "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology.",
+      "defaultgraph":"alttype"
     },
     "instance_types_sdtyped_dbo": {
       "name": "Instance Types Sdtyped Dbo",
       "traits":"LinkedData",
-      "desc": "The SDType heuristic can extract probable type information in large, cross-domain databases on noisy data. This is its result for DBpedia which supplements the normally gathered instance types. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology."
+      "desc": "The SDType heuristic can extract probable type information in large, cross-domain databases on noisy data. This is its result for DBpedia which supplements the normally gathered instance types. This set is its result for DBpedia where the inferred type has an equivalent in the DBpedia ontology.",
+      "defaultgraph":"alttype"
     }
   },
   "infobox":{
@@ -367,7 +374,8 @@
     "page_links": {
       "name": "Page Links",
       "traits":"LinkedData",
-      "desc": "Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms."
+      "desc": "Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.",
+      "defaultgraph":"links"
     },
     "disambiguations": {
       "name": "Disambiguations",

@@ -321,15 +321,15 @@ function loadDatasetListOfLang(lang)
 function getDatasetsAndDistributionsById(id){
     var ret = {};
     for(var i = 0; i < id["@graph"].length; i++) {
-        if (id["@graph"][i]["@type"] == "dataid:Dataset") {
+        if (subArrayTest(["dataid:Dataset"], id["@graph"][i]["@type"])) {
             var title = id["@graph"][i]["dc:title"]["@value"];
             if(title !== undefined && title.trim().length > 0)
                 ret[removeQuery(id["@graph"][i]["@id"])] = id["@graph"][i];
         }
-        if (id["@graph"][i]["@type"] == "dataid:SingleFile") {
+        if (subArrayTest(["dataid:SingleFile"], id["@graph"][i]["@type"])) {
             ret[id["@graph"][i]["@id"]] = id["@graph"][i];
         }
-        if (id["@graph"][i]["@type"] == "dataid:MediaType") {
+        if (subArrayTest(["dataid:MediaType"], id["@graph"][i]["@type"])) {
             ret[id["@graph"][i]["@id"]] = id["@graph"][i];
         }
     }
