@@ -22,7 +22,7 @@ class Dataset private[provenance](
    result: String = null, //Uri of the Extractor/script which produced this dataset (see class DBpediaAnnotations)
    input: Seq[String] = Seq.empty[String], //Uris of the Extractors/scripts which use this dataset as in input (see class DBpediaAnnotations)
    depr: String = null, //last DBpedia version the dataset was in use (and now deprecated): e.g. 2015-10
-   traits: DatasetTrait.ValueSet = DatasetTrait.ValueSet.empty, //The set of traits the dataset has. According to these traits a dataset will be post-processed.
+   var traits: DatasetTrait.ValueSet = DatasetTrait.ValueSet.empty, //The set of traits the dataset has. According to these traits a dataset will be post-processed.
    defaultGraf: String = null, //The default graph name is usually the language specific dbpedia namespace IRI (if this is null). With this extension you can add to the path of this IRI to define secondary graphs.
    var keywords: Seq[String] = Seq.empty[String] //also for documentation
    )
@@ -99,14 +99,25 @@ class Dataset private[provenance](
   }
 
   def defaultGraph: Option[String] = {
+    def appendNamespaceByTrait(ns: String): String = {
+      var ret = ns
+      this.traits.foreach( trai => trai match{
+        case DatasetTrait.Unredirected => ret += "/unredirected"
+        case DatasetTrait.EnglishUris => ret += "/en_uris"
+        case DatasetTrait.WikidataUris => ret += "/wkd_uris"
+        case _=>
+      })
+      ret
+    }
     this.language match {
       case Some(l) => Option(this.defaultGraf) match{
-        case Some(dg) => dg match{
-          case str if str == "dataset" => Some(l.dbpediaUri + "/" + this.encoded)
-          case str if str.trim.matches("\\w+") => Some(l.dbpediaUri + "/" + str.trim.toLowerCase())
-          case _ => Some(l.dbpediaUri)
+        case Some(dg) => dg.trim match{
+          case str if str == "namespace" => Some(appendNamespaceByTrait(l.dbpediaUri))
+          case str if str == "dataset" => Some(appendNamespaceByTrait(l.dbpediaUri) + "/" + this.encoded)
+          case str if str.trim.matches("(\\w|-|_)+") => Some(appendNamespaceByTrait(l.dbpediaUri) + "/" + str.trim.toLowerCase())
+          case _ => throw new IllegalArgumentException("Default graph entry is missing or malformed for dataset: " + this.encoded)
         }
-        case None => Some(l.dbpediaUri)
+        case None => throw new IllegalArgumentException("Default graph entry is missing or malformed for dataset: " + this.encoded)
       }
       case None => None
     }

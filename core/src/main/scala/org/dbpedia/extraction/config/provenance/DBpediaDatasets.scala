@@ -84,13 +84,15 @@ object DBpediaDatasets
             naturalName = set.name + " English Uris",
             descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching English DBpedia resources.",
             fileName = set.encoded + "_en_uris",
+            traits = set.traits + DatasetTrait.EnglishUris,
             sources = Seq(set)
         )
         //wkd uris
         datasets(set.encoded + "_wkd_uris") = set.copyDataset(
             naturalName = set.name + " Wikidata Uris",
-            descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching Wikidata DBpedia resources.",
+            descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching Wikidata resources.",
             fileName = set.encoded + "_wkd_uris",
+            traits = set.traits + DatasetTrait.WikidataUris,
             sources = Seq(set)
         )
         //unredirected
@@ -98,6 +100,7 @@ object DBpediaDatasets
             naturalName = set.name + " Unredirected",
             descr = set.description.getOrElse("Undescribed Dataset") + " This datasets resources were not resolved along Wikipedia redirects.",
             fileName = set.encoded + "_unredirected",
+            traits = set.traits + DatasetTrait.Unredirected,
             sources = Seq(set)
         )
     }
@@ -223,7 +226,7 @@ object DBpediaDatasets
     /**
      * Wikidata
      */
-    val WikidataLabelsMappingsWiki = datasets.get("wikidata_labels").get
+    //val WikidataLabelsMappingsWiki = datasets.get("wikidata_labels").get
     val WikidataLabelsRest = datasets.get("labels_nmw").get
     val WikidataSameAs = datasets.get("sameas_all_wikis").get
     val WikidataNameSpaceSameAs = datasets.get("sameas_wikidata").get

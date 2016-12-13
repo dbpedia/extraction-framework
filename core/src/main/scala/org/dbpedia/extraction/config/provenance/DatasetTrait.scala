@@ -11,4 +11,7 @@ object DatasetTrait extends Enumeration {
   val Publicised = Value
   val Provenance = Value
   val LinkedData = Value
+  val Unredirected = Value
+  val EnglishUris = Value
+  val WikidataUris = Value
 }

@@ -10,19 +10,24 @@
   "sources": {
     "pages_articles": {
       "name": "Wikipedia XML source dump file",
-      "desc": "The Wikipedia dump file, which is the source for all other extracted datasets."
+      "desc": "The Wikipedia dump file, which is the source for all other extracted datasets.",
+      "defaultgraph": "namespace"
     },
     "file_information": {
-      "name": "File Information"
+      "name": "File Information",
+      "desc": "TODO",
+      "defaultgraph": "namespace"
     },
     "main_dataset": {
       "name": "Main Dataset",
       "traits":"LinkedData",
-      "desc":"DBpedia root dataset for representing all datasets of e certain language and version of DBpedia"
+      "desc":"DBpedia root dataset for representing all datasets of e certain language and version of DBpedia",
+      "defaultgraph": "namespace"
     },
     "wiktionary_dbpedia_org": {
       "name": "wiktionary.dbpedia.org",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "namespace"
     }
   },
   "general": {
@@ -30,51 +35,61 @@
       "name": "Flickr Wrappr Links",
       "traits":"LinkedData",
       "desc": "Contains links to flickr wrappr.",
-      "depr": "2015-10"
+      "depr": "2015-10",
+      "defaultgraph": "namespace"
     },
     "labels": {
       "name": "Labels",
       "traits":"LinkedData",
-      "desc": "Titles of all Wikipedia Articles in the corresponding language. In Wikidata, it contains all the languages available in the mappings wiki, labels_nmw contains the rest "
+      "desc": "Titles of all Wikipedia Articles in the corresponding language. In Wikidata, it contains all the languages available in the mappings wiki, labels_nmw contains the rest ",
+      "defaultgraph": "namespace"
     },
     "category_labels": {
       "name": "Category Labels.",
       "traits":"LinkedData",
-      "desc": "Labels for Categories."
+      "desc": "Labels for Categories.",
+      "defaultgraph": "namespace"
     },
     "images": {
       "name": "Images",
       "traits":"LinkedData",
-      "desc": "Main image and corresponding thumbnail from Wikipedia article."
+      "desc": "Main image and corresponding thumbnail from Wikipedia article.",
+      "defaultgraph": "namespace"
     },
     "geo_coordinates": {
       "name": "Geo Coordinates",
       "traits":"LinkedData",
-      "desc": "Geographic coordinates extracted from Wikipedia."
+      "desc": "Geographic coordinates extracted from Wikipedia.",
+      "defaultgraph": "namespace"
     },
     "persondata": {
       "name": "Person data",
       "traits":"LinkedData",
-      "desc": "Information about persons (date and place of birth etc., extracted from the English and German Wikipedia, represented using the FOAF vocabulary."
+      "desc": "Information about persons (date and place of birth etc., extracted from the English and German Wikipedia, represented using the FOAF vocabulary.",
+      "defaultgraph": "namespace"
     },
     "pnd": {
       "name": "pnd",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "namespace"
     },
     "redirects": {
       "name": "Redirects",
       "traits":"LinkedData",
-      "desc": "Dataset containing redirects between articles in Wikipedia."
+      "desc": "Dataset containing redirects between articles in Wikipedia.",
+      "defaultgraph": "namespace"
     },
     "transitive_redirects": {
       "name": "Rransitive Redirects",
       "traits":"LinkedData",
-      "desc": "Dataset containing transitively resolved redirects between articles in Wikipedia."
+      "desc": "Dataset containing transitively resolved redirects between articles in Wikipedia.",
+      "defaultgraph": "namespace"
     },
     "article_categories": {
       "name": "Article Categories",
       "traits":"LinkedData",
-      "desc": "Links from concepts to categories using the SKOS vocabulary."
+      "desc": "Links from concepts to categories using the SKOS vocabulary.",
+      "defaultgraph": "namespace"
     },
     "article_templates": {
       "name": "Article Templates",
@@ -85,34 +100,38 @@
     "article_templates_nested": {
       "name": "Nested Article Templates",
       "traits":"LinkedData",
-      "desc": "Templates used in an article (nested)."
+      "desc": "Templates used in an article (nested).",
       "defaultgraph": "dataset"
     },
     "skos_categories": {
       "name": "SKOS Categories",
       "traits":"LinkedData",
-      "desc": "Information which concept is a category and how categories are related using the SKOS Vocabulary."
+      "desc": "Information which concept is a category and how categories are related using the SKOS Vocabulary.",
+      "defaultgraph": "namespace"
     },
     "revision_uris": {
       "name": "Revision Uris",
       "traits":"LinkedData",
-      "desc": "Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release."
+      "desc": "Dataset linking DBpedia resource to the specific Wikipedia article revision used in this DBpedia release.",
+      "defaultgraph": "namespace"
     },
     "revision_ids": {
       "name": "Revision Ids",
       "traits":"LinkedData",
-      "desc": "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from."
+      "desc": "Dataset linking a DBpedia resource to the revision ID of the Wikipedia article the data was extracted from.",
+      "defaultgraph": "namespace"
     },
     "revision_meta": {
       "name": "Revision Meta Data",
       "traits":"LinkedData",
-      "desc": "Dataset containing additional revision information"
+      "desc": "Dataset containing additional revision information",
       "defaultgraph": "dataset"
     },
     "page_ids": {
       "name": "Page Ids",
       "traits":"LinkedData",
-      "desc": "Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from."
+      "desc": "Dataset linking a DBpedia resource to the page ID of the Wikipedia article the data was extracted from.",
+      "defaultgraph": "namespace"
     },
     "interlanguage_links": {
       "name": "Interlanguage Links",
@@ -123,22 +142,26 @@
     "interlanguage_links_chapters": {
       "name": "Interlanguage Links between DBpedia Chapters",
       "traits":"LinkedData",
-      "desc": "Chapter specific interlanguage links only contains the interlanguage links between those languages for which a DBpedia mapping chapter exists and provides dereferencable URIs. (a subset of interlanguage links)"
+      "desc": "Chapter specific interlanguage links only contains the interlanguage links between those languages for which a DBpedia mapping chapter exists and provides dereferencable URIs. (a subset of interlanguage links)",
+      "defaultgraph": "namespace"
     },
     "genders": {
       "name": "Genders",
       "traits":"LinkedData",
-      "desc": "Dataset trying to identify the gender of a resource"
+      "desc": "Dataset trying to identify the gender of a resource",
+      "defaultgraph": "namespace"
     },
     "topical_concepts": {
       "name": "Topical Concepts",
       "traits":"LinkedData",
-      "desc": "Resources that describe a category"
+      "desc": "Resources that describe a category",
+      "defaultgraph": "namespace"
     },
     "uri_same_as_iri": {
       "name": "Uri Same As Iri",
       "traits":"LinkedData",
-      "desc": "The owl:sameAs links between the IRI and URI format of DBpedia resources. Only extracted when IRI and URI are actually different."
+      "desc": "The owl:sameAs links between the IRI and URI format of DBpedia resources. Only extracted when IRI and URI are actually different.",
+      "defaultgraph": "namespace"
     },
     "page_length": {
       "name": "Page Length",
@@ -149,17 +172,20 @@
     "image_galleries": {
       "name": "Image Galleries",
       "traits":"LinkedData",
-      "desc": "An image gallery for a resource"
+      "desc": "An image gallery for a resource",
+      "defaultgraph": "namespace"
     },
     "image_annotations": {
       "name": "Image Annotations",
       "traits":"LinkedData",
-      "desc": "Annotations of image regions"
+      "desc": "Annotations of image regions",
+      "defaultgraph": "namespace"
     },
     "kml_files": {
       "name": "Kml Files",
       "traits":"LinkedData",
-      "desc": "Description of KML files from Commons"
+      "desc": "Description of KML files from Commons",
+      "defaultgraph": "namespace"
     },
     "anchor_text": {
       "name": "Anchor Texts",
@@ -176,49 +202,58 @@
     "sounds": {
       "name": "sounds",
       "traits":"LinkedData",
-      "desc": "Audio files and sounds from Wikipedia articles."
+      "desc": "Audio files and sounds from Wikipedia articles.",
+      "defaultgraph": "namespace"
     },
     "french_population": {
       "name": "French Population",
       "traits":"LinkedData",
-      "desc": "French dataset about population."
+      "desc": "French dataset about population.",
+      "defaultgraph": "namespace"
     }
   },
   "mappings_based":{
     "instance_types": {
       "name": "Instance Types",
       "traits":"LinkedData",
-      "desc": "Contains triples of the form $object rdf:type $class from the mapping-based extraction."
+      "desc": "Contains triples of the form $object rdf:type $class from the mapping-based extraction.",
+      "defaultgraph": "namespace"
     },
     "instance_types_transitive": {
       "name": "Instance Types Transitive",
       "traits":"LinkedData",
-      "desc": "Contains transitive rdf:type $class based on the DBpedia ontology."
+      "desc": "Contains transitive rdf:type $class based on the DBpedia ontology.",
+      "defaultgraph": "namespace"
     },
     "mappingbased_objects_uncleaned": {
       "name": "mappingbased_objects_uncleaned",
       "traits":"LinkedData",
-      "depr": "2015-10"
+      "depr": "2015-10",
+      "defaultgraph": "namespace"
     },
     "mappingbased_literals": {
       "name": "Mappingbased Literals",
       "traits":"LinkedData",
-      "desc": "High-quality data extracted from Infoboxes using the mapping-based extraction (Literal properties only). The predicates in this dataset are in the ontology namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace."
+      "desc": "High-quality data extracted from Infoboxes using the mapping-based extraction (Literal properties only). The predicates in this dataset are in the ontology namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace.",
+      "defaultgraph": "namespace"
     },
     "geo_coordinates_mappingbased": {
       "name": "Geo Coordinates Mappingbased",
       "traits":"LinkedData",
-      "desc": "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki"
+      "desc": "Geographic coordinates extracted from Wikipedia originating from mapped infoboxes in the mappings wiki",
+      "defaultgraph": "namespace"
     },
     "specific_mappingbased_properties": {
       "name": "Specific Mappingbased Properties",
       "traits":"LinkedData",
-      "desc": "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city."
+      "desc": "Infobox data from the mapping-based extraction, using units of measurement more convenient for the resource type, e.g. square kilometres instead of square metres for the area of a city.",
+      "defaultgraph": "namespace"
     },
     "mappingbased_objects": {
       "name": "Mappingbased Objects",
       "traits":"LinkedData",
-      "desc": "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the 'ontology' namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace."
+      "desc": "High-quality data extracted from Infoboxes using the mapping-based extraction (Object properties only). The predicates in this dataset are in the 'ontology' namespace. Note that this data is of much higher quality than the Raw Infobox Properties in the 'property' namespace.",
+      "defaultgraph": "namespace"
     },
     "mappingbased_objects_disjoint_range": {
       "name": "Mappingbased Objects Disjoint Range",
@@ -267,7 +302,8 @@
     "infobox_properties": {
       "name": "Infobox Properties",
       "traits":"LinkedData",
-      "desc": "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data."
+      "desc": "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data.",
+      "defaultgraph": "namespace"
     },
     "infobox_properties_mapped": {
       "name": "Infobox Properties Mapped",
@@ -278,7 +314,8 @@
     "infobox_property_definitions": {
       "name": "Infobox Property Definitions",
       "traits":"LinkedData",
-      "desc": "All properties predicates used in infoboxes."
+      "desc": "All properties predicates used in infoboxes.",
+      "defaultgraph": "namespace"
     },
     "template_parameters": {
       "name": "Template Parameters",
@@ -294,29 +331,34 @@
     "template_mappings": {
       "name": "Template Mappings",
       "traits":"LinkedData",
-      "desc": "Todo."
+      "desc": "Todo.",
+      "defaultgraph": "namespace"
     },
     "template_mapping_hints_instance": {
       "name": "Template Mapping Hints Instance",
       "traits":"LinkedData",
-      "desc": "Todo"
+      "desc": "Todo",
+      "defaultgraph": "namespace"
     },
     "template_mapping_hints": {
       "name": "Template Mapping Hints",
       "traits":"LinkedData",
-      "desc": "Todo"
+      "desc": "Todo",
+      "defaultgraph": "namespace"
     }
   },
   "abstracts":{
     "short_abstracts": {
       "name": "Short Abstracts",
       "traits":"LinkedData",
-      "desc": "Short Abstracts (about 600 characters long) of Wikipedia articles."
+      "desc": "Short Abstracts (about 600 characters long) of Wikipedia articles.",
+      "defaultgraph": "namespace"
     },
     "long_abstracts": {
       "name": "Long Abstracts",
       "traits":"LinkedData",
-      "desc": "Long abstracts (full abstracts) of Wikipedia articles, usually the first section."
+      "desc": "Long abstracts (full abstracts) of Wikipedia articles, usually the first section.",
+      "defaultgraph": "namespace"
     },
     "missing_short_abstracts": {
       "name": "Missing Short Abstracts",
@@ -359,12 +401,14 @@
     "wikipedia_links": {
       "name": "Wikipedia Links",
       "traits":"LinkedData",
-      "desc": "Dataset linking DBpedia resource to corresponding article in Wikipedia."
+      "desc": "Dataset linking DBpedia resource to corresponding article in Wikipedia.",
+      "defaultgraph": "namespace"
     },
     "external_links": {
       "name": "External Links",
       "traits":"LinkedData",
-      "desc": "Links to external web pages about a concept."
+      "desc": "Links to external web pages about a concept.",
+      "defaultgraph": "namespace"
     },
     "page_links": {
       "name": "Page Links",
@@ -375,12 +419,14 @@
     "disambiguations": {
       "name": "Disambiguations",
       "traits":"LinkedData",
-      "desc": "Links extracted from Wikipedia disambiguation pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics."
+      "desc": "Links extracted from Wikipedia disambiguation pages. Since Wikipedia has no syntax to distinguish disambiguation links from ordinary links, DBpedia has to use heuristics.",
+      "defaultgraph": "namespace"
     },
     "homepages": {
       "name": "Homepages",
       "traits":"LinkedData",
-      "desc": "Links to homepages of persons, organizations etc."
+      "desc": "Links to homepages of persons, organizations etc.",
+      "defaultgraph": "namespace"
     },
     "out_degree": {
       "name": "Out Degree",
@@ -391,17 +437,20 @@
     "freebase_links": {
       "name": "Freebase Links",
       "traits":"LinkedData",
-      "desc": "This file contains the back-links (owl:sameAs) to the Freebase dataset."
+      "desc": "This file contains the back-links (owl:sameAs) to the Freebase dataset.",
+      "defaultgraph": "namespace"
     },
     "geonames_links": {
       "name": "Geonames Links",
       "traits":"LinkedData",
-      "desc": "This file contains the back-links (owl:sameAs) to the Geonames dataset."
+      "desc": "This file contains the back-links (owl:sameAs) to the Geonames dataset.",
+      "defaultgraph": "namespace"
     },
     "commons_page_links": {
       "name": "Commons Page Links",
       "traits":"LinkedData",
-      "desc": "Dataset containing links between a language-locale DBpedia instance and DBpedia Commons."
+      "desc": "Dataset containing links between a language-locale DBpedia instance and DBpedia Commons.",
+      "defaultgraph": "namespace"
     }
   },
   "wikidata":{
@@ -418,16 +467,19 @@
     },
     "sameas_wikidata": {
       "name": "sameas_wikidata",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "namespace"
     },
     "sameas_external": {
       "name": "sameas_external",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "namespace"
     },
     "alias": {
       "name": "alias",
       "traits":"LinkedData",
-      "desc": "Wikidata-specific dataset containing aliases for languages in the mappings wiki. See the alias_nmw dataset for the rest of data."
+      "desc": "Wikidata-specific dataset containing aliases for languages in the mappings wiki. See the alias_nmw dataset for the rest of data.",
+      "defaultgraph": "namespace"
     },
     "alias_nmw": {
       "name": "alias_nmw",
@@ -438,7 +490,8 @@
     "description": {
       "name": "description",
       "traits":"LinkedData",
-      "desc": "Wikidata-specific dataset containing descriptions for languages in the mappings wiki. See the description_nmw dataset for the rest of data."
+      "desc": "Wikidata-specific dataset containing descriptions for languages in the mappings wiki. See the description_nmw dataset for the rest of data.",
+      "defaultgraph": "namespace"
     },
     "description_nmw": {
       "name": "description_nmw",
@@ -448,7 +501,8 @@
     },
     "properties": {
       "name": "properties",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "namespace"
     },
     "ontology_subclassof": {
       "name": "ontology_subclassof",
@@ -487,7 +541,8 @@
     },
     "references": {
       "name": "references",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "namespace"
     },
     "wikidata_duplicate_iri_split": {
       "name": "wikidata_duplicate_iri_split",

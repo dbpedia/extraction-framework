@@ -195,8 +195,10 @@ object DataIdGenerator {
             dataset = addDataset(mainModel, lang, dis, creator)
             if(dis.contains("pages_articles"))
               pagesArticles = DBpediaDatasets.getDataset(dataset.getURI, lang, this.dbpVersion)
-            topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
-            mainModel.add(dataset, getProperty("dc", "isPartOf"), currentRootSet)
+            else {
+              topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
+              mainModel.add(dataset, getProperty("dc", "isPartOf"), currentRootSet)
+            }
           }
           dumpFile.findFirstIn(dis) match {
             case Some(l) =>
@@ -532,11 +534,11 @@ object DataIdGenerator {
 
     // add prev/next/latest statements
     addVersionPointers(model, datasetUri)
+    model.add(datasetUri, getProperty("rdfs", "label"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
 
     if (!superset) //not!
     {
       model.add(datasetUri, getProperty("dc", "title"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
-      model.add(datasetUri, getProperty("rdfs", "label"), createLiteral(dataset.name.replace("-", " ").replace("_", " "), "en"))
       dataset.description match{
         case Some(desc) => model.add(datasetUri, getProperty("dc", "description"), createLiteral(desc, "en"))
         case None => {

@@ -30,7 +30,7 @@ class WikidataLabelExtractor(
   private val mappingLanguages = Namespace.mappings.keySet
 
   // this is where we will store the output
-  override val datasets = Set(DBpediaDatasets.WikidataLabelsMappingsWiki,DBpediaDatasets.WikidataLabelsRest)
+  override val datasets = Set(DBpediaDatasets.Labels,DBpediaDatasets.WikidataLabelsRest)
 
   override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     // This array will hold all the triples we will extract
