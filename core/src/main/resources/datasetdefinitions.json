@@ -79,12 +79,14 @@
     "article_templates": {
       "name": "Article Templates",
       "traits":"LinkedData",
-      "desc": "Templates used in an article (top-level)."
+      "desc": "Templates used in an article (top-level).",
+      "defaultgraph": "dataset"
     },
     "article_templates_nested": {
       "name": "Nested Article Templates",
       "traits":"LinkedData",
       "desc": "Templates used in an article (nested)."
+      "defaultgraph": "dataset"
     },
     "skos_categories": {
       "name": "SKOS Categories",
@@ -105,6 +107,7 @@
       "name": "Revision Meta Data",
       "traits":"LinkedData",
       "desc": "Dataset containing additional revision information"
+      "defaultgraph": "dataset"
     },
     "page_ids": {
       "name": "Page Ids",
@@ -114,7 +117,8 @@
     "interlanguage_links": {
       "name": "Interlanguage Links",
       "traits":"LinkedData",
-      "desc": "Dataset linking a DBpedia resource to the same resource in other languages and in Wikidata."
+      "desc": "Dataset linking a DBpedia resource to the same resource in other languages and in Wikidata.",
+      "defaultgraph": "dataset"
     },
     "interlanguage_links_chapters": {
       "name": "Interlanguage Links between DBpedia Chapters",
@@ -139,7 +143,8 @@
     "page_length": {
       "name": "Page Length",
       "traits":"LinkedData",
-      "desc": "Numbers of characters contained in a Wikipedia article's source."
+      "desc": "Numbers of characters contained in a Wikipedia article's source.",
+      "defaultgraph": "metrics"
     },
     "image_galleries": {
       "name": "Image Galleries",
@@ -159,12 +164,14 @@
     "anchor_text": {
       "name": "Anchor Texts",
       "traits":"LinkedData",
-      "desc": "Texts used in links to refer to Wikipedia articles from other Wikipedia articles."
+      "desc": "Texts used in links to refer to Wikipedia articles from other Wikipedia articles.",
+      "defaultgraph": "dataset"
     },
     "surface_forms": {
       "name": "Surface Forms",
       "traits":"LinkedData",
-      "desc": "Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name."
+      "desc": "Texts used to refer to Wikipedia articles. Includes the anchor texts data, the names of redirects pointing to an article and the actual article name.",
+      "defaultgraph": "dataset"
     },
     "sounds": {
       "name": "sounds",
@@ -235,7 +242,7 @@
       "name": "Instance Types Lhd Ext",
       "traits":"LinkedData",
       "desc": "Linked Hypernym Extension dataset attaches entity articles with a DBpedia resource as their type. The types are hypernyms mined from articles' free text using hand-crafted lexicosyntactic patterns. Unlike the  Inference dataset the Extension dataset contains more specific types, since the set of types is not constrained to DBpedia Ontology - any DBpedia resource can serve as a type.",
-      "defaultgraph":"alttype"
+      "defaultgraph":"alttype-ext"
     },
     "instance_types_dbtax_dbo": {
       "name": "Instance Types Dbtax Dbo",
@@ -247,7 +254,7 @@
       "name": "Instance Types Dbtax Ext",
       "traits":"LinkedData",
       "desc": "DBTax is a data-driven approach to convert the Wikipedia category system into an extensive general-purpose taxonomy, the types of which can be automatically assigned to resources. This set is its result for DBpedia where the inferred type has no known equivalent in the DBpedia ontology.",
-      "defaultgraph":"alttype"
+      "defaultgraph":"alttype-ext"
     },
     "instance_types_sdtyped_dbo": {
       "name": "Instance Types Sdtyped Dbo",
@@ -265,7 +272,8 @@
     "infobox_properties_mapped": {
       "name": "Infobox Properties Mapped",
       "traits":"LinkedData",
-      "desc": "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data. This dataset contains facts that have equivalent mapped facts in the mapping-based datasets. "
+      "desc": "Information that has been extracted from Wikipedia infoboxes. Note that this data is in the less clean 'property' namespace. The Mapping-based Properties in the 'ontology' namespace, should always be preferred over this data. This dataset contains facts that have equivalent mapped facts in the mapping-based datasets. ",
+      "defaultgraph": "dataset"
     },
     "infobox_property_definitions": {
       "name": "Infobox Property Definitions",
@@ -275,11 +283,13 @@
     "template_parameters": {
       "name": "Template Parameters",
       "traits":"LinkedData",
-      "desc": "Dataset describing names of template parameters."
+      "desc": "Dataset describing names of template parameters.",
+      "defaultgraph": "dataset"
     },
     "infobox_test": {
       "name": "infobox_test",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     },
     "template_mappings": {
       "name": "Template Mappings",
@@ -311,12 +321,14 @@
     "missing_short_abstracts": {
       "name": "Missing Short Abstracts",
       "traits":"LinkedData",
-      "depr": "2015-04"
+      "depr": "2015-04",
+      "defaultgraph": "dataset"
     },
     "missing_long_abstracts": {
       "name": "Missing Long Abstracts",
       "traits":"LinkedData",
-      "depr": "2015-04"
+      "depr": "2015-04",
+      "defaultgraph": "dataset"
     },
     "nif_abstract_context": {
       "name": "Nif Abstract Context",
@@ -358,7 +370,7 @@
       "name": "Page Links",
       "traits":"LinkedData",
       "desc": "Dataset containing internal links between DBpedia instances. The dataset was created from the internal links between Wikipedia articles. The dataset might be useful for structural analysis, data mining or for ranking DBpedia instances using Page Rank or similar algorithms.",
-      "defaultgraph":"links"
+      "defaultgraph": "dataset"
     },
     "disambiguations": {
       "name": "Disambiguations",
@@ -373,7 +385,8 @@
     "out_degree": {
       "name": "Out Degree",
       "traits":"LinkedData",
-      "desc": "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article."
+      "desc": "Number of links emerging from a Wikipedia article and pointing to another Wikipedia article.",
+      "defaultgraph": "metrics"
     },
     "freebase_links": {
       "name": "Freebase Links",
@@ -395,11 +408,13 @@
     "labels_nmw": {
       "name": "labels nmw for Wikidata",
       "traits":"LinkedData",
-      "desc": "Wikidata-specific dataset containing ttem labels for languages not in the mappings wiki. See the labels dataset for the rest of data."
+      "desc": "Wikidata-specific dataset containing ttem labels for languages not in the mappings wiki. See the labels dataset for the rest of data.",
+      "defaultgraph": "dataset"
     },
     "sameas_all_wikis": {
       "name": "sameas_all_wikis",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     },
     "sameas_wikidata": {
       "name": "sameas_wikidata",
@@ -417,7 +432,8 @@
     "alias_nmw": {
       "name": "alias_nmw",
       "traits":"LinkedData",
-      "desc": "Wikidata-specific dataset containing aliases for languages not in the mappings wiki. See the alias dataset for the rest of data."
+      "desc": "Wikidata-specific dataset containing aliases for languages not in the mappings wiki. See the alias dataset for the rest of data.",
+      "defaultgraph": "dataset"
     },
     "description": {
       "name": "description",
@@ -427,7 +443,8 @@
     "description_nmw": {
       "name": "description_nmw",
       "traits":"LinkedData",
-      "desc": "Wikidata-specific dataset containing descriptions for languages not in the mappings wiki. See the description dataset for the rest of data."
+      "desc": "Wikidata-specific dataset containing descriptions for languages not in the mappings wiki. See the description dataset for the rest of data.",
+      "defaultgraph": "dataset"
     },
     "properties": {
       "name": "properties",
@@ -435,35 +452,38 @@
     },
     "ontology_subclassof": {
       "name": "ontology_subclassof",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     },
     "wikidata_r2r_mapping_errors": {
       "name": "wikidata_r2r_mapping_errors",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     },
     "mappingbased_properties_reified": {
       "name": "mappingbased_properties_reified",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "reified"
     },
     "mappingbased_properties_reified_qualifiers": {
       "name": "mappingbased_properties_reified_qualifiers",
-      "traits":"LinkedData"
-    },
-    "raw_unredirected": {
-      "name": "raw_unredirected",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "reified"
     },
     "raw": {
       "name": "raw",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     },
     "raw_reified": {
       "name": "raw_reified",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     },
     "raw_reified_qualifiers": {
       "name": "raw_reified_qualifiers",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     },
     "references": {
       "name": "references",
@@ -471,28 +491,33 @@
     },
     "wikidata_duplicate_iri_split": {
       "name": "wikidata_duplicate_iri_split",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "reified"
     }
   },
   "citations":{
     "citation_links": {
       "name": "Citation Links",
       "traits":"LinkedData",
-      "desc": "Links from a citation to a DBpedia article using the dbp:isCitedBy property"
+      "desc": "Links from a citation to a DBpedia article using the dbp:isCitedBy property",
+      "defaultgraph": "dataset"
     },
     "citation_data": {
       "name": "Citation Data",
       "traits":"LinkedData",
-      "desc": "Raw data extracted from Wikipedia citation templates"
+      "desc": "Raw data extracted from Wikipedia citation templates",
+      "defaultgraph": "dataset"
     },
     "cited_facts": {
       "name": "Cited Facts",
       "traits":"LinkedData",
-      "desc": "Experimental dataset the extracts facts with a citation."
+      "desc": "Experimental dataset the extracts facts with a citation.",
+      "defaultgraph": "dataset"
     },
     "citation_types": {
       "name": "Citation Types",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "defaultgraph": "dataset"
     }
   }
 }
