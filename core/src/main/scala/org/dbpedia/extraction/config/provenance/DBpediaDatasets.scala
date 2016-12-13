@@ -2,7 +2,6 @@ package org.dbpedia.extraction.config.provenance
 
 import org.dbpedia.extraction.ontology.DBpediaNamespace
 import org.dbpedia.extraction.util.{JsonConfig, Language}
-import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.mutable
 
@@ -106,7 +105,7 @@ object DBpediaDatasets
     }
 
     //TODO these datasets should be replaced - create wikidata sameas links files
-    for(lang <- Namespace.mappings.keySet)
+    for(lang <- Language.map.values)
         datasets("interlanguage_links_" + lang.wikiCode) = new Dataset(
             "Wikidata Interlanguage Links for " + lang.name,
             "Interlanguage links generated from the Wikidata dump file.",
@@ -114,6 +113,8 @@ object DBpediaDatasets
             null,
             "interlanguage_links_" + lang.wikiCode
         )
+
+
 
     tempMap = null
     
