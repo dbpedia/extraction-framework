@@ -26,23 +26,6 @@
     }
   },
   "general": {
-    "short_abstracts": {
-      "name": "Short abstract literals",
-      "traits":"LinkedData",
-      "desc": "Short Abstracts (about 600 characters long) from the first section of Wikipedia articles.",
-      "sources": [
-        "pages_articles"
-      ]
-    },
-    "short_abstracts_en_uris": {
-      "name": "Short abstract literals",
-      "traits":"LinkedData",
-      "desc": "Short Abstracts (about 600 characters long) from the first section of Wikipedia articles, mapped to the corresponding English resources.",
-      "sources": [
-        "short_abstracts"
-      ],
-      "depr": "2016-04"
-    },
     "flickr_wrappr_links": {
       "name": "Flickr Wrappr Links",
       "traits":"LinkedData",
@@ -52,7 +35,7 @@
     "labels": {
       "name": "Labels",
       "traits":"LinkedData",
-      "desc": "Titles of all Wikipedia Articles in the corresponding language."
+      "desc": "Titles of all Wikipedia Articles in the corresponding language. In Wikidata, it contains all the languages available in the mappings wiki, labels_nmw contains the rest "
     },
     "category_labels": {
       "name": "Category Labels.",
@@ -409,13 +392,10 @@
     }
   },
   "wikidata":{
-    "wikidata_labels": {
-      "name": "Wikidata Labels",
-      "traits":"LinkedData"
-    },
     "labels_nmw": {
       "name": "labels nmw for Wikidata",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "desc": "Wikidata-specific dataset containing ttem labels for languages not in the mappings wiki. See the labels dataset for the rest of data."
     },
     "sameas_all_wikis": {
       "name": "sameas_all_wikis",
@@ -431,19 +411,23 @@
     },
     "alias": {
       "name": "alias",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "desc": "Wikidata-specific dataset containing aliases for languages in the mappings wiki. See the alias_nmw dataset for the rest of data."
     },
     "alias_nmw": {
       "name": "alias_nmw",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "desc": "Wikidata-specific dataset containing aliases for languages not in the mappings wiki. See the alias dataset for the rest of data."
     },
     "description": {
       "name": "description",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "desc": "Wikidata-specific dataset containing descriptions for languages in the mappings wiki. See the description_nmw dataset for the rest of data."
     },
     "description_nmw": {
       "name": "description_nmw",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "desc": "Wikidata-specific dataset containing descriptions for languages not in the mappings wiki. See the description dataset for the rest of data."
     },
     "properties": {
       "name": "properties",
@@ -503,7 +487,8 @@
     },
     "cited_facts": {
       "name": "Cited Facts",
-      "traits":"LinkedData"
+      "traits":"LinkedData",
+      "desc": "Experimental dataset the extracts facts with a citation."
     },
     "citation_types": {
       "name": "Citation Types",
