@@ -41,7 +41,7 @@ class WikidataLabelExtractor(
         Language.get(lang) match {
           case Some(dbpedia_lang) => {
             if (mappingLanguages.contains(dbpedia_lang))
-              quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLabelsMappingsWiki,
+              quads += new Quad(dbpedia_lang, DBpediaDatasets.Labels,
                 subjectUri, labelProperty, literalWithoutLang, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
             else
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataLabelsRest,
