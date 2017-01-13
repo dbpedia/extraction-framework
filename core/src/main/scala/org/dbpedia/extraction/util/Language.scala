@@ -66,8 +66,6 @@ object Language extends (String => Language)
   val logger = Logger.getLogger(Language.getClass.getName)
 
   val wikipediaLanguageUrl = "https://noc.wikimedia.org/conf/langlist"
-
-  val wikis = WikiInfo.fromURL(WikiInfo.URL, Codec.UTF8)
   
   val map: Map[String, Language] = locally {
     def language(code : String, name: String, iso_1: String, iso_3: String): Language = {
@@ -82,7 +80,10 @@ object Language extends (String => Language)
         new DBpediaNamespace("http://"+code+".dbpedia.org/property/"),
         "http://"+code+".wikipedia.org",
         "https://"+code+".wikipedia.org/w/api.php",
-        wikis.filter(x => x.wikicode == code).head.pages
+        ConfigUtils.wikiInfos.filter(x => x.wikicode == code) match{
+          case e if e.nonEmpty => e.head.pages
+          case _ => 0
+        }
       )
     }
 
@@ -107,7 +108,7 @@ object Language extends (String => Language)
             new DBpediaNamespace(properties("propertyUri").asText),
             properties("baseUri").asText,
             properties("apiUri").asText,
-            wikis.filter(x => x.wikicode == properties("wikiCode").asText).head.pages
+            properties("pages").asInt
           )
           case None => languages(lang) = language(
             properties("wikiCode").asText,

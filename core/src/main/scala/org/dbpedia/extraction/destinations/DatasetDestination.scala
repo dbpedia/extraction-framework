@@ -19,13 +19,13 @@ extends Destination
   override def open() = {
     for(dest <- destinations)
     {
-      DatasetDestination.openedDatasets.get(dest._1) match{
-        case Some(x) => throw new Exception("The following Dataset is already in progress: " + dest._1)
-        case None => {
+      //DatasetDestination.openedDatasets.get(dest._1) match{
+        //case Some(x) => throw new Exception("The following Dataset is already in progress: " + dest._1)
+        //case None => {
           dest._2.open()
           DatasetDestination.openedDatasets(dest._1) = true
-        }
-      }
+        //}
+      //}
     }
   }
 
