@@ -41,11 +41,11 @@ class Language private(
   val resourceUri: RdfNamespace,
   val propertyUri: RdfNamespace,
   val baseUri: String,
-  val apiUri: String
+  val apiUri: String,
+  val pages: Int
 )
 {
     val locale = new Locale(isoCode)
-
     
     /** 
      * Wikipedia dump files use this prefix (with underscores), e.g. be_x_old, but
@@ -54,7 +54,7 @@ class Language private(
     val filePrefix = wikiCode.replace('-', '_')
     /**
      */
-    override def toString = "wiki="+wikiCode+",locale="+locale.getLanguage
+    override def toString: String = "wiki="+wikiCode+",locale="+locale.getLanguage
     
     // no need to override equals() and hashCode() - there is only one object for each value, so equality means identity. 
 }
@@ -66,9 +66,10 @@ object Language extends (String => Language)
   val logger = Logger.getLogger(Language.getClass.getName)
 
   val wikipediaLanguageUrl = "https://noc.wikimedia.org/conf/langlist"
+
+  val wikis = WikiInfo.fromURL(WikiInfo.URL, Codec.UTF8)
   
   val map: Map[String, Language] = locally {
-    
     def language(code : String, name: String, iso_1: String, iso_3: String): Language = {
       new Language(
         code,
@@ -80,7 +81,8 @@ object Language extends (String => Language)
         new DBpediaNamespace("http://"+code+".dbpedia.org/resource/"),
         new DBpediaNamespace("http://"+code+".dbpedia.org/property/"),
         "http://"+code+".wikipedia.org",
-        "https://"+code+".wikipedia.org/w/api.php"
+        "https://"+code+".wikipedia.org/w/api.php",
+        wikis.filter(x => x.wikicode == code).head.pages
       )
     }
 
@@ -95,22 +97,23 @@ object Language extends (String => Language)
         val properties = specialLangs.getMap(lang)
         properties.get("dbpediaDomain") match{
           case Some(dom) => languages(lang) = new Language(
-            properties.get("wikiCode").get.asText,
-            properties.get("name").get.asText,
-            properties.get("isoCode").get.asText,
-            properties.get("iso639_3").get.asText,
+            properties("wikiCode").asText,
+            properties("name").asText,
+            properties("isoCode").asText,
+            properties("iso639_3").asText,
             dom.asText,
-            properties.get("dbpediaUri").get.asText(),
-            new DBpediaNamespace(properties.get("resourceUri").get.asText),
-            new DBpediaNamespace(properties.get("propertyUri").get.asText),
-            properties.get("baseUri").get.asText,
-            properties.get("apiUri").get.asText
+            properties("dbpediaUri").asText(),
+            new DBpediaNamespace(properties("resourceUri").asText),
+            new DBpediaNamespace(properties("propertyUri").asText),
+            properties("baseUri").asText,
+            properties("apiUri").asText,
+            wikis.filter(x => x.wikicode == properties("wikiCode").asText).head.pages
           )
           case None => languages(lang) = language(
-            properties.get("wikiCode").get.asText,
-            properties.get("name").get.asText,
-            properties.get("isoCode").get.asText,
-            properties.get("iso639_3").get.asText)
+            properties("wikiCode").asText,
+            properties("name").asText,
+            properties("isoCode").asText,
+            properties("iso639_3").asText)
         }
       }
     }

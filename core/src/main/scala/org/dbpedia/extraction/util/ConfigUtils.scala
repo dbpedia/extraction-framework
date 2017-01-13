@@ -85,7 +85,7 @@ object ConfigUtils {
   // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
   def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
     
-    val keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
+    val keys = for(arg <- args; key <- arg.split("[,\\s]"); if key.nonEmpty) yield key
         
     var languages = SortedSet[Language]()
     var excludedLanguages = SortedSet[Language]()
@@ -95,19 +95,16 @@ object ConfigUtils {
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappings.keySet
       case "@chapters" => languages ++= Namespace.chapters.keySet
+      case "@downloaded" => languages ++= downloadedLanguages(baseDir)
+      case "@abstracts" => {
+        //@downloaded - Commons & Wikidata
+        languages ++= downloadedLanguages(baseDir)
+        excludedLanguages += Language.Commons
+        excludedLanguages += Language.Wikidata
+      }
       case RangeRegex(from, to) => ranges += toRange(from, to)
       case LanguageRegex(language) => languages += Language(language)
       case ExcludedLanguageRegex(language) => excludedLanguages += Language(language)
-      case "@downloaded" => {
-        // resolve only downloaded languages
-        for(file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki")))
-        {
-          Language.get(file.getName.replace("wiki", "").replace("_", "-")) match{
-            case Some(l) => languages += l
-            case None =>
-          }
-        }
-      }
       case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
@@ -123,10 +120,13 @@ object ConfigUtils {
       val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
       
       // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
+      for ((from, to) <- ranges; wiki <- wikis; if from <= wiki.pages && wiki.pages <= to)
       {
         // ...add its language
-        languages += wiki.language
+        Language.get(wiki.wikicode) match{
+          case Some(l) => languages += l
+          case None =>
+        }
       }
     }
 
@@ -134,7 +134,12 @@ object ConfigUtils {
     
     languages.toArray
   }
-  
+
+  private def downloadedLanguages(baseDir: File): Array[Language] = {
+    for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki"))) yield
+      Language.get(file.getName.replace("wiki", "").replace("_", "-")).collect{ case l :Language => l}.get
+  }
+
   /**
    * Simple regex matching Wikipedia language codes.
    * Language codes have at least two characters, start with a lower-case letter and contain only 

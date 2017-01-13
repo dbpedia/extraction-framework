@@ -9,7 +9,7 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Information about a Wikipedia.
  */
-class WikiInfo(val language: Language, val pages: Int)
+class WikiInfo(val wikicode: String, val pages: Int)
 
 /**
  * Helper methods to create WikiInfo objects.
@@ -74,7 +74,7 @@ object WikiInfo
       if (! ConfigUtils.LanguageRegex.pattern.matcher(fields(2)).matches) throw new Exception("expected language code in field with index [2], found line ["+line+"]")
 
       if(Language.map.keySet.contains(wikiCode))
-        Option(new WikiInfo(Language(wikiCode), pages))
+        Option(new WikiInfo(wikiCode, pages))
       else
       {
         logger.log(Level.WARNING, "Language: " + wikiCode + " will be ignored. Add this language to the addonlangs.json file to extract it.")
