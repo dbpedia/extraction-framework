@@ -16,11 +16,34 @@ import scala.io.Codec
 import scala.util.Try
 
 
-/**
- * TODO: use scala.collection.Map[String, String] instead of java.util.Properties?
- */
 object ConfigUtils {
-  
+
+  /**
+    * Simple regex matching Wikipedia language codes.
+    * Language codes have at least two characters, start with a lower-case letter and contain only
+    * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
+    */
+  val LanguageRegex = """([a-z][a-z0-9-]+)""".r
+
+  /**
+    * Regex used for excluding languages from the import.
+    */
+  val ExcludedLanguageRegex = """!([a-z][a-z0-9-]+)""".r
+
+  /**
+    * Regex for numeric range, both limits optional
+    */
+  val RangeRegex = """(\d*)-(\d*)""".r
+
+  val universalConfig = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
+  val baseDir = getValue(universalConfig , "base-dir", true){
+    x =>
+      val dir = new File(x)
+      if (! dir.exists) throw error("dir "+dir+" does not exist")
+      dir
+  }
+  val wikiInfos = WikiInfo.fromFile(new File(baseDir, WikiInfo.FileName), Codec.UTF8)
+
   def loadConfig(file: String, charset: String = "UTF-8"): Properties = {
     loadFromStream(new FileInputStream(file), charset)
   }
@@ -85,7 +108,7 @@ object ConfigUtils {
   // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
   def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
     
-    val keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
+    val keys = for(arg <- args; key <- arg.split("[,\\s]"); if key.nonEmpty) yield key
         
     var languages = SortedSet[Language]()
     var excludedLanguages = SortedSet[Language]()
@@ -95,38 +118,34 @@ object ConfigUtils {
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappings.keySet
       case "@chapters" => languages ++= Namespace.chapters.keySet
+      case "@downloaded" => languages ++= downloadedLanguages(baseDir)
+      case "@abstracts" => {
+        //@downloaded - Commons & Wikidata
+        languages ++= downloadedLanguages(baseDir)
+        excludedLanguages += Language.Commons
+        excludedLanguages += Language.Wikidata
+      }
       case RangeRegex(from, to) => ranges += toRange(from, to)
       case LanguageRegex(language) => languages += Language(language)
       case ExcludedLanguageRegex(language) => excludedLanguages += Language(language)
-      case "@downloaded" => {
-        // resolve only downloaded languages
-        for(file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki")))
-        {
-          Language.get(file.getName.replace("wiki", "").replace("_", "-")) match{
-            case Some(l) => languages += l
-            case None =>
-          }
-        }
-      }
       case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
     // resolve page count ranges to languages
     if (ranges.nonEmpty)
     {
-      val listFile = new File(baseDir, WikiInfo.FileName)
-      
       // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
       // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
       // these non-ASCII chars anyway, so we don't have to unescape them.
-      println("parsing "+listFile)
-      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
       
       // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
+      for ((from, to) <- ranges; wiki <- wikiInfos; if from <= wiki.pages && wiki.pages <= to)
       {
         // ...add its language
-        languages += wiki.language
+        Language.get(wiki.wikicode) match{
+          case Some(l) => languages += l
+          case None =>
+        }
       }
     }
 
@@ -134,24 +153,12 @@ object ConfigUtils {
     
     languages.toArray
   }
-  
-  /**
-   * Simple regex matching Wikipedia language codes.
-   * Language codes have at least two characters, start with a lower-case letter and contain only 
-   * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
-   */
-  val LanguageRegex = """([a-z][a-z0-9-]+)""".r
 
-  /**
-   * Regex used for excluding languages from the import.
-   */
-  val ExcludedLanguageRegex = """!([a-z][a-z0-9-]+)""".r
-    
-  /**
-   * Regex for numeric range, both limits optional
-   */
-  val RangeRegex = """(\d*)-(\d*)""".r
-  
+  private def downloadedLanguages(baseDir: File): Array[Language] = {
+    for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki"))) yield
+      Language.get(file.getName.replace("wiki", "").replace("_", "-")).collect{ case l :Language => l}.get
+  }
+
   def toRange(from: String, to: String): (Int, Int) = {
     val lo: Int = if (from.isEmpty) 0 else from.toInt
     val hi: Int = if (to.isEmpty) Int.MaxValue else to.toInt

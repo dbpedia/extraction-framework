@@ -55,7 +55,10 @@ object Download extends DownloadConfig
       for (((from, to), files) <- ranges; wiki <- wikis; if from <= wiki.pages && wiki.pages <= to)
       {
         // ...add files for this range to files for this language
-        languages.getOrElseUpdate(wiki.language, new HashSet[(String, Boolean)]) ++= files
+        Language.get(wiki.wikicode) match{
+          case Some(l) => languages.getOrElseUpdate(l, new HashSet[(String, Boolean)]) ++= files
+          case None =>
+        }
       }
     }
     

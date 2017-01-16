@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.util
 
 import java.io.File
-import java.util.Properties
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.Extractor
@@ -19,7 +18,6 @@ class Config(configPath: String)
     * 1. the universal config containing properties universal for a release
     * 2. the extraction job specific config provided by the user
     */
-  val universalConfig = ConfigUtils.loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
   val config = ConfigUtils.loadConfig(configPath)
 
   def checkOverride(key: String) = if(config.containsKey(key))
