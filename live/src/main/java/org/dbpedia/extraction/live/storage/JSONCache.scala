@@ -56,15 +56,15 @@ class JSONCache(pageID: Long, pageTitle: String) {
           val objLsit = vp.asInstanceOf[List[Map[String,String]]]
           for (obj <- objLsit) {
             val objType: String = obj.getOrElse("type","")
-            val objDatatype: String = obj.getOrElse("datatype", "http://www.w3.org/2001/XMLSchema#string")
-            val finalDatatype = if (objType.equals("uri")) null else objDatatype // null datatype if uri
             val objLang: String = obj.getOrElse("lang", JSONCache.defaultLanguage)
+            val objDatatype: String = if (objType.equals("uri"))  null
+                                      else obj.getOrElse("datatype", "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
 
             val objValue: String = obj.getOrElse("value","")
             // unescape if URI
-            val finalValue = if (finalDatatype == null) org.apache.commons.lang.StringEscapeUtils.unescapeJava(objValue) else objValue
+            val finalValue = if (objDatatype == null) org.apache.commons.lang.StringEscapeUtils.unescapeJava(objValue) else objValue
 
-            quads += new Quad(if (objLang.isEmpty) JSONCache.defaultLanguage else objLang ,"",subject, predicate, objValue, "", finalDatatype)
+            quads += new Quad(objLang ,"",subject, predicate, objValue, "", objDatatype)
 
           }
         }
@@ -211,7 +211,7 @@ object JSONCache {
                                                 else obj.getOrElse("datatype", "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
 
 
-                      quads += new Quad(if (objLang.isEmpty) defaultLanguage else objLang , "", subject, predicate, objValue, "", objDatatype)
+                      quads += new Quad(objLang , "", subject, predicate, objValue, "", objDatatype)
 
                     }
                 }
