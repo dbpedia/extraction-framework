@@ -107,12 +107,13 @@ class JSONCache(pageID: Long, pageTitle: String) {
     if (subjectsSet.size()>0)
       subjects.deleteCharAt(subjects.length-1); //delete last comma
 
+    val escaped_json = org.apache.commons.lang.StringEscapeUtils.escapeJava(json)
     // Check wheather to update oΑr insert
     if (cacheExists) {
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  json, subjects.toString, diff,  "" + this.pageID))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheUpdate, Array[String](this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff,  "" + this.pageID))
     }
     else
-      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, updatedTimes,  json, subjects.toString, diff))
+      return JDBCUtil.execPrepared(DBpediaSQLQueries.getJSONCacheInsert, Array[String]("" + this.pageID, this.pageTitle, updatedTimes,  escaped_json, subjects.toString, diff))
   }
 
   private def initCache {
@@ -120,9 +121,9 @@ class JSONCache(pageID: Long, pageTitle: String) {
       cacheObj = JDBCUtil.getCacheContent(DBpediaSQLQueries.getJSONCacheSelect, this.pageID)
       if (cacheObj == null) return
       cacheExists = true
-      if (cacheObj.json.equals("")) return
-
-      val map = JSONCache.mapper.readValue[Map[String, Any]](cacheObj.json)
+      if (cacheObj.escaped_json.trim.isEmpty) return
+      val unescaped_json = org.apache.commons.lang.StringEscapeUtils.unescapeJava(cacheObj.escaped_json)
+      val map = JSONCache.mapper.readValue[Map[String, Any]](unescaped_json)
 
       map.foreach {
         case (key, value) => {
@@ -224,6 +225,6 @@ object JSONCache {
   }
 }
 
-class JSONCacheItem(val pageID: Long, val updatedTimes: Int, val json: String, val subjects: java.util.Set[String]) {
+class JSONCacheItem(val pageID: Long, val updatedTimes: Int, val escaped_json: String, val subjects: java.util.Set[String]) {
 
 }
