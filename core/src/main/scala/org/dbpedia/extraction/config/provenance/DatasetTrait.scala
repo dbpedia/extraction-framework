@@ -8,7 +8,11 @@ package org.dbpedia.extraction.config.provenance
 object DatasetTrait extends Enumeration {
   val Ordered = Value
   val Validated = Value
-  val Publicised = Value
+  val Published = Value
+  val Temporary = Value
+  val Virtual = Value
+  val Deprecated = Value
+  val Testeset = Value
   val Provenance = Value
   val LinkedData = Value
   val Unredirected = Value

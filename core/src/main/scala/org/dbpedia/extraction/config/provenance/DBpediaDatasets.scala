@@ -194,15 +194,16 @@ object DBpediaDatasets
     val InfoboxTest = datasets.get("infobox_test").get
 
     /**
-     * Abstracts
+     * Abstracts & Page text
      */
     val ShortAbstracts = datasets.get("short_abstracts").get
     val LongAbstracts = datasets.get("long_abstracts").get
     val MissingShortAbstracts = datasets.get("missing_short_abstracts").get
     val MissingLongAbstracts = datasets.get("missing_long_abstracts").get
-    val NifAbstractContext = datasets.get("nif_abstract_context").get
+    val NifContext = datasets.get("nif_context").get
     val NifPageStructure = datasets.get("nif_page_structure").get
     val NifTextLinks = datasets.get("nif_text_links").get
+    val RawTables = datasets.get("raw_tables").get
 
     /**
      * Links

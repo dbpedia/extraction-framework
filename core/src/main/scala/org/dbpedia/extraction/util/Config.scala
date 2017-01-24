@@ -84,7 +84,7 @@ class Config(configPath: String)
     * all non universal properties...
     */
 
-  lazy val languages = parseLanguages(dumpDir, getStrings(config, "languages", ','))
+  lazy val languages = parseLanguages(dumpDir, getStrings(config, "languages", ","))
 
   lazy val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 
@@ -95,7 +95,7 @@ class Config(configPath: String)
   lazy val namespaces = loadNamespaces()
 
   private def loadNamespaces(): Set[Namespace] = {
-    val names = getStrings(config, "namespaces", ',')
+    val names = getStrings(config, "namespaces", ",")
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
@@ -134,12 +134,14 @@ class Config(configPath: String)
     shortAbstractMinLength = config.getProperty("short-abstract-min-length", "200").toInt
   )
 
-  case class NifParameters(nifQuery: String, nifTags: String, isTestRun: Boolean, writeAnchor: Boolean, writeLinkAnchor: Boolean)
+  case class NifParameters(nifQuery: String, nifTags: String, isTestRun: Boolean, writeAnchor: Boolean, writeLinkAnchor: Boolean, removeElements: Seq[String], replaceElements: Map[String, String])
   lazy val nifParameters = NifParameters(
     nifQuery=config.getProperty("nif-query", ""),
     nifTags = config.getProperty("nif-tags", "parse,text"),
     isTestRun = config.getProperty("nif-isTestRun", "false").toBoolean,
     writeAnchor = config.getProperty("nif-write-anchor", "false").toBoolean,
-    writeLinkAnchor = config.getProperty("nif-write-link-anchor", "true").toBoolean
+    writeLinkAnchor = config.getProperty("nif-write-link-anchor", "true").toBoolean,
+    removeElements = getStrings(config, "nif-remove-elements", ";"),
+    replaceElements = getStringMap(config, "nif-replace-elements", ";")
   )
 }

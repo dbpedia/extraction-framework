@@ -22,10 +22,10 @@ public class LinkExtractor implements NodeVisitor {
 	private int offset;
 	private boolean inSup = false;
 	private boolean invisible = false;
-    private LinkExtractorContext context;
+    private NifExtractorContext context;
 	private ArrayList<String> errors = new ArrayList<>();
 	
-	public LinkExtractor(int startOffset, LinkExtractorContext context) {
+	public LinkExtractor(int startOffset, NifExtractorContext context) {
         paragraphs = new ArrayList<Paragraph>();
 		offset = startOffset;
 		this.context = context;
@@ -43,7 +43,7 @@ public class LinkExtractor implements NodeVisitor {
 	
 	public void head(Node node, int depth) {
 
-		if(skipLevel>0)
+		if(skipLevel>=0)
 			return;
 		//ignore all content inside invisible tags
 		if(invisible || node.attr("style").matches(".*display\\s*:\\s*none.*")) {
@@ -57,30 +57,12 @@ public class LinkExtractor implements NodeVisitor {
 		  tempText = StringEscapeUtils.unescapeHtml4(tempText);
           tempText = org.dbpedia.extraction.util.StringUtils.escape(tempText, replaceChars());
 
-			if(tempText.trim().length() == 0 && (text.endsWith(" ") || text.endsWith("(") | text.endsWith("[") | text.endsWith("{")))
-				return;
-
-		  //exclude spoken versions, citation numbers etc
-		  if(tempText.equals("Listen")) {
-		  	return;
-		  } else if (tempText.matches("\\[[0-9?]+\\]")) {
-		  	return;
-		  } else if (tempText.matches("[0-9]+px")) {
-			return;
-		  }
-		  
-		  //remove superscripts with additional information. example: de/Leipzig
-		  if(inSup) {
-			  if(tempText.equals("?")||tempText.equals("i")||tempText.equals("/")||tempText.equals(",")||tempText.equals("|")) {
-				  return;
-			  }
-		  }
 		  int beforeOffset = offset;
-		  offset += tempText.length() - StringUtils.countMatches(tempText, "\\");   //length - escape count
+            offset += tempText.length() - StringUtils.countMatches(tempText, "\\");   //length - escape count
 
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
-              if(!tempText.trim().startsWith(this.context.templateString + ":"))  //not!
+              if(!tempText.trim().startsWith(this.context.wikipediaTemplateString + ":"))  //not!
               {
                   if(tempText.endsWith(" ")) {
 
@@ -143,23 +125,22 @@ public class LinkExtractor implements NodeVisitor {
             }
             else
                 paragraph = new Paragraph(offset, "");
-		} else if(node.nodeName().equals("code")||node.nodeName().equals("sub")||node.nodeName().equals("em")
-				||node.nodeName().equals("i")||node.nodeName().equals("b")||node.nodeName().equals("dfn")||node.nodeName().equals("kbd")
-				||node.nodeName().equals("tt")||node.nodeName().equals("abbr")||node.nodeName().equals("li")) {
-			//don't skip the text in code, sup or sub texts
-			//TODO make this configurable
 		} else if(node.nodeName().equals("sup")) {
 			inSup = true;
-		} else {
-			//skip all other tags
-			if(!node.nodeName().equals("span")) {
+        } else if(node.nodeName().equals("table")) {
+		    if(paragraph == null)
+				paragraph = new Paragraph(offset, "");
+			paragraph.addTable(offset, node.outerHtml());
+            skipLevel = depth;
+        } else {
+/*			if(!node.nodeName().equals("span")) {
 					skipLevel = depth;
 			} else {
 				//TODO make this configurable
 				if(node.attr("id").equals("coordinates")||node.attr("class").equals("audio")||node.attr("class").equals("noprint")||node.attr("class").contains("error"))
 					skipLevel = depth;
 			}
-			
+			*/
 		}
 	}
 
@@ -229,7 +210,7 @@ public class LinkExtractor implements NodeVisitor {
 			}
         }
 
-        if(node.nodeName().equals("sup")&&inSup) {
+        if(node.nodeName().equals("sup") && inSup) {
 			inSup = false;
 		}
 
@@ -267,14 +248,15 @@ public class LinkExtractor implements NodeVisitor {
         return rep;
     }
 
-    public static class LinkExtractorContext{
+    public static class NifExtractorContext {
         private String language;
         private String resource;
-        private String templateString;
-        public LinkExtractorContext(String language, String resource, String templateString){
+        private String wikipediaTemplateString;
+
+        public NifExtractorContext(String language, String resource, String templateString){
             this.language = language;
             this.resource = resource;
-            this.templateString = templateString;
+            this.wikipediaTemplateString = templateString;
         }
     }
 }

@@ -1,14 +1,14 @@
-package org.dbpedia.extraction.scripts
+package org.dbpedia.extraction.mappings
 
 import java.io.File
 
-import org.apache.commons.codec.language.bm.Languages
-import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.WriterDestination
-import org.dbpedia.extraction.mappings.NifExtractor
-import org.dbpedia.extraction.util._
-import org.dbpedia.extraction.wikiparser.{PageNode, Namespace, WikiTitle}
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
+import org.dbpedia.extraction.nif.WikipediaNifExtractor
+import org.dbpedia.extraction.util.{Config, IOUtils, Language, RichFile}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
 import org.scalatest.FunSuite
+
 
 /**
   * Created by Chile on 10/17/2016.
@@ -26,31 +26,32 @@ import org.scalatest.FunSuite
 
 class NifExtractorTest extends FunSuite {
 
+
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-    def language = Language.map.get("fr").get
-    def configFile = new Config(ConfigUtils.loadConfig("C:\\Users\\Chile\\IdeaProjects\\extraction-framework\\dump\\extraction.nif.abstracts.properties", "UTF-8"))
+    def language = Language.map.get("en").get
+    def configFile = new Config("C:\\Users\\Chile\\IdeaProjects\\extraction-framework-temp\\dump\\extraction.nif.abstracts.properties")
   }
-  private val extractor = new NifExtractor(context)
+  private val wikipageextractor = new NifExtractor(context)
+  private val extractor = new WikipediaNifExtractor(context, "http://example.org/file/path?version=1.1&nif=context_0_1234" )
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
-  private val titles = List("Timár", "Paris")
+  //private val titles = List("Honeyroot", "United_States_v._E._C._Knight_Co.", "Moritz_Christian_Julius_Thaulow", "Tri-Cities_(Ontario)")
+  private val titles = List("Germany")
 
   test("testExtractNif") {
     dest.open()
     for(title <- titles){
       val wt = new WikiTitle(title, Namespace.Main, context.language)
-      val pn = new PageNode(wt,0l, 0l,0l,0l,"", false, false)
       val html = getHtml(wt)
-      dest.write(extractor.extractNif(pn, "http://dbpedia.org/resource/" + title, html))
+      dest.write(extractor.extractNif("http://example.org/", "http://dbpedia.org/resource/" + title, html)((ex: Throwable) => Unit))
     }
     dest.close()
   }
 
-  Languages
   private def getHtml(title:WikiTitle): String={
-    extractor.retrievePage(title, 0l) match{
-      case Some(pc) => extractor.postProcess(title, pc)
+    wikipageextractor.retrievePage(title, 0l) match{
+      case Some(pc) => wikipageextractor.postProcess(title, pc)
       case None => ""
     }
   }
@@ -59,3 +60,4 @@ class NifExtractorTest extends FunSuite {
 
   override def convertToLegacyCheckingEqualizer[T](left: T): LegacyCheckingEqualizer[T] = ???
 }
+

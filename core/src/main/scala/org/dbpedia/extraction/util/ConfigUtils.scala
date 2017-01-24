@@ -77,14 +77,18 @@ object ConfigUtils {
   }
 
 
-  def getValues[T](config: Properties, key: String, sep: Char, required: Boolean = false)(map: String => T): Seq[T] = {
+  def getValues[T](config: Properties, key: String, sep: String, required: Boolean = false)(map: String => T): Seq[T] = {
     getStrings(config, key, sep, required).map(map(_))
   }
 
-  def getStrings(config: Properties, key: String, sep: Char, required: Boolean = false): Seq[String] = {
+  def getStrings(config: Properties, key: String, sep: String, required: Boolean = false): Seq[String] = {
     val string = getString(config, key, required)
     if (string == null) Seq.empty
     else string.trimSplit(sep)
+  }
+
+  def getStringMap(config: Properties, key: String, sep: String, required: Boolean = false): Map[String, String] = {
+    getStrings(config, key, sep, required).map(x => x.split("->")).map( y => y(0) -> y(1)).toMap
   }
 
   def getValue[T](config: Properties, key: String, required: Boolean = false)(map: String => T): T = {
