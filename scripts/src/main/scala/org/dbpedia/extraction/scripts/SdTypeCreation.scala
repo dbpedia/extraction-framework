@@ -408,8 +408,8 @@ object SdTypeCreation {
     owlThingPenalty =  ConfigUtils.getString(config, "owl-thing-penalty", required=true).toFloat
     require(owlThingPenalty >= 0.01f && owlThingPenalty <= 0.99f, "Please specify a valid owlThingPenalty score in the range of [0.01, 0.99].")
 
-    inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",',', required=false)(x => x)
-    outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",',', required=false)(x => x)
+    inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",",", required=false)(x => x)
+    outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",",", required=false)(x => x)
 
     returnAllValid = ConfigUtils.getString(config, "return-all-valid-types", required=false).toBoolean
     returnOnlyUntyped = ConfigUtils.getString(config, "return-only-untyped", required=false).toBoolean

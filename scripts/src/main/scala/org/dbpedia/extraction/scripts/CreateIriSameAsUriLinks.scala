@@ -28,7 +28,7 @@ object CreateIriSameAsUriLinks {
     
     val output = getString(config, "output", true)
     
-    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ",", true))
 
     val policies = parsePolicies(config, "uri-policy")
     val formats = parseFormats(config, "format", policies)

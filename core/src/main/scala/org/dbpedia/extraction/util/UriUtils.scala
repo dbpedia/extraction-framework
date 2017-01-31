@@ -5,6 +5,8 @@ import java.net._
 import org.apache.commons.lang3.StringEscapeUtils
 import org.dbpedia.util.text.uri.UriDecoder
 
+import scala.util.{Failure, Success, Try}
+
 object UriUtils
 {
     private val knownSchemes = Set("http", "https", "ftp")
@@ -37,17 +39,20 @@ object UriUtils
         path
     }
 
-  def createUri(uri: String): URI ={
-    // unescape all \\u escaped characters
-    val input = StringEscapeUtils.unescapeJava(uri)
+  def createUri(uri: String): Try[URI] ={
+    //TODO revise this method!
+    Try {
+      // unescape all \\u escaped characters
+      val input = URLDecoder.decode(StringEscapeUtils.unescapeJava(uri), "UTF-8")
 
-    // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
-    // "#%<>?[\]^`{|}
+      // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
+      // "#%<>?[\]^`{|}
 
-    // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
-    if (input.contains("\\"))
-      throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
-    new URI(StringUtils.escape(input, StringUtils.replacements('%', "\"<>[\\]^`{|}")))
+      // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
+      if (input.contains("\\"))
+        throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
+      new URI(StringUtils.escape(input, StringUtils.replacements('%', "\"<>[\\]^`{|}")))
+    }
   }
 
   /**
@@ -86,7 +91,10 @@ object UriUtils
         new URI(prelude + resource + qu + frag)
       }
       else
-        createUri(input)
+        createUri(input) match{
+          case Success(s) => s
+          case Failure(f) => null
+        }
     }
 
   /**

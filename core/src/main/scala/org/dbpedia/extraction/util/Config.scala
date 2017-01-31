@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.util
 
 import java.io.File
+import java.net.URL
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.Extractor
@@ -134,14 +135,20 @@ class Config(configPath: String)
     shortAbstractMinLength = config.getProperty("short-abstract-min-length", "200").toInt
   )
 
-  case class NifParameters(nifQuery: String, nifTags: String, isTestRun: Boolean, writeAnchor: Boolean, writeLinkAnchor: Boolean, removeElements: Seq[String], replaceElements: Map[String, String])
+  case class NifParameters(
+    nifQuery: String,
+    nifTags: String,
+    isTestRun: Boolean,
+    writeAnchor: Boolean,
+    writeLinkAnchor: Boolean,
+    cssSelectorMap: URL
+  )
   lazy val nifParameters = NifParameters(
     nifQuery=config.getProperty("nif-query", ""),
     nifTags = config.getProperty("nif-tags", "parse,text"),
     isTestRun = config.getProperty("nif-isTestRun", "false").toBoolean,
     writeAnchor = config.getProperty("nif-write-anchor", "false").toBoolean,
     writeLinkAnchor = config.getProperty("nif-write-link-anchor", "true").toBoolean,
-    removeElements = getStrings(config, "nif-remove-elements", ";"),
-    replaceElements = getStringMap(config, "nif-replace-elements", ";")
+    cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json")   //static config file in core/src/main/resources
   )
 }

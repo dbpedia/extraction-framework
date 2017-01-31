@@ -29,10 +29,10 @@ object CreateFlickrWrapprLinks {
     val baseDir = getValue(config, "base-dir", true)(new File(_))
     if (! baseDir.exists) throw error("dir "+baseDir+" does not exist")
     
-    val include = getStrings(config, "include-subjects", ',', true)
-    val exclude = getStrings(config, "exclude-subjects", ',', true)
+    val include = getStrings(config, "include-subjects", ",", true)
+    val exclude = getStrings(config, "exclude-subjects", ",", true)
     
-    val names = getStrings(config, "namespaces", ',', false)
+    val names = getStrings(config, "namespaces", ",", false)
     val namespaces =
       if (names.isEmpty) null
       // Special case for namespace "Main" - its Wikipedia name is the empty string ""
@@ -40,7 +40,7 @@ object CreateFlickrWrapprLinks {
 
     val output = getString(config, "output", true)
     
-    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ",", true))
     
     val predSuffix = getString(config, "property-suffix", true)
     

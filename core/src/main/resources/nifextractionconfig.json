@@ -1,0 +1,98 @@
+{
+  "default":{
+    "nif-find-pageend":[
+      "span[id='References']",
+      "span[id='External_Links']",
+      "span[id='External_links_and_references']",
+      ".printfooter"
+    ],
+    "nif-find-next-title":["h1", "h2", "h3", "h4"],
+    "nif-find-toc":[".toc", "span[id='toc']"],
+    "nif-remove-elements":[
+      ".noprint",
+      ".haudio",
+      ".noexcerpt",
+      "sup.reference",
+      "span.mw-editsection",
+      ".error",
+      "#coordinates",
+      ".infobox",
+      ".navbox",
+      ".thumb",
+      "div[role='img']",
+      ".mw-cite-backlink"
+    ],
+    "nif-replace-elements":[
+      "ul > li:not(:last-child) ->* $c",
+      "ul > li:last-child ->* $c",
+      "ol > li:not(:last-child) ->$c"],
+    "nif-note-elements":[
+    "div.hatnote -> ($c)"
+    ]
+  },
+  "de":{
+    "nif-find-pageend":[
+      "span[id=Gesprochene_Version]",
+      "span[id=Weblinks]",
+      "span[id=Literatur]",
+      "span[id=Anmerkungen]"
+    ],
+    "nif-find-next-title":[],
+    "nif-find-toc":[],
+    "nif-remove-elements":[
+      "a[title*='Datei'] ~ sup",
+      "a[title*='Datei']",
+      "a[title*='Hörbeispiel']",
+      ".hauptartikel-pfeil"
+    ],
+    "nif-replace-elements":[
+    ],
+    "nif-note-elements":[
+      "div.sieheauch -> ($c)",
+      "div.hauptartikel -> ($c)"
+    ]
+  },
+  "fr":{
+    "nif-find-pageend":[
+      "span[id*=Note_et]",
+      "span[id*=R.C3.A9f.C3.A9rences]",
+      "span[id=Bibliographie]",
+      ".catlinks"
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  },
+  "en":{
+    "nif-find-pageend":[
+
+    ],
+    "nif-find-next-title":[
+
+    ],
+    "nif-find-toc":[
+
+    ],
+    "nif-remove-elements":[
+
+    ],
+    "nif-replace-elements":[
+
+    ],
+    "nif-note-elements":[
+
+    ]
+  }
+}

@@ -6,7 +6,8 @@ import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{Config, Language}
 import org.dbpedia.extraction.wikiparser.Namespace
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
-import org.jsoup.nodes.Document
+import org.jsoup.nodes.{Document, Element, Node}
+import org.jsoup.select.Elements
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
@@ -50,11 +51,11 @@ class WikipediaNifExtractor(
     * @param extractionResults - the extraction results for a particular section
     * @return
     */
-  override def extendSectionTriples(extractionResults: TempHtmlExtractionResults, graphIri: String, subjectIri: String): Seq[Quad] = {
+  override def extendSectionTriples(extractionResults: ExtractedSection, graphIri: String, subjectIri: String): Seq[Quad] = {
     //this is only dbpedia relevant: for singling out long and short abstracts
     if (extractionResults.section.id == "abstract" && recordAbstracts) {
       //not!
-      List(longQuad(subjectIri, extractionResults.text, graphIri), shortQuad(subjectIri, getShortAbstract(extractionResults.paragraphs), graphIri))
+      List(longQuad(subjectIri, this.calculateText(extractionResults.paragraphs)._1, graphIri), shortQuad(subjectIri, getShortAbstract(extractionResults.paragraphs), graphIri))
     }
     else
       List()
@@ -102,7 +103,7 @@ class WikipediaNifExtractor(
       val title = nodes.headOption
       nodes = nodes.drop(1)
       title match{
-        case Some(t) if t.childNode(0).attr("id").toLowerCase.trim != "references" && t.childNode(0).attr("id").toLowerCase.trim != "external_links" => {
+        case Some(t) if isWikiNextTitle(t) && !isWikiPageEnd(t)  => {
           //calculate the section number by looking at the <h2> to <h4> tags
           val depth = Integer.parseInt(t.asInstanceOf[org.jsoup.nodes.Element].tagName().substring(1))-1
           if(currentSection.size < depth) //first subsection
@@ -128,12 +129,12 @@ class WikipediaNifExtractor(
             next = None,
             sub = None,
             id = t.childNode(0).attr("id"),
-            title = t.childNode(0).childNode(0).asInstanceOf[org.jsoup.nodes.TextNode].text(),
+            title = t.childNode(0).asInstanceOf[Element].text(),
             //merge section numbers separated by a dot
             ref = currentSection.map(n => "." + n.toString).foldRight("")(_+_).substring(1),
             tableCount = 0,
             //take all following tags until you hit another title or end of content
-            content = Seq(t) ++ nodes.takeWhile(node => !node.nodeName().matches("h\\d") && node.attr("class") != "printfooter")
+            content = Seq(t) ++ nodes.takeWhile(node => !isWikiNextTitle(node) && !isWikiPageEnd(node))
           )
           section.top match{
             case Some(s) => s.sub = Option(section)
@@ -151,7 +152,7 @@ class WikipediaNifExtractor(
     }
 
     nodes = nodes.dropWhile(node => node.nodeName() != "p")    //move cursor to the beginning of the abstract
-    val ab = nodes.takeWhile(node => node.attr("id") != "toc" && node.attr("class") != "mw-headline")
+    val ab = nodes.takeWhile(node => !isWikiNextTitle(node) && !isWikiToc(node) && !isWikiPageEnd(node))
 
     tocMap.append(new PageSection(                     //save abstract (abstract = section 0)
       prev = None,
@@ -174,5 +175,25 @@ class WikipediaNifExtractor(
       res = getParagraphText
     }
     tocMap
+  }
+
+  private def isWikiPageEnd(node: Node): Boolean ={
+    cssSelectorTest(node, cssSelectorConfigMap.findPageEnd)
+  }
+
+  private def isWikiToc(node: Node): Boolean ={
+    cssSelectorTest(node, cssSelectorConfigMap.findToc)
+  }
+
+  private def isWikiNextTitle(node: Node): Boolean ={
+    cssSelectorTest(node, cssSelectorConfigMap.nextTitle)
+  }
+
+  private def cssSelectorTest(node: Node, queries: Seq[String]): Boolean ={
+    val doc = Document.createShell("").appendChild(node)
+    val test: Elements = new Elements()
+    for( query: String <- queries )
+      test.addAll(doc.select(query))
+    test.size() > 0
   }
 }

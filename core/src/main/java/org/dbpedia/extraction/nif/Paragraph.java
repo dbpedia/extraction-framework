@@ -2,6 +2,8 @@ package org.dbpedia.extraction.nif;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -9,14 +11,16 @@ import java.util.LinkedList;
  * Created by Chile on 10/17/2016.
  */
 public class Paragraph {
-    private String text = "";
+    String text = "";
+    private String tagName = null;
     private int begin = 0;
     private LinkedList<Link> internalLinks = new LinkedList<>();
     private HashMap<Integer,String> tableHtml = new HashMap<>();
 
-    public Paragraph(int begin, String text){
+    public Paragraph(int begin, String text, String tag){
         this.begin = begin;
         this.text = text;
+        this.tagName = tag;
     }
 
     public String getText() {
@@ -51,8 +55,26 @@ public class Paragraph {
         tableHtml.put(position, html);
     }
 
-    public void addText(String text) {
-        this.text += text;
+    /**
+     * adds new text snipped, returns the
+     * @param text
+     * @return
+     */
+    public int addText(String text) {
+        String zw = text.replaceAll("\\s+", " ");
+        this.text += zw;
+        return GetEscapedStringLength(zw);
+    }
+
+    public int finalizeParagraph(){
+        if(Paragraph.FollowedByWhiteSpace(this.getText()))
+            return 0;
+        else
+            return -1;
+    }
+
+    public String getTagName() {
+        return tagName;
     }
 
     public LinkedList<Link> getLinks() {
@@ -60,10 +82,31 @@ public class Paragraph {
     }
 
     public int getLength(){
-        return getText().trim().length() - StringUtils.countMatches(getText(), "\\");
+        return GetEscapedStringLength(getText());
     }
 
     public HashMap<Integer, String> getTableHtml() {
         return this.tableHtml;
+    }
+
+    public boolean hasContent(){
+        if(this.getLength() > 0)
+            return true;
+        if(this.tableHtml.size() > 0)
+            return true;
+        if(this.getLinks().size() > 0)
+            return true;
+        return false;
+    }
+
+    static ArrayList<Character> whiteSpacePrefixes = new ArrayList<Character>(Arrays.asList('(', '[', '{', ' ', '\n'));
+    public static boolean FollowedByWhiteSpace(String text){
+        if(text == null || text.length() == 0)
+            return false;
+        return !whiteSpacePrefixes.contains(text.charAt(text.length()-1));
+    }
+
+    public static int GetEscapedStringLength(String text){
+        return text.length() - StringUtils.countMatches(text, "\\");
     }
 }

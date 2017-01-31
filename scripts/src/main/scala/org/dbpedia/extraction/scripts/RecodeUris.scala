@@ -1,9 +1,11 @@
 package org.dbpedia.extraction.scripts
 
-import org.dbpedia.extraction.util.{Language, Workers, SimpleWorkers, UriUtils}
+import org.dbpedia.extraction.util.{Language, SimpleWorkers, UriUtils, Workers}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import java.io.File
+
 import scala.Console.err
+import scala.util.{Failure, Success}
 
 /**
  * Decodes DBpedia URIs that percent-encode too many characters and encodes them following our
@@ -75,6 +77,9 @@ object RecodeUris {
       if(recodeToIris)
         UriUtils.uriToIri(uri)
       else
-        UriUtils.createUri(uri).toASCIIString
+        UriUtils.createUri(uri) match{
+          case Success(s) => s.toASCIIString
+          case Failure(f) => null
+        }
   }
 }

@@ -1,7 +1,6 @@
 package org.dbpedia.extraction.nif;
 
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.dbpedia.extraction.util.UriUtils;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeVisitor;
@@ -9,25 +8,23 @@ import org.jsoup.select.NodeVisitor;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LinkExtractor implements NodeVisitor {
 
 	private boolean inLink = false;
 	private int skipLevel = -1;
-	private String text = "";
 	private List<Paragraph> paragraphs = null;
 	private Paragraph paragraph = null;
     private Link tempLink;
-	private int offset;
 	private boolean inSup = false;
 	private boolean invisible = false;
     private NifExtractorContext context;
 	private ArrayList<String> errors = new ArrayList<>();
 	
-	public LinkExtractor(int startOffset, NifExtractorContext context) {
+	public LinkExtractor(NifExtractorContext context) {
         paragraphs = new ArrayList<Paragraph>();
-		offset = startOffset;
 		this.context = context;
 	}
 	
@@ -45,6 +42,9 @@ public class LinkExtractor implements NodeVisitor {
 
 		if(skipLevel>=0)
 			return;
+
+        if(paragraph == null)
+            paragraph = new Paragraph(0, "", "p");
 		//ignore all content inside invisible tags
 		if(invisible || node.attr("style").matches(".*display\\s*:\\s*none.*")) {
 			invisible = true;
@@ -52,38 +52,27 @@ public class LinkExtractor implements NodeVisitor {
 		}
 
 		if(node.nodeName().equals("#text")) {
-		  String tempText = node.toString(); 
+		  String tempText = node.toString();
 		  //replace no-break spaces because unescape doesn't deal with them
 		  tempText = StringEscapeUtils.unescapeHtml4(tempText);
           tempText = org.dbpedia.extraction.util.StringUtils.escape(tempText, replaceChars());
-
-		  int beforeOffset = offset;
-            offset += tempText.length() - StringUtils.countMatches(tempText, "\\");   //length - escape count
 
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
               if(!tempText.trim().startsWith(this.context.wikipediaTemplateString + ":"))  //not!
               {
-                  if(tempText.endsWith(" ")) {
-
-                      tempText = tempText.substring(0, tempText.length()-1);
-                      offset--;
-                  }
                   tempLink.setLinkText(tempText);
-                  tempLink.setWordStart(beforeOffset);
-                  tempLink.setWordEnd(offset);
+                  tempLink.setWordStart(paragraph.getLength() + (Paragraph.FollowedByWhiteSpace(paragraph.getText()) ? 1 : 0));
+                  paragraph.addText(tempText);
+                  tempLink.setWordEnd(paragraph.getLength());
               }
               else{                                            // -> filter out hidden links to the underlying template
 				  errors.add("found Template in resource: " + this.context.resource + ": " + tempText);
-                  offset = beforeOffset;
-                  tempText = "";
+				  return;
 			  }
 		  }
-
-			if(paragraph == null)
-			  paragraph = new Paragraph(beforeOffset, "");
-			paragraph.addText(tempText);
-			text += tempText;
+		  else
+		    paragraph.addText(tempText);
 
 		} else if(node.nodeName().equals("a")) {
             String link = node.attr("href");
@@ -117,21 +106,22 @@ public class LinkExtractor implements NodeVisitor {
             }
         } else if(node.nodeName().equals("p")) {
             if(paragraph != null) {
-                if(paragraph.getLength() > 0)
-                {
-                    paragraphs.add(paragraph);
-                    paragraph = new Paragraph(offset, "");
-                }
+                addParagraph("p");
             }
             else
-                paragraph = new Paragraph(offset, "");
+                paragraph = new Paragraph(0, "", "p");
 		} else if(node.nodeName().equals("sup")) {
 			inSup = true;
+        } else if(node.nodeName().matches("h\\d")) {
+            addParagraph(node.nodeName());
         } else if(node.nodeName().equals("table")) {
-		    if(paragraph == null)
-				paragraph = new Paragraph(offset, "");
-			paragraph.addTable(offset, node.outerHtml());
+            addParagraph("table");
+			paragraph.addTable(paragraph.getLength(), node.outerHtml());
+            addParagraph("p");
             skipLevel = depth;
+        } else if(node.nodeName().equals("span")) {
+		    if(node.attr("class").contains("notebegin"))
+                addParagraph("note");
         } else {
 /*			if(!node.nodeName().equals("span")) {
 					skipLevel = depth;
@@ -192,48 +182,53 @@ public class LinkExtractor implements NodeVisitor {
 			} else {
 				return;
 			}
-		}	 
-		
+		}
+
 		if(node.nodeName().equals("a")&&inLink) {
 			inLink = false;
 			paragraph.addLink(tempLink);
 			tempLink = new Link();
 		}
-
-        if(node.nodeName().equals("p") && paragraph != null && paragraph.getLength() > 0) {
-            paragraphs.add(paragraph);
-            paragraph = null;
-			//specific fix when there are two paragraphs following each other and the whitespace is missing
-			if(text.length() > 0 && !text.endsWith(" ")){
-				text += " ";
-				offset++;
-			}
+		else if(invisible && node.attr("style").matches(".*display\\s*:\\s*none.*")) {
+            invisible = false;
         }
-
-        if(node.nodeName().equals("sup") && inSup) {
+        else if(node.nodeName().equals("p") && paragraph != null) {
+            addParagraph("p");
+        }
+        else if(node.nodeName().equals("sup") && inSup) {
 			inSup = false;
 		}
-
-		if(invisible && node.attr("style").matches(".*display\\s*:\\s*none.*")) {
-			invisible = false;
-		}
-	}
-	
-	public String getText() {
-		return  text;
+        else if(node.nodeName().matches("h\\d")) {
+            addParagraph("p");
+        }
+        else if(node.nodeName().equals("span")) {
+            if(node.attr("class").contains("noteend"))
+                addParagraph("p");
+        }
 	}
 	
 	public List<Paragraph> getParagraphs() {
-		if(paragraph != null)
+		if(paragraph != null && paragraph.getLength() > 0)
         {
             paragraphs.add(paragraph);
             paragraph = null;
         }
         return paragraphs;
 	}
-	
-	public int getOffset() {
-		return offset;
+
+	private void addParagraph(String newTag){
+	    if(paragraph.getLength() != 0 || paragraph.getTableHtml().size() > 0)
+            paragraphs.add(paragraph);
+
+	    paragraph = new Paragraph(0, "", (newTag == null ? "p" : newTag));
+    }
+
+	public HashMap<Integer, String> getTables(){
+		HashMap<Integer, String> tables = new HashMap<>();
+		for(Paragraph p : this.getParagraphs()){
+			tables.putAll(p.getTableHtml());
+		}
+		return tables;
 	}
 
 	public ArrayList<String> getErrors(){

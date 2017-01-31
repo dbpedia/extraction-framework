@@ -29,22 +29,22 @@ class NifExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-    def language = Language.map.get("en").get
+    def language = Language.map.get("fr").get
     def configFile = new Config("C:\\Users\\Chile\\IdeaProjects\\extraction-framework-temp\\dump\\extraction.nif.abstracts.properties")
   }
   private val wikipageextractor = new NifExtractor(context)
   private val extractor = new WikipediaNifExtractor(context, "http://example.org/file/path?version=1.1&nif=context_0_1234" )
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
-  //private val titles = List("Honeyroot", "United_States_v._E._C._Knight_Co.", "Moritz_Christian_Julius_Thaulow", "Tri-Cities_(Ontario)")
-  private val titles = List("Germany")
+  //private val titles = List("Dana_Ferguson", "Doum,_Central_African_Republic", "Robert_A._Baines", "1962_Copa_del_Generalísimo_Final")
+  private val titles = List("George_Washington")
 
   test("testExtractNif") {
     dest.open()
     for(title <- titles){
       val wt = new WikiTitle(title, Namespace.Main, context.language)
       val html = getHtml(wt)
-      dest.write(extractor.extractNif("http://example.org/", "http://dbpedia.org/resource/" + title, html)((ex: Throwable) => Unit))
+      dest.write(extractor.extractNif("http://example.org/", "http://dbpedia.org/resource/" + title, html)((ex: Throwable) => System.err.println(ex.getMessage)))
     }
     dest.close()
   }

@@ -47,7 +47,7 @@ object WikidataSameAsToLanguageLinks {
 
     val output = getString(config, "output", required = true)
 
-    val language = parseLanguages(baseDir, getStrings(config, "languages", ',', required = true))
+    val language = parseLanguages(baseDir, getStrings(config, "languages", ",", required = true))
 
     val policies = parsePolicies(config, "uri-policy")
     val formats = parseFormats(config, "format", policies)

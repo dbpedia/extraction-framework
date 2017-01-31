@@ -43,8 +43,6 @@ class NifExtractor(
   protected val writeLinkAnchors = context.configFile.nifParameters.writeLinkAnchor
   protected val writeStrings = context.configFile.nifParameters.writeAnchor
   protected val shortAbstractLength = context.configFile.abstractParameters.shortAbstractMinLength
-  protected val removeElementsCssQueries = context.configFile.nifParameters.removeElements
-  protected val replaceElementsCssQueries = context.configFile.nifParameters.replaceElements
 
   protected val dbpediaVersion = context.configFile.dbPediaVersion
 
