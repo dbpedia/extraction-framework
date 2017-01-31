@@ -37,10 +37,7 @@ class Config(configPath: String)
    * and overrides this val to null because it is not needed)
    */
   lazy val dumpDir = getValue(checkOverride("base-dir"), "base-dir", true){
-    x =>
-      val dir = new File(x)
-      if (! dir.exists) throw error("dir "+dir+" does not exist")
-      dir
+    x => new File(x)
   }
 
   lazy val parallelProcesses = checkOverride("parallel-processes").getProperty("parallel-processes", "4").toInt
