@@ -13,6 +13,8 @@ import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
+import scala.language.reflectiveCalls
+
 /**
   * Created by Chile on 1/19/2017.
   */
@@ -23,7 +25,7 @@ class WikipediaNifExtractor(
        def configFile : Config
      },
      nifContextIri: String
-   ) extends HtmlNifExtractor(nifContextIri, context.language.isoCode,context.configFile) {
+   ) extends HtmlNifExtractor(nifContextIri, context.language.isoCode, context.configFile) {
 
 
   /**
