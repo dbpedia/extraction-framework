@@ -125,7 +125,7 @@ class RichString(str : String)
    * Split string on given character or whitespace, trim each part, remove empty parts
    */
   def trimSplit(sep: String): Array[String] = {
-    str.split("["+sep+"]+", -1).map(_.trim).filter(_.nonEmpty)  //removed \\s from pattern !
+    str.split("[\\s"+sep+"\\s]+", -1).map(_.trim).filter(_.nonEmpty)
   }
 
 }

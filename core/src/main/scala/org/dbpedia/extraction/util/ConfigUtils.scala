@@ -37,12 +37,14 @@ object ConfigUtils {
 
   val universalConfig = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
   val baseDir = getValue(universalConfig , "base-dir", true){
-    x =>
-      val dir = new File(x)
-      if (! dir.exists) throw error("dir "+dir+" does not exist")
-      dir
+    x => new File(x)
+      //if (! dir.exists) throw error("dir "+dir+" does not exist")
+      //dir
   }
-  val wikiInfos = WikiInfo.fromFile(new File(baseDir, WikiInfo.FileName), Codec.UTF8)
+  val wikiInfos = if(baseDir.exists())
+    WikiInfo.fromFile(new File(baseDir, WikiInfo.FileName), Codec.UTF8)
+  else
+    Seq()
 
   def loadConfig(file: String, charset: String = "UTF-8"): Properties = {
     loadFromStream(new FileInputStream(file), charset)
