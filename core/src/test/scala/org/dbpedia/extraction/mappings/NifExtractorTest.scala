@@ -6,7 +6,7 @@ import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.nif.WikipediaNifExtractor
 import org.dbpedia.extraction.util.{Config, IOUtils, Language, RichFile}
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import org.scalatest.FunSuite
 
 
@@ -29,11 +29,10 @@ class NifExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-    def language = Language.map.get("fr").get
+    def language = Language.map.get("en").get
     def configFile = new Config("C:\\Users\\Chile\\IdeaProjects\\extraction-framework-temp\\dump\\extraction.nif.abstracts.properties")
   }
   private val wikipageextractor = new NifExtractor(context)
-  private val extractor = new WikipediaNifExtractor(context, "http://example.org/file/path?version=1.1&nif=context_0_1234" )
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   //private val titles = List("Dana_Ferguson", "Doum,_Central_African_Republic", "Robert_A._Baines", "1962_Copa_del_Generalísimo_Final")
@@ -43,8 +42,10 @@ class NifExtractorTest extends FunSuite {
     dest.open()
     for(title <- titles){
       val wt = new WikiTitle(title, Namespace.Main, context.language)
+      val wp = new WikiPage(wt, null, 3273623938l, 3273623939l, 3273623939l, "")
+      val extractor = new WikipediaNifExtractor(context, wp)
       val html = getHtml(wt)
-      dest.write(extractor.extractNif("http://example.org/", "http://dbpedia.org/resource/" + title, html)((ex: Throwable) => System.err.println(ex.getMessage)))
+      dest.write(extractor.extractNif(html)(tt => System.err.println(tt.errorMsg)))
     }
     dest.close()
   }

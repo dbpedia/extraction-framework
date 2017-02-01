@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.dump.extract
 
 import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, WikiPageExtractor}
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity, WikiPageExtractor}
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.{Language, SimpleWorkers}
-import org.dbpedia.extraction.wikiparser.{WikiPage, Namespace, PageNode}
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 
 /**
  * Executes a extraction.
@@ -39,12 +39,12 @@ class ExtractionJob(
         destination.write(graph)
       }
       else
-        page.addExtractionRecord("Namespace did not match: " + page.title.namespace)
+        page.addExtractionRecord("Namespace did not match: " + page.title.namespace + " for page: " + page.title.encoded)
 
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
       val records = page.getExtractionRecords() match{
         case seq :Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
-        case _ => Seq(new RecordEntry[PageNode](page, page.title.language))
+        case _ => Seq(new RecordEntry[PageNode](page, RecordSeverity.Info, page.title.language))
       }
       //forward all records to the recorder
       extractionRecorder.record(records:_*)
@@ -68,11 +68,11 @@ class ExtractionJob(
     for (page <- source)
       workers.process(page)
 
-    extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", language)
+    extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, language)
 
     if(retryFailedPages){
       val fails = extractionRecorder.listFailedPages.get(language).get.keys.map(_._2)
-      extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", language)
+      extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordSeverity.Warning, language)
       extractionRecorder.resetFailedPages(language)
       for(page <- fails) {
         page.toggleRetry()
@@ -81,7 +81,7 @@ class ExtractionJob(
           case _ =>
         }
       }
-      extractionRecorder.printLabeledLine("all failed pages were retried.", language)
+      extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, language)
     }
 
     workers.stop()

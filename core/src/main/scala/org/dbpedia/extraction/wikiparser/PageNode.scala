@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.mappings.RecordEntry
+import org.dbpedia.extraction.mappings.{RecordEntry, RecordSeverity}
 
 import scala.collection.mutable.ListBuffer
 
@@ -50,8 +50,17 @@ extends Node(children, 0)
         case _ => false
     }
 
-    def addExtractionRecord(errorMsg: String = null, error: Throwable = null, pushToStd: Boolean = false): Unit ={
-        extractionRecords.append(new RecordEntry(this, this.title.language, errorMsg, error, pushToStd))
+    def addExtractionRecord(recordEntry: RecordEntry[PageNode]): Unit ={
+        if((recordEntry.errorMsg == null || recordEntry.errorMsg.trim.length == 0) && recordEntry.error == null)
+            extractionRecords.append(new RecordEntry(recordEntry.page, RecordSeverity.Info, recordEntry.page.title.language, recordEntry.errorMsg, recordEntry.error))
+        else if(recordEntry.error != null)
+            extractionRecords.append(new RecordEntry(recordEntry.page, RecordSeverity.Exception, recordEntry.page.title.language, recordEntry.errorMsg, recordEntry.error))
+        else
+            extractionRecords.append(new RecordEntry(recordEntry.page, RecordSeverity.Warning, recordEntry.page.title.language, recordEntry.errorMsg, recordEntry.error))
+    }
+
+    def addExtractionRecord(errorMsg: String = null, error: Throwable = null): Unit ={
+        addExtractionRecord(new RecordEntry[PageNode](this, RecordSeverity.Info, this.title.language, errorMsg, error))
     }
 
     def getExtractionRecords() = this.extractionRecords.seq

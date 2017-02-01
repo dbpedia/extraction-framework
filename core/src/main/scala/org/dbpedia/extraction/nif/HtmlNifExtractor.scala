@@ -4,6 +4,7 @@ import java.net.URI
 
 import org.apache.commons.lang3.StringEscapeUtils
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.mappings.RecordSeverity
 import org.dbpedia.extraction.nif.LinkExtractor.NifExtractorContext
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
@@ -52,7 +53,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     * @param exceptionHandle
     * @return
     */
-  def extractNif(graphIri: String, subjectIri: String, html: String)(exceptionHandle: Throwable => Unit): Seq[Quad] = {
+  def extractNif(graphIri: String, subjectIri: String, html: String)(exceptionHandle: (String, RecordSeverity.Value, Throwable) => Unit): Seq[Quad] = {
 
     val sections = getRelevantParagraphs(html)
 
@@ -77,11 +78,11 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
           //collect additional triples
           extendSectionTriples(extractionResults, graphIri, subjectIri)
           //forward exceptions
-          extractionResults.errors.foreach(err => exceptionHandle(new Exception(err)))
+          extractionResults.errors.foreach(exceptionHandle(_, RecordSeverity.Warning, null))
           quad
         }
         case Failure(e) => {
-          exceptionHandle(e)
+          exceptionHandle(e.getMessage, RecordSeverity.Exception, e)
           List()
         }
       }
@@ -126,7 +127,6 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     triples += nifStructure(sectionUri, RdfNamespace.NIF.append("beginIndex"), offset.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
     triples += nifStructure(sectionUri, RdfNamespace.NIF.append("endIndex"), (offset + calculateText(section.paragraphs)._2).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
     triples += nifStructure(sectionUri, RdfNamespace.NIF.append("referenceContext"), contextUri, sourceUrl, null)
-    triples += nifStructure(contextUri, RdfNamespace.NIF.append("hasSection"), sectionUri, sourceUrl, null)
 
     //adding navigational properties
     section.getPrev match{
@@ -138,19 +138,28 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     }
     section.getTop match{
       case Some(p) => {
-        triples += nifStructure(sectionUri, RdfNamespace.NIF.append("topSection"), p.getSectionIri(), sourceUrl, null)
         triples += nifStructure(sectionUri, RdfNamespace.NIF.append("superString"), p.getSectionIri(), sourceUrl, null)
-        triples += nifStructure(p.getSectionIri(), RdfNamespace.NIF.append("subSection"), sectionUri, sourceUrl, null)
+        triples += nifStructure(p.getSectionIri(), RdfNamespace.NIF.append("hasSection"), sectionUri, sourceUrl, null)
       }
       case None =>
     }
 
-    if(section.top.isEmpty && section.prev.isEmpty) {
-      triples += nifStructure(contextUri, RdfNamespace.NIF.append("firstSection"), sectionUri, sourceUrl, null)
+    if(section.top.isEmpty) {
       triples += nifStructure(sectionUri, RdfNamespace.NIF.append("superString"), contextUri, sourceUrl, null)
+      triples += nifStructure(contextUri, RdfNamespace.NIF.append("hasSection"), sectionUri, sourceUrl, null)
+      if (section.prev.isEmpty)
+        triples += nifStructure(contextUri, RdfNamespace.NIF.append("firstSection"), sectionUri, sourceUrl, null)
+      if (section.next.isEmpty)
+        triples += nifStructure(contextUri, RdfNamespace.NIF.append("lastSection"), sectionUri, sourceUrl, null)
     }
-    if(section.sub.isEmpty && section.next.isEmpty)
-      triples += nifStructure(contextUri, RdfNamespace.NIF.append("lastSection"), sectionUri, sourceUrl, null)
+    else{
+      triples += nifStructure(sectionUri, RdfNamespace.NIF.append("superString"), section.getTop.get.getSectionIri(), sourceUrl, null)
+      triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("hasSection"), sectionUri, sourceUrl, null)
+      if (section.prev.isEmpty)
+        triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("firstSection"), sectionUri, sourceUrl, null)
+      if (section.next.isEmpty)
+        triples += nifStructure(section.getTop.get.getSectionIri(), RdfNamespace.NIF.append("lastSection"), sectionUri, sourceUrl, null)
+    }
 
     //further specifying paragraphs of every section
     var lastParagraph: String = null
@@ -205,7 +214,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     for(table <- tables.toList){
       section.tableCount = section.tableCount+1
       val position = offset + table._1
-      val tableUri = getNifIri("table", position, position).replaceFirst("&chars=.*", "&ref=" + section.ref + "_" + section.tableCount)
+      val tableUri = getNifIri("table", position, position).replaceFirst("&char=.*", "&ref=" + section.ref + "_" + section.tableCount)
 
       triples += rawTables(tableUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("Structure"), sourceUrl, null)
       triples += rawTables(tableUri, RdfNamespace.NIF.append("referenceContext"), contextUri, sourceUrl, null)
@@ -330,12 +339,12 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
 
     //replace queries
     for(css <- cssSelectorConfigMap.replaceElements) {
-      val query = css.split("\\s*->\\s*")
+      val query = css.split("->")
       for (item <- doc.select(query(0)).asScala) {
         val before = query(1).substring(0, query(1).indexOf("$c"))
         val after = query(1).substring(query(1).indexOf("$c") + 2)
-        item.before("<span>" + before + "</span>")
-        item.after("<span>" + after + "</span>")
+        item.before("<span>" + before  + "</span>")
+        item.after("<span>" + after  + "</span>")
       }
     }
 
@@ -346,7 +355,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
         val before = query(1).substring(0, query(1).indexOf("$c"))
         val after = query(1).substring(query(1).indexOf("$c") + 2)
         item.before("<span class='notebegin'>" + before + "</span>")
-        item.after("<span class='noteend'>" + after + "</span>")
+        item.after("<span class='noteend'>" + after  + "</span>")
       }
     }
 
@@ -399,7 +408,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     val uri = URI.create(nifContextIri)
     var iri = uri.getScheme + "://" + uri.getHost + (if(uri.getPort > 0) ":" + uri.getPort else "") + uri.getPath + "?"
     val m = uri.getQuery.split("&").map(_.trim).collect{ case x if !x.startsWith("nif=") => x}
-    iri += m.foldRight("")(_+"&"+_) + "nif=" + nifClass + "&chars=" + beginIndex + "," + endIndex
+    iri += m.foldRight("")(_+"&"+_) + "nif=" + nifClass + "&char=" + beginIndex + "," + endIndex
     iri.replace("?&", "?")
   }
 

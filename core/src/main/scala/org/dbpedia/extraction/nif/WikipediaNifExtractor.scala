@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.nif
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.mappings.{RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.ontology.{Ontology, RdfNamespace}
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{Config, Language}
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 import org.jsoup.nodes.{Document, Element, Node}
 import org.jsoup.select.Elements
@@ -12,7 +13,6 @@ import org.jsoup.select.Elements
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-
 import scala.language.reflectiveCalls
 
 /**
@@ -24,8 +24,8 @@ class WikipediaNifExtractor(
        def language : Language
        def configFile : Config
      },
-     nifContextIri: String
-   ) extends HtmlNifExtractor(nifContextIri, context.language.isoCode, context.configFile) {
+     wikiPage: WikiPage
+   ) extends HtmlNifExtractor(wikiPage.uri + "?dbpv=" + context.configFile.dbPediaVersion + "&nif=context", context.language.isoCode, context.configFile) {
 
 
   /**
@@ -45,6 +45,12 @@ class WikipediaNifExtractor(
   override protected val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x
     case None => "Template"
+  }
+
+  def extractNif(html: String)(exceptionHandle: RecordEntry[WikiPage] => Unit): Seq[Quad] = {
+    super.extractNif(wikiPage.sourceIri, wikiPage.uri, html){ (_1:String, _2:RecordSeverity.Value, _3:Throwable) =>
+      new RecordEntry[WikiPage](wikiPage, _2, context.language, _1, _3)
+    }
   }
 
   /**
@@ -70,7 +76,7 @@ class WikipediaNifExtractor(
     * @return
     */
   override def extendContextTriples(quads: Seq[Quad], graphIri: String, subjectIri: String): Seq[Quad] = {
-    List(nifContext(nifContextIri, RdfNamespace.NIF.append("predLang"), "http://lexvo.org/id/iso639-3/" + this.context.language.iso639_3, graphIri, null))
+    List(nifContext(wikiPage.uri + "?dbpv=" + context.configFile.dbPediaVersion + "&nif=context", RdfNamespace.NIF.append("predLang"), "http://lexvo.org/id/iso639-3/" + this.context.language.iso639_3, graphIri, null))
   }
 
   private def getShortAbstract(paragraphs: List[Paragraph]): String = {
@@ -153,7 +159,7 @@ class WikipediaNifExtractor(
       }
     }
 
-    nodes = nodes.dropWhile(node => node.nodeName() != "p")    //move cursor to the beginning of the abstract
+    nodes = nodes.dropWhile(node => node.nodeName() != "p")    //move cursor to infobox / abstract
     val ab = nodes.takeWhile(node => !isWikiNextTitle(node) && !isWikiToc(node) && !isWikiPageEnd(node))
 
     tocMap.append(new PageSection(                     //save abstract (abstract = section 0)

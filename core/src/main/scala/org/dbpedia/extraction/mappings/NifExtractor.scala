@@ -67,8 +67,7 @@ class NifExtractor(
       case None => return Seq.empty
     }
 
-    val nifContextIri = subjectUri + "?dbpv=" + dbpediaVersion + "&nif=context"
-    new WikipediaNifExtractor(context, nifContextIri).extractNif(pageNode.sourceIri, subjectUri, html)(err => pageNode.addExtractionRecord("", err, pushToStd = true))
+    new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err.asInstanceOf[RecordEntry[PageNode]]))
   }
 
 }

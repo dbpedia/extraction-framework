@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
-import org.dbpedia.extraction.mappings.{RecordEntry, ExtractionRecorder}
+
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
+
 import scala.Console.err
 
 /**
@@ -20,7 +22,12 @@ class QuadReader {
   }
 
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
-    recorder.record(new RecordEntry[Quad](quad, lang, errorMsg, error))
+    if(errorMsg == null && error == null)
+      recorder.record(new RecordEntry[Quad](quad, RecordSeverity.Info, lang, errorMsg, error))
+    else if(error != null)
+      recorder.record(new RecordEntry[Quad](quad, RecordSeverity.Exception, lang, errorMsg, error))
+    else
+      recorder.record(new RecordEntry[Quad](quad, RecordSeverity.Warning, lang, errorMsg, error))
   }
 
   /**

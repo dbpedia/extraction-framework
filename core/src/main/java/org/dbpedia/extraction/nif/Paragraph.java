@@ -24,7 +24,7 @@ public class Paragraph {
     }
 
     public String getText() {
-        return text.trim();
+        return StringUtils.strip(text, " ");
     }
 
     public int getBegin() {
@@ -61,9 +61,8 @@ public class Paragraph {
      * @return
      */
     public int addText(String text) {
-        String zw = text.replaceAll("\\s+", " ");
-        this.text += zw;
-        return GetEscapedStringLength(zw);
+        this.text += text;
+        return GetEscapedStringLength(text);
     }
 
     public int finalizeParagraph(){

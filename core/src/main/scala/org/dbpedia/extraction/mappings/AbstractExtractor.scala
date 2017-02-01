@@ -175,6 +175,7 @@ extends WikiPageExtractor
             // system eventually becomes overloaded. So we wait a moment. The higher the load,
             // the longer we wait.
 
+            val zw = ex.getMessage
             var loadFactor = Double.NaN
             var sleepMs = sleepFactorMs
  
@@ -191,8 +192,8 @@ extends WikiPageExtractor
             }
             else {
               ex match {
-                case e : java.net.SocketTimeoutException => throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
-                case _ => throw new Exception("Unknown error when retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
+                case e : java.net.SocketTimeoutException => throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, e)
+                case _ => throw new Exception("A non time related error occurred when retrieving page " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
               }
             }
           }

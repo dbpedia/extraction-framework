@@ -1,7 +1,7 @@
 {
   "default":{
     "nif-find-pageend":[
-      "span[id='References']",
+      "span[id*='eferences']",
       "span[id='External_Links']",
       "span[id='External_links_and_references']",
       ".printfooter"
@@ -16,16 +16,16 @@
       "span.mw-editsection",
       ".error",
       "#coordinates",
-      ".infobox",
       ".navbox",
       ".thumb",
       "div[role='img']",
       ".mw-cite-backlink"
     ],
     "nif-replace-elements":[
-      "ul > li:not(:last-child) ->* $c",
-      "ul > li:last-child ->* $c",
-      "ol > li:not(:last-child) ->$c"],
+      "ul > li:not(:last-child) -> \\n* $c",
+      "ul > li:last-child -> \\n* $c",
+      "ol > li:not(:last-child) -> \\n* $c",
+      "ol > li:last-child -> \\n* $c"],
     "nif-note-elements":[
     "div.hatnote -> ($c)"
     ]

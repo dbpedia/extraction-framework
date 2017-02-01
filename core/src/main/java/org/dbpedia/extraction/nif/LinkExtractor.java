@@ -56,6 +56,7 @@ public class LinkExtractor implements NodeVisitor {
 		  //replace no-break spaces because unescape doesn't deal with them
 		  tempText = StringEscapeUtils.unescapeHtml4(tempText);
           tempText = org.dbpedia.extraction.util.StringUtils.escape(tempText, replaceChars());
+		  tempText = tempText.replace("\\n", "\n").replace("\\t", "\t").replace("\\r", "");
 
 		  //this text node is the content of an <a> element: make a new nif:Word
 		  if(inLink) {
@@ -238,7 +239,6 @@ public class LinkExtractor implements NodeVisitor {
     private String[] replaceChars() {
         String[] rep = new String[256];
         rep['\n'] = "";
-        rep['\\'] = "";
         rep['\u00A0'] = " ";
         return rep;
     }

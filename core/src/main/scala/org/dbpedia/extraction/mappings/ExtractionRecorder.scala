@@ -110,7 +110,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
       record.page match{
         case page: PageNode => {
           if (record.errorMsg != null)
-            printLabeledLine(record.errorMsg, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
+            printLabeledLine(record.errorMsg, record.severity, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
           Option(record.error) match {
             case Some(ex) => failedRecord(page.title.encoded, page.id, record.page, ex, record.language)
             case None => recordExtractedPage(page.id, page.title, record.logSuccessfulPage)
@@ -119,7 +119,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
         case quad: Quad =>{
           Option(record.error) match {
             case Some(ex) => failedRecord(quad.subject, runningPageNumber(record.language), record.page, ex, record.language)
-            case None => recordQuad(quad, record.language)
+            case None => recordQuad(quad, record.severity, record.language)
           }
         }
         case _ => {
@@ -130,7 +130,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
               else "an undefined error occurred at quad: " + successfulPages(record.language)
             }
           }
-          printLabeledLine(msg, record.language, Seq(PrinterDestination.err, PrinterDestination.file))
+          printLabeledLine(msg, record.severity, record.language, Seq(PrinterDestination.err, PrinterDestination.file))
         }
       }
     }
@@ -154,10 +154,10 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
       case Some(map) => map += ((id,node) -> exception)
       case None =>  failedPageMap += lang -> mutable.Map[(Long, T), Throwable]((id, node) -> exception)
     }
-    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name + ": " + exception.getMessage(), lang, Seq(PrinterDestination.file))
+    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name + ": " + exception.getMessage(), RecordSeverity.Exception, lang, Seq(PrinterDestination.file))
     for (ste <- exception.getStackTrace)
-      printLabeledLine("\t" + ste.toString, lang, Seq(PrinterDestination.file), noLabel = true)
-    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name, lang, Seq(PrinterDestination.err, PrinterDestination.file))
+      printLabeledLine("\t" + ste.toString, RecordSeverity.Exception, lang, Seq(PrinterDestination.file), noLabel = true)
+    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name, RecordSeverity.Exception, lang, Seq(PrinterDestination.err, PrinterDestination.file))
   }
 
   /**
@@ -173,10 +173,10 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
         case Some(map) => map += (id -> title)
         case None => successfulPagesMap += title.language -> mutable.Map[Long, WikiTitle](id -> title)
       }
-      printLabeledLine("page " + id + ": " + title.encoded + " extracted", title.language, Seq(PrinterDestination.file))
+      printLabeledLine("page " + id + ": " + title.encoded + " extracted", RecordSeverity.Info, title.language, Seq(PrinterDestination.file))
     }
     if(increaseAndGetSuccessfulPages(title.language) % reportInterval == 0)
-      printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", title.language)
+      printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", RecordSeverity.Info, title.language)
   }
 
   /**
@@ -185,25 +185,30 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
     * @param quad
     * @param lang
     */
-  def recordQuad(quad: Quad, lang:Language): Unit = synchronized {
+  def recordQuad(quad: Quad, severity: RecordSeverity.Value, lang:Language): Unit = synchronized {
     if(increaseAndGetSuccessfulPages(lang) % reportInterval == 0)
-      printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", lang)
+      printLabeledLine("processed {page} quads; {mspp} per quad; {fail} failed quads", severity, lang)
   }
 
     /**
     * print a line to std out, err or the log file
     *
     * @param line - the line in question
-    * @param lang - langauge of current page
+    * @param language - langauge of current page
     * @param print - enum values for printer destinations (err, out, file - null mean all of them)
     * @param noLabel - the initial label (lang: time passed) is omitted
     */
-  def printLabeledLine(line:String, language: Language = null, print: Seq[PrinterDestination.Value] = null, noLabel: Boolean = false): Unit ={
+  def printLabeledLine(line:String, severity: RecordSeverity.Value, language: Language = null, print: Seq[PrinterDestination.Value] = null, noLabel: Boolean = false): Unit ={
     val lang = if(language != null) language else defaultLang
-    val printOptions = if(print == null) Seq(PrinterDestination.out, PrinterDestination.file) else print
+    val printOptions = if(print == null) {
+      if(severity == RecordSeverity.Exception )
+        Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
+      else
+        Seq(PrinterDestination.out, PrinterDestination.file)
+    } else print
     val pages = successfulPages(lang)
     val time = System.currentTimeMillis - startTime.get
-    val replacedLine = ((if(noLabel) "" else lang.wikiCode  + ": extraction at {time}{data}; ") + line)
+    val replacedLine = ((if(noLabel) "" else severity.toString + "; " + lang.wikiCode  + "; extraction at {time}{data}; ") + line)
       .replaceAllLiterally("{time}", StringUtils.prettyMillis(time))
       .replaceAllLiterally("{mspp}", decForm.format(time.toDouble / pages) + " ms")
       .replaceAllLiterally("{page}", pages.toString)
@@ -258,8 +263,13 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
   */
 class RecordEntry[T](
   val page: T,
+  val severity: RecordSeverity.Value,
   val language: Language,
   val errorMsg: String= null,
   val error:Throwable = null,
   val logSuccessfulPage:Boolean = false
 )
+
+object RecordSeverity extends Enumeration {
+  val Info, Warning, Exception = Value
+}
