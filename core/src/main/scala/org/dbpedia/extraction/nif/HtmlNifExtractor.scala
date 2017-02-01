@@ -69,14 +69,14 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
             context = context + "\n\n"
             offset += 2
           }
-          val quad = makeStructureElements(extractionResults, nifContextIri, graphIri, offset)
+          var quad = makeStructureElements(extractionResults, nifContextIri, graphIri, offset)
 
           val extractedText = calculateText(extractionResults.paragraphs)
           offset += extractedText._2
           context += extractedText._1
 
           //collect additional triples
-          extendSectionTriples(extractionResults, graphIri, subjectIri)
+          quad ++= extendSectionTriples(extractionResults, graphIri, subjectIri)
           //forward exceptions
           extractionResults.errors.foreach(exceptionHandle(_, RecordSeverity.Warning, null))
           quad

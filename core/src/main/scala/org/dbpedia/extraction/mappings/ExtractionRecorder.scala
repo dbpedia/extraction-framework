@@ -206,6 +206,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
       else
         Seq(PrinterDestination.out, PrinterDestination.file)
     } else print
+
     val pages = successfulPages(lang)
     val time = System.currentTimeMillis - startTime.get
     val replacedLine = ((if(noLabel) "" else severity.toString + "; " + lang.wikiCode  + "; extraction at {time}{data}; ") + line)
