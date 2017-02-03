@@ -3,11 +3,12 @@ package org.dbpedia.extraction.mappings
 import java.io.{InputStream, OutputStreamWriter}
 import java.net.URL
 import java.util.logging.Logger
+import javax.xml.ws.WebServiceException
 
 import org.dbpedia.extraction.annotations.ExtractorAnnotation
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{Config, Language}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
@@ -15,7 +16,6 @@ import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import scala.io.Source
 import scala.language.reflectiveCalls
 import scala.util.{Failure, Success, Try}
-import scala.xml.{NodeSeq, XML}
 
 /**
  * Extracts wiki texts like abstracts or sections in html.
@@ -247,13 +247,30 @@ extends WikiPageExtractor
     private def readInAbstract(inputStream : InputStream) : Try[String] =
     {
       // for XML format
-      val xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-      var text = XML.loadString(xmlAnswer).asInstanceOf[NodeSeq]
+      var xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
+      //var text = XML.loadString(xmlAnswer).asInstanceOf[NodeSeq]
 
-      for(child <- xmlPath)
-        text = text \ child
+      //test for errors
+      val pattern = "(<error[^>]+info=\")([^\\\"]+)".r
+      if(xmlAnswer.contains("error code=")) {
+        return Failure(new WebServiceException(pattern.findFirstMatchIn(xmlAnswer) match {
+          case Some(m) => m.group(2)
+          case None => "An unknown exception occurred while retrieving the source XML from the mediawiki API."
+        }))
+      }
 
-      decodeHtml(text.text.trim)
+      //get rid of surrounding tags
+      xmlAnswer = xmlAnswer.replaceFirst("<?xml[^>]*>", "")
+      for(child <- xmlPath){
+        if(xmlAnswer.contains("<" + child) && xmlAnswer.contains("</" + child)) {
+          xmlAnswer = xmlAnswer.replaceFirst("<" + child + "[^>]*>", "")
+          xmlAnswer = xmlAnswer.substring(0, xmlAnswer.lastIndexOf("</" + child + ">"))
+        }
+        else
+          return Failure(new WebServiceException("The response from the mediawiki API does not contain the expected XML path: " + xmlPath))
+      }
+
+      decodeHtml(xmlAnswer.trim)
     }
 
     private def replacePatterns(abst: String): String= {

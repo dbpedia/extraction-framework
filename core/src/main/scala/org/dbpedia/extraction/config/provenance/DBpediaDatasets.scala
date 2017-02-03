@@ -204,6 +204,7 @@ object DBpediaDatasets
     val NifPageStructure = datasets.get("nif_page_structure").get
     val NifTextLinks = datasets.get("nif_text_links").get
     val RawTables = datasets.get("raw_tables").get
+    val Equations = datasets.get("equations").get
 
     /**
      * Links

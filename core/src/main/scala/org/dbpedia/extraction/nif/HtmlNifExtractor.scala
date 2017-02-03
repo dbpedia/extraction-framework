@@ -8,11 +8,12 @@ import org.dbpedia.extraction.mappings.RecordSeverity
 import org.dbpedia.extraction.nif.LinkExtractor.NifExtractorContext
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Config, CssConfigurationMap, UriUtils, WikiUtil}
+import org.dbpedia.extraction.util.{Config, CssConfigurationMap, UriUtils}
 import org.jsoup.Jsoup
 import org.jsoup.nodes.{Document, Element, TextNode}
 import org.jsoup.parser.Tag
 import org.jsoup.select.NodeTraversor
+import uk.ac.ed.ph.snuggletex.{SerializationMethod, SnuggleEngine, SnuggleInput, XMLStringOutputOptions}
 
 import scala.collection.convert.decorateAsScala._
 import scala.collection.mutable
@@ -33,6 +34,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
   protected lazy val nifStructure = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifPageStructure.encoded) _
   protected lazy val nifLinks = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.NifTextLinks.encoded) _
   protected lazy val rawTables = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.RawTables.encoded) _
+  protected lazy val equations = QuadBuilder.dynamicPredicate(language, DBpediaDatasets.Equations.encoded) _
 
   protected val templateString = "Template"
 
@@ -177,7 +179,12 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
 
     def writeParagraph(i: Int): Unit = {
       //add raw tables (text length might be 0)
-      triples ++= saveRawTables(section.paragraphs(i).getTableHtml.asScala, section, contextUri, sourceUrl, off)
+      if(section.paragraphs(i).getTagName == "table")
+        triples ++= saveRawTables(section.paragraphs(i).getAdditionalStructures.asScala, section, contextUri, sourceUrl, off)
+
+      //add equations MathML
+      if(section.paragraphs(i).getTagName == "math")
+        triples ++= saveEquations(section.paragraphs(i).getAdditionalStructures.asScala, section, contextUri, sourceUrl, off)
 
       if(section.paragraphs(i).getLength == 0)
         return
@@ -221,6 +228,22 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
       triples += rawTables(tableUri, RdfNamespace.NIF.append("beginIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
       triples += rawTables(tableUri, RdfNamespace.NIF.append("endIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
       triples += rawTables(tableUri, RdfNamespace.DC.append("source"), table._2, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
+    }
+    triples
+  }
+
+  private def saveEquations(equs: mutable.Map[Integer, String], section: PageSection, contextUri: String, sourceUrl: String, offset: Int): ListBuffer[Quad] = {
+    val triples = ListBuffer[Quad]()
+    for(equ <- equs.toList){
+      section.equationCount = section.equationCount+1
+      val position = offset + equ._1
+      val equUri = getNifIri("equation", position, position).replaceFirst("&char=.*", "&ref=" + section.ref + "_" + section.equationCount)
+
+      triples += equations(equUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("Structure"), sourceUrl, null)
+      triples += equations(equUri, RdfNamespace.NIF.append("referenceContext"), contextUri, sourceUrl, null)
+      triples += equations(equUri, RdfNamespace.NIF.append("beginIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
+      triples += equations(equUri, RdfNamespace.NIF.append("endIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
+      triples += equations(equUri, RdfNamespace.DC.append("source"), equ._2, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
     }
     triples
   }
@@ -296,27 +319,30 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     }
   }
 
-  @deprecated
-  private def extractTextParagraph(text: String): (String, Int) = {
-    var tempText: String = StringEscapeUtils.unescapeHtml4(text)
-    tempText = WikiUtil.cleanSpace(tempText).trim
-    if (tempText.contains("\\")) {
-      tempText = tempText.replace("\\", "")
-    }
-    var escapeCount: Int = 0
-    if (tempText.contains("\"") && !(tempText.trim == "\"")) {
-      tempText = tempText.replace("\"", "\\\"")
-      escapeCount = org.apache.commons.lang3.StringUtils.countMatches(tempText, "\\")
-    }
-    else if (tempText.trim == "\"") {
-      tempText = ""
-    }
-    (WikiUtil.cleanSpace(tempText).trim, tempText.length - escapeCount)
+  protected def latexToMathMl(formula: String): String = {
+    /* Create vanilla SnuggleEngine and new SnuggleSession */
+    val engine = new SnuggleEngine()
+    val session = engine.createSession()
+
+    /* Parse some very basic Math Mode input */
+    val input = new SnuggleInput(formula)
+    session.parseInput(input)
+
+    //build options
+    val options = new XMLStringOutputOptions()
+    options.setSerializationMethod(SerializationMethod.XHTML)
+    options.setIndenting(true)
+    options.setEncoding("UTF-8")
+    options.setAddingMathSourceAnnotations(true)
+
+    /* Convert the results to an XML String, which in this case will
+     * be a single MathML <math>...</math> element. */
+    session.buildXMLString(options)
   }
 
   private def cleanHtml(str: String): String = {
-    val text = StringEscapeUtils.unescapeHtml4(str)
-    StringEscapeUtils.unescapeJava(text.replaceAll("\\n", ""))
+    StringEscapeUtils.unescapeHtml4(str).replaceAll("\n", "")
+    //text = StringEscapeUtils.unescapeJava(text)
   }
 
   protected def getJsoupDoc(html: String): Document = {
@@ -329,6 +355,8 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
 
     // get all tables and save them as is (after delete, since we want the same number of tables before and after)
     val tables = doc.select("table").clone().asScala
+
+    val equations = for(e <- doc.select("span.tex").asScala) yield latexToMathMl(e.text())
 
     //hack to number ol items (cant see a way to do it with css selectors in a sufficient way)
     for(ol <- doc.select("ol").asScala){
@@ -366,42 +394,12 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     for(i <- zw.indices)
       zw(i).replaceWith(tables(i))
 
+    //replace latex equations with mathML
+    val eqhs = doc.select("span.tex").asScala
+    for(i <- eqhs.indices)
+      eqhs(i).replaceWith(Jsoup.parseBodyFragment(equations(i)).body().child(0))
+
     doc
-  }
-
-  @deprecated
-  private def cleanUpWhiteSpaces(input : String): String =
-  {
-    //replaces multiple replace functions: tempText.replace("( ", "(").replace("  ", " ").replace(" ,", ",").replace(" .", ".");
-    val sb = new StringBuilder()
-    val chars = input.toCharArray
-
-    var pos = 0
-    var l = ' '
-
-    while (pos < chars.length)
-    {
-      val c = chars(pos)
-      if(c == ' ' || c == ',' || c == '.' || c == ')' || c == ']')        //
-      {
-        if(l != ' ')                //
-          sb.append(l)
-      }
-      else
-        sb.append(l)
-
-      if(l == '(' || l == '[')        //
-      {
-        if(c != ' ')                //
-          l = c
-      }
-      else
-        l = c
-      pos += 1
-    }
-    sb.append(l)
-
-    sb.toString.substring(1)   //delete first space (see init of l)
   }
 
   protected def getNifIri(nifClass: String, beginIndex: Int, endIndex: Int): String ={
@@ -459,6 +457,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
    val title: String,
    val ref: String,
    var tableCount: Integer,
+   var equationCount: Integer,
    val content: Seq[org.jsoup.nodes.Node]
  ) {
 
@@ -486,7 +485,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     val section: PageSection,
     var paragraphs: List[Paragraph],
     var errors: List[String]
-  ) extends PageSection(section.prev, section.top, section.next, section.sub, section.id, section.title, section.ref, section.tableCount, section.content)
+  ) extends PageSection(section.prev, section.top, section.next, section.sub, section.id, section.title, section.ref, section.tableCount, section.equationCount, section.content)
   {
     private val nonSpaceChars = List('[', '(', '{')
 
@@ -539,7 +538,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     }
 
     def getTables = {
-      val tables = for(paragraph <- paragraphs; tt <- paragraph.getTableHtml.entrySet().asScala)
+      val tables = for(paragraph <- paragraphs; tt <- paragraph.getAdditionalStructures.entrySet().asScala)
         yield tablecount -> (tt.getKey, tt.getValue)
       tables.toMap
     }

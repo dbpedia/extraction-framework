@@ -15,7 +15,7 @@ public class Paragraph {
     private String tagName = null;
     private int begin = 0;
     private LinkedList<Link> internalLinks = new LinkedList<>();
-    private HashMap<Integer,String> tableHtml = new HashMap<>();
+    private HashMap<Integer,String> additionalStructures = new HashMap<>();
 
     public Paragraph(int begin, String text, String tag){
         this.begin = begin;
@@ -47,12 +47,12 @@ public class Paragraph {
         return offset + begin + this.getLength();
     }
 
-    public void addLink(Link link) {
+    void addLink(Link link) {
         internalLinks.add(link);
     }
 
-    public void addTable(Integer position, String html) {
-        tableHtml.put(position, html);
+    void addStructure(Integer position, String html) {
+        additionalStructures.put(position, html);
     }
 
     /**
@@ -63,13 +63,6 @@ public class Paragraph {
     public int addText(String text) {
         this.text += text;
         return GetEscapedStringLength(text);
-    }
-
-    public int finalizeParagraph(){
-        if(Paragraph.FollowedByWhiteSpace(this.getText()))
-            return 0;
-        else
-            return -1;
     }
 
     public String getTagName() {
@@ -84,21 +77,21 @@ public class Paragraph {
         return GetEscapedStringLength(getText());
     }
 
-    public HashMap<Integer, String> getTableHtml() {
-        return this.tableHtml;
+    public HashMap<Integer, String> getAdditionalStructures() {
+        return this.additionalStructures;
     }
 
     public boolean hasContent(){
         if(this.getLength() > 0)
             return true;
-        if(this.tableHtml.size() > 0)
+        if(this.additionalStructures.size() > 0)
             return true;
         if(this.getLinks().size() > 0)
             return true;
         return false;
     }
 
-    static ArrayList<Character> whiteSpacePrefixes = new ArrayList<Character>(Arrays.asList('(', '[', '{', ' ', '\n'));
+    private static ArrayList<Character> whiteSpacePrefixes = new ArrayList<Character>(Arrays.asList('(', '[', '{', ' ', '\n'));
     public static boolean FollowedByWhiteSpace(String text){
         if(text == null || text.length() == 0)
             return false;

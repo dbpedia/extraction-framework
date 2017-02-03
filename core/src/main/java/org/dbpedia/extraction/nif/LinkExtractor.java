@@ -117,22 +117,20 @@ public class LinkExtractor implements NodeVisitor {
             addParagraph(node.nodeName());
         } else if(node.nodeName().equals("table")) {
             addParagraph("table");
-			paragraph.addTable(paragraph.getLength(), node.outerHtml());
+			paragraph.addStructure(paragraph.getLength(), node.outerHtml());
             addParagraph("p");
             skipLevel = depth;
         } else if(node.nodeName().equals("span")) {
+			//denote notes
 		    if(node.attr("class").contains("notebegin"))
                 addParagraph("note");
-        } else {
-/*			if(!node.nodeName().equals("span")) {
-					skipLevel = depth;
-			} else {
-				//TODO make this configurable
-				if(node.attr("id").equals("coordinates")||node.attr("class").equals("audio")||node.attr("class").equals("noprint")||node.attr("class").contains("error"))
-					skipLevel = depth;
-			}
-			*/
-		}
+
+        } else if(node.nodeName().equals("math"))  {
+            addParagraph("math");
+            paragraph.addStructure(paragraph.getLength(), node.outerHtml());
+            addParagraph("p");
+            skipLevel = depth;
+        }
 	}
 
 	private void setUri(String uri) {
@@ -218,7 +216,7 @@ public class LinkExtractor implements NodeVisitor {
 	}
 
 	private void addParagraph(String newTag){
-	    if(paragraph.getLength() != 0 || paragraph.getTableHtml().size() > 0)
+	    if(paragraph.getLength() != 0 || paragraph.getAdditionalStructures().size() > 0)
             paragraphs.add(paragraph);
 
 	    paragraph = new Paragraph(0, "", (newTag == null ? "p" : newTag));
@@ -227,7 +225,7 @@ public class LinkExtractor implements NodeVisitor {
 	public HashMap<Integer, String> getTables(){
 		HashMap<Integer, String> tables = new HashMap<>();
 		for(Paragraph p : this.getParagraphs()){
-			tables.putAll(p.getTableHtml());
+			tables.putAll(p.getAdditionalStructures());
 		}
 		return tables;
 	}

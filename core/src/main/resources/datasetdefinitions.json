@@ -6,7 +6,8 @@
     "add source datasets",
     "dperecation dates",
     "refine dataset traits!!!!!",
-    "add keywords as well "
+    "add keywords as well ",
+    "defaultgraph: namespace= published under the official namespace (default graph) of this language, dataset= this dataset will be attributed with a new namespace, matching its dataset name, any other value is the namespace ending of the graph uri"
   ],
   "sources": {
     "pages_articles": {
@@ -392,6 +393,18 @@
       "traits":"LinkedData, Published",
       "desc": "Contains the full text of a Wikipedia page in the NLP Interchange Format (NIF). All other NIF resources will reference the context of its Wikipedia page.It contains the whole text of a WikiPage (minus tables and references and minor artifacts)",
       "defaultgraph":"nif"
+    },
+    "raw_tables": {
+      "name": "raw html tables",
+      "traits":"LinkedData, Temporary",
+      "desc": "These are the raw html tables collected during the NIF extraction; to be further processed later.",
+      "defaultgraph": "dataset"
+    },
+    "equations": {
+      "name": "equations in MathML",
+      "traits":"LinkedData",
+      "desc": "This are all equations collected during the NIF extraction, transformed into MathML XML syntax.",
+      "defaultgraph": "dataset"
     }
   },
   "links":{
@@ -448,14 +461,6 @@
       "traits":"LinkedData, Published",
       "desc": "Dataset containing links between a language-locale DBpedia instance and DBpedia Commons.",
       "defaultgraph": "namespace"
-    }
-  },
-  "tables":{
-    "raw_tables": {
-      "name": "raw html tables",
-      "traits":"LinkedData, Temporary",
-      "desc": "These are the raw html tables collected during the NIF extraction; to be further processed later",
-      "defaultgraph": "dataset"
     }
   },
   "wikidata":{

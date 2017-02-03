@@ -141,6 +141,7 @@ class WikipediaNifExtractor(
             //merge section numbers separated by a dot
             ref = currentSection.map(n => "." + n.toString).foldRight("")(_+_).substring(1),
             tableCount = 0,
+            equationCount = 0,
             //take all following tags until you hit another title or end of content
             content = Seq(t) ++ nodes.takeWhile(node => !isWikiNextTitle(node) && !isWikiPageEnd(node))
           )
@@ -171,6 +172,7 @@ class WikipediaNifExtractor(
       title = "abstract",
       ref = currentSection.map(n => "." + n.toString).foldRight("")(_+_).substring(1),
       tableCount=0,
+      equationCount = 0,
       content = ab
     ))
 
