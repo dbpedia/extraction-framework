@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringEscapeUtils
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.mappings.RecordSeverity
 import org.dbpedia.extraction.nif.LinkExtractor.NifExtractorContext
+import org.dbpedia.extraction.nif.Paragraph.HtmlString
 import org.dbpedia.extraction.ontology.RdfNamespace
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.{Config, CssConfigurationMap, UriUtils}
@@ -180,11 +181,11 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     def writeParagraph(i: Int): Unit = {
       //add raw tables (text length might be 0)
       if(section.paragraphs(i).getTagName == "table")
-        triples ++= saveRawTables(section.paragraphs(i).getAdditionalStructures.asScala, section, contextUri, sourceUrl, off)
+        triples ++= saveRawTables(section.paragraphs(i).getHtmlStrings.asScala.toList, section, contextUri, sourceUrl, off)
 
       //add equations MathML
       if(section.paragraphs(i).getTagName == "math")
-        triples ++= saveEquations(section.paragraphs(i).getAdditionalStructures.asScala, section, contextUri, sourceUrl, off)
+        triples ++= saveEquations(section.paragraphs(i).getHtmlStrings.asScala.toList, section, contextUri, sourceUrl, off)
 
       if(section.paragraphs(i).getLength == 0)
         return
@@ -216,34 +217,35 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     triples
   }
 
-  private def saveRawTables(tables: mutable.Map[Integer, String], section: PageSection, contextUri: String, sourceUrl: String, offset: Int): ListBuffer[Quad] = {
+  private def saveRawTables(tables: List[HtmlString], section: PageSection, contextUri: String, sourceUrl: String, offset: Int): ListBuffer[Quad] = {
     val triples = ListBuffer[Quad]()
     for(table <- tables.toList){
       section.tableCount = section.tableCount+1
-      val position = offset + table._1
+      val position = offset + table.getOffset
       val tableUri = getNifIri("table", position, position).replaceFirst("&char=.*", "&ref=" + section.ref + "_" + section.tableCount)
 
-      triples += rawTables(tableUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("Structure"), sourceUrl, null)
+      triples += rawTables(tableUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("OffsetBasedString"), sourceUrl, null)
       triples += rawTables(tableUri, RdfNamespace.NIF.append("referenceContext"), contextUri, sourceUrl, null)
       triples += rawTables(tableUri, RdfNamespace.NIF.append("beginIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
       triples += rawTables(tableUri, RdfNamespace.NIF.append("endIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
-      triples += rawTables(tableUri, RdfNamespace.DC.append("source"), table._2, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
+      triples += rawTables(tableUri, RdfNamespace.HTML.append("class"), table.getOuterClass, sourceUrl, RdfNamespace.XSD.append("string"))
+      triples += rawTables(tableUri, RdfNamespace.DC.append("source"), table.getHtml, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
     }
     triples
   }
 
-  private def saveEquations(equs: mutable.Map[Integer, String], section: PageSection, contextUri: String, sourceUrl: String, offset: Int): ListBuffer[Quad] = {
+  private def saveEquations(equs: List[HtmlString], section: PageSection, contextUri: String, sourceUrl: String, offset: Int): ListBuffer[Quad] = {
     val triples = ListBuffer[Quad]()
     for(equ <- equs.toList){
       section.equationCount = section.equationCount+1
-      val position = offset + equ._1
+      val position = offset + equ.getOffset
       val equUri = getNifIri("equation", position, position).replaceFirst("&char=.*", "&ref=" + section.ref + "_" + section.equationCount)
 
-      triples += equations(equUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("Structure"), sourceUrl, null)
+      triples += equations(equUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("OffsetBasedString"), sourceUrl, null)
       triples += equations(equUri, RdfNamespace.NIF.append("referenceContext"), contextUri, sourceUrl, null)
       triples += equations(equUri, RdfNamespace.NIF.append("beginIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
       triples += equations(equUri, RdfNamespace.NIF.append("endIndex"), position.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
-      triples += equations(equUri, RdfNamespace.DC.append("source"), equ._2, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
+      triples += equations(equUri, RdfNamespace.DC.append("source"), equ.getHtml, sourceUrl, RdfNamespace.RDF.append("XMLLiteral"))
     }
     triples
   }
@@ -310,7 +312,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
             section.addParagraphs(extractor.getParagraphs.asScala.toList)
             section.addErrors(extractor.getErrors.asScala.toList)
           }
-          else if(extractor.getTables.size() > 0){
+          else if(extractor.getTableCount > 0){
             section.addParagraphs(extractor.getParagraphs.asScala.toList)
             section.addErrors(extractor.getErrors.asScala.toList)
           }
@@ -535,12 +537,6 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     private def tablecount = {
       tablecounty= tablecounty+1
       tablecounty
-    }
-
-    def getTables = {
-      val tables = for(paragraph <- paragraphs; tt <- paragraph.getAdditionalStructures.entrySet().asScala)
-        yield tablecount -> (tt.getKey, tt.getValue)
-      tables.toMap
     }
   }
 }

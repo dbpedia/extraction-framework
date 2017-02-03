@@ -260,7 +260,7 @@ extends WikiPageExtractor
       }
 
       //get rid of surrounding tags
-      xmlAnswer = xmlAnswer.replaceFirst("<?xml[^>]*>", "")
+      xmlAnswer = xmlAnswer.replaceFirst("<\\?xml[^>]*>", "")
       for(child <- xmlPath){
         if(xmlAnswer.contains("<" + child) && xmlAnswer.contains("</" + child)) {
           xmlAnswer = xmlAnswer.replaceFirst("<" + child + "[^>]*>", "")

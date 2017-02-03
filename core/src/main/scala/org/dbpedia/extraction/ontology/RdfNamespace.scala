@@ -74,6 +74,7 @@ object RdfNamespace {
   val DBF = ns("dbf", "http://dbpedia.org/function/")
   val CRML = ns("crml", "http://semweb.mmlab.be/ns/crml#")
   val NIF = ns("nif", "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#")
+  val HTML = ns("html", "http://www.w3.org/1999/xhtml/")
 
   //the following namespaces are required for supporting the entries in the mappings Wiki as of 2014-07-15
   val CIDOCCRM = ns("cidoccrm", "http://purl.org/NET/cidoc-crm/core#", false)

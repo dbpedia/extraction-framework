@@ -36,7 +36,7 @@ class NifExtractorTest extends FunSuite {
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   //private val titles = List("Antimon", "Alkalimetalle", "Apostilb", "Doldenblütler")
-  private val titles = List("Alkalimetalle")
+  private val titles = List("DDR-Ringermeisterschaften_1949", "Gambrinus_Liga_2006/07", "Abu_Nidal")
 
   test("testExtractNif") {
     dest.open()

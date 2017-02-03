@@ -8,7 +8,6 @@ import org.jsoup.select.NodeVisitor;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class LinkExtractor implements NodeVisitor {
@@ -117,7 +116,7 @@ public class LinkExtractor implements NodeVisitor {
             addParagraph(node.nodeName());
         } else if(node.nodeName().equals("table")) {
             addParagraph("table");
-			paragraph.addStructure(paragraph.getLength(), node.outerHtml());
+			paragraph.addStructure(paragraph.getLength(), node.outerHtml(), "table", node.attr("class"), node.attr("id"));
             addParagraph("p");
             skipLevel = depth;
         } else if(node.nodeName().equals("span")) {
@@ -127,7 +126,7 @@ public class LinkExtractor implements NodeVisitor {
 
         } else if(node.nodeName().equals("math"))  {
             addParagraph("math");
-            paragraph.addStructure(paragraph.getLength(), node.outerHtml());
+            paragraph.addStructure(paragraph.getLength(), node.outerHtml(), "math", "tex", null);
             addParagraph("p");
             skipLevel = depth;
         }
@@ -216,18 +215,18 @@ public class LinkExtractor implements NodeVisitor {
 	}
 
 	private void addParagraph(String newTag){
-	    if(paragraph.getLength() != 0 || paragraph.getAdditionalStructures().size() > 0)
+	    if(paragraph.getLength() != 0 || paragraph.getHtmlStrings().size() > 0)
             paragraphs.add(paragraph);
 
 	    paragraph = new Paragraph(0, "", (newTag == null ? "p" : newTag));
     }
 
-	public HashMap<Integer, String> getTables(){
-		HashMap<Integer, String> tables = new HashMap<>();
+	public int getTableCount(){
+		int count =0;
 		for(Paragraph p : this.getParagraphs()){
-			tables.putAll(p.getAdditionalStructures());
+			count += paragraph.getHtmlStrings().size();
 		}
-		return tables;
+		return count;
 	}
 
 	public ArrayList<String> getErrors(){
