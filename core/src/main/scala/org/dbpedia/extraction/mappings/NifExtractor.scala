@@ -46,7 +46,7 @@ class NifExtractor(
 
   protected val dbpediaVersion = context.configFile.dbPediaVersion
 
-  override val datasets = Set(DBpediaDatasets.NifContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts, DBpediaDatasets.RawTables)
+  override val datasets = Set(DBpediaDatasets.NifContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts, DBpediaDatasets.RawTables, DBpediaDatasets.Equations)
 
   private val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x
