@@ -6,7 +6,7 @@ import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.util.text.ParseExceptionIgnorer
@@ -136,9 +136,21 @@ extends PageNodeExtractor
       // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
       // TODO: there may be other characters that need to be escaped.
       var titleParam = pageTitle.encodedWithNamespace
-      AbstractExtractor.CHARACTERS_TO_ESCAPE foreach { case (search, replacement) =>
+      List(
+        (";", "%3B"),
+        ("/", "%2F"),
+        ("?", "%3F"),
+        (":", "%3A"),
+        ("@", "%40"),
+        ("&", "%26"),
+        ("=", "%3D"),
+        ("+", "%2B"),
+        (",", "%2C"),
+        ("$", "%24")
+      ) foreach { case (search, replacement) =>
         titleParam = titleParam.replace(search, replacement);
       }
+
 
       // Fill parameters
       val parameters = apiParametersFormat.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)

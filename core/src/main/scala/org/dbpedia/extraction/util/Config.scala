@@ -5,6 +5,7 @@ import java.net.URL
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.Extractor
+import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
 
@@ -114,7 +115,6 @@ class Config(configPath: String)
     new IllegalArgumentException(message, cause)
   }
 
-  case class MediaWikiConnection(apiUrl: String, maxRetries: Int, connectMs: Int, readMs: Int, sleepFactor: Int)
   lazy val mediawikiConnection = MediaWikiConnection(
     apiUrl=config.getProperty("mwc-apiUrl", ""),
     maxRetries = config.getProperty("mwc-maxRetries", "4").toInt,
@@ -123,23 +123,15 @@ class Config(configPath: String)
     sleepFactor = config.getProperty("mwc-sleepFactor", "1000").toInt
   )
 
-  case class AbstractParameters(abstractQuery: String, abstractTags: String, shortAbstractsProperty: String, longAbstractsProperty: String, shortAbstractMinLength: Int)
   lazy val abstractParameters = AbstractParameters(
     abstractQuery=config.getProperty("abstract-query", ""),
-    abstractTags = config.getProperty("abstract-tags", "query,pages,page,extract"),
     shortAbstractsProperty = config.getProperty("short-abstracts-property", "rdfs:comment"),
     longAbstractsProperty = config.getProperty("long-abstracts-property", "abstract"),
-    shortAbstractMinLength = config.getProperty("short-abstract-min-length", "200").toInt
+    shortAbstractMinLength = config.getProperty("short-abstract-min-length", "200").toInt,
+    abstractTags = config.getProperty("abstract-tags", "query,pages,page,extract")
   )
 
-  case class NifParameters(
-    nifQuery: String,
-    nifTags: String,
-    isTestRun: Boolean,
-    writeAnchor: Boolean,
-    writeLinkAnchor: Boolean,
-    cssSelectorMap: URL
-  )
+
   lazy val nifParameters = NifParameters(
     nifQuery=config.getProperty("nif-query", ""),
     nifTags = config.getProperty("nif-tags", "parse,text"),
@@ -148,4 +140,31 @@ class Config(configPath: String)
     writeLinkAnchor = config.getProperty("nif-write-link-anchor", "true").toBoolean,
     cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json")   //static config file in core/src/main/resources
   )
+}
+
+object Config{
+  case class NifParameters(
+                            nifQuery: String,
+                            nifTags: String,
+                            isTestRun: Boolean,
+                            writeAnchor: Boolean,
+                            writeLinkAnchor: Boolean,
+                            cssSelectorMap: URL
+                          )
+
+  case class MediaWikiConnection(
+                                  apiUrl: String,
+                                  maxRetries: Int,
+                                  connectMs: Int,
+                                  readMs: Int,
+                                  sleepFactor: Int
+                                )
+
+  case class AbstractParameters(
+                                 abstractQuery: String,
+                                 shortAbstractsProperty: String,
+                                 longAbstractsProperty: String,
+                                 shortAbstractMinLength: Int,
+                                 abstractTags: String
+                               )
 }

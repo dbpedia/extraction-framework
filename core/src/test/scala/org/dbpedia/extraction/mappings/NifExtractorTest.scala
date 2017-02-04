@@ -5,7 +5,7 @@ import java.io.File
 import org.dbpedia.extraction.destinations.WriterDestination
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.nif.WikipediaNifExtractor
-import org.dbpedia.extraction.util.{Config, IOUtils, Language, RichFile}
+import org.dbpedia.extraction.util.{MediaWikiConnector, _}
 import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import org.scalatest.FunSuite
 
@@ -36,7 +36,9 @@ class NifExtractorTest extends FunSuite {
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   //private val titles = List("Antimon", "Alkalimetalle", "Apostilb", "Doldenblütler")
-  private val titles = List("DDR-Ringermeisterschaften_1949", "Gambrinus_Liga_2006/07", "Abu_Nidal")
+  private val titles = List("Leukippos")
+
+  private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
 
   test("testExtractNif") {
     dest.open()
@@ -51,8 +53,8 @@ class NifExtractorTest extends FunSuite {
   }
 
   private def getHtml(title:WikiTitle): String={
-    wikipageextractor.retrievePage(title, 0l) match{
-      case Some(pc) => wikipageextractor.postProcess(title, pc)
+    mwConnector.retrievePage(title, context.configFile.abstractParameters.abstractQuery) match{
+      case Some(pc) => AbstractExtractor.postProcessExtractedHtml(title, pc)
       case None => ""
     }
   }

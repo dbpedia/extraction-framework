@@ -74,9 +74,8 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
           }
           var quad = makeStructureElements(extractionResults, nifContextIri, graphIri, offset)
 
-          val extractedText = calculateText(extractionResults.paragraphs)
-          offset += extractedText._2
-          context += extractedText._1
+          offset += extractionResults.getExtractedLength
+          context += extractionResults.getExtractedText
 
           //collect additional triples
           quad ++= extendSectionTriples(extractionResults, graphIri, subjectIri)
@@ -128,7 +127,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     triples += nifStructure(sectionUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("Section"), sourceUrl, null)
     triples += nifStructure(sectionUri, RdfNamespace.SKOS.append("notation"), section.ref, sourceUrl, RdfNamespace.RDFS.append("Literal"))
     triples += nifStructure(sectionUri, RdfNamespace.NIF.append("beginIndex"), offset.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
-    triples += nifStructure(sectionUri, RdfNamespace.NIF.append("endIndex"), (offset + calculateText(section.paragraphs)._2).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
+    triples += nifStructure(sectionUri, RdfNamespace.NIF.append("endIndex"), (offset + section.getExtractedLength).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
     triples += nifStructure(sectionUri, RdfNamespace.NIF.append("referenceContext"), contextUri, sourceUrl, null)
 
     //adding navigational properties
@@ -412,44 +411,6 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     iri.replace("?&", "?")
   }
 
-  protected def calculateText(paragraphs: Seq[Paragraph]): (String, Int) = {
-    var length = 0
-    var text = ""
-    for (paragraph <- paragraphs)
-      if (paragraph.getLength > 0) {
-        if (text.length != 0) {
-          if (paragraph.getTagName == "note") {
-            text += paragraph.getText + "\n"
-            length += paragraph.getLength + 1
-          }
-          else if (paragraph.getTagName.matches("h\\d")) {
-            text += paragraph.getText + "\n"
-            length += paragraph.getLength + 1
-          }
-          else if (Paragraph.FollowedByWhiteSpace(text)) {
-            text += " " + paragraph.getText
-            length += paragraph.getLength + 1
-          }
-          else {
-            text += paragraph.getText
-            length += paragraph.getLength
-          }
-        }
-        else {
-          if (paragraph.getTagName.matches("h\\d")) {
-            text += paragraph.getText + "\n"
-            length += paragraph.getLength + 1
-          }
-          else {
-            text += paragraph.getText
-            length += paragraph.getLength
-          }
-        }
-      }
-    assert(length == Paragraph.GetEscapedStringLength(text))
-    (text, length)
-  }
-
   protected class PageSection(
    var prev: Option[PageSection],
    var top: Option[PageSection],
@@ -489,21 +450,24 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     var errors: List[String]
   ) extends PageSection(section.prev, section.top, section.next, section.sub, section.id, section.title, section.ref, section.tableCount, section.equationCount, section.content)
   {
-    private val nonSpaceChars = List('[', '(', '{')
-
     private var offset = 0
     def getSectionIri(offset: Int = offset): String = {
       this.offset = offset
       getNifIri("section", getBeginIndex(offset), getEndIndex(offset))
     }
 
-/*    def getExtractedText: String ={
-      calculateText(paragraphs)._1
+    private var extractedText: String = _
+    def getExtractedText: String ={
+      if(extractedText == null)
+        extractedText = HtmlNifExtractor.ExtractTextFromParagraphs(paragraphs)
+      extractedText
     }
 
     def getExtractedLength: Int ={
-      calculateText(paragraphs)._2 //to ensure the length calculation
-    }*/
+      if(extractedText == null)
+        extractedText = HtmlNifExtractor.ExtractTextFromParagraphs(paragraphs)
+      Paragraph.GetEscapedStringLength(extractedText)
+    }
 
     def getBeginIndex(offset: Int = offset): Int = {
       this.offset = offset
@@ -516,7 +480,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     def getEndIndex(offset: Int = offset): Int ={
       this.offset = offset
       if(paragraphs.nonEmpty)
-        getBeginIndex(offset) + calculateText(paragraphs)._2
+        getBeginIndex(offset) + getExtractedLength
       else
         offset
     }
@@ -537,6 +501,46 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     private def tablecount = {
       tablecounty= tablecounty+1
       tablecounty
+    }
+  }
+
+  object HtmlNifExtractor{
+
+    def ExtractTextFromParagraphs(paragraphs: Seq[Paragraph]): String = {
+      var length = 0
+      var text = ""
+      for (paragraph <- paragraphs)
+        if (paragraph.getLength > 0) {
+          if (text.length != 0) {
+            if (paragraph.getTagName == "note") {
+              text += paragraph.getText + "\n"
+              length += paragraph.getLength + 1
+            }
+            else if (paragraph.getTagName.matches("h\\d")) {
+              text += paragraph.getText + "\n"
+              length += paragraph.getLength + 1
+            }
+            else if (Paragraph.FollowedByWhiteSpace(text)) {
+              text += " " + paragraph.getText
+              length += paragraph.getLength + 1
+            }
+            else {
+              text += paragraph.getText
+              length += paragraph.getLength
+            }
+          }
+          else {
+            if (paragraph.getTagName.matches("h\\d")) {
+              text += paragraph.getText + "\n"
+              length += paragraph.getLength + 1
+            }
+            else {
+              text += paragraph.getText
+              length += paragraph.getLength
+            }
+          }
+        }
+      text
     }
   }
 }

@@ -86,7 +86,7 @@ class FileTypeExtractor(context: {
      *  <resource> foaf:depiction <file>
      *  <file> foaf:thumbnail <image-thumbnail>
      */
-    def generateImageURLQuads(page: PageNode, subjectUri: String): Seq[Quad] =
+    def generateImageURLQuads(page: WikiPage, subjectUri: String): Seq[Quad] =
     {
         // Get the file and thumbnail URLs.
         val fileURL = ExtractorUtils.getFileURL(page.title.encoded, commonsLang)
@@ -128,7 +128,7 @@ class FileTypeExtractor(context: {
  *
      * @returns None if no extension exists, Some[String] if an extension was found.
      */
-    def extractExtension(page: PageNode): Option[String] =
+    def extractExtension(page: WikiPage): Option[String] =
     {
         // Extract an extension.
         val extensionRegex = new scala.util.matching.Regex("""\.(\w+)$""", "extension")
@@ -156,7 +156,7 @@ class FileTypeExtractor(context: {
      *  <resource> rdf:type dbo:Image
      *  <resource> rdf:type dbo:StillImage
      */
-    def generateFileTypeQuads(extension: String, page: PageNode, subjectUri: String):Seq[Quad] = {
+    def generateFileTypeQuads(extension: String, page: WikiPage, subjectUri: String):Seq[Quad] = {
         // 1. <resource> dbo:fileExtension "extension"^^xsd:string
         val file_extension_quad = new Quad(
             Language.English, DBpediaDatasets.FileInformation,

@@ -1,60 +1,69 @@
 package org.dbpedia.extraction.wikiparser.impl.simple
 
-import org.dbpedia.extraction.util.{UriUtils, Language, WikiUtil}
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.{Disambiguation, Redirect}
-import org.dbpedia.extraction.util.RichString.wrapString
 import java.net.{URI, URISyntaxException}
 import java.util.logging.{Level, Logger}
 
-import SimpleWikiParser._
+import org.dbpedia.extraction.util.RichString.wrapString
+import org.dbpedia.extraction.util.{Language, UriUtils, WikiUtil}
+import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
+
+import scala.util.matching.Regex
 
 object SimpleWikiParser
 {
-    private val logger = Logger.getLogger(classOf[SimpleWikiParser].getName)
+    private val logger = Logger.getLogger(this.getClass.getName)
 
     private val MaxNestingLevel = 10
     private val MaxErrors = 1000
 
-    private val commentEnd = new Matcher(List("-->"));
+    private val commentEnd = new Matcher(List("-->"))
 
-    private val htmlTagEndOrStart = new Matcher(List("/>", "<"), false);
-    private val refEnd = new Matcher(List("</ref>"));
-    private val mathEnd = new Matcher(List("</math>"));
-    private val codeEnd = new Matcher(List("</code>"));
-    private val sourceEnd = new Matcher(List("</source>"));
+    private val htmlTagEndOrStart = new Matcher(List("/>", "<"), false)
+    private val refEnd = new Matcher(List("</ref>"))
+    private val mathEnd = new Matcher(List("</math>"))
+    private val codeEnd = new Matcher(List("</code>"))
+    private val sourceEnd = new Matcher(List("</source>"))
         
-    private val internalLinkLabelOrEnd = new Matcher(List("|", "]]", "\n"));
-    private val internalLinkEnd = new Matcher(List("]]", "\n"), true);
+    private val internalLinkLabelOrEnd = new Matcher(List("|", "]]", "\n"))
+    private val internalLinkEnd = new Matcher(List("]]", "\n"), true)
 
-    private val externalLinkLabelOrEnd = new Matcher(List(" ", "]", "\n"));
-    private val externalLinkEnd = new Matcher(List("]", "\n"), true);
+    private val externalLinkLabelOrEnd = new Matcher(List(" ", "]", "\n"))
+    private val externalLinkEnd = new Matcher(List("]", "\n"), true)
 
-    private val linkEnd = new Matcher(List(" ", "{","}", "[", "]", "\n", "\t"));
+    private val linkEnd = new Matcher(List(" ", "{","}", "[", "]", "\n", "\t"))
 
     // '|=' is not valid wiki markup but safe to include, see http://sourceforge.net/tracker/?func=detail&atid=935521&aid=3572779&group_id=190976
-    private val propertyValueOrEnd = new Matcher(List("|=","=", "|", "}}"), true);
-    private val propertyEnd = new Matcher(List("|", "}}"), true);
-    private val templateParameterEnd = new Matcher(List("|", "}}}"), true);
-    private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true);
-    private val parserFunctionEnd = new Matcher(List("}}"), true);
+    private val propertyValueOrEnd = new Matcher(List("|=","=", "|", "}}"), true)
+    private val propertyEnd = new Matcher(List("|", "}}"), true)
+    private val templateParameterEnd = new Matcher(List("|", "}}}"), true)
+    private val propertyEndOrParserFunctionNameEnd = new Matcher(List("|", "}}", ":"), true)
+    private val parserFunctionEnd = new Matcher(List("}}"), true)
 
-    private val tableRowEnd1 = new Matcher(List("|}", "|+", "|-", "|", "!"));
-    private val tableRowEnd2 = new Matcher(List("|}", "|-", "|", "!"));
+    private val tableRowEnd1 = new Matcher(List("|}", "|+", "|-", "|", "!"))
+    private val tableRowEnd2 = new Matcher(List("|}", "|-", "|", "!"))
 
-    private val tableCellEnd1 = new Matcher(List("\n ", "\n|}", "\n|-", "\n|", "\n!", "||", "!!", "|", "!"), true);
-    private val tableCellEnd2 = new Matcher(List("|}", "|-", "|", "!"));
-    private val tableCellEnd3 = new Matcher(List("\n ", "\n|}", "\n|-", "\n|", "\n!", "||", "!!"), true);
+    private val tableCellEnd1 = new Matcher(List("\n ", "\n|}", "\n|-", "\n|", "\n!", "||", "!!", "|", "!"), true)
+    private val tableCellEnd2 = new Matcher(List("|}", "|-", "|", "!"))
+    private val tableCellEnd3 = new Matcher(List("\n ", "\n|}", "\n|-", "\n|", "\n!", "||", "!!"), true)
 
-    private val sectionEnd = new Matcher(List("=\n", "=\r", "\n"), true);
-}
+    private val sectionEnd = new Matcher(List("=\n", "=\r", "\n"), true)
 
-/**
- * Port of the DBpedia WikiParser from PHP.
- */
-//TODO section names should only contain the contents of the TextNodes
-class SimpleWikiParser extends WikiParser
-{
+    def getRedirectPattern(lang: Language): Regex ={
+
+      //Check if this page is a Redirect
+      // TODO: the regex used in org.dbpedia.extraction.mappings.Redirects.scala is probably a bit better
+      // TODO: also extract the redirect target.
+      // TODO: compare extracted redirect target to the one found by Wikipedia (stored in the WikiPage object).
+      // Problems:
+      // - if the WikiPage object was not read from XML dump or api.php, redirect may not be set in WikiPage
+      // - generating the XML dump files takes several days, and the wikitext is obviously not generated at the
+      //   same time as the redirect target, so sometimes they do not match.
+      // In a nutshell: if the redirect in WikiPage is different from what we find, we're probably correct.
+      val pattern = """(?is)\s*(?:""" + Redirect(lang).mkString("|") + """)\s*:?\s*\[\[.*"""
+      pattern.r
+    }
+
     /**
      * Parses WikiText source and builds an Abstract Syntax Tree.
      *
@@ -65,42 +74,19 @@ class SimpleWikiParser extends WikiParser
     def apply(page : WikiPage) : Option[PageNode] =
     {
       if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki")
-      {
-        return None
-      }
+        None
+      else if(false)
+        None
       else
       {
         //Parse source
         val nodes = parseUntil(new Matcher(List(), true), new Source(page.source, page.title.language), 0)
 
-        //Check if this page is a Redirect
-        // TODO: the regex used in org.dbpedia.extraction.mappings.Redirects.scala is probably a bit better
-        val redirectRegex = """(?is)\s*(?:""" + Redirect(page.title.language).mkString("|") + """)\s*:?\s*\[\[.*"""
-        // TODO: also extract the redirect target.
-        // TODO: compare extracted redirect target to the one found by Wikipedia (stored in the WikiPage object).
-        // Problems:
-        // - if the WikiPage object was not read from XML dump or api.php, redirect may not be set in WikiPage
-        // - generating the XML dump files takes several days, and the wikitext is obviously not generated at the
-        //   same time as the redirect target, so sometimes they do not match.
-        // In a nutshell: if the redirect in WikiPage is different from what we find, we're probably correct.
-        val isRedirect = page.source.matches(redirectRegex)
-
-        //Check if this page is a Disambiguation
-        //TODO resolve template titles
-        val disambiguationNames = Disambiguation.get(page.title.language).getOrElse(Set("Disambig"))
-        val isDisambiguation = nodes.exists(node => findTemplate(node, disambiguationNames, page.title.language))
-
         //Return page node
-        Some(new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, isRedirect, isDisambiguation, nodes))
+        Some(new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, page.source, nodes))
       }
 
 
-    }
-
-    private def findTemplate(node : Node, names : Set[String], language : Language) : Boolean = node match
-    {
-        case TemplateNode(title, _, _, _) => names.contains(title.decoded)
-        case _ => node.children.exists(node => findTemplate(node, names, language))
     }
     
     private def  parseUntil(matcher : Matcher, source : Source, level : Int) : List[Node] =

@@ -3,7 +3,7 @@ package org.dbpedia.extraction.mappings
 import java.io.{File, FilenameFilter}
 
 import org.dbpedia.extraction.sources.FileSource
-import org.dbpedia.extraction.util.{Config, Language}
+import org.dbpedia.extraction.util.{Config, Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
 import org.junit.{Ignore, Test}
 
@@ -56,7 +56,8 @@ class AbstractExtractorTest
       //return empty Abstract in case that the parser Returned None
       //val generatedAbstract = extractor.retrievePage(n.title)
       parser(page) match {
-        case Some(n) => extractor.retrievePage(page.title, page.id/*, generatedAbstract*/) match{
+        case Some(n) => new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
+          .retrievePage(page.title, context.configFile.abstractParameters.abstractQuery /*, generatedAbstract*/) match{
             case Some(l) => l
             case None => ""
         }

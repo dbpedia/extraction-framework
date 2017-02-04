@@ -115,7 +115,7 @@ extends WikiPageExtractor
         )
 
         /** Retrieve all templates on the page which are not ignored */
-        for {node <- new SimpleWikiParser().apply(pageWithoutRefs)
+        for {node <- SimpleWikiParser.apply(pageWithoutRefs)
              template <- ExtractorUtils.collectTemplatesFromNodeTransitive(node)
              resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
              if citationTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)

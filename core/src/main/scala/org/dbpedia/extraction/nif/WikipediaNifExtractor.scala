@@ -61,9 +61,9 @@ class WikipediaNifExtractor(
     */
   override def extendSectionTriples(extractionResults: ExtractedSection, graphIri: String, subjectIri: String): Seq[Quad] = {
     //this is only dbpedia relevant: for singling out long and short abstracts
-    if (extractionResults.section.id == "abstract" && recordAbstracts) {
+    if (recordAbstracts && extractionResults.section.id == "abstract" && extractionResults.getExtractedLength > 0) {
       //not!
-      List(longQuad(subjectIri, this.calculateText(extractionResults.paragraphs)._1, graphIri), shortQuad(subjectIri, getShortAbstract(extractionResults.paragraphs), graphIri))
+      List(longQuad(subjectIri, extractionResults.getExtractedText, graphIri), shortQuad(subjectIri, getShortAbstract(extractionResults), graphIri))
     }
     else
       List()
@@ -79,15 +79,20 @@ class WikipediaNifExtractor(
     List(nifContext(wikiPage.uri + "?dbpv=" + context.configFile.dbPediaVersion + "&nif=context", RdfNamespace.NIF.append("predLang"), "http://lexvo.org/id/iso639-3/" + this.context.language.iso639_3, graphIri, null))
   }
 
-  private def getShortAbstract(paragraphs: List[Paragraph]): String = {
-    var shortAbstract = ""
-    for (p <- paragraphs) {
-      if (shortAbstract.length <= shortAbstractLength || shortAbstract.length + p.getText.length < shortAbstractLength * 3) //create short Abstract between [shortAbstractLength, shortAbstractLength*3]
-        shortAbstract += p.getText
+  private def getShortAbstract(extractionResults: ExtractedSection): String = {
+    var len = 0
+    var ps: List[Paragraph] = List()
+    for (p <- extractionResults.paragraphs) {
+      if (len <= shortAbstractLength || len + p.getText.length < shortAbstractLength * 3) //create short Abstract between [shortAbstractLength, shortAbstractLength*3]
+        {
+          ps ++= List(p)
+          len += p.getLength
+        }
     }
-    if (shortAbstract.length > shortAbstractLength * 4) //only cut abstract if the first paragraph is exceedingly long
-      shortAbstract = shortAbstract.substring(0, shortAbstractLength * 4)
-    shortAbstract
+    val text = HtmlNifExtractor.ExtractTextFromParagraphs(ps)
+    if (len > shortAbstractLength * 4) //only cut abstract if the first paragraph is exceedingly long
+      return text.substring(0, shortAbstractLength * 4)
+    text
   }
 
 

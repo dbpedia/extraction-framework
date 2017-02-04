@@ -1,21 +1,15 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.{InputStream, OutputStreamWriter}
-import java.net.URL
 import java.util.logging.Logger
-import javax.xml.ws.WebServiceException
 
 import org.dbpedia.extraction.annotations.ExtractorAnnotation
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
-import org.dbpedia.extraction.util.{Config, Language}
+import org.dbpedia.extraction.util.{Config, Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 
-import scala.io.Source
 import scala.language.reflectiveCalls
-import scala.util.{Failure, Success, Try}
 
 /**
  * Extracts wiki texts like abstracts or sections in html.
@@ -34,6 +28,7 @@ import scala.util.{Failure, Success, Try}
  * We leave the old code commented since we might re-use it soon
  */
 
+@deprecated("replaced by NifExtractor.scala: which will extract the whole page content including the abstract - to only extract the abstract refer to the java documentation")
 @ExtractorAnnotation("abstract extractor")
 class AbstractExtractor(
   context : {
@@ -47,27 +42,8 @@ extends WikiPageExtractor
   protected val logger = Logger.getLogger(classOf[AbstractExtractor].getName)
   this.getClass.getClassLoader.getResource("myproperties.properties")
 
-  protected def apiUrl: URL = new URL(context.configFile.mediawikiConnection.apiUrl)
-  //require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
-
-  protected val maxRetries = context.configFile.mediawikiConnection.maxRetries
-  require(maxRetries <= 10 && maxRetries > 0, "maxRetries has to be in the interval of [1,10]")
-
-    /** timeout for connection to web server, milliseconds */
-  protected val connectMs = context.configFile.mediawikiConnection.connectMs
-  require(connectMs > 200, "connectMs shall be more than 200 ms!")
-
-    /** timeout for result from web server, milliseconds */
-  protected val readMs = context.configFile.mediawikiConnection.readMs
-  require(readMs > 1000, "readMs shall be more than 1000 ms!")
-
-    /** sleep between retries, milliseconds, multiplied by CPU load */
-  protected val sleepFactorMs = context.configFile.mediawikiConnection.sleepFactor
-  require(sleepFactorMs > 200, "sleepFactorMs shall be more than 200 ms!")
-
 
   /** protected params ... */
-  protected val xmlPath = context.configFile.abstractParameters.abstractTags.split(",").map(_.trim)
 
   protected val language = context.language.wikiCode
 
@@ -85,9 +61,8 @@ extends WikiPageExtractor
 
   override val datasets = Set(DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts)
 
-    private val osBean = java.lang.management.ManagementFactory.getOperatingSystemMXBean
+  private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.abstractParameters.abstractTags.split(","))
 
-    private val availableProcessors = osBean.getAvailableProcessors
 
     override def extract(pageNode : WikiPage, subjectUri: String): Seq[Quad] =
     {
@@ -104,8 +79,8 @@ extends WikiPageExtractor
         // if(abstractWikiText == "") return Seq.empty
 
         //Retrieve page text
-        val text = retrievePage(pageNode.title, pageNode.id, pageNode.isRetry) match{
-          case Some(t) => postProcess(pageNode.title, replacePatterns(t))
+        val text = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match{
+          case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, replacePatterns(t))
           case None => return Seq.empty
         }
 
@@ -124,82 +99,6 @@ extends WikiPageExtractor
         {
             Seq(quadLong, quadShort)
         }
-    }
-
-    /**
-     * Retrieves a Wikipedia page.
-     *
-     * @param pageTitle The encoded title of the page
-     * @return The page as an Option
-     */
-    def retrievePage(pageTitle : WikiTitle, pageId: Long, isRetry: Boolean = false) : Option[String] =
-    {
-      val retryFactor = if(isRetry) 2 else 1
-      // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
-      // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
-      // TODO: there may be other characters that need to be escaped.
-      var titleParam = pageTitle.encodedWithNamespace
-      AbstractExtractor.CHARACTERS_TO_ESCAPE foreach { case (search, replacement) =>
-        titleParam = titleParam.replace(search, replacement);
-      }
-      
-      // Fill parameters
-      val parameters = apiParametersFormat.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)
-
-      for(counter <- 1 to maxRetries)
-      {
-        try
-        {
-          val conn = apiUrl.openConnection
-          conn.setDoOutput(true)
-          conn.setConnectTimeout(retryFactor * connectMs)
-          conn.setReadTimeout(retryFactor * readMs)
-
-          val writer = new OutputStreamWriter(conn.getOutputStream)
-          writer.write(parameters)
-          writer.flush()
-          writer.close()
-
-          // Read answer
-          return readInAbstract(conn.getInputStream) match{
-            case Success(str) => Option(str)
-            case Failure(e) => throw e
-          }
-        }
-        catch
-        {
-          case ex: Exception => {
-            
-            // The web server may still be trying to render the page. If we send new requests
-            // at once, there will be more and more tasks running in the web server and the
-            // system eventually becomes overloaded. So we wait a moment. The higher the load,
-            // the longer we wait.
-
-            val zw = ex.getMessage
-            var loadFactor = Double.NaN
-            var sleepMs = sleepFactorMs
- 
-            // if the load average is not available, a negative value is returned
-            val load = osBean.getSystemLoadAverage()
-            if (load >= 0) {
-              loadFactor = load / availableProcessors
-              sleepMs = (loadFactor * sleepFactorMs).toInt
-            }
-
-            if (counter < maxRetries) {
-              //logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
-              Thread.sleep(sleepMs)
-            }
-            else {
-              ex match {
-                case e : java.net.SocketTimeoutException => throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, e)
-                case _ => throw new Exception("A non time related error occurred when retrieving page " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, ex)
-              }
-            }
-          }
-        }
-      }
-      throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
     }
 
     /**
@@ -238,40 +137,6 @@ extends WikiPageExtractor
         builder.toString().trim
     }
 
-    /**
-     * Get the parsed and cleaned abstract text from the MediaWiki instance input stream.
-     * It returns
-     * <api> <query> <pages> <page> <extract> ABSTRACT_TEXT <extract> <page> <pages> <query> <api>
-     *  ///  <api> <parse> <text> ABSTRACT_TEXT </text> </parse> </api>
-     */
-    private def readInAbstract(inputStream : InputStream) : Try[String] =
-    {
-      // for XML format
-      var xmlAnswer = Source.fromInputStream(inputStream, "UTF-8").getLines().mkString("")
-      //var text = XML.loadString(xmlAnswer).asInstanceOf[NodeSeq]
-
-      //test for errors
-      val pattern = "(<error[^>]+info=\")([^\\\"]+)".r
-      if(xmlAnswer.contains("error code=")) {
-        return Failure(new WebServiceException(pattern.findFirstMatchIn(xmlAnswer) match {
-          case Some(m) => m.group(2)
-          case None => "An unknown exception occurred while retrieving the source XML from the mediawiki API."
-        }))
-      }
-
-      //get rid of surrounding tags
-      xmlAnswer = xmlAnswer.replaceFirst("<\\?xml[^>]*>", "")
-      for(child <- xmlPath){
-        if(xmlAnswer.contains("<" + child) && xmlAnswer.contains("</" + child)) {
-          xmlAnswer = xmlAnswer.replaceFirst("<" + child + "[^>]*>", "")
-          xmlAnswer = xmlAnswer.substring(0, xmlAnswer.lastIndexOf("</" + child + ">"))
-        }
-        else
-          return Failure(new WebServiceException("The response from the mediawiki API does not contain the expected XML path: " + xmlPath))
-      }
-
-      decodeHtml(xmlAnswer.trim)
-    }
 
     private def replacePatterns(abst: String): String= {
       var ret = abst
@@ -284,30 +149,6 @@ extends WikiPageExtractor
       ret
     }
 
-    def postProcess(pageTitle: WikiTitle, text: String): String =
-    {
-      val startsWithLowercase =
-      if (text.isEmpty) {
-        false
-      } else {
-        val firstLetter = text.substring(0,1)
-        firstLetter != firstLetter.toUpperCase(context.language.locale)
-      }
-
-      //HACK
-      if (startsWithLowercase)
-      {
-        val decodedTitle = pageTitle.decoded.replaceFirst(" \\(.+\\)$", "")
-
-        if (! text.toLowerCase.contains(decodedTitle.toLowerCase))
-        {
-          // happens mainly for Japanese names (abstract starts with template)
-          return decodedTitle + " " + text
-        }
-      }
-
-      text
-    }
 
     //private val destinationNamespacesToRender = List(Namespace.Main, Namespace.Template)
 
@@ -370,29 +211,35 @@ extends WikiPageExtractor
     }
     */
 
-    def decodeHtml(text: String): Try[String] = {
-      val coder = new HtmlCoder(XmlCodes.NONE)
-      Try(coder.code(text))
-    }
 }
 
 object AbstractExtractor {
-  /**
-   * List of all characters which are reserved in a query component according to RFC 2396
-   * with their escape sequences as determined by the JavaScript function encodeURIComponent.
-   */
-  val CHARACTERS_TO_ESCAPE = List(
-    (";", "%3B"),
-    ("/", "%2F"),
-    ("?", "%3F"),
-    (":", "%3A"),
-    ("@", "%40"),
-    ("&", "%26"),
-    ("=", "%3D"),
-    ("+", "%2B"),
-    (",", "%2C"),
-    ("$", "%24")
-  )
+
+  //TODO check if this function is still relevant
+  def postProcessExtractedHtml(pageTitle: WikiTitle, text: String): String =
+  {
+    val startsWithLowercase =
+      if (text.isEmpty) {
+        false
+      } else {
+        val firstLetter = text.substring(0,1)
+        firstLetter != firstLetter.toUpperCase(pageTitle.language.locale)
+      }
+
+    //HACK
+    if (startsWithLowercase)
+    {
+      val decodedTitle = pageTitle.decoded.replaceFirst(" \\(.+\\)$", "")
+
+      if (! text.toLowerCase.contains(decodedTitle.toLowerCase))
+      {
+        // happens mainly for Japanese names (abstract starts with template)
+        return decodedTitle + " " + text
+      }
+    }
+
+    text
+  }
 
   val patternsToRemove = List(
     """<div style=[^/]*/>""".r -> " ",

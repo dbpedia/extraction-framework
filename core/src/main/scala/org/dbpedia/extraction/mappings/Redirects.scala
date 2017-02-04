@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.mappings
 
-import java.util.logging.{Level, Logger}
-import org.dbpedia.extraction.sources.Source
-import collection.mutable.{HashSet, HashMap}
 import java.io._
-import util.control.ControlThrowable
-import org.dbpedia.extraction.wikiparser._
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect
+
+import scala.collection.mutable.{HashMap, HashSet}
 
 /**
  * Holds the redirects between wiki pages
@@ -89,7 +90,7 @@ class Redirects(val map : Map[String, String])
           }
         }
 
-        return (mappings ++ resolvedMappings)
+        mappings ++ resolvedMappings
     }
 }
 

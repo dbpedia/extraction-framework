@@ -1,6 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
+import org.dbpedia.extraction.mappings.{RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.util.StringUtils._
+import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
+
+import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a wiki page
@@ -17,17 +21,31 @@ import org.dbpedia.extraction.util.StringUtils._
  * @param format e.g. "text/x-wiki"
  */
 class WikiPage(
-    title: WikiTitle,
+    val title: WikiTitle,
     val redirect: WikiTitle,
-    id: Long,
-    revision: Long,
-    timestamp: Long,
-    contributorID: Long,
-    contributorName: String,
+    val id: Long,
+    val revision: Long,
+    val timestamp: Long,
+    val contributorID: Long,
+    val contributorName: String,
     val source : String,
     val format: String)
-  extends PageNode(title,id,revision,timestamp,contributorID,contributorName, redirect != null, false)
 {
+
+  private val extractionRecords = ListBuffer[RecordEntry[WikiPage]]()
+
+  lazy val pageNode: Option[PageNode] = SimpleWikiParser(this)
+
+  def isRedirect: Boolean = SimpleWikiParser.getRedirectPattern(title.language).findFirstMatchIn(this.source) match{
+    case Some(x) => true
+    case None => false
+  }
+
+  def isDisambiguation: Boolean = pageNode match{
+    case Some(s) => s.isDisambiguation
+    case None => throw new WikiParserException("WikiPage " + title.encoded + " could not be extracted.")
+  }
+  //lazy val pageNode = SimpleWikiParser
   def this(title: WikiTitle, redirect: WikiTitle, id: String, revision: String, timestamp: String, contributorID: String, contributorName: String, source : String, format: String) =
     this(title, redirect, WikiPage.parseLong(id), WikiPage.parseLong(revision), parseTimestamp(timestamp), WikiPage.parseLong(contributorID), contributorName, source, format)
 
@@ -39,13 +57,41 @@ class WikiPage(
 
   override def toString = "WikiPage(" + title + "," + id + "," + revision + "," + contributorID + "," + contributorName + "," + source + "," + format + ")"
 
-  /**
-   * Serializes this page to XML using the MediaWiki export format.
-   * The MediaWiki export format is specified at http://www.mediawiki.org/xml/export-0.8.
-   */
-  override def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
+  def sourceIri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
 
-  override def sourceIri : String = title.pageIri + (if (revision >= 0) "?oldid=" + revision else "")
+  //Generate the page URI
+  def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+
+  def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, source, format)
+
+  private var isRetryy = false
+
+  def toggleRetry() = {
+    this.isRetryy = !this.isRetryy
+  }
+
+  def isRetry = this.isRetryy
+
+
+  def addExtractionRecord(recordEntry: RecordEntry[WikiPage]): Unit ={
+    val severity = if(recordEntry.severity != null)
+      recordEntry.severity
+    else if((recordEntry.errorMsg == null || recordEntry.errorMsg.trim.length == 0) && recordEntry.error == null)
+      RecordSeverity.Info
+    else if(recordEntry.error != null)
+      RecordSeverity.Exception
+    else
+      RecordSeverity.Warning
+
+    extractionRecords.append(new RecordEntry(recordEntry.page, severity, recordEntry.page.title.language, recordEntry.errorMsg, recordEntry.error))
+  }
+
+  def addExtractionRecord(errorMsg: String = null, error: Throwable = null, severity: RecordSeverity.Value = null): Unit ={
+
+    addExtractionRecord(new RecordEntry[WikiPage](this, severity, this.title.language, errorMsg, error))
+  }
+
+  def getExtractionRecords() = this.extractionRecords.seq
 }
 
 object WikiPage {

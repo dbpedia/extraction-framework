@@ -22,7 +22,7 @@ class ExtractionJob(
    destination: Destination,
    language: Language,
    retryFailedPages: Boolean,
-   extractionRecorder: ExtractionRecorder[PageNode])
+   extractionRecorder: ExtractionRecorder[WikiPage])
 {
 /*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
   val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
@@ -39,12 +39,12 @@ class ExtractionJob(
         destination.write(graph)
       }
       else
-        page.addExtractionRecord("Namespace did not match: " + page.title.namespace + " for page: " + page.title.encoded)
+        page.addExtractionRecord("Namespace did not match: " + page.title.namespace + " for page: " + page.title.encoded, null, RecordSeverity.Info)
 
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
       val records = page.getExtractionRecords() match{
         case seq :Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
-        case _ => Seq(new RecordEntry[PageNode](page, RecordSeverity.Info, page.title.language))
+        case _ => Seq(new RecordEntry[WikiPage](page, RecordSeverity.Info, page.title.language))
       }
       //forward all records to the recorder
       extractionRecorder.record(records:_*)

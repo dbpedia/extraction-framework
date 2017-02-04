@@ -139,9 +139,9 @@ class ConfigLoader(config: Config)
       case Some(p) => {
         val file = new File(p, "testExtraction")
         file.createNewFile()
-        new ExtractionRecorder[PageNode](new FileWriter(file), 2000, description)
+        new ExtractionRecorder[WikiPage](new FileWriter(file), 2000, description)
       }
-      case None => new ExtractionRecorder[PageNode]()
+      case None => new ExtractionRecorder[WikiPage]()
     }
 
     val extractionJobNS = if(input._1 == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces

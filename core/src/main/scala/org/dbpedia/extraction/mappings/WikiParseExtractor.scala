@@ -24,8 +24,7 @@ import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 
   override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
 
-    val parser = new SimpleWikiParser()
-    val node = parser(page)
+    val node = SimpleWikiParser(page)
     node match {
       case Some(n) =>  extractors.extract(n, subjectUri)
       case None => Seq.empty

@@ -3,9 +3,10 @@ package org.dbpedia.extraction.mappings
 import java.io.Writer
 import java.text.DecimalFormat
 import java.util.concurrent.atomic.AtomicLong
+
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, StringUtils}
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage, WikiTitle}
 
 import scala.collection.mutable
 
@@ -107,8 +108,9 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
     */
   def record(records: RecordEntry[T]*): Unit = {
     for(record <- records) {
+      val count = increaseAndGetSuccessfulPages(record.language)
       record.page match{
-        case page: PageNode => {
+        case page: WikiPage => {
           if (record.errorMsg != null)
             printLabeledLine(record.errorMsg, record.severity, page.title.language, Seq(PrinterDestination.err, PrinterDestination.file))
           Option(record.error) match {
@@ -122,7 +124,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
             case None => recordQuad(quad, record.severity, record.language)
           }
         }
-        case _ => {
+        case _ if count % reportInterval == 0 => {  //TODO check this
           val msg = Option(record.errorMsg) match{
             case Some(m) => m
             case None => {
@@ -130,7 +132,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
               else "an undefined error occurred at quad: " + successfulPages(record.language)
             }
           }
-          printLabeledLine(msg, record.severity, record.language, Seq(PrinterDestination.err, PrinterDestination.file))
+          printLabeledLine(msg, record.severity, record.language, null)
         }
       }
     }
@@ -203,23 +205,41 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
     val printOptions = if(print == null) {
       if(severity == RecordSeverity.Exception )
         Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
-      else
+      else if(severity == RecordSeverity.Warning)
         Seq(PrinterDestination.out, PrinterDestination.file)
+      else
+        Seq(PrinterDestination.file)
     } else print
 
     val pages = successfulPages(lang)
     val time = System.currentTimeMillis - startTime.get
-    val replacedLine = ((if(noLabel) "" else severity.toString + "; " + lang.wikiCode  + "; extraction at {time}{data}; ") + line)
-      .replaceAllLiterally("{time}", StringUtils.prettyMillis(time))
-      .replaceAllLiterally("{mspp}", decForm.format(time.toDouble / pages) + " ms")
-      .replaceAllLiterally("{page}", pages.toString)
-      .replaceAllLiterally("{fail}", failedPages(lang).toString)
-      .replaceAllLiterally("{data}", if(defaultDataset != null) " for dataset " + defaultDataset else "")
+    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; extraction at {time}{data}; ") + line
+    val pattern = "\\{\\s*\\w+\\s*\\}".r
+    var lastend = 0
+    var resultString = ""
+    for(matchh <- pattern.findAllMatchIn(replacedLine)){
+      resultString += replacedLine.substring(lastend, matchh.start)
+      resultString += (Option(matchh.matched) match{
+        case Some(m) =>
+          m match{
+            case i if i == "{time}" => StringUtils.prettyMillis(time)
+            case i if i == "{mspp}" => decForm.format(time.toDouble / pages) + " ms"
+            case i if i == "{page}" => pages.toString
+            case i if i == "{fail}" => failedPages(lang).toString
+            case i if i == "{data}" => if(defaultDataset != null) " for dataset " + defaultDataset else ""
+            case _ => ""
+          }
+        case None => ""
+      })
+      lastend = matchh.end
+    }
+    resultString += replacedLine.substring(lastend)
+
     for(pr <-printOptions)
       pr match{
-        case PrinterDestination.err => System.err.println(replacedLine)
-        case PrinterDestination.out => System.out.println(replacedLine)
-        case PrinterDestination.file if logWriter != null => logWriter.append(replacedLine + "\n")
+        case PrinterDestination.err => System.err.println(resultString)
+        case PrinterDestination.out => System.out.println(resultString)
+        case PrinterDestination.file if logWriter != null => logWriter.append(resultString + "\n")
         case _ =>
       }
   }
@@ -242,7 +262,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
   def resetFailedPages(lang: Language) = failedPageMap.get(lang) match{
     case Some(m) => {
       m.clear()
-      successfulPageCount.get(lang).get.set(0)
+      successfulPageCount(lang).set(0)
     }
     case None =>
   }

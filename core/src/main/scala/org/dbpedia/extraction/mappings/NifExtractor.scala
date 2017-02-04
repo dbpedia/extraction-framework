@@ -5,7 +5,7 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.nif.WikipediaNifExtractor
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{Config, Language}
+import org.dbpedia.extraction.util.{Config, Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
@@ -32,12 +32,10 @@ class NifExtractor(
        def configFile : Config
      }
    )
-  extends AbstractExtractor(context)
+  extends WikiPageExtractor
 {
   //API parameters to geht HTML of first section
-  override val apiParametersFormat = "uselang="+language + context.configFile.nifParameters.nifQuery
-
-  override val xmlPath = context.configFile.nifParameters.nifTags.split(",").map(_.trim)
+  val apiParametersFormat = "uselang="+ context.language.wikiCode + context.configFile.nifParameters.nifQuery
 
   protected val isTestRun = context.configFile.nifParameters.isTestRun
   protected val writeLinkAnchors = context.configFile.nifParameters.writeLinkAnchor
@@ -47,6 +45,8 @@ class NifExtractor(
   protected val dbpediaVersion = context.configFile.dbPediaVersion
 
   override val datasets = Set(DBpediaDatasets.NifContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts, DBpediaDatasets.RawTables, DBpediaDatasets.Equations)
+
+  private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
 
   private val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x
@@ -62,12 +62,12 @@ class NifExtractor(
     if(pageNode.isRedirect || pageNode.isDisambiguation) return Seq.empty
 
     //Retrieve page text
-    val html = retrievePage(pageNode.title, pageNode.id, pageNode.isRetry) match{
-      case Some(t) => postProcess(pageNode.title, t)
+    val html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match{
+      case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, t)
       case None => return Seq.empty
     }
 
-    new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err.asInstanceOf[RecordEntry[PageNode]]))
+    new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
   }
 
 }
