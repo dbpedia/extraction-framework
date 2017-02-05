@@ -49,16 +49,17 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
   def retrievePage(pageTitle : WikiTitle, apiParameterString: String, isRetry: Boolean = false) : Option[String] =
   {
     val retryFactor = if(isRetry) 2 else 1
+
     // The encoded title may contain some URI-escaped characters (e.g. "5%25-Klausel"),
     // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
-    // TODO: there may be other characters that need to be escaped.
+    // TODO: test this in detail!!! there may be other characters that need to be escaped.
     var titleParam = pageTitle.encodedWithNamespace
-    MediaWikiConnector.CHARACTERS_TO_ESCAPE foreach { case (search, replacement) =>
-      titleParam = titleParam.replace(search, replacement);
+    MediaWikiConnector.CHARACTERS_TO_ESCAPE foreach {
+      case (search, replacement) =>  titleParam = titleParam.replace(search, replacement);
     }
 
     // Fill parameters
-    val parameters = apiParameterString.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)
+    val parameters = "uselang=" + pageTitle.language.wikiCode + apiParameterString.format(titleParam)
 
     for(counter <- 1 to maxRetries)
     {
@@ -94,14 +95,13 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
             var sleepMs = sleepFactorMs
 
             // if the load average is not available, a negative value is returned
-            val load = osBean.getSystemLoadAverage()
+            val load = osBean.getSystemLoadAverage
             if (load >= 0) {
               loadFactor = load / availableProcessors
               sleepMs = (loadFactor * sleepFactorMs).toInt
             }
 
             if (counter < maxRetries) {
-              //logger.log(Level.INFO, "Error retrieving abstract of " + pageTitle + ". Retrying after " + sleepMs + " ms. Load factor: " + loadFactor, ex)
               Thread.sleep(sleepMs)
             }
             else {

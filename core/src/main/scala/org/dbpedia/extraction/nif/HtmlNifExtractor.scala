@@ -320,7 +320,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     }
   }
 
-  protected def latexToMathMl(formula: String): String = {
+  protected def latexToMathMl(formula: String): Try[String] = {
     /* Create vanilla SnuggleEngine and new SnuggleSession */
     val engine = new SnuggleEngine()
     val session = engine.createSession()
@@ -338,7 +338,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
 
     /* Convert the results to an XML String, which in this case will
      * be a single MathML <math>...</math> element. */
-    session.buildXMLString(options)
+    Try{session.buildXMLString(options)}
   }
 
   private def cleanHtml(str: String): String = {
@@ -398,7 +398,11 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     //replace latex equations with mathML
     val eqhs = doc.select("span.tex").asScala
     for(i <- eqhs.indices)
-      eqhs(i).replaceWith(Jsoup.parseBodyFragment(equations(i)).body().child(0))
+      equations(i) match{
+        case Success(e) => eqhs(i).replaceWith(Jsoup.parseBodyFragment(e).body().child(0))
+        case Failure(f) => eqhs(i).replaceWith(Jsoup.parseBodyFragment("<span/>").body().child(0))
+      }
+
 
     doc
   }

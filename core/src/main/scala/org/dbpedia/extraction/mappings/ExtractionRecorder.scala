@@ -108,7 +108,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
     */
   def record(records: RecordEntry[T]*): Unit = {
     for(record <- records) {
-      val count = increaseAndGetSuccessfulPages(record.language)
+      //val count = increaseAndGetSuccessfulPages(record.language)
       record.page match{
         case page: WikiPage => {
           if (record.errorMsg != null)
@@ -124,7 +124,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
             case None => recordQuad(quad, record.severity, record.language)
           }
         }
-        case _ if count % reportInterval == 0 => {  //TODO check this
+        case _  => {
           val msg = Option(record.errorMsg) match{
             case Some(m) => m
             case None => {

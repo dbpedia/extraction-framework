@@ -13,13 +13,14 @@ import scala.collection.Map
 import scala.util.{Failure, Success}
 
 
-class Config(configPath: String)
+class Config(val configPath: String)
 {
   /**
     * load two config files:
     * 1. the universal config containing properties universal for a release
     * 2. the extraction job specific config provided by the user
     */
+
   val config = ConfigUtils.loadConfig(configPath)
 
   def checkOverride(key: String) = if(config.containsKey(key))
@@ -37,9 +38,7 @@ class Config(configPath: String)
    * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
    * and overrides this val to null because it is not needed)
    */
-  lazy val dumpDir = getValue(checkOverride("base-dir"), "base-dir", true){
-    x => new File(x)
-  }
+  lazy val dumpDir = getValue(checkOverride("base-dir"), "base-dir", required = true){ x => new File(x)}
 
   lazy val parallelProcesses = checkOverride("parallel-processes").getProperty("parallel-processes", "4").toInt
 
@@ -61,7 +60,7 @@ class Config(configPath: String)
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val ontologyFile = getValue(checkOverride("ontology"), "ontology", false)(new File(_))
+  lazy val ontologyFile = getValue(checkOverride("ontology"), "ontology", required = false)(new File(_))
 
   /**
     * Local mappings files, downloaded for speed and reproducibility
@@ -69,7 +68,7 @@ class Config(configPath: String)
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val mappingsDir = getValue(checkOverride("mappings"), "mappings", false)(new File(_))
+  lazy val mappingsDir = getValue(checkOverride("mappings"), "mappings", required = false)(new File(_))
 
   lazy val policies = parsePolicies(checkOverride("uri-policy"), "uri-policy")
 
@@ -78,8 +77,6 @@ class Config(configPath: String)
   lazy val disambiguations = checkOverride("disambiguations").getProperty("disambiguations", "page_props.sql.gz")
 
   /**
-    *
-    *
     * all non universal properties...
     */
 
@@ -144,27 +141,27 @@ class Config(configPath: String)
 
 object Config{
   case class NifParameters(
-                            nifQuery: String,
-                            nifTags: String,
-                            isTestRun: Boolean,
-                            writeAnchor: Boolean,
-                            writeLinkAnchor: Boolean,
-                            cssSelectorMap: URL
-                          )
+    nifQuery: String,
+    nifTags: String,
+    isTestRun: Boolean,
+    writeAnchor: Boolean,
+    writeLinkAnchor: Boolean,
+    cssSelectorMap: URL
+  )
 
   case class MediaWikiConnection(
-                                  apiUrl: String,
-                                  maxRetries: Int,
-                                  connectMs: Int,
-                                  readMs: Int,
-                                  sleepFactor: Int
-                                )
+    apiUrl: String,
+    maxRetries: Int,
+    connectMs: Int,
+    readMs: Int,
+    sleepFactor: Int
+  )
 
   case class AbstractParameters(
-                                 abstractQuery: String,
-                                 shortAbstractsProperty: String,
-                                 longAbstractsProperty: String,
-                                 shortAbstractMinLength: Int,
-                                 abstractTags: String
-                               )
+    abstractQuery: String,
+    shortAbstractsProperty: String,
+    longAbstractsProperty: String,
+    shortAbstractMinLength: Int,
+    abstractTags: String
+  )
 }

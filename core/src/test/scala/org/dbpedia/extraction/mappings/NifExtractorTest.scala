@@ -36,7 +36,7 @@ class NifExtractorTest extends FunSuite {
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   //private val titles = List("Antimon", "Alkalimetalle", "Apostilb", "Doldenblütler")
-  private val titles = List("Leukippos")
+  private val titles = List("Mehrwertige_Logik")
 
   private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
 
@@ -53,7 +53,7 @@ class NifExtractorTest extends FunSuite {
   }
 
   private def getHtml(title:WikiTitle): String={
-    mwConnector.retrievePage(title, context.configFile.abstractParameters.abstractQuery) match{
+    mwConnector.retrievePage(title, context.configFile.nifParameters.nifQuery) match{
       case Some(pc) => AbstractExtractor.postProcessExtractedHtml(title, pc)
       case None => ""
     }

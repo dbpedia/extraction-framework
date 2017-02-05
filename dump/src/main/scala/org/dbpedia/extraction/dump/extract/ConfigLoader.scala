@@ -2,6 +2,7 @@ package org.dbpedia.extraction.dump.extract
 
 import java.io._
 import java.net.URL
+import java.util.Calendar
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
@@ -14,8 +15,8 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 
-import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.collection.convert.decorateAsScala._
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 
 /**
  * Loads the dump extraction configuration.
@@ -27,14 +28,40 @@ import scala.collection.convert.decorateAsScala._
  */
 class ConfigLoader(config: Config)
 {
-    private val logger = Logger.getLogger(classOf[ConfigLoader].getName)
+  private val logger = Logger.getLogger(classOf[ConfigLoader].getName)
 
-    private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob]().asScala
+  private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob]().asScala
+
+  private var extractionRecorder: ExtractionRecorder[WikiPage] = null
+
+  def getExtractionRecorder: ExtractionRecorder[WikiPage] = if(extractionRecorder != null)
+    extractionRecorder
+  else {
+    extractionRecorder = config.logDir match {
+      case Some(p) => {
+        var logname = config.configPath.replace("\\", "/")
+        if (logname.indexOf("/") >= 0)
+          logname = logname.substring(logname.lastIndexOf("/") + 1) + "." + Calendar.getInstance.getTimeInMillis + ".log"
+        val logFile = new File(p, logname)
+        logFile.createNewFile()
+        val logStream = new FileOutputStream(logFile)
+
+        //TODO val preamble = input._1.wikiCode+": "+input._2.size+" extractors ("+
+        //  input._2.map(_.getSimpleName).mkString(",")+"), "+
+        //  datasets.size+" datasets ("+datasets.mkString(",")+")"
+
+        new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null)
+      }
+      case None => new ExtractionRecorder[WikiPage]()
+    }
+    extractionRecorder
+  }
 
   /**
     * Creates ab extraction job for a specific language.
     */
-  val extractionJobWorker = SimpleWorkers(config.parallelProcesses,config.parallelProcesses) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
+  val extractionJobWorker = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { input: (Language,  Seq[Class[_ <: Extractor[_]]]) =>
+
     val finder = new Finder[File](config.dumpDir, input._1, config.wikiName)
 
     val date = latestDate(finder)
@@ -117,32 +144,23 @@ class ConfigLoader(config: Config)
     val datasets = extractor.datasets
 
     val formatDestinations = new ArrayBuffer[Destination]()
-    for ((suffix, format) <- config.formats) {
 
+    for ((suffix, format) <- config.formats) {
       val datasetDestinations = new HashMap[String, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
           case Some(file)=> datasetDestinations(dataset.encoded) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
           case None =>
         }
-
       }
-
       formatDestinations += new DatasetDestination(datasetDestinations)
     }
 
-    val destination = new MarkerDestination(new CompositeDestination(formatDestinations.toSeq: _*), finder.file(date, Extraction.Complete).get, false)
-
-    val description = input._1.wikiCode+": "+input._2.size+" extractors ("+input._2.map(_.getSimpleName).mkString(",")+"), "+datasets.size+" datasets ("+datasets.mkString(",")+")"
-
-    val extractionRecorder = config.logDir match{
-      case Some(p) => {
-        val file = new File(p, "testExtraction")
-        file.createNewFile()
-        new ExtractionRecorder[WikiPage](new FileWriter(file), 2000, description)
-      }
-      case None => new ExtractionRecorder[WikiPage]()
-    }
+    val destination = new MarkerDestination(
+      new CompositeDestination(formatDestinations.toSeq: _*),
+      finder.file(date, Extraction.Complete).get,
+      false
+    )
 
     val extractionJobNS = if(input._1 == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
 
@@ -173,8 +191,7 @@ class ConfigLoader(config: Config)
     }
 
     private def readers(source: String, finder: Finder[File], date: String): List[() => Reader] = {
-
-      files(source, finder, date).map(reader(_))
+      files(source, finder, date).map(reader)
     }
 
     private def files(source: String, finder: Finder[File], date: String): List[File] = {
@@ -202,7 +219,6 @@ class ConfigLoader(config: Config)
           val language = Language.Mappings
           WikiSource.fromNamespaces(namespaces, url, language)
         }
-      
         new OntologyReader().read(ontologySource)
     }
 
