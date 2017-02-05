@@ -48,7 +48,7 @@ extends WikiPageExtractor
   protected val language = context.language.wikiCode
 
     //private val apiParametersFormat = "uselang="+language+"&format=xml&action=parse&prop=text&title=%s&text=%s"
-  protected val apiParametersFormat = "uselang="+language + context.configFile.abstractParameters.abstractQuery
+  protected val apiParametersFormat = context.configFile.abstractParameters.abstractQuery
 
     // lazy so testing does not need ontology
   protected lazy val shortProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)

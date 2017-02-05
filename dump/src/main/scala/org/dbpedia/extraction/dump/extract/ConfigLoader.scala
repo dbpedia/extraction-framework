@@ -164,7 +164,7 @@ class ConfigLoader(config: Config)
 
     val extractionJobNS = if(input._1 == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
 
-    extractionJobs.put(input._1, new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, input._1, config.retryFailedPages, extractionRecorder))
+    extractionJobs.put(input._1, new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, input._1, config.retryFailedPages, getExtractionRecorder))
   }
 
     /**

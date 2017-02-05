@@ -35,7 +35,7 @@ class NifExtractor(
   extends WikiPageExtractor
 {
   //API parameters to geht HTML of first section
-  val apiParametersFormat = "uselang="+ context.language.wikiCode + context.configFile.nifParameters.nifQuery
+  val apiParametersFormat = context.configFile.nifParameters.nifQuery
 
   protected val isTestRun = context.configFile.nifParameters.isTestRun
   protected val writeLinkAnchors = context.configFile.nifParameters.writeLinkAnchor
