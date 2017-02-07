@@ -346,12 +346,15 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
   }
 
   protected def getJsoupDoc(html: String): Document = {
-    val doc = Jsoup.parse(cleanHtml(html))
+    val doc = Jsoup.parse(html.replaceAll("\n", ""))
 
     //delete queries
     for(query <- cssSelectorConfigMap.removeElements)
       for(item <- doc.select(query).asScala)
         item.remove()
+
+    // get preserve elements
+    val codes = doc.select("code, text[xml:space='preserve']").clone().asScala.toList
 
     // get all tables and save them as is (after delete, since we want the same number of tables before and after)
     val tables = doc.select("table").clone().asScala
@@ -386,6 +389,19 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
         item.after("<span class='noteend'>" + after  + "</span>")
       }
     }
+
+    val cods = doc.select("code, text[xml:space='preserve']").asScala
+    if(cods.size != codes.size)
+      throw new Exception("An error occurred due to differing codes counts")
+    for(i <- codes.indices){
+        var code = ""
+        for (child <- codes(i).childNodes().asScala) {
+          code += child.toString
+        }
+        val replaceElement = new Element(Tag.valueOf("span"), "")
+        replaceElement.appendChild(new TextNode(StringEscapeUtils.unescapeHtml4(code), ""))
+        cods(i).replaceWith(replaceElement)
+      }
 
     //revert to original tables, which might be corrupted by alterations above -> tables shall be untouched by alterations!
     val zw = doc.select("table").asScala
