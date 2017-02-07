@@ -71,7 +71,7 @@ class ExtractionJob(
     extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, language)
 
     if(retryFailedPages){
-      val fails = extractionRecorder.listFailedPages.get(language).get.keys.map(_._2)
+      val fails = extractionRecorder.listFailedPages(language).keys.map(_._2)
       extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordSeverity.Warning, language)
       extractionRecorder.resetFailedPages(language)
       for(page <- fails) {

@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.sources;
 
 import org.dbpedia.extraction.util.Language;
-import org.dbpedia.extraction.wikiparser.*;
+import org.dbpedia.extraction.wikiparser.Namespace;
+import org.dbpedia.extraction.wikiparser.WikiPage;
+import org.dbpedia.extraction.wikiparser.WikiTitle;
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces;
 import org.dbpedia.util.Exceptions;
 import org.dbpedia.util.text.xml.XMLStreamUtils;
-
 import scala.Function1;
 import scala.util.control.ControlThrowable;
 
@@ -386,7 +387,7 @@ public class WikipediaDumpParser
   {
     try
     {
-      return WikiTitle.parseCleanTitle(titleString, _language);
+      return WikiTitle.parseCleanTitle(titleString, _language, scala.Option.apply(null));
     }
     catch (Exception e)
     {

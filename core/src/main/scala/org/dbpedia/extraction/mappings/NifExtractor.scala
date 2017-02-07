@@ -7,7 +7,6 @@ import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Config, Language, MediaWikiConnector}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 import scala.language.reflectiveCalls
 
@@ -47,11 +46,6 @@ class NifExtractor(
   override val datasets = Set(DBpediaDatasets.NifContext,DBpediaDatasets.NifPageStructure,DBpediaDatasets.NifTextLinks,DBpediaDatasets.LongAbstracts, DBpediaDatasets.ShortAbstracts, DBpediaDatasets.RawTables, DBpediaDatasets.Equations)
 
   private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
-
-  private val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
-    case Some(x) => x
-    case None => "Template"
-  }
 
   override def extract(pageNode : WikiPage, subjectUri : String): Seq[Quad] =
   {

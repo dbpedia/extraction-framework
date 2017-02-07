@@ -17,10 +17,6 @@ object Extraction {
     require(args != null && args.length >= 1 && args(0).nonEmpty, "missing required argument: config file name")
     Authenticator.setDefault(new ProxyAuthenticator())
 
-
-    // overwrite properties with CLI args
-    // TODO arguments could be of the format a=b and then property a can be overwritten with "b"
-
     //Load extraction jobs from configuration
     val config = new Config(args.head)
     val configLoader = new ConfigLoader(config)

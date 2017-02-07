@@ -1,13 +1,19 @@
 package org.dbpedia.extraction.sources
 
-import org.dbpedia.extraction.wikiparser.{WikiPage, Namespace, WikiTitle}
-import java.io.{File,FileInputStream,InputStreamReader}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
+import java.io.{File, FileInputStream, InputStreamReader}
+
 import scala.xml.Elem
 import org.dbpedia.extraction.util.Language
 import java.io.Reader
-import java.util.concurrent.{ExecutorService, Executors, Callable}
+import java.util.concurrent.{Callable, ExecutorService, Executors}
+
 import scala.collection.JavaConversions._
 import java.util.logging.Level
+
+import com.sun.net.httpserver.Authenticator.{Failure, Success}
+
+import scala.util.{Failure, Success, Try}
 
 /**
  *  Loads wiki pages from an XML stream using the MediaWiki export format.
@@ -123,50 +129,52 @@ private class XMLSource(xml : Elem, language: Language) extends Source
 {
     override def foreach[U](f : WikiPage => U) : Unit =
     {
-        for(page <- xml \ "page";
-            rev <- page \ "revision")
+
+      for(page <- xml \ "page";
+          rev <- page \ "revision")
+      {
+
+        val title = WikiTitle.parseCleanTitle((page \ "title").text, language, Try{(page \ "id").text.toLong}.toOption)
+
+        val nsElem = page \ "ns"
+        if (nsElem.nonEmpty )
         {
-            val title = WikiTitle.parseCleanTitle((page \ "title").text, language)
-
-            val nsElem = page \ "ns"
-            if (nsElem.nonEmpty )
-            {
-              try
-              {
-                val nsCode = nsElem.text.toInt
-                require(title.namespace.code == nsCode, "XML Namespace (" + nsCode + ") does not match the computed namespace (" + title.namespace + ") in page: " + title.decodedWithNamespace)
-              }
-              catch
-              {
-                case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
-              }
-            }
-
-            //Skip bad titles
-            if(title != null)
-            {
-                val _redirect = (page \ "redirect" \ "@title").text match
-                {
-                  case "" => null
-                  case t => WikiTitle.parse(t, language)
-                }
-                val _contributorID = (rev \ "contributor" \ "id").text match
-                {
-                  case null => "0"
-                  case id => id
-                }
-                f( new WikiPage( title     = title,
-                                 redirect  = _redirect,
-                                 id        = (page \ "id").text,
-                                 revision  = (rev \ "id").text,
-                                 timestamp = (rev \ "timestamp").text,
-                                 contributorID = _contributorID,
-                                 contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
-                                 else (rev \ "contributor" \ "username" ).text,
-                                 source    = (rev \ "text").text,
-                                 format    = (rev \ "format").text) )
-            }
+          try
+          {
+            val nsCode = nsElem.text.toInt
+            require(title.namespace.code == nsCode, "XML Namespace (" + nsCode + ") does not match the computed namespace (" + title.namespace + ") in page: " + title.decodedWithNamespace)
+          }
+          catch
+          {
+            case e: NumberFormatException => throw new IllegalArgumentException("Cannot parse content of element [ns] as int", e)
+          }
         }
+
+        //Skip bad titles
+        if(title != null)
+        {
+            val _redirect = (page \ "redirect" \ "@title").text match
+            {
+              case "" => null
+              case t => WikiTitle.parse(t, language)
+            }
+            val _contributorID = (rev \ "contributor" \ "id").text match
+            {
+              case null => "0"
+              case id => id
+            }
+            f( new WikiPage( title     = title,
+                             redirect  = _redirect,
+                             id        = (page \ "id").text,
+                             revision  = (rev \ "id").text,
+                             timestamp = (rev \ "timestamp").text,
+                             contributorID = _contributorID,
+                             contributorName = if (_contributorID == "0") (rev \ "contributor" \ "ip" ).text
+                             else (rev \ "contributor" \ "username" ).text,
+                             source    = (rev \ "text").text,
+                             format    = (rev \ "format").text) )
+        }
+      }
     }
 
     override def hasDefiniteSize = true

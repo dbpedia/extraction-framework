@@ -31,6 +31,7 @@ class WikipediaNifExtractor(
   /**
     * DBpedia relevant properties
     */
+
   // lazy so testing does not need ontology
   protected lazy val shortProperty = context.ontology.properties(context.configFile.abstractParameters.shortAbstractsProperty)
 
@@ -42,6 +43,7 @@ class WikipediaNifExtractor(
   protected lazy val shortQuad = QuadBuilder(context.language, DBpediaDatasets.ShortAbstracts, shortProperty, null) _
   protected val recordAbstracts = !context.configFile.nifParameters.isTestRun  //not! will create dbpedia short and long abstracts
   protected val shortAbstractLength = context.configFile.abstractParameters.shortAbstractMinLength
+  protected val abstractsOnly = context.configFile.nifParameters.abstractsOnly
   override protected val templateString = Namespaces.names(context.language).get(Namespace.Template.code) match {
     case Some(x) => x
     case None => "Template"
@@ -104,13 +106,12 @@ class WikipediaNifExtractor(
   override def getRelevantParagraphs (html: String): mutable.ListBuffer[PageSection] = {
 
     val tocMap = new mutable.ListBuffer[PageSection]()
-
     val doc: Document = getJsoupDoc(html)
     var nodes = doc.select("body").first.childNodes.asScala
     val currentSection = new ListBuffer[Int]()                  //keeps track of section number
     currentSection.append(0)                                    //initialize on abstract section
 
-    def getParagraphText : Option[PageSection] ={
+    def getSection : Option[PageSection] ={
       //look for the next <h> tag
       nodes = nodes.dropWhile(node => !node.nodeName().matches("h\\d"))
       val title = nodes.headOption
@@ -181,13 +182,15 @@ class WikipediaNifExtractor(
       content = ab
     ))
 
-    var res: Option[PageSection] = getParagraphText
-    while(res.nonEmpty){
-      res match{
-        case Some(ps) => tocMap.append(ps)
-        case None =>
+    if(!abstractsOnly) {
+      var res: Option[PageSection] = getSection
+      while (res.nonEmpty) {
+        res match {
+          case Some(ps) => tocMap.append(ps)
+          case None =>
+        }
+        res = getSection
       }
-      res = getParagraphText
     }
     tocMap
   }

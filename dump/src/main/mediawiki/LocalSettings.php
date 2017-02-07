@@ -15,6 +15,14 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
+error_reporting( -1 );
+ini_set( 'display_errors', 1 );
+
+$wgShowExceptionDetails = true;
+
+#This section checks the api parameters for the lang/uselang parameter
+#When running the update.php script: remove this section and uncomment
+#the direct language initialization below to the language you want to update
 if ( isset( $_REQUEST['uselang'] ) ) {
 	$languageCode = $_REQUEST['uselang'];
 } else if ( isset( $_REQUEST['lang'] ) ) {
@@ -23,6 +31,7 @@ if ( isset( $_REQUEST['uselang'] ) ) {
 } else {
 	die( "Missing request parameter 'uselang' or 'lang'\n" );
 }
+#$languageCode = 'de';
 
 $underscoreLanguageCode = str_replace('-', '_', $languageCode);
 
@@ -41,7 +50,7 @@ $wgScriptPath = "/mediawiki";
 $wgScriptExtension = ".php";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://localhost";
+$wgServer = "http://localhost:8008";
 
 ## The relative URL path to the skins directory
 $wgStylePath = "$wgScriptPath/skins";
@@ -64,10 +73,16 @@ $wgEmailAuthentication = false;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = ":/data/dbpedia-release/mysql/mysql.sock";
+$wgDBserver = ":/var/run/mysqld/mysqld.sock";
 $wgDBname = $underscoreLanguageCode."wiki";
 $wgDBuser = "root";
 $wgDBpassword = "";
+
+## Debug SQL queries
+$wgShowSQLErrors = true;
+$wgDebugDumpSql  = true;
+$wgShowDBErrorBacktrace = true;
+$wgDebugLogFile = "/home/extractor/2016-10-extraction/mysql-db-error.log";
 
 # MySQL specific settings
 $wgDBprefix = "";
@@ -139,30 +154,45 @@ $wgDiff3 = "/usr/bin/diff3";
 $wgResourceLoaderMaxQueryLength = -1;
 
 
+$wgCacheEpoch = max( $wgCacheEpoch, gmdate( 'YmdHis', @filemtime( __FILE__ ) ) );
+$wgUseTidy = true;
+$wgMainCacheType = CACHE_MEMCACHED;
+$wgParserCacheType = CACHE_MEMCACHED; # optional
+$wgMessageCacheType = CACHE_MEMCACHED; # optional
+$wgMemCachedServers = array( "127.0.0.1:11211" );
+$wgDisableCounters = true;
+$wgSessionsInObjectCache = true; # optional
+$wgSessionCacheType = CACHE_MEMCACHED; # optional
 
-# End of automatically generated settings.
-# Add more configuration options below.
 
-# Enabled Extensions. Most extensions are enabled by including the base extension file here
-# but check specific extension documentation for more details
-require_once( "$IP/extensions/Babel/Babel.php" );
+$wgPFEnableStringFunctions = true;
+
+# enabling extensions - please make sure all of these are cloned and installed under /extensions
+wfLoadExtension( 'Babel' );
 require_once( "$IP/extensions/CategoryTree/CategoryTree.php" );
-require_once( "$IP/extensions/CharInsert/CharInsert.php" );
-require_once( "$IP/extensions/Cite/Cite.php" );
-require_once( "$IP/extensions/ExpandTemplates/ExpandTemplates.php" );
-require_once( "$IP/extensions/ImageMap/ImageMap.php" );
-require_once( "$IP/extensions/InputBox/InputBox.php" );
-require_once( "$IP/extensions/Interwiki/Interwiki.php" );
-require_once( "$IP/extensions/Math/Math.php" );
+wfLoadExtension( "CharInsert" );
+wfLoadExtension( "Cite" );
+wfLoadExtension( "ImageMap" );
+wfLoadExtension( "InputBox" );
+wfLoadExtension( "Interwiki" );
+wfLoadExtension( "Math" );
 require_once("$IP/extensions/GeoData/GeoData.php");
-require_once("$IP/extensions/MobileFrontend/MobileFrontend.php");
-require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
-require_once( "$IP/extensions/Poem/Poem.php" );
-require_once( "$IP/extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php" );
-require_once( "$IP/extensions/TextExtracts/TextExtracts.php" );
+wfLoadExtension( "MobileFrontend");
+wfLoadExtension( "ParserFunctions" );
+wfLoadExtension( "Poem" );
+wfLoadExtension( "SyntaxHighlight_GeSHi" );
 require_once( "$IP/extensions/timeline/Timeline.php" );
-require_once( "$IP/extensions/wikihiero/wikihiero.php" );
-require_once( "$IP/extensions/Scribunto/Scribunto.php");
-require_once( "$IP/extensions/Mantle/Mantle.php");
-$wgScribuntoDefaultEngine = 'luastandalone';
-#$wgScribuntoDefaultEngine = 'luasandbox'; # faster but needs configuration read http://www.mediawiki.org/wiki/Extension:Scribunto
+wfLoadExtension( "wikihiero" );
+require_once "$IP/extensions/Scribunto/Scribunto.php";
+wfLoadExtension( "TextExtracts" );
+
+# configure math extension
+$wgMathValidModes = array('source');
+$wgDefaultUserOptions['math'] = 'source';
+$wgMathDisableTexFilter = 'always';
+
+# Configuration for TextExtracts which removes noisy tags
+$wgExtractsRemoveClasses = array( '.metadata', 'span.coordinates', 'span.geo-multi-punct', 'span.geo-nondefault', '#coordinates', '.reflist', '.citation', '#toc', '.tocnumber', '.references', '.reference', '.noprint');
+
+$wgTemplateDataUseGUI = false;
+$wgScribuntoDefaultEngine = 'luastandalone'; # faster but needs configuration read http://www.mediawiki.org/wiki/Extension:Scribunto

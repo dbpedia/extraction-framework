@@ -1,10 +1,7 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.mappings.RecordEntry
 import org.dbpedia.extraction.wikiparser.impl.simple.SimpleWikiParser
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Disambiguation
-
-import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a page.
@@ -29,38 +26,37 @@ class PageNode (
 ) 
 extends Node(children, 0)
 {
+  def toWikiText = children.map(_.toWikiText).mkString
 
-    def toWikiText = children.map(_.toWikiText).mkString
+  def toPlainText = children.map(_.toPlainText).mkString
 
-    def toPlainText = children.map(_.toPlainText).mkString
-
-    def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
+  def toDumpXML = WikiPage.toDumpXML(title, id, revision, timestamp, contributorID, contributorName, toWikiText, "text/x-wiki")
 
 
-    def isRedirect: Boolean ={
-      SimpleWikiParser.getRedirectPattern(title.language).findFirstMatchIn(this.source) match{
-        case Some(x) => true
-        case None => false
-      }
+  def isRedirect: Boolean ={
+    SimpleWikiParser.getRedirectPattern(title.language).findFirstMatchIn(this.source) match{
+      case Some(x) => true
+      case None => false
     }
+  }
 
 
-    def isDisambiguation: Boolean ={
-      val disambiguationNames = Disambiguation.get(this.title.language).getOrElse(Set("Disambig"))
-      children.exists(node => findTemplate(node, disambiguationNames))
-    }
+  def isDisambiguation: Boolean ={
+    val disambiguationNames = Disambiguation.get(this.title.language).getOrElse(Set("Disambig"))
+    children.exists(node => findTemplate(node, disambiguationNames))
+  }
 
-    //Generate the page URI
-    def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
+  //Generate the page URI
+  def uri = this.title.language.resourceUri.append(this.title.decodedWithNamespace)
 
-    override def equals(other : Any) = other match
-    {
+  override def equals(other : Any) = other match
+  {
 
-        case otherPageNode : PageNode => ( otherPageNode.title == title && otherPageNode.id == id && otherPageNode.revision == revision && otherPageNode.timestamp == timestamp
-          && otherPageNode.contributorID == contributorID && otherPageNode.contributorName == contributorName && otherPageNode.isRedirect == isRedirect
-          && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.filterEmptyTextNodes(otherPageNode.children) == NodeUtil.filterEmptyTextNodes(children))
-        case _ => false
-    }
+      case otherPageNode : PageNode => ( otherPageNode.title == title && otherPageNode.id == id && otherPageNode.revision == revision && otherPageNode.timestamp == timestamp
+        && otherPageNode.contributorID == contributorID && otherPageNode.contributorName == contributorName && otherPageNode.isRedirect == isRedirect
+        && otherPageNode.isDisambiguation == isDisambiguation && NodeUtil.filterEmptyTextNodes(otherPageNode.children) == NodeUtil.filterEmptyTextNodes(children))
+      case _ => false
+  }
 
 
   private def findTemplate(node : Node, names : Set[String]) : Boolean = node match

@@ -34,10 +34,11 @@ class ConfigLoader(config: Config)
 
   private var extractionRecorder: ExtractionRecorder[WikiPage] = null
 
-  def getExtractionRecorder: ExtractionRecorder[WikiPage] = if(extractionRecorder != null)
-    extractionRecorder
-  else {
-    extractionRecorder = config.logDir match {
+  def getExtractionRecorder: ExtractionRecorder[WikiPage] =
+    if(extractionRecorder != null)
+      extractionRecorder
+    else {
+      extractionRecorder = config.logDir match {
       case Some(p) => {
         var logname = config.configPath.replace("\\", "/")
         if (logname.indexOf("/") >= 0)
@@ -134,7 +135,11 @@ class ConfigLoader(config: Config)
         }
       }
 
-      def disambiguations : Disambiguations = if (_disambiguations != null) _disambiguations else new Disambiguations(Set[Long]())
+      def disambiguations : Disambiguations =
+        if (_disambiguations != null)
+          _disambiguations
+        else
+          new Disambiguations(Set[Long]())
 
       def configFile: Config = config
     }
@@ -181,7 +186,6 @@ class ConfigLoader(config: Config)
       extractionJobs.values
     }
 
-    
     private def writer(file: File): () => Writer = {
       () => IOUtils.writer(file)
     }

@@ -12,7 +12,9 @@ import scala.util.{Failure, Success, Try}
 import org.dbpedia.extraction.util.Config.MediaWikiConnection
 
 /**
-  * Created by Chile on 2/4/2017.
+  * The Mediawiki API connector
+  * @param connectionConfig - Collection of parameters necessary for API requests (see Config.scala)
+  * @param xmlPath - An array of XML tag names leading from the root (usually 'api') to the intended content of the response XML (depending on the request query used)
   */
 class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[String]) {
 
@@ -59,7 +61,11 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
     }
 
     // Fill parameters
-    val parameters = "uselang=" + pageTitle.language.wikiCode + apiParameterString.format(titleParam)
+    val parameters = "uselang=" + pageTitle.language.wikiCode + (pageTitle.id match{
+      case Some(id) if apiParameterString.contains("%d") =>
+        apiParameterString.replace("%s", "").format(id)
+      case _ => apiParameterString.replaceAll("&pageid=[^&]+", "").format(titleParam)
+    })
 
     for(counter <- 1 to maxRetries)
     {

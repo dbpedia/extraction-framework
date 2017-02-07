@@ -109,13 +109,12 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
 
   private def makeContext(text: String, contextUri: String, sourceUrl: String, contextEnd: Int): ListBuffer[Quad] = {
     var cont = ListBuffer[Quad]()
-    val wikipediaUrl = if(sourceUrl.contains("?")) sourceUrl.substring(0, sourceUrl.indexOf('?')) else sourceUrl
     if (contextEnd == 0)
       return ListBuffer()
     cont += nifContext(contextUri, RdfNamespace.RDF.append("type"), RdfNamespace.NIF.append("Context"), sourceUrl, null)
     cont += nifContext(contextUri, RdfNamespace.NIF.append("beginIndex"), "0", sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger") )
     cont += nifContext(contextUri, RdfNamespace.NIF.append("endIndex"), contextEnd.toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger") )
-    cont += nifContext(contextUri, RdfNamespace.NIF.append("sourceUrl"), wikipediaUrl, sourceUrl, null)
+    cont += nifContext(contextUri, RdfNamespace.NIF.append("sourceUrl"), sourceUrl, sourceUrl, null)
     cont += nifContext(contextUri, RdfNamespace.NIF.append("isString"), text, sourceUrl, RdfNamespace.XSD.append("string"))
     cont
   }

@@ -135,6 +135,7 @@ class Config(val configPath: String)
     isTestRun = config.getProperty("nif-isTestRun", "false").toBoolean,
     writeAnchor = config.getProperty("nif-write-anchor", "false").toBoolean,
     writeLinkAnchor = config.getProperty("nif-write-link-anchor", "true").toBoolean,
+    abstractsOnly = config.getProperty("nif-extract-abstract-only", "true").toBoolean,
     cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json")   //static config file in core/src/main/resources
   )
 }
@@ -146,6 +147,7 @@ object Config{
     isTestRun: Boolean,
     writeAnchor: Boolean,
     writeLinkAnchor: Boolean,
+    abstractsOnly: Boolean,
     cssSelectorMap: URL
   )
 

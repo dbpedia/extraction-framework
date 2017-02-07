@@ -205,7 +205,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
     val printOptions = if(print == null) {
       if(severity == RecordSeverity.Exception )
         Seq(PrinterDestination.err, PrinterDestination.out, PrinterDestination.file)
-      else if(severity == RecordSeverity.Warning)
+      else if(severity == RecordSeverity.Info)
         Seq(PrinterDestination.out, PrinterDestination.file)
       else
         Seq(PrinterDestination.file)
