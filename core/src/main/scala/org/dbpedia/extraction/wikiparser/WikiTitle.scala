@@ -185,7 +185,7 @@ object WikiTitle
      * @param title MediaWiki link e.g. "Template:Infobox Automobile"
      * @param language The source language of this link
      */
-    def parseCleanTitle(title: String, language: Language, id: Option[Long]): WikiTitle = {
+    def parseCleanTitle(title: String, language: Language, id: Option[java.lang.Long]): WikiTitle = {
         var namespace = Namespace.Main
         var decodedName = title
 
@@ -198,7 +198,12 @@ object WikiTitle
             }
         }
 
+        val zwid = id match{
+            case Some(i) => Option(i.longValue())
+            case None => None
+        }
+
         // we explicitly disable capitalization of the title here
-        new WikiTitle(decodedName, namespace, language, false, null, false, id)
+        new WikiTitle(decodedName, namespace, language, false, null, false, zwid)
     }
 }

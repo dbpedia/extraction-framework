@@ -202,7 +202,6 @@ public class WikipediaDumpParser
     
     //Read title
     String titleStr = readString(TITLE_ELEM, true);
-    WikiTitle title = parseTitle(titleStr);
     // now after </title>
 
     int nsCode;
@@ -214,6 +213,13 @@ public class WikipediaDumpParser
     {
       throw new IllegalArgumentException("cannot parse content of element ["+NS_ELEM+"] as int", e);
     }
+
+    //Read page id
+    String pageId = readString(ID_ELEM, false);
+    // now at </id>
+
+    //create title now with pageId
+    WikiTitle title = parseTitle(titleStr, pageId);
 
     // now after </ns>
 
@@ -240,10 +246,6 @@ public class WikipediaDumpParser
       return;
     }
 
-    //Read page id
-    String pageId = readString(ID_ELEM, false);
-    // now at </id>
-
     //Read page
     WikiPage page = null;
     WikiTitle redirect = null;
@@ -251,7 +253,7 @@ public class WikipediaDumpParser
     {
       if (isStartElement(REDIRECT_ELEM))
       {
-        redirect = parseTitle(_reader.getAttributeValue(null, TITLE_ELEM));
+        redirect = parseTitle(_reader.getAttributeValue(null, TITLE_ELEM), null);
         nextTag();
         // now at </redirect>
       }
@@ -281,7 +283,6 @@ public class WikipediaDumpParser
         else logger.log(Level.WARNING, _language.wikiCode() + ": error processing page  '"+title+"': "+Exceptions.toString(e, 200));
       }
     }
-    
     requireEndElement(PAGE_ELEM);
   }
 
@@ -383,11 +384,19 @@ public class WikipediaDumpParser
    * @param titleString expected name of element. if null, don't check name.
    * @return null if title cannot be parsed for some reason
    */
-  private WikiTitle parseTitle( String titleString )
+  private WikiTitle parseTitle( String titleString, String pageId )
   {
+    Long id = null;
+    if(pageId != null) {
+        try {
+            id = Long.parseLong(pageId);
+        } catch (Throwable e) {
+        }
+    }
+
     try
     {
-      return WikiTitle.parseCleanTitle(titleString, _language, scala.Option.apply(null));
+      return WikiTitle.parseCleanTitle(titleString, _language, scala.Option.apply(id));
     }
     catch (Exception e)
     {

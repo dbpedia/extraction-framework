@@ -134,7 +134,7 @@ private class XMLSource(xml : Elem, language: Language) extends Source
           rev <- page \ "revision")
       {
 
-        val title = WikiTitle.parseCleanTitle((page \ "title").text, language, Try{(page \ "id").text.toLong}.toOption)
+        val title = WikiTitle.parseCleanTitle((page \ "title").text, language, Try{new java.lang.Long(java.lang.Long.parseLong((page \ "id").text))}.toOption)
 
         val nsElem = page \ "ns"
         if (nsElem.nonEmpty )
