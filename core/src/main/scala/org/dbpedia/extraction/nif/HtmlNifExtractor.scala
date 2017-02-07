@@ -390,6 +390,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
       }
     }
 
+    //deal with <code> elements
     val cods = doc.select("code, text[xml:space='preserve']").asScala
     if(cods.size != codes.size)
       throw new Exception("An error occurred due to differing codes counts")
