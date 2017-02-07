@@ -2,7 +2,6 @@ package org.dbpedia.extraction.dump.extract
 
 import java.io._
 import java.net.URL
-import java.util.Calendar
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
@@ -16,6 +15,7 @@ import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.convert.decorateAsScala._
+import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, HashMap}
 
 /**
@@ -32,30 +32,32 @@ class ConfigLoader(config: Config)
 
   private val extractionJobs = new ConcurrentHashMap[Language, ExtractionJob]().asScala
 
-  private var extractionRecorder: ExtractionRecorder[WikiPage] = null
+  private val extractionRecorder = new mutable.HashMap[Language, ExtractionRecorder[WikiPage]]()
 
-  def getExtractionRecorder: ExtractionRecorder[WikiPage] =
-    if(extractionRecorder != null)
-      extractionRecorder
-    else {
-      extractionRecorder = config.logDir match {
-      case Some(p) => {
-        var logname = config.configPath.replace("\\", "/")
-        if (logname.indexOf("/") >= 0)
-          logname = logname.substring(logname.lastIndexOf("/") + 1) + "." + Calendar.getInstance.getTimeInMillis + ".log"
-        val logFile = new File(p, logname)
-        logFile.createNewFile()
-        val logStream = new FileOutputStream(logFile)
+  def getExtractionRecorder(lang: Language): ExtractionRecorder[WikiPage] = {
+    extractionRecorder.get(lang) match {
+      case None => {
+        extractionRecorder(lang) = config.logDir match {
+          case Some(p) => {
+            var logname = config.configPath.replace("\\", "/")
+            if (logname.indexOf("/") >= 0)
+              logname = config.dbPediaVersion + "_" + logname.substring(logname.lastIndexOf("/") + 1) + "_" + lang.wikiCode + ".log"
+            val logFile = new File(p, logname)
+            logFile.createNewFile()
+            val logStream = new FileOutputStream(logFile)
 
-        //TODO val preamble = input._1.wikiCode+": "+input._2.size+" extractors ("+
-        //  input._2.map(_.getSimpleName).mkString(",")+"), "+
-        //  datasets.size+" datasets ("+datasets.mkString(",")+")"
+            //TODO val preamble = input._1.wikiCode+": "+input._2.size+" extractors ("+
+            //  input._2.map(_.getSimpleName).mkString(",")+"), "+
+            //  datasets.size+" datasets ("+datasets.mkString(",")+")"
 
-        new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null)
+            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null)
+          }
+          case None => new ExtractionRecorder[WikiPage]()
+        }
+        extractionRecorder(lang)
       }
-      case None => new ExtractionRecorder[WikiPage]()
+      case Some(er) => er
     }
-    extractionRecorder
   }
 
   /**
@@ -169,7 +171,7 @@ class ConfigLoader(config: Config)
 
     val extractionJobNS = if(input._1 == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
 
-    extractionJobs.put(input._1, new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, input._1, config.retryFailedPages, getExtractionRecorder))
+    extractionJobs.put(input._1, new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, input._1, config.retryFailedPages, getExtractionRecorder(input._1)))
   }
 
     /**

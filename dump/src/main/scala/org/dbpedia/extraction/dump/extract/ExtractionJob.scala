@@ -18,11 +18,11 @@ import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 class ExtractionJob(
    extractor: WikiPageExtractor,
    source: Source,
-   namespaces: Set[Namespace],
-   destination: Destination,
-   language: Language,
-   retryFailedPages: Boolean,
-   extractionRecorder: ExtractionRecorder[WikiPage])
+   val namespaces: Set[Namespace],
+   val destination: Destination,
+   val language: Language,
+   val retryFailedPages: Boolean,
+   val extractionRecorder: ExtractionRecorder[WikiPage])
 {
 /*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
   val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
@@ -38,8 +38,8 @@ class ExtractionJob(
         val graph = extractor.extract(page, page.uri)
         destination.write(graph)
       }
-      else
-        page.addExtractionRecord("Namespace did not match: " + page.title.namespace + " for page: " + page.title.encoded, null, RecordSeverity.Info)
+      //TODO I don't think this will be necessary
+        //page.addExtractionRecord("Namespace did not match: " + page.title.namespace + " for page: " + page.title.encoded, null, RecordSeverity.Warning)
 
       //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
       val records = page.getExtractionRecords() match{

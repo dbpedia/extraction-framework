@@ -36,15 +36,15 @@ class NifExtractorTest extends FunSuite {
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   //private val titles = List("Antimon", "Alkalimetalle", "Apostilb", "Doldenblütler")
-  private val titles = List("Animalia_(book)")
+  private val titles = List("Achilles")
 
   private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
 
   test("testExtractNif") {
     dest.open()
     for(title <- titles){
-      val wt = new WikiTitle(title, Namespace.Main, context.language)
-      val wp = new WikiPage(wt, null, 438503, 438503, 438503, "")
+      val wt = new WikiTitle(title, Namespace.Main, context.language, false, null, true, Option(305l))
+      val wp = new WikiPage(wt, null, 305, 305, 305, "")
       val extractor = new WikipediaNifExtractor(context, wp)
       val html = getHtml(wt)
       dest.write(extractor.extractNif(html)(tt => System.err.println(tt.errorMsg)))
