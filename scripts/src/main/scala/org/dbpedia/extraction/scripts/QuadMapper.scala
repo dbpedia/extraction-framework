@@ -1,16 +1,15 @@
 package org.dbpedia.extraction.scripts
 
 import java.lang.StringBuilder
-import java.net.{URLEncoder, URL, URI}
-import org.dbpedia.extraction.destinations.Quad
-import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
-import org.dbpedia.extraction.util.{UriUtils, DateFinder, FileLike, IOUtils}
-import scala.Console.err
-import org.dbpedia.extraction.util.IOUtils.writer
-import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.destinations.WriterDestination
-import org.dbpedia.extraction.destinations.formatters.{TerseBuilder, Formatter, TerseFormatter}
+
+import org.dbpedia.extraction.destinations.{Destination, Quad, WriterDestination}
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
+import org.dbpedia.extraction.util.IOUtils.writer
+import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
+import org.dbpedia.extraction.util.{DateFinder, FileLike, IOUtils, UriUtils}
+
+import scala.Console.err
 
 /**
  * Maps old quads/triples to new quads/triples.
@@ -76,7 +75,7 @@ object QuadMapper {
     * @deprecated don't use it any more!
     */
   @Deprecated
-  private def quadToString(quad: Quad): String = {
+  def quadToString(quad: Quad): String = {
     val sb = new StringBuilder
     sb append '<' append quad.subject append "> <" append quad.predicate append "> "
     if (quad.datatype == null) {

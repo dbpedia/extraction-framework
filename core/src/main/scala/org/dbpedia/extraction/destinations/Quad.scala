@@ -3,9 +3,10 @@ package org.dbpedia.extraction.destinations
 import java.net.URI
 
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.ontology.{OntologyProperty,OntologyType}
+import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyType}
 import org.dbpedia.extraction.util.Language
 import Quad._
+import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 
 /**
  * Represents a statement.
@@ -204,6 +205,16 @@ object Quad
     if (datatype != null) datatype
     else if (range.isInstanceOf[Datatype]) range.asInstanceOf[Datatype]
     else null
+  }
+
+  val tripleFormatter = new TerseFormatter(false, true)
+  val quadFormatter = new TerseFormatter(true, true)
+
+  def serialize(quad: Quad): String ={
+    if(quad.context != null)
+      quadFormatter.render(quad)
+    else
+      tripleFormatter.render(quad)
   }
 
   /**

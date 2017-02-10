@@ -1,18 +1,19 @@
 package org.dbpedia.extraction.spark.rdd
 
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.io.compress.CompressionCodec
+import org.apache.hadoop.util.ReflectionUtils
+import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 import org.dbpedia.extraction.destinations.Quad
 
 /**
   * Created by Chile on 2/7/2017.
   */
-class SSparkRddExample{
-
-}
-
 object SSparkRddExample{
-
   def main(args: Array[String]): Unit = {
+
+    System.setProperty("hadoop.home.dir","C:\\hadoop" );
     val conf = new SparkConf(true)
     conf.setMaster("local[*]")
     conf.setAppName("test")
@@ -21,7 +22,7 @@ object SSparkRddExample{
     val sc = SparkContext.getOrCreate(conf)
 
     //Input: create quad file handle (RDD)
-    val rdd = sc.textFile("C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\dewiki\\20160305\\dewiki-20160305-mappingbased-objects-uncleaned.tql.bz2")
+    val rdd: RDD[String] = sc.textFile("C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\dewiki\\20160305\\dewiki-20160305-mappingbased-literals.tql.bz2")
 
     //DPU: parse to quad objects (String -> Option[Quad])
     var quads = rdd.map[Option[Quad]] {
@@ -31,7 +32,7 @@ object SSparkRddExample{
 
     //DPU: filter 'deathPlace' predicates
     quads = quads.filter{
-      case Some(quad) if quad.predicate == "http://dbpedia.org/ontology/deathPlace" => true
+      case Some(quad) if quad.predicate == "http://dbpedia.org/ontology/deathDate" => true
       case _ => false
     }
 
@@ -42,7 +43,11 @@ object SSparkRddExample{
     //DPU: sort resulting quads by subject
     out = out.sortBy({quad => quad.subject}, true)
 
+    val codecClass = Class.forName("org.apache.hadoop.io.compress.BZip2Codec")
+    val c = new Configuration()
+    val codec = ReflectionUtils.newInstance(codecClass, c).asInstanceOf[CompressionCodec]
+
     //Output: save resulting quad collection (Quad is serializable!)
-    quads.saveAsTextFile( "C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\dewiki\\20160305\\dewiki-20160305-mappingbased-objects-uncleaned_sorted.tql.bz2")
+    out.map(q => Quad.serialize(q)).coalesce(1).saveAsTextFile( "C:\\Users\\Chile\\Desktop\\Dbpedia\\core-i18n\\dewiki\\20160305\\dewiki-20160305-mappingbased-literals-filtered.tql.bz2", codec.getClass)
   }
 }

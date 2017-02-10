@@ -3,10 +3,12 @@ package org.dbpedia.extraction.spark.rdd
 import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.UriUtils
 
+import scala.util.{Failure, Success, Try}
+
 /**
   * Created by Chile on 2/7/2017.
   */
-class SSparkRecodeUris extends Transformer[Quad, Quad]{
+class SSparkRecodeUris extends Transformer[Quad, Quad] with Serializable{
   override def transform(in: Quad): Quad = {
       val quad = in
       try {
@@ -24,5 +26,8 @@ class SSparkRecodeUris extends Transformer[Quad, Quad]{
   }
 
   def fixUri(uri: String): String =
-    UriUtils.uriToIri(uri)
+    Try{UriUtils.uriToIri(uri)} match{
+      case Success(s) => s
+      case Failure(f) => uri
+    }
 }
