@@ -25,8 +25,6 @@ extends WikiPageExtractor
     val finalExtractors    = new ArrayBuffer[Extractor[WikiPage]]()
     //to do: add json extractors
 
-    val quads = new ArrayBuffer[Quad]()
-
     //if extractor is not either PageNodeExtractor or JsonNodeExtractor so it accepts WikiPage as input
     extractors foreach { extractor =>
       extractor match {

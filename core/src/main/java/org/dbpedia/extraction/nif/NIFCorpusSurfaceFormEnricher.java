@@ -355,4 +355,5 @@ public class NIFCorpusSurfaceFormEnricher {
 		WikiCorpusGenerator gen = new WikiCorpusGenerator(lang, logfile);
 		rich.enrichCorpus(gen, outpath, lang);
 	}
-}*/
+}
+*/

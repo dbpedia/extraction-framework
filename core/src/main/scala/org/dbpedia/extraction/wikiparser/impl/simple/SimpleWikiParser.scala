@@ -73,6 +73,7 @@ object SimpleWikiParser
      */
     def apply(page : WikiPage) : Option[PageNode] =
     {
+
       if (page.format != null && page.format.nonEmpty && page.format != "text/x-wiki")
         None
       else if(false)
@@ -85,8 +86,6 @@ object SimpleWikiParser
         //Return page node
         Some(new PageNode(page.title, page.id, page.revision, page.timestamp, page.contributorID, page.contributorName, page.source, nodes))
       }
-
-
     }
     
     private def  parseUntil(matcher : Matcher, source : Source, level : Int) : List[Node] =

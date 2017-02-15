@@ -90,7 +90,9 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
       }
     }
 
-    quads.flatten ++ makeContext(context, nifContextIri, graphIri, offset) ++ extendContextTriples(quads.flatten, graphIri, subjectIri)
+    quads.flatten ++
+      makeContext(context, nifContextIri, graphIri, offset) ++
+      extendContextTriples(quads.flatten, graphIri, subjectIri)
   }
 
   /**
@@ -366,6 +368,18 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
       val li = ol.children().select("li").asScala
       for(i <- li.indices)
         li(i).before("<span> " + (i+1) + ". </span>")
+    }
+
+    //if h1 titles exist in page content, replace all titles with 'h'+(i+1)
+    if(doc.select("h1").size() > 0) {
+      for (i <- 4 to 1 by -1) {
+        for (item <- doc.select("h"+i.toString).asScala) {
+          val replaceElement = new Element(Tag.valueOf("h" + (i+1).toString), "")
+          for(child <- item.children().asScala)
+            replaceElement.appendChild(child)
+          item.replaceWith(replaceElement)
+        }
+      }
     }
 
     //replace queries
