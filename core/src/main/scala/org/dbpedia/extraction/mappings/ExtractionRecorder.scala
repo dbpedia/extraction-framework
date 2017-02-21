@@ -171,7 +171,7 @@ class ExtractionRecorder[T](
     for (ste <- exception.getStackTrace)
       printLabeledLine("\t" + ste.toString, RecordSeverity.Exception, lang, Seq(PrinterDestination.file), noLabel = true)
 
-    if(slackCredantials != null && failedPages(lang) % slackCredantials.exceptionThreshold * slackIncreaseExceptionThreshold == 0)
+    if(slackCredantials != null && failedPages(lang) % (slackCredantials.exceptionThreshold * slackIncreaseExceptionThreshold) == 0)
       forwardExceptionWarning(lang)
   }
 
@@ -269,7 +269,7 @@ class ExtractionRecorder[T](
       "failed" -> failed.toString,
       "mspp" -> (decForm.format(time.toDouble / pages) + " ms"),
       "erate" -> (if(failed == 0) "0" else ((pages+failed) / failed).toString),
-      "dataset" -> (if(datasets.nonEmpty) " for dataset " + datasets.head.name else ""),
+      "dataset" -> (if(datasets.nonEmpty) datasets.size + " datasets" else ""),
       "time" -> StringUtils.prettyMillis(time)
     )
   }
@@ -283,7 +283,7 @@ class ExtractionRecorder[T](
     val line = "Extraction started for language: " + lang.wikiCode +
       (if(datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
     printLabeledLine(line, RecordSeverity.Info, lang)
-    forwardSimpleLine(line)
+    forwardExtractionOverview(lang, line)
   }
 
   override def finalize(): Unit ={
@@ -311,24 +311,33 @@ class ExtractionRecorder[T](
     val out, err, file = Value
   }
 
+  /**
+    * the following methods will post messages to a Slack webhook if the Slack-Cedentials are available in the config file
+    */
   var lastExceptionMsg = new Date().getTime
+
+  /**
+    * forward an exception summary to slack
+    * (will increase the slack-exception-threshold by factor 2 if two of these messages are fired within 2 minutes)
+    * @param lang
+    */
   def forwardExceptionWarning(lang: Language) : Unit =
   {
     if(slackCredantials == null)
       return
-    //if error warnings are less than 2 min apart increase summary 10-fold
+    //if error warnings are less than 2 min apart increase threshold
     if((new Date().getTime - lastExceptionMsg) / 1000 < 120)
-      slackIncreaseExceptionThreshold = slackIncreaseExceptionThreshold*10
+      slackIncreaseExceptionThreshold = slackIncreaseExceptionThreshold*2
     lastExceptionMsg = new Date().getTime
 
     val attachments = new JsonArray()
-    val attachment = getAttachment("Multiple pages failed to be extracted.", if(slackIncreaseExceptionThreshold == 1) "warning" else "danger")
+    val attachment = getAttachment("Multiple pages failed to be extracted.", if(slackIncreaseExceptionThreshold < 5) "warning" else "danger")
     val fields = new JsonArray()
     attachment.put("fields", fields)
     attachments.add(attachment)
     addKeyValue(fields, "Number of exceptions", failedPages(lang).toString)
 
-    val data = defaultMessage("Exception Summary for language " + lang.name, null, attachments)
+    val data = defaultMessage("Exception status report for language " + lang.name, null, attachments)
 
     sendCurl(slackCredantials.webhook.toString, data)
   }
@@ -339,11 +348,11 @@ class ExtractionRecorder[T](
       return
     val status = getStatusValues(lang)
     val attachments = new JsonArray()
-    val attachment = getAttachment("Extraction Summary:", "#36a64f")
+    val attachment = getAttachment("Extraction Status Report:", "#36a64f")
     val fields = new JsonArray()
     addKeyValue(fields, "extracted pages:", status("pages"))
     if(status("dataset").nonEmpty)
-      addKeyValue(fields, "of dataset:", status("dataset"))
+      addKeyValue(fields, "extracted datasets:", status("dataset"))
     addKeyValue(fields, "time elapsed: ", status("time"))
     addKeyValue(fields, "per page: ", status("mspp"))
     addKeyValue(fields, "failed pages: ", status("failed"))
@@ -351,6 +360,27 @@ class ExtractionRecorder[T](
     attachments.add(attachment)
 
     sendCurl(slackCredantials.webhook.toString, defaultMessage("Summary report for extraction of language " + lang.name, null, attachments))
+  }
+
+  def forwardExtractionOverview(lang: Language, msg: String) : Unit ={
+    if(slackCredantials == null || datasets.isEmpty)
+      return
+    val attachments = new JsonArray()
+    val attachment = getAttachment("The datasets extracted are:", "#439FE0")
+    val fields = new JsonArray()
+
+    for(dataset <- datasets.sortBy(x => x.encoded)){
+      val field = new JsonObject()
+      field.put("title", dataset.name)
+      field.put("value", dataset.versionUri)
+      field.put("short", false)
+      fields.add(field)
+    }
+
+    attachment.put("fields", fields)
+    attachments.add(attachment)
+
+    sendCurl(slackCredantials.webhook.toString, defaultMessage(msg, null, attachments))
   }
 
   def forwardSimpleLine(line: String) : Unit =
