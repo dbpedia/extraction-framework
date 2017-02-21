@@ -32,6 +32,8 @@ class ExtractionJob(
 
   result.foreach( x => println(x.toString))*/
 
+  def datasets = extractor.datasets
+
   private val workers = SimpleWorkers { page: WikiPage =>
     try {
       if (namespaces.contains(page.title.namespace)) {
@@ -57,7 +59,7 @@ class ExtractionJob(
   
   def run(): Unit =
   {
-    extractionRecorder.initialize(language)
+    extractionRecorder.initialize(language, extractor.datasets.toSeq)
 
     extractor.initializeExtractor()
     
@@ -89,5 +91,7 @@ class ExtractionJob(
     destination.close()
 
     extractor.finalizeExtractor()
+
+    extractionRecorder.finalize()
   }
 }

@@ -24,7 +24,6 @@ object Extraction {
     //Execute the extraction jobs one by one
     for (job <- configLoader.getExtractionJobs) {
       job.run()
-      job.extractionRecorder.finalize()
     }
   }
 }

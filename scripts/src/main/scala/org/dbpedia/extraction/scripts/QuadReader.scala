@@ -75,7 +75,7 @@ class QuadReader {
       case None => null
     }
     recorder = new ExtractionRecorder[Quad](recorder)
-    getRecorder.initialize(language, dataset)
+    getRecorder.initialize(language)
 
     IOUtils.readLines(file) { line =>
       line match {

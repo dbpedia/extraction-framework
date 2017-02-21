@@ -22,25 +22,10 @@ do
   ADD_ARGS="$ADD_ARGS|$ARG"
 done
 
-#insert parameter for the SlackForwarder script below
-#to show results of an extraction step in slack, add 'msg-slack' as second parameter (after the LAUNCHER)
-SlackUrl="https://hooks.slack.com/services/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"
-SlackRegexMap="$HOME/IDEAprojects/extraction-framework/scripts/slackRegexMap.json"
-LogDir="$HOME/IDEAprojects/logs"
-
 # export MAVEN_OPTS='-Xmx4096M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGC -XX:+PrintGCTimeStamps'
 # export MAVEN_DEBUG='-X -e'
 
 # if we're not on a terminal, use batch mode to avoid ugly log files
 [ ! -t 1 ] && BATCH="-B"
 
-if [[ $SLACK != false && $SlackUrl == https://hooks.slack.com/services* ]] ;
-then
-  #mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=SlackForwarder"  "-DaddArgs=$SlackUrl|$SlackRegexMap|$LogDir|$1|$SLACK" &
-  sleep 5
-  PID="$(ps ax | grep java | grep extraction.scripts.SlackForwarder | tail -1 | sed -n -E 's/([0-9]+).*/\1/p' | xargs)"
-  echo $PID
-  mvn $MAVEN_DEBUG -B scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS" &> "/proc/$PID/fd/0"
-else
-  mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS"
-fi
+mvn $MAVEN_DEBUG $BATCH scala:run "-Dlauncher=$LAUNCHER" "-DaddArgs=$ADD_ARGS"

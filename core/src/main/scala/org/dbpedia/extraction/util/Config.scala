@@ -5,7 +5,7 @@ import java.net.URL
 
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.Extractor
-import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters}
+import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
 import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
 
@@ -47,7 +47,24 @@ class Config(val configPath: String)
     case Failure(e) => throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
   }
 
+  /**
+    * The directory where all log files will be stored
+    */
   lazy val logDir = Option(checkOverride("log-dir").getProperty("log-dir"))
+
+  /**
+    * If set, extraction summaries are forwarded via the API of Slack, displaying messages on a dedicated channel.
+    * The URL of the slack webhook to be used
+    * the username under which all messages are posted (has to be registered for this webhook?)
+    * Threshold of extracted pages over which a summary of the current extraction is posted
+    * Threshold of exceptions over which an exception report is posted
+    */
+  lazy val slackCredentials = SlackCredentials(
+    webhook = new URL(checkOverride("slack-webhook").getProperty("slack-webhook")),
+    username = checkOverride("slack-username").getProperty("slack-username"),
+    summaryThreshold = checkOverride("slack-summary-threshold").getProperty("slack-summary-threshold").toInt,
+    exceptionThreshold = checkOverride("slack-exception-threshold").getProperty("slack-exception-threshold").toInt
+  )
 
   // TODO Watch out, this could be a regex
   lazy val source = checkOverride("source").getProperty("source", "pages-articles.xml.bz2")
@@ -166,4 +183,11 @@ object Config{
     shortAbstractMinLength: Int,
     abstractTags: String
   )
+
+  case class SlackCredentials(
+     webhook: URL,
+     username: String,
+     summaryThreshold: Int,
+     exceptionThreshold: Int
+   )
 }

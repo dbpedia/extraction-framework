@@ -264,7 +264,7 @@ abstract class HtmlNifExtractor(nifContextIri: String, language: String, configF
     triples += nifStructure(tableUri, RdfNamespace.NIF.append("endIndex"), (offset + section.title.length).toString, sourceUrl, RdfNamespace.XSD.append("nonNegativeInteger"))
     triples += nifStructure(tableUri, RdfNamespace.NIF.append("superString"), section.getSectionIri(), sourceUrl, null)
     if(writeLinkAnchors)
-      triples += nifLinks(tableUri, RdfNamespace.NIF.append("anchorOf"), section.title, sourceUrl, RdfNamespace.XSD.append("string"))
+      triples += nifStructure(tableUri, RdfNamespace.NIF.append("anchorOf"), section.title, sourceUrl, RdfNamespace.XSD.append("string"))
     triples
   }
 

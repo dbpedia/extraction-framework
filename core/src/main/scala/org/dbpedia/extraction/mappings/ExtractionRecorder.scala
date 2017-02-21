@@ -1,21 +1,33 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.Writer
+import java.io.{ByteArrayOutputStream, Writer}
+import java.net.SocketTimeoutException
+import java.nio.charset.Charset
 import java.text.DecimalFormat
+import java.util.Date
 import java.util.concurrent.atomic.AtomicLong
 
+import org.apache.jena.atlas.json.{JSON, JsonArray, JsonObject}
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.Config.SlackCredentials
 import org.dbpedia.extraction.util.{Language, StringUtils}
 import org.dbpedia.extraction.wikiparser.{PageNode, WikiPage, WikiTitle}
 
 import scala.collection.mutable
+import scalaj.http.Http
 
 /**
   * Created by Chile on 11/3/2016.
   */
-class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 100000, val preamble: String = null) {
+class ExtractionRecorder[T](
+   val logWriter: Writer = null,
+   val reportInterval: Int = 100000,
+   val preamble: String = null,
+   val slackCredantials: SlackCredentials = null
+ ) {
 
-  def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble)
+  def this(er: ExtractionRecorder[T]) = this(er.logWriter, er.reportInterval, er.preamble, er.slackCredantials)
 
   private var failedPageMap = Map[Language, scala.collection.mutable.Map[(Long, T), Throwable]]()
   private var successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
@@ -23,16 +35,17 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
   private val startTime = new AtomicLong()
   private var successfulPageCount = Map[Language,AtomicLong]()
 
-  private var logWriter: Writer = null
-
   private var defaultLang: Language = Language.English
-  private var defaultDataset: String = null
 
   private var openConnections = 0
 
   private val decForm = new DecimalFormat("#.##")
 
-  setLogFile(logFile, preamble)
+  private var slackIncreaseExceptionThreshold = 1
+
+  private var datasets: Seq[Dataset] = Seq()
+
+  setLogFile(preamble)
 
   /**
     * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
@@ -44,11 +57,9 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
   /**
     * define the log file destination
     *
-    * @param logFile the target file
     * @param preamble the optional first line of the log file
     */
-  def setLogFile(logFile: Writer, preamble: String = null): Unit ={
-    logWriter = logFile
+  def setLogFile(preamble: String = null): Unit ={
     if(logWriter != null && preamble != null && preamble.length > 0)
       logWriter.append("# " + preamble + "\n")
   }
@@ -156,10 +167,12 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
       case Some(map) => map += ((id,node) -> exception)
       case None =>  failedPageMap += lang -> mutable.Map[(Long, T), Throwable]((id, node) -> exception)
     }
-    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name + ": " + exception.getMessage(), RecordSeverity.Exception, lang, Seq(PrinterDestination.file))
+    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name + ": " + exception.getMessage(), RecordSeverity.Exception, lang, Seq(PrinterDestination.err, PrinterDestination.file))
     for (ste <- exception.getStackTrace)
       printLabeledLine("\t" + ste.toString, RecordSeverity.Exception, lang, Seq(PrinterDestination.file), noLabel = true)
-    printLabeledLine("extraction failed for " + tag + " " + id + ": " + name, RecordSeverity.Exception, lang, Seq(PrinterDestination.err, PrinterDestination.file))
+
+    if(slackCredantials != null && failedPages(lang) % slackCredantials.exceptionThreshold * slackIncreaseExceptionThreshold == 0)
+      forwardExceptionWarning(lang)
   }
 
   /**
@@ -177,8 +190,11 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
       }
       printLabeledLine("page " + id + ": " + title.encoded + " extracted", RecordSeverity.Info, title.language, Seq(PrinterDestination.file))
     }
-    if(increaseAndGetSuccessfulPages(title.language) % reportInterval == 0)
+    val pages = increaseAndGetSuccessfulPages(title.language)
+    if(pages % reportInterval == 0)
       printLabeledLine("extracted {page} pages; {mspp} per page; {fail} failed pages", RecordSeverity.Info, title.language)
+    if(slackCredantials != null && pages % slackCredantials.summaryThreshold == 0)
+      forwardSummary(title.language)
   }
 
   /**
@@ -211,8 +227,7 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
         Seq(PrinterDestination.file)
     } else print
 
-    val pages = successfulPages(lang)
-    val time = System.currentTimeMillis - startTime.get
+    val status = getStatusValues(lang)
     val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; extraction at {time}{data}; ") + line
     val pattern = "\\{\\s*\\w+\\s*\\}".r
     var lastend = 0
@@ -222,11 +237,12 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
       resultString += (Option(matchh.matched) match{
         case Some(m) =>
           m match{
-            case i if i == "{time}" => StringUtils.prettyMillis(time)
-            case i if i == "{mspp}" => decForm.format(time.toDouble / pages) + " ms"
-            case i if i == "{page}" => pages.toString
-            case i if i == "{fail}" => failedPages(lang).toString
-            case i if i == "{data}" => if(defaultDataset != null) " for dataset " + defaultDataset else ""
+            case i if i == "{time}" => status("time")
+            case i if i == "{mspp}" => status("mspp")
+            case i if i == "{page}" => status("pages")
+            case i if i == "{erate}" => status("erate")
+            case i if i == "{fail}" => status("failed")
+            case i if i == "{data}" => status("dataset")
             case _ => ""
           }
         case None => ""
@@ -244,18 +260,42 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
       }
   }
 
-  def initialize(lang: Language, dataset: String = null): Unit ={
+  def getStatusValues(lang: Language): Map[String, String] = {
+    val pages = successfulPages(lang)
+    val time = System.currentTimeMillis - startTime.get
+    val failed = failedPages(lang)
+
+    Map("pages" -> pages.toString,
+      "failed" -> failed.toString,
+      "mspp" -> (decForm.format(time.toDouble / pages) + " ms"),
+      "erate" -> (if(failed == 0) "0" else ((pages+failed) / failed).toString),
+      "dataset" -> (if(datasets.nonEmpty) " for dataset " + datasets.head.name else ""),
+      "time" -> StringUtils.prettyMillis(time)
+    )
+  }
+
+  def initialize(lang: Language, datasets: Seq[Dataset] = Seq()): Unit ={
     startTime.set(System.currentTimeMillis)
     defaultLang = lang
-    defaultDataset = dataset
     openConnections += 1
+    this.datasets = datasets
+
+    val line = "Extraction started for language: " + lang.wikiCode +
+      (if(datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
+    printLabeledLine(line, RecordSeverity.Info, lang)
+    forwardSimpleLine(line)
   }
 
   override def finalize(): Unit ={
     openConnections -= 1
     if(openConnections == 0 && logWriter != null)
       logWriter.close()
-    logWriter = null
+
+    val line = "Extraction finished for language: " + defaultLang.wikiCode +
+      (if(datasets.nonEmpty) ", extracted " + datasets.size + " datasets." else "")
+    printLabeledLine(line, RecordSeverity.Info, defaultLang)
+    forwardSimpleLine(line)
+
     super.finalize()
   }
 
@@ -269,6 +309,108 @@ class ExtractionRecorder[T](logFile: Writer = null, val reportInterval: Int = 10
 
   object PrinterDestination extends Enumeration {
     val out, err, file = Value
+  }
+
+  var lastExceptionMsg = new Date().getTime
+  def forwardExceptionWarning(lang: Language) : Unit =
+  {
+    if(slackCredantials == null)
+      return
+    //if error warnings are less than 2 min apart increase summary 10-fold
+    if((new Date().getTime - lastExceptionMsg) / 1000 < 120)
+      slackIncreaseExceptionThreshold = slackIncreaseExceptionThreshold*10
+    lastExceptionMsg = new Date().getTime
+
+    val attachments = new JsonArray()
+    val attachment = getAttachment("Multiple pages failed to be extracted.", if(slackIncreaseExceptionThreshold == 1) "warning" else "danger")
+    val fields = new JsonArray()
+    attachment.put("fields", fields)
+    attachments.add(attachment)
+    addKeyValue(fields, "Number of exceptions", failedPages(lang).toString)
+
+    val data = defaultMessage("Exception Summary for language " + lang.name, null, attachments)
+
+    sendCurl(slackCredantials.webhook.toString, data)
+  }
+
+  def forwardSummary(lang: Language) : Unit =
+  {
+    if(slackCredantials == null)
+      return
+    val status = getStatusValues(lang)
+    val attachments = new JsonArray()
+    val attachment = getAttachment("Extraction Summary:", "#36a64f")
+    val fields = new JsonArray()
+    addKeyValue(fields, "extracted pages:", status("pages"))
+    if(status("dataset").nonEmpty)
+      addKeyValue(fields, "of dataset:", status("dataset"))
+    addKeyValue(fields, "time elapsed: ", status("time"))
+    addKeyValue(fields, "per page: ", status("mspp"))
+    addKeyValue(fields, "failed pages: ", status("failed"))
+    attachment.put("fields", fields)
+    attachments.add(attachment)
+
+    sendCurl(slackCredantials.webhook.toString, defaultMessage("Summary report for extraction of language " + lang.name, null, attachments))
+  }
+
+  def forwardSimpleLine(line: String) : Unit =
+  {
+    if(slackCredantials == null)
+      return
+
+    sendCurl(slackCredantials.webhook.toString, defaultMessage(line, null))
+  }
+
+  def getAttachment(attachMsg: String, color: String): JsonObject =
+  {
+    val attachment = new JsonObject()
+    attachment.put("title", attachMsg)
+    val fields = new JsonArray()
+    attachment.put("fields", fields)
+    attachment.put("color", color)
+    attachment
+  }
+
+  def addKeyValue(array: JsonArray, key: String, value: String): Unit =
+  {
+    val left = new JsonObject()
+    left.put("value", key)
+    left.put("short", true)
+    val right = new JsonObject()
+    right.put("value", value)
+    right.put("short", true)
+    array.add(left)
+    array.add(right)
+  }
+
+  def defaultMessage(mainText: String, subText: String, attachments: JsonArray = null): JsonObject =
+  {
+    val data = new JsonObject()
+    data.put("text", mainText)
+    if(subText != null)
+      data.put("pretext", subText)
+    data.put("username", slackCredantials.username)
+    data.put("icon_emoji", ":card_index:")
+
+    if(attachments != null)
+      data.put("attachments", attachments)
+    data
+  }
+
+  def sendCurl(url: String, data: JsonObject): Boolean =
+  {
+    try {
+      val baos = new ByteArrayOutputStream()
+      JSON.write(baos, data)
+      val resp = Http(url).postData(new String(baos.toByteArray, Charset.defaultCharset())).asString
+      if (resp.code != 200) {
+        System.err.println(resp.body)
+      }
+      true
+    }
+    catch{
+      case e : SocketTimeoutException => false
+    }
   }
 
 }

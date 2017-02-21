@@ -50,9 +50,13 @@ class ConfigLoader(config: Config)
             //  input._2.map(_.getSimpleName).mkString(",")+"), "+
             //  datasets.size+" datasets ("+datasets.mkString(",")+")"
 
-            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null)
+            extractionJobs.get(lang) match{
+              case Some(e) => new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials)
+              case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials)
+            }
+
           }
-          case None => new ExtractionRecorder[WikiPage]()
+
         }
         extractionRecorder(lang)
       }
@@ -169,9 +173,21 @@ class ConfigLoader(config: Config)
       false
     )
 
-    val extractionJobNS = if(input._1 == Language.Commons) ExtractorUtils.commonsNamespacesContainingMetadata else config.namespaces
+    val extractionJobNS = if(context.language == Language.Commons)
+      ExtractorUtils.commonsNamespacesContainingMetadata
+    else config.namespaces
 
-    extractionJobs.put(input._1, new ExtractionJob(extractor, context.articlesSource, extractionJobNS, destination, input._1, config.retryFailedPages, getExtractionRecorder(input._1)))
+    val extractionJob = new ExtractionJob(
+      extractor,
+      context.articlesSource,
+      extractionJobNS,
+      destination,
+      context.language,
+      config.retryFailedPages,
+      getExtractionRecorder(context.language)
+    )
+
+    extractionJobs.put(context.language, extractionJob)
   }
 
     /**
@@ -184,7 +200,7 @@ class ConfigLoader(config: Config)
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
       val zw = config.extractorClasses.view.map(e => (e._1, e._2)).toList
-      Workers.work[(Language,  Seq[Class[_ <: Extractor[_]]])](extractionJobWorker, zw)
+      Workers.work[(Language, Seq[Class[_ <: Extractor[_]]])](extractionJobWorker, zw)
       extractionJobs.values
     }
 
