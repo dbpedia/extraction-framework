@@ -292,7 +292,7 @@ class ExtractionRecorder[T](
       logWriter.close()
 
     val line = "Extraction finished for language: " + defaultLang.wikiCode +
-      (if(datasets.nonEmpty) ", extracted " + datasets.size + " datasets." else "")
+      (if(datasets.nonEmpty) ", extracted " + datasets.size + " datasets after" + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
     printLabeledLine(line, RecordSeverity.Info, defaultLang)
     forwardSimpleLine(line)
 
