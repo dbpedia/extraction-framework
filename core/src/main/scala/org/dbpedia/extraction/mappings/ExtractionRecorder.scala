@@ -21,7 +21,7 @@ import scalaj.http.Http
   * Created by Chile on 11/3/2016.
   */
 class ExtractionRecorder[T](
-   val logWriter: Writer = null,
+   var logWriter: Writer = null,
    val reportInterval: Int = 100000,
    val preamble: String = null,
    val slackCredantials: SlackCredentials = null
@@ -288,8 +288,10 @@ class ExtractionRecorder[T](
 
   override def finalize(): Unit ={
     openConnections -= 1
-    if(openConnections == 0 && logWriter != null)
+    if(openConnections == 0 && logWriter != null){
       logWriter.close()
+      logWriter = null
+    }
 
     val line = "Extraction finished for language: " + defaultLang.wikiCode +
       (if(datasets.nonEmpty) ", extracted " + datasets.size + " datasets after" + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
