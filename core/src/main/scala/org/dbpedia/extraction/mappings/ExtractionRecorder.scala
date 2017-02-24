@@ -294,7 +294,7 @@ class ExtractionRecorder[T](
     }
 
     val line = "Extraction finished for language: " + defaultLang.wikiCode +
-      (if(datasets.nonEmpty) ", extracted " + datasets.size + " datasets after" + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
+      (if(datasets.nonEmpty) ", extracted " + successfulPages(defaultLang) + "pages for " + datasets.size + " datasets after" + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
     printLabeledLine(line, RecordSeverity.Info, defaultLang)
     forwardSimpleLine(line)
 
