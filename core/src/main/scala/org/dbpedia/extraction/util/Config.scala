@@ -32,6 +32,12 @@ class Config(val configPath: String)
     * get all universal properties, check if there is an override in the provided config file
     */
 
+
+  // TODO Watch out, this could be a regex
+  lazy val source = checkOverride("source").getProperty("source", "pages-articles.xml.bz2")
+
+  lazy val wikiName = checkOverride("wiki-name").getProperty("wiki-name", "wiki")
+
   /**
    * Dump directory
    * Note: This is lazy to defer initialization until actually called (eg. this class is not used
@@ -66,11 +72,6 @@ class Config(val configPath: String)
     exceptionThreshold = checkOverride("slack-exception-threshold").getProperty("slack-exception-threshold").toInt
   )
 
-  // TODO Watch out, this could be a regex
-  lazy val source = checkOverride("source").getProperty("source", "pages-articles.xml.bz2")
-
-  lazy val wikiName = checkOverride("wiki-name").getProperty("wiki-name", "wiki")
-
   /**
     * Local ontology file, downloaded for speed and reproducibility
     * Note: This is lazy to defer initialization until actually called (eg. this class is not used
@@ -97,7 +98,7 @@ class Config(val configPath: String)
     * all non universal properties...
     */
 
-  lazy val languages = parseLanguages(dumpDir, getStrings(config, "languages", ","))
+  lazy val languages = parseLanguages(dumpDir, getStrings(config, "languages", ","), wikiName)
 
   lazy val requireComplete = config.getProperty("require-download-complete", "false").toBoolean
 

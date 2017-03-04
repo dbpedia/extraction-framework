@@ -13,6 +13,7 @@ import org.dbpedia.extraction.wikiparser.Namespace
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable.HashSet
 import scala.io.Codec
+import scala.reflect.internal.MissingRequirementError
 import scala.util.Try
 
 
@@ -112,7 +113,7 @@ object ConfigUtils {
    * @return languages, sorted by language code
    */
   // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
-  def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
+  def parseLanguages(baseDir: File, args: Seq[String], wikiPostFix: String = "wiki"): Array[Language] = {
     
     val keys = for(arg <- args; key <- arg.split("[,\\s]"); if key.nonEmpty) yield key
         
@@ -124,10 +125,10 @@ object ConfigUtils {
     for (key <- keys) key match {
       case "@mappings" => languages ++= Namespace.mappings.keySet
       case "@chapters" => languages ++= Namespace.chapters.keySet
-      case "@downloaded" => languages ++= downloadedLanguages(baseDir)
+      case "@downloaded" => languages ++= downloadedLanguages(baseDir, wikiPostFix)
       case "@abstracts" => {
         //@downloaded - Commons & Wikidata
-        languages ++= downloadedLanguages(baseDir)
+        languages ++= downloadedLanguages(baseDir, wikiPostFix)
         excludedLanguages += Language.Commons
         excludedLanguages += Language.Wikidata
       }
@@ -160,9 +161,13 @@ object ConfigUtils {
     languages.toArray
   }
 
-  private def downloadedLanguages(baseDir: File): Array[Language] = {
-    for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki"))) yield
-      Language.get(file.getName.replace("wiki", "").replace("_", "-")).collect{ case l :Language => l}.get
+  private def downloadedLanguages(baseDir: File, wikiPostFix: String = "wiki"): Array[Language] = {
+    for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith(wikiPostFix))) yield
+      Language.get(file.getName.replace(wikiPostFix, "").replace("_", "-")) match{
+        case Some(l) => l
+        case None => throw new MissingRequirementError(file.getName.replace(wikiPostFix, "").replace("_", "-") +
+          ": is an unknown language code. Please update the addonlangs.json file and add this language.")
+      }
   }
 
   def toRange(from: String, to: String): (Int, Int) = {
