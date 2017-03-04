@@ -125,7 +125,7 @@ extends WikiPageExtractor
 
                 quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
 
-                for (property <- template.children; if (!property.key.forall(_.isDigit))) {
+                for (property <- template.children; if !property.key.forall(_.isDigit)) {
                     // exclude numbered properties
                     // TODO clean HTML
 

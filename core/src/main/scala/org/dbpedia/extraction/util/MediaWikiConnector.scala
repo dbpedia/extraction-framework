@@ -88,36 +88,35 @@ class MediaWikiConnector(connectionConfig: MediaWikiConnection, xmlPath: Seq[Str
         }
       }
       catch
-        {
-          case ex: Exception => {
+      {
+        case ex: Exception => {
 
-            // The web server may still be trying to render the page. If we send new requests
-            // at once, there will be more and more tasks running in the web server and the
-            // system eventually becomes overloaded. So we wait a moment. The higher the load,
-            // the longer we wait.
+          // The web server may still be trying to render the page. If we send new requests
+          // at once, there will be more and more tasks running in the web server and the
+          // system eventually becomes overloaded. So we wait a moment. The higher the load,
+          // the longer we wait.
 
-            val zw = ex.getMessage
-            var loadFactor = Double.NaN
-            var sleepMs = sleepFactorMs
+          val zw = ex.getMessage
+          var loadFactor = Double.NaN
+          var sleepMs = sleepFactorMs
 
-            // if the load average is not available, a negative value is returned
-            val load = osBean.getSystemLoadAverage
-            if (load >= 0) {
-              loadFactor = load / availableProcessors
-              sleepMs = (loadFactor * sleepFactorMs).toInt
+          // if the load average is not available, a negative value is returned
+          val load = osBean.getSystemLoadAverage
+          if (load >= 0) {
+            loadFactor = load / availableProcessors
+            sleepMs = (loadFactor * sleepFactorMs).toInt
+          }
+          ex match {
+            case e : java.net.SocketTimeoutException => {
+              if (counter < maxRetries)
+                Thread.sleep(sleepMs)
+              else
+                throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, e)
             }
-
-            if (counter < maxRetries) {
-              Thread.sleep(sleepMs)
-            }
-            else {
-              ex match {
-                case e : java.net.SocketTimeoutException => throw new Exception("Timeout error retrieving abstract of " + pageTitle + " in " + counter + " tries. Giving up. Load factor: " + loadFactor, e)
-                case _ => throw ex
-              }
-            }
+            case _ => throw ex
           }
         }
+      }
     }
     throw new Exception("Could not retrieve abstract after " + maxRetries + " tries for page: " + pageTitle.encoded)
   }

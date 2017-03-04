@@ -280,8 +280,7 @@ class ExtractionRecorder[T](
     openConnections += 1
     this.datasets = datasets
 
-    val line = "Extraction started for language: " + lang.wikiCode +
-      (if(datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
+    val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
     printLabeledLine(line, RecordSeverity.Info, lang)
     forwardExtractionOverview(lang, line)
   }
@@ -293,8 +292,8 @@ class ExtractionRecorder[T](
       logWriter = null
     }
 
-    val line = "Extraction finished for language: " + defaultLang.wikiCode +
-      (if(datasets.nonEmpty) ", extracted " + successfulPages(defaultLang) + "pages for " + datasets.size + " datasets after" + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
+    val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
+      (if(datasets.nonEmpty) ", extracted " + successfulPages(defaultLang) + " pages for " + datasets.size + " datasets after " + StringUtils.prettyMillis(System.currentTimeMillis - startTime.get) + " minutes." else "")
     printLabeledLine(line, RecordSeverity.Info, defaultLang)
     forwardSimpleLine(line)
 
@@ -361,7 +360,7 @@ class ExtractionRecorder[T](
     attachment.put("fields", fields)
     attachments.add(attachment)
 
-    sendCurl(slackCredantials.webhook.toString, defaultMessage("Summary report for extraction of language " + lang.name, null, attachments))
+    sendCurl(slackCredantials.webhook.toString, defaultMessage("Summary report for extraction of language " + lang.name + " (" + lang.wikiCode + ")", null, attachments))
   }
 
   def forwardExtractionOverview(lang: Language, msg: String) : Unit ={

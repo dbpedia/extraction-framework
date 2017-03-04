@@ -29,14 +29,14 @@ class NifExtractorTest extends FunSuite {
 
   private val context = new {
     def ontology = throw new IllegalStateException("don't need Ontology for testing!!! don't call extract!")
-    def language = Language.map("ro")
+    def language = Language.map("eu")
     def configFile = new Config("C:\\Users\\Chile\\IdeaProjects\\extraction-framework-temp\\dump\\extraction.nif.abstracts.properties")
   }
   private val wikipageextractor = new NifExtractor(context)
   private val outFile = new RichFile(new File("C:\\Users\\Chile\\Desktop\\Dbpedia\\nif-abstracts.ttl"))
   private val dest = new WriterDestination(() => IOUtils.writer(outFile), new TerseFormatter(false,true))
   //private val titles = List("Antimon", "Alkalimetalle", "Apostilb", "Doldenblütler")
-  private val titles = List("Onesia_gonideci")
+  private val titles = List("Trancrainville")
 
   private val mwConnector = new MediaWikiConnector(context.configFile.mediawikiConnection, context.configFile.nifParameters.nifTags.split(","))
 
@@ -44,7 +44,7 @@ class NifExtractorTest extends FunSuite {
     dest.open()
     for(title <- titles){
       val wt = new WikiTitle(title, Namespace.Main, context.language, false, null, true, None)
-      val wp = new WikiPage(wt, null, 0l, 0l, 0l, "")
+      val wp = new WikiPage(wt, null, 4548, 4548, 4548, "")
       val extractor = new WikipediaNifExtractor(context, wp)
       val html = getHtml(wt)
       dest.write(extractor.extractNif(html)(tt => System.err.println(tt.errorMsg)))
