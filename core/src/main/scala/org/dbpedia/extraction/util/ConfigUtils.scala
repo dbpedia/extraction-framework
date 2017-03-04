@@ -165,7 +165,7 @@ object ConfigUtils {
     for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith(wikiPostFix))) yield
       Language.get(file.getName.replace(wikiPostFix, "").replace("_", "-")) match{
         case Some(l) => l
-        case None => throw new MissingRequirementError(file.getName.replace(wikiPostFix, "").replace("_", "-") +
+        case None => throw new IllegalArgumentException(file.getName.replace(wikiPostFix, "").replace("_", "-") +
           ": is an unknown language code. Please update the addonlangs.json file and add this language.")
       }
   }
