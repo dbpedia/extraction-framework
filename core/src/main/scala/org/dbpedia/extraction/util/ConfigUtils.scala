@@ -6,14 +6,16 @@ import java.util.Properties
 
 import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
+import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
+import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.immutable.SortedSet
+import scala.collection.mutable
 import scala.collection.mutable.HashSet
 import scala.io.Codec
-import scala.reflect.internal.MissingRequirementError
 import scala.util.Try
 
 
@@ -163,9 +165,9 @@ object ConfigUtils {
 
   private def downloadedLanguages(baseDir: File, wikiPostFix: String = "wiki"): Array[Language] = {
     for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith(wikiPostFix))) yield
-      Language.get(file.getName.replace(wikiPostFix, "").replace("_", "-")) match{
+      Language.get(file.getName.replaceAll(wikiPostFix + "$", "").replace("_", "-")) match{
         case Some(l) => l
-        case None => throw new IllegalArgumentException(file.getName.replace(wikiPostFix, "").replace("_", "-") +
+        case None => throw new IllegalArgumentException(file.getName.replaceAll(wikiPostFix + "$", "").replace("_", "-") +
           ": is an unknown language code. Please update the addonlangs.json file and add this language.")
       }
   }
@@ -185,5 +187,31 @@ object ConfigUtils {
       }
       case None => throw new IllegalArgumentException("No version string was provided.")
     }
+  }
+
+
+  /**
+    * This function was extracted from the ImageExtractor object, since
+    *  the free & nonfree images are now extracted before starting the extraction jobs
+    * @param source pages_articles of a given language
+    * @param wikiCode the wikicode of a given language
+    * @return two lists: ._1: list of free images, ._2: list of nonfree images
+    */
+  def loadImages(source: Source, wikiCode: String): (Seq[String], Seq[String]) =
+  {
+    val freeImages = new mutable.HashSet[String]()
+    val nonFreeImages = new mutable.HashSet[String]()
+
+    for(page <- source if page.title.namespace == Namespace.File;
+        ImageExtractorConfig.ImageLinkRegex() <- List(page.title.encoded) )
+    {
+      ImageExtractorConfig.NonFreeRegex(wikiCode).findFirstIn(page.source) match
+      {
+        case Some(_) => nonFreeImages += page.title.encoded
+        case None => if (freeImages != null) freeImages += page.title.encoded
+      }
+    }
+
+    (freeImages.toSeq, nonFreeImages.toSeq)
   }
 }

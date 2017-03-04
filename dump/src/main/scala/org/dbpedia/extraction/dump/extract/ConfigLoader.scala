@@ -34,6 +34,10 @@ class ConfigLoader(config: Config)
 
   private val extractionRecorder = new mutable.HashMap[Language, ExtractionRecorder[WikiPage]]()
 
+  //these lists are used when the ImageExtractor is amongst the selected Extractors
+  private val nonFreeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
+  private val freeImages = new ConcurrentHashMap[Language, Seq[String]]().asScala
+
   def getExtractionRecorder(lang: Language): ExtractionRecorder[WikiPage] = {
     extractionRecorder.get(lang) match {
       case None => {
@@ -103,17 +107,7 @@ class ConfigLoader(config: Config)
       }
       def mappings : Mappings = _mappings
 
-      private val _articlesSource =
-      {
-        val articlesReaders = readers(config.source, finder, date)
-
-        XMLSource.fromReaders(articlesReaders, language,
-          title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
-            title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
-            title.namespace == Namespace.WikidataProperty || ExtractorUtils.titleContainsCommonsMetadata(title))
-      }
-
-      def articlesSource = _articlesSource
+      def articlesSource = getArticlesSource(language, finder)
 
       private val _redirects =
       {
@@ -144,6 +138,16 @@ class ConfigLoader(config: Config)
           new Disambiguations(Set[Long]())
 
       def configFile: Config = config
+
+      def freeImages : Seq[String] = ConfigLoader.this.freeImages.get(language) match{
+        case Some(s) => s
+        case None => Seq()
+      }
+
+      def nonFreeImages : Seq[String] = ConfigLoader.this.nonFreeImages.get(language) match{
+        case Some(s) => s ++ ConfigLoader.this.nonFreeImages(Language.Commons)                //always add commons to the list of non free images
+        case None => Seq()
+      }
     }
 
     //Extractors
@@ -186,6 +190,17 @@ class ConfigLoader(config: Config)
     extractionJobs.put(context.language, extractionJob)
   }
 
+  /**
+    * Creates ab extraction job for a specific language.
+    */
+  val imageCategoryWorker = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
+    val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
+    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode)
+    this.freeImages.put(lang, imageCategories._1)
+    this.nonFreeImages.put(lang, imageCategories._2)
+  }
+
+
     /**
      * Loads the configuration and creates extraction jobs for all configured languages.
       *
@@ -193,10 +208,19 @@ class ConfigLoader(config: Config)
      */
     def getExtractionJobs: Traversable[ExtractionJob] =
     {
+      //first check if some langs are extraction images, if so load the image category lists
+
+      logger.info("Loadings images")
+      val imageExtractorLanguages = config.extractorClasses.filter(x => x._2.map( y => y.getSimpleName).contains("ImageExtractor")) match{
+        case Seq() => List[Language]()                                          //no ImageExtractors selected
+        case filtered => filtered.keySet.toList ++ List(Language.Commons)       //else: add Commons (see ImageExtractorScala for why)
+      }
+      Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
+      logger.info("Images loaded from dump")
+
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier
-      val zw = config.extractorClasses.view.map(e => (e._1, e._2)).toList
-      Workers.work[(Language, Seq[Class[_ <: Extractor[_]]])](extractionJobWorker, zw)
+      Workers.work[(Language, Seq[Class[_ <: Extractor[_]]])](extractionJobWorker, config.extractorClasses.toList)
       extractionJobs.values
     }
 
@@ -247,6 +271,16 @@ class ConfigLoader(config: Config)
       val date = latestDate(finder)
       XMLSource.fromReaders(readers(config.source, finder, date), Language.Commons, _.namespace == Namespace.File)
     }
+
+  private def getArticlesSource(language: Language, finder: Finder[File]) =
+  {
+    val articlesReaders = readers(config.source, finder, latestDate(finder))
+
+    XMLSource.fromReaders(articlesReaders, language,
+      title => title.namespace == Namespace.Main || title.namespace == Namespace.File ||
+        title.namespace == Namespace.Category || title.namespace == Namespace.Template ||
+        title.namespace == Namespace.WikidataProperty || ExtractorUtils.titleContainsCommonsMetadata(title))
+  }
 
     private def latestDate(finder: Finder[_]): String = {
       val isSourceRegex = config.source.startsWith("@")

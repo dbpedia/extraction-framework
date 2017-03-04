@@ -118,7 +118,7 @@ object Workers {
     Workers.work[T](worker, args, null)
   }
 
-  def work[T <: AnyRef](worker: Workers[T], args : List[T], showProgress: String = null) : Unit = {
+  def work[T <: AnyRef](worker: Workers[T], args : Seq[T], showProgress: String = null) : Unit = {
     val percent = new AtomicInteger()
     try {
       worker.start()
