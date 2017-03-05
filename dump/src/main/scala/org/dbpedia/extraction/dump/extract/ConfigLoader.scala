@@ -213,9 +213,10 @@ class ConfigLoader(config: Config)
     {
       //first check if some langs are extraction images, if so load the image category lists
 
-      val imageExtractorLanguages = config.extractorClasses.filter(x => x._2.map( y => y.getSimpleName).contains("ImageExtractor")) match{
-        case Seq() => List[Language]()                                          //no ImageExtractors selected
-        case filtered => filtered.keySet.toList ++ List(Language.Commons)       //else: add Commons (see ImageExtractorScala for why)
+      val zw = config.extractorClasses.filter(x => x._2.map( y => y.getSimpleName).contains("ImageExtractor"))
+      val imageExtractorLanguages = zw match{
+        case filtered if filtered.nonEmpty => filtered.keySet.toList ++ List(Language.Commons)       //else: add Commons (see ImageExtractorScala for why)
+        case _ => List[Language]()                                                                   //no ImageExtractors selected
       }
       Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
 
