@@ -44,8 +44,8 @@ class ConfigLoader(config: Config)
         extractionRecorder(lang) = config.logDir match {
           case Some(p) => {
             var logname = config.configPath.replace("\\", "/")
-            if (logname.indexOf("/") >= 0)
-              logname = config.dbPediaVersion + "_" + logname.substring(logname.lastIndexOf("/") + 1) + "_" + lang.wikiCode + ".log"
+            logname = logname.substring(logname.lastIndexOf("/") + 1)
+            logname = config.dbPediaVersion + "_" + logname + "_" + lang.wikiCode + ".log"
             val logFile = new File(p, logname)
             logFile.createNewFile()
             val logStream = new FileOutputStream(logFile)
