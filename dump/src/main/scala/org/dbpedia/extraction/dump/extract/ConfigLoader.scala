@@ -194,10 +194,13 @@ class ConfigLoader(config: Config)
     * Creates ab extraction job for a specific language.
     */
   val imageCategoryWorker = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
+    getExtractionRecorder(lang).initialize(lang)
+    getExtractionRecorder(lang).printLabeledLine("Start image list preparation for ImageExtractor.", RecordSeverity.Info)
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
-    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode)
+    val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang))
     this.freeImages.put(lang, imageCategories._1)
     this.nonFreeImages.put(lang, imageCategories._2)
+    getExtractionRecorder(lang).printLabeledLine("Finished image list preparation for ImageExtractor: " + imageCategories._1.size + " free images, " + imageCategories._2 + " nonfree images.", RecordSeverity.Info)
   }
 
 
@@ -210,13 +213,11 @@ class ConfigLoader(config: Config)
     {
       //first check if some langs are extraction images, if so load the image category lists
 
-      logger.info("Loadings images")
       val imageExtractorLanguages = config.extractorClasses.filter(x => x._2.map( y => y.getSimpleName).contains("ImageExtractor")) match{
         case Seq() => List[Language]()                                          //no ImageExtractors selected
         case filtered => filtered.keySet.toList ++ List(Language.Commons)       //else: add Commons (see ImageExtractorScala for why)
       }
       Workers.work[Language](imageCategoryWorker, imageExtractorLanguages)
-      logger.info("Images loaded from dump")
 
       // Create a non-strict view of the extraction jobs
       // non-strict because we want to create the extraction job when it is needed, not earlier

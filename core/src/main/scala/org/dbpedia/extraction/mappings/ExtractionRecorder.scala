@@ -37,8 +37,6 @@ class ExtractionRecorder[T](
 
   private var defaultLang: Language = Language.English
 
-  private var openConnections = 0
-
   private val decForm = new DecimalFormat("#.##")
 
   private var slackIncreaseExceptionThreshold = 1
@@ -277,7 +275,6 @@ class ExtractionRecorder[T](
   def initialize(lang: Language, datasets: Seq[Dataset] = Seq()): Unit ={
     startTime.set(System.currentTimeMillis)
     defaultLang = lang
-    openConnections += 1
     this.datasets = datasets
 
     val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
@@ -286,8 +283,7 @@ class ExtractionRecorder[T](
   }
 
   override def finalize(): Unit ={
-    openConnections -= 1
-    if(openConnections == 0 && logWriter != null){
+    if(logWriter != null){
       logWriter.close()
       logWriter = null
     }

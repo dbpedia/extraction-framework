@@ -7,10 +7,11 @@ import java.util.Properties
 import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.sources.Source
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.wikiparser.Namespace
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable
@@ -197,7 +198,7 @@ object ConfigUtils {
     * @param wikiCode the wikicode of a given language
     * @return two lists: ._1: list of free images, ._2: list of nonfree images
     */
-  def loadImages(source: Source, wikiCode: String): (Seq[String], Seq[String]) =
+  def loadImages(source: Source, wikiCode: String, extractionRecorder: ExtractionRecorder[WikiPage] = null): (Seq[String], Seq[String]) =
   {
     val freeImages = new mutable.HashSet[String]()
     val nonFreeImages = new mutable.HashSet[String]()
@@ -205,6 +206,14 @@ object ConfigUtils {
     for(page <- source if page.title.namespace == Namespace.File;
         ImageExtractorConfig.ImageLinkRegex() <- List(page.title.encoded) )
     {
+      if(extractionRecorder != null) {
+        val records = page.getExtractionRecords() match {
+          case seq: Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
+          case _ => Seq(new RecordEntry[WikiPage](page, RecordSeverity.Info, page.title.language))
+        }
+        //forward all records to the recorder
+        extractionRecorder.record(records:_*)
+      }
       ImageExtractorConfig.NonFreeRegex(wikiCode).findFirstIn(page.source) match
       {
         case Some(_) => nonFreeImages += page.title.encoded
