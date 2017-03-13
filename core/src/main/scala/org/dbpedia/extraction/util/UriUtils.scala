@@ -20,7 +20,7 @@ object UriUtils
      */
     def cleanLink( uri : URI ) : Option[String] =
     {
-      if (knownSchemes.contains(uri.getScheme)) Some(uri.normalize.toString) 
+      if (knownSchemes.contains(uri.getScheme)) Some(uri.normalize.toString)
       else None
     }
 
@@ -118,9 +118,9 @@ object UriUtils
       // re-encode URI according to our own rules
       uri.getScheme + "://" +
         uri.getAuthority +
-        decode(uri.getPath)  +
-        (if(uri.getQuery != null) "?" + decode(uri.getQuery) else "")+
-        (if(uri.getFragment != null) "#" + decode(uri.getFragment) else "")
+        encodeIriComponent(uri.getPath)  +
+        (if(uri.getQuery != null) "?" + encodeIriComponent(uri.getQuery) else "")+
+        (if(uri.getFragment != null) "#" + encodeIriComponent(uri.getFragment) else "")
   }
 
   private def encodeAndClean(uriPart: String): String={
@@ -136,6 +136,34 @@ object UriUtils
       decoded = UriDecoder.decode(decoded)
 
     decoded.replaceAll("[<>#%\\?\\[\\\\\\]]", "_")
+  }
+
+  def encodeIriComponent(comp : String) : String = {
+    // replaceAll("[<>#%\\?\\[\\\\\\]]", "_") first because this seems to have a dbpedia specific reason (see decode)
+    val charArray = comp.replaceAll("[<>#%\\?\\[\\\\\\]]", "_").toCharArray
+    var decodedString = ""
+    // List of reserved & unwise characters that need encoding, refering to [RFC3987] Section 2.2
+    val notAllowed = List('%' , //% needs to be encoded
+      ':' , '?' , '#' , '[' , ']' , '@', '!' , '$' , '&' , ''' , '(' , ')' , '*' , '+' , ',' , ';' , '=', // reserved
+      ' ', '{', '}', '|', '\\', '^', '[', ']', '`') // unwise characters that SHOULD be encoded
+    charArray.foreach{
+      case(char) => {
+        if(notAllowed.contains(char)) {
+          //whitespace would be encoded to +, not %20
+          decodedString += URLEncoder.encode("" + char, "UTF-8").replace("+", "%20")
+        }
+        else decodedString += char
+      }
+    }
+    // Direction Format Characters, refering to Section 4.1 in [RFC3987],
+    // they seem to be eliminated by the decoding already, but we'll encode them just in case
+    decodedString.replaceAll("\u202A", "%E2%80%AA")
+      .replaceAll("\u202B", "%E2%80%AB")
+      .replaceAll("\u202C", "%E2%80%AC")
+      .replaceAll("\u202D", "%E2%80%AD")
+      .replaceAll("\u202E", "%E2%80%AE")
+      .replaceAll("\u200E", "%E2%80%8E")
+      .replaceAll("\u200F", "%E2%80%8F")
   }
 
   def encodeUriComponent(comp: String): String={
