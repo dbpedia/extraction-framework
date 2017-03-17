@@ -45,24 +45,12 @@ class ExtractionRecorder[T](
 
   private var writerOpen = if(logWriter == null) false else true
 
-  setLogFile(preamble)
-
   /**
     * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
     *
     * @return the failed pages (id, title) for every Language
     */
   def listFailedPages: Map[Language, mutable.Map[(Long, T), Throwable]] = failedPageMap
-
-  /**
-    * define the log file destination
-    *
-    * @param preamble the optional first line of the log file
-    */
-  def setLogFile(preamble: String = null): Unit ={
-    if(writerOpen && preamble != null && preamble.length > 0)
-      logWriter.append("# " + preamble + "\n")
-  }
 
   /**
     * successful page count
@@ -275,9 +263,16 @@ class ExtractionRecorder[T](
   }
 
   def initialize(lang: Language, datasets: Seq[Dataset] = Seq()): Unit ={
+    failedPageMap = Map[Language, scala.collection.mutable.Map[(Long, T), Throwable]]()
+    successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
+    successfulPageCount = Map[Language,AtomicLong]()
+
     startTime.set(System.currentTimeMillis)
     defaultLang = lang
     this.datasets = datasets
+
+    if(preamble != null)
+      printLabeledLine(preamble, RecordSeverity.Info, lang)
 
     val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
     printLabeledLine(line, RecordSeverity.Info, lang)

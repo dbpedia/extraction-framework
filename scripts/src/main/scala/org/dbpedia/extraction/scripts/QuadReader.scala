@@ -11,17 +11,16 @@ import scala.Console.err
 
 /**
  */
-class QuadReader {
+class QuadReader(log: FileLike[File] = null, preamble: String = null) {
 
-  def this(file: FileLike[File], preamble: String = null){
-    this()
-    Option(file) match{
-      case Some(f) => recorder = new ExtractionRecorder[Quad](IOUtils.writer(f, append = true), 100000, preamble)
-      case None => recorder = new ExtractionRecorder[Quad](null, 100000, preamble)
-    }
+  private val recorder: ExtractionRecorder[Quad] =     Option(log) match{
+    case Some(f) => new ExtractionRecorder[Quad](IOUtils.writer(f, append = true), 100000, preamble)
+    case None => new ExtractionRecorder[Quad](null, 100000, preamble)
   }
 
-  private var recorder = new ExtractionRecorder[Quad](null, 100000, null)
+  def this(){
+    this(null, null)
+  }
 
   def getRecorder = recorder
 
@@ -78,7 +77,6 @@ class QuadReader {
       case Some(x) => x
       case None => null
     }
-    recorder = new ExtractionRecorder[Quad](recorder)
     getRecorder.initialize(language)
 
     IOUtils.readLines(file) { line =>
