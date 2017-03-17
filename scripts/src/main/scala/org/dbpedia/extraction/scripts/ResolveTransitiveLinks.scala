@@ -44,9 +44,9 @@ object ResolveTransitiveLinks {
     // Does NOT work with .nq or .tql files. (Preserving the context wouldn't make sense.)
     val suffix = args(3)
     require(suffix.nonEmpty, "no file suffix")
-    
+
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = parseLanguages(baseDir, args.drop(4))
+    val languages = parseLanguages(baseDir, args(4).split(","))
     require(languages.nonEmpty, "no languages")
 
     val logDir = Try{new File(args(5))}
