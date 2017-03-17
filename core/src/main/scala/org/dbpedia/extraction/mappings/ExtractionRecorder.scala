@@ -21,7 +21,7 @@ import scalaj.http.Http
   * Created by Chile on 11/3/2016.
   */
 class ExtractionRecorder[T](
-   var logWriter: Writer = null,
+   val logWriter: Writer = null,
    val reportInterval: Int = 100000,
    val preamble: String = null,
    val slackCredantials: SlackCredentials = null
@@ -43,6 +43,8 @@ class ExtractionRecorder[T](
 
   private var datasets: Seq[Dataset] = Seq()
 
+  private var writerOpen = if(logWriter == null) false else true
+
   setLogFile(preamble)
 
   /**
@@ -58,7 +60,7 @@ class ExtractionRecorder[T](
     * @param preamble the optional first line of the log file
     */
   def setLogFile(preamble: String = null): Unit ={
-    if(logWriter != null && preamble != null && preamble.length > 0)
+    if(writerOpen && preamble != null && preamble.length > 0)
       logWriter.append("# " + preamble + "\n")
   }
 
@@ -253,7 +255,7 @@ class ExtractionRecorder[T](
       pr match{
         case PrinterDestination.err => System.err.println(resultString)
         case PrinterDestination.out => System.out.println(resultString)
-        case PrinterDestination.file if logWriter != null => logWriter.append(resultString + "\n")
+        case PrinterDestination.file if writerOpen => logWriter.append(resultString + "\n")
         case _ =>
       }
   }
@@ -283,9 +285,9 @@ class ExtractionRecorder[T](
   }
 
   override def finalize(): Unit ={
-    if(logWriter != null){
+    if(writerOpen){
       logWriter.close()
-      logWriter = null
+      writerOpen = false
     }
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +
