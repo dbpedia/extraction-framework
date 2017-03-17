@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.scripts
 
+import java.io.File
 import java.lang.StringBuilder
 
 import org.dbpedia.extraction.destinations.{Destination, WriterDestination}
@@ -15,7 +16,7 @@ import scala.Console.err
 /**
  * Maps old quads/triples to new quads/triples.
  */
-class QuadMapper extends QuadReader {
+class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends QuadReader(file, preamble) {
 
   /**
    * @deprecated use one of the map functions below 

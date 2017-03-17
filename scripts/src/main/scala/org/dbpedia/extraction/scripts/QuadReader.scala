@@ -13,13 +13,19 @@ import scala.Console.err
  */
 class QuadReader {
 
+  def this(file: FileLike[File]){
+    this()
+    recorder = new ExtractionRecorder[Quad](IOUtils.writer(file, append = true), 100000, null)
+  }
+
+  def this(file: FileLike[File], preamble: String){
+    this()
+    recorder = new ExtractionRecorder[Quad](IOUtils.writer(file, append = true), 100000, preamble)
+  }
+
   private var recorder = new ExtractionRecorder[Quad](null, 100000, null)
 
   def getRecorder = recorder
-
-  def setLogFile(file: FileLike[File], preamble: String = null): Unit ={
-    recorder = new ExtractionRecorder[Quad](IOUtils.writer(file, append = true), 100000, preamble)
-  }
 
   def addQuadRecord(quad: Quad, lang: Language, errorMsg: String = null, error: Throwable = null): Unit ={
     if(errorMsg == null && error == null)
