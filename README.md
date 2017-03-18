@@ -26,14 +26,8 @@ The DBpedia extraction framework is structured into different modules
 * **Core Module** : Contains the core components of the framework.
 * **Dump extraction Module** : Contains the DBpedia dump extraction application.
 
-<a name="p27582-8"></a>
-
-
-<a name="h25-4"></a>
-
 ### Core Module
 
-<a name="p27582-9"></a>
 
 ![http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png](http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png "http://www4.wiwiss.fu-berlin.de/dbpedia/wiki/DataFlow.png")
 
@@ -50,17 +44,9 @@ The DBpedia extraction framework is structured into different modules
 
 In addition to the core components, a number of utility packages offers essential functionality to be used by the extraction code:
 
-* **Ontology** Classes used to represent an ontology. Methods for both, reading and writing ontologies are provided. All classes are located in the namespace [org.dbpedia.extraction.ontology](http://www4.wiwiss.fu-berlin.de/dbpedia/scaladoc/org/dbpedia/extraction/ontology/package.html "Outgoing link (in new window)")
-* **DataParser** Parsers to extract data from nodes in the abstract syntax tree. All classes are located in the namespace [org.dbpedia.extraction.dataparser](http://www4.wiwiss.fu-berlin.de/dbpedia/scaladoc/org/dbpedia/extraction/dataparser/package.html "Outgoing link (in new window)")
-* **Util** Various utility classes. All classes are located in the namespace [org.dbpedia.extraction.util](http://www4.wiwiss.fu-berlin.de/dbpedia/scaladoc/org/dbpedia/extraction/util/package.html "Outgoing link (in new window)")
-
-<a name="p27582-12"></a>
-
-For details about a package follow the links.
-
-You can find the complete scaladoc [here](http://www4.wiwiss.fu-berlin.de/dbpedia/scaladoc/index.html "Outgoing link (in new window)")
-
-<a name="h25-5"></a>
+* **Ontology** Classes used to represent an ontology. Methods for both, reading and writing ontologies are provided. All classes are located in the namespace [org.dbpedia.extraction.ontology](tree/master/core/src/main/scala/org/dbpedia/extraction/ontology)
+* **DataParser** Parsers to extract data from nodes in the abstract syntax tree. All classes are located in the namespace [org.dbpedia.extraction.dataparser](tree/master/core/src/main/scala/org/dbpedia/extraction/dataparser)
+* **Util** Various utility classes. All classes are located in the namespace [org.dbpedia.extraction.util](tree/master/core/src/main/scala/org/dbpedia/extraction/util)
 
 ### Dump extraction Module
 More recent configuration options can be found here: [https://github.com/dbpedia/extraction-framework/wiki/Extraction-Instructions](https://github.com/dbpedia/extraction-framework/wiki/Extraction-Instructions "Outgoing link (in new window)").
