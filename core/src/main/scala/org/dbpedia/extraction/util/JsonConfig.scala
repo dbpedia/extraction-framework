@@ -27,9 +27,9 @@ class JsonConfig(fileUrl:URL) {
     configMap.get(property) match{
       case Some(o) => o.getNodeType match{
         case JsonNodeType.OBJECT => JsonConfig.getObjectMap(o)
-        case _ => null
+        case _ => Map()
       }
-      case None => null
+      case None => Map()
     }
   }
 
@@ -37,7 +37,7 @@ class JsonConfig(fileUrl:URL) {
     var command = new WikidataTransformationCommands {
       override def execute(): Unit = print("")
     }
-    if (getMap(property).size >= 1) {
+    if (getMap(property).nonEmpty) {
       receiver.setParameters(property, value, equivClassSet, equivPropertySet, getMap(property).map(x => x._1 -> x._2.asText()))
       val oneToManyCommand = new WikidataOneToManyCommand(receiver)
       command = oneToManyCommand
