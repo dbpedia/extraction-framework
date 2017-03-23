@@ -21,7 +21,7 @@ import scalaj.http.Http
   * Created by Chile on 11/3/2016.
   */
 class ExtractionRecorder[T](
-   var logWriter: Writer = null,
+   val logWriter: Writer = null,
    val reportInterval: Int = 100000,
    val preamble: String = null,
    val slackCredantials: SlackCredentials = null
@@ -43,7 +43,7 @@ class ExtractionRecorder[T](
 
   private var datasets: Seq[Dataset] = Seq()
 
-  setLogFile(preamble)
+  private var writerOpen = if(logWriter == null) false else true
 
   /**
     * A map for failed pages, which could be used for a better way to record extraction fails than just a simple console output.
@@ -51,16 +51,6 @@ class ExtractionRecorder[T](
     * @return the failed pages (id, title) for every Language
     */
   def listFailedPages: Map[Language, mutable.Map[(Long, T), Throwable]] = failedPageMap
-
-  /**
-    * define the log file destination
-    *
-    * @param preamble the optional first line of the log file
-    */
-  def setLogFile(preamble: String = null): Unit ={
-    if(logWriter != null && preamble != null && preamble.length > 0)
-      logWriter.append("# " + preamble + "\n")
-  }
 
   /**
     * successful page count
@@ -253,7 +243,7 @@ class ExtractionRecorder[T](
       pr match{
         case PrinterDestination.err => System.err.println(resultString)
         case PrinterDestination.out => System.out.println(resultString)
-        case PrinterDestination.file if logWriter != null => logWriter.append(resultString + "\n")
+        case PrinterDestination.file if writerOpen => logWriter.append(resultString + "\n")
         case _ =>
       }
   }
@@ -273,9 +263,16 @@ class ExtractionRecorder[T](
   }
 
   def initialize(lang: Language, datasets: Seq[Dataset] = Seq()): Unit ={
+    failedPageMap = Map[Language, scala.collection.mutable.Map[(Long, T), Throwable]]()
+    successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
+    successfulPageCount = Map[Language,AtomicLong]()
+
     startTime.set(System.currentTimeMillis)
     defaultLang = lang
     this.datasets = datasets
+
+    if(preamble != null)
+      printLabeledLine(preamble, RecordSeverity.Info, lang)
 
     val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
     printLabeledLine(line, RecordSeverity.Info, lang)
@@ -283,9 +280,9 @@ class ExtractionRecorder[T](
   }
 
   override def finalize(): Unit ={
-    if(logWriter != null){
+    if(writerOpen){
       logWriter.close()
-      logWriter = null
+      writerOpen = false
     }
 
     val line = "Extraction finished for language: " + defaultLang.name + " (" + defaultLang.wikiCode + ") " +

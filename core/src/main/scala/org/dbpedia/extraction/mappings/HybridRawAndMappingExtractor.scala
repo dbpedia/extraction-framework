@@ -55,10 +55,10 @@ extends PageNodeExtractor {
           newRawGraph += q.copy()
         }
         else if ( tuple.isDefined && mappedIndex.contains( tuple.get)) {
-          newRawGraph += q.copy(context = q.context + "&mapped=")
+          newRawGraph += q.copy(context = q.context + "&mapped=", dataset = DBpediaDatasets.InfoboxPropertiesMapped.encoded)
         }
         else {
-          newRawGraph += q.copy(context = q.context + "&unmapped=", dataset = DBpediaDatasets.InfoboxPropertiesMapped.encoded)
+          newRawGraph += q.copy(context = q.context + "&unmapped=")
         }
     })
 

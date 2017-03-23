@@ -2,10 +2,13 @@ package org.dbpedia.extraction.scripts
 
 import org.dbpedia.extraction.util.ConfigUtils.parseLanguages
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{DateFinder, TransitiveClosure, IOUtils}
+import org.dbpedia.extraction.util.{DateFinder, IOUtils, TransitiveClosure}
+
 import scala.collection.mutable.LinkedHashMap
 import java.io.File
+
 import scala.Console.err
+import scala.util.{Failure, Success, Try}
 
 /**
  * Replace triples in a dataset by their transitive closure.
@@ -24,7 +27,8 @@ object ResolveTransitiveLinks {
       /*1*/ "input file part (e.g. 'redirects'), " +
       /*2*/ "output file part (e.g. 'transitive-redirects'), " +
       /*3*/ "triples file suffix (e.g. '.nt.gz'), " +
-      /*4*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')")
+      /*4*/ "languages or article count ranges (e.g. 'en,fr' or '10000-')" +
+      /*5*/ "log dir (optional) - if provided, log output files are created ther for each language")
     
     val baseDir = new File(args(0))
     
@@ -40,10 +44,12 @@ object ResolveTransitiveLinks {
     // Does NOT work with .nq or .tql files. (Preserving the context wouldn't make sense.)
     val suffix = args(3)
     require(suffix.nonEmpty, "no file suffix")
-    
+
     // Use all remaining args as keys or comma or whitespace separated lists of keys
-    val languages = parseLanguages(baseDir, args.drop(4))
+    val languages = parseLanguages(baseDir, args(4).split(","))
     require(languages.nonEmpty, "no languages")
+
+    val logDir = Try{new File(args(5))}
     
     for (language <- languages) {
       
@@ -51,9 +57,14 @@ object ResolveTransitiveLinks {
       
       // use LinkedHashMap to preserve order
       val map = new LinkedHashMap[String, String]()
+
+      val logfile = logDir match{
+        case Success(s) => new File(s, "resolveTransitiveLinks" + "_" + language.wikiCode + ".log")
+        case Failure(f) => null
+      }
       
       var predicate: String = null
-      new QuadMapper().readQuads(finder, input + suffix, auto = true) { quad =>
+      new QuadMapper(logfile).readQuads(finder, input + suffix, auto = true) { quad =>
         if (quad.context != null) throw new IllegalArgumentException("expected triple, found quad: "+quad)
         if (quad.datatype != null) throw new IllegalArgumentException("expected object uri, found object literal: "+quad)
         if (predicate == null) predicate = quad.predicate

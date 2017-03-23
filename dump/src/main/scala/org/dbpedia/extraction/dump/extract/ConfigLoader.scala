@@ -45,7 +45,7 @@ class ConfigLoader(config: Config)
           case Some(p) => {
             var logname = config.configPath.replace("\\", "/")
             logname = logname.substring(logname.lastIndexOf("/") + 1)
-            logname = config.dbPediaVersion + "_" + logname + "_" + lang.wikiCode + ".log"
+            logname = logname + "_" + lang.wikiCode + ".log"
             val logFile = new File(p, logname)
             logFile.createNewFile()
             val logStream = new FileOutputStream(logFile)

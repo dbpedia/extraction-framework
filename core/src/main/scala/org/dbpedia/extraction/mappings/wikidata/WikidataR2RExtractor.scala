@@ -44,7 +44,7 @@ class WikidataR2RExtractor(
                             )
   extends JsonNodeExtractor {
 
-  val config: JsonConfig = new JsonConfig(this.getClass.getResource("wikidatar2rconfig.json"))
+  val config: JsonConfig = new JsonConfig(JsonConfig.getClass.getClassLoader.getResource("wikidatar2rconfig.json"))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
   val classMappings = readClassMappings("auto_generated_mapping.json")
@@ -87,7 +87,7 @@ class WikidataR2RExtractor(
 
                 val statementUri = WikidataUtil.getStatementUri(subjectUri, property, value)
 
-                val PV = property + " " + value;
+                val PV = property + " " + value
                 if (duplicateList.contains(PV)) {
                   val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId.toString)
                   quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceIri, null)
@@ -133,7 +133,8 @@ class WikidataR2RExtractor(
             quads ++= getReificationQuads(page, statementUri, datatype, quad)
           }
         } catch {
-          case e: Exception => println("exception caught: " + e)
+          case e: Exception =>
+            println("exception caught: " + e)
         }
 
       }
@@ -183,7 +184,8 @@ class WikidataR2RExtractor(
                     quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2RQualifier,
                       statementUri, ontologyProperty, mappedQualifierValue._2, page.wikiPage.sourceIri, datatype)
                   } catch {
-                    case e: Exception => println("exception caught: " + e)
+                    case e: Exception =>
+                      println("exception caught: " + e)
                   }
                 }
               }

@@ -17,7 +17,6 @@
 	<build>
 		<plugins>
 			<plugin>
-
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>scala-maven-plugin</artifactId>
 				<executions>
@@ -29,7 +28,6 @@
 						</goals>
 					</execution>
 				</executions>
-
 				<configuration>
 					<launchers>
 
@@ -38,8 +36,8 @@
 							<mainClass>org.dbpedia.extraction.dump.sql.Import</mainClass>
 							<jvmArgs>
 								<jvmArg>-server</jvmArg>
-								<jvmArg>-DtotalEntitySizeLimit=2147480000</jvmArg>
-								<jvmArg>-Djdk.xml.totalEntitySizeLimit=2147480000</jvmArg>
+								<jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
 							</jvmArgs>
 							<args>
 								<!-- base folder of downloaded dumps -->
@@ -85,6 +83,8 @@
 
 							<jvmArgs>
 								<jvmArg>-server</jvmArg>
+								<jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
 								<!-- Request statistics -->
 								<jvmArg>-Dextract.template.stats=true</jvmArg>
 								<!-- <jvmArg>-Xmx4096m</jvmArg> <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg> 
@@ -99,6 +99,8 @@
 							<id>compress</id>
 							<mainClass>org.dbpedia.extraction.dump.compress.Compress</mainClass>
 							<jvmArgs>
+								<jvmArg>-DtotalEntitySizeLimit=0</jvmArg>
+								<jvmArg>-Djdk.xml.totalEntitySizeLimit=0</jvmArg>
 								<jvmArg>-Xmx1024m</jvmArg>
 							</jvmArgs>
 							<!-- mvn scala:run -Dlauncher=Compress "-DaddArgs=/data|/data-compressed" -->
@@ -137,14 +139,6 @@
 									these files -->
 							</args>
 						</launcher>
-                        <launcher>
-                            <id>SlackForwarder</id>
-                            <mainClass>org.dbpedia.extraction.scripts.SlackForwarder</mainClass>
-                            <jvmArgs>
-                                <jvmArg>-server</jvmArg>
-                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
-                            </jvmArgs>
-                        </launcher>
 					</launchers>
 				</configuration>
 
