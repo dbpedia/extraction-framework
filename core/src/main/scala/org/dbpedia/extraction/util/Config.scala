@@ -97,6 +97,9 @@ class Config(val configPath: String)
 
   lazy val disambiguations = checkOverride("disambiguations").getProperty("disambiguations", "page_props.sql.gz")
 
+  lazy val inputFileName = getString(checkOverride("input"), "input")
+  lazy val outputFileName = getString(checkOverride("oputut"), "output")
+  lazy val inputSuffix = getString(checkOverride("suffix"), "suffix")
   /**
     * all non universal properties...
     */

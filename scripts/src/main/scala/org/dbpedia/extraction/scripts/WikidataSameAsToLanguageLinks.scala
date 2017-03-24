@@ -31,9 +31,9 @@ object WikidataSameAsToLanguageLinks {
   def main(args: Array[String]) {
     require(args != null && args.length == 1 && args(0).nonEmpty, "missing required argument: config file name")
 
-    val config = loadConfig(args(0), "UTF-8")
+    val config = new Config(args(0))
 
-    val baseDir = getValue(config, "base-dir", required = true)(new File(_))
+    val baseDir = config.dumpDir
     if (!baseDir.exists) {
       throw error("dir " + baseDir + " does not exist")
     }
@@ -41,16 +41,16 @@ object WikidataSameAsToLanguageLinks {
     val inputFinder = new Finder[File](baseDir, Language.Wikidata, "wiki")
     val date = inputFinder.dates().last
 
-    val input = getString(config, "input", required = true)
+    val input = config.inputFileName
 
-    val suffix = getString(config, "suffix", required = true)
+    val suffix = config.inputSuffix
 
-    val output = getString(config, "output", required = true)
+    val output = config.outputFileName
 
-    val language = parseLanguages(baseDir, getStrings(config, "languages", ",", required = true))
+    val language = config.languages
 
-    val policies = parsePolicies(config, "uri-policy")
-    val formats = parseFormats(config, "format", policies)
+    val policies = config.policies
+    val formats = config.formats
 
     // find the input wikidata file
     val wikiDataFile: RichFile = inputFinder.file(date, input + suffix).get
