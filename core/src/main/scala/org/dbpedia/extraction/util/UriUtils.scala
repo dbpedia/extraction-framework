@@ -3,7 +3,7 @@ package org.dbpedia.extraction.util
 import java.net._
 
 import org.apache.commons.lang3.StringEscapeUtils
-import org.dbpedia.util.text.uri.UriDecoder
+import org.dbpedia.util.text.uri.{UriDecoder, UriToIriDecoder}
 
 import scala.util.{Failure, Success, Try}
 
@@ -116,17 +116,24 @@ object UriUtils
     */
   def uriToIri(uri: URI): String = {
       // re-encode URI according to our own rules
-      uri.getScheme + "://" +
+      // iriDecode: reserved characters excluded
+      // wikiEncode: unwise characters encoded to dbpedia rules
+      // BUT: wikiEncode encodes % to %25
+      // TODO:
+      // - if even necessary: handle "\u202A", "\u202B", "\u202C", "\u202D", "\u202E", "\u200E", "\u200F"
+      //   (direction change & embedding chars)
+      // - handle other Encoding Types (examples?)
+    uri.getScheme + "://" +
         uri.getAuthority +
-        encodeIriComponent(uri.getPath)  +
-        (if(uri.getQuery != null) "?" + encodeIriComponent(uri.getQuery) else "")+
-        (if(uri.getFragment != null) "#" + encodeIriComponent(uri.getFragment) else "")
+        WikiUtil.wikiEncode(iriDecode(uri.getRawPath)).replaceAll("%25", "%")  +
+        (if(uri.getQuery != null) "?" + WikiUtil.wikiEncode(iriDecode(uri.getRawQuery)).replaceAll("%25", "%") else "")+
+        (if(uri.getFragment != null) "#" + WikiUtil.wikiEncode(iriDecode(uri.getRawFragment)).replaceAll("%25", "%") else "")
   }
 
   private def encodeAndClean(uriPart: String): String={
     var decoded = uriPart
-    while(UriDecoder.decode(decoded) != decoded)
-      decoded = UriDecoder.decode(decoded)
+    while(UriToIriDecoder.decode(decoded) != decoded)
+      decoded = UriToIriDecoder.decode(decoded)
     StringUtils.escape(decoded, StringUtils.replacements('%', "<>\"#%?[\\]^`{|}"))
   }
 
@@ -138,32 +145,11 @@ object UriUtils
     decoded.replaceAll("[<>#%\\?\\[\\\\\\]]", "_")
   }
 
-  def encodeIriComponent(comp : String) : String = {
-    // replaceAll("[<>#%\\?\\[\\\\\\]]", "_") first because this seems to have a dbpedia specific reason (see decode)
-    val charArray = comp.replaceAll("[<>#%\\?\\[\\\\\\]]", "_").toCharArray
-    var decodedString = ""
-    // List of reserved & unwise characters that need encoding, refering to [RFC3987] Section 2.2
-    val notAllowed = List('%' , //% needs to be encoded
-      ':' , '?' , '#' , '[' , ']' , '@', '!' , '$' , '&' , ''' , '(' , ')' , '*' , '+' , ',' , ';' , '=', // reserved
-      ' ', '{', '}', '|', '\\', '^', '[', ']', '`') // unwise characters that SHOULD be encoded
-    charArray.foreach{
-      case(char) => {
-        if(notAllowed.contains(char)) {
-          //whitespace would be encoded to +, not %20
-          decodedString += URLEncoder.encode("" + char, "UTF-8").replace("+", "%20")
-        }
-        else decodedString += char
-      }
-    }
-    // Direction Format Characters, refering to Section 4.1 in [RFC3987],
-    // they seem to be eliminated by the decoding already, but we'll encode them just in case
-    decodedString.replaceAll("\u202A", "%E2%80%AA")
-      .replaceAll("\u202B", "%E2%80%AB")
-      .replaceAll("\u202C", "%E2%80%AC")
-      .replaceAll("\u202D", "%E2%80%AD")
-      .replaceAll("\u202E", "%E2%80%AE")
-      .replaceAll("\u200E", "%E2%80%8E")
-      .replaceAll("\u200F", "%E2%80%8F")
+  private def iriDecode(uriPart: String): String={
+    var decoded = uriPart
+    while(UriToIriDecoder.decode(decoded) != decoded)
+      decoded = UriToIriDecoder.decode(decoded)
+    decoded
   }
 
   def encodeUriComponent(comp: String): String={
