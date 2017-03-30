@@ -36,7 +36,9 @@ extends Destination
   }
 
   override def close() = {
-    writer.write(formatter.footer)
-    writer.close()
+    if(writer != null) {
+      writer.write(formatter.footer)
+      writer.close()
+    }
   }
 }
