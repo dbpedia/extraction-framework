@@ -18,10 +18,15 @@ import java.util.List;
  * ignores Invalid Escape Sequences
  */
 public class UriToIriDecoder {
-    private static List<String> reserved = Arrays.asList(
-            "%3A", "%3F", "%23", "%5B", "%5D", "%2F", "%40", "%21",
-            "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C",
-            "%3B", "%3D");
+    /*
+    Reserved by IRI Specification:
+     "%3A", "%3F", "%23", "%5B", "%5D", "%2F", "%40", "%21",
+     "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C",
+     "%3B", "%3D"
+     Most of them are allowed by DBpedia though,
+     but dbpedia encodes the Pipe character (|) with %7D
+    */
+    private static List<String> reserved = Arrays.asList("%3F", "%23", "%5B", "%5D", "%7D");
 
     private static int decode(char c) {
         if ((c >= '0') && (c <= '9'))

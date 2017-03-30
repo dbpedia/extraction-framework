@@ -20,7 +20,7 @@ class UriUtils$IriTest extends FunSuite {
   }
 
   test("reserved characters") {
-    // !#$&'()*+,/:;=?@[] should stay encoded
+    // !#$&'()*+,/=?@[] should stay encoded
     val testUri = "http://dbpedia.org/resource/%21%23%24%26%27%28%29%2A%2B%2C%2F%3A%3B%3D%3F%40%5B%5D"
     val resultIri = "http://dbpedia.org/resource/%21%23%24%26%27%28%29%2A%2B%2C%2F%3A%3B%3D%3F%40%5B%5D"
     if (log == true) info(UriUtils.uriToIri(testUri))
