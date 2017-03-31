@@ -14,7 +14,7 @@ import java.util.List;
  * Based on the decode-methods from the URI Class,
  * just that they do not decode the reserved characters
  * listed in the [RFC3987] IRI Specification
- *
+ * <p>
  * ignores Invalid Escape Sequences
  */
 public class UriToIriDecoder {
@@ -26,9 +26,9 @@ public class UriToIriDecoder {
      Most of them are allowed by DBpedia though,
      but dbpedia encodes the Pipe character (|) with %7D
     */
-    private static List<String> reserved = Arrays.asList("%3F", "%23", "%5B", "%5D", "%7D");
+    private List<String> reserved = Arrays.asList("%3F", "%23", "%5B", "%5D", "%7D");
 
-    private static int decode(char c) {
+    private int decode(char c) {
         if ((c >= '0') && (c <= '9'))
             return c - '0';
         if ((c >= 'a') && (c <= 'f'))
@@ -39,19 +39,28 @@ public class UriToIriDecoder {
         return -1;
     }
 
-    private static byte decode(char c1, char c2) {
+    private byte decode(char c1, char c2) {
         return (byte) (((decode(c1) & 0xf) << 4)
                 | ((decode(c2) & 0xf) << 0));
     }
 
-    public static String decode(String s) {
+    public String decode(String s) {
+        // + will be interpreted as Whitespace,
+        // if the String does not contain %20
+        if (s.indexOf('+') > 0){
+            if(!s.contains("%20"))
+                s = s.replaceAll("\\+", " ");
+        }
+
         if (s == null)
             return s;
         int n = s.length();
         if (n == 0)
             return s;
-        if (s.indexOf('%') < 0)
+        if (s.indexOf('%') < 0){
             return s;
+        }
+
 
         StringBuffer sb = new StringBuffer(n);
         ByteBuffer bb = ByteBuffer.allocate(n);
@@ -77,21 +86,27 @@ public class UriToIriDecoder {
                 c = s.charAt(i);
                 continue;
             }
+
             bb.clear();
             int ui = i;
-            for (;;) {
+            for (; ; ) {
                 assert (n - i >= 2);
-                if(i+2 < n){
+                if (i + 2 < n) {
                     char c1 = s.charAt(++i);
                     char c2 = s.charAt(++i);
                     // Checks if the encoded symbol is not a reserved character or invalid
+
                     if (!reserved.contains("%" + c1 + c2) && c1 <= 'F' && c2 <= 'F')
                         bb.put(decode(c1, c2));
-                    else
-                        sb.append("%" + c1 + c2);
-                } else if (i+1 < n){
-                    sb.append("%"+ s.charAt(++i));
-                } else sb.append("%");
+                    else {
+                        bb.put((byte) '%');
+                        bb.put((byte) c1);
+                        bb.put((byte) c2);
+                    }
+                } else if (i + 1 < n) {
+                    bb.put((byte) '%');
+                    bb.put((byte) s.charAt(++i));
+                } else bb.put((byte) '%');
                 if (++i >= n)
                     break;
                 c = s.charAt(i);

@@ -132,8 +132,8 @@ object UriUtils
 
   private def encodeAndClean(uriPart: String): String={
     var decoded = uriPart
-    while(UriToIriDecoder.decode(decoded) != decoded)
-      decoded = UriToIriDecoder.decode(decoded)
+    while(UriDecoder.decode(decoded) != decoded)
+      decoded = UriDecoder.decode(decoded)
     StringUtils.escape(decoded, StringUtils.replacements('%', "<>\"#%?[\\]^`{|}"))
   }
 
@@ -147,8 +147,9 @@ object UriUtils
 
   private def iriDecode(uriPart: String): String={
     var decoded = uriPart
-    while(UriToIriDecoder.decode(decoded) != decoded)
-      decoded = UriToIriDecoder.decode(decoded)
+    var decoder = new UriToIriDecoder;
+    while(decoder.decode(decoded) != decoded)
+      decoded = decoder.decode(decoded)
     decoded
   }
 
