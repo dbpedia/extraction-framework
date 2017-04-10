@@ -6,7 +6,6 @@ import java.net.URL
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
@@ -58,9 +57,9 @@ object TypeConsistencyCheck {
   def main(args: Array[String]) {
 
 
-    require(args != null && args.length == 2, "Two arguments required, extraction config file and extension to work with")
+    require(args != null && args.length == 1, "Two arguments required, extraction config file and extension to work with")
     require(args(0).nonEmpty, "missing required argument: config file name")
-    require(args(1).nonEmpty, "missing required argument: suffix e.g. .tql.gz")
+    //require(args(1).nonEmpty, "missing required argument: suffix e.g. .tql.gz")
 
 
     val config = new Config(args(0))
@@ -88,7 +87,7 @@ object TypeConsistencyCheck {
       new OntologyReader().read(ontologySource)
     }
 
-    val suffix = args(1)
+    val suffix = config.inputSuffix
     val typesDataset = "instance-types" + suffix
     val mappedTripleDataset = "mappingbased-objects-uncleaned" + suffix
 
