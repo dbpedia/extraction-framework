@@ -12,7 +12,7 @@ import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyPropert
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{ConfigUtils, Finder, IOUtils, Language}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.mutable
@@ -63,19 +63,19 @@ object TypeConsistencyCheck {
     require(args(1).nonEmpty, "missing required argument: suffix e.g. .tql.gz")
 
 
-    val config = ConfigUtils.loadConfig(args(0), "UTF-8")
+    val config = new Config(args(0))
 
-    val baseDir = ConfigUtils.getValue(config, "base-dir", true)(new File(_))
+    val baseDir = config.dumpDir
     if (!baseDir.exists)
       throw new IllegalArgumentException("dir " + baseDir + " does not exist")
-    val langConfString = ConfigUtils.getString(config, "languages", false)
-    val languages = ConfigUtils.parseLanguages(baseDir, Seq(langConfString))
 
-    val policies = parsePolicies(config, "uri-policy")
-    val formats = parseFormats(config, "format", policies)
+    val languages = config.languages
+
+    val policies = config.policies
+    val formats = config.formats
 
     lazy val ontology = {
-      val ontologyFile = ConfigUtils.getValue(config, "ontology", false)(new File(_))
+      val ontologyFile = config.ontologyFile
       val ontologySource = if (ontologyFile != null && ontologyFile.isFile) {
         XMLSource.fromFile(ontologyFile, Language.Mappings)
       }
