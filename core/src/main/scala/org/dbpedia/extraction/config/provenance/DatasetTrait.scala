@@ -7,6 +7,7 @@ package org.dbpedia.extraction.config.provenance
   */
 object DatasetTrait extends Enumeration {
   val Ordered = Value
+  val Unsorted = Value    //opposite of Ordered, but it implies that this is a temporary dataset which is going to be sorted
   val Validated = Value
   val Published = Value
   val Temporary = Value

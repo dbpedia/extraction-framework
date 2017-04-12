@@ -86,12 +86,20 @@ object DBpediaDatasets
             traits = set.traits + DatasetTrait.EnglishUris,
             sources = Seq(set)
         )
+        //wkd uris unsorted
+        datasets(set.encoded + "_wkd_uris_unsorted") = set.copyDataset(
+            naturalName = set.name + " Wikidata Uris unsorted",
+            descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching Wikidata resources (unsorted).",
+            fileName = set.encoded + "_wkd_uris_unsorted",
+            traits = set.traits ++ Seq(DatasetTrait.WikidataUris, DatasetTrait.Unsorted),
+            sources = Seq(set)
+        )
         //wkd uris
         datasets(set.encoded + "_wkd_uris") = set.copyDataset(
             naturalName = set.name + " Wikidata Uris",
-            descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching Wikidata resources.",
+            descr = set.description.getOrElse("Undescribed Dataset") + " Normalized dataset matching Wikidata resources (sorted).",
             fileName = set.encoded + "_wkd_uris",
-            traits = set.traits + DatasetTrait.WikidataUris,
+            traits = set.traits ++ Seq(DatasetTrait.WikidataUris, DatasetTrait.Ordered),
             sources = Seq(set)
         )
         //unredirected
