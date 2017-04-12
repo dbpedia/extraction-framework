@@ -71,6 +71,7 @@ object XMLSource
        * @param xml The xml which contains the pages
      */
     def fromOAIXML(xml : Elem) : Source  = new OAIXMLSource(xml)
+
 }
 
 /**

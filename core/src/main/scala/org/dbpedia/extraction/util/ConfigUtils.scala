@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
 import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
-import org.dbpedia.extraction.sources.Source
+import org.dbpedia.extraction.sources.{Source, XMLSource}
 import org.dbpedia.extraction.util.Language.wikiCodeOrdering
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
@@ -18,6 +18,7 @@ import scala.collection.mutable
 import scala.collection.mutable.HashSet
 import scala.io.Codec
 import scala.util.Try
+import scala.util.matching.Regex
 
 
 object ConfigUtils {
@@ -27,30 +28,26 @@ object ConfigUtils {
     * Language codes have at least two characters, start with a lower-case letter and contain only
     * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
     */
-  val LanguageRegex = """([a-z][a-z0-9-]+)""".r
+  val LanguageRegex: Regex = """([a-z][a-z0-9-]+)""".r
 
   /**
     * Regex used for excluding languages from the import.
     */
-  val ExcludedLanguageRegex = """!([a-z][a-z0-9-]+)""".r
+  val ExcludedLanguageRegex: Regex = """!([a-z][a-z0-9-]+)""".r
 
   /**
     * Regex for numeric range, both limits optional
     */
-  val RangeRegex = """(\d*)-(\d*)""".r
+  val RangeRegex: Regex = """(\d*)-(\d*)""".r
 
-  val universalConfig = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
-  val baseDir = getValue(universalConfig , "base-dir", true){
-    x => new File(x)
+  //val baseDir = getValue(universalConfig , "base-dir", true){
+   // x => new File(x)
       //if (! dir.exists) throw error("dir "+dir+" does not exist")
       //dir
-  }
-  val wikiInfos = if(baseDir.exists())
-    WikiInfo.fromFile(new File(baseDir, WikiInfo.FileName), Codec.UTF8)
-  else
-    Seq()
+  //}
 
-  def loadConfig(file: String, charset: String = "UTF-8"): Properties = {
+  def loadConfig(filePath: String, charset: String = "UTF-8"): Properties = {
+    val file = new File(filePath)
     loadFromStream(new FileInputStream(file), charset)
   }
 
@@ -126,8 +123,8 @@ object ConfigUtils {
     val ranges = new HashSet[(Int,Int)]
   
     for (key <- keys) key match {
-      case "@mappings" => languages ++= Namespace.mappings.keySet
-      case "@chapters" => languages ++= Namespace.chapters.keySet
+      case "@mappings" => languages ++= Namespace.mappingLanguages
+      case "@chapters" => languages ++= Namespace.chapterLanguages
       case "@downloaded" => languages ++= downloadedLanguages(baseDir, wikiPostFix)
       case "@abstracts" => {
         //@downloaded - Commons & Wikidata
@@ -149,7 +146,7 @@ object ConfigUtils {
       // these non-ASCII chars anyway, so we don't have to unescape them.
       
       // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikiInfos; if from <= wiki.pages && wiki.pages <= to)
+      for ((from, to) <- ranges; wiki <- Config.wikiInfos; if from <= wiki.pages && wiki.pages <= to)
       {
         // ...add its language
         Language.get(wiki.wikicode) match{

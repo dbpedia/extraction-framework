@@ -27,7 +27,7 @@ class WikidataAliasExtractor(
   // Here we define all the ontology predicates we will use
   private val aliasProperty = context.ontology.properties("alias")
 
-  private val mappingLanguages = Namespace.mappings.keySet
+  private val mappingLanguages = Namespace.mappingLanguages
 
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.WikidataAliasMappingsWiki, DBpediaDatasets.WikidataAliasRest)

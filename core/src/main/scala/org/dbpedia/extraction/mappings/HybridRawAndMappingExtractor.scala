@@ -26,7 +26,7 @@ extends PageNodeExtractor {
   private val mappingExtractor = new MappingExtractor(context)
   private val language = context.language
 
-  private val enableMappingExtractor = Namespace.mappings.contains(language)
+  private val enableMappingExtractor = Namespace.mappingLanguages.contains(language)
 
   override val datasets = (rawinfoboxExtractor.datasets ++ mappingExtractor.datasets) + DBpediaDatasets.InfoboxPropertiesMapped
 

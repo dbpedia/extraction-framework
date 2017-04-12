@@ -27,7 +27,7 @@ class WikidataLabelExtractor(
   // Here we define all the ontology predicates we will use
   private val labelProperty = context.ontology.properties("rdfs:label")
 
-  private val mappingLanguages = Namespace.mappings.keySet
+  private val mappingLanguages = Namespace.mappingLanguages
 
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.Labels,DBpediaDatasets.WikidataLabelsRest)

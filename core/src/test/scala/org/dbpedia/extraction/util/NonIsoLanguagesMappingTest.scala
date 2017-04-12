@@ -1,12 +1,13 @@
 package org.dbpedia.extraction.util
 
 import java.util.Locale
+
 import org.junit.runner.RunWith
 import org.scalatest.junit._
 import org.scalatest._
 import Inspectors._
 
-import io.{Codec, Source}
+import scala.io.{Codec, Source}
 
 /**
  * Tests if the Map Language.nonIsoWpCodes is complete, so that for each MediaWiki language code

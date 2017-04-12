@@ -155,26 +155,26 @@ object CanonicalizeIris {
 
     baseDir = config.dumpDir
 
-    val mappings = ConfigUtils.getValues(config.config, "mapping-files",",", required=true)(x => x)
+    val mappings = ConfigUtils.getValues(config.properties, "mapping-files",",", required=true)(x => x)
     require(mappings.nonEmpty, "no mapping datasets")
 
     // Suffix of mapping files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val mappingSuffix = ConfigUtils.getString(config.config, "mapping-suffix",required=true)
+    val mappingSuffix = ConfigUtils.getString(config.properties, "mapping-suffix",required=true)
     require(mappingSuffix.nonEmpty, "no mapping file suffix")
 
-    val inputs = ConfigUtils.getValues(config.config, "input-files",",", required=true)(x => x)
+    val inputs = ConfigUtils.getValues(config.properties, "input-files",",", required=true)(x => x)
     require(inputs.nonEmpty, "no input datasets")
 
-    val extension = ConfigUtils.getString(config.config, "name-extension",required=true)
+    val extension = ConfigUtils.getString(config.properties, "name-extension",required=true)
     require(extension.nonEmpty, "no result name extension")
 
     val threads = config.parallelProcesses
 
     // Language using generic domain (usually en)
-    genericLanguage = ConfigUtils.getValue(config.config, "generic-language",required=false)(x => Language(x))
+    genericLanguage = ConfigUtils.getValue(config.properties, "generic-language",required=false)(x => Language(x))
 
-    newLanguage = ConfigUtils.getValue(config.config, "mapping-language",required=true)(x => Language(x))
+    newLanguage = ConfigUtils.getValue(config.properties, "mapping-language",required=true)(x => Language(x))
     newPrefix = uriPrefix(newLanguage)
     newResource = newPrefix+"resource/"
 
