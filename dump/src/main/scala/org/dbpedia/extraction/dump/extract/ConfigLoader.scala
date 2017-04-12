@@ -54,9 +54,9 @@ class ConfigLoader(config: Config)
             //  input._2.map(_.getSimpleName).mkString(",")+"), "+
             //  datasets.size+" datasets ("+datasets.mkString(",")+")"
 
-            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials)
+            new ExtractionRecorder[WikiPage](new OutputStreamWriter(logStream), 2000, null, config.slackCredentials.getOrElse(null))
           }
-          case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials)
+          case None => new ExtractionRecorder[WikiPage](null, 2000, null, config.slackCredentials.getOrElse(null))
         }
         extractionRecorder(lang)
       }

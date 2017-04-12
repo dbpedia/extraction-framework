@@ -25,7 +25,7 @@ class WikidataDescriptionExtractor(
   // Here we define all the ontology predicates we will use
   private val descriptionProperty = context.ontology.properties("description")
 
-  private val mappingLanguages = Namespace.mappings.keySet
+  private val mappingLanguages = Namespace.mappingLanguages
 
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.WikidataDescriptionMappingsWiki, DBpediaDatasets.WikidataDescriptionRest)

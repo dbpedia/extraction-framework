@@ -104,7 +104,7 @@ object TypeStatistics {
         }
       }
       results.put(lang.wikiCode, writeLang(lang.wikiCode, statements, subjects, props, objects))
-    }, Namespace.mappings.keySet.toList.sortBy(x => x))
+    }, Namespace.mappingLanguages.toList.sortBy(x => x))
 
     logger.log(Level.INFO, "finished calculations")
 

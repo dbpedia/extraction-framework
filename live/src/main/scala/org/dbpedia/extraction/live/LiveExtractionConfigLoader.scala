@@ -46,7 +46,7 @@ object LiveExtractionConfigLoader
   val ontologySource = WikiSource.fromNamespaces(
     namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
     url = new URL(Language.Mappings.apiUri),
-    language = Language.Mappings );
+    language = Language.Mappings )
 
   /** Mappings source */
   val mappingsSource =  WikiSource.fromNamespaces(

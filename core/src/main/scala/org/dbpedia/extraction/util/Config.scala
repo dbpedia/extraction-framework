@@ -2,7 +2,9 @@ package org.dbpedia.extraction.util
 
 import java.io.File
 import java.net.URL
+import java.util.Properties
 
+import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.mappings.Extractor
 import org.dbpedia.extraction.util.Config.{AbstractParameters, MediaWikiConnection, NifParameters, SlackCredentials}
@@ -10,7 +12,8 @@ import org.dbpedia.extraction.util.ConfigUtils._
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.Map
-import scala.util.{Failure, Success}
+import scala.io.Codec
+import scala.util.{Failure, Success, Try}
 
 
 class Config(val configPath: String)
@@ -21,12 +24,12 @@ class Config(val configPath: String)
     * 2. the extraction job specific config provided by the user
     */
 
-  val config = ConfigUtils.loadConfig(configPath)
+  val properties: Properties = if(configPath == null) Config.universalProperties else ConfigUtils.loadConfig(configPath)
 
-  def checkOverride(key: String) = if(config.containsKey(key))
-    config
+  def checkOverride(key: String): Properties = if(properties.containsKey(key))
+    properties
   else
-    universalConfig
+    Config.universalProperties
 
   /**
     * get all universal properties, check if there is an override in the provided config file
@@ -34,9 +37,9 @@ class Config(val configPath: String)
 
 
   // TODO Watch out, this could be a regex
-  lazy val source = checkOverride("source").getProperty("source", "pages-articles.xml.bz2").trim
+  lazy val source: String = checkOverride("source").getProperty("source", "pages-articles.xml.bz2").trim
 
-  lazy val wikiName = checkOverride("wiki-name").getProperty("wiki-name", "wiki").trim
+  lazy val wikiName: String = checkOverride("wiki-name").getProperty("wiki-name", "wiki").trim
 
   /**
    * Dump directory
@@ -44,11 +47,11 @@ class Config(val configPath: String)
    * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
    * and overrides this val to null because it is not needed)
    */
-  lazy val dumpDir = getValue(checkOverride("base-dir"), "base-dir", required = true){ x => new File(x)}
+  lazy val dumpDir: File = getValue(checkOverride("base-dir"), "base-dir", required = true){ x => new File(x)}
 
-  lazy val parallelProcesses = checkOverride("parallel-processes").getProperty("parallel-processes", "4").trim.toInt
+  lazy val parallelProcesses: Int = checkOverride("parallel-processes").getProperty("parallel-processes", "4").trim.toInt
 
-  lazy val dbPediaVersion = parseVersionString(getString(checkOverride("dbpedia-version"), "dbpedia-version").trim) match{
+  lazy val dbPediaVersion: String = parseVersionString(getString(checkOverride("dbpedia-version"), "dbpedia-version").trim) match{
     case Success(s) => s
     case Failure(e) => throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
   }
@@ -56,7 +59,10 @@ class Config(val configPath: String)
   /**
     * The directory where all log files will be stored
     */
-  lazy val logDir = Option(checkOverride("log-dir").getProperty("log-dir").trim)
+  lazy val logDir: Option[File] = Option(getString(checkOverride("log-dir"), "log-dir")) match {
+    case Some(x) => Some(new File(x))
+    case None => None
+  }
 
   /**
     * If set, extraction summaries are forwarded via the API of Slack, displaying messages on a dedicated channel.
@@ -65,15 +71,13 @@ class Config(val configPath: String)
     * Threshold of extracted pages over which a summary of the current extraction is posted
     * Threshold of exceptions over which an exception report is posted
     */
-  lazy val slackCredentials = if(checkOverride("slack-webhook").getProperty("slack-webhook") == null)
-    null
-  else
-    SlackCredentials(
-      webhook = new URL(checkOverride("slack-webhook").getProperty("slack-webhook").trim),
-      username = checkOverride("slack-username").getProperty("slack-username").trim,
-      summaryThreshold = checkOverride("slack-summary-threshold").getProperty("slack-summary-threshold").trim.toInt,
-      exceptionThreshold = checkOverride("slack-exception-threshold").getProperty("slack-exception-threshold").trim.toInt
-    )
+  lazy val slackCredentials = Try{
+      SlackCredentials(
+        webhook = new URL(getString(checkOverride("slack-webhook"), "slack-webhook").trim),
+        username = checkOverride("slack-username").getProperty("slack-username").trim,
+        summaryThreshold = checkOverride("slack-summary-threshold").getProperty("slack-summary-threshold").trim.toInt,
+        exceptionThreshold = checkOverride("slack-exception-threshold").getProperty("slack-exception-threshold").trim.toInt
+      )}
 
   /**
     * Local ontology file, downloaded for speed and reproducibility
@@ -81,7 +85,7 @@ class Config(val configPath: String)
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val ontologyFile = getValue(checkOverride("ontology"), "ontology", required = false)(new File(_))
+  lazy val ontologyFile: File = getValue(checkOverride("ontology"), "ontology", required = false)(new File(_))
 
   /**
     * Local mappings files, downloaded for speed and reproducibility
@@ -89,30 +93,30 @@ class Config(val configPath: String)
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val mappingsDir = getValue(checkOverride("mappings"), "mappings", required = false)(new File(_))
+  lazy val mappingsDir: File = getValue(checkOverride("mappings"), "mappings", required = false)(new File(_))
 
-  lazy val policies = parsePolicies(checkOverride("uri-policy"), "uri-policy")
+  lazy val policies: Map[String, Array[Policy]] = parsePolicies(checkOverride("uri-policy"), "uri-policy")
 
-  lazy val formats = parseFormats(checkOverride("format"), "format", policies)
+  lazy val formats: Map[String, Formatter] = parseFormats(checkOverride("format"), "format", policies)
 
-  lazy val disambiguations = checkOverride("disambiguations").getProperty("disambiguations", "page_props.sql.gz")
+  lazy val disambiguations: String = checkOverride("disambiguations").getProperty("disambiguations", "page_props.sql.gz")
 
-  lazy val inputFileName = getString(checkOverride("input"), "input")
-  lazy val outputFileName = getString(checkOverride("output"), "output")
-  lazy val inputSuffix = getString(checkOverride("suffix"), "suffix")
+  lazy val inputFileName: String = getString(checkOverride("input"), "input")
+  lazy val outputFileName: String = getString(checkOverride("output"), "output")
+  lazy val inputSuffix: String = getString(checkOverride("suffix"), "suffix")
   /**
     * all non universal properties...
     */
 
-  lazy val languages = parseLanguages(dumpDir, getStrings(checkOverride("languages"), "languages", ","), wikiName)
+  lazy val languages: Array[Language] = parseLanguages(dumpDir, getStrings(checkOverride("languages"), "languages", ","), wikiName)
 
-  lazy val requireComplete = checkOverride("require-download-complete").getProperty("require-download-complete", "false").trim.toBoolean
+  lazy val requireComplete: Boolean = checkOverride("require-download-complete").getProperty("require-download-complete", "false").trim.toBoolean
 
-  lazy val retryFailedPages = checkOverride("retry-failed-pages").getProperty("retry-failed-pages", "false").trim.toBoolean
+  lazy val retryFailedPages: Boolean = checkOverride("retry-failed-pages").getProperty("retry-failed-pages", "false").trim.toBoolean
 
-  lazy val extractorClasses = loadExtractorClasses()
+  lazy val extractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = loadExtractorClasses()
 
-  lazy val namespaces = loadNamespaces()
+  lazy val namespaces: Set[Namespace] = loadNamespaces()
 
   private def loadNamespaces(): Set[Namespace] = {
     val names = getStrings(checkOverride("namespaces"), "namespaces", ",")
@@ -129,7 +133,7 @@ class Config(val configPath: String)
    */
   private def loadExtractorClasses() : Map[Language, Seq[Class[_ <: Extractor[_]]]] =
   {
-    ExtractorUtils.loadExtractorsMapFromConfig(languages, config)
+    ExtractorUtils.loadExtractorsMapFromConfig(languages, properties)
   }
 
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
@@ -197,4 +201,11 @@ object Config{
      summaryThreshold: Int,
      exceptionThreshold: Int
    )
+
+  private val universalProperties: Properties = loadConfig(this.getClass.getClassLoader.getResource("universal.properties")).asInstanceOf[Properties]
+  val universalConfig: Config = new Config(null)
+
+  private val wikisinfoFile = new File(getString(universalProperties , "base-dir", true), WikiInfo.FileName)
+  private lazy val wikiinfo = if(wikisinfoFile.exists()) WikiInfo.fromFile(wikisinfoFile, Codec.UTF8) else Seq()
+  def wikiInfos = wikiinfo
 }

@@ -80,7 +80,7 @@ object Language extends (String => Language)
         new DBpediaNamespace("http://"+code+".dbpedia.org/property/"),
         "http://"+code+".wikipedia.org",
         "https://"+code+".wikipedia.org/w/api.php",
-        ConfigUtils.wikiInfos.filter(x => x.wikicode == code) match{
+        Config.wikiInfos.filter(x => x.wikicode == code) match{
           case e if e.nonEmpty => e.head.pages
           case _ => 0
         }

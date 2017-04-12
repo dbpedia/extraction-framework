@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.wikiparser
 
-import org.dbpedia.extraction.util.{JsonConfig, Language}
+import java.io.{File, FileInputStream, InputStreamReader}
+import org.dbpedia.extraction.sources.XMLSource
+import org.dbpedia.extraction.util.{Config, JsonConfig, Language}
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
 
 import scala.collection.mutable.HashMap
@@ -28,128 +30,113 @@ class Namespace private[wikiparser](val code: Int, val name: String, dbpedia: Bo
     case _ => false
   }
 }
-  
-/**
- * Helper object that builds namespace objects and then disappears. 
- */
-private class NamespaceBuilder {
-  
+
+object Namespace {
+
   // map from namespace code to namespace (all namespaces)
-  val values = new HashMap[Int, Namespace]
-  
+  private val _values = new HashMap[Int, Namespace]
+
   // map from language to mapping namespace (only mapping namespaces)
-  val mappings = new HashMap[Language, Namespace]
+  private val _mappings = new HashMap[Language, Namespace]
 
   // map from chapter language to mapping namespace
-  val chapters = new HashMap[Language, Namespace]
+  private val _chapters = new HashMap[Language, Namespace]
 
   // map from namespace name to namespace (only dbpedia namespaces)
-  val dbpedias = new HashMap[String, Namespace]
+  private val _dbpedias = new HashMap[String, Namespace]
 
-  def ns(code: Int, name: String, dbpedia: Boolean) : Namespace = {
+  private def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
+    val namespace = new Namespace(code, name, dbpedia)
+    val previous = _values.put(code, namespace)
+    require(previous.isEmpty, "duplicate namespace: ["+previous.get+"] and ["+namespace+"]")
+    if (dbpedia)
+      _dbpedias(name.toLowerCase(Language.Mappings.locale)) = namespace
+    namespace
+  }
+
+  private def ns(code: Int, name: String, dbpedia: Boolean) : Namespace = {
     // also create 'talk'namespace, except for the first few namespaces, they are special
     if (code % 2 == 0 && code >= 2)
       create(code + 1, name+" talk", dbpedia)
     create(code, name, dbpedia)
   }
 
-  def create(code: Int, name: String, dbpedia: Boolean) : Namespace = {
-    val namespace = new Namespace(code, name, dbpedia)
-    val previous = values.put(code, namespace)
-    require(previous.isEmpty, "duplicate namespace: ["+previous.get+"] and ["+namespace+"]")
-    if (dbpedia)
-      dbpedias(name.toLowerCase(Language.Mappings.locale)) = namespace
-    namespace
-  }
-
   // Default MediaWiki namespaces
-  val mediawiki = Map("Media"-> -2,"Special"-> -1,"Main"->0,"Talk"->1,"User"->2,"Project"->4,"File"->6,"MediaWiki"->8,"Template"->10,"Help"->12,"Category"->14)
-  
+  private val mediawiki = Map("Media"-> -2,"Special"-> -1,"Main"->0,"Talk"->1,"User"->2,"Project"->4,"File"->6,"MediaWiki"->8,"Template"->10,"Help"->12,"Category"->14)
+
   for ((name,code) <- mediawiki)
     ns(code, name, false)
-  
+
   // The following are used quite differently on different wikipedias, so we use generic names.
   // Most languages use 100-113, but hu uses 90-99.
   // en added 446,447,710,711 in late 2012. Let's go up to 999 to prepare for future additions.
   // wikidata added 120-123, 1198,1199 in early 2013. Let's go up to 1999 to prepare for future additions.
-  // en added 2600 in July 2014. Let's go up to 2999. Namespaces > 3000 are discouraged according to 
+  // en added 2600 in July 2014. Let's go up to 2999. Namespaces > 3000 are discouraged according to
   // https://www.mediawiki.org/wiki/Extension_default_namespaces
   for (code <- (90 to 148 by 2) ++ (400 to 2998 by 2))
     ns(code, "Namespace "+code, false)
-    
-  // Namespaces used on http://mappings.dbpedia.org, sorted by number. 
+
+  // Namespaces used on http://mappings.dbpedia.org, sorted by number.
   // see http://mappings.dbpedia.org/api.php?action=query&meta=siteinfo&siprop=namespaces
   ns(200, "OntologyClass", true)
   ns(202, "OntologyProperty", true)
   ns(206, "Datatype", true)
 
-  val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("mappinglanguages.json"))
-  
+  private val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("mappinglanguages.json"))
+
   for (lang <- mappingsFile.keys()) {
+    val language = Language(lang)
     val properties = mappingsFile.getMap(lang)
-    val nns : Namespace = ns(new Integer(properties.get("code").get.asText), "Mapping " + lang, true)
-    mappings(Language(lang)) = nns
-    properties.get("chapter") match{
-      case Some(b) => if(java.lang.Boolean.parseBoolean(b.asText)) chapters(Language(lang)) = nns
-      case None =>
+    val nns : Namespace = ns(new Integer(properties("code").asText), "Mapping " + lang, true)
+
+    //test if mappings language has actual mappings!
+    //load mappings to check if this language does have actual mappings!
+    val file = new File(Config.universalConfig.mappingsDir, nns.name(Language.Mappings).replace(' ', '_') + ".xml")
+    if (XMLSource.fromFile(file, language).nonEmpty){
+      _mappings(language) = nns
+      properties.get("chapter") match {
+        case Some(b) => if (java.lang.Boolean.parseBoolean(b.asText)) _chapters(language) = nns
+        case None =>
+      }
     }
   }
-}
 
-/**
- * Helper class that lets us build the namespace objects without retaining any references 
- * to the builder or other temporary data. Using the builder as constructor parameter instead 
- * of val does the trick.
- */
-private[wikiparser] class NamespaceBuilderDisposer(builder: NamespaceBuilder) {
-  
-  /**
-   * Immutable map from namespace code to namespace containing all MediaWiki and DBpedia namespaces.
-   */
-  val values: Map[Int, Namespace] = builder.values.toMap // toMap makes immutable
+  //public stuff
+  val values: Map[Int, Namespace] = _values.toMap
 
-  /**
-   * Immutable map from language to namespace containing only the mapping namespaces on http://mappings.dbpedia.org.
-   */
-  val mappings: Map[Language, Namespace]  = builder.mappings.toMap // toMap makes immutable
+  val dbpedias: Map[String, Namespace] = _dbpedias.toMap
 
-  /**
-    * Immutable map from language to namespace containing only the chapter namespaces
-    */
-  val chapters: Map[Language, Namespace]  = builder.chapters.toMap // toMap makes immutable
+  val mappings: Map[Language, Namespace] = _mappings.toMap
+  def mappingLanguages: Set[Language] = mappings.keySet
 
-  /**
-   * Immutable map from namespace name to namespace containing only the DBpedia namespaces.
-   */
-  val dbpedias: Map[String, Namespace] = builder.dbpedias.toMap // toMap makes immutable
-}
+  val chapters: Map[Language, Namespace] = _chapters.toMap
+  def chapterLanguages: Set[Language] = chapters.keySet
 
-object Namespace extends NamespaceBuilderDisposer(new NamespaceBuilder) {
-  
-  val Main = values(0)
-  val File = values(6)
-  val Template = values(10)
-  val Category = values(14)
-  val Module = values(828)
-  val WikidataProperty = values(120)
 
-  val OntologyClass = values(200)
-  val OntologyProperty = values(202)
-  
+  val Main: Namespace = _values(0)
+  val File: Namespace = _values(6)
+  val Template: Namespace = _values(10)
+  val Category: Namespace = _values(14)
+  val Module: Namespace = _values(828)
+  val WikidataProperty: Namespace = _values(120)
+
+  val OntologyClass: Namespace = _values(200)
+  val OntologyProperty: Namespace = _values(202)
+
   def apply(lang: Language, name: String): Namespace = {
     get(lang, name) match {
       case Some(namespace) => namespace
       case None => throw new IllegalArgumentException("unknown namespace name '"+name+"' for language '"+lang.wikiCode+"'")
     }
   }
-  
+
   def get(lang: Language, name: String): Option[Namespace] = {
-    dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
+    _dbpedias.get(name.toLowerCase(Language.Mappings.locale)) match {
       // TODO: name.toLowerCase(lang.locale) doesn't quite work. On the other hand, MediaWiki
       // upper / lower case namespace names don't make sense either. Example: http://tr.wikipedia.org/?oldid=13637892
       case None => Namespaces.codes(lang).get(name.toLowerCase(lang.locale)) match {
         case None => None
-        case Some(code) => values.get(code)
+        case Some(code) => _values.get(code)
       }
       case some => some // return what we found, don't un-wrap and re-wrap Some(namespace)
     }

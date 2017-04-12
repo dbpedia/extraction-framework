@@ -30,7 +30,7 @@ class WikidataLLExtractor(
   // Here we define all the ontology predicates we will use
   private val sameAsProperty = context.ontology.properties("owl:sameAs")
 
-  private val mappingLanguages = Namespace.mappings.keySet
+  private val mappingLanguages = Namespace.mappingLanguages
   private val datasetMap: Map[String, Dataset] = (
     for (lang <- mappingLanguages)
       yield lang.wikiCode -> DBpediaDatasets.getDataset("interlanguage_links_" + lang.wikiCode)
