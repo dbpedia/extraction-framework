@@ -40,7 +40,7 @@ class DateTimeParser ( context : {
     private val eraRegex = eraStr.keySet.mkString("|")
 
     private val prefix = if(strict) """\s*""" else """.*?"""
-    private val postfix = if(strict) """\s*""" else ".*"
+    private val postfix = if(strict) """\s*""" else ".*\n*"
 
     // catch dates like: "8 June 07" or "07 June 45"
     private val DateRegex1 = ("""(?iu)""" + prefix + """([0-9]{1,2})\s*("""+monthRegex+""")\s*([0-9]{2})(?!\d)\s*(?!\s)(?!"""+ eraRegex +""").*""" + postfix).r
@@ -58,7 +58,7 @@ class DateTimeParser ( context : {
     private val DateRegex5 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{1,2}+)[-/\|](""" + monthRegex + """)[-/\|]([0-9]{3,4}+)(?!\d)""" + postfix).r
 
     // catch dates like: "1990 06 24", "1990-06-24", "1990/06/24" or "1977-01-01 00:00:00.000000"
-    private val DateRegex6 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{3,4})[-/\s]([0-9]{1,2})[-/\s]([0-9]{1,2})(?!\d).*""").r
+    private val DateRegex6 = ("""(?iu)""" + prefix + """(?<!\d)([0-9]{3,4})[-/\s]([0-9]{1,2})[-/\s]([0-9]{1,2})(?!\d)""" + postfix).r
 
     // catch dates like: "20 de Janeiro de 1999", "[[1º de Julho]] de [[2005]]"
     private val DateRegex7 = ("""(?iu)""" + prefix + """(?<!\d)\[?\[?([0-9]{1,2})(\.|""" + cardinalityRegex + """)?\s*d?e?\s*(""" + monthRegex + """)\]?\]?\s*d?e?\s*\[?\[?([0-9]{0,4})\s*?\]?\]?(?!\d)""" + postfix).r
