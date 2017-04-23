@@ -45,10 +45,7 @@ class WikidataR2RExtractor(
                             }
                             )
   extends JsonNodeExtractor {
-
-//  val url: URL = this.getClass.getClassLoader.getResource("wikidatar2rconfig.json")
-//  print(this.getClass().getClassLoader.getResource("").getPath())
-//  print(url.getPath)
+  
   val config: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("wikidatar2rconfig.json"))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
