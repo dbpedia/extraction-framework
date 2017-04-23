@@ -45,7 +45,7 @@ class WikidataR2RExtractor(
                             }
                             )
   extends JsonNodeExtractor {
-  
+
   val config: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("wikidatar2rconfig.json"))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
@@ -73,7 +73,8 @@ class WikidataR2RExtractor(
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
         val duplicateList = getDuplicates(statementGroup)
-        statementGroup.getStatements.foreach {
+        val statements = checkRank(statementGroup)
+        statements.foreach {
           statement => {
             val claim = statement.getClaim()
             val property = claim.getMainSnak().getPropertyId().getId
@@ -113,6 +114,18 @@ class WikidataR2RExtractor(
     splitDatasets(quads, subjectUri, page)
   }
 
+  def checkRank(statementGroup: StatementGroup): Seq[Statement] ={
+    var statements = Seq[Statement]();
+
+    //If statementGroup has preferred statement
+    statements = statementGroup.getStatements.filter(_.getRank.toString=="PREFERRED").toSeq;
+
+    //If there is no preferred statement, filter out all deprecated statement and take all Normal statemnts
+    if (statements.isEmpty) {
+      statements = statementGroup.getStatements.filter(_.getRank.toString!="DEPRECATED")
+    }
+    statements
+  }
   def getQuad(page: JsonNode, subjectUri: String,statementUri:String,map: mutable.Map[String, String]): ArrayBuffer[Quad] = {
     val quads = new ArrayBuffer[Quad]()
     map.foreach {
