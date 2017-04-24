@@ -118,11 +118,11 @@ class WikidataR2RExtractor(
     var statements = Seq[Statement]();
 
     //If statementGroup has preferred statement
-    statements = statementGroup.getStatements.filter(_.getRank.toString=="PREFERRED").toSeq;
+    statements = statementGroup.getStatements.filter(_.getRank.equals(StatementRank.PREFERRED));
 
-    //If there is no preferred statement, filter out all deprecated statement and take all Normal statemnts
+    //If there is no preferred statement, take all Normal statemnts
     if (statements.isEmpty) {
-      statements = statementGroup.getStatements.filter(_.getRank.toString!="DEPRECATED")
+      statements = statementGroup.getStatements.filter(_.getRank.equals(StatementRank.NORMAL))
     }
     statements
   }
