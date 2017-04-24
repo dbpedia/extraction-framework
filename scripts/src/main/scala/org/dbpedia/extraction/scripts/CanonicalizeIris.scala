@@ -21,9 +21,6 @@ object CanonicalizeIris {
 
   private val finders = new ConcurrentHashMap[Language, DateFinder[File]]().asScala
 
-  //TODO make this configurable
-  private val inputSuffix = ".tql.bz2"
-
   private var baseDir: File = null
 
   private var genericLanguage: Language = Language.English
@@ -149,37 +146,53 @@ object CanonicalizeIris {
 
   def main(args: Array[String]): Unit = {
 
-    require(args != null && args.length == 1, "One arguments required, extraction config file")
+    require(args != null && args.length == 1, "One arguments required, extraction properties file")
 
     val config = new Config(args.head)
 
     baseDir = config.dumpDir
 
-    val mappings = ConfigUtils.getValues(config.properties, "mapping-files",",", required=true)(x => x)
-    require(mappings.nonEmpty, "no mapping datasets")
+    val mappings = config.getArbitraryStringProperty("mapping-files") match{
+      case Some(x) => x.split(",").map(x => x.trim).distinct
+      case None => Array()
+    }
+    require(mappings.nonEmpty, "Please provide a 'mapping-files' property in your properties configuration, defining the mapping dataset(s)")
 
     // Suffix of mapping files, for example ".nt", ".ttl.gz", ".nt.bz2" and so on.
     // This script works with .nt, .ttl, .nq or .tql files, using IRIs or URIs.
-    val mappingSuffix = ConfigUtils.getString(config.properties, "mapping-suffix",required=true)
-    require(mappingSuffix.nonEmpty, "no mapping file suffix")
+    val mappingSuffix = config.getArbitraryStringProperty("mapping-suffix") match{
+      case Some(x) => x.trim
+      case None => throw new IllegalArgumentException("Please provide a 'mapping-suffix' in your properties configuration")
+    }
 
-    val inputs = ConfigUtils.getValues(config.properties, "input-files",",", required=true)(x => x)
-    require(inputs.nonEmpty, "no input datasets")
+    val inputs = config.inputDatasets
+    require(inputs.nonEmpty, "Please provide a 'input' in your properties configuration, defining the input datasets")
 
-    val extension = ConfigUtils.getString(config.properties, "name-extension",required=true)
-    require(extension.nonEmpty, "no result name extension")
+    val inputSuffix = config.inputSuffix match{
+      case Some(x) => x.trim
+      case None => throw new IllegalArgumentException("Please provide a 'suffix' attribute in your properties configuration")
+    }
+
+    val extension = config.datasetnameExtension
+    require(extension.nonEmpty, "Please provide a 'name-extension' in your properties configuration, defining the dataset name extension truncated at the end of the current dataset name")
 
     val threads = config.parallelProcesses
 
     // Language using generic domain (usually en)
-    genericLanguage = ConfigUtils.getValue(config.properties, "generic-language",required=false)(x => Language(x))
+    genericLanguage = config.getArbitraryStringProperty("generic-language") match{
+      case Some(l) => Language(l.trim)
+      case None => null
+    }
 
-    newLanguage = ConfigUtils.getValue(config.properties, "mapping-language",required=true)(x => Language(x))
+    newLanguage = config.getArbitraryStringProperty("mapping-language") match{
+      case Some(l) => Language(l)
+      case None => throw new IllegalArgumentException("Please provide a 'mapping-language' in your properties configuration (usually 'en' or 'wikidata')")
+    }
     newPrefix = uriPrefix(newLanguage)
     newResource = newPrefix+"resource/"
 
     val languages = config.languages
-    require(languages.nonEmpty, "no languages")
+    require(languages.nonEmpty, "Please provide the 'languages' property in your properties configuration")
 
     frmts = config.formats.toMap
 
@@ -193,7 +206,7 @@ object CanonicalizeIris {
     //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get), DBpediaDatasets.getDataset(input+ (if(extension != null) extension else "")))
+        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get), DBpediaDatasets.getDataset(input+extension.getOrElse("")))
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
   }

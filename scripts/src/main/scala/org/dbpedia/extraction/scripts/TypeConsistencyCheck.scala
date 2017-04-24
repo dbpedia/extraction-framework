@@ -87,7 +87,10 @@ object TypeConsistencyCheck {
       new OntologyReader().read(ontologySource)
     }
 
-    val suffix = config.inputSuffix
+    val suffix = config.inputSuffix match{
+      case Some(x) => x
+      case None => throw new IllegalArgumentException("Please provide a 'suffix' attribute in your properties configuration")
+    }
     val typesDataset = "instance-types" + suffix
     val mappedTripleDataset = "mappingbased-objects-uncleaned" + suffix
 

@@ -3,6 +3,7 @@ package org.dbpedia.extraction.util
 import java.io.File
 import java.net.URL
 import java.util.Properties
+import java.util.logging.{Level, Logger}
 
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
@@ -18,18 +19,30 @@ import scala.util.{Failure, Success, Try}
 
 class Config(val configPath: String)
 {
+  val logger = Logger.getLogger(getClass.getName)
   /**
     * load two config files:
     * 1. the universal config containing properties universal for a release
     * 2. the extraction job specific config provided by the user
     */
 
-  val properties: Properties = if(configPath == null) Config.universalProperties else ConfigUtils.loadConfig(configPath)
+  private val properties: Properties = if(configPath == null) Config.universalProperties else ConfigUtils.loadConfig(configPath)
 
-  def checkOverride(key: String): Properties = if(properties.containsKey(key))
+  private def checkOverride(key: String): Properties = if(properties.containsKey(key))
     properties
   else
     Config.universalProperties
+
+  def getArbitraryStringProperty(key: String): Option[String] = {
+    Option(getString(checkOverride(key), key))
+  }
+
+  def throwMissingPropertyException(property: String, required: Boolean): Unit ={
+    if(required)
+      throw new IllegalArgumentException("The following required property is missing from the provided .properties file (or has an invalid format): '" + property + "'")
+    else
+      logger.log(Level.WARNING, "The following property is missing from the provided .properties file (or has an invalid format): '" + property + "'. It will not factor in.")
+  }
 
   /**
     * get all universal properties, check if there is an override in the provided config file
@@ -101,21 +114,57 @@ class Config(val configPath: String)
 
   lazy val disambiguations: String = checkOverride("disambiguations").getProperty("disambiguations", "page_props.sql.gz")
 
-  lazy val inputFileName: String = getString(checkOverride("input"), "input")
-  lazy val outputFileName: String = getString(checkOverride("output"), "output")
-  lazy val inputSuffix: String = getString(checkOverride("suffix"), "suffix")
   /**
     * all non universal properties...
     */
+  /**
+    * An array of input dataset names (e.g. 'instance-types' or 'mappingbased-literals') (separated by a ',')
+    */
+  lazy val inputDatasets: Seq[String] = getStrings(checkOverride("input"), "input", ",").distinct   //unique collection of names!!!
+  /**
+    * A dataset name for the output file generated (e.g. 'instance-types' or 'mappingbased-literals')
+    */
+  lazy val outputDataset: Option[String] = Option(getString(checkOverride("output"), "output"))
+  /**
+    * the suffix of the files representing the input dataset (usually a combination of RDF serialization extension and compression used - e.g. .ttl.bz2 when using the TURTLE triples compressed with bzip2)
+    */
+  lazy val inputSuffix: Option[String] = Option(getString(checkOverride("suffix"), "suffix"))
+  /**
+    * same as for inputSuffix (for the output dataset)
+    */
+  lazy val outputSuffix: Option[String] = Option(getString(checkOverride("output-suffix"), "output-suffix"))
+  /**
+    * instead of a defined output dataset name, one can specify a name extension turncated at the end of the input dataset name (e.g. '-transitive' -> instance-types-transitive)
+    */
+  lazy val datasetnameExtension: Option[String] = Option(getString(checkOverride("name-extension"), "name-extension"))
 
+  /**
+    * An array of languages specified by the exact enumeration of language wiki codes (e.g. en,de,fr...)
+    * or article count ranges ('10000-20000' or '10000-' -> all wiki languages having that much articles...)
+    * or '@mappings', '@chapters' when only mapping/chapter languages are of concern
+    * or '@downloaded' if all downloaded languages are to be processed (containing the download.complete file)
+    * or '@abstracts' to only process languages which provide human readable abstracts (thus not 'wikidata' and the like...)
+    */
   lazy val languages: Array[Language] = parseLanguages(dumpDir, getStrings(checkOverride("languages"), "languages", ","), wikiName)
 
+  /**
+    * before processing a given language, check if the download.complete file is present
+    */
   lazy val requireComplete: Boolean = checkOverride("require-download-complete").getProperty("require-download-complete", "false").trim.toBoolean
 
+  /**
+    * TODO experimental, ignore for now
+    */
   lazy val retryFailedPages: Boolean = checkOverride("retry-failed-pages").getProperty("retry-failed-pages", "false").trim.toBoolean
 
+  /**
+    * the extractor classes to be used when extracting the XML dumps
+    */
   lazy val extractorClasses: Map[Language, Seq[Class[_ <: Extractor[_]]]] = loadExtractorClasses()
 
+  /**
+    * namespaces loaded defined by the languages in use (see languages)
+    */
   lazy val namespaces: Set[Namespace] = loadNamespaces()
 
   private def loadNamespaces(): Set[Namespace] = {

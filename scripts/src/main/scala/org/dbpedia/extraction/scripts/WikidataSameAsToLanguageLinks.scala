@@ -41,16 +41,22 @@ object WikidataSameAsToLanguageLinks {
     val inputFinder = new Finder[File](baseDir, Language.Wikidata, "wiki")
     val date = inputFinder.dates().last
 
-    val input = config.inputFileName
+    val suffix = config.inputSuffix match{
+      case Some(x) => x
+      case None => throw new IllegalArgumentException("Please provide a 'suffix' attribute in your properties configuration")
+    }
 
-    val suffix = config.inputSuffix
-
-    val output = config.outputFileName
+    val output = config.outputDataset match{
+      case Some (l) => l
+      case None => throw new IllegalArgumentException("Please provide an 'output' attribute for the output dataset file in the .properties configuration.")
+    }
 
     val language = config.languages
 
     val policies = config.policies
     val formats = config.formats
+
+    val input = config.inputDatasets.headOption.getOrElse(throw new IllegalArgumentException("Please provide an 'input' attribute for the wikidata input file in the .properties configuration."))
 
     // find the input wikidata file
     val wikiDataFile: RichFile = inputFinder.file(date, input + suffix).get
