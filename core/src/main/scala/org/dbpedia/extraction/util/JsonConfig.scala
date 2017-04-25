@@ -26,7 +26,12 @@ class JsonConfig(fileUrl:URL) {
   def getMap(property: String): Map[String, JsonNode] = {
     configMap.get(property) match{
       case Some(o) => o.getNodeType match{
-        case JsonNodeType.OBJECT => JsonConfig.getObjectMap(o)
+        case JsonNodeType.OBJECT => {
+          JsonConfig.getObjectMap(o)
+        }
+        case JsonNodeType.ARRAY => {
+          JsonConfig.getObjectMap(o)
+      }
         case _ => null
       }
       case None => null
@@ -37,16 +42,19 @@ class JsonConfig(fileUrl:URL) {
     var command = new WikidataTransformationCommands {
       override def execute(): Unit = print("")
     }
-    if (getMap(property).size >= 1) {
-      receiver.setParameters(property, value, equivClassSet, equivPropertySet, getMap(property).map(x => x._1 -> x._2.asText()))
-      val oneToManyCommand = new WikidataOneToManyCommand(receiver)
-      command = oneToManyCommand
-    }
-    else {
-      receiver.setParameters(property, value, equivClassSet, equivPropertySet, getMap(property).map(x => x._1 -> x._2.asText()))
-      val oneToOneCommand = new WikidataOneToOneCommand(receiver)
-      command = oneToOneCommand
-    }
+
+      if (getMap(property)!=null) {
+        if (getMap(property).size >= 1) {
+          receiver.setParameters(property, value, equivClassSet, equivPropertySet, getMap(property).map(x => x._1 -> x._2.asText()))
+          val oneToManyCommand = new WikidataOneToManyCommand(receiver)
+          command = oneToManyCommand
+        }
+        else {
+          receiver.setParameters(property, value, equivClassSet, equivPropertySet, getMap(property).map(x => x._1 -> x._2.asText()))
+          val oneToOneCommand = new WikidataOneToOneCommand(receiver)
+          command = oneToOneCommand
+        }
+      }
     command
   }
 
@@ -78,6 +86,19 @@ object JsonConfig{
           throw new Exception("JsonObjectMap was loaded with non unique key: " + key)
         val jsonNode = node.get(key)
         ret += (key -> jsonNode)
+      }
+
+      case JsonNodeType.ARRAY=> {
+        node.foreach {
+          eachMapping => {
+            for ( key <- eachMapping.fieldNames()) {
+              if(ret.keys.contains(key))
+                throw new Exception("JsonObjectMap was loaded with non unique key: " + key)
+              val jsonNode = eachMapping.get(key)
+              ret += (key -> jsonNode)
+            }
+          }
+        }
       }
       case _ => throw new Exception("JsonObjectMap was loaded with non ObjectNode type.")
     }
