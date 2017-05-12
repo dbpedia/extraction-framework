@@ -46,8 +46,10 @@ extends PageNodeExtractor
   protected val publicParames = abstractParams.getMap("publicParams")
   protected val protectedParams = abstractParams.getMap("protectedParams")
 
-  protected val failLogFile = new File(publicParames.get("failedPagesLog").get.asText())
-  failLogFile.createNewFile()
+  /*
+    protected val failLogFile = new File(publicParames.get("failedPagesLog").get.asText())
+    failLogFile.createNewFile()
+  */
 
   protected def apiUrl: URL = new URL(publicParames.get("apiUrl").get.asText())
   require(Try{apiUrl.openConnection().connect()} match {case Success(x)=> true case Failure(e) => false}, "can not connect to the apiUrl")
