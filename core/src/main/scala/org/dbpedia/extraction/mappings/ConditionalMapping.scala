@@ -13,15 +13,20 @@ extends Extractor[TemplateNode]
 
   override def extract(node: TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
   {
+    var matched = false
+    val graph=Seq.empty
     for(condition <- cases)
     {
       if (condition.matches(node)) {
-        val graph = condition.extract(node, subjectUri, pageContext)
-        // template mapping sets instance URI
-        val instanceURI = node.getAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION).getOrElse(throw new IllegalArgumentException("missing instance URI"))
-        return graph ++ defaultMappings.flatMap(_.extract(node, instanceURI, pageContext))
+        matched=true
+        val tempGraph = condition.extract(node, subjectUri, pageContext)
+        graph ++ tempGraph
       }
     }
-    Seq.empty
+    if(matched){
+      val instanceURI = node.getAnnotation(TemplateMapping.INSTANCE_URI_ANNOTATION).getOrElse(throw new IllegalArgumentException("missing instance URI"))
+      return graph ++ defaultMappings.flatMap(_.extract(node, instanceURI, pageContext))
+    }
+    graph
   }
 }
