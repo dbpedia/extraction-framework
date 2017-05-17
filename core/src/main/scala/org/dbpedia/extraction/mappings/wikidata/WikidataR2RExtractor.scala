@@ -54,7 +54,7 @@ class WikidataR2RExtractor(
 
   private val rdfType = context.ontology.properties("rdf:type")
   private val subclassOf = context.ontology.properties("rdfs:subClassOf")
-  private val partof = context.ontology.properties("partof")
+  //private val partof = context.ontology.properties("partof")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
   private val rdfSubject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
@@ -112,7 +112,7 @@ class WikidataR2RExtractor(
                 }
 
                 //if equ classes are available, we can be sure that we are dealing with a type like property
-                if(equivPropertySet.contains(rdfType) || equivPropertySet.contains(partof) || equivPropertySet.contains(subclassOf))
+                if(equivPropertySet.contains(rdfType) || equivPropertySet.contains(subclassOf))  // maybe add equivPropertySet.contains(partof)
                 {
                   //create the type like statements
                   quads += new Quad(
