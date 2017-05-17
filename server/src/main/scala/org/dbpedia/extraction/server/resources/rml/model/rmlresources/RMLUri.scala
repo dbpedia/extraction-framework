@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.server.resources.rml.model.rmlresources
 
-import com.hp.hpl.jena.util.URIref
+import org.apache.jena.util.URIref
 
 
 /**

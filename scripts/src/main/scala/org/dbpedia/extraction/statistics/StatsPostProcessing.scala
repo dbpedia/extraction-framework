@@ -11,7 +11,8 @@ import scala.Console._
   * Created by Chile on 3/9/2016.
   */
 object StatsPostProcessing {
-  def main(args: Array[String]): Unit = {
+  //TODO have a look at the JsonValue problem before release
+/*  def main(args: Array[String]): Unit = {
 
     val logger = Logger.getLogger(getClass.getName)
 
@@ -174,5 +175,5 @@ object StatsPostProcessing {
     JSON.write(new FileOutputStream(propsOut), propsMap)
     JSON.write(new FileOutputStream(typesOut), typesMap)
     logger.log(Level.INFO, "finished postprocessing")
-  }
+  }*/
 }

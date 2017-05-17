@@ -2,7 +2,8 @@ package org.dbpedia.extraction.server.resources.rml.model
 
 import java.io.StringWriter
 
-import com.hp.hpl.jena.rdf.model.{Model, ModelFactory}
+import org.apache.jena.rdf.model.{Model, ModelFactory}
+
 
 /**
   * Class that is a wrapper around a Jena model that adds behaviour
