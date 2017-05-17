@@ -53,9 +53,12 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   val config: JsonConfig = new JsonConfig(JsonConfig.getClass.getClassLoader.getResource("wikidatar2rconfig.json"))
+  Console.out.println(JsonConfig.getClass.getClassLoader.getResource("wikidatar2rconfig.json"))
 
-  var equivalentProperties: Map[String, Set[String]] = config.configMap.map(p => p._2 match{
-    case array: ArrayNode => "wikidata:" + p._1 -> array.elements().asScala.map(x => RdfNamespace.fullUri(RdfNamespace.DBO, x.fieldNames().next())).toSet
+  var equivalentProperties: Map[String, Set[String]] = config.configMap.map(
+    p => p._2 match{
+    case array: ArrayNode => "wikidata:" + p._1 -> array.elements().asScala.map(x =>
+      RdfNamespace.fullUri(RdfNamespace.DBO, x.fieldNames().next())).toSet
   })
 
   context.ontology.wikidataPropertiesMap.foreach(x => equivalentProperties += x._1 -> x._2.map(y => y.uri))
