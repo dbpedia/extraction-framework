@@ -16,7 +16,7 @@ object DBpediaDatasets
     for (inner <- mappingsFile.keys() if inner != "TODOs") {
         val in = mappingsFile.getMap(inner)
         for(filename <- in.keys) {
-            val properties = in.get(filename).get
+            val properties = in(filename)
             tempMap(filename) = new Dataset(
                 Option(properties.get("name")) match {
                     case Some(n) => n.asText()
@@ -129,157 +129,161 @@ object DBpediaDatasets
     /**
       * Source
       */
-    val PagesArticles = datasets.get("pages_articles").get
+    val PagesArticles: Dataset = datasets("pages_articles")
 
     /**
      * General
      */
-    val Labels = datasets.get("labels").get
-    val CategoryLabels = datasets.get("category_labels").get
-    val Images = datasets.get("images").get
-    val GeoCoordinates = datasets.get("geo_coordinates").get
-    val Persondata = datasets.get("persondata").get
-    val Pnd = datasets.get("pnd").get
-    val Redirects = datasets.get("redirects").get
-    val RedirectsTransitive = datasets.get("transitive_redirects").get
-    val ArticleCategories = datasets.get("article_categories").get
-    val ArticleTemplates = datasets.get("article_templates").get
-    val ArticleTemplatesNested = datasets.get("article_templates_nested").get
-    val SkosCategories = datasets.get("skos_categories").get
-    val RevisionUris = datasets.get("revision_uris").get
-    val RevisionIds = datasets.get("revision_ids").get
-    val RevisionMeta = datasets.get("revision_meta").get
-    val PageIds = datasets.get("page_ids").get
-    val InterLanguageLinks = datasets.get("interlanguage_links").get // Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
-    val InterLanguageLinksChapter = datasets.get("interlanguage_links_chapters").get
-    val Genders = datasets.get("genders").get
-    val TopicalConcepts = datasets.get("topical_concepts").get
-    val UriSameAsIri = datasets.get("uri_same_as_iri").get
-    val FlickrWrapprLinks = datasets.get("flickr_wrappr_links").get
-    val PageLength = datasets.get("page_length").get
-    val ImageGalleries = datasets.get("image_galleries").get
-    val ImageAnnotations = datasets.get("image_annotations").get
-    val KMLFiles = datasets.get("kml_files").get
-    val AnchorText = datasets.get("anchor_text").get
-    val SurfaceForms = datasets.get("surface_forms").get
-    val Sounds = datasets.get("sounds").get
+    val Labels: Dataset = datasets("labels")
+    val CategoryLabels: Dataset = datasets("category_labels")
+    val Images: Dataset = datasets("images")
+    val GeoCoordinates: Dataset = datasets("geo_coordinates")
+    val Persondata: Dataset = datasets("persondata")
+    val Pnd: Dataset = datasets("pnd")
+    val Redirects: Dataset = datasets("redirects")
+    val RedirectsTransitive: Dataset = datasets("transitive_redirects")
+    val ArticleCategories: Dataset = datasets("article_categories")
+    val ArticleTemplates: Dataset = datasets("article_templates")
+    val ArticleTemplatesNested: Dataset = datasets("article_templates_nested")
+    val SkosCategories: Dataset = datasets("skos_categories")
+    val RevisionUris: Dataset = datasets("revision_uris")
+    val RevisionIds: Dataset = datasets("revision_ids")
+    val RevisionMeta: Dataset = datasets("revision_meta")
+    val PageIds: Dataset = datasets("page_ids")
+    val InterLanguageLinks: Dataset = datasets("interlanguage_links") // Since the inter-language links were moved from Wikipedia to Wikidata, we now extract these links from the Wikidata dump, not from Wikipedia pages.")
+    val InterLanguageLinksChapter: Dataset = datasets("interlanguage_links_chapters")
+    val Genders: Dataset = datasets("genders")
+    val TopicalConcepts: Dataset = datasets("topical_concepts")
+    val UriSameAsIri: Dataset = datasets("uri_same_as_iri")
+    val FlickrWrapprLinks: Dataset = datasets("flickr_wrappr_links")
+    val PageLength: Dataset = datasets("page_length")
+    val ImageGalleries: Dataset = datasets("image_galleries")
+    val ImageAnnotations: Dataset = datasets("image_annotations")
+    val KMLFiles: Dataset = datasets("kml_files")
+    val AnchorText: Dataset = datasets("anchor_text")
+    val SurfaceForms: Dataset = datasets("surface_forms")
+    val Sounds: Dataset = datasets("sounds")
 
     /**
      * Mapping based
      */
-    val OntologyTypes = datasets.get("instance_types").get
-    val OntologyTypesTransitive = datasets.get("instance_types_transitive").get
-    val OntologyPropertiesObjects = datasets.get("mappingbased_objects_uncleaned").get
-    val OntologyPropertiesLiterals = datasets.get("mappingbased_literals").get
-    val OntologyPropertiesGeo = datasets.get("geo_coordinates_mappingbased").get
-    val SpecificProperties = datasets.get("specific_mappingbased_properties").get
+    val OntologyTypes: Dataset = datasets("instance_types")
+    val OntologyTypesTransitive: Dataset = datasets("instance_types_transitive")
+    val OntologyPropertiesObjects: Dataset = datasets("mappingbased_objects_uncleaned")
+    val OntologyPropertiesLiterals: Dataset = datasets("mappingbased_literals")
+    val OntologyPropertiesGeo: Dataset = datasets("geo_coordinates_mappingbased")
+    val SpecificProperties: Dataset = datasets("specific_mappingbased_properties")
 
-    val OntologyPropertiesObjectsCleaned = datasets.get("mappingbased_objects").get
-    val OntologyPropertiesDisjointRange = datasets.get("mappingbased_objects_disjoint_range").get
-    val OntologyPropertiesDisjointDomain = datasets.get("mappingbased_objects_disjoint_domain").get
+    val OntologyPropertiesObjectsCleaned: Dataset = datasets("mappingbased_objects")
+    val OntologyPropertiesDisjointRange: Dataset = datasets("mappingbased_objects_disjoint_range")
+    val OntologyPropertiesDisjointDomain: Dataset = datasets("mappingbased_objects_disjoint_domain")
 
-    val LhdDboInstanceTypes = datasets.get("instance_types_lhd_dbo").get
-    val LhdExtInstanceTypes = datasets.get("instance_types_lhd_ext").get
-    val TaxDboInstanceTypes = datasets.get("instance_types_dbtax_dbo").get
-    val TaxExtInstanceTypes = datasets.get("instance_types_dbtax_ext").get
-    val SDInstanceTypes = datasets.get("instance_types_sdtyped_dbo").get
+    val LhdDboInstanceTypes: Dataset = datasets("instance_types_lhd_dbo")
+    val LhdExtInstanceTypes: Dataset = datasets("instance_types_lhd_ext")
+    val TaxDboInstanceTypes: Dataset = datasets("instance_types_dbtax_dbo")
+    val TaxExtInstanceTypes: Dataset = datasets("instance_types_dbtax_ext")
+    val SDInstanceTypes: Dataset = datasets("instance_types_sdtyped_dbo")
 
     /**
      * French population template
      */
-     val FrenchPopulation = datasets.get("french_population").get
+     val FrenchPopulation: Dataset = datasets("french_population")
 
     /**
      *  Infobox
      */
-    val InfoboxProperties = datasets.get("infobox_properties").get
-    val InfoboxPropertiesMapped = datasets.get("infobox_properties_mapped").get
-    val InfoboxPropertyDefinitions = datasets.get("infobox_property_definitions").get
-    val TemplateParameters = datasets.get("template_parameters").get
-    val TemplateMappings = datasets.get("template_mappings").get
-    val TemplateMappingsHints = datasets.get("template_mapping_hints").get
-    val TemplateMappingsHintsInstance = datasets.get("template_mapping_hints_instance").get
-    val InfoboxTest = datasets.get("infobox_test").get
+    val InfoboxProperties: Dataset = datasets("infobox_properties")
+    val InfoboxPropertiesMapped: Dataset = datasets("infobox_properties_mapped")
+    val InfoboxPropertyDefinitions: Dataset = datasets("infobox_property_definitions")
+    val TemplateParameters: Dataset = datasets("template_parameters")
+    val TemplateMappings: Dataset = datasets("template_mappings")
+    val TemplateMappingsHints: Dataset = datasets("template_mapping_hints")
+    val TemplateMappingsHintsInstance: Dataset = datasets("template_mapping_hints_instance")
+    val InfoboxTest: Dataset = datasets("infobox_test")
 
     /**
      * Abstracts & Page text
      */
-    val ShortAbstracts = datasets.get("short_abstracts").get
-    val LongAbstracts = datasets.get("long_abstracts").get
-    val MissingShortAbstracts = datasets.get("missing_short_abstracts").get
-    val MissingLongAbstracts = datasets.get("missing_long_abstracts").get
-    val NifContext = datasets.get("nif_context").get
-    val NifPageStructure = datasets.get("nif_page_structure").get
-    val NifTextLinks = datasets.get("nif_text_links").get
-    val RawTables = datasets.get("raw_tables").get
-    val Equations = datasets.get("equations").get
+    val ShortAbstracts: Dataset = datasets("short_abstracts")
+    val LongAbstracts: Dataset = datasets("long_abstracts")
+    val MissingShortAbstracts: Dataset = datasets("missing_short_abstracts")
+    val MissingLongAbstracts: Dataset = datasets("missing_long_abstracts")
+    val NifContext: Dataset = datasets("nif_context")
+    val NifPageStructure: Dataset = datasets("nif_page_structure")
+    val NifTextLinks: Dataset = datasets("nif_text_links")
+    val RawTables: Dataset = datasets("raw_tables")
+    val Equations: Dataset = datasets("equations")
 
     /**
      * Links
      */
-    val LinksToWikipediaArticle = datasets.get("wikipedia_links").get
-    val ExternalLinks = datasets.get("external_links").get
-    val PageLinks = datasets.get("page_links").get
-    val DisambiguationLinks  = datasets.get("disambiguations").get
-    val Homepages = datasets.get("homepages").get
-    val OutDegree = datasets.get("out_degree").get
-    val FreebaseLinks = datasets.get("freebase_links").get
-    val GeonamesLinks = datasets.get("geonames_links").get
-    val CommonsLink = datasets.get("commons_page_links").get
+    val LinksToWikipediaArticle: Dataset = datasets("wikipedia_links")
+    val ExternalLinks: Dataset = datasets("external_links")
+    val PageLinks: Dataset = datasets("page_links")
+    val DisambiguationLinks: Dataset = datasets("disambiguations")
+    val Homepages: Dataset = datasets("homepages")
+    val OutDegree: Dataset = datasets("out_degree")
+    val FreebaseLinks: Dataset = datasets("freebase_links")
+    val GeonamesLinks: Dataset = datasets("geonames_links")
+    val CommonsLink: Dataset = datasets("commons_page_links")
 
 
     /**
      * Files
      */
-    val FileInformation = datasets.get("file_information").get
+    val FileInformation: Dataset = datasets("file_information")
 
 
     /**
      * Wikidata
      */
     //val WikidataLabelsMappingsWiki = datasets.get("wikidata_labels").get
-    val WikidataLabelsRest = datasets.get("labels_nmw").get
-    val WikidataSameAs = datasets.get("sameas_all_wikis").get
-    val WikidataNameSpaceSameAs = datasets.get("sameas_wikidata").get
-    val WikidataSameAsExternal = datasets.get("sameas_external").get
-    val WikidataAliasMappingsWiki = datasets.get("alias").get
-    val WikidataAliasRest = datasets.get("alias_nmw").get
-    val WikidataDescriptionMappingsWiki = datasets.get("description").get
-    val WikidataDescriptionRest = datasets.get("description_nmw").get
-    val WikidataProperty= datasets.get("properties").get
+    val WikidataLabelsRest: Dataset = datasets("labels_nmw")
+    val WikidataSameAs: Dataset = datasets("sameas_all_wikis")
+    val WikidataNameSpaceSameAs: Dataset = datasets("sameas_wikidata")
+    val WikidataSameAsExternal: Dataset = datasets("sameas_external")
+    val WikidataAliasMappingsWiki: Dataset = datasets("alias")
+    val WikidataAliasRest: Dataset = datasets("alias_nmw")
+    val WikidataDescriptionMappingsWiki: Dataset = datasets("description")
+    val WikidataDescriptionRest: Dataset = datasets("description_nmw")
+    val WikidataProperty: Dataset = datasets("properties")
     val WikidataR2R_literals = OntologyPropertiesLiterals
     val WikidataR2R_objects = OntologyPropertiesObjects
-    val WikidataR2R_ontology = datasets.get("ontology_subclassof").get
-    val WikidataR2R_mappingerrors = datasets.get("wikidata_r2r_mapping_errors").get
-    val WikidataReifiedR2R = datasets.get("mappingbased_properties_reified").get // keep same name with other languages
-    val WikidataReifiedR2RQualifier= datasets.get("mappingbased_properties_reified_qualifiers").get // keep same name with other languages
-    val WikidataRaw = datasets.get("raw_unredirected").get
-    val WikidataRawRedirected = datasets.get("raw").get
-    val WikidataRawReified = datasets.get("raw_reified").get
-    val WikidataRawReifiedQualifiers = datasets.get("raw_reified_qualifiers").get
-    val WikidataReference = datasets.get("references").get
-    val WikidataDublicateIriSplit = datasets.get("wikidata_duplicate_iri_split").get
+    val WikidataR2R_ontology: Dataset = datasets("ontology_subclassof")
+    val WikidataR2R_mappingerrors: Dataset = datasets("wikidata_r2r_mapping_errors")
+    val WikidataReifiedR2R: Dataset = datasets("mappingbased_properties_reified") // keep same name with other languages
+    val WikidataReifiedR2RQualifier: Dataset = datasets("mappingbased_properties_reified_qualifiers") // keep same name with other languages
+    val WikidataRaw: Dataset = datasets("raw_unredirected")
+    val WikidataRawRedirected: Dataset = datasets("raw")
+    val WikidataRawReified: Dataset = datasets("raw_reified")
+    val WikidataRawReifiedQualifiers: Dataset = datasets("raw_reified_qualifiers")
+    val WikidataReference: Dataset = datasets("references")
+    val WikidataDublicateIriSplit: Dataset = datasets("wikidata_duplicate_iri_split")
+    val WikidataTypeLikeStatements: Dataset = datasets("wikidata_type_like_statements")
+
+    val WikidataR2RErrorDataset = DBpediaDatasets.WikidataR2R_mappingerrors
+    val WikidataDuplicateIRIDataset = DBpediaDatasets.WikidataDublicateIriSplit
 
     /**
      * Citations
      */
-    val CitationLinks = datasets.get("citation_links").get
-    val CitationData = datasets.get("citation_data").get
-    val CitatedFacts = datasets.get("cited_facts").get  //TODO add description @Dimitris
+    val CitationLinks: Dataset = datasets("citation_links")
+    val CitationData: Dataset = datasets("citation_data")
+    val CitatedFacts: Dataset = datasets("cited_facts")  //TODO add description @Dimitris
     //val CitationTypes = datasets.get("citation_types").get
 
 
   /**
     * misc
     */
-  val MainDataset = datasets.get("main_dataset").get
-  val WiktionaryDataset = datasets.get("wiktionary_dbpedia_org").get
+  val MainDataset: Dataset = datasets("main_dataset")
+  val WiktionaryDataset: Dataset = datasets("wiktionary_dbpedia_org")
   val TestDataset = new Dataset("test_dataset", "this is just a test", Language.English, "2015-10", "test_dataset", Seq(MainDataset), null, Seq(), "2015-10", DatasetTrait.ValueSet(DatasetTrait.Ordered, DatasetTrait.Provenance))
 
 
   def getDataset(dataset: Dataset, language: Language, version: String): Dataset = getDataset(dataset.encoded, language, version)
 
-  def getDataset(name: String, language: Language = null, version: String = null) =
+  def getDataset(name: String, language: Language = null, version: String = null): Dataset =
   {
     val n = if(name.startsWith(DBpediaNamespace.DATASET.toString))
       name.substring(DBpediaNamespace.DATASET.toString.length, if(name.indexOf("?") >= 0) name.indexOf("?") else name.length)

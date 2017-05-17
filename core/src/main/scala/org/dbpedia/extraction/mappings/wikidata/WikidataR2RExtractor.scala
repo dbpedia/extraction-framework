@@ -59,10 +59,21 @@ class WikidataR2RExtractor(
   // this is where we will store the output
   val WikidataR2RErrorDataset = DBpediaDatasets.WikidataR2R_mappingerrors
   val WikidataDuplicateIRIDataset = DBpediaDatasets.WikidataDublicateIriSplit
-  override val datasets = Set(DBpediaDatasets.WikidataR2R_literals, DBpediaDatasets.WikidataR2R_objects, WikidataR2RErrorDataset,WikidataDuplicateIRIDataset,
-                              DBpediaDatasets.WikidataReifiedR2R, DBpediaDatasets.WikidataReifiedR2RQualifier, DBpediaDatasets.GeoCoordinates,
-                              DBpediaDatasets.Images, DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive,
-                              DBpediaDatasets.WikidataSameAsExternal, DBpediaDatasets.WikidataNameSpaceSameAs, DBpediaDatasets.WikidataR2R_ontology)
+  override val datasets = Set(
+    DBpediaDatasets.WikidataR2R_literals,
+    DBpediaDatasets.WikidataR2R_objects,
+    WikidataR2RErrorDataset,
+    WikidataDuplicateIRIDataset,
+    DBpediaDatasets.WikidataReifiedR2R,
+    DBpediaDatasets.WikidataReifiedR2RQualifier,
+    DBpediaDatasets.GeoCoordinates,
+    DBpediaDatasets.Images,
+    DBpediaDatasets.OntologyTypes,
+    DBpediaDatasets.OntologyTypesTransitive,
+    DBpediaDatasets.WikidataSameAsExternal,
+    DBpediaDatasets.WikidataNameSpaceSameAs,
+    DBpediaDatasets.WikidataR2R_ontology,
+    DBpediaDatasets.WikidataTypeLikeStatements)
 
   override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     // This array will hold all the triples we will extract
@@ -93,13 +104,18 @@ class WikidataR2RExtractor(
                   quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceIri, null)
                 }
 
+
+                if(equivClassSet.nonEmpty)    //if equ classes are available, we can be sure that we are dealing with a type like property
+                {
+                  //create the type like statements
+                  val wikidataProperrtyUri = "https://www.wikidata.org/wiki/Property:" + property
+                  quads += new Quad(context.language, DBpediaDatasets.WikidataTypeLikeStatements, subjectUri, wikidataProperrtyUri, value.toString, page.wikiPage.sourceIri, null)
+                }
+
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
 
                 //Wikidata qualifiers R2R mapping
                 quads ++= getQualifersQuad(page, statementUri, claim)
-
-
-
               }
 
               case _ =>
