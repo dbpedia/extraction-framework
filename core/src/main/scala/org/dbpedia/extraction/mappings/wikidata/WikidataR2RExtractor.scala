@@ -1,14 +1,10 @@
 package org.dbpedia.extraction.mappings
 
 import java.io.IOException
-import java.net.URL
-
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.config.mappings.wikidata._
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
-import org.dbpedia.extraction.ontology._
+import org.dbpedia.extraction.ontology.{OntologyProperty, _}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{JsonConfig, Language, WikidataUtil}
@@ -55,11 +51,14 @@ class WikidataR2RExtractor(
   val classMappings = readClassMappings("auto_generated_mapping.json")
 
   private val rdfType = context.ontology.properties("rdf:type")
+  private val subclassOf = context.ontology.properties("rdfs:subClassOf")
+  private val partof = context.ontology.properties("partof")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
   private val rdfSubject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
   private val rdfPredicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
   private val rdfObject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#object"
+  private val wikidataProperrtyUri = "https://www.wikidata.org/wiki/Property"
 
   // this is where we will store the output
   val WikidataR2RErrorDataset = DBpediaDatasets.WikidataR2R_mappingerrors
@@ -90,10 +89,10 @@ class WikidataR2RExtractor(
         val statements = checkRank(statementGroup)
         statements.foreach {
           statement => {
-            val claim = statement.getClaim()
-            val property = claim.getMainSnak().getPropertyId().getId
+            val claim = statement.getClaim
+            val property = claim.getMainSnak.getPropertyId.getId
             val equivPropertySet = getEquivalentProperties(property)
-            claim.getMainSnak() match {
+            claim.getMainSnak match {
               case mainSnak: ValueSnak => {
                 val value = mainSnak.getValue
 
@@ -106,16 +105,21 @@ class WikidataR2RExtractor(
 
                 val PV = property + " " + value
                 if (duplicateList.contains(PV)) {
-                  val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId.toString)
+                  val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId)
                   quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceIri, null)
                 }
 
-
-                if(equivClassSet.nonEmpty)    //if equ classes are available, we can be sure that we are dealing with a type like property
+                //if equ classes are available, we can be sure that we are dealing with a type like property
+                if(equivPropertySet.contains(rdfType) || equivPropertySet.contains(partof) || equivPropertySet.contains(subclassOf))
                 {
                   //create the type like statements
-                  val wikidataProperrtyUri = "https://www.wikidata.org/wiki/Property:" + property
-                  quads += new Quad(context.language, DBpediaDatasets.WikidataTypeLikeStatements, subjectUri, wikidataProperrtyUri, value.toString, page.wikiPage.sourceIri, null)
+                  quads += new Quad(
+                    context.language,
+                    DBpediaDatasets.WikidataTypeLikeStatements,
+                    subjectUri,
+                    wikidataProperrtyUri + ":" + property,
+                    value.asInstanceOf[IriIdentifiedValue].getIri,
+                    page.wikiPage.sourceIri, null)
                 }
 
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
@@ -236,14 +240,13 @@ class WikidataR2RExtractor(
     var duplicateList = mutable.MutableList[String]();
     statementGroup.getStatements.foreach {
       statement => {
-        val claim = statement.getClaim()
-        val property = claim.getMainSnak().getPropertyId().getId
-        claim.getMainSnak() match {
-          case mainSnak: ValueSnak => {
+        val claim = statement.getClaim
+        val property = claim.getMainSnak.getPropertyId.getId
+        claim.getMainSnak match {
+          case mainSnak: ValueSnak =>
             val value = mainSnak.getValue
-            val PV = property + " " + value;
-            duplicateList +=PV;
-            }
+            val PV = property + " " + value
+            duplicateList +=PV
           case _ =>
         }
       }
@@ -254,26 +257,25 @@ class WikidataR2RExtractor(
 
   private def findType(datatype: Datatype, range: OntologyType): Datatype = {
     if (datatype != null) datatype
-    else if (range.isInstanceOf[Datatype]) range.asInstanceOf[Datatype]
-    else null
+    else range match {
+      case datatype: Datatype => datatype
+      case _ => null
+    }
   }
 
   private def getEquivalentClass(value: Value): Set[OntologyClass] = {
-    var classes = Set[OntologyClass]()
-
     value match {
-      case v: ItemIdValue => {
+      case v: ItemIdValue =>
         val wikidataItem = WikidataUtil.getItemId(v)
-          if (!classMappings.isEmpty){
+          if (classMappings.nonEmpty){
             classMappings.get(wikidataItem) match {
-            case Some(mappings) => classes++=mappings
-            case _=>
+              case Some(mappings) => return mappings
+              case None =>
             }
           }
-      }
       case _ =>
     }
-    classes
+    Set()
   }
 
   private def readClassMappings(fileName:String): mutable.Map[String,Set[OntologyClass]] = {
@@ -306,7 +308,7 @@ class WikidataR2RExtractor(
       classMap => finalMap+=classMap._1.replace("wikidata:","")->classMap._2
     }
 
-    return finalMap
+    finalMap
   }
 
   private def getEquivalentProperties(property: String): Set[OntologyProperty] = {
