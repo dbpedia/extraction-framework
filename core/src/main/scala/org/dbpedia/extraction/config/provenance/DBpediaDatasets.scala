@@ -7,6 +7,8 @@ import scala.collection.mutable
 
 /**
  * Defines the datasets which are extracted by DBpedia.
+  *
+  * IMPORTANT: when introducing new datasets: make sure you included a new entry in main/resources/datasetdefinitions.json!!!!
  */
 object DBpediaDatasets
 {

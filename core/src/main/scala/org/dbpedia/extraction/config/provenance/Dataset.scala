@@ -23,7 +23,12 @@ class Dataset private[provenance](
    input: Seq[String] = Seq.empty[String], //Uris of the Extractors/scripts which use this dataset as in input (see class DBpediaAnnotations)
    depr: String = null, //last DBpedia version the dataset was in use (and now deprecated): e.g. 2015-10
    var traits: DatasetTrait.ValueSet = DatasetTrait.ValueSet.empty, //The set of traits the dataset has. According to these traits a dataset will be post-processed.
-   defaultGraf: String = null, //The default graph name is usually the language specific dbpedia namespace IRI (if this is null). With this extension you can add to the path of this IRI to define secondary graphs.
+   defaultGraf: String = "dataset", //The default graph name is usually the language specific dbpedia namespace IRI.
+   // With this extension you can add to the path of this IRI to define secondary graphs .
+    // reserved values:
+   //       'namespace' -> the dataset is part of the general namespace of this language (for general datasets which form the main knowledge graph of this language)
+   //       'dataset'   -> the language namespace is appended with the name of the current dataset (forming an alternate graph iri -> indicating that the dataset has a singular purpose, but should not appear in the general knowledge graph)
+   //       'any other value (no whitespaces!)' -> is appended to the namespace of this language (see above -> this can be used to crete alternative namespaces stretching over multiple datasets)
    var keywords: Seq[String] = Seq.empty[String] //also for documentation
    )
 {
