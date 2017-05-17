@@ -68,32 +68,7 @@
         </plugins>
     </build>
 
-    <repositories>
-        <!--snuggletex dependencies: used to convert latex formula into infix notation maybe replace these-->
-        <repository>
-            <id>www2.ph.ed.ac.uk-releases</id>
-            <url>http://www2.ph.ed.ac.uk/maven2</url>
-        </repository>
-    </repositories>
-
     <dependencies>
-        <!--snuggletex dependencies: used to convert latex formula into infix notation maybe replace these-->
-        <dependency>
-            <groupId>uk.ac.ed.ph.snuggletex</groupId>
-            <artifactId>snuggletex-core</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>uk.ac.ed.ph.snuggletex</groupId>
-            <artifactId>snuggletex-upconversion</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>uk.ac.ed.ph.snuggletex</groupId>
-            <artifactId>snuggletex-jeuclid</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
@@ -131,11 +106,15 @@
         </dependency>
 
         <dependency>
+		<groupId>org.wikidata.wdtk</groupId>
+		<artifactId>wdtk-dumpfiles</artifactId>
+		<version>0.7.0</version>
+	 </dependency>	
             <groupId>org.wikidata.wdtk</groupId>
             <artifactId>wdtk-dumpfiles</artifactId>
             <version>0.7.0</version>
          </dependency>
-	 
+
         <dependency>
               <groupId>org.wikidata.wdtk</groupId>
               <artifactId>wdtk-datamodel</artifactId>

@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
 import java.io.IOException
+import java.net.URL
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -17,6 +18,10 @@ import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+
 import scala.language.{postfixOps, reflectiveCalls}
 
 /**
@@ -82,7 +87,8 @@ class WikidataR2RExtractor(
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
         val duplicateList = getDuplicates(statementGroup)
-        statementGroup.getStatements.foreach {
+        val statements = checkRank(statementGroup)
+        statements.foreach {
           statement => {
             val claim = statement.getClaim()
             val property = claim.getMainSnak().getPropertyId().getId
@@ -125,9 +131,22 @@ class WikidataR2RExtractor(
         }
       }
     }
+
     splitDatasets(quads, subjectUri, page)
   }
 
+  def checkRank(statementGroup: StatementGroup): Seq[Statement] ={
+    var statements = Seq[Statement]();
+
+    //If statementGroup has preferred statement
+    statements = statementGroup.getStatements.filter(_.getRank.equals(StatementRank.PREFERRED));
+
+    //If there is no preferred statement, take all Normal statemnts
+    if (statements.isEmpty) {
+      statements = statementGroup.getStatements.filter(_.getRank.equals(StatementRank.NORMAL))
+    }
+    statements
+  }
   def getQuad(page: JsonNode, subjectUri: String,statementUri:String,map: mutable.Map[String, String]): ArrayBuffer[Quad] = {
     val quads = new ArrayBuffer[Quad]()
     map.foreach {
@@ -149,8 +168,7 @@ class WikidataR2RExtractor(
             quads ++= getReificationQuads(page, statementUri, datatype, quad)
           }
         } catch {
-          case e: Exception =>
-            println("exception caught: " + e)
+          case e: Exception => println("exception caught: " + e)
         }
 
       }
@@ -200,8 +218,7 @@ class WikidataR2RExtractor(
                     quads += new Quad(context.language, DBpediaDatasets.WikidataReifiedR2RQualifier,
                       statementUri, ontologyProperty, mappedQualifierValue._2, page.wikiPage.sourceIri, datatype)
                   } catch {
-                    case e: Exception =>
-                      println("exception caught: " + e)
+                    case e: Exception => println("exception caught: " + e)
                   }
                 }
               }
@@ -247,9 +264,11 @@ class WikidataR2RExtractor(
     value match {
       case v: ItemIdValue => {
         val wikidataItem = WikidataUtil.getItemId(v)
-          classMappings.get(wikidataItem) match {
+          if (!classMappings.isEmpty){
+            classMappings.get(wikidataItem) match {
             case Some(mappings) => classes++=mappings
             case _=>
+            }
           }
       }
       case _ =>
@@ -280,6 +299,7 @@ class WikidataR2RExtractor(
       }
     } catch {
       case ioe: IOException => println("Please check class mapping file "+ioe)
+      case npe: NullPointerException=> println("Null pointer exception, file is empty" + npe)
     }
 
     context.ontology.wikidataClassesMap.foreach {
