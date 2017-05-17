@@ -12,7 +12,7 @@ import scala.collection.JavaConversions
   * Created by Chile on 2/16/2016.
   */
 object OpenRdfUtils {
-  def convertToOpenRdfModel(jena: com.hp.hpl.jena.rdf.model.Model): org.openrdf.model.Model =
+  def convertToOpenRdfModel(jena: org.apache.jena.rdf.model.Model): org.openrdf.model.Model =
   {
     val retModel = new TreeModel()
 
@@ -31,7 +31,7 @@ object OpenRdfUtils {
     retModel
   }
 
-  private def convertResource(res: com.hp.hpl.jena.rdf.model.Resource): Resource =
+  private def convertResource(res: org.apache.jena.rdf.model.Resource): Resource =
   {
     if(res.isURIResource)
       new URIImpl(res.getURI)
@@ -40,12 +40,12 @@ object OpenRdfUtils {
     new URIImpl(res.getURI)
   }
 
-  private def convertObject(obj: com.hp.hpl.jena.rdf.model.RDFNode): Value =
+  private def convertObject(obj: org.apache.jena.rdf.model.RDFNode): Value =
   {
     if(obj.isResource)
-      return convertResource(obj.asInstanceOf[com.hp.hpl.jena.rdf.model.Resource])
+      return convertResource(obj.asInstanceOf[org.apache.jena.rdf.model.Resource])
     if(obj.isLiteral) {
-      val lit = obj.asInstanceOf[com.hp.hpl.jena.rdf.model.Literal]
+      val lit = obj.asInstanceOf[org.apache.jena.rdf.model.Literal]
       if (lit.getDatatype != null)
         return new LiteralImpl(lit.getString, new URIImpl(lit.getDatatypeURI))
       if(lit.getLanguage.trim.nonEmpty)

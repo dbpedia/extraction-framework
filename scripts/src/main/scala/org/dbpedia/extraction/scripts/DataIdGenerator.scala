@@ -8,11 +8,11 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.logging.{Level, Logger}
 
-import com.hp.hpl.jena.rdf.model._
-import com.hp.hpl.jena.vocabulary.RDF
 import org.apache.commons.lang3.SystemUtils
 import org.apache.http.client.utils.URLEncodedUtils
 import org.apache.jena.atlas.json.{JSON, JsonObject, JsonValue}
+import org.apache.jena.rdf.model._
+import org.apache.jena.vocabulary.RDF
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.{ConfigUtils, Language, OpenRdfUtils}
 import org.openrdf.rio.RDFFormat
