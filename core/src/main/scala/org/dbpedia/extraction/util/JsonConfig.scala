@@ -38,7 +38,7 @@ class JsonConfig(fileUrl:URL) {
     }
   }
 
-  def getCommand(property: String, value: Value, equivClassSet: Set[OntologyClass], equivPropertySet: Set[OntologyProperty], receiver: WikidataCommandReceiver): WikidataTransformationCommands = {
+  def getCommand(property: String, value: Value, equivClassSet: Set[OntologyClass], equivPropertySet: Set[String], receiver: WikidataCommandReceiver): WikidataTransformationCommands = {
     var command = new WikidataTransformationCommands {
       override def execute(): Unit = print("")
     }

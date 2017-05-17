@@ -17,8 +17,13 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.language.reflectiveCalls
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.ArrayNode
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import org.apache.commons.collections.IteratorUtils
+import org.apache.jena.atlas.json.JsonArray
+import org.apache.jena.ext.com.google.common.collect.Lists
 
+import scala.collection.convert.decorateAsScala._
 import scala.language.{postfixOps, reflectiveCalls}
 
 /**
@@ -48,6 +53,12 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   val config: JsonConfig = new JsonConfig(JsonConfig.getClass.getClassLoader.getResource("wikidatar2rconfig.json"))
+
+  var equivalentProperties: Map[String, Set[String]] = config.configMap.map(p => p._2 match{
+    case array: ArrayNode => "wikidata:" + p._1 -> array.elements().asScala.map(x => RdfNamespace.fullUri(RdfNamespace.DBO, x.fieldNames().next())).toSet
+  })
+
+  context.ontology.wikidataPropertiesMap.foreach(x => equivalentProperties += x._1 -> x._2.map(y => y.uri))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
   val classMappings = readClassMappings(context.configFile.wikidataMappingsFile)
@@ -313,15 +324,12 @@ class WikidataR2RExtractor(
     finalMap
   }
 
-  private def getEquivalentProperties(property: String): Set[OntologyProperty] = {
+  private def getEquivalentProperties(property: String): Set[String] = {
     var properties = Set[OntologyProperty]()
-    val prop = "wikidata:" + property
-    context.ontology.wikidataPropertiesMap.foreach({ map =>
-      if (map._1.matches(prop)) {
-        properties ++= map._2
-      }
-    })
-    properties
+    equivalentProperties.get("wikidata:" + property) match{
+      case Some(x) => x
+      case None => Set[String]()
+    }
   }
 
   /**

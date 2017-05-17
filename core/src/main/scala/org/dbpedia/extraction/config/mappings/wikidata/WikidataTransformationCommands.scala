@@ -36,10 +36,10 @@ class WikidataCommandReceiver() {
   private var value: Value = _
   private var map = Map.empty[String, String]
   private var equivClassSet = Set[OntologyClass]()
-  private var equivPropertySet = Set[OntologyProperty]()
+  private var equivPropertySet = Set[String]()
 
 
-  def setParameters(property: String, value: Value, equivClassSet: Set[OntologyClass], equivPropSet: Set[OntologyProperty], map: Map[String, String]): Unit = {
+  def setParameters(property: String, value: Value, equivClassSet: Set[OntologyClass], equivPropSet: Set[String], map: Map[String, String]): Unit = {
     this.property = property
     this.value = value
     this.equivClassSet = equivClassSet
