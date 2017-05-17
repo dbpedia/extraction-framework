@@ -391,6 +391,7 @@ object SdTypeCreation {
 
   def main(args: Array[String]): Unit = {
 
+    //FIXME please use Config class not the config loader
     require(args != null && args.length == 1, "One arguments required, extraction config file")
 
     val config = ConfigUtils.loadConfig(args(0), "UTF-8")

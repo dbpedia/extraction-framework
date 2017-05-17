@@ -1,13 +1,14 @@
 package org.dbpedia.extraction.mappings
 
-import java.io.IOException
+import java.io.{File, IOException}
+
 import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 import org.dbpedia.extraction.config.mappings.wikidata._
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.{OntologyProperty, _}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.transform.Quad
-import org.dbpedia.extraction.util.{JsonConfig, Language, WikidataUtil}
+import org.dbpedia.extraction.util.{Config, JsonConfig, Language, WikidataUtil}
 import org.dbpedia.extraction.wikiparser.{JsonNode, Namespace}
 import org.wikidata.wdtk.datamodel.interfaces._
 
@@ -41,6 +42,7 @@ class WikidataR2RExtractor(
                             context: {
                               def ontology: Ontology
                               def language: Language
+                              def configFile: Config
                             }
                             )
   extends JsonNodeExtractor {
@@ -48,7 +50,7 @@ class WikidataR2RExtractor(
   val config: JsonConfig = new JsonConfig(JsonConfig.getClass.getClassLoader.getResource("wikidatar2rconfig.json"))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
-  val classMappings = readClassMappings("auto_generated_mapping.json")
+  val classMappings = readClassMappings(context.configFile.wikidataMappingsFile)
 
   private val rdfType = context.ontology.properties("rdf:type")
   private val subclassOf = context.ontology.properties("rdfs:subClassOf")
@@ -278,11 +280,11 @@ class WikidataR2RExtractor(
     Set()
   }
 
-  private def readClassMappings(fileName:String): mutable.Map[String,Set[OntologyClass]] = {
+  private def readClassMappings(file: File): mutable.Map[String,Set[OntologyClass]] = {
     val finalMap = mutable.Map[String,Set[OntologyClass]]()
 
     try {
-      val source = scala.io.Source.fromFile(fileName)
+      val source = scala.io.Source.fromFile(file)
       val jsonString = source.getLines() mkString
       val mapper = new ObjectMapper() with ScalaObjectMapper
       mapper.registerModule(DefaultScalaModule)

@@ -69,6 +69,11 @@ class Config(val configPath: String)
     case Failure(e) => throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
   }
 
+  lazy val wikidataMappingsFile: File = {
+    val name = checkOverride("wikidata-property-mappings-file").getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim
+    new File(dumpDir, name)
+  }
+
   /**
     * The directory where all log files will be stored
     */

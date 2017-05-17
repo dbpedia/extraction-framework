@@ -27,6 +27,7 @@ import scala.util.control.Breaks._
  * Then creates new mapping
  * dbo:Class: {owl:equivalentClass: Qx}  and writes to file
  *
+  * needs to be run after
  */
 
 object WikidataSubClassOf {
@@ -41,21 +42,20 @@ object WikidataSubClassOf {
     require(args(0).nonEmpty, "missing required argument: config file name")
     require(args(1).nonEmpty, "missing required argument: suffix e.g. .tql.gz")
 
-    val config = ConfigUtils.loadConfig(args(0), "UTF-8")
+    val config = new Config(args(0))
     val suffix = args(1)
-    val subClassOfDataset = DBpediaDatasets.WikidataR2R_ontology.encoded + "." + suffix
-    val rawDataset = DBpediaDatasets.WikidataRawRedirected.encoded + "." + suffix
+    val rawDataset = DBpediaDatasets.WikidataRawRedirected.encoded + suffix
 
-    val baseDir = ConfigUtils.getValue(config, "base-dir", true)(new File(_))
+    val baseDir = config.dumpDir
     if (!baseDir.exists)
       throw new scala.IllegalArgumentException("dir " + baseDir + " does not exist")
 
     val finder = new DateFinder(baseDir, Language.Wikidata)
-    val date = finder.finder.dates().last
-    val ontology = getOntology(config)
+    finder.byName("pages-articles.xml.bz2", auto = true)
+    val ontology = new OntologyReader().read( XMLSource.fromFile(config.ontologyFile, Language.Mappings))
 
     // use integers in the map [superClass -> set[subclasses]]
-    val wkdSubClassMap = getWikidataSubClassOfMap(rawDataset, finder, date)
+    val wkdSubClassMap = getWikidataSubClassOfMap(rawDataset, finder)
     val wkdEquivMap: mutable.HashMap[Int, Option[String]] = new mutable.HashMap[Int, Option[String]]()
 
     // init all wikidata classes with None
@@ -102,7 +102,7 @@ object WikidataSubClassOf {
       // remove the opional
       .map(x => ("Q"+x._1.toString(), x._2.get))
 
-    writeConfig(wkdToDbpMappings)
+    writeConfig(config.wikidataMappingsFile, wkdToDbpMappings)
 
   }
 
@@ -178,7 +178,7 @@ object WikidataSubClassOf {
 
   }
 
-  def getWikidataSubClassOfMap(rawDataset: String, finder: DateFinder[File], date: String): mutable.Map[Int, mutable.Set[Int]] = {
+  def getWikidataSubClassOfMap(rawDataset: String, finder: DateFinder[File]): mutable.Map[Int, mutable.Set[Int]] = {
     val wikidataSubClassMap = mutable.Map.empty[Int, mutable.Set[Int]]
     try {
       new QuadMapper().readQuads(finder, rawDataset) { quad =>
@@ -192,7 +192,8 @@ object WikidataSubClassOf {
 
           } catch {
             case e: NumberFormatException =>
-              Console.err.println(e.printStackTrace())
+              //FIXME forward to extraction recorder
+              Console.out.println(e.printStackTrace())
           }
         }
       }
@@ -205,14 +206,14 @@ object WikidataSubClassOf {
     }
   }
 
-  private def writeConfig(dbo_class_map: mutable.Map[String, String]): Unit = {
+  private def writeConfig(outputFile: File, dbo_class_map: mutable.Map[String, String]): Unit = {
     val mapper = new ObjectMapper()
     mapper.registerModule(DefaultScalaModule)
     val json_out = new StringWriter
 
     mapper.writeValue(json_out, dbo_class_map)
     val json = json_out.toString()
-    val pw = new PrintWriter(new File("../dump/auto_generated_mapping.json"))
+    val pw = new PrintWriter(outputFile)
     pw.write(json)
     pw.close()
   }
