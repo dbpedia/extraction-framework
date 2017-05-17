@@ -57,11 +57,40 @@ class NifExtractor(
 
     //Retrieve page text
     val html = mwConnector.retrievePage(pageNode.title, apiParametersFormat, pageNode.isRetry) match{
-      case Some(t) => AbstractExtractor.postProcessExtractedHtml(pageNode.title, t)
+      case Some(t) => NifExtractor.postProcessExtractedHtml(pageNode.title, t)
       case None => return Seq.empty
     }
 
     new WikipediaNifExtractor(context, pageNode).extractNif(html)(err => pageNode.addExtractionRecord(err))
   }
 
+}
+
+object NifExtractor{
+  //TODO check if this function is still relevant
+  //copied from AbstractExtractor
+  def postProcessExtractedHtml(pageTitle: WikiTitle, text: String): String =
+  {
+    val startsWithLowercase =
+      if (text.isEmpty) {
+        false
+      } else {
+        val firstLetter = text.substring(0,1)
+        firstLetter != firstLetter.toUpperCase(pageTitle.language.locale)
+      }
+
+    //HACK
+    if (startsWithLowercase)
+    {
+      val decodedTitle = pageTitle.decoded.replaceFirst(" \\(.+\\)$", "")
+
+      if (! text.toLowerCase.contains(decodedTitle.toLowerCase))
+      {
+        // happens mainly for Japanese names (abstract starts with template)
+        return decodedTitle + " " + text
+      }
+    }
+
+    text
+  }
 }
