@@ -7,17 +7,15 @@ package org.dbpedia.extraction.util
 
 import java.io._
 import java.net.URL
-import java.util
 
 import com.fasterxml.jackson.core.JsonFactory
-import com.fasterxml.jackson.databind.node.{JsonNodeType, ObjectNode}
+import com.fasterxml.jackson.databind.node.JsonNodeType
 import com.fasterxml.jackson.databind.{JsonNode, ObjectReader, ObjectMapper}
 import org.dbpedia.extraction.config.mappings.wikidata.{WikidataOneToOneCommand, WikidataOneToManyCommand, WikidataTransformationCommands, WikidataCommandReceiver}
-import org.dbpedia.extraction.ontology.{OntologyProperty, OntologyClass}
+import org.dbpedia.extraction.ontology.OntologyClass
 import org.wikidata.wdtk.datamodel.interfaces.Value
 
 import scala.collection.JavaConversions._
-import scala.collection.JavaConverters._
 import scala.language.postfixOps
 
 class JsonConfig(fileUrl:URL) {

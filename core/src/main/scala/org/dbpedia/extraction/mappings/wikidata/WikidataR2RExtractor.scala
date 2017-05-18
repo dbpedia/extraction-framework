@@ -50,7 +50,6 @@ class WikidataR2RExtractor(
   extends JsonNodeExtractor {
 
   val config: JsonConfig = new JsonConfig(JsonConfig.getClass.getClassLoader.getResource("wikidatar2r.json"))
-  Console.out.println(JsonConfig.getClass.getClassLoader.getResource("wikidatar2r.json"))
 
   var equivalentProperties: Map[String, Set[String]] = config.configMap.map(
     p => p._2 match{
@@ -74,13 +73,11 @@ class WikidataR2RExtractor(
   private val wikidataProperrtyUri = "https://www.wikidata.org/wiki/Property"
 
   // this is where we will store the output
-  val WikidataR2RErrorDataset = DBpediaDatasets.WikidataR2R_mappingerrors
-  val WikidataDuplicateIRIDataset = DBpediaDatasets.WikidataDublicateIriSplit
   override val datasets = Set(
     DBpediaDatasets.WikidataR2R_literals,
     DBpediaDatasets.WikidataR2R_objects,
-    WikidataR2RErrorDataset,
-    WikidataDuplicateIRIDataset,
+    DBpediaDatasets.WikidataR2R_mappingerrors,
+    DBpediaDatasets.WikidataDublicateIriSplit,
     DBpediaDatasets.WikidataReifiedR2R,
     DBpediaDatasets.WikidataReifiedR2RQualifier,
     DBpediaDatasets.GeoCoordinates,
@@ -119,10 +116,10 @@ class WikidataR2RExtractor(
                 val PV = property + " " + value
                 if (duplicateList.contains(PV)) {
                   val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId)
-                  quads += new Quad(context.language, WikidataDuplicateIRIDataset, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceIri, null)
+                  quads += new Quad(context.language, DBpediaDatasets.WikidataDublicateIriSplit, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceIri, null)
                 }
 
-                //if equ classes are available, we can be sure that we are dealing with a type like property
+                //if type properties are available, we can be sure that we are dealing with a type like property
                 if(equivPropertySet.contains(rdfType.uri) || equivPropertySet.contains(subclassOf.uri))  // maybe add equivPropertySet.contains(partof)
                 {
                   //create the type like statements
@@ -172,7 +169,7 @@ class WikidataR2RExtractor(
           val ontologyProperty = context.ontology.properties(propertyValue._1)
           val datatype = findType(null, ontologyProperty.range)
           if (propertyValue._2.startsWith("http:") && datatype != null && datatype.name == "xsd:string") {
-            quads += new Quad(context.language, WikidataR2RErrorDataset, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceIri, datatype)
+            quads += new Quad(context.language, DBpediaDatasets.WikidataR2R_mappingerrors, subjectUri, ontologyProperty, propertyValue._2.toString, page.wikiPage.sourceIri, datatype)
           } else {
 
             //split to literal / object datasets
