@@ -1,13 +1,10 @@
 package org.dbpedia.extraction.dump.extract
 
-import java.util.logging.{Level, Logger}
-
 import org.dbpedia.extraction.destinations.Destination
-import org.dbpedia.extraction.mappings.WikiPageExtractor
-import org.dbpedia.extraction.sources.{Source, WikiPage}
-import org.dbpedia.extraction.util.SimpleWorkers
-import org.dbpedia.extraction.wikiparser.Namespace
-import org.dbpedia.util.Exceptions
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity, WikiPageExtractor}
+import org.dbpedia.extraction.sources.Source
+import org.dbpedia.extraction.util.{Language, SimpleWorkers}
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 
 /**
  * Executes a extraction.
@@ -16,44 +13,85 @@ import org.dbpedia.util.Exceptions
  * @param source The extraction source
  * @param namespaces Only extract pages in these namespaces
  * @param destination The extraction destination. Will be closed after the extraction has been finished.
- * @param label user readable label of this extraction job.
+ * @param language the language of this extraction.
  */
-class ExtractionJob(extractor: WikiPageExtractor, source: Source, namespaces: Set[Namespace], destination: Destination, label: String, description: String)
+class ExtractionJob(
+   extractor: WikiPageExtractor,
+   source: Source,
+   val namespaces: Set[Namespace],
+   val destination: Destination,
+   val language: Language,
+   val retryFailedPages: Boolean,
+   val extractionRecorder: ExtractionRecorder[WikiPage])
 {
-  private val logger = Logger.getLogger(getClass.getName)
+/*  val myAnnotatedClass: ClassSymbol = runtimeMirror(Thread.currentThread().getContextClassLoader).classSymbol(ExtractorAnnotation.getClass)
+  val annotation: Option[Annotation] = myAnnotatedClass.annotations.find(_.tree.tpe =:= typeOf[ExtractorAnnotation])
+  val result = annotation.flatMap { a =>
+    a.tree.children.tail.collect({ case Literal(Constant(name: String)) => name }).headOption
+  }
 
-  private val progress = new ExtractionProgress(label, description)
+  result.foreach( x => println(x.toString))*/
+
+  def datasets = extractor.datasets
 
   private val workers = SimpleWorkers { page: WikiPage =>
-    var success = false
     try {
       if (namespaces.contains(page.title.namespace)) {
-        //val graph = extractor(parser(page))
-        val graph = extractor.extract(page)
+        val graph = extractor.extract(page, page.uri)
         destination.write(graph)
       }
-      success = true
+      //TODO I don't think this will be necessary
+        //page.addExtractionRecord("Namespace did not match: " + page.title.namespace + " for page: " + page.title.encoded, null, RecordSeverity.Warning)
+
+      //if the internal extraction process of this extractor yielded extraction records (e.g. non critical errors etc.), those will be forwarded to the ExtractionRecorder, else a new record is produced
+      val records = page.getExtractionRecords() match{
+        case seq :Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
+        case _ => Seq(new RecordEntry[WikiPage](page, RecordSeverity.Info, page.title.language))
+      }
+      //forward all records to the recorder
+      extractionRecorder.record(records:_*)
     } catch {
-      case ex: Exception => logger.log(Level.WARNING, "error processing page '"+page.title+"': "+Exceptions.toString(ex, 200))
+      case ex: Exception =>
+        page.addExtractionRecord(null, ex)
+        extractionRecorder.record(page.getExtractionRecords():_*)
     }
-    progress.countPage(success)
   }
   
   def run(): Unit =
   {
-    progress.start()
+    extractionRecorder.initialize(language, extractor.datasets.toSeq)
+
+    extractor.initializeExtractor()
     
     destination.open()
 
     workers.start()
-    
-    for (page <- source) workers.process(page)
-    
+
+    for (page <- source)
+      workers.process(page)
+
+    extractionRecorder.printLabeledLine("finished extraction after {page} pages with {mspp} per page", RecordSeverity.Info, language)
+
+    if(retryFailedPages){
+      val fails = extractionRecorder.listFailedPages(language).keys.map(_._2)
+      extractionRecorder.printLabeledLine("retrying " + fails.size + " failed pages", RecordSeverity.Warning, language)
+      extractionRecorder.resetFailedPages(language)
+      for(page <- fails) {
+        page.toggleRetry()
+        page match{
+          case p: WikiPage => workers.process(p)
+          case _ =>
+        }
+      }
+      extractionRecorder.printLabeledLine("all failed pages were re-executed.", RecordSeverity.Info, language)
+    }
+
     workers.stop()
     
     destination.close()
-    
-    progress.end()
+
+    extractor.finalizeExtractor()
+
+    extractionRecorder.finalize()
   }
-  
 }

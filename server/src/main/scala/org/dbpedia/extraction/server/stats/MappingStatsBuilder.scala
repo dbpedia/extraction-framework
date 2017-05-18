@@ -2,8 +2,9 @@ package org.dbpedia.extraction.server.stats
 
 import java.io.{File,FileOutputStream,OutputStreamWriter}
 import java.util.logging.Logger
+import org.dbpedia.extraction.transform.Quad
+
 import scala.collection.mutable
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.{Language,WikiUtil,IOUtils}
 import org.dbpedia.extraction.util.RichFile.wrapFile

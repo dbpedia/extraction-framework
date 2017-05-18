@@ -4,11 +4,11 @@ import java.net.URI
 
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser._
@@ -94,30 +94,38 @@ extends WikiPageExtractor
     override val datasets = Set(DBpediaDatasets.CitationData, DBpediaDatasets.CitationLinks /*, DBpediaDatasets.CitationTypes*/)
 
 
-    override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(page : WikiPage, subjectUri : String) : Seq[Quad] =
     {
-        if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
+        if (page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
         val quads = new ArrayBuffer[Quad]()
 
         // the simple wiki parser is confused with the <ref> ... </ref> hetml tags and ignores whatever is inside them
         // with this hack we create a wikiPage close and remove all "<ref" from the source and then try to reparse the page
-        val pageWithoutRefs = new WikiPage(title = page.title, redirect = page.redirect, id = page.id, revision = page.revision, timestamp = page.timestamp, contributorID = page.contributorID, contributorName = page.contributorName, source = page.source.replaceAll("<ref", ""), format = page.format)
+        val pageWithoutRefs = new WikiPage(
+            title = page.title,
+            redirect = page.redirect,
+            id = page.id,
+            revision = page.revision,
+            timestamp = page.timestamp,
+            contributorID = page.contributorID,
+            contributorName = page.contributorName,
+            source = page.source.replaceAll("<ref", ""),
+            format = page.format
+        )
 
         /** Retrieve all templates on the page which are not ignored */
-        for { node <- new SimpleWikiParser().apply(pageWithoutRefs)
-            template <- ExtractorUtils.collectTemplatesFromNodeTransitive(node)
-          resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
-          if citationTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)
-        }
-        {
+        for {node <- SimpleWikiParser.apply(pageWithoutRefs)
+             template <- ExtractorUtils.collectTemplatesFromNodeTransitive(node)
+             resolvedTitle = context.redirects.resolve(template.title).decoded.toLowerCase
+             if citationTemplatesRegex.exists(regex => regex.unapplySeq(resolvedTitle).isDefined)
+        } {
 
-            for (citationIri <- getCitationIRI(template) )
-            {
+            for (citationIri <- getCitationIRI(template)) {
 
-                quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceUri, null)
+                quads += new Quad(language, DBpediaDatasets.CitationLinks, citationIri, isCitedProperty, subjectUri, template.sourceIri, null)
 
-                for (property <- template.children; if (!property.key.forall(_.isDigit))) {
+                for (property <- template.children; if !property.key.forall(_.isDigit)) {
                     // exclude numbered properties
                     // TODO clean HTML
 
@@ -127,7 +135,7 @@ extends WikiPageExtractor
                     for (splitNode <- splitPropertyNodes; (value, datatype) <- extractValue(splitNode)) {
                         val propertyUri = getPropertyUri(property.key)
                         try {
-                            quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads += new Quad(language, DBpediaDatasets.CitationData, citationIri, propertyUri, value, splitNode.sourceIri, datatype)
 
 
                         }
@@ -138,7 +146,7 @@ extends WikiPageExtractor
                 }
             }
         }
-        
+
         quads
     }
 

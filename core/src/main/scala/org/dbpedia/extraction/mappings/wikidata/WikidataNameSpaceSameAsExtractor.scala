@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{WikidataUtil, Language}
 import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
 
@@ -26,7 +27,7 @@ class WikidataNameSpaceSameAsExtractor(
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.WikidataNameSpaceSameAs )
 
-  override def extract(page : JsonNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(page : JsonNode, subjectUri : String): Seq[Quad] =
   {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
@@ -34,7 +35,7 @@ class WikidataNameSpaceSameAsExtractor(
     if (page.wikiPage.title.namespace != Namespace.WikidataProperty) {
       val objectUri = subjectUri.replace(WikidataUtil.wikidataDBpNamespace,"http://www.wikidata.org/entity/")
 
-      quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.sourceUri,null)
+      quads += new Quad(context.language, DBpediaDatasets.WikidataNameSpaceSameAs , subjectUri, sameAsProperty , objectUri, page.wikiPage.sourceIri,null)
     }
 
     quads

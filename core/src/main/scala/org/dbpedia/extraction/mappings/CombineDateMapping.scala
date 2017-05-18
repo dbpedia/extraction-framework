@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.wikiparser.TemplateNode
 import org.dbpedia.extraction.dataparser.DateTimeParser
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
 import org.dbpedia.extraction.ontology.OntologyProperty
 import org.dbpedia.extraction.util.{Language, Date}
 import scala.collection.mutable.ArrayBuffer
@@ -34,7 +35,7 @@ extends PropertyMapping
 
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String): Seq[Quad] =
   {
     var dates = ArrayBuffer[Date]()
     
@@ -48,7 +49,7 @@ extends PropertyMapping
     
     try {
       val mergedDate = Date.merge(dates, datatype)
-      Seq(quad(subjectUri, mergedDate.toString, node.sourceUri))
+      Seq(quad(subjectUri, mergedDate.toString, node.sourceIri))
     } catch {
       case ex : Exception => Seq.empty // TODO: logging
     }

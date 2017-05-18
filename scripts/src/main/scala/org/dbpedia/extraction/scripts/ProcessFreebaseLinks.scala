@@ -2,12 +2,14 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
+import org.dbpedia.extraction.transform.Quad
+
 import scala.Console.err
 import scala.collection.mutable.{ArrayBuffer,HashMap,TreeSet}
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
-import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.Finder
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.IOUtils.{readLines,writer}
@@ -34,9 +36,10 @@ object ProcessFreebaseLinks
 
     val output = getString(config, "output", true)
 
-    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ",", true))
 
-    val formats = parseFormats(config, "uri-policy", "format")
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
 
     // destinations for all languages
     val destinations = new HashMap[String, Destination]() {
@@ -174,6 +177,7 @@ DBpedia and Freebase URIs and create a Quad from them.
 
   /**
    * Unescapes the given MQL escaped key and returns the resulting string.
+ *
    * @param key key containing MQL escape sequences
    * @return unescaped key
    */

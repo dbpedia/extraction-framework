@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.destinations
 
+import org.dbpedia.extraction.transform.Quad
 import org.slf4j.LoggerFactory
 
 import scala.collection.Seq

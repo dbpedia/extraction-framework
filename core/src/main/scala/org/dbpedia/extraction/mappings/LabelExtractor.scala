@@ -1,12 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.ExtractorUtils
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Extracts labels to articles based on their title.
@@ -23,7 +23,7 @@ extends WikiPageExtractor
   
   override val datasets = Set(DBpediaDatasets.Labels)
 
-  override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext) : Seq[Quad] =
+  override def extract(page: WikiPage, subjectUri: String) : Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(page.title)) return Seq.empty
 
@@ -32,6 +32,6 @@ extends WikiPageExtractor
     val label = page.title.decoded
     
     if(label.isEmpty) Seq.empty
-    else Seq(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label, page.sourceUri, context.ontology.datatypes("rdf:langString")))
+    else Seq(new Quad(context.language, DBpediaDatasets.Labels, subjectUri, labelProperty, label, page.sourceIri, context.ontology.datatypes("rdf:langString")))
   }
 }

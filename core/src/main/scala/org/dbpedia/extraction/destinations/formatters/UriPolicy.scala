@@ -106,17 +106,6 @@ object UriPolicy {
   )
 
   /**
-   * Parse all URI policy and format lines.
-   * @param uriPolicyPrefix property key prefix, e.g. "uri-policy"
-   * @param formatPrefix format key prefix, e.g. "format"
-   * @return map from file suffix (without '.' dot) to formatter
-   */
-  def parseFormats(config: Properties, uriPolicyPrefix: String, formatPrefix: String): Map[String, Formatter] = {
-    val policies = parsePolicies(config, uriPolicyPrefix)
-    parseFormats(config, formatPrefix, policies)
-  }
-
-  /**
    * Parse all format lines.
    * @param prefix format key prefix, e.g. "format"
    * @return map from file suffix (without '.' dot) to formatter
@@ -132,7 +121,7 @@ object UriPolicy {
 
         val suffix = key.substring(dottedPrefix.length)
 
-        val settings = getStrings(config, key, ';', true)
+        val settings = getStrings(config, key, ";", true)
         require(settings.length == 1 || settings.length == 2, "key '"+key+"' must have one or two values separated by ';' - file format and optional uri policy name")
 
         val formatter =
@@ -176,9 +165,9 @@ object UriPolicy {
     val entries = Array.fill(POSITIONS)(new ArrayBuffer[(Int, Policy)])
 
     // parse a value like "uri:en,fr; xml-safe-predicates:*"
-    for (policy <- list.trimSplit(';')) {
+    for (policy <- list.trimSplit(";")) {
       // parse a part like "uri:en,fr" or "xml-safe-predicates:*"
-      policy.trimSplit(':') match {
+      policy.trimSplit(":") match {
         case Array(name, languages) =>
           // get factory for a name like "xml-safe-predicates"
           policies.get(name) match {
@@ -210,7 +199,7 @@ object UriPolicy {
    */
   private def parsePolicyApplicable(languages: String): PolicyApplicable = {
 
-    val codes = languages.trimSplit(',').toSet
+    val codes = languages.trimSplit(",").toSet
 
     // "*" matches all dbpedia domains
     if (codes("*")) {

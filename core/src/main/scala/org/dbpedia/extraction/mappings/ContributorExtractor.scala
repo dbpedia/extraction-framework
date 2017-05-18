@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.mappings
 
+import java.net.URLEncoder
+
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import java.net.{URLEncoder, URI}
+
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,7 +27,7 @@ class ContributorExtractor( context : {
 
   override val datasets = Set(DBpediaDatasets.RevisionMeta)
 
-  override def extract(node : WikiPage, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : WikiPage, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
@@ -53,14 +55,14 @@ class ContributorExtractor( context : {
     //      contributorName, node.sourceUri, context.ontology.getDatatype("xsd:string").get );
     //Required Quads
     val quadPageWithContributor = new Quad(language, DBpediaDatasets.RevisionMeta, pageURL, contributorPredicate,
-      contributorURL, node.sourceUri, null );
+      contributorURL, node.sourceIri, null );
 
     val quadContributorName = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL,
       context.ontology.properties.get("rdfs:label").get,
-      contributorName, node.sourceUri, context.ontology.datatypes.get("xsd:string").get );
+      contributorName, node.sourceIri, context.ontology.datatypes.get("xsd:string").get );
 
     val quadContributorID = new Quad(language, DBpediaDatasets.RevisionMeta, contributorURL, contributorIDPredicate,
-      contributorID.toString, node.sourceUri, context.ontology.datatypes.get("xsd:integer").get );
+      contributorID.toString, node.sourceIri, context.ontology.datatypes.get("xsd:integer").get );
 
     Seq(quadPageWithContributor, quadContributorName, quadContributorID);
 

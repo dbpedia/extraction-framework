@@ -1,11 +1,11 @@
 package org.dbpedia.extraction.mappings.wikitemplate.wiktionary.bindinghandler
 
+import org.dbpedia.extraction.transform.Quad
 import org.openrdf.model._
 import org.openrdf.model.impl.ValueFactoryImpl
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 import scala.util.matching.Regex
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
 import org.dbpedia.extraction.mappings.wikitemplate._
 import org.dbpedia.extraction.mappings.Cache

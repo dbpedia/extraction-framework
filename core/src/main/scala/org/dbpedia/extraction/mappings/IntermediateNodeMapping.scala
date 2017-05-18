@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.{NodeUtil, TemplateNode}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.{Buffer,ArrayBuffer}
@@ -29,7 +30,7 @@ extends PropertyMapping
   override val datasets = mappings.flatMap(_.datasets).toSet ++ Set(DBpediaDatasets.OntologyTypes, DBpediaDatasets.OntologyTypesTransitive, DBpediaDatasets.OntologyPropertiesObjects)
     
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
     var graph = new ArrayBuffer[Quad]()
 
@@ -46,7 +47,7 @@ extends PropertyMapping
       //require their values to be all singles
       if(valueNodes.forall(_.size <= 1))
       {
-        createInstance(graph, node, subjectUri, pageContext)
+        createInstance(graph, node, subjectUri)
       }
       else
       {
@@ -68,29 +69,29 @@ extends PropertyMapping
       //allow multiple values in this property
       for(valueNodesForOneProperty <- valueNodes; value <- valueNodesForOneProperty)
       {
-        createInstance(graph, value.parent.asInstanceOf[TemplateNode], subjectUri, pageContext)
+        createInstance(graph, value.parent.asInstanceOf[TemplateNode], subjectUri)
       }
     }
 
     graph
   }
 
-  private def createInstance(graph: Buffer[Quad], node : TemplateNode, originalSubjectUri : String, pageContext : PageContext): Unit =
+  private def createInstance(graph: Buffer[Quad], node : TemplateNode, originalSubjectUri : String): Unit =
   {
-    val instanceUri = pageContext.generateUri(originalSubjectUri, node)
+    val instanceUri = node.generateUri(originalSubjectUri, node)
     
     // extract quads
-    val values = mappings.flatMap(_.extract(node, instanceUri, pageContext))
+    val values = mappings.flatMap(_.extract(node, instanceUri))
 
     // only generate triples if we actually extracted some values
     if(! values.isEmpty)
     {
-      graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, originalSubjectUri, correspondingProperty, instanceUri, node.sourceUri);
+      graph += new Quad(context.language, DBpediaDatasets.OntologyPropertiesObjects, originalSubjectUri, correspondingProperty, instanceUri, node.sourceIri);
       
       for (cls <- nodeClass.relatedClasses) {
         // Here we split the transitive types from the direct type assignment
         val typeDataset = if (cls.equals(nodeClass)) DBpediaDatasets.OntologyTypes else DBpediaDatasets.OntologyTypesTransitive
-        graph += new Quad(context.language, typeDataset, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceUri)
+        graph += new Quad(context.language, typeDataset, instanceUri, context.ontology.properties("rdf:type"), cls.uri, node.sourceIri)
       }
       
       graph ++= values

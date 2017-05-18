@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser.{PropertyNode, TemplateNode}
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import java.util.logging.{Logger, Level}
 import org.dbpedia.extraction.ontology.{Ontology, OntologyProperty}
 import org.dbpedia.extraction.util.Language
@@ -51,11 +52,11 @@ extends PropertyMapping
 
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesGeo)
 
-  override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
     extractGeoCoordinate(node) match
     {
-      case Some(coord) => writeGeoCoordinate(node, coord, subjectUri, node.sourceUri, pageContext)
+      case Some(coord) => writeGeoCoordinate(node, coord, subjectUri, node.sourceIri)
       case None => Seq.empty
     }
   }
@@ -127,7 +128,7 @@ extends PropertyMapping
     None
   }
 
-  private def writeGeoCoordinate(node : TemplateNode, coord : GeoCoordinate, subjectUri : String, sourceUri : String, pageContext : PageContext) : Seq[Quad] =
+  private def writeGeoCoordinate(node : TemplateNode, coord : GeoCoordinate, subjectUri : String, sourceUri : String) : Seq[Quad] =
   {
     var quads = new ArrayBuffer[Quad]()
     
@@ -135,7 +136,7 @@ extends PropertyMapping
 
     if(ontologyProperty != null)
     {
-      instanceUri = pageContext.generateUri(subjectUri, ontologyProperty.name)
+      instanceUri = node.generateUri(subjectUri, ontologyProperty.name)
 
       quads += new Quad(context.language,  DBpediaDatasets.OntologyPropertiesGeo, subjectUri, ontologyProperty, instanceUri, sourceUri)
     }

@@ -1,8 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
+import org.dbpedia.extraction.transform.Quad
+
 import collection.mutable.HashSet
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{Dataset, DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import scala.collection.mutable.ArrayBuffer
@@ -26,7 +28,7 @@ class ArticleTemplatesExtractor(
 
   override val datasets = Set(DBpediaDatasets.ArticleTemplates, DBpediaDatasets.ArticleTemplatesNested)
 
-  override def extract(node: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(node: PageNode, subjectUri: String): Seq[Quad] = {
     var quads = new ArrayBuffer[Quad]()
 
     val seenTemplates = new HashSet[String]()
@@ -44,7 +46,7 @@ class ArticleTemplatesExtractor(
     templates.map( t => {
       val templateUri = context.language.resourceUri.append(t.title.decodedWithNamespace)
       new Quad(context.language, dataset, subjectUri, usesTemplateProperty,
-        templateUri, t.sourceUri, null)
+        templateUri, t.sourceIri, null)
     })
   }
 

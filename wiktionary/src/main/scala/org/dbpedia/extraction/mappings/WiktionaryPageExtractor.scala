@@ -2,8 +2,9 @@ package org.dbpedia.extraction.mappings
 
 import java.net.URL
 
-import org.dbpedia.extraction.destinations.{Dataset, Quad}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.mappings.wikitemplate._
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 import org.openrdf.model.impl.ValueFactoryImpl
@@ -49,7 +50,7 @@ class WiktionaryPageExtractor(
 extends PageNodeExtractor {
   override val datasets = Set(datasetURI) //new Dataset("wiktionary"))
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
+  override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     //return new Graph()
     val cache = new Cache
@@ -529,7 +530,7 @@ object WiktionaryPageExtractor {
   /**
   * the name of the dataset
   */
-  val datasetURI : Dataset = new Dataset("wiktionary.dbpedia.org")
+  val datasetURI : Dataset = DBpediaDatasets.WiktionaryDataset
   
   /**
   * the graph of all produced quads
@@ -674,7 +675,7 @@ object WiktionaryPageExtractor {
       } else {
         null
       },
-      datasetURI.name,
+      datasetURI.encoded,
       s.getSubject.toString(),
       s.getPredicate.toString(),
       s.getObject.toString(),

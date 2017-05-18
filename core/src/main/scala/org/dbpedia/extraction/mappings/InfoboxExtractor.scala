@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
+
 import collection.mutable.HashSet
 import org.dbpedia.extraction.ontology.datatypes.{Datatype, DimensionDatatype}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.dataparser._
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.config.mappings.InfoboxExtractorConfig
@@ -100,7 +102,7 @@ extends PageNodeExtractor
     
     override val datasets = Set(DBpediaDatasets.InfoboxProperties, DBpediaDatasets.InfoboxTest, DBpediaDatasets.InfoboxPropertyDefinitions)
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) return Seq.empty
         
@@ -132,14 +134,14 @@ extends PageNodeExtractor
                         val propertyUri = getPropertyUri(property.key)
                         try
                         {
-                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceUri, datatype)
+                            quads += new Quad(language, DBpediaDatasets.InfoboxProperties, subjectUri, propertyUri, value, splitNode.sourceIri, datatype)
 
                             if (InfoboxExtractorConfig.extractTemplateStatistics) 
                             {
                             	val stat_template = language.resourceUri.append(template.title.decodedWithNamespace)
                             	val stat_property = property.key.replace("\n", " ").replace("\t", " ").trim
                             	quads += new Quad(language, DBpediaDatasets.InfoboxTest, subjectUri, stat_template,
-                                               stat_property, node.sourceUri, ontology.datatypes("xsd:string"))
+                                               stat_property, node.sourceIri, ontology.datatypes("xsd:string"))
                             }
                         }
                         catch
@@ -153,8 +155,8 @@ extends PageNodeExtractor
                             {
                                 val propertyLabel = getPropertyLabel(property.key)
                                 seenProperties += propertyUri
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceUri)
-                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceUri, rdfLangStrDt)
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, typeProperty, propertyClass.uri, splitNode.sourceIri)
+                                quads += new Quad(language, DBpediaDatasets.InfoboxPropertyDefinitions, propertyUri, labelProperty, propertyLabel, splitNode.sourceIri, rdfLangStrDt)
                             }
                         }
                     }

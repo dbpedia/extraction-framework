@@ -18,7 +18,7 @@ class RMLTemplateMappingFactory extends RMLMappingFactory {
   {
 
     println("Loading RML Mapping: " + page.title.encodedWithNamespace)
-    val rmlModel = new RMLModel(page.title, page.sourceUri)
+    val rmlModel = new RMLModel(page.title, page.sourceIri)
     val rmlMapper = new RMLModelMapper(rmlModel)
     if(mappings.templateMappings.head._2.isInstanceOf[TemplateMapping]) {
       val templateMapping = mappings.templateMappings.head._2.asInstanceOf[TemplateMapping] // :|

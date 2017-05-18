@@ -1,10 +1,9 @@
 package org.dbpedia.extraction.server
 
-import org.dbpedia.extraction.sources.WikiPage
 import org.dbpedia.extraction.mappings.{WikiPageExtractor, Extractor, Redirects, Mappings}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.wikiparser.{PageNode, WikiTitle}
+import org.dbpedia.extraction.wikiparser.{WikiPage, PageNode, WikiTitle}
 import java.io.File
 import scala.actors.Actor
 import scala.collection.immutable.Map

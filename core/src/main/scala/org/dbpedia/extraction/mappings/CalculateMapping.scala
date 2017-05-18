@@ -1,9 +1,10 @@
 package org.dbpedia.extraction.mappings
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad, QuadBuilder}
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.ontology.{DBpediaNamespace, Ontology, OntologyProperty}
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.TemplateNode
 
@@ -55,7 +56,7 @@ extends PropertyMapping
   
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals, DBpediaDatasets.SpecificProperties)
 
-  def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  def extract(node : TemplateNode, subjectUri : String) : Seq[Quad] =
   {
       for( property1 <- node.property(templateProperty1);
            property2 <- node.property(templateProperty2);
@@ -71,7 +72,7 @@ extends PropertyMapping
                   {
                       case "add" => unit1.toStandardUnit(value1) + unit2.toStandardUnit(value2)
                   }
-                  return writeUnitValue(value, unit1, subjectUri, node.sourceUri)
+                  return writeUnitValue(value, unit1, subjectUri, node.sourceIri)
               }
               //DoubleParser
               case (value1 : Double, value2 : Double) =>
@@ -80,7 +81,7 @@ extends PropertyMapping
                   {
                       case "add" => (value1 + value2).toString
                   }
-                  staticType(subjectUri, value, node.sourceUri)
+                  staticType(subjectUri, value, node.sourceIri)
               }
               //IntegerParser
               case (value1 : Int, value2 : Int) =>
@@ -89,7 +90,7 @@ extends PropertyMapping
                   {
                       case "add" => (value1 + value2).toString
                   }
-                  staticType(subjectUri, value, node.sourceUri)
+                  staticType(subjectUri, value, node.sourceIri)
               }
           }
 

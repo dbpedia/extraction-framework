@@ -2,12 +2,13 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty, Ontology}
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.scripts.QuadMapper.QuadMapperFormatter
 import org.dbpedia.extraction.sources.XMLSource
+import org.dbpedia.extraction.transform.Quad
 
 import scala.Console._
 import scala.collection._
@@ -266,7 +267,7 @@ object SdTypeCreation {
   }
 
   val typesWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "instance-types" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "instance-types" + suffix, auto = true) { quad =>
       contextMap.get(quad.subject) match{
         case Some(l) =>
         case None => contextMap.put(quad.subject, quad.context)
@@ -284,13 +285,13 @@ object SdTypeCreation {
   }
 
   val workerDisamb = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "disambiguations-unredirected" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "disambiguations-unredirected" + suffix, auto = true) { quad =>
       disambiguations.put(quad.subject, 1)
     }
   }
 
   val objectPropWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "mappingbased-objects-uncleaned" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "mappingbased-objects-uncleaned" + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_in.get(quad.value) match {
         case Some(m) => m.get(quad.predicate) match {
           case Some(c) =>
@@ -332,7 +333,7 @@ object SdTypeCreation {
   }
 
   val literalWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    QuadReader.readQuads(finder, "mappingbased-literals" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, "mappingbased-literals" + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_out.get(quad.subject) match {
         case Some(m) => m.get(quad.predicate) match {
           case Some(c) =>
@@ -407,8 +408,8 @@ object SdTypeCreation {
     owlThingPenalty =  ConfigUtils.getString(config, "owl-thing-penalty", required=true).toFloat
     require(owlThingPenalty >= 0.01f && owlThingPenalty <= 0.99f, "Please specify a valid owlThingPenalty score in the range of [0.01, 0.99].")
 
-    inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",',', required=false)(x => x)
-    outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",',', required=false)(x => x)
+    inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",",", required=false)(x => x)
+    outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",",", required=false)(x => x)
 
     returnAllValid = ConfigUtils.getString(config, "return-all-valid-types", required=false).toBoolean
     returnOnlyUntyped = ConfigUtils.getString(config, "return-only-untyped", required=false).toBoolean
@@ -424,10 +425,11 @@ object SdTypeCreation {
       new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
     }
 
-    val formats = parseFormats(config, "uri-policy", "format").map( x=>
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies).map( x=>
       x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
 
-    val destination = DestinationUtils.createDestination(finder, Seq(dataset), formats)
+    val destination = DestinationUtils.createDestination(finder, Array(dataset), formats)
 
     //read all input files and process the content
     Workers.workInParallel[Language](Array(typesWorker, objectPropWorker, workerDisamb,literalWorker), Seq(language))
@@ -461,7 +463,7 @@ object SdTypeCreation {
     Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculation")
 
     //write results to file
-    err.println(language.wikiCode + ": Starting to write " + dataset.name + suffix + " with " + resultMap.values.size + " instances.")
+    err.println(language.wikiCode + ": Starting to write " + dataset.encoded + suffix + " with " + resultMap.values.size + " instances.")
     destination.open()
     Workers.work[List[Quad]](SimpleWorkers(1.5, 2.0){ quads: List[Quad] =>
       destination.write(quads)

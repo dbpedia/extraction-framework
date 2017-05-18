@@ -1,10 +1,10 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.wikiparser.PageNode
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.destinations.QuadBuilder
 import java.net.URI
 import scala.language.reflectiveCalls
 
@@ -28,10 +28,10 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.UriSameAsIri)
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
+  override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     // only extract triple if IRI is actually different from URI
     if (new URI(subjectUri).toASCIIString() == subjectUri) Seq.empty
-    else Seq(quad(subjectUri, subjectUri, page.sourceUri))
+    else Seq(quad(subjectUri, subjectUri, page.sourceIri))
   }
 }

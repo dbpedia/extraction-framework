@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{Language, WikidataUtil}
 import org.dbpedia.extraction.wikiparser.{Namespace, JsonNode}
 
@@ -24,12 +25,12 @@ class WikidataDescriptionExtractor(
   // Here we define all the ontology predicates we will use
   private val descriptionProperty = context.ontology.properties("description")
 
-  private val mappingLanguages = Namespace.mappings.keySet
+  private val mappingLanguages = Namespace.mappingLanguages
 
   // this is where we will store the output
   override val datasets = Set(DBpediaDatasets.WikidataDescriptionMappingsWiki, DBpediaDatasets.WikidataDescriptionRest)
 
-  override def extract(page: JsonNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: JsonNode, subjectUri: String): Seq[Quad] = {
     // This array will hold all the triples we will extract
     val quads = new ArrayBuffer[Quad]()
 
@@ -40,10 +41,10 @@ class WikidataDescriptionExtractor(
           case Some(dbpedia_lang) => {
             if (mappingLanguages.contains(dbpedia_lang))
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataDescriptionMappingsWiki, subjectUri,
-                descriptionProperty, description, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                descriptionProperty, description, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
             else
               quads += new Quad(dbpedia_lang, DBpediaDatasets.WikidataDescriptionRest, subjectUri,
-                descriptionProperty, description, page.wikiPage.sourceUri, context.ontology.datatypes("rdf:langString"))
+                descriptionProperty, description, page.wikiPage.sourceIri, context.ontology.datatypes("rdf:langString"))
           }
           case _ =>
         }

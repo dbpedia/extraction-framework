@@ -1,11 +1,13 @@
 package org.dbpedia.extraction.util
 
 import java.io.Closeable
-import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.atomic.AtomicInteger
-import Workers._
+import java.util.concurrent.{ArrayBlockingQueue, ConcurrentHashMap}
+
+import org.dbpedia.extraction.util.Workers._
 
 import scala.Console._
+import scala.collection.convert.decorateAsScala._
 
 trait Worker[T <: AnyRef] {
   def init(): Unit
@@ -116,7 +118,7 @@ object Workers {
     Workers.work[T](worker, args, null)
   }
 
-  def work[T <: AnyRef](worker: Workers[T], args : List[T], showProgress: String = null) : Unit = {
+  def work[T <: AnyRef](worker: Workers[T], args : Seq[T], showProgress: String = null) : Unit = {
     val percent = new AtomicInteger()
     try {
       worker.start()
@@ -174,8 +176,15 @@ object Workers {
  * @param factory called during initialization of this class to create a worker for each thread
  */
 class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]) extends Closeable {
-  
+
+  object WorkerState extends Enumeration {
+    val queued, inProcess, done = Value
+  }
+
   private val queue = new ArrayBlockingQueue[AnyRef](queueLength)
+
+  private val processLog = new ConcurrentHashMap[Int, WorkerState.Value]().asScala
+  private var queueDependency = new ConcurrentHashMap[Int, Int]().asScala
   
   private val workers =
   for (i <- 0 until threads) yield
@@ -186,9 +195,18 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
       try {
         while(true) {
           val value = queue.take()
+          queueDependency.get(value.hashCode()) match{
+            case Some(h) => processLog.get(h) match{
+              case Some(x) => if(!x.equals(WorkerState.done)) queue.put(value)
+              case None =>
+            }
+            case None =>
+          }
+          processLog(value.hashCode()) = WorkerState.inProcess
           // if we find the sentinel, we're done
           if (value eq sentinel) return
           worker.process(value.asInstanceOf[T])
+          processLog(value.hashCode()) = WorkerState.done
         }
       } finally {
         worker.destroy()
@@ -203,13 +221,17 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
     for (worker <- workers) worker.start()
   }
 
+  final def process(value: T, dependentOn: T): Unit = process(value, dependentOn.hashCode())
   /**
    * Add a value to the queue. A thread will take the value and let its worker process it.
    * If queue is full and all threads are busy, wait until a thread becomes available.
    */
-  final def process(value: T): Unit = {
+  final def process(value: T, dependentOn: Int = -1): Unit = {
     if (value == null) throw new NullPointerException("value")
+    if(dependentOn >= 0)
+      queueDependency(value.hashCode()) = dependentOn
     queue.put(value)
+    processLog(value.hashCode()) = WorkerState.queued
   }
   
   /**
@@ -221,6 +243,13 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
     // wait for the threads to find the sentinels and finish
     for (worker <- workers) worker.join()
   }
+
+  /**
+    * check the state of a queued Worker object
+    * @param hash - hashcode of queued object
+    * @return WorkerState
+    */
+  def checkWorkerProcess(hash: Int) = Option(processLog(hash))
 
   override def close(): Unit = stop()
 }

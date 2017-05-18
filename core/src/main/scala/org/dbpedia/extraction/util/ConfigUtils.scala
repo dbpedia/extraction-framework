@@ -1,25 +1,53 @@
 package org.dbpedia.extraction.util
 
+import java.io.{File, FileInputStream, InputStream, InputStreamReader}
 import java.net.URL
 import java.util.Properties
-import java.io.{InputStream, File, FileInputStream, InputStreamReader}
+
 import com.fasterxml.jackson.core.JsonFactory
-import com.fasterxml.jackson.databind.{JsonNode, ObjectReader, ObjectMapper}
+import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper, ObjectReader}
+import org.dbpedia.extraction.config.mappings.ImageExtractorConfig
+import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
+import org.dbpedia.extraction.sources.{Source, XMLSource}
+import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+import org.dbpedia.extraction.util.RichString.wrapString
+import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 
 import scala.collection.immutable.SortedSet
-import org.dbpedia.extraction.util.RichString.wrapString
+import scala.collection.mutable
+import scala.collection.mutable.HashSet
 import scala.io.Codec
-import org.dbpedia.extraction.wikiparser.Namespace
-import scala.collection.mutable.{HashSet,HashMap}
-import org.dbpedia.extraction.util.Language.wikiCodeOrdering
+import scala.util.Try
+import scala.util.matching.Regex
 
 
-/**
- * TODO: use scala.collection.Map[String, String] instead of java.util.Properties?
- */
 object ConfigUtils {
-  
-  def loadConfig(file: String, charset: String = "UTF-8"): Properties = {
+
+  /**
+    * Simple regex matching Wikipedia language codes.
+    * Language codes have at least two characters, start with a lower-case letter and contain only
+    * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
+    */
+  val LanguageRegex: Regex = """([a-z][a-z0-9-]+)""".r
+
+  /**
+    * Regex used for excluding languages from the import.
+    */
+  val ExcludedLanguageRegex: Regex = """!([a-z][a-z0-9-]+)""".r
+
+  /**
+    * Regex for numeric range, both limits optional
+    */
+  val RangeRegex: Regex = """(\d*)-(\d*)""".r
+
+  //val baseDir = getValue(universalConfig , "base-dir", true){
+   // x => new File(x)
+      //if (! dir.exists) throw error("dir "+dir+" does not exist")
+      //dir
+  //}
+
+  def loadConfig(filePath: String, charset: String = "UTF-8"): Properties = {
+    val file = new File(filePath)
     loadFromStream(new FileInputStream(file), charset)
   }
 
@@ -50,24 +78,29 @@ object ConfigUtils {
     finally file.close()
     config
   }
-  
-  def getValues[T](config: Properties, key: String, sep: Char, required: Boolean)(map: String => T): Seq[T] = {
+
+
+  def getValues[T](config: Properties, key: String, sep: String, required: Boolean = false)(map: String => T): Seq[T] = {
     getStrings(config, key, sep, required).map(map(_))
   }
 
-  def getStrings(config: Properties, key: String, sep: Char, required: Boolean): Seq[String] = {
+  def getStrings(config: Properties, key: String, sep: String, required: Boolean = false): Seq[String] = {
     val string = getString(config, key, required)
     if (string == null) Seq.empty
     else string.trimSplit(sep)
   }
 
-  def getValue[T](config: Properties, key: String, required: Boolean)(map: String => T): T = {
+  def getStringMap(config: Properties, key: String, sep: String, required: Boolean = false): Map[String, String] = {
+    getStrings(config, key, sep, required).map(x => x.split("->")).map( y => y(0) -> y(1)).toMap
+  }
+
+  def getValue[T](config: Properties, key: String, required: Boolean = false)(map: String => T): T = {
     val string = getString(config, key, required)
     if (string == null) null.asInstanceOf[T]
     else map(string)
   }
   
-  def getString(config: Properties, key: String, required: Boolean): String = {
+  def getString(config: Properties, key: String, required: Boolean = false): String = {
     val string = config.getProperty(key)
     if (string != null) string
     else if (! required) null
@@ -80,9 +113,9 @@ object ConfigUtils {
    * @return languages, sorted by language code
    */
   // TODO: reuse this in org.dbpedia.extraction.dump.download.DownloadConfig
-  def parseLanguages(baseDir: File, args: Seq[String]): Array[Language] = {
+  def parseLanguages(baseDir: File, args: Seq[String], wikiPostFix: String = "wiki"): Array[Language] = {
     
-    val keys = for(arg <- args; key <- arg.split("[,\\s]"); if (key.nonEmpty)) yield key
+    val keys = for(arg <- args; key <- arg.split("[,\\s]"); if key.nonEmpty) yield key
         
     var languages = SortedSet[Language]()
     var excludedLanguages = SortedSet[Language]()
@@ -90,40 +123,36 @@ object ConfigUtils {
     val ranges = new HashSet[(Int,Int)]
   
     for (key <- keys) key match {
-      case "@mappings" => languages ++= Namespace.mappings.keySet
-      case "@chapters" => languages ++= Namespace.chapters.keySet
+      case "@mappings" => languages ++= Namespace.mappingLanguages
+      case "@chapters" => languages ++= Namespace.chapterLanguages
+      case "@downloaded" => languages ++= downloadedLanguages(baseDir, wikiPostFix)
+      case "@abstracts" => {
+        //@downloaded - Commons & Wikidata
+        languages ++= downloadedLanguages(baseDir, wikiPostFix)
+        excludedLanguages += Language.Commons
+        excludedLanguages += Language.Wikidata
+      }
       case RangeRegex(from, to) => ranges += toRange(from, to)
       case LanguageRegex(language) => languages += Language(language)
       case ExcludedLanguageRegex(language) => excludedLanguages += Language(language)
-      case "@downloaded" => {
-        // resolve only downloaded languages
-        for(file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith("wiki")))
-        {
-          Language.get(file.getName.replace("wiki", "").replace("_", "-")) match{
-            case Some(l) => languages += l
-            case None =>
-          }
-        }
-      }
       case other => throw new IllegalArgumentException("Invalid language / range '"+other+"'")
     }
     
     // resolve page count ranges to languages
     if (ranges.nonEmpty)
     {
-      val listFile = new File(baseDir, WikiInfo.FileName)
-      
       // Note: the file is in ASCII, any non-ASCII chars are XML-encoded like '&#231;'. 
       // There is no Codec.ASCII, but UTF-8 also works for ASCII. Luckily we don't use 
       // these non-ASCII chars anyway, so we don't have to unescape them.
-      println("parsing "+listFile)
-      val wikis = WikiInfo.fromFile(listFile, Codec.UTF8)
       
       // for all wikis in one of the desired ranges...
-      for ((from, to) <- ranges; wiki <- wikis; if (from <= wiki.pages && wiki.pages <= to))
+      for ((from, to) <- ranges; wiki <- Config.wikiInfos; if from <= wiki.pages && wiki.pages <= to)
       {
         // ...add its language
-        languages += wiki.language
+        Language.get(wiki.wikicode) match{
+          case Some(l) => languages += l
+          case None =>
+        }
       }
     }
 
@@ -131,29 +160,64 @@ object ConfigUtils {
     
     languages.toArray
   }
-  
-  /**
-   * Simple regex matching Wikipedia language codes.
-   * Language codes have at least two characters, start with a lower-case letter and contain only 
-   * lower-case letters and dash, but there are also dumps for "wikimania2005wiki" etc.
-   */
-  val LanguageRegex = """([a-z][a-z0-9-]+)""".r
 
-  /**
-   * Regex used for excluding languages from the import.
-   */
-  val ExcludedLanguageRegex = """!([a-z][a-z0-9-]+)""".r
-    
-  /**
-   * Regex for numeric range, both limits optional
-   */
-  val RangeRegex = """(\d*)-(\d*)""".r
-  
+  private def downloadedLanguages(baseDir: File, wikiPostFix: String = "wiki"): Array[Language] = {
+    for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith(wikiPostFix))) yield
+      Language.get(file.getName.replaceAll(wikiPostFix + "$", "").replace("_", "-")) match{
+        case Some(l) => l
+        case None => throw new IllegalArgumentException(file.getName.replaceAll(wikiPostFix + "$", "").replace("_", "-") +
+          ": is an unknown language code. Please update the addonlangs.json file and add this language.")
+      }
+  }
+
   def toRange(from: String, to: String): (Int, Int) = {
     val lo: Int = if (from.isEmpty) 0 else from.toInt
     val hi: Int = if (to.isEmpty) Int.MaxValue else to.toInt
     if (lo > hi) throw new NumberFormatException
     (lo, hi)
   }
-  
+
+  def parseVersionString(str: String): Try[String] =Try {
+    Option(str) match {
+      case Some(v) => "2\\d{3}-\\d{2}".r.findFirstMatchIn(v.trim) match {
+        case Some(y) => if (y.end == 7) v.trim else throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
+        case None => throw new IllegalArgumentException("Provided version string did not match 2\\d{3}-\\d{2}")
+      }
+      case None => throw new IllegalArgumentException("No version string was provided.")
+    }
+  }
+
+
+  /**
+    * This function was extracted from the ImageExtractor object, since
+    *  the free & nonfree images are now extracted before starting the extraction jobs
+    * @param source pages_articles of a given language
+    * @param wikiCode the wikicode of a given language
+    * @return two lists: ._1: list of free images, ._2: list of nonfree images
+    */
+  def loadImages(source: Source, wikiCode: String, extractionRecorder: ExtractionRecorder[WikiPage] = null): (Seq[String], Seq[String]) =
+  {
+    val freeImages = new mutable.HashSet[String]()
+    val nonFreeImages = new mutable.HashSet[String]()
+
+    for(page <- source if page.title.namespace == Namespace.File;
+        ImageExtractorConfig.ImageLinkRegex() <- List(page.title.encoded) )
+    {
+      if(extractionRecorder != null) {
+        val records = page.getExtractionRecords() match {
+          case seq: Seq[RecordEntry[PageNode]] if seq.nonEmpty => seq
+          case _ => Seq(new RecordEntry[WikiPage](page, RecordSeverity.Info, page.title.language))
+        }
+        //forward all records to the recorder
+        extractionRecorder.record(records:_*)
+      }
+      ImageExtractorConfig.NonFreeRegex(wikiCode).findFirstIn(page.source) match
+      {
+        case Some(_) => nonFreeImages += page.title.encoded
+        case None => if (freeImages != null) freeImages += page.title.encoded
+      }
+    }
+
+    (freeImages.toSeq, nonFreeImages.toSeq)
+  }
 }

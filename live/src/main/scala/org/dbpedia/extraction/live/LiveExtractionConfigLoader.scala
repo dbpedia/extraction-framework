@@ -8,7 +8,7 @@ import java.util.Properties
 import java.io.File
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
-import org.dbpedia.extraction.sources.{WikiPage, WikiSource, Source, XMLSource}
+import org.dbpedia.extraction.sources.{WikiSource, Source, XMLSource}
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.UriPolicy
@@ -46,7 +46,7 @@ object LiveExtractionConfigLoader
   val ontologySource = WikiSource.fromNamespaces(
     namespaces = Set(Namespace.OntologyClass, Namespace.OntologyProperty),
     url = new URL(Language.Mappings.apiUri),
-    language = Language.Mappings );
+    language = Language.Mappings )
 
   /** Mappings source */
   val mappingsSource =  WikiSource.fromNamespaces(
@@ -165,7 +165,6 @@ object LiveExtractionConfigLoader
           jsonNodeParser(wikiPage)
         }
         val uri = wikiPage.title.language.resourceUri.append(wikiPage.title.decodedWithNamespace)
-        val context = new PageContext()
 
         extractorRestrictDest.open
 
@@ -179,17 +178,17 @@ object LiveExtractionConfigLoader
               extractor match {
                 case pageNodeExtractor :PageNodeExtractor =>  {
                   pageNode match {
-                    case Some(pageNodeValue) => pageNodeExtractor.extract(pageNodeValue, uri, context)
+                    case Some(pageNodeValue) => pageNodeExtractor.extract(pageNodeValue, uri)
                     case _ => Seq.empty // in case the WikiParser returned None
                   }
                 }
                 case jsonNodeExtractor :JsonNodeExtractor =>  {
                   jsonNode match {
-                    case Some(jsonNodeValue) => jsonNodeExtractor.extract(jsonNodeValue, uri, context)
+                    case Some(jsonNodeValue) => jsonNodeExtractor.extract(jsonNodeValue, uri)
                     case _ => Seq.empty  // in case the jsonParser returned None
                   }
                 }
-                case wikiPageExtractor :WikiPageExtractor =>  wikiPageExtractor.extract(wikiPage, uri, context)
+                case wikiPageExtractor :WikiPageExtractor =>  wikiPageExtractor.extract(wikiPage, uri)
                 case _ => Seq.empty
               }
 

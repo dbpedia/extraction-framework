@@ -1,34 +1,20 @@
+/*
 package org.dbpedia.extraction.nif;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import com.hp.hpl.jena.rdf.model.*;
+import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
-
-//import com.hp.hpl.jena.rdf.model.*;
-//import com.hp.hpl.jena.vocabulary.RDF;
-import org.apache.commons.lang3.StringEscapeUtils;
 
 public class NIFCorpusSurfaceFormEnricher {
 
-	/*private File corpusFolder;
+	private File corpusFolder;
 	private File[] corpusFiles;
 	private Map<String, List<String>> surfaceForms = new HashMap<String, List<String>>();
 	//this should probably replaced with proper tokenization
@@ -368,5 +354,6 @@ public class NIFCorpusSurfaceFormEnricher {
 		String outpath = args[3];
 		WikiCorpusGenerator gen = new WikiCorpusGenerator(lang, logfile);
 		rich.enrichCorpus(gen, outpath, lang);
-	}*/
+	}
 }
+*/

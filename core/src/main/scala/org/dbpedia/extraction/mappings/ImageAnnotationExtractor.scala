@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser._
+
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.util.StringUtils._
 
 /**
  * Extracts image annotations created using the Image Annotator gadget
@@ -32,7 +34,7 @@ extends PageNodeExtractor
   private val asWikiTextProperty = context.ontology.properties("asWikiText")
 
   /** Extract image annotations from a particular page */
-  override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(pageNode : PageNode, subjectUri : String) : Seq[Quad] =
   {
     // Image annotations will only be extracted from File:s on the Commons.
     if (context.language != Language.Commons || pageNode.title.namespace != Namespace.File) {
@@ -124,7 +126,7 @@ extends PageNodeExtractor
                     subjectUri,
                     hasAnnotationProperty,
                     annotation_url,
-                    pageNode.sourceUri
+                    pageNode.sourceIri
                 ))
 
                 // Generate one quad each for plaintext and WikiText content.
@@ -135,7 +137,7 @@ extends PageNodeExtractor
                         annotation_url, 
                         descriptionProperty, 
                         contents_plaintext, 
-                        pageNode.sourceUri
+                        pageNode.sourceIri
                     )
                 )
 
@@ -146,7 +148,7 @@ extends PageNodeExtractor
                         annotation_url, 
                         asWikiTextProperty, 
                         contents_wikitext, 
-                        pageNode.sourceUri
+                        pageNode.sourceIri
                     )
                 )
 

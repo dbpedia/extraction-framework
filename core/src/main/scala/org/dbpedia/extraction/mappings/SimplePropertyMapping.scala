@@ -2,9 +2,10 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.dataparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.ontology._
 import java.lang.IllegalArgumentException
@@ -185,7 +186,7 @@ extends PropertyMapping
     
     override val datasets = Set(DBpediaDatasets.OntologyPropertiesObjects, DBpediaDatasets.OntologyPropertiesLiterals, DBpediaDatasets.SpecificProperties)
 
-    override def extract(node : TemplateNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(node : TemplateNode, subjectUri : String): Seq[Quad] =
     {
         val graph = new ArrayBuffer[Quad]
 
@@ -241,8 +242,8 @@ extends PropertyMapping
                     (if (isHashIri) "&objectHasFragment=" else "")
                 val g = parseResult match
                 {
-                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
-                    case value => writeValue(value, subjectUri, propertyNode.sourceUri+resultLengthPercentageTxt)
+                    case (value : Double, unit : UnitDatatype) => writeUnitValue(node, value, unit, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
+                    case value => writeValue(value, subjectUri, propertyNode.sourceIri+resultLengthPercentageTxt)
                 }
 
                 graph ++= g

@@ -6,8 +6,9 @@ import java.io.File
 import org.dbpedia.extraction.mappings.Redirects
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{WikiPage, XMLSource}
+import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.WikiPage
 
 /**
   * Generate context for xml and rml

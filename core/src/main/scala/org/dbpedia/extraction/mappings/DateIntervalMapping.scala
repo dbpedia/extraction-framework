@@ -2,10 +2,11 @@ package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
 import org.dbpedia.extraction.config.dataparser.DataParserConfig
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.dataparser.{DateTimeParser,StringParser}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.ontology.OntologyProperty
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.mappings.DateIntervalMappingConfig._
 import org.dbpedia.extraction.wikiparser.{PropertyNode, NodeUtil, TemplateNode}
@@ -39,7 +40,7 @@ extends PropertyMapping
   
   override val datasets = Set(DBpediaDatasets.OntologyPropertiesLiterals)
 
-  override def extract(node : TemplateNode, subjectUri: String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : TemplateNode, subjectUri: String) : Seq[Quad] =
   {
     // replicate standard mechanism implemented by dataparsers
     for(propertyNode <- node.property(templateProperty))
@@ -99,7 +100,7 @@ extends PropertyMapping
       }
 
       //Write start date quad
-      val quad1 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceUri)
+      val quad1 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, startDateOntologyProperty, startDate.toString, propertyNode.sourceIri)
 
       //Writing the end date is optional if "until present" is specified
       for(endDate <- endDateOpt)
@@ -112,7 +113,7 @@ extends PropertyMapping
         }
 
         //Write end year quad
-        val quad2 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceUri)
+        val quad2 = new Quad(context.language, DBpediaDatasets.OntologyPropertiesLiterals, subjectUri, endDateOntologyProperty, endDate.toString, propertyNode.sourceIri)
 
         return Seq(quad1, quad2)
       }

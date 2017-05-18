@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.ConfigUtils.{loadConfig,parseLanguages,getString,getValue,getStrings}
-import org.dbpedia.extraction.destinations.formatters.UriPolicy.parseFormats
+import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import scala.collection.mutable.ArrayBuffer
-import org.dbpedia.extraction.destinations.{Quad,Destination,CompositeDestination,WriterDestination}
+import org.dbpedia.extraction.destinations.{Destination,CompositeDestination,WriterDestination}
 import org.dbpedia.extraction.util.IOUtils.writer
 import org.dbpedia.extraction.util.Finder
 import java.net.URI
@@ -27,9 +28,10 @@ object CreateIriSameAsUriLinks {
     
     val output = getString(config, "output", true)
     
-    val languages = parseLanguages(baseDir, getStrings(config, "languages", ',', true))
-    
-    val formats = parseFormats(config, "uri-policy", "format")
+    val languages = parseLanguages(baseDir, getStrings(config, "languages", ",", true))
+
+    val policies = parsePolicies(config, "uri-policy")
+    val formats = parseFormats(config, "format", policies)
 
     val sameAs = RdfNamespace.OWL.append("sameAs")
     
@@ -47,8 +49,8 @@ object CreateIriSameAsUriLinks {
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
       val destination = new CompositeDestination(formatDestinations.toSeq: _*)
-      
-      QuadMapper.mapQuads(language.wikiCode, inputFile, destination, true) { quad =>
+
+      new QuadMapper().mapQuads(language, inputFile, destination, true) { quad =>
         val iri = quad.subject
         val uri = new URI(iri).toASCIIString
         if (uri == iri) List.empty

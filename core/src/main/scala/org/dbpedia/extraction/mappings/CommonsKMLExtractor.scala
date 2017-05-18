@@ -1,12 +1,14 @@
 package org.dbpedia.extraction.mappings
 
 import java.util.logging.Logger
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad}
-import org.dbpedia.extraction.wikiparser._
+
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.wikiparser.WikiPage
+
 import scala.language.reflectiveCalls
 
 /**
@@ -44,7 +46,7 @@ extends WikiPageExtractor
     /**
      * Extract a WikiPage that consists of KML.
      */
-    override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+    override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
         // This extractor only applies to Commons file named '.*/overlay.kml'.
         if (context.language != Language.Commons || !page.title.decoded.toLowerCase.endsWith("/overlay.kml")) {
             return Seq.empty
@@ -62,7 +64,7 @@ extends WikiPageExtractor
             subjectUriWithoutOverlay,
             hasKMLDataProperty,
             result.group("kml_content"),
-            page.sourceUri,
+            page.sourceIri,
             new Datatype("rdf:XMLLiteral")
         ))
 

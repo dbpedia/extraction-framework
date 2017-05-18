@@ -40,7 +40,7 @@ object AbstractRepair {
         new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix).get), new TerseFormatter(quads = true, turtle = true, null)),
         new WriterDestination(() => IOUtils.writer(finder.byName(abstractFile + "-repaired" + suffix.replace("tql", "ttl")).get), new TerseFormatter(quads = false, turtle = true, null))
       )
-      QuadMapper.mapQuads(language.wikiCode, new RichFile(faultyFile), destination, required = true, closeWriter = false) { quad =>
+      new QuadMapper().mapQuads(language, new RichFile(faultyFile), destination, required = true, closeWriter = false) { quad =>
         if (quad.value.indexOf(templateString + ":") >= 0) {
           langMap.put(quad.subject, 0)
           Seq()
@@ -48,7 +48,7 @@ object AbstractRepair {
         else
           Seq(quad)
       }
-      QuadMapper.mapQuads(language.wikiCode, new RichFile(oldFile), destination, required = true) { quad =>
+      new QuadMapper().mapQuads(language, new RichFile(oldFile), destination, required = true) { quad =>
         langMap.get(quad.subject) match {
           case Some(x) => {
             Seq(quad)

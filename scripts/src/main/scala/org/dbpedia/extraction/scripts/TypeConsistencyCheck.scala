@@ -3,14 +3,15 @@ package org.dbpedia.extraction.scripts
 import java.io.{File, Writer}
 import java.net.URL
 
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{ConfigUtils, Finder, IOUtils, Language}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.Namespace
 
 import scala.collection.mutable
@@ -56,23 +57,24 @@ object TypeConsistencyCheck {
   def main(args: Array[String]) {
 
 
-    require(args != null && args.length == 2, "Two arguments required, extraction config file and extension to work with")
+    require(args != null && args.length == 1, "Two arguments required, extraction config file and extension to work with")
     require(args(0).nonEmpty, "missing required argument: config file name")
-    require(args(1).nonEmpty, "missing required argument: suffix e.g. .tql.gz")
+    //require(args(1).nonEmpty, "missing required argument: suffix e.g. .tql.gz")
 
 
-    val config = ConfigUtils.loadConfig(args(0), "UTF-8")
+    val config = new Config(args(0))
 
-    val baseDir = ConfigUtils.getValue(config, "base-dir", true)(new File(_))
+    val baseDir = config.dumpDir
     if (!baseDir.exists)
       throw new IllegalArgumentException("dir " + baseDir + " does not exist")
-    val langConfString = ConfigUtils.getString(config, "languages", false)
-    val languages = ConfigUtils.parseLanguages(baseDir, Seq(langConfString))
 
-    val formats = parseFormats(config, "uri-policy", "format")
+    val languages = config.languages
+
+    val policies = config.policies
+    val formats = config.formats
 
     lazy val ontology = {
-      val ontologyFile = ConfigUtils.getValue(config, "ontology", false)(new File(_))
+      val ontologyFile = config.ontologyFile
       val ontologySource = if (ontologyFile != null && ontologyFile.isFile) {
         XMLSource.fromFile(ontologyFile, Language.Mappings)
       }
@@ -85,7 +87,10 @@ object TypeConsistencyCheck {
       new OntologyReader().read(ontologySource)
     }
 
-    val suffix = args(1)
+    val suffix = config.inputSuffix match{
+      case Some(x) => x
+      case None => throw new IllegalArgumentException("Please provide a 'suffix' attribute in your properties configuration")
+    }
     val typesDataset = "instance-types" + suffix
     val mappedTripleDataset = "mappingbased-objects-uncleaned" + suffix
 
@@ -103,7 +108,7 @@ object TypeConsistencyCheck {
 
 
       try {
-        QuadReader.readQuads(lang.wikiCode+": Reading types from "+typesDataset, finder.file(date, typesDataset).get) { quad =>
+        new QuadMapper().readQuads(lang, finder.file(date, typesDataset).get) { quad =>
           val q = quad.copy(language = lang.wikiCode) //set the language of the Quad
           computeType(quad, resourceTypes, ontology)
         }
@@ -117,18 +122,18 @@ object TypeConsistencyCheck {
 
       try {
         destination.open()
-        QuadReader.readQuads(lang.wikiCode+": Reading types from " + mappedTripleDataset, finder.file(date, mappedTripleDataset).get) { quad =>
+        new QuadMapper().readQuads(lang, finder.file(date, mappedTripleDataset).get) { quad =>
 
           val rangeDataset = checkQuadRange(quad, resourceTypes, ontology)
           val domainDataset = checkQuadDomain(quad, resourceTypes, ontology)
 
-          val datasetList = List(rangeDataset.name, domainDataset.name).distinct
+          val datasetList = List(rangeDataset.encoded, domainDataset.encoded).distinct
           val verifiedDatasets : List[String] = {
-            if (datasetList.size == 1 && datasetList.contains(correctDataset.name)) {
+            if (datasetList.size == 1 && datasetList.contains(correctDataset.encoded)) {
               datasetList
             }
             else {
-              datasetList.filter(_ != correctDataset.name)
+              datasetList.filter(_ != correctDataset.encoded)
             }
           }
           for (d <- verifiedDatasets) {
@@ -148,7 +153,8 @@ object TypeConsistencyCheck {
 
     /**
      * Chacks a Quad for range violations and returns the new dataset where it should be written depending on the state
-     * @param quad
+      *
+      * @param quad
      * @return
      */
     def checkQuadRange(quad: Quad, resourceTypes: scala.collection.mutable.Map[String, OntologyClass], ontology: Ontology): Dataset =
@@ -191,6 +197,7 @@ object TypeConsistencyCheck {
 
     /**
       * Chacks a Quad for domain violations and returns the new dataset where it should be written depending on the state
+      *
       * @param quad
       * @return
       */
@@ -230,7 +237,8 @@ object TypeConsistencyCheck {
 
     /**
      * checks if two classes ar disjoint by testing any base-classes recursively for disjointnes
-     * @param objClass      the type of an object
+      *
+      * @param objClass      the type of an object
      * @param rangeClass    the range of the pertaining property
      * @param clear         new disjoint tests have to clear the relatedClasses cache, keeps already tested combinations of this cycle
      * @return
@@ -305,8 +313,8 @@ object TypeConsistencyCheck {
     for ((suffix, format) <- formats) {
       val datasetDestinations = new HashMap[String, Destination]()
       for (dataset <- datasets) {
-        val file = finder.file(date, dataset.name.replace('_', '-')+'.'+suffix).get
-        datasetDestinations(dataset.name) = new WriterDestination(writer(file), format)
+        val file = finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix).get
+        datasetDestinations(dataset.encoded) = new WriterDestination(writer(file), format)
       }
 
       destination += new DatasetDestination(datasetDestinations)

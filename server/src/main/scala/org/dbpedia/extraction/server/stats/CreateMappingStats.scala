@@ -3,7 +3,7 @@ package org.dbpedia.extraction.server.stats
 import java.io.File
 import java.util.logging.Logger
 
-import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 import org.dbpedia.extraction.util.{Finder,Language}
@@ -73,7 +73,7 @@ object CreateMappingStats
             val date = finder.dates("extraction-complete").last
             
             def inputFile(dataset: Dataset): File = {
-              finder.file(date, dataset.name.replace('_', '-')+".ttl"+suffix).get
+              finder.file(date, dataset.encoded.replace('_', '-')+".ttl"+suffix).get
             }
             
             // extracted by org.dbpedia.extraction.mappings.RedirectExtractor

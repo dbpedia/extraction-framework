@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.dataparser
 
-import _root_.org.dbpedia.extraction.sources.WikiPage
 import _root_.org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.dbpedia.extraction.wikiparser._

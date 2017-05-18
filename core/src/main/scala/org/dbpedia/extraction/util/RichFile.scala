@@ -1,10 +1,12 @@
 package org.dbpedia.extraction.util
 
-import java.io.{IOException,File,FilenameFilter,InputStream,FileInputStream,OutputStream,FileOutputStream}
+import java.io._
 import java.util.regex.Pattern
-import RichFile._
+
+import org.dbpedia.extraction.util.RichFile._
+
 import scala.language.implicitConversions
-import scala.util.{Failure, Success, Try}
+import scala.util.Try
 
 object RichFile {
 

@@ -2,8 +2,8 @@ package org.dbpedia.extraction.mappings.wikitemplate.wiktionary.postprocessor
 
 import org.dbpedia.extraction.mappings.WiktionaryPageExtractor
 import org.dbpedia.extraction.mappings.wikitemplate.PostProcessor
+import org.dbpedia.extraction.transform.Quad
 import xml.{Node => XMLNode, NodeSeq}
-import org.dbpedia.extraction.destinations.{Quad, Dataset}
 import org.dbpedia.extraction.util.Language
 
 import org.openrdf.model.{Statement, Value, Resource, Literal}

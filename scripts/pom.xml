@@ -157,6 +157,18 @@
                             </jvmArgs>
                         </launcher>
                         <launcher>
+                            <id>CanonicalizeIris</id>
+                            <mainClass>org.dbpedia.extraction.scripts.CanonicalizeIris</mainClass>
+                            <jvmArgs><jvmArg>-server</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg></jvmArgs>
+                            <jvmArgs>
+                                <jvmArg>-server</jvmArg>
+                                <jvmArg>-Xmx20G</jvmArg><!-- processing languages in parallel takes a lot of space -->
+                                <jvmArg>-XX:+HeapDumpOnOutOfMemoryError</jvmArg>
+                                <jvmArg>-XX:+UseConcMarkSweepGC</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                        <launcher>
                             <id>ResolveTransitiveLinks</id>
                             <mainClass>org.dbpedia.extraction.scripts.ResolveTransitiveLinks</mainClass>
                             <jvmArgs>

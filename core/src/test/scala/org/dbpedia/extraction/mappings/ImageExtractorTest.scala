@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings
 
-import org.scalatest.{PrivateMethodTester, FlatSpec}
-import org.scalatest.Matchers
+import org.dbpedia.extraction.sources.MemorySource
+import org.dbpedia.extraction.util.{ConfigUtils, Language}
+import org.dbpedia.extraction.wikiparser.{Namespace, WikiPage, WikiTitle}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import scala.collection.mutable.{Set => MutableSet, HashSet}
-import org.dbpedia.extraction.sources.{WikiPage, MemorySource}
-import org.dbpedia.extraction.wikiparser.{Namespace, WikiTitle}
-import org.dbpedia.extraction.util.Language
+import org.scalatest.{FlatSpec, Matchers, PrivateMethodTester}
+
+import scala.collection.mutable.{Set => MutableSet}
 
 /**
  *
@@ -16,15 +16,13 @@ import org.dbpedia.extraction.util.Language
 class ImageExtractorTest extends FlatSpec with Matchers with PrivateMethodTester {
 
   "ImageExtractor" must "load 1 free image" in {
-    val freeImages = new HashSet[String]()
-    val nonFreeImages = new HashSet[String]()
 
     val loadImages = PrivateMethod[Unit]('loadImages)
     val source = new MemorySource(new WikiPage(new WikiTitle("Test.png", Namespace.File, Language("en")), "{{Free screenshot|template=BSD}}"))
     // def loadImages(source: Source, freeImages: MutableSet[String], nonFreeImages: MutableSet[String], wikiCode: String)
-    ImageExtractor invokePrivate loadImages(source, freeImages, nonFreeImages, "en")
+    val res = ConfigUtils.loadImages(source, "en")
 
-    freeImages should not be ('empty)
-    freeImages should have size (1)
+    res._1 should have size (1)
+    res._2 should not be ('empty)
   }
 }

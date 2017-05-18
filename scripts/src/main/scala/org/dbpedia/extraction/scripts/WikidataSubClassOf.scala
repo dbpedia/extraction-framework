@@ -1,25 +1,21 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.{PrintWriter, StringWriter, File, Writer}
-import java.lang.annotation.Annotation
+import java.io.{File, PrintWriter, StringWriter}
 import java.net.URL
 import java.util.Properties
 
-import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations._
-import org.dbpedia.extraction.destinations.formatters.Formatter
-import org.dbpedia.extraction.destinations.formatters.UriPolicy._
+import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty}
 import org.dbpedia.extraction.sources.{WikiSource, XMLSource}
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.util.{ConfigUtils, Finder, IOUtils, Language}
+import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.wikiparser.Namespace
-import com.fasterxml.jackson.module.scala.DefaultScalaModule
-import scala.IllegalArgumentException
+
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, HashMap}
 import scala.util.control.Breaks._
 
 /**
@@ -47,15 +43,15 @@ object WikidataSubClassOf {
 
     val config = ConfigUtils.loadConfig(args(0), "UTF-8")
     val suffix = args(1)
-    val subClassOfDataset = DBpediaDatasets.WikidataR2R_ontology.name + "." + suffix
-    val rawDataset = DBpediaDatasets.WikidataRawRedirected.name + "." + suffix
+    val subClassOfDataset = DBpediaDatasets.WikidataR2R_ontology.encoded + "." + suffix
+    val rawDataset = DBpediaDatasets.WikidataRawRedirected.encoded + "." + suffix
 
     val baseDir = ConfigUtils.getValue(config, "base-dir", true)(new File(_))
     if (!baseDir.exists)
       throw new scala.IllegalArgumentException("dir " + baseDir + " does not exist")
 
-    val finder = new Finder[File](baseDir, Language.Wikidata, "wiki")
-    val date = finder.dates().last
+    val finder = new DateFinder(baseDir, Language.Wikidata)
+    val date = finder.finder.dates().last
     val ontology = getOntology(config)
 
     // use integers in the map [superClass -> set[subclasses]]
@@ -182,10 +178,10 @@ object WikidataSubClassOf {
 
   }
 
-  def getWikidataSubClassOfMap(rawDataset: String, finder: Finder[File], date: String): mutable.Map[Int, mutable.Set[Int]] = {
+  def getWikidataSubClassOfMap(rawDataset: String, finder: DateFinder[File], date: String): mutable.Map[Int, mutable.Set[Int]] = {
     val wikidataSubClassMap = mutable.Map.empty[Int, mutable.Set[Int]]
     try {
-      QuadReader.readQuads("Reading subClassOf statements from " + rawDataset, finder.file(date, rawDataset).get) { quad =>
+      new QuadMapper().readQuads(finder, rawDataset) { quad =>
         if (quad.predicate.equals(subClassProperty)) {
 
           try {

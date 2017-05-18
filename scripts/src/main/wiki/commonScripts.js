@@ -70,6 +70,10 @@ function calcPercDiff(older, newer, factional) {
 
 function subArrayTest(sub, array)
 {
+    if(!Array.isArray(array))
+        array = [array];
+    if(!Array.isArray(sub))
+        sub = [sub];
     if(array.length < sub.length)
         return false;
     var zw = false;
@@ -83,11 +87,11 @@ function subArrayTest(sub, array)
 }
 
 function getIfContains(valueArray, substring, field){
-    var arr = null
+    var arr = null;
     if(Array.isArray(valueArray))
-        arr= valueArray
+        arr= valueArray;
     else
-        arr = [valueArray]
+        arr = [valueArray];
     for(var i in arr){
         if(!field){
             if(typeof arr[i] === 'string' && arr[i].indexOf(substring) >= 0)

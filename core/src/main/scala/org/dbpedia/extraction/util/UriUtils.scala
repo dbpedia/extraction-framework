@@ -3,7 +3,9 @@ package org.dbpedia.extraction.util
 import java.net._
 
 import org.apache.commons.lang3.StringEscapeUtils
-import org.dbpedia.util.text.uri.UriDecoder
+import org.dbpedia.util.text.uri.{UriDecoder, UriToIriDecoder}
+
+import scala.util.{Failure, Success, Try}
 
 object UriUtils
 {
@@ -18,7 +20,7 @@ object UriUtils
      */
     def cleanLink( uri : URI ) : Option[String] =
     {
-      if (knownSchemes.contains(uri.getScheme)) Some(uri.normalize.toString) 
+      if (knownSchemes.contains(uri.getScheme)) Some(uri.normalize.toString)
       else None
     }
 
@@ -37,17 +39,20 @@ object UriUtils
         path
     }
 
-  def createUri(uri: String): URI ={
-    // unescape all \\u escaped characters
-    val input = StringEscapeUtils.unescapeJava(uri)
+  def createUri(uri: String): Try[URI] ={
+    //TODO revise this method!
+    Try {
+      // unescape all \\u escaped characters
+      val input = URLDecoder.decode(StringEscapeUtils.unescapeJava(uri), "UTF-8")
 
-    // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
-    // "#%<>?[\]^`{|}
+      // Here's the list of characters that we re-encode (see WikiUtil.iriReplacements):
+      // "#%<>?[\]^`{|}
 
-    // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
-    if (input.contains("\\"))
-      throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
-    new URI(StringUtils.escape(input, StringUtils.replacements('%', "\"<>[\\]^`{|}")))
+      // we re-encode backslashes and we currently can't decode Turtle, so we disallow it
+      if (input.contains("\\"))
+        throw new IllegalArgumentException("URI contains backslash: [" + input + "]")
+      new URI(StringUtils.escape(input, StringUtils.replacements('%', "\"<>[\\]^`{|}")))
+    }
   }
 
   /**
@@ -86,7 +91,10 @@ object UriUtils
         new URI(prelude + resource + qu + frag)
       }
       else
-        createUri(input)
+        createUri(input) match{
+          case Success(s) => s
+          case Failure(f) => null
+        }
     }
 
   /**
@@ -108,11 +116,18 @@ object UriUtils
     */
   def uriToIri(uri: URI): String = {
       // re-encode URI according to our own rules
-      uri.getScheme + "://" +
+      // iriDecode: reserved characters excluded
+      // wikiEncode: unwise characters encoded to dbpedia rules
+      // BUT: wikiEncode encodes % to %25
+      // TODO:
+      // - if even necessary: handle "\u202A", "\u202B", "\u202C", "\u202D", "\u202E", "\u200E", "\u200F"
+      //   (direction change & embedding chars)
+      // - handle other Encoding Types (examples?)
+    uri.getScheme + "://" +
         uri.getAuthority +
-        decode(uri.getPath)  +
-        (if(uri.getQuery != null) "?" + decode(uri.getQuery) else "")+
-        (if(uri.getFragment != null) "#" + decode(uri.getFragment) else "")
+        WikiUtil.wikiEncode(iriDecode(uri.getRawPath)).replaceAll("%25", "%")  +
+        (if(uri.getQuery != null) "?" + WikiUtil.wikiEncode(iriDecode(uri.getRawQuery)).replaceAll("%25", "%") else "")+
+        (if(uri.getFragment != null) "#" + WikiUtil.wikiEncode(iriDecode(uri.getRawFragment)).replaceAll("%25", "%") else "")
   }
 
   private def encodeAndClean(uriPart: String): String={
@@ -128,6 +143,14 @@ object UriUtils
       decoded = UriDecoder.decode(decoded)
 
     decoded.replaceAll("[<>#%\\?\\[\\\\\\]]", "_")
+  }
+
+  private def iriDecode(uriPart: String): String={
+    var decoded = uriPart
+    var decoder = new UriToIriDecoder;
+    while(decoder.decode(decoded) != decoded)
+      decoded = decoder.decode(decoded)
+    decoded
   }
 
   def encodeUriComponent(comp: String): String={

@@ -3,11 +3,11 @@ package org.dbpedia.extraction.mappings
 import java.io.File
 
 import org.dbpedia.extraction.ontology.io.OntologyReader
-import org.dbpedia.extraction.sources.{WikiPage, XMLSource}
+import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.util.Language
 import org.scalatest.{Matchers, PrivateMethodTester, FlatSpec}
 
-import org.dbpedia.extraction.wikiparser.{WikiTitle, WikiParser}
+import org.dbpedia.extraction.wikiparser.{WikiPage, WikiTitle, WikiParser}
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.language.reflectiveCalls

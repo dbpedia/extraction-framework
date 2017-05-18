@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.destinations
 
+import org.dbpedia.extraction.transform.Quad
+
 /**
  * A destination that is composed of different child destinations.
  * Each statement is forwarded to all child destinations.

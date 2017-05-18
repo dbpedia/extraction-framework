@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import java.net.{URI, URISyntaxException}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
 import org.dbpedia.extraction.config.mappings.HomepageExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, UriUtils}
@@ -42,7 +43,7 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.Homepages)
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] =
+  override def extract(page: PageNode, subjectUri: String): Seq[Quad] =
   {
     if(page.title.namespace != Namespace.Main) return Seq.empty
 
@@ -61,7 +62,7 @@ extends PageNodeExtractor
             val cleaned = cleanProperty(text)
             if (cleaned.nonEmpty) { // do not proceed if the property value is not a valid candidate
               val url = if (UriUtils.hasKnownScheme(cleaned)) cleaned else "http://" + cleaned
-              val graph = generateStatement(subjectUri, pageContext, url, textNode)
+              val graph = generateStatement(subjectUri, url, textNode)
               if (!graph.isEmpty)
               {
                 return graph
@@ -70,7 +71,7 @@ extends PageNodeExtractor
           }
           case (linkNode @ ExternalLinkNode(destination, _, _, _)) =>
           {
-            val graph = generateStatement(subjectUri, pageContext, destination.toString, linkNode)
+            val graph = generateStatement(subjectUri, destination.toString, linkNode)
             if (!graph.isEmpty)
             {
               return graph
@@ -85,12 +86,12 @@ extends PageNodeExtractor
     {
       for((url, sourceNode) <- findLinkTemplateInSection(externalLinkSectionChildren))
       {
-        val graph = generateStatement(subjectUri, pageContext, url, sourceNode)
+        val graph = generateStatement(subjectUri, url, sourceNode)
         if (!graph.isEmpty) return graph
       }
       for((url, sourceNode) <- findLinkInSection(externalLinkSectionChildren))
       {
-        val graph = generateStatement(subjectUri, pageContext, url, sourceNode)
+        val graph = generateStatement(subjectUri, url, sourceNode)
         if (!graph.isEmpty) return graph
       }
     }
@@ -110,13 +111,13 @@ extends PageNodeExtractor
     else ""
   }
 
-  private def generateStatement(subjectUri: String, pageContext: PageContext, url: String, node: Node): Seq[Quad] =
+  private def generateStatement(subjectUri: String, url: String, node: Node): Seq[Quad] =
   {
     try
     {
       for(link <- UriUtils.cleanLink(new URI(url)))
       {
-        return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceUri))
+        return Seq(new Quad(context.language, DBpediaDatasets.Homepages, subjectUri, homepageProperty, link, node.sourceIri))
       }
     }
     catch

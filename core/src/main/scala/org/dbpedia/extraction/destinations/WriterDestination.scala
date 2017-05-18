@@ -2,6 +2,9 @@ package org.dbpedia.extraction.destinations
 
 import java.io.Writer
 import org.dbpedia.extraction.destinations.formatters.Formatter
+import org.dbpedia.extraction.transform.Quad
+
+import scala.collection.mutable.{ListBuffer, ArrayBuffer}
 
 /**
  * Writes quads to a writer.
@@ -33,7 +36,9 @@ extends Destination
   }
 
   override def close() = {
-    writer.write(formatter.footer)
-    writer.close()
+    if(writer != null) {
+      writer.write(formatter.footer)
+      writer.close()
+    }
   }
 }

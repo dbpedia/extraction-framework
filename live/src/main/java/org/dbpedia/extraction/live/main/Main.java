@@ -33,7 +33,7 @@ public class Main {
 
     //private volatile static Statistics statistics = null;
 
-    private volatile static List<Feeder> feeders = new ArrayList<Feeder>(5);
+    private volatile static List<Feeder>  feeders = new ArrayList<Feeder>(5);
     private volatile static List<PageProcessor> processors = new ArrayList<PageProcessor>(10);
     private volatile static Publisher publisher ;
 

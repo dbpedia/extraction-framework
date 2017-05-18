@@ -1,17 +1,16 @@
 package org.dbpedia.extraction.mappings
 
 import java.io.File
-
-import org.dbpedia.extraction.destinations.Quad
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.ontology.{OntologyProperty, Ontology}
+import org.dbpedia.extraction.transform.Quad
 import org.scalatest.{PrivateMethodTester, FlatSpec}
 import org.scalatest.Matchers
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.collection.mutable.{Set => MutableSet, HashSet}
-import org.dbpedia.extraction.sources.{XMLSource, WikiPage, MemorySource}
-import org.dbpedia.extraction.wikiparser.{WikiParser, Namespace, WikiTitle}
+import org.dbpedia.extraction.sources.{XMLSource, MemorySource}
+import org.dbpedia.extraction.wikiparser.{WikiPage, WikiParser, Namespace, WikiTitle}
 import org.dbpedia.extraction.util.Language
 
 /**

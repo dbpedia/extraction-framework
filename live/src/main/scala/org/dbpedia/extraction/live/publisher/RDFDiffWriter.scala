@@ -4,8 +4,9 @@ import java.io._
 
 import org.apache.log4j.Logger
 import org.dbpedia.extraction.destinations.formatters.{TerseFormatter, UriPolicy}
-import org.dbpedia.extraction.destinations.{Destination, Quad, WriterDestination}
+import org.dbpedia.extraction.destinations.{Destination, WriterDestination}
 import org.dbpedia.extraction.live.core.LiveOptions
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils
 import org.dbpedia.extraction.util.RichFile._
 
@@ -26,6 +27,7 @@ object RDFDiffWriter {
 
   /**
    * Writes a set of Quads in a file in TURTLE format. If zip == true it will be compressed with a .gz suffix
+ *
    * @param quads A Set og Quads to write
    * @param filename  The dewstination file name
    */

@@ -1,21 +1,14 @@
 package org.dbpedia.extraction.scripts
 
-import scala.collection.mutable.{Set,HashSet}
-import java.io.{File,FileNotFoundException}
-import java.net.URI
-import org.dbpedia.extraction.util.{IOUtils, Finder, Language}
-import org.dbpedia.extraction.util.TurtleUtils.escapeTurtle
-import org.dbpedia.extraction.util.StringUtils.{prettyMillis,formatCurrentTimestamp}
-import org.dbpedia.extraction.util.NumberUtils.hexToInt
-import org.dbpedia.extraction.util.WikiUtil.{wikiEncode,cleanSpace}
-import org.dbpedia.extraction.util.RichString.wrapString
+import java.io.{File, FileNotFoundException}
+
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.util.RichFile.wrapFile
-import org.dbpedia.extraction.destinations.{Dataset,DBpediaDatasets}
-import CreateFreebaseLinks._
+import org.dbpedia.extraction.util.StringUtils.{formatCurrentTimestamp, prettyMillis}
+import org.dbpedia.extraction.util.{Finder, IOUtils, Language}
+
 import scala.Console.err
-import java.util.regex.Matcher
-import java.lang.StringBuilder
-import collection.mutable
+import scala.collection.mutable
 
 /**
  * Create a dataset file with owl:sameAs links to Freebase.
@@ -93,7 +86,7 @@ object CreateFreebaseLinks
     val date = finder.dates("download-complete").last
     
     def find(dataset: Dataset): File = {
-      val file = finder.file(date, dataset.name.replace('_', '-')+suffix).get
+      val file = finder.file(date, dataset.encoded.replace('_', '-')+suffix).get
       if (! file.exists()) throw new FileNotFoundException(file.toString())
       file
     }

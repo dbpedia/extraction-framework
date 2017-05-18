@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.live.publisher;
 
-import org.dbpedia.extraction.destinations.Quad;
+import org.dbpedia.extraction.transform.Quad;
 
 import java.util.HashSet;
 import java.util.Set;

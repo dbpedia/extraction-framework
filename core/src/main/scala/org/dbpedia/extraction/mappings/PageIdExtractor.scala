@@ -1,11 +1,12 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.wikiparser.PageNode
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.{QuadBuilder, Quad}
 import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser.WikiPage
+
 import scala.language.reflectiveCalls
-import org.dbpedia.extraction.sources.WikiPage
 
 /**
  * Extracts page ids of articles, e.g.
@@ -25,7 +26,7 @@ extends WikiPageExtractor
 
   private val quad = QuadBuilder(context.language, DBpediaDatasets.PageIds, wikiPageIdProperty, context.ontology.datatypes("xsd:integer")) _
 
-  override def extract(page: WikiPage, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
-    Seq(quad(subjectUri, page.id.toString, page.sourceUri))
+  override def extract(page: WikiPage, subjectUri: String): Seq[Quad] = {
+    Seq(quad(subjectUri, page.id.toString, page.sourceIri))
   }
 }

@@ -6,7 +6,7 @@ import org.dbpedia.extraction.ontology._
 import org.dbpedia.extraction.ontology.datatypes._
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.sources.{WikiPage, Source}
+import org.dbpedia.extraction.sources.Source
 
 /**
  * Loads an ontology from configuration files using the DBpedia mapping language.

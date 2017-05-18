@@ -1,18 +1,21 @@
 package org.dbpedia.extraction.mappings
 
+import java.io._
+import java.net.URL
+import java.util.logging.{Level, Logger}
+
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.ontology.Ontology
+import org.dbpedia.extraction.transform.{Quad, QuadBuilder}
+import org.dbpedia.extraction.util.Language
+import org.dbpedia.extraction.wikiparser._
+import org.dbpedia.util.text.ParseExceptionIgnorer
+import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+
 import scala.collection.mutable
-import scala.xml.XML
 import scala.io.Source
 import scala.language.reflectiveCalls
-import java.io._
-import java.net.{URLEncoder, URL}
-import java.util.logging.{Logger, Level}
-import org.dbpedia.extraction.destinations.{DBpediaDatasets,Quad,QuadBuilder}
-import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
-import org.dbpedia.util.text.ParseExceptionIgnorer
+import scala.xml.XML
 
 /**
  * Extracts page abstracts which are not yet extracted. For each page which is a candidate for extraction
@@ -71,7 +74,7 @@ extends PageNodeExtractor
 
     private val availableProcessors = osBean.getAvailableProcessors()
 
-    override def extract(pageNode : PageNode, subjectUri : String, pageContext : PageContext): Seq[Quad] =
+    override def extract(pageNode : PageNode, subjectUri : String): Seq[Quad] =
     {
       // only run extraction if subjectUri is not in list of extracted data
         if (MissingAbstractsExtractor.existingAbstracts(subjectUri)) {
@@ -108,8 +111,8 @@ extends PageNodeExtractor
           val shortText = short(text)
 
           //Create statements
-          val quadLong = longQuad(subjectUri, text, pageNode.sourceUri)
-          val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceUri)
+          val quadLong = longQuad(subjectUri, text, pageNode.sourceIri)
+          val quadShort = shortQuad(subjectUri, shortText, pageNode.sourceIri)
 
           if (shortText.isEmpty) {
             Seq(quadLong)
@@ -133,9 +136,21 @@ extends PageNodeExtractor
       // so we can't use URLEncoder.encode(). But "&" is not escaped, so we do this here.
       // TODO: there may be other characters that need to be escaped.
       var titleParam = pageTitle.encodedWithNamespace
-      AbstractExtractor.CHARACTERS_TO_ESCAPE foreach { case (search, replacement) =>
+      List(
+        (";", "%3B"),
+        ("/", "%2F"),
+        ("?", "%3F"),
+        (":", "%3A"),
+        ("@", "%40"),
+        ("&", "%26"),
+        ("=", "%3D"),
+        ("+", "%2B"),
+        (",", "%2C"),
+        ("$", "%24")
+      ) foreach { case (search, replacement) =>
         titleParam = titleParam.replace(search, replacement);
       }
+
 
       // Fill parameters
       val parameters = apiParametersFormat.format(titleParam/*, URLEncoder.encode(pageWikiText, "UTF-8")*/)
@@ -206,7 +221,8 @@ extends PageNodeExtractor
      * TODO: probably doesn't work for most non-European languages.
      * TODO: analyse ActiveAbstractExtractor, I think this works  quite well there,
      * because it takes the first two or three sentences
-     * @param text
+      *
+      * @param text
      * @param max max length
      * @return result string
      */

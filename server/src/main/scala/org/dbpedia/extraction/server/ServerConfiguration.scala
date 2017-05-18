@@ -24,7 +24,7 @@ private class ServerConfiguration(config: Properties) {
   val _languages = getString(config, "languages",true)
   val languages = parseLanguages(null,Seq(_languages))
 
-  val mappingTestExtractorClasses = ExtractorUtils.loadExtractorClassSeq(getStrings(config, "mappingsTestExtractors", ',', false))
+  val mappingTestExtractorClasses = ExtractorUtils.loadExtractorClassSeq(getStrings(config, "mappingsTestExtractors", ",", false))
   val customTestExtractorClasses = ExtractorUtils.loadExtractorsMapFromConfig(languages, config)
 
 }

@@ -1,9 +1,6 @@
 package org.dbpedia.extraction.server.resources.rml.mappings
 
-import org.apache.jena.rdf.model.Resource
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
-import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLPredicateObjectMap, RMLTriplesMap}
 import org.dbpedia.extraction.wikiparser.TemplateNode

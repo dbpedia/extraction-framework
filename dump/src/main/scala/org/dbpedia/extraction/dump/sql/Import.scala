@@ -15,7 +15,8 @@ import scala.io.Source
 object Import {
   
   def main(args: Array[String]) : Unit = {
-    
+
+    //TODO put this into a properties file
     val baseDir = new File(args(0))
     val tablesFile = new File(args(1))
     val url = args(2)

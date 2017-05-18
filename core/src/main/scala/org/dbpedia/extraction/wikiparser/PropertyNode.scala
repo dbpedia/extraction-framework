@@ -27,12 +27,12 @@ case class PropertyNode(key : String, override val children : List[Node], overri
 
     def propertyNodeValueToPalinText = children.map(_.toPlainText).mkString
 
-    override def sourceUri : String =
+    override def sourceIri : String =
     {
 
       val sb = new StringBuilder
 
-      sb append(super.sourceUri)
+      sb append(super.sourceIri)
 
       if (this.parent != null && this.parent.isInstanceOf[TemplateNode]) {
         sb append "&template="  append this.parent.asInstanceOf[TemplateNode].title.encoded

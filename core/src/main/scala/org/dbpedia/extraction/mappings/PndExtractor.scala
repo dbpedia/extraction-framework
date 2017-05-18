@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.config.mappings.PndExtractorConfig
 import org.dbpedia.extraction.ontology.Ontology
@@ -35,7 +36,7 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.Pnd)
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if (node.title.namespace != Namespace.Main) return Seq.empty
     
@@ -55,7 +56,7 @@ extends PageNodeExtractor
           {
             for (pnd <- getPnd(property)) 
             {
-                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceIri, new Datatype("xsd:string"))
             }
           }
         }
@@ -66,7 +67,7 @@ extends PageNodeExtractor
           {
             for (pnd <- getPnd(property))
             {
-                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceUri, new Datatype("xsd:string"))
+                quads += new Quad(context.language, DBpediaDatasets.Pnd, subjectUri, individualisedPndProperty, pnd, property.sourceIri, new Datatype("xsd:string"))
             }
           }
         }

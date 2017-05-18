@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
-import org.dbpedia.extraction.wikiparser.impl.wikipedia.Namespaces
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{Language, ExtractorUtils}
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.{ExtractorUtils, Language}
 import org.dbpedia.extraction.wikiparser._
+
 import scala.language.reflectiveCalls
 
 /**
@@ -18,14 +19,14 @@ class ArticleCategoriesExtractor( context : {
 
     override val datasets = Set(DBpediaDatasets.ArticleCategories)
 
-    override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+    override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
     {
         if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
             return Seq.empty
         
         val links = collectCategoryLinks(node).filter(isCategoryForArticle(_))
 
-        links.map(link => new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceUri))
+        links.map(link => new Quad(context.language, DBpediaDatasets.ArticleCategories, subjectUri, dctermsSubjectProperty, getUri(link.destination), link.sourceIri))
     }
 
     private def isCategoryForArticle(linkNode : InternalLinkNode) = linkNode.destinationNodes match

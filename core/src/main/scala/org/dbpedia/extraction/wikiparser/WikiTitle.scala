@@ -1,13 +1,10 @@
 package org.dbpedia.extraction.wikiparser
 
-import java.util.Locale
-import org.dbpedia.extraction.util.Language
-import org.dbpedia.extraction.util.WikiUtil
 import org.dbpedia.extraction.util.RichString.wrapString
-import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.util.text.ParseExceptionIgnorer
+import org.dbpedia.util.text.html.{HtmlCoder, XmlCodes}
 import org.dbpedia.util.text.uri.UriDecoder
-import scala.collection.mutable.ListBuffer
 
 /**
  * Represents a page title. Or a link to a page.
@@ -25,18 +22,17 @@ class WikiTitle (
   val language: Language,
   val isInterLanguageLink: Boolean = false,
   val fragment: String = null,
-  val capitalizeLink : Boolean = true
+  val capitalizeLink : Boolean = true,
+  var id: Option[Long] = None
 )
 {
     if (decoded.isEmpty) throw new WikiParserException("page name must not be empty")
 
     /** Wiki-encoded page name (without namespace) e.g. Automobile_generation */
-    val encoded = if (capitalizeLink) {
+    val encoded = if (capitalizeLink)
         WikiUtil.wikiEncode(decoded).capitalize(language.locale)
-    }
-    else {
-        WikiUtil.wikiEncode(decoded)
-    }
+        else
+            WikiUtil.wikiEncode(decoded)
 
     /** Canonical page name with namespace e.g. "Template talk:Automobile generation" */
     val decodedWithNamespace = withNamespace(false)
@@ -189,7 +185,7 @@ object WikiTitle
      * @param title MediaWiki link e.g. "Template:Infobox Automobile"
      * @param language The source language of this link
      */
-    def parseCleanTitle(title: String, language: Language): WikiTitle = {
+    def parseCleanTitle(title: String, language: Language, id: Option[java.lang.Long]): WikiTitle = {
         var namespace = Namespace.Main
         var decodedName = title
 
@@ -202,8 +198,12 @@ object WikiTitle
             }
         }
 
-        // we explicitly disable capitalization of the title here
-        new WikiTitle(decodedName, namespace, language, false, null, false)
-    }
+        val zwid = id match{
+            case Some(i) => Option(i.longValue())
+            case None => None
+        }
 
+        // we explicitly disable capitalization of the title here
+        new WikiTitle(decodedName, namespace, language, false, null, false, zwid)
+    }
 }

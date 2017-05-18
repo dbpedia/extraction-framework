@@ -1,9 +1,9 @@
 package org.dbpedia.extraction.mappings
 
 import org.dbpedia.extraction.config.dataparser.InfoboxMappingsExtractorConfig._
-import org.dbpedia.extraction.destinations.{Dataset, Quad}
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.sources.WikiPage
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.{ExtractorUtils, InfoboxMappingsUtils, Language}
 import org.dbpedia.extraction.wikiparser._
 import scala.language.reflectiveCalls
@@ -20,17 +20,18 @@ class InfoboxMappingsTemplateExtractor (context: {
 {
   private val templateParameterProperty = context.language.propertyUri.append("templateUsesWikidataProperty")
 
-  val hintDatasetInst = new Dataset("template_mapping_hints_instance")
-  val hintDataset = new Dataset("template_mapping_hints")
-  val mapDataset = new Dataset("template_mappings")
+  val hintDatasetInst = DBpediaDatasets.TemplateMappingsHintsInstance
+  val hintDataset = DBpediaDatasets.TemplateMappingsHints
+  val mapDataset = DBpediaDatasets.TemplateMappings
   override val datasets = Set(hintDataset, mapDataset)
-  override def extract(page : WikiPage, subjectUri : String, pageContext : PageContext): Seq[Quad] = {
+
+  override def extract(page : WikiPage, subjectUri : String): Seq[Quad] = {
     if (!List(Namespace.Template, Namespace.Main).contains(page.title.namespace) ) return Seq.empty
 
-    var simpleParser = WikiParser.getInstance("simple")
+    val simpleParser = WikiParser.getInstance("simple")
     val parserFunctions = ExtractorUtils.collectParserFunctionsFromNode(simpleParser.apply(page).getOrElse(null))
 
-    val propertyParserFuncions = parserFunctions.filter(p => (p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from")))
+    val propertyParserFuncions = parserFunctions.filter(p => p.title.equalsIgnoreCase("#property") && p.children.nonEmpty && !p.children.head.toString.contains("from"))
     val propertyParserFuncionsHints = propertyParserFuncions.map(_.children.head.toString)
     val propertyParserFuncionsMappings = getTemplateMappingsFromPropertyParserFunc(propertyParserFuncions)
     val invokeFunc = parserFunctions.filter(p => p.title.equalsIgnoreCase("#invoke"))
@@ -41,17 +42,17 @@ class InfoboxMappingsTemplateExtractor (context: {
     val mappingQuads = propertyParserFuncionsMappings.map( p => {
       val value = p._1.toString + "=>" + p._2.toString
       new Quad(context.language, mapDataset, subjectUri, templateParameterProperty,
-        value, page.sourceUri, context.ontology.datatypes("xsd:string")) })
+        value, page.sourceIri, context.ontology.datatypes("xsd:string")) })
 
     val parserFuncQuads = (propertyParserFuncions ++ wikidataParserFunc ++ propertyLinkParserFunc).map( p =>
       new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
-        p.toWikiText, page.sourceUri, context.ontology.datatypes("xsd:string"))
+        p.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string"))
     )
 
     val templateQuads = ExtractorUtils.collectTemplatesFromNodeTransitive(simpleParser.apply(page).getOrElse(null))
       .filter(t => List("conditionalurl",/* "official_website",*/ "wikidatacheck").contains(t.title.encoded.toString.toLowerCase))
       .map(t => new Quad(context.language, hintDataset, subjectUri, templateParameterProperty,
-        t.toWikiText, page.sourceUri, context.ontology.datatypes("xsd:string")))
+        t.toWikiText, page.sourceIri, context.ontology.datatypes("xsd:string")))
 
     parserFuncQuads ++ templateQuads ++ mappingQuads
 

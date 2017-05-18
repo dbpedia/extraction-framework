@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.destinations
 
+import org.dbpedia.extraction.transform.Quad
+
 /**
  * Base class for destinations that forward most calls to another destination.
  */

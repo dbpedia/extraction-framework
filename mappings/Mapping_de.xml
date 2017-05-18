@@ -1555,7 +1555,7 @@ broken --&gt;
        {{ PropertyMapping | templateProperty = EP | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = SDName | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = RE | ontologyProperty = }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Fernsehsendung</title><ns>208</ns><id>9149</id><revision><id>31820</id><timestamp>2014-02-13T14:27:59Z</timestamp><text>{{ TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Fernsehsendung</title><ns>208</ns><id>9149</id><revision><id>51151</id><timestamp>2016-06-06T12:09:11Z</timestamp><text>{{ TemplateMapping
    | mapToClass = TelevisionShow
    | mappings =
         {{PropertyMapping | templateProperty = OT | ontologyProperty = foaf:name }}
@@ -3470,6 +3470,18 @@ broken
 	{{PropertyMapping | templateProperty = ORT | ontologyProperty = location }}
         {{ GeocoordinatesMapping | latitude = BREITENGRAD | longitude = LÄNGENGRAD }} 
 
+}}</text></revision></page><page><title>Mapping de:Infobox Lkw-Modell Generationen</title><ns>208</ns><id>11744</id><revision><id>51495</id><timestamp>2016-09-16T07:35:20Z</timestamp><text>{{ TemplateMapping
+   | mapToClass = Automobile
+   | mappings =
+       {{ PropertyMapping | templateProperty = Marke | ontologyProperty = manufacturer }}
+       {{ PropertyMapping | templateProperty = Modell | ontologyProperty = name }}
+       {{ PropertyMapping | templateProperty = Hersteller | ontologyProperty = manufacturer }}
+       {{ PropertyMapping | templateProperty = Bezeichnung | ontologyProperty = name }}
+       {{ PropertyMapping | templateProperty = von | ontologyProperty = modelStartYear }}
+       {{ PropertyMapping | templateProperty = bis | ontologyProperty = modelEndYear }}
+       {{ PropertyMapping | templateProperty = Vorgänger | ontologyProperty = predecessor }}
+       {{ PropertyMapping | templateProperty = Nachfolger | ontologyProperty = successor }}
+       {{ PropertyMapping | templateProperty = ähnlich | ontologyProperty = relatedMeanOfTransportation }}
 }}</text></revision></page><page><title>Mapping de:Infobox MLB player</title><ns>208</ns><id>3466</id><revision><id>47245</id><timestamp>2015-03-28T16:25:30Z</timestamp><text>{{ TemplateMapping
    | mapToClass = BaseballPlayer
    | mappings =
@@ -7346,7 +7358,7 @@ Im Englischen nicht bekannt/verwendet:
        {{ PropertyMapping | templateProperty = Amateurteams | ontologyProperty = formerTeam }}
        {{ PropertyMapping | templateProperty = Profiteams | ontologyProperty = formerTeam }}
        {{ PropertyMapping | templateProperty = AktuellesTeam | ontologyProperty = club }}
---&gt;</text></revision></page><page><title>Mapping de:Infobox Raumfahrer</title><ns>208</ns><id>3437</id><revision><id>12461</id><timestamp>2011-04-27T14:35:21Z</timestamp><text>{{ TemplateMapping
+--&gt;</text></revision></page><page><title>Mapping de:Infobox Raumfahrer</title><ns>208</ns><id>3437</id><revision><id>51305</id><timestamp>2016-06-13T12:07:00Z</timestamp><text>{{ TemplateMapping
    | mapToClass = Astronaut
    | mappings =
        {{ PropertyMapping | templateProperty = name | ontologyProperty = foaf:name }}
@@ -7357,6 +7369,9 @@ Im Englischen nicht bekannt/verwendet:
        {{ PropertyMapping | templateProperty = dauer | ontologyProperty = timeInSpace }}
 &lt;!-- Does not work with the Month-Year format: --&gt;
        {{ PropertyMapping | templateProperty = ausgeschieden | ontologyProperty = retired }}
+
+       {{ PropertyMapping | templateProperty = 1.Mission | ontologyProperty = mission }}
+       {{ PropertyMapping | templateProperty = 2.Mission | ontologyProperty = mission }}
 }}
 
 &lt;!-- 
@@ -7372,7 +7387,8 @@ Im Englischen nicht bekannt/verwendet:
        {{ PropertyMapping | templateProperty = erster_start | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = letzte_landung | ontologyProperty = }}
        {{ PropertyMapping | templateProperty = anzahl_eva | ontologyProperty = }}
-       {{ PropertyMapping | templateProperty = missionen | ontologyProperty = }}
+      {{ PropertyMapping | templateProperty = missionen | ontologyProperty = }}
+       
 --&gt;</text></revision></page><page><title>Mapping de:Infobox Rennrodler</title><ns>208</ns><id>4007</id><revision><id>47304</id><timestamp>2015-03-30T09:47:51Z</timestamp><text>{{ TemplateMapping
    | mapToClass = WinterSportPlayer
    | mappings =
@@ -9410,6 +9426,11 @@ Maybe useful properties but without a counterpart so far:
 	{{PropertyMapping | templateProperty = VIAF | ontologyProperty = viafId }}
 	{{PropertyMapping | templateProperty = LCCN | ontologyProperty = lccn }}
         {{PropertyMapping | templateProperty = NDL | ontologyProperty = ndlId }}
+}}</text></revision></page><page><title>Mapping de:Nummer-eins-Hits</title><ns>208</ns><id>11708</id><revision><id>51304</id><timestamp>2016-06-13T12:04:22Z</timestamp><text>{{ TemplateMapping
+| mapToClass            = TrackList
+| mappings              =
+{{PropertyMapping | templateProperty = Art | ontologyProperty = foaf:name }}
+{{PropertyMapping | templateProperty = Bezeichnung | ontologyProperty = abstract }}
 }}</text></revision></page><page><title>Mapping de:Personendaten</title><ns>208</ns><id>11106</id><revision><id>47486</id><timestamp>2015-04-01T19:31:50Z</timestamp><text>{{TemplateMapping
 | mapToClass = Person &lt;!--owl:Thing--&gt;
 | mappings =

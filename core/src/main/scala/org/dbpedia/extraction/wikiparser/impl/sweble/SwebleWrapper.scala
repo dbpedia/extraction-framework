@@ -1,38 +1,28 @@
 package org.dbpedia.extraction.wikiparser.impl.sweble
 
-import java.io.{File, StringWriter}
 import java.net.URI
-import java.util
 import java.util.ArrayList
 
+import de.fau.cs.osr.ptk.common.ast.RtData
+import de.fau.cs.osr.ptk.common.{AstVisitor, Warning}
+import org.sweble.wikitext.engine._
+import org.sweble.wikitext.engine.config.WikiConfigImpl
 import org.sweble.wikitext.engine.nodes.{EngPage, EngProcessedPage}
+import org.sweble.wikitext.engine.utils.DefaultConfigEnWp
+import org.sweble.wikitext.parser.nodes.WtNodeList.WtNodeListImpl
+import org.sweble.wikitext.parser.nodes._
 import org.sweble.wikitext.parser.parser.PreprocessorToParserTransformer
 import org.sweble.wikitext.parser.preprocessor.PreprocessedWikitext
-import org.sweble.wikitext.parser.{WtEntityMap, WtEntityMapImpl, WtRtData, postprocessor}
-import org.sweble.wikitext.parser.nodes._
-import org.sweble.wikitext.parser.postprocessor.TreeBuilder
+import org.sweble.wikitext.parser.{WtEntityMap, WtEntityMapImpl}
 
 import scala.collection.JavaConversions._
+import scala.collection.mutable.ListBuffer
 import scala.language.implicitConversions
-import org.sweble.wikitext.engine.ExpansionVisitor
-
-import collection.mutable.ListBuffer
-import org.sweble.wikitext.parser.nodes.WtNodeList.WtNodeListImpl
-import org.sweble.wikitext.engine.utils.DefaultConfigEnWp
-import org.sweble.wikitext.engine.config.WikiConfig
-import org.sweble.wikitext.engine.config.WikiConfigImpl
-import org.sweble.wikitext.engine._
-import de.fau.cs.osr.ptk.common.ast.{AstNode, RtData}
-import de.fau.cs.osr.ptk.common.{AstPrinter, AstVisitor, Warning}
-import org.sweble.wikitext.engine.ext.parser_functions.ParserFunctionIf
-import org.sweble.wikitext.parser.nodes.WtBody.WtBodyImpl
-import org.sweble.wikitext.parser.nodes.WtLinkTarget.LinkTargetType
 //import de.fau.cs.osr.ptk.nodegen.parser._
 
 
+import org.dbpedia.extraction.util.{Language, WikiUtil}
 import org.dbpedia.extraction.wikiparser._
-import org.dbpedia.extraction.sources.WikiPage
-import org.dbpedia.extraction.util.{UriUtils, WikiUtil, Language}
 
 
 /**
@@ -74,7 +64,7 @@ final class SwebleWrapper extends WikiParser
 
 
         //TODO dont transform, refactor all extractors instead
-        Some(transformAST(page, false, false, parsed))
+        Some(transformAST(page, parsed))
     }
 
     def parse(pageId : PageId, wikitext : String) : EngPage = {
@@ -87,7 +77,7 @@ final class SwebleWrapper extends WikiParser
 
     // The start_line param is for cases when I am rerunning the parser on a subtext and hence need
     // to adjust for the line numbers
-    def transformAST(page: WikiPage, isRedirect : Boolean, isDisambiguation : Boolean, swebleTree : EngPage, start_line : Int = 0) : PageNode = {
+    def transformAST(page: WikiPage, swebleTree : EngPage, start_line : Int = 0) : PageNode = {
         //parse template arguments
 
        // new ParameterToDefaultValueResolver(pageId).go(swebleTree)
@@ -97,7 +87,7 @@ final class SwebleWrapper extends WikiParser
         val nodesClean = mergeConsecutiveTextNodes(nodes)
         //println(nodesClean)
         new PageNode(page.title, page.id, page.revision, page.timestamp,
-            page.contributorID,  page.contributorName, isRedirect, isDisambiguation, nodesClean)
+            page.contributorID,  page.contributorName, page.source, nodesClean)
     }
 
     def transformNodes(nl : WtNodeListImpl, start_line : Int) : List[Node] = {

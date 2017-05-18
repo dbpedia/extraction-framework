@@ -1,13 +1,13 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.ontology.Ontology
-import org.dbpedia.extraction.util.{ExtractorUtils, Language}
+import org.dbpedia.extraction.transform.Quad
+import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser._
 
 import scala.collection.mutable.ArrayBuffer
-import scala.language.reflectiveCalls
-import scala.language.postfixOps
+import scala.language.{postfixOps, reflectiveCalls}
 
 /**
  *  Combines the raw infobox and mappings extractor and tries to split the triples of the raw infobox extractor
@@ -26,19 +26,19 @@ extends PageNodeExtractor {
   private val mappingExtractor = new MappingExtractor(context)
   private val language = context.language
 
-  private val enableMappingExtractor = Namespace.mappings.contains(language)
+  private val enableMappingExtractor = Namespace.mappingLanguages.contains(language)
 
   override val datasets = (rawinfoboxExtractor.datasets ++ mappingExtractor.datasets) + DBpediaDatasets.InfoboxPropertiesMapped
 
-  override def extract(page: PageNode, subjectUri: String, pageContext: PageContext): Seq[Quad] = {
+  override def extract(page: PageNode, subjectUri: String): Seq[Quad] = {
 
 
     val mappedGraph =
       // check if the mappings exist for a language
-      if (enableMappingExtractor) mappingExtractor.extract(page, subjectUri, pageContext)
+      if (enableMappingExtractor) mappingExtractor.extract(page, subjectUri)
       else Seq.empty
 
-    val rawGraph = rawinfoboxExtractor.extract(page, subjectUri, pageContext)
+    val rawGraph = rawinfoboxExtractor.extract(page, subjectUri)
 
     return mappedGraph ++ splitRawGraph(rawGraph, mappedGraph)
   }
@@ -51,14 +51,14 @@ extends PageNodeExtractor {
     rawGraph
       .foreach( q => {
         val tuple = extractTemplatePropertyAndLine(q.context)
-        if (! q.dataset.equals(DBpediaDatasets.InfoboxProperties.name)) {
+        if (! q.dataset.equals(DBpediaDatasets.InfoboxProperties.encoded)) {
           newRawGraph += q.copy()
         }
         else if ( tuple.isDefined && mappedIndex.contains( tuple.get)) {
-          newRawGraph += q.copy(context = q.context + "&mapped=")
+          newRawGraph += q.copy(context = q.context + "&mapped=", dataset = DBpediaDatasets.InfoboxPropertiesMapped.encoded)
         }
         else {
-          newRawGraph += q.copy(context = q.context + "&unmapped=", dataset = DBpediaDatasets.InfoboxPropertiesMapped.name)
+          newRawGraph += q.copy(context = q.context + "&unmapped=")
         }
     })
 

@@ -1,3 +1,4 @@
+/*
 package org.dbpedia.extraction.nif;
 
 import java.io.*;
@@ -21,17 +22,19 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.NodeTraversor;
 
+*/
 /**
  * Extract NIF from Abstract triples including links
  * TODO: links that are plain text are not recognized AND exploded (www.wikipedia.de)
  * TODO: external data like wiki links and spotlight not in there
  * @author Martin Brümmer
  *
- */
+ *//*
+
 
 public class WikiCorpusGenerator {
 
-/*	private String abstractText = "";
+	private String abstractText = "";
 	private String logfile = "";
 	private boolean writePrefix = true;
 	private int fileNumber = 0;
@@ -103,11 +106,13 @@ public class WikiCorpusGenerator {
 					tempTime = System.currentTimeMillis();		
 				}
 					
-*//*				if(count>40000) {
+*/
+/*				if(count>40000) {
 					count = 0;
 					fileNumber++;
 					writePrefix=true;
 				}*//*
+
 				
 				String parse = parseLine(line, resources);
 				
@@ -208,11 +213,13 @@ public class WikiCorpusGenerator {
 
 	
 	
-	*//**//**
+	*/
+/**
 	 * Clean up URIs: Add language subdomain, do URI encoding
 	 * @param uri 
 	 * @return sanitized URI
-	 *//**//*
+	 *//*
+
 	private String sanitizeUri(String uri) {
 		try {
 			uri = uri.replace("index.php?title=","");
@@ -247,11 +254,13 @@ public class WikiCorpusGenerator {
 		return uri;
 	}
 	
-	*//**//**
+	*/
+/**
 	 * Find the relevant paragraph of text, that is, the first paragraph after the info table, disambiguation links and quality control labels
 	 * @param The full abstract html as extracted by DBpedia extraction framework.
 	 * @return The relevant abstract paragraph HTML 
-	 *//**//*
+	 *//*
+
 
 	private String getRelevantParagraphs(String abstractString, String resourceUri) {
 		
@@ -298,11 +307,13 @@ public class WikiCorpusGenerator {
 		}
 	}
 	
-	*//**//**
+	*/
+/**
 	 * Extract the abstract text and a number of link objects
 	 * @param The HTML string of the relevant abstract paragraphs 
 	 * @return a list of Link objects containing the links, anchors and offsets. Abstract text is saved to class variable.
-	 *//**//*
+	 *//*
+
 	
 	private List<Link> getLinkAndText(String line, String resource) {
 			
@@ -349,7 +360,7 @@ public class WikiCorpusGenerator {
 				}
 				offset+=textLength;
 			} else {		
-				LinkExtractor extractor = new LinkExtractor(offset,this.language);
+				LinkExtractor extractor = new LinkExtractor(offset, this.language);
 				NodeTraversor traversor = new NodeTraversor(extractor);
 				traversor.traverse(elementNode);
 				
@@ -599,6 +610,7 @@ public class WikiCorpusGenerator {
 //		resources.add("http://de.dbpedia.org/resource/Leipzig");
 //		wiki.readFast("/media/martin/Elements/abstract_html/dewiki-20150515-long-abstracts.nt.gz", resources, "/media/martin/Elements/corpustest.ttl");
 
-	}*/
+	}
 	
 }
+*/

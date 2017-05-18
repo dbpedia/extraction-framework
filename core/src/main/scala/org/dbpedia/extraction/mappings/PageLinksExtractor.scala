@@ -1,6 +1,7 @@
 package org.dbpedia.extraction.mappings
 
-import org.dbpedia.extraction.destinations.{DBpediaDatasets, Quad}
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
+import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.{Language, ExtractorUtils}
@@ -23,14 +24,14 @@ extends PageNodeExtractor
 
   override val datasets = Set(DBpediaDatasets.PageLinks)
 
-  override def extract(node : PageNode, subjectUri : String, pageContext : PageContext) : Seq[Quad] =
+  override def extract(node : PageNode, subjectUri : String) : Seq[Quad] =
   {
     if(node.title.namespace != Namespace.Main && !ExtractorUtils.titleContainsCommonsMetadata(node.title)) 
         return Seq.empty
     
     val list = ExtractorUtils.collectInternalLinksFromNode(node)
 
-    list.map(link => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceUri, null))
+    list.map(link => new Quad(context.language, DBpediaDatasets.PageLinks, subjectUri, wikiPageWikiLinkProperty, getUri(link.destination), link.sourceIri, null))
   }
 
   private def getUri(destination : WikiTitle) : String =
