@@ -123,7 +123,7 @@ class WikidataR2RExtractor(
                 }
 
                 //if equ classes are available, we can be sure that we are dealing with a type like property
-                if(equivPropertySet.contains(rdfType) || equivPropertySet.contains(subclassOf))  // maybe add equivPropertySet.contains(partof)
+                if(equivPropertySet.contains(rdfType.uri) || equivPropertySet.contains(subclassOf.uri))  // maybe add equivPropertySet.contains(partof)
                 {
                   //create the type like statements
                   quads += new Quad(
