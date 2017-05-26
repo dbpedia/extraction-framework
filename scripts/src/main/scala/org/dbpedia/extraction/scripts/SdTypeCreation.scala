@@ -50,9 +50,9 @@ object SdTypeCreation {
   private val stat_predicate_weight_apriori: concurrent.Map[PredicateDirection.Value, concurrent.Map[String, Float]] = new ConcurrentHashMap[PredicateDirection.Value, concurrent.Map[String, Float]]().asScala                           //Predicate(out) -> Weight
   stat_predicate_weight_apriori.put(PredicateDirection.In, new ConcurrentHashMap[String, Float]().asScala)
   stat_predicate_weight_apriori.put(PredicateDirection.Out, new ConcurrentHashMap[String, Float]().asScala)
-  private var propertyMap = Map[String, OntologyProperty]()
-  //private var resultMap = new ConcurrentHashMap[String, List[Quad]]().asScala
+  private var propertyMap = new ConcurrentHashMap[String, OntologyProperty]().asScala
   private val contextMap = new ConcurrentHashMap[String, String]().asScala
+
   private var suffix:String = _
 
   val dataset = DBpediaDatasets.SDInstanceTypes
@@ -70,6 +70,24 @@ object SdTypeCreation {
   private var destination : Destination = _
 
   private var ontology: Ontology = _
+
+  def clearAllMaps: Unit ={
+    resourceCount = 0
+    type_count.clear()
+    disambiguations.clear()
+    typeStatistics.clear()
+    predStatisticsIn.clear()
+    predStatisticsOut.clear()
+    stat_resource_predicate_tf_in.clear()
+    stat_resource_predicate_tf_out.clear()
+    stat_type_predicate_perc_in.clear()
+    stat_type_predicate_perc_out.clear()
+    stat_predicate_weight_apriori.clear()
+    stat_predicate_weight_apriori.put(PredicateDirection.In, new ConcurrentHashMap[String, Float]().asScala)
+    stat_predicate_weight_apriori.put(PredicateDirection.Out, new ConcurrentHashMap[String, Float]().asScala)
+    propertyMap.clear()
+    contextMap.clear()
+  }
 
   def getProperty(uri: String, ontology: Ontology) : Option[OntologyProperty] = {
     if (propertyMap.contains(uri)) {
@@ -266,7 +284,7 @@ object SdTypeCreation {
   }
 
   def typesWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    new QuadMapper().readQuads(finder, "instance-types" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, DBpediaDatasets.OntologyTypes.filenameEncoded + suffix, auto = true) { quad =>
       contextMap.get(quad.subject) match{
         case Some(l) =>
         case None => contextMap.put(quad.subject, quad.context)
@@ -284,13 +302,16 @@ object SdTypeCreation {
   }
 
   def workerDisamb = SimpleWorkers(1.5, 1.0) { language: Language =>
-    new QuadMapper().readQuads(finder, "disambiguations" + suffix, auto = true) { quad =>
-      disambiguations.put(quad.subject, 1)
+    finder.byName(DBpediaDatasets.DisambiguationLinks.filenameEncoded + suffix, auto = true) match{
+      case None => Console.err.println("No disambiguation dataset found for language: " + language.wikiCode)
+      case Some(x) => new QuadMapper().readQuads(language, x) { quad =>
+        disambiguations.put(quad.subject, 1)
+      }
     }
   }
 
   def objectPropWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    new QuadMapper().readQuads(finder, "mappingbased-objects-uncleaned" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, DBpediaDatasets.OntologyPropertiesObjects.filenameEncoded + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_in.get(quad.value) match {
         case Some(m) => m.get(quad.predicate) match {
           case Some(c) =>
@@ -332,7 +353,7 @@ object SdTypeCreation {
   }
 
   def literalWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
-    new QuadMapper().readQuads(finder, "mappingbased-literals" + suffix, auto = true) { quad =>
+    new QuadMapper().readQuads(finder, DBpediaDatasets.OntologyPropertiesLiterals.filenameEncoded + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_out.get(quad.subject) match {
         case Some(m) => m.get(quad.predicate) match {
           case Some(c) =>
@@ -426,7 +447,7 @@ object SdTypeCreation {
       x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
 
     for(language <- config.languages) {
-
+      clearAllMaps
       finder = new DateFinder(baseDir, language)
       finder.byName("instance-types" + suffix, auto = true) //work around to set date of finder
       destination = DestinationUtils.createDestination(finder, Array(dataset.getLanguageVersion(language, config.dbPediaVersion)), formats)

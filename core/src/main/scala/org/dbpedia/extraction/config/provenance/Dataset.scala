@@ -49,6 +49,8 @@ class Dataset private[provenance](
   /** Wiki-encoded dataset name */
   val encoded = WikiUtil.wikiEncode((if(Option(fileName).nonEmpty && fileName.trim.nonEmpty) fileName.trim else name).replace("-", "_")).toLowerCase
 
+  val filenameEncoded = encoded.replace("_", "-")
+
   val canonicalUri = RdfNamespace.fullUri(DBpediaNamespace.DATASET, encoded)
 
   val version = ConfigUtils.parseVersionString(versionEntry)
@@ -106,12 +108,12 @@ class Dataset private[provenance](
   def defaultGraph: Option[String] = {
     def appendNamespaceByTrait(ns: String): String = {
       var ret = ns
-      this.traits.foreach( trai => trai match{
+      this.traits.foreach {
         case DatasetTrait.Unredirected => ret += "/unredirected"
         case DatasetTrait.EnglishUris => ret += "/en_uris"
         case DatasetTrait.WikidataUris => ret += "/wkd_uris"
-        case _=>
-      })
+        case _ =>
+      }
       ret
     }
     this.language match {
