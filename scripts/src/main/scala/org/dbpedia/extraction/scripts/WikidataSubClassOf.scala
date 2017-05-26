@@ -27,7 +27,7 @@ import scala.util.control.Breaks._
  * Then creates new mapping
  * dbo:Class: {owl:equivalentClass: Qx}  and writes to file
  *
-  * needs to be run after
+  * needs to be run after the redirection of the wikidata-raw dataset
  */
 
 object WikidataSubClassOf {
@@ -38,12 +38,11 @@ object WikidataSubClassOf {
 
   def main(args: Array[String]) {
 
-    require(args != null && args.length == 2, "Two arguments required, extraction config file and extension to work with")
+    require(args != null && args.length == 1, "Two arguments required, extraction config file and extension to work with")
     require(args(0).nonEmpty, "missing required argument: config file name")
-    require(args(1).nonEmpty, "missing required argument: suffix e.g. .tql.gz")
 
     val config = new Config(args(0))
-    val suffix = args(1)
+    val suffix = config.inputSuffix
     val rawDataset = DBpediaDatasets.WikidataRawRedirected.encoded + suffix
 
     val baseDir = config.dumpDir

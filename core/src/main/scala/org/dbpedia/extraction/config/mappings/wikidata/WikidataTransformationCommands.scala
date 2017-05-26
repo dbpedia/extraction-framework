@@ -105,14 +105,12 @@ class WikidataCommandReceiver() {
   }
 
   def getDBpediaProperties(key: String, value: Value): Unit = {
-    if (!equivPropertySet.isEmpty) {
       equivPropertySet.foreach {
         mappedProperty => {
           val propKey = mappedProperty.toString.replace("http://dbpedia.org/ontology/", "")
             MapResult += (propKey -> WikidataUtil.getValue(value))
         }
       }
-    }
   }
 
   def getLatitude(value: Value) = value match {

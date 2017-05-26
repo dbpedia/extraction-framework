@@ -51,20 +51,12 @@ class WikidataR2RExtractor(
 
   val config: JsonConfig = new JsonConfig(JsonConfig.getClass.getClassLoader.getResource("wikidatar2r.json"))
 
-  var equivalentProperties: Map[String, Set[String]] = config.configMap.map(
-    p => p._2 match{
-    case array: ArrayNode => "wikidata:" + p._1 -> array.elements().asScala.map(x =>
-      RdfNamespace.fullUri(RdfNamespace.DBO, x.fieldNames().next())).toSet
-  })
-
-  context.ontology.wikidataPropertiesMap.foreach(x => equivalentProperties += x._1 -> x._2.map(y => y.uri))
+  var equivalentProperties: Map[String, Set[String]] = context.ontology.wikidataPropertiesMap.map(x => x._1 -> x._2.map(y => y.uri))
 
   //class mappings generated with script WikidataSubClassOf and written to json file.
   val classMappings = readClassMappings(context.configFile.wikidataMappingsFile)
 
   private val rdfType = context.ontology.properties("rdf:type")
-  private val subclassOf = context.ontology.properties("rdfs:subClassOf")
-  //private val partof = context.ontology.properties("partof")
   private val wikidataSplitIri = context.ontology.properties("wikidataSplitIri")
   private val rdfStatement = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
   private val rdfSubject = "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
@@ -118,20 +110,6 @@ class WikidataR2RExtractor(
                   val statementUriWithHash = WikidataUtil.getStatementUriWithHash(subjectUri, property, value, statement.getStatementId)
                   quads += new Quad(context.language, DBpediaDatasets.WikidataDublicateIriSplit, statementUri, wikidataSplitIri, statementUriWithHash, page.wikiPage.sourceIri, null)
                 }
-
-                //if type properties are available, we can be sure that we are dealing with a type like property
-                if(equivPropertySet.contains(rdfType.uri) || equivPropertySet.contains(subclassOf.uri))  // maybe add equivPropertySet.contains(partof)
-                {
-                  //create the type like statements
-                  quads += new Quad(
-                    context.language,
-                    DBpediaDatasets.WikidataTypeLikeStatements,
-                    subjectUri,
-                    wikidataProperrtyUri + ":" + property,
-                    value.asInstanceOf[IriIdentifiedValue].getIri,
-                    page.wikiPage.sourceIri, null)
-                }
-
                 quads ++= getQuad(page, subjectUri, statementUri, receiver.getMap())
 
                 //Wikidata qualifiers R2R mapping
@@ -322,7 +300,6 @@ class WikidataR2RExtractor(
   }
 
   private def getEquivalentProperties(property: String): Set[String] = {
-    var properties = Set[OntologyProperty]()
     equivalentProperties.get("wikidata:" + property) match{
       case Some(x) => x
       case None => Set[String]()
@@ -335,7 +312,7 @@ class WikidataR2RExtractor(
   private def splitDatasets(originalGraph: Seq[Quad], subjectUri : String, page: JsonNode) : Seq[Quad] = {
     val adjustedGraph = new ArrayBuffer[Quad]
 
-    originalGraph.map(q => {
+    originalGraph.foreach(q => {
       if (q.dataset.equals(DBpediaDatasets.WikidataR2R_literals.encoded) || q.dataset.equals(DBpediaDatasets.WikidataR2R_objects.encoded)) {
         q.predicate match {
 

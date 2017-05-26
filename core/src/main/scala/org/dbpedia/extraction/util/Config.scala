@@ -17,8 +17,13 @@ import scala.io.Codec
 import scala.util.{Failure, Success, Try}
 
 
-class Config(val configPath: String)
+class Config(val configPath: String) extends
+  Properties(Config.universalProperties)
 {
+
+  if(configPath != null)
+    this.putAll(ConfigUtils.loadConfig(configPath))
+
   val logger = Logger.getLogger(getClass.getName)
   /**
     * load two config files:
@@ -26,15 +31,8 @@ class Config(val configPath: String)
     * 2. the extraction job specific config provided by the user
     */
 
-  private val properties: Properties = if(configPath == null) Config.universalProperties else ConfigUtils.loadConfig(configPath)
-
-  private def checkOverride(key: String): Properties = if(properties.containsKey(key))
-    properties
-  else
-    Config.universalProperties
-
   def getArbitraryStringProperty(key: String): Option[String] = {
-    Option(getString(checkOverride(key), key))
+    Option(getString(this, key))
   }
 
   def throwMissingPropertyException(property: String, required: Boolean): Unit ={
@@ -50,9 +48,9 @@ class Config(val configPath: String)
 
 
   // TODO Watch out, this could be a regex
-  lazy val source: String = checkOverride("source").getProperty("source", "pages-articles.xml.bz2").trim
+  lazy val source: String = this.getProperty("source", "pages-articles.xml.bz2").trim
 
-  lazy val wikiName: String = checkOverride("wiki-name").getProperty("wiki-name", "wiki").trim
+  lazy val wikiName: String = this.getProperty("wiki-name", "wiki").trim
 
   /**
    * Dump directory
@@ -60,24 +58,24 @@ class Config(val configPath: String)
    * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
    * and overrides this val to null because it is not needed)
    */
-  lazy val dumpDir: File = getValue(checkOverride("base-dir"), "base-dir", required = true){ x => new File(x)}
+  lazy val dumpDir: File = getValue(this, "base-dir", required = true){ x => new File(x)}
 
-  lazy val parallelProcesses: Int = checkOverride("parallel-processes").getProperty("parallel-processes", "4").trim.toInt
+  lazy val parallelProcesses: Int = this.getProperty("parallel-processes", "4").trim.toInt
 
-  lazy val dbPediaVersion: String = parseVersionString(getString(checkOverride("dbpedia-version"), "dbpedia-version").trim) match{
+  lazy val dbPediaVersion: String = parseVersionString(getString(this, "dbpedia-version").trim) match{
     case Success(s) => s
     case Failure(e) => throw new IllegalArgumentException("dbpedia-version option in universal.properties was not defined or in a wrong format", e)
   }
 
   lazy val wikidataMappingsFile: File = {
-    val name = checkOverride("wikidata-property-mappings-file").getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim
+    val name = this.getProperty("wikidata-property-mappings-file", "wikidata-property-mappings.json").trim
     new File(dumpDir, name)
   }
 
   /**
     * The directory where all log files will be stored
     */
-  lazy val logDir: Option[File] = Option(getString(checkOverride("log-dir"), "log-dir")) match {
+  lazy val logDir: Option[File] = Option(getString(this, "log-dir")) match {
     case Some(x) => Some(new File(x))
     case None => None
   }
@@ -91,10 +89,10 @@ class Config(val configPath: String)
     */
   lazy val slackCredentials = Try{
       SlackCredentials(
-        webhook = new URL(getString(checkOverride("slack-webhook"), "slack-webhook").trim),
-        username = checkOverride("slack-username").getProperty("slack-username").trim,
-        summaryThreshold = checkOverride("slack-summary-threshold").getProperty("slack-summary-threshold").trim.toInt,
-        exceptionThreshold = checkOverride("slack-exception-threshold").getProperty("slack-exception-threshold").trim.toInt
+        webhook = new URL(getString(this, "slack-webhook").trim),
+        username = this.getProperty("slack-username").trim,
+        summaryThreshold = this.getProperty("slack-summary-threshold").trim.toInt,
+        exceptionThreshold = this.getProperty("slack-exception-threshold").trim.toInt
       )}
 
   /**
@@ -103,7 +101,7 @@ class Config(val configPath: String)
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val ontologyFile: File = getValue(checkOverride("ontology"), "ontology", required = false)(new File(_))
+  lazy val ontologyFile: File = getValue(this, "ontology", required = false)(new File(_))
 
   /**
     * Local mappings files, downloaded for speed and reproducibility
@@ -111,13 +109,13 @@ class Config(val configPath: String)
     * directly in the distributed extraction framework - DistConfig.ExtractionConfig extends Config
     * and overrides this val to null because it is not needed)
     */
-  lazy val mappingsDir: File = getValue(checkOverride("mappings"), "mappings", required = false)(new File(_))
+  lazy val mappingsDir: File = getValue(this, "mappings", required = false)(new File(_))
 
-  lazy val policies: Map[String, Array[Policy]] = parsePolicies(checkOverride("uri-policy"), "uri-policy")
+  lazy val policies: Map[String, Array[Policy]] = parsePolicies(this, "uri-policy")
 
-  lazy val formats: Map[String, Formatter] = parseFormats(checkOverride("format"), "format", policies)
+  lazy val formats: Map[String, Formatter] = parseFormats(this, "format", policies)
 
-  lazy val disambiguations: String = checkOverride("disambiguations").getProperty("disambiguations", "page_props.sql.gz")
+  lazy val disambiguations: String = this.getProperty("disambiguations", "page_props.sql.gz")
 
   /**
     * all non universal properties...
@@ -125,23 +123,23 @@ class Config(val configPath: String)
   /**
     * An array of input dataset names (e.g. 'instance-types' or 'mappingbased-literals') (separated by a ',')
     */
-  lazy val inputDatasets: Seq[String] = getStrings(checkOverride("input"), "input", ",").distinct   //unique collection of names!!!
+  lazy val inputDatasets: Seq[String] = getStrings(this, "input", ",").distinct   //unique collection of names!!!
   /**
     * A dataset name for the output file generated (e.g. 'instance-types' or 'mappingbased-literals')
     */
-  lazy val outputDataset: Option[String] = Option(getString(checkOverride("output"), "output"))
+  lazy val outputDataset: Option[String] = Option(getString(this, "output"))
   /**
     * the suffix of the files representing the input dataset (usually a combination of RDF serialization extension and compression used - e.g. .ttl.bz2 when using the TURTLE triples compressed with bzip2)
     */
-  lazy val inputSuffix: Option[String] = Option(getString(checkOverride("suffix"), "suffix"))
+  lazy val inputSuffix: Option[String] = Option(getString(this, "suffix"))
   /**
     * same as for inputSuffix (for the output dataset)
     */
-  lazy val outputSuffix: Option[String] = Option(getString(checkOverride("output-suffix"), "output-suffix"))
+  lazy val outputSuffix: Option[String] = Option(getString(this, "output-suffix"))
   /**
     * instead of a defined output dataset name, one can specify a name extension turncated at the end of the input dataset name (e.g. '-transitive' -> instance-types-transitive)
     */
-  lazy val datasetnameExtension: Option[String] = Option(getString(checkOverride("name-extension"), "name-extension"))
+  lazy val datasetnameExtension: Option[String] = Option(getString(this, "name-extension"))
 
   /**
     * An array of languages specified by the exact enumeration of language wiki codes (e.g. en,de,fr...)
@@ -150,17 +148,17 @@ class Config(val configPath: String)
     * or '@downloaded' if all downloaded languages are to be processed (containing the download.complete file)
     * or '@abstracts' to only process languages which provide human readable abstracts (thus not 'wikidata' and the like...)
     */
-  lazy val languages: Array[Language] = parseLanguages(dumpDir, getStrings(checkOverride("languages"), "languages", ","), wikiName)
+  lazy val languages: Array[Language] = parseLanguages(dumpDir, getStrings(this, "languages", ","), wikiName)
 
   /**
     * before processing a given language, check if the download.complete file is present
     */
-  lazy val requireComplete: Boolean = checkOverride("require-download-complete").getProperty("require-download-complete", "false").trim.toBoolean
+  lazy val requireComplete: Boolean = this.getProperty("require-download-complete", "false").trim.toBoolean
 
   /**
     * TODO experimental, ignore for now
     */
-  lazy val retryFailedPages: Boolean = checkOverride("retry-failed-pages").getProperty("retry-failed-pages", "false").trim.toBoolean
+  lazy val retryFailedPages: Boolean = this.getProperty("retry-failed-pages", "false").trim.toBoolean
 
   /**
     * the extractor classes to be used when extracting the XML dumps
@@ -173,7 +171,7 @@ class Config(val configPath: String)
   lazy val namespaces: Set[Namespace] = loadNamespaces()
 
   private def loadNamespaces(): Set[Namespace] = {
-    val names = getStrings(checkOverride("namespaces"), "namespaces", ",")
+    val names = getStrings(this, "namespaces", ",")
     if (names.isEmpty) Set(Namespace.Main, Namespace.File, Namespace.Category, Namespace.Template, Namespace.WikidataProperty)
     // Special case for namespace "Main" - its Wikipedia name is the empty string ""
     else names.map(name => if (name.toLowerCase(Language.English.locale) == "main") Namespace.Main else Namespace(Language.English, name)).toSet
@@ -187,7 +185,7 @@ class Config(val configPath: String)
    */
   private def loadExtractorClasses() : Map[Language, Seq[Class[_ <: Extractor[_]]]] =
   {
-    ExtractorUtils.loadExtractorsMapFromConfig(languages, properties)
+    ExtractorUtils.loadExtractorsMapFromConfig(languages, this)
   }
 
   private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
@@ -195,29 +193,29 @@ class Config(val configPath: String)
   }
 
   lazy val mediawikiConnection = MediaWikiConnection(
-    apiUrl=checkOverride("mwc-apiUrl").getProperty("mwc-apiUrl", "").trim,
-    maxRetries = checkOverride("mwc-maxRetries").getProperty("mwc-maxRetries", "4").trim.toInt,
-    connectMs = checkOverride("mwc-connectMs").getProperty("mwc-connectMs", "2000").trim.toInt,
-    readMs = checkOverride("mwc-readMs").getProperty("mwc-readMs", "5000").trim.toInt,
-    sleepFactor = checkOverride("mwc-sleepFactor").getProperty("mwc-sleepFactor", "1000").trim.toInt
+    apiUrl=this.getProperty("mwc-apiUrl", "").trim,
+    maxRetries = this.getProperty("mwc-maxRetries", "4").trim.toInt,
+    connectMs = this.getProperty("mwc-connectMs", "2000").trim.toInt,
+    readMs = this.getProperty("mwc-readMs", "5000").trim.toInt,
+    sleepFactor = this.getProperty("mwc-sleepFactor", "1000").trim.toInt
   )
 
   lazy val abstractParameters = AbstractParameters(
-    abstractQuery=checkOverride("abstract-query").getProperty("abstract-query", "").trim,
-    shortAbstractsProperty = checkOverride("short-abstracts-property").getProperty("short-abstracts-property", "rdfs:comment").trim,
-    longAbstractsProperty = checkOverride("long-abstracts-property").getProperty("long-abstracts-property", "abstract").trim,
-    shortAbstractMinLength = checkOverride("short-abstract-min-length").getProperty("short-abstract-min-length", "200").trim.toInt,
-    abstractTags = checkOverride("abstract-tags").getProperty("abstract-tags", "query,pages,page,extract").trim
+    abstractQuery=this.getProperty("abstract-query", "").trim,
+    shortAbstractsProperty = this.getProperty("short-abstracts-property", "rdfs:comment").trim,
+    longAbstractsProperty = this.getProperty("long-abstracts-property", "abstract").trim,
+    shortAbstractMinLength = this.getProperty("short-abstract-min-length", "200").trim.toInt,
+    abstractTags = this.getProperty("abstract-tags", "query,pages,page,extract").trim
   )
 
 
   lazy val nifParameters = NifParameters(
-    nifQuery=checkOverride("nif-query").getProperty("nif-query", "").trim,
-    nifTags = checkOverride("nif-tags").getProperty("nif-tags", "parse,text").trim,
-    isTestRun = checkOverride("nif-isTestRun").getProperty("nif-isTestRun", "false").trim.toBoolean,
-    writeAnchor = checkOverride("nif-write-anchor").getProperty("nif-write-anchor", "false").trim.toBoolean,
-    writeLinkAnchor = checkOverride("nif-write-link-anchor").getProperty("nif-write-link-anchor", "true").trim.toBoolean,
-    abstractsOnly = checkOverride("nif-extract-abstract-only").getProperty("nif-extract-abstract-only", "true").trim.toBoolean,
+    nifQuery=this.getProperty("nif-query", "").trim,
+    nifTags = this.getProperty("nif-tags", "parse,text").trim,
+    isTestRun = this.getProperty("nif-isTestRun", "false").trim.toBoolean,
+    writeAnchor = this.getProperty("nif-write-anchor", "false").trim.toBoolean,
+    writeLinkAnchor = this.getProperty("nif-write-link-anchor", "true").trim.toBoolean,
+    abstractsOnly = this.getProperty("nif-extract-abstract-only", "true").trim.toBoolean,
     cssSelectorMap = this.getClass.getClassLoader.getResource("nifextractionconfig.json")   //static config file in core/src/main/resources
   )
 }

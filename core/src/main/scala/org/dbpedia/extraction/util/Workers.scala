@@ -9,10 +9,22 @@ import org.dbpedia.extraction.util.Workers._
 import scala.Console._
 import scala.collection.convert.decorateAsScala._
 
+
+/**
+  * Provides the overall state of a worker
+  */
+object WorkerState extends Enumeration {
+  val
+  declared,             //worker was declared but was not yet initialized (started)
+  initialized,          //worker is ready to work after its initialization (started)
+  destroyed = Value     //worker has finished all work after it was told to do so (destroyed)
+}
+
 trait Worker[T <: AnyRef] {
   def init(): Unit
   def process(value: T): Unit
   def destroy(): Unit
+  def getState: WorkerState.Value
 }
 
 object SimpleWorkers {
@@ -25,9 +37,11 @@ object SimpleWorkers {
    */
   def apply[T <: AnyRef](threads: Int, queueLength: Int)(proc: T => Unit): Workers[T] = {
     new Workers[T](threads, queueLength, new Worker[T]() {
-      def init() = {}
+      private var state : WorkerState.Value = WorkerState.declared
+      def init() = {state = WorkerState.initialized}
       def process(value: T) = proc(value)
-      def destroy() = {}
+      def destroy() = {state = WorkerState.destroyed}
+      def getState: _root_.org.dbpedia.extraction.util.WorkerState.Value = state
     })
   }
   
@@ -171,54 +185,72 @@ object Workers {
  * blocking in process(). But what if there are multiple master threads? Ough. We need more ways to
  * communicate between masters and workers...
  *  
- * @param threads number of threads in pool
+ * @param availThreads number of threads in pool
  * @param queueLength max length of work queue
  * @param factory called during initialization of this class to create a worker for each thread
  */
-class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]) extends Closeable {
+class Workers[T <: AnyRef](availThreads: Int, queueLength: Int, factory: => Worker[T]) extends Closeable {
 
-  object WorkerState extends Enumeration {
-    val queued, inProcess, done = Value
+  /**
+    * Provides the state of a package of work
+    */
+  object WorkerObjectState extends Enumeration {
+    val
+    queued,       //this package of work is queued (and therefor soon to be processed)
+    inProcess,    //this package of work is already being processed atm.
+    done = Value  //this package of work was already processed
   }
 
   private val queue = new ArrayBlockingQueue[AnyRef](queueLength)
 
-  private val processLog = new ConcurrentHashMap[Int, WorkerState.Value]().asScala
+  private val processLog = new ConcurrentHashMap[Int, WorkerObjectState.Value]().asScala
   private var queueDependency = new ConcurrentHashMap[Int, Int]().asScala
-  
-  private val workers =
-  for (i <- 0 until threads) yield
-  new Thread() {
-    val worker = factory
-    override def run(): Unit = {
-      worker.init()
-      try {
-        while(true) {
-          val value = queue.take()
-          queueDependency.get(value.hashCode()) match{
-            case Some(h) => processLog.get(h) match{
-              case Some(x) => if(!x.equals(WorkerState.done)) queue.put(value)
+
+  private val threads =
+  for (i <- 0 until availThreads) yield
+    new Thread() {
+      val worker = factory
+      override def run(): Unit = {
+        try {
+          if(worker.getState != WorkerState.initialized)
+            throw new IllegalStateException("A worker was tasked with work while not being in the 'initialized' state: " + worker.getState)
+
+          while(true) {
+            val value = queue.take()
+            queueDependency.get(value.hashCode()) match{
+              case Some(h) => processLog.get(h) match{
+                case Some(x) => if(!x.equals(WorkerObjectState.done)) queue.put(value)
+                case None =>
+              }
               case None =>
             }
-            case None =>
+            processLog(value.hashCode()) = WorkerObjectState.inProcess
+
+            // if we find the sentinel, we're done
+            if (value eq sentinel)
+              return
+
+            worker.process(value.asInstanceOf[T])
+            processLog(value.hashCode()) = WorkerObjectState.done
           }
-          processLog(value.hashCode()) = WorkerState.inProcess
-          // if we find the sentinel, we're done
-          if (value eq sentinel) return
-          worker.process(value.asInstanceOf[T])
-          processLog(value.hashCode()) = WorkerState.done
+        } finally {
         }
-      } finally {
-        worker.destroy()
       }
     }
-  }
   
   /**
    * Start all threads. Each thread will initialize its worker.
    */
   final def start(): Unit = {
-    for (worker <- workers) worker.start()
+    for (thread <- threads) {
+      if(thread.worker.getState == WorkerState.declared){
+        thread.worker.init()
+      }
+      if(thread.getState != Thread.State.NEW)
+        thread.resume()
+      else
+        thread.start()
+    }
   }
 
   final def process(value: T, dependentOn: T): Unit = process(value, dependentOn.hashCode())
@@ -231,7 +263,7 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
     if(dependentOn >= 0)
       queueDependency(value.hashCode()) = dependentOn
     queue.put(value)
-    processLog(value.hashCode()) = WorkerState.queued
+    processLog(value.hashCode()) = WorkerObjectState.queued
   }
   
   /**
@@ -239,9 +271,12 @@ class Workers[T <: AnyRef](threads: Int, queueLength: Int, factory: => Worker[T]
    */
   final def stop(): Unit = {
     // enqueue one sentinel per thread - each thread removes one
-    for (worker <- workers) queue.put(sentinel)
+    for (thread <- threads) queue.put(sentinel)
     // wait for the threads to find the sentinels and finish
-    for (worker <- workers) worker.join()
+    for (thread <- threads) {
+      thread.join()
+      thread.worker.destroy()
+    }
   }
 
   /**

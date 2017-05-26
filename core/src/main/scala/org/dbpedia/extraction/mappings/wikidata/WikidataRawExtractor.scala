@@ -52,12 +52,12 @@ class WikidataRawExtractor(
       for ((statementGroup) <- page.wikiDataDocument.getStatementGroups) {
         statementGroup.getStatements.foreach {
           statement => {
-            val claim = statement.getClaim()
+            val claim = statement.getClaim
             val propertyId = claim.getMainSnak.getPropertyId.getId
-            val propertyIri = claim.getMainSnak().getPropertyId().getIri
+            val propertyIri = claim.getMainSnak.getPropertyId.getIri
             val property = WikidataUtil.getWikidataNamespace(propertyIri)
 
-            claim.getMainSnak() match {
+            claim.getMainSnak match {
               case mainSnak: ValueSnak => {
                 val value = mainSnak.getValue
 

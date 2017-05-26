@@ -51,26 +51,25 @@ object SdTypeCreation {
   stat_predicate_weight_apriori.put(PredicateDirection.In, new ConcurrentHashMap[String, Float]().asScala)
   stat_predicate_weight_apriori.put(PredicateDirection.Out, new ConcurrentHashMap[String, Float]().asScala)
   private var propertyMap = Map[String, OntologyProperty]()
-  private var resultMap = new ConcurrentHashMap[String, List[Quad]]().asScala
+  //private var resultMap = new ConcurrentHashMap[String, List[Quad]]().asScala
   private val contextMap = new ConcurrentHashMap[String, String]().asScala
-  private var suffix:String = null
+  private var suffix:String = _
 
   val dataset = DBpediaDatasets.SDInstanceTypes
 
   private var sdScoreThreshold:Float = 0f
   private var owlThingPenalty: Float = 0f
 
-  private var inPropertiesExceptions: Seq[String] = null
-  private var outPropertiesExceptions: Seq[String] = null
+  private var inPropertiesExceptions: Seq[String] = _
+  private var outPropertiesExceptions: Seq[String] = _
 
   private var returnAllValid: Boolean = false
   private var returnOnlyUntyped: Boolean = false
 
-  private var  finder: DateFinder[File] = null
+  private var  finder: DateFinder[File] = _
+  private var destination : Destination = _
 
-  private var ontology: Ontology = null
-
-  private var language: Language = null
+  private var ontology: Ontology = _
 
   def getProperty(uri: String, ontology: Ontology) : Option[OntologyProperty] = {
     if (propertyMap.contains(uri)) {
@@ -78,7 +77,7 @@ object SdTypeCreation {
     } else {
       val predicateOpt = ontology.properties.find(x => x._2.uri == uri)
       val predicate: OntologyProperty =
-        if (predicateOpt != null && predicateOpt != None) { predicateOpt.get._2 }
+        if (predicateOpt != null && predicateOpt.isDefined) { predicateOpt.get._2 }
         else null
       propertyMap += (uri -> predicate)
       Option(predicate)
@@ -150,7 +149,7 @@ object SdTypeCreation {
         val allResWithPred = precentageMap.get(pred._1).map(x => x.values.map(y => y._1).sum)
         allResWithPred match {
           case Some(allRes) =>
-            for (typ <- precentageMap.get(pred._1).get) {
+            for (typ <- precentageMap(pred._1)) {
               val booster = calculateDomainRangeBooster(typ._1, pred._1, inout, ontology)
               results.get(typ._1) match {
                 case Some(m) => {
@@ -187,7 +186,7 @@ object SdTypeCreation {
       case Some(x)=> x
       case None => typeStatistics.put(typ, type_count(typ).length.toFloat)
     }
-    typeStatistics.get(typ).get / resourceCount.toFloat
+    typeStatistics(typ) / resourceCount.toFloat
   }
 
   def getResourcePredicateCount(res: String, pred: String, inout: PredicateDirection.Value): Int = {
@@ -218,7 +217,7 @@ object SdTypeCreation {
       case Some(resWithPred) => {                                                                                               //resources with predicate pred
       val count = (for (res <- typ._2) yield getResourcePredicateCount(res, pred, inout)).sum                                 //count resources of type t with predicate pred
       val percentage = count.toFloat / resWithPred.toFloat
-        val massFactor = 1f - (type_count.get(typ._1).get.length / resourceCount.toFloat)
+        val massFactor = 1f - (type_count(typ._1).length / resourceCount.toFloat)
         writeMap.get(pred) match {
           case Some(p) => p.get(typ._1) match {
             case Some(c) => throw new Exception("this should be unique!")
@@ -241,14 +240,14 @@ object SdTypeCreation {
       case PredicateDirection.In => stat_type_predicate_perc_in
       case PredicateDirection.Out => stat_type_predicate_perc_out
     }
-    stat_predicate_weight_apriori.get(inout).get.get(predicate) match {
+    stat_predicate_weight_apriori(inout).get(predicate) match {
       case Some(v) => v
       case None => {
         val wp = map.get(predicate) match {
           case Some(x) => x.map(_._2._2).sum                                 //make sum over all types pointed out by a predicate
           case None => 0f
         }
-        stat_predicate_weight_apriori.get(inout).get.put(predicate, wp)
+        stat_predicate_weight_apriori(inout).put(predicate, wp)
         wp
       }
     }
@@ -266,7 +265,7 @@ object SdTypeCreation {
     1f / (ret1 + ret2)
   }
 
-  val typesWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
+  def typesWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
     new QuadMapper().readQuads(finder, "instance-types" + suffix, auto = true) { quad =>
       contextMap.get(quad.subject) match{
         case Some(l) =>
@@ -284,13 +283,13 @@ object SdTypeCreation {
     }
   }
 
-  val workerDisamb = SimpleWorkers(1.5, 1.0) { language: Language =>
-    new QuadMapper().readQuads(finder, "disambiguations-unredirected" + suffix, auto = true) { quad =>
+  def workerDisamb = SimpleWorkers(1.5, 1.0) { language: Language =>
+    new QuadMapper().readQuads(finder, "disambiguations" + suffix, auto = true) { quad =>
       disambiguations.put(quad.subject, 1)
     }
   }
 
-  val objectPropWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
+  def objectPropWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
     new QuadMapper().readQuads(finder, "mappingbased-objects-uncleaned" + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_in.get(quad.value) match {
         case Some(m) => m.get(quad.predicate) match {
@@ -332,7 +331,7 @@ object SdTypeCreation {
     }
   }
 
-  val literalWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
+  def literalWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
     new QuadMapper().readQuads(finder, "mappingbased-literals" + suffix, auto = true) { quad =>
       stat_resource_predicate_tf_out.get(quad.subject) match {
         case Some(m) => m.get(quad.predicate) match {
@@ -354,7 +353,7 @@ object SdTypeCreation {
     }
   }
 
-  val probabilityWorker = SimpleWorkers(1.5, 1.0) { pred: String =>
+  def probabilityWorker = SimpleWorkers(1.5, 1.0) { pred: String =>
     for (typ <- type_count) //all types
     {
       saveAprioriDistributions((typ._1, typ._2.toList), pred, PredicateDirection.In)
@@ -362,17 +361,17 @@ object SdTypeCreation {
     }
   }
 
-  val resultCalculator = SimpleWorkers(1.5, 5.0) { resources: List[String] =>
+  def resultCalculator = SimpleWorkers(1.5, 5.0) { tuple: (List[String], Language) =>
     val zw = new ListBuffer[Quad]()
-    val idPos = resources.head.lastIndexOf("/")+1
-    for(resource <- resources) {
+    val idPos = tuple._1.head.lastIndexOf("/")+1
+    for(resource <- tuple._1) {
       val newType = getTypeScores(resource)
       val current = newType.head
       var read = true
       while (read && current._2 >= sdScoreThreshold) {
         //compare to score threshold
         zw += new Quad(
-          language = language,
+          language = tuple._2,
           dataset = dataset,
           subject = resource,
           predicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
@@ -386,21 +385,22 @@ object SdTypeCreation {
         read = returnAllValid
       }
     }
-    resultMap.put(resources.head, zw.toList)
+    destination.write(zw)
   }
 
   def main(args: Array[String]): Unit = {
 
-    //FIXME please use Config class not the config loader
     require(args != null && args.length == 1, "One arguments required, extraction config file")
 
-    val config = ConfigUtils.loadConfig(args(0), "UTF-8")
+    val config = new Config(args(0))
 
-    val baseDir = ConfigUtils.getValue(config, "base-dir", required=true)(new File(_))
-    require(baseDir.isDirectory() && baseDir.canRead() && baseDir.canWrite(), "Please specify a valid local base extraction directory!")
+    val baseDir = config.dumpDir
+    require(baseDir.isDirectory && baseDir.canRead && baseDir.canWrite, "Please specify a valid local base extraction directory - invalid path: " + baseDir)
 
-    suffix = ConfigUtils.getString(config, "suffix", required=true)
-    require(suffix.startsWith("."), "Please specify a valid file extension starting with a '.'!")
+    suffix = config.inputSuffix match{
+      case Some(x) if x.startsWith(".") => x
+      case _ => throw new IllegalArgumentException("Please specify a valid file extension starting with a '.'!")
+    }
     require("\\.[a-zA-Z0-9]{2,3}\\.(gz|bz2)".r.replaceFirstIn(suffix, "") == "", "provide a valid serialization extension starting with a dot (e.g. .ttl.bz2)")
 
     sdScoreThreshold =  ConfigUtils.getString(config, "threshold", required=true).toFloat
@@ -409,20 +409,15 @@ object SdTypeCreation {
     owlThingPenalty =  ConfigUtils.getString(config, "owl-thing-penalty", required=true).toFloat
     require(owlThingPenalty >= 0.01f && owlThingPenalty <= 0.99f, "Please specify a valid owlThingPenalty score in the range of [0.01, 0.99].")
 
-    inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",",", required=false)(x => x)
-    outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",",", required=false)(x => x)
+    inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",",")(x => x)
+    outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",",")(x => x)
 
-    returnAllValid = ConfigUtils.getString(config, "return-all-valid-types", required=false).toBoolean
-    returnOnlyUntyped = ConfigUtils.getString(config, "return-only-untyped", required=false).toBoolean
+    returnAllValid = ConfigUtils.getString(config, "return-all-valid-types").toBoolean
+    returnOnlyUntyped = ConfigUtils.getString(config, "return-only-untyped").toBoolean
 
-    val langConfString = ConfigUtils.getString(config, "languages", required=true)
-    language = ConfigUtils.parseLanguages(baseDir, langConfString.split(","))(0) //TODO
-
-    finder = new DateFinder(baseDir, language)
-    finder.byName("instance-types" + suffix, auto = true)   //work around to set date of finder
 
     ontology = {
-      val ontologySource = ConfigUtils.getValue(config, "ontology", required=false)(new File(_))
+      val ontologySource = ConfigUtils.getValue(config, "ontology")(new File(_))
       new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
     }
 
@@ -430,45 +425,46 @@ object SdTypeCreation {
     val formats = parseFormats(config, "format", policies).map( x=>
       x._1 -> (if(x._2.isInstanceOf[TerseFormatter]) new QuadMapperFormatter(x._2.asInstanceOf[TerseFormatter]) else x._2)).toMap
 
-    val destination = DestinationUtils.createDestination(finder, Array(dataset), formats)
+    for(language <- config.languages) {
 
-    //read all input files and process the content
-    Workers.workInParallel[Language](Array(typesWorker, objectPropWorker, workerDisamb,literalWorker), Seq(language))
+      finder = new DateFinder(baseDir, language)
+      finder.byName("instance-types" + suffix, auto = true) //work around to set date of finder
+      destination = DestinationUtils.createDestination(finder, Array(dataset.getLanguageVersion(language, config.dbPediaVersion)), formats)
 
-    //delete properties exempted by the user
-    outPropertiesExceptions.map(x => predStatisticsOut.remove(x))
-    inPropertiesExceptions.map(x => predStatisticsIn.remove(x))
+      //read all input files and process the content
+      Workers.workInParallel[Language](Array(typesWorker, objectPropWorker, workerDisamb, literalWorker), List(language))
 
-    //count unique resources
-    resourceCount = (stat_resource_predicate_tf_in.keys.toList ::: stat_resource_predicate_tf_out.keys.toList).distinct.length
-    //get all predicates
-    val allPreds = (predStatisticsIn.keys.toList ::: predStatisticsOut.keys.toList).distinct
+      //delete properties exempted by the user
+      outPropertiesExceptions.map(x => predStatisticsOut.remove(x))
+      inPropertiesExceptions.map(x => predStatisticsIn.remove(x))
 
-    //run the intermediate statistical calculations
-    Workers.work[String](probabilityWorker, allPreds, language.wikiCode + ": Type statistics calculation")
+      //count unique resources
+      resourceCount = (stat_resource_predicate_tf_in.keys.toList ::: stat_resource_predicate_tf_out.keys.toList).distinct.length
+      //get all predicates
+      val allPreds = (predStatisticsIn.keys.toList ::: predStatisticsOut.keys.toList).distinct
 
-    //do the type calculations and write to files(s)
-    val baseuri = if(language == Language.English) "http://dbpedia.org/resource/" else language.dbpediaUri
-    val allResources = returnOnlyUntyped match{
-      case true => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList)
-        .filter(x => x.startsWith(baseuri))
-        .diff[String](type_count.values.flatMap(x => x).toSeq)
-        .diff[String](disambiguations.keys.toSeq)
-        .distinct
-      case false => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList)
-        .filter(x => x.startsWith(baseuri))
-        .distinct
+      //run the intermediate statistical calculations
+      Workers.work[String](probabilityWorker, allPreds, language.wikiCode + ": Type statistics calculation")
+
+      //do the type calculations and write to files(s)
+      val baseuri = if (language == Language.English) "http://dbpedia.org/resource/" else language.dbpediaUri
+      val allResources = returnOnlyUntyped match {
+        case true => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList)
+          .filter(x => x.startsWith(baseuri))
+          .diff[String](type_count.values.flatten.toSeq)
+          .diff[String](disambiguations.keys.toSeq)
+          .distinct
+        case false => (stat_resource_predicate_tf_in.keySet.toList ::: stat_resource_predicate_tf_out.keySet.toList)
+          .filter(x => x.startsWith(baseuri))
+          .distinct
+      }
+      //resultMap = new ConcurrentHashMap[String, List[Quad]]((allResources.size / 0.75f + 1).toInt).asScala //setting initial size for performance reasons
+
+      //write results to file
+      err.println(language.wikiCode + ": Starting to calculate new types for " + allResources.size + " instances.")
+      destination.open()
+      Workers.work[(List[String], Language)](resultCalculator, allResources.grouped(100).map(x => (x, language)).toList, language.wikiCode + ": New type statements calculation")
+      destination.close()
     }
-    err.println(language.wikiCode + ": Starting to calculate new types for " + allResources.size + " instances.")
-    resultMap = new ConcurrentHashMap[String, List[Quad]]((allResources.size/0.75f+1).toInt).asScala  //setting initial size for performance reasons
-    Workers.work[List[String]](resultCalculator, allResources.grouped(100).toList, language.wikiCode + ": New type statements calculation")
-
-    //write results to file
-    err.println(language.wikiCode + ": Starting to write " + dataset.encoded + suffix + " with " + resultMap.values.size + " instances.")
-    destination.open()
-    Workers.work[List[Quad]](SimpleWorkers(1.5, 2.0){ quads: List[Quad] =>
-      destination.write(quads)
-    }, resultMap.values.toList, language.wikiCode + ": New type statements written")
-    destination.close()
   }
 }
