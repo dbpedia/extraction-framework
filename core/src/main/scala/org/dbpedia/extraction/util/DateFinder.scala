@@ -20,7 +20,8 @@ class DateFinder[T](val finder: Finder[T]){
 
   def byName(name: String, auto: Boolean = false): Option[T] = {
     if (_date == null) {
-      if (! auto) throw new IllegalStateException("date not set")
+      if (! auto)
+        throw new IllegalStateException("date not set")
       _date = finder.dates(name).last
     }
     finder.file(_date, name)

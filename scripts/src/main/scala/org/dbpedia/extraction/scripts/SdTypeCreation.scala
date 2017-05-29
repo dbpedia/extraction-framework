@@ -5,7 +5,7 @@ import java.io.File
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
-import org.dbpedia.extraction.ontology.{OntologyClass, OntologyProperty, Ontology}
+import org.dbpedia.extraction.ontology.{Ontology, OntologyClass, OntologyProperty, OntologyType}
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.transform.Quad
@@ -52,6 +52,7 @@ object SdTypeCreation {
   stat_predicate_weight_apriori.put(PredicateDirection.Out, new ConcurrentHashMap[String, Float]().asScala)
   private var propertyMap = new ConcurrentHashMap[String, OntologyProperty]().asScala
   private val contextMap = new ConcurrentHashMap[String, String]().asScala
+  private val typeMap = new ConcurrentHashMap[String, String]().asScala
 
   private var suffix:String = _
 
@@ -63,8 +64,11 @@ object SdTypeCreation {
   private var inPropertiesExceptions: Seq[String] = _
   private var outPropertiesExceptions: Seq[String] = _
 
+  private var classExceptions: Seq[String] = _
+
   private var returnAllValid: Boolean = false
   private var returnOnlyUntyped: Boolean = false
+  private var compareToRealType: Boolean = false
 
   private var  finder: DateFinder[File] = _
   private var destination : Destination = _
@@ -87,6 +91,7 @@ object SdTypeCreation {
     stat_predicate_weight_apriori.put(PredicateDirection.Out, new ConcurrentHashMap[String, Float]().asScala)
     propertyMap.clear()
     contextMap.clear()
+    typeMap.clear()
   }
 
   def getProperty(uri: String, ontology: Ontology) : Option[OntologyProperty] = {
@@ -141,14 +146,30 @@ object SdTypeCreation {
       case Some(property) => if(inout == PredicateDirection.In) property.range else property.domain
       case None => return 0f
     }
-    clas.isInstanceOf[OntologyClass] match{
+    typeDiffPenalty(target, clas)
+  }
+
+  def typeDiffPenalty(targetClass: String, actualClass: String, ontology: Ontology): Float = {
+    val target = ontology.classes.find(x => x._2.uri == targetClass.trim) match {
+      case Some(x ) => x._2
+      case None => return 0f
+    }
+    val clas = ontology.classes.find(x => x._2.uri == actualClass.trim) match {
+      case Some(x ) => x._2
+      case None => return 0f
+    }
+    typeDiffPenalty(target, clas)
+  }
+
+  private def typeDiffPenalty(target: OntologyClass, clas: OntologyType) = {
+    clas.isInstanceOf[OntologyClass] match {
       case true => {
         val scoreMapTarget = createScoreMap(target)
-        val scoreMapClass = createScoreMap(clas.asInstanceOf[OntologyClass])     //add owl:Thing
-        scoreMapTarget.get(clas.asInstanceOf[OntologyClass]) match{
+        val scoreMapClass = createScoreMap(clas.asInstanceOf[OntologyClass]) //add owl:Thing
+        scoreMapTarget.get(clas.asInstanceOf[OntologyClass]) match {
           case Some(booster) => booster
           case None => scoreMapClass.get(target) match {
-            case Some(booster) => booster/2                       //Target subclass of Clas -> is taxed twice as hard
+            case Some(booster) => booster / 2 //Target subclass of Clas -> is taxed twice as hard
             case None => 0f
           }
         }
@@ -163,27 +184,31 @@ object SdTypeCreation {
       case PredicateDirection.Out => stat_type_predicate_perc_out
     }
     (if(inout == PredicateDirection.In) stat_resource_predicate_tf_in else stat_resource_predicate_tf_out).get(resource) match {
-      case Some(predicateMap) => for (pred <- predicateMap) {
-        val allResWithPred = precentageMap.get(pred._1).map(x => x.values.map(y => y._1).sum)
-        allResWithPred match {
-          case Some(allRes) =>
-            for (typ <- precentageMap(pred._1)) {
-              val booster = calculateDomainRangeBooster(typ._1, pred._1, inout, ontology)
-              results.get(typ._1) match {
-                case Some(m) => {
-                  val zw = (typ._2._1 / allRes) * getAprioriDistribution(pred._1, inout)
-                  m += ((pred._1, zw * booster * pred._2, zw * booster, pred._2))
-                }
-                case None => {
-                  val zw = new ListBuffer[(String, Float, Float, Int)]()
-                  zw += ((pred._1, (typ._2._1 / allRes) * getAprioriDistribution(pred._1, inout) * booster * pred._2,
-                    (typ._2._1 / allRes) * getAprioriDistribution(pred._1, inout) * booster, pred._2))
-                  results.put(typ._1, zw)
+      case Some(predicateMap) =>
+        for (pred <- predicateMap) {
+          val allResWithPred = precentageMap.get(pred._1).map(x => x.values.map(y => y._1).sum)
+          allResWithPred match {
+            case Some(allRes) =>
+              for (typ <- precentageMap(pred._1)) {
+                val booster = calculateDomainRangeBooster(typ._1, pred._1, inout, ontology)
+                results.get(typ._1) match {
+                  case Some(m) => {
+                    val zw = (typ._2._1 / allRes) * getAprioriDistribution(pred._1, inout)
+                    m += ((pred._1, zw * booster * pred._2, zw * booster, pred._2))
+                  }
+                  case None => {
+                    val zw = new ListBuffer[(String, Float, Float, Int)]()
+                    zw += ((pred._1,                                                                        //predicate
+                      (typ._2._1 / allRes) * getAprioriDistribution(pred._1, inout) * booster * pred._2,    //(amount of thusly typed instances pointed out with the given predicate /
+                                                                                                              // number of triples with this predicate) * apriori distribution of predicate in graph * domain-range booster * number of predicate for this instance
+                      (typ._2._1 / allRes) * getAprioriDistribution(pred._1, inout) * booster,
+                      pred._2))
+                    results.put(typ._1, zw)
+                  }
                 }
               }
-            }
-          case None =>
-        }
+            case None =>
+          }
       }
       case None =>
     }
@@ -194,7 +219,11 @@ object SdTypeCreation {
     calculateOneDirectionalScore(resource, ret, PredicateDirection.In)
     calculateOneDirectionalScore(resource, ret, PredicateDirection.Out)
     val normFactor = getNormalizationFactor(resource)
-    ret.map(x => (x._1, x._2.map(_._2).sum * normFactor, x._2.map(_._4).sum, x._2.map(_._3).sum * normFactor)).toList.sortBy[Float](_._2).reverse
+    ret.map(x => (x._1,                       //the type
+      x._2.map(_._2).sum * normFactor,        //
+      x._2.map(_._4).sum,
+      x._2.map(_._3).sum * normFactor)
+    ).toList.sortBy[Float](_._2).reverse
   }
 
   def getTypePropability(typ: String): Float = {
@@ -280,16 +309,14 @@ object SdTypeCreation {
       case Some(map) => (for( pred <- map.keys) yield getAprioriDistribution(pred, PredicateDirection.Out)).sum
       case None => 0f
     }
-    1f / (ret1 + ret2)
+    Math.max(1f / (0.1f + ret1 + ret2), 1f)   //this will ensure that the booster <= 10f and >= 1f
   }
 
   def typesWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
     new QuadMapper().readQuads(finder, DBpediaDatasets.OntologyTypes.filenameEncoded + suffix, auto = true) { quad =>
-      contextMap.get(quad.subject) match{
-        case Some(l) =>
-        case None => contextMap.put(quad.subject, quad.context)
-      }
-      if(quad.value.trim.startsWith("http://dbpedia.org/ontology/")) // TODO check if this is relevant
+      if(quad.value.trim.startsWith("http://dbpedia.org/ontology/")) { // TODO check if this is relevant
+        if (compareToRealType) //store to have the original type later
+          typeMap.put(quad.subject, quad.value)
         type_count.get(quad.value) match {
           case Some(list) => type_count.put(quad.value, list += quad.subject)
           case None => {
@@ -298,56 +325,64 @@ object SdTypeCreation {
             type_count.put(quad.value, buff)
           }
         }
+      }
     }
   }
 
   def workerDisamb = SimpleWorkers(1.5, 1.0) { language: Language =>
     finder.byName(DBpediaDatasets.DisambiguationLinks.filenameEncoded + suffix, auto = true) match{
-      case None => Console.err.println("No disambiguation dataset found for language: " + language.wikiCode)
-      case Some(x) => new QuadMapper().readQuads(language, x) { quad =>
+      case Some(x) if x.exists() => new QuadMapper().readQuads(language, x) { quad =>
         disambiguations.put(quad.subject, 1)
       }
+      case _ => Console.err.println("No disambiguation dataset found for language: " + language.wikiCode)
     }
   }
 
   def objectPropWorker = SimpleWorkers(1.5, 1.0) { language: Language =>
     new QuadMapper().readQuads(finder, DBpediaDatasets.OntologyPropertiesObjects.filenameEncoded + suffix, auto = true) { quad =>
-      stat_resource_predicate_tf_in.get(quad.value) match {
-        case Some(m) => m.get(quad.predicate) match {
-          case Some(c) =>
-            m.put(quad.predicate, c + 1)
-          case None => m.put(quad.predicate, 1)
+      if (!quad.predicate.endsWith("type")) //skip dbo:type
+      {
+        contextMap.get(quad.subject) match{
+          case Some(l) =>
+          case None => contextMap.put(quad.subject, quad.context)
         }
-        case None => {
-          val zw = new ConcurrentHashMap[String, Int]().asScala
-          zw.put(quad.predicate, 1)
-          stat_resource_predicate_tf_in.put(quad.value, zw)
+        stat_resource_predicate_tf_in.get(quad.value) match {
+          case Some(m) => m.get(quad.predicate) match {
+            case Some(c) =>
+              m.put(quad.predicate, c + 1)
+            case None => m.put(quad.predicate, 1)
+          }
+          case None => {
+            val zw = new ConcurrentHashMap[String, Int]().asScala
+            zw.put(quad.predicate, 1)
+            stat_resource_predicate_tf_in.put(quad.value, zw)
+          }
         }
-      }
-      predStatisticsIn.get(quad.predicate) match{
-        case Some(c) => predStatisticsIn.put(quad.predicate, c +1)
-        case None => predStatisticsIn.put(quad.predicate, 1)
-      }
-      stat_resource_predicate_tf_out.get(quad.subject) match {
-        case Some(m) => m.get(quad.predicate) match {
-          case Some(c) =>
-            m.put(quad.predicate, c + 1)
-          case None =>
-            m.put(quad.predicate, 1)
+        predStatisticsIn.get(quad.predicate) match {
+          case Some(c) => predStatisticsIn.put(quad.predicate, c + 1)
+          case None => predStatisticsIn.put(quad.predicate, 1)
         }
-        case None => {
-          val zw = new ConcurrentHashMap[String, Int]().asScala
-          zw.put(quad.predicate, 1)
-          stat_resource_predicate_tf_out.put(quad.subject, zw)
+        stat_resource_predicate_tf_out.get(quad.subject) match {
+          case Some(m) => m.get(quad.predicate) match {
+            case Some(c) =>
+              m.put(quad.predicate, c + 1)
+            case None =>
+              m.put(quad.predicate, 1)
+          }
+          case None => {
+            val zw = new ConcurrentHashMap[String, Int]().asScala
+            zw.put(quad.predicate, 1)
+            stat_resource_predicate_tf_out.put(quad.subject, zw)
+          }
         }
-      }
-      predStatisticsOut.get(quad.predicate) match{
-        case Some(c) => predStatisticsOut.put(quad.predicate, c +1)
-        case None => predStatisticsOut.put(quad.predicate, 1)
-      }
-      contextMap.get(quad.subject) match{
-        case Some(l) =>
-        case None => contextMap.put(quad.subject, quad.context)
+        predStatisticsOut.get(quad.predicate) match {
+          case Some(c) => predStatisticsOut.put(quad.predicate, c + 1)
+          case None => predStatisticsOut.put(quad.predicate, 1)
+        }
+        contextMap.get(quad.subject) match {
+          case Some(l) =>
+          case None => contextMap.put(quad.subject, quad.context)
+        }
       }
     }
   }
@@ -384,12 +419,11 @@ object SdTypeCreation {
 
   def resultCalculator = SimpleWorkers(1.5, 5.0) { tuple: (List[String], Language) =>
     val zw = new ListBuffer[Quad]()
-    val idPos = tuple._1.head.lastIndexOf("/")+1
     for(resource <- tuple._1) {
       val newType = getTypeScores(resource)
       val current = newType.head
       var read = true
-      while (read && current._2 >= sdScoreThreshold) {
+      while (read && !classExceptions.contains(current._1) && (current._2 >= sdScoreThreshold  && current._4 >= sdScoreThreshold/2)) {
         //compare to score threshold
         zw += new Quad(
           language = tuple._2,
@@ -400,9 +434,26 @@ object SdTypeCreation {
           context = (contextMap.get(resource) match{
               case Some (c) => if(c.contains('#')) c.substring(0, c.indexOf('#')) else c
               case None => resource + "?nowikientry=linktarget"}) +
-            "#typeCalculatedBy=sdTypeAlgorithm&sdTypeScore=" + (if (current._2 > 1f) 1f else current._2) +
+            "#typeCalculatedBy=sdTypeAlgorithm&sdTypeScore=" + (if (current._4 > 1f) 1f else current._4) +
             "&sdTypeBasedOn=" + current._3,
           datatype = null)
+
+        if(compareToRealType)
+          typeMap.get(resource) match{
+            case Some(x) => zw += new Quad(
+              language = tuple._2,
+              dataset = dataset,
+              subject = resource,
+              predicate = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              value = x,
+              context = (contextMap.get(resource) match{
+                case Some (c) => if(c.contains('#')) c.substring(0, c.indexOf('#')) else c
+                case None => resource + "?nowikientry=linktarget"}) +
+                "#typeCalculatedBy=sdTypeDiffPenalty=" + typeDiffPenalty(current._1, x, ontology),
+              datatype = null)
+            case None =>
+          }
+
         read = returnAllValid
       }
     }
@@ -433,9 +484,11 @@ object SdTypeCreation {
     inPropertiesExceptions = ConfigUtils.getValues(config, "in-properties-exceptions",",")(x => x)
     outPropertiesExceptions = ConfigUtils.getValues(config, "out-properties-exceptions",",")(x => x)
 
+    classExceptions = ConfigUtils.getValues(config, "class-exceptions",",")(x => x)
+
     returnAllValid = ConfigUtils.getString(config, "return-all-valid-types").toBoolean
     returnOnlyUntyped = ConfigUtils.getString(config, "return-only-untyped").toBoolean
-
+    compareToRealType = ConfigUtils.getString(config, "compare-to-original-type").toBoolean
 
     ontology = {
       val ontologySource = ConfigUtils.getValue(config, "ontology")(new File(_))
