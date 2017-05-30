@@ -219,7 +219,7 @@ class Workers[T <: AnyRef](availThreads: Int, queueLength: Int, factory: => Work
             val value = queue.take()
             queueDependency.get(value.hashCode()) match{
               case Some(h) => processLog.get(h) match{
-                case Some(x) => if(!x.equals(WorkerObjectState.done)) queue.put(value)
+                case Some(x) => queue.put(value) // dependency is queued or in progress -> ergo put it back in the queue
                 case None =>
               }
               case None =>
@@ -231,7 +231,9 @@ class Workers[T <: AnyRef](availThreads: Int, queueLength: Int, factory: => Work
               return
 
             worker.process(value.asInstanceOf[T])
-            processLog(value.hashCode()) = WorkerObjectState.done
+
+            //will  not longer save WorkerObjectState.done since this constitutes a memory leak. Instead, we assume that its done when not available
+            processLog.remove(value.hashCode())
           }
         } finally {
         }
