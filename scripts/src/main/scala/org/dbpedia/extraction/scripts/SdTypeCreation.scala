@@ -102,6 +102,7 @@ object SdTypeCreation {
       val predicate: OntologyProperty =
         if (predicateOpt != null && predicateOpt.isDefined) { predicateOpt.get._2 }
         else null
+      ontology.classes.get("").get.baseClasses
       propertyMap += (uri -> predicate)
       Option(predicate)
     }

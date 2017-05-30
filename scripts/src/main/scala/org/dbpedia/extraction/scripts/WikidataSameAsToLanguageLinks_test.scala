@@ -7,7 +7,6 @@ import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.scripts.WikidataSameAsToLanguageLinks_test.{DBPEDIA_URI_PATTERN, error, sameAs}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils._
 import org.dbpedia.extraction.util.RichFile.wrapFile
@@ -77,7 +76,7 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
 
   private val relevantLanguages: Set[String] = languages.map(_.wikiCode).toSet
   private val destinations = setupDestinations()
-  private var currentSameEntities = new mutable.HashMap[String, EntityContext]()
+  private var currentSameEntities = new mutable.HashMap[Language, EntityContext]()
 
   /**
     * Starts the generation of the inter-language links from sameAs information contained in the given
@@ -87,22 +86,17 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
     destinations.foreach(_._2.open())
     // init workers
     val workers = SimpleWorkers(1.5, 1.5) { job : JobEntity =>
-      val language = job.language
-      val wikiDataEntity = job.wikiDataEntity
-      val sameEntities = job.sameEntities
-      sameEntities.get(language) match {
+      job.sameEntities.get(job.language) match {
         case Some(currentEntity) =>
           // generate quads for the current language and prepend the sameAs statement quad to the
           // wikidata entity
           var quads = List[Quad]()
-          quads :::= sameEntities.filterKeys(_ != language).toList.sortBy(_._1).map { case (language, context) =>
-            new Quad(language, null, currentEntity.entityUri, sameAs, context.entityUri, context.context, null: String)
+          quads :::= job.sameEntities.filterKeys(_ != language).toList.sortBy(_._1).map {
+            case (language, context) => new Quad(language.wikiCode, null, currentEntity.entityUri, sameAs, context.entityUri, context.context, null: String)
           }
-          quads ::= new Quad(language, null, currentEntity.entityUri, sameAs, wikiDataEntity, currentEntity.context,
-            null: String)
-          quads ::= new Quad(language, null, currentEntity.entityUri, sameAs, getWikidataUri(wikiDataEntity),
-            currentEntity.context, null: String)
-          destinations(language).write(quads)
+          quads ::= new Quad(job.language.wikiCode, null, currentEntity.entityUri, sameAs, job.wikiDataEntity, currentEntity.context, null: String)
+          quads ::= new Quad(job.language.wikiCode, null, currentEntity.entityUri, sameAs, getWikidataUri(job.wikiDataEntity), currentEntity.context, null: String)
+          destinations(job.language).write(quads)
         case _ => // do not write anything when there is no entity in the current language
       }
     }
@@ -110,10 +104,10 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
     workers.start()
     new QuadMapper().readSortedQuads(Language.Wikidata, wikiDataFile) { quads: Traversable[Quad] =>
       if(quads.nonEmpty){
-        currentSameEntities = new mutable.HashMap[String, EntityContext]()
+        currentSameEntities = new mutable.HashMap[Language, EntityContext]()
         quads.foreach(extractLanguageAndStore)
         relevantLanguages.foreach(language =>
-          workers.process(new JobEntity(language, new String(quads.head.subject), currentSameEntities)))
+          workers.process(new JobEntity(Language(language), new String(quads.head.subject), currentSameEntities)))
       }
     }
     // close workers & destinations
@@ -142,12 +136,12 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
       val lang = matcher.group(1)
       if (lang == null) {
         // URI starts with http://dbpedia.org..
-        currentSameEntities("en") = new EntityContext(value, context)
+        currentSameEntities(Language.English) = new EntityContext(value, context)
       }
       else {
         // non-English URI ==> store entity and context in list
         if (relevantLanguages.contains(lang.replace(".", ""))) {
-          currentSameEntities(lang.replace(".", "")) = new EntityContext(value, context)
+          currentSameEntities(Language(lang.replace(".", ""))) = new EntityContext(value, context)
         }
       }
     }
@@ -165,8 +159,8 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
     * Sets up the destinations for the relevant languages in all configured formats but does not yet open
     * the destinations.
     */
-  private def setupDestinations(): Map[String, Destination] = {
-    var destinations = Map[String, Destination]()
+  private def setupDestinations(): Map[Language, Destination] = {
+    var destinations = Map[Language, Destination]()
     for (currentLanguage <- languages) {
       val outputFinder = new Finder[File](baseDir, currentLanguage, "wiki")
       val outputDate = outputFinder.dates().last
@@ -175,7 +169,7 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
         val file = outputFinder.file(outputDate, output + '.' + suffix).get
         formatDestinations += new WriterDestination(() => writer(file), format)
       }
-      destinations += currentLanguage.wikiCode -> new CompositeDestination(formatDestinations.toSeq: _*)
+      destinations += currentLanguage -> new CompositeDestination(formatDestinations.toSeq: _*)
     }
     destinations
   }
@@ -186,7 +180,7 @@ class WikidataSameAsToLanguageLinks_test(val baseDir: File, val wikiDataFile: Fi
     * @param wikiDataEntity the Entity of our current set of quads
     * @param sameEntities Entities in owl:sameAs relation to the wikiDataEntity
     */
-  private class JobEntity(val language: String, val wikiDataEntity: String, val sameEntities: mutable.HashMap[String, EntityContext])
+  private class JobEntity(val language: Language, val wikiDataEntity: String, val sameEntities: mutable.HashMap[Language, EntityContext])
 
   /**
     * Represents the combination of an entity URI which is assigned to some wikidata entity by means
