@@ -3,6 +3,7 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.util.regex.Matcher
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy._
 import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
@@ -46,10 +47,12 @@ object WikidataSameAsToLanguageLinks {
       case None => throw new IllegalArgumentException("Please provide a 'suffix' attribute in your properties configuration")
     }
 
-    val output = config.outputDataset match{
+    val output = DBpediaDatasets.TestDataset.filenameEncoded
+
+/*      config.outputDataset match{
       case Some (l) => l
       case None => throw new IllegalArgumentException("Please provide an 'output' attribute for the output dataset file in the .properties configuration.")
-    }
+    }*/
 
     val language = config.languages
 
