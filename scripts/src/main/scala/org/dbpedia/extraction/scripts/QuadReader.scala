@@ -8,6 +8,7 @@ import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
 import scala.Console.err
+import scala.collection.mutable.ListBuffer
 
 /**
  */
@@ -52,19 +53,21 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
 
   def readSortedQuads[T <% FileLike[T]](language: Language, file: FileLike[_])(proc: Traversable[Quad] => Unit): Unit = {
     //TODO needs extraction-recorder syntax!
-    val lastSubj = ""
-    var seq = List[Quad]()
+    var lastSubj = ""
+    var seq = ListBuffer[Quad]()
     readQuads(language, file) { quad =>
-      if(lastSubj != quad.subject)
+      if(!lastSubj.equals(quad.subject))
       {
-        proc(seq)
-        seq = List[Quad](quad)
+        lastSubj = quad.subject
+        proc(seq.toList)
+        seq.clear()
+        seq += quad
       }
       else{
-        seq.::(quad)
+        seq += quad
       }
     }
-    proc(seq)
+    proc(seq.toList)
   }
 
   /**
