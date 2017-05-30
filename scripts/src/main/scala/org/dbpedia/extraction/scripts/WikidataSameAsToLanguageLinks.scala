@@ -47,12 +47,10 @@ object WikidataSameAsToLanguageLinks {
       case None => throw new IllegalArgumentException("Please provide a 'suffix' attribute in your properties configuration")
     }
 
-    val output = DBpediaDatasets.TestDataset.filenameEncoded
-
-/*      config.outputDataset match{
+    val output = config.outputDataset match{
       case Some (l) => l
       case None => throw new IllegalArgumentException("Please provide an 'output' attribute for the output dataset file in the .properties configuration.")
-    }*/
+    }
 
     val language = config.languages
 
