@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.{BufferedReader, File}
+import java.io.File
 
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.util._
@@ -15,20 +15,27 @@ import scala.io.Source
   * Created by Termilion on 10/5/2017.
   */
 class WikidataSameAsToLang$test extends FunSuite {
-  private var baseDir : File = null
-  private var date : String = null
-  private var suffix : String = null
+  /**
+    * set to true to see outputs for each difference while comparing the files, note that
+    * these should be concurrency based changes of the sequence
+    */
+  private val detailed_log = false
+
+  // output file names
   private var output_1 : String = "test_1"
   private var output_2 : String = "test_2"
-  private var language : Array[Language] = null
-  private var formats : Map[String, Formatter] = null
+  // test input file name
   private var input : String = "test-input"
-  private var wikiDataFile: RichFile = null
 
-  // TODO: come up with a better performing solution for the concurrency issue => maybe compare graphs instead of files?
+  private var wikiDataFile: RichFile = null
+  private var language : Array[Language] = null
+  private var baseDir : File = null
+  private var suffix : String = null
+  private var formats : Map[String, Formatter] = null
+
   /**
-    * The test assures that the new version of WikidataSameAsToLanguageLinks is faster and both outputs contain the same quads.
-    * False alarms caused by concurrency are handled, but that could use some memory when testing on big files.
+    * The test assures that the new version of WikidataSameAsToLanguageLinks outputs the same quads as the old version.
+    * False alarms caused by concurrency are handled, but that will uses some memory when testing on big files.
     */
   test("Compare WdSATLL_test and WdSATLL") {
     loadConfig("process.wikidata.sameas.all.properties")
@@ -38,29 +45,33 @@ class WikidataSameAsToLang$test extends FunSuite {
     oldCode.processLinks()
     var time1 = System.currentTimeMillis() - start
     info("Old Code finished in: " + time1 + " ms")
-      // TODO: RAM Usage ?
-    //Execute new
     start = System.currentTimeMillis()
     val newCode = new WikidataSameAsToLanguageLinks_test(baseDir, wikiDataFile, output_2, language, formats)
     newCode.processLinks()
     var time2 = System.currentTimeMillis() - start
-    info("New Code finished in: " + time2 + " ms")
-      // TODO: RAM Usage ?
-      //Find Files
-    val testfileFinder = new Finder[File](baseDir, Language.English, "wiki")
-    val date = testfileFinder.dates().last
-      //Read Files
-    var i = 0
+    info("New Code finished in: " + time2 + " ms\n\n")
+
     var diff = 0
+
+    language.toList.foreach(lang => {
+      val testfileFinder = new Finder[File](baseDir, lang, "wiki")
+    val date = testfileFinder.dates().last
+    //Read Files
+    var index = 0
     var diff_list1 = ListBuffer[String]()
     var diff_list2 = ListBuffer[String]()
+    val testfile1 = testfileFinder.file(date, output_1 + suffix).get
+    val testfile2 = testfileFinder.file(date, output_2 + suffix).get
+
+    info("Comparing: " + testfile1 + " and " + testfile2)
+
     val iterator_1 = Source.fromInputStream(
       IOUtils.inputStream(testfileFinder.file(date, output_1 + suffix).get)).getLines()
     val iterator_2 = Source.fromInputStream(
       IOUtils.inputStream(testfileFinder.file(date, output_2 + suffix).get)).getLines()
     while(iterator_1.hasNext && iterator_2.hasNext){
       //Compare Files
-      i += 1
+      index += 1
       val line_1 = iterator_1.next()
       val line_2 = iterator_2.next()
       if(!line_1.equals(line_2)){
@@ -80,17 +91,27 @@ class WikidataSameAsToLang$test extends FunSuite {
         // Output different Lines
         if(!line_1.trim.startsWith("#")) {
           // Line is not head or tail comment
-          info("DIFFERENCE in line: " + i + "\nline 1: " + line_1 + "\nline 2: " + line_2)
+          if(detailed_log) info("DIFFERENCE in line: " + index + "\nline 1: " + line_1 + "\nline 2: " + line_2)
           diff += 1
         }
       }
     }
+      info("Differences in File " + testfile2 + ": " + diff)
+    })
+
     //Output gathered Data
-    info("\n\nOld Time: "+time1+"  New Time: "+time2+"\nDifference in Time (NEW - OLD): " + (time2 - time1) + "ms\nNumber of Lines that differed (without the concurrency differences!): " + diff)
+    info("\n\nOld Time: "+time1+"ms  New Time: "+time2+"ms\nDifference in Time (NEW - OLD): " + (time2 - time1) + "ms\nNumber of Lines that differed: " + diff)
     assert(diff == 0, "Test Failed: the Files are different!")
-    assert(time2 <= time1, "Test Failed: the new Code is slower!")
   }
 
+  private def error(message: String, cause: Throwable = null): IllegalArgumentException = {
+    new IllegalArgumentException(message, cause)
+  }
+
+  /**
+    * Loads the necessary parts from the config file
+    * @param fileName config filename
+    */
   private def loadConfig(fileName : String): Unit = {
     require(fileName != "", "missing required argument: config file name")
 
@@ -101,7 +122,7 @@ class WikidataSameAsToLang$test extends FunSuite {
   }
 
     val inputFinder = new Finder[File](baseDir, Language.Wikidata, "wiki")
-    date = inputFinder.dates().last
+    val date = inputFinder.dates().last
 
     suffix = config.inputSuffix match{
     case Some(x) => x

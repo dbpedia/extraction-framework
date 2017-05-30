@@ -6,7 +6,7 @@ import java.util.regex.Matcher
 import org.dbpedia.extraction.destinations.formatters.Formatter
 import org.dbpedia.extraction.destinations.{CompositeDestination, Destination, WriterDestination}
 import org.dbpedia.extraction.ontology.RdfNamespace
-import org.dbpedia.extraction.scripts.WikidataSameAsToLanguageLinks.{DBPEDIA_URI_PATTERN, error, sameAs}
+import org.dbpedia.extraction.scripts.WikidataSameAsToLanguageLinks_test.{DBPEDIA_URI_PATTERN, error, sameAs}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.IOUtils._
 import org.dbpedia.extraction.util.RichFile.wrapFile
@@ -14,21 +14,10 @@ import org.dbpedia.extraction.util._
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-/*
-* TODO: Composite Destinations => CompDest of CompDest? Write executes on all? => maybe not usable, because every language gets its own quads to write
-* TODO: mapSortedQuads instead of readSortedQuads => only really usable with CompDest
-* TODO: find out, why sameAs and DBPEDIA_URI_PATTERN aren't accessible in class
-*
-* DONE: fixed readSortedQuads
-* DONE: test-class
-* DONE: separate file
-* DONE: rebuild branch from temp
-* DONE: old (and way better) Worker-logic reimplemented and cleaned up the mess
-* DONE: readSortedQuads instead of readQuads
-*/
 
-/**
-  *
+/** Generates language links from the Wikidata sameAs dataset as created by the
+  * [[org.dbpedia.extraction.mappings.WikidataSameAsExtractor]]. This code assumes the subjects to be
+  * ordered, in particular, it assumes that there is *exactly* one continuous block for each subject.
   */
 object WikidataSameAsToLanguageLinks_test {
   private val sameAs = RdfNamespace.OWL.append("sameAs")
