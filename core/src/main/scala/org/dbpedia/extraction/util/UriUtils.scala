@@ -147,7 +147,7 @@ object UriUtils
 
   private def iriDecode(uriPart: String): String={
     var decoded = uriPart
-    var decoder = new UriToIriDecoder;
+    val decoder = new UriToIriDecoder
     while(decoder.decode(decoded) != decoded)
       decoded = decoder.decode(decoded)
     decoded

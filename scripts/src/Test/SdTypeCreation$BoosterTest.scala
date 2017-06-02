@@ -18,9 +18,9 @@ class SdTypeCreation$BoosterTest extends FunSuite {
       new OntologyReader().read(ontologySource)
     }
 
-    System.out.println(SdTypeCreation.calculateDomainRangeBooster("http://dbpedia.org/ontology/University", "http://dbpedia.org/ontology/numberOfStudents", SdTypeCreation.PredicateDirection.Out, ontology ))
-    System.out.println(SdTypeCreation.calculateDomainRangeBooster("http://dbpedia.org/ontology/EducationalInstitution", "http://dbpedia.org/ontology/numberOfStudents", SdTypeCreation.PredicateDirection.Out, ontology ))
-    System.out.println(SdTypeCreation.calculateDomainRangeBooster("http://dbpedia.org/ontology/University", "http://dbpedia.org/ontology/editing", SdTypeCreation.PredicateDirection.Out, ontology ))
+    System.out.println(SdTypeCreation.calculateDomainRangePenalty("http://dbpedia.org/ontology/University", "http://dbpedia.org/ontology/numberOfStudents", SdTypeCreation.PredicateDirection.Out, ontology ))
+    System.out.println(SdTypeCreation.calculateDomainRangePenalty("http://dbpedia.org/ontology/EducationalInstitution", "http://dbpedia.org/ontology/numberOfStudents", SdTypeCreation.PredicateDirection.Out, ontology ))
+    System.out.println(SdTypeCreation.calculateDomainRangePenalty("http://dbpedia.org/ontology/University", "http://dbpedia.org/ontology/editing", SdTypeCreation.PredicateDirection.Out, ontology ))
   }
 
 }

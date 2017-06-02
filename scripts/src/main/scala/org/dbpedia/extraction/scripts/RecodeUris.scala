@@ -46,7 +46,7 @@ object RecodeUris {
 
     Workers.work(SimpleWorkers(1.5, 1.0) { input:File =>
       var changeCount = 0
-      val outFile = new File(baseDir, input.name.substring(0, input.name.length - outSuffix.length) + outSuffix)
+      val outFile = new File(input.getParent, input.name.substring(0, input.name.length - inSuffix.length) + outSuffix)
       new QuadMapper().mapQuads(Language.Core, input, outFile, required = true) { quad =>
         try {
           var changed = false
