@@ -64,6 +64,9 @@ object IOUtils {
    */
   def reader(file: FileLike[_], charset: Charset = Codec.UTF8.charSet): Reader =
     new InputStreamReader(inputStream(file), charset)
+
+  def bufferedReader(file: FileLike[_], charset: Charset = Codec.UTF8.charSet): BufferedLineReader =
+    new BufferedLineReader(new InputStreamReader(inputStream(file), charset))
   
   /**
    * open input stream, wrap in unzipper stream if file suffix indicates compressed file,

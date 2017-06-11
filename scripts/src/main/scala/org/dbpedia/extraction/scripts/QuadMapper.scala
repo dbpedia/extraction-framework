@@ -16,7 +16,7 @@ import scala.Console.err
 /**
  * Maps old quads/triples to new quads/triples.
  */
-class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends QuadReader(file, preamble) {
+class QuadMapper(log: FileLike[File] = null, reportInterval: Int = 100000, preamble: String = null) extends QuadReader(log, reportInterval, preamble) {
 
   /**
    * @deprecated use one of the map functions below 
