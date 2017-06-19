@@ -24,18 +24,22 @@ object PersonDataExtractorNew {
     }
 
     val inputFinder = new Finder[File](baseDir, Language.Wikidata, "wiki")
+    val date = inputFinder.dates().last
     val dfinder = new DateFinder[File](inputFinder)
     dfinder.byName("raw.tql.bz2", auto = true) // work around for setting the date-finder date
 
+    // output
     val destination = DestinationUtils.createDestination(dfinder,
       Array(DBpediaDatasets.Persondata.getLanguageVersion(Language.Wikidata, config.dbPediaVersion)), config.formats.toMap)
 
-    val date = inputFinder.dates().last
-
+    // raw property data input
     val rawDataFile : RichFile = inputFinder.file(date, "raw.tql.bz2").get
+    // file with the instance Type information
     val instanceFile : RichFile = inputFinder.file(date, "instance_types.tql.bz2").get
+    // Mapping JSON
     val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("persondatamapping.json"))
 
+    // Types of instances our subjects could be. Here: Subclasses of dbo:Person
     val instanceTypes = Array(
       "http://dbpedia.org/ontology/Person",
       "http://dbpedia.org/ontology/Actor",
@@ -100,23 +104,24 @@ object PersonDataExtractorNew {
 }
 
 /**
-  * Created by termi on 02.06.17.
+  * Created by Robert Bielinski on 02.06.17.
+  * PersonData Extractor for the new Wikipedia Template standards.
+  * Runs on wikidata raw file, outputs the wikidata PersonData file.
   */
 class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFile : RichFile,
                               destination: Destination, instanceTypeOf: Array[String], mappingsFile: JsonConfig) {
 
   def extract(): Unit = {
-    mappingsFile.get("http://wikidata.org/entity/P20") match {
-      case Some(o) => println(o.asText())
-      case None =>
-    }
+
     val instanceMap = mutable.HashMap[String, String]()
+
     //Read Instance File
     new QuadMapper().readQuads(Language.Wikidata, instanceFile)(quad =>
       if(instanceTypeOf.contains(quad.value)){
-        instanceMap.put(quad.subject, "")
+        instanceMap.put(quad.subject, null)
       }
     )
+
     // read raw file and process quads
     destination.open()
     new QuadMapper().readSortedQuads(Language.Wikidata, rawDataFile)(quads => {
@@ -127,19 +132,26 @@ class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFil
             // Subject is an instance of our desired Type or Subtype of it
             new_quads = process(quads)
           case None =>
-            // Subject is not defined as Person => check if maybe the properties are similar
+            // Subject is not defined as Person => check if the properties are maybe similar
             var similarity = 0
             quads.foreach(quad => {
               if(mappingsFile.keys().toList.contains(quad.predicate)) similarity += 1
             })
             if(similarity >= 3) new_quads = process(quads)
-
         }
       }
       destination.write(new_quads)
     })
+    destination.close()
   }
-  destination.close()
+
+  def maptoLanguage(languages: Traversable[Language]): Unit ={
+    // TODO
+    // read sameAs File of Language
+    // read our new PersonData File
+    // replace subjects and objects
+    // save in Language Folder
+  }
 
   def process(quads : Traversable[Quad]) : Traversable[Quad] =  {
     var new_quads = ArrayBuffer[Quad]()
@@ -152,8 +164,7 @@ class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFil
           // datatype is either defined by the quad (value is literal) or null (value is another resource)
           var datatype : Datatype = null
           if(quad.datatype != null) datatype = new Datatype(quad.datatype)
-          val new_quad = new Quad(Language.Wikidata, DBpediaDatasets.Persondata, subject, node.asText(), value, new String(quad.context), datatype)
-          new_quads += new_quad
+          new_quads += new Quad(Language.Wikidata, DBpediaDatasets.Persondata, subject, node.asText(), value, new String(quad.context), datatype)
         case None =>
       }
     })
