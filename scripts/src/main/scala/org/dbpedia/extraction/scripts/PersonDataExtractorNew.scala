@@ -50,67 +50,18 @@ object PersonDataExtractorNew {
     val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("persondatamapping.json"))
 
     val ontology = {
-      val ontologySource = ConfigUtils.getValue(Config.universalConfig.properties, "ontology")(new File(_))
+      val ontologySource = config.ontologyFile
       new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
     }
 
-    //TODO get rid of list when merged
-    // Types of instances our subjects could be. Here: Subclasses of dbo:Person
-    val instanceTypes = Array(
-      "http://dbpedia.org/ontology/Person",
-      "http://dbpedia.org/ontology/Actor",
-      "http://dbpedia.org/ontology/Ambassador",
-      "http://dbpedia.org/ontology/Archeologist",
-      "http://dbpedia.org/ontology/Architect",
-      "http://dbpedia.org/ontology/Aristocrat",
-      "http://dbpedia.org/ontology/Artist",
-      "http://dbpedia.org/ontology/Astronaut",
-      "http://dbpedia.org/ontology/Athlete",
-      "http://dbpedia.org/ontology/BeautyQueen",
-      "http://dbpedia.org/ontology/BusinessPerson",
-      "http://dbpedia.org/ontology/Celebrity",
-      "http://dbpedia.org/ontology/Chef",
-      "http://dbpedia.org/ontology/Cleric",
-      "http://dbpedia.org/ontology/Coach",
-      "http://dbpedia.org/ontology/Criminal",
-      "http://dbpedia.org/ontology/Economist",
-      "http://dbpedia.org/ontology/Egyptologist",
-      "http://dbpedia.org/ontology/Engineer",
-      "http://dbpedia.org/ontology/Farmer",
-      "http://dbpedia.org/ontology/FictionalCharacter",
-      "http://dbpedia.org/ontology/HorseTrainer",
-      "http://dbpedia.org/ontology/Journalist",
-      "http://dbpedia.org/ontology/Judge",
-      "http://dbpedia.org/ontology/Lawyer",
-      "http://dbpedia.org/ontology/Linguist",
-      "http://dbpedia.org/ontology/MemberResistanceMovement",
-      "http://dbpedia.org/ontology/MilitaryPerson",
-      "http://dbpedia.org/ontology/Model",
-      "http://dbpedia.org/ontology/Monarch",
-      "http://dbpedia.org/ontology/MovieDirector",
-      "http://dbpedia.org/ontology/Noble",
-      "http://dbpedia.org/ontology/OfficeHolder",
-      "http://dbpedia.org/ontology/OrganisationMember",
-      "http://dbpedia.org/ontology/Orphan",
-      "http://dbpedia.org/ontology/Philosopher",
-      "http://dbpedia.org/ontology/PlayboyPlaymate",
-      "http://dbpedia.org/ontology/Politician",
-      "http://dbpedia.org/ontology/PoliticianSpouse",
-      "http://dbpedia.org/ontology/Presenter",
-      "http://dbpedia.org/ontology/Producer",
-      "http://dbpedia.org/ontology/Psychologist",
-      "http://dbpedia.org/ontology/Referee",
-      "http://dbpedia.org/ontology/Religious",
-      "http://dbpedia.org/ontology/RomanEmperor",
-      "http://dbpedia.org/ontology/Royalty",
-      "http://dbpedia.org/ontology/Scientist",
-      "http://dbpedia.org/ontology/SportsManager",
-      "http://dbpedia.org/ontology/TelevisionDirector",
-      "http://dbpedia.org/ontology/TelevisionPersonality",
-      "http://dbpedia.org/ontology/TheatreDirector",
-      "http://dbpedia.org/ontology/Writer")
+    val person = ontology.getOntologyClass("Person") match{
+      case Some(p) => p
+      case None => throw new IllegalArgumentException("Class dbo:Person was not found!")
+    }
 
-    val extractor = new PersonDataExtractorNew(baseDir, instanceFile, rawDataFile, destination, instanceTypes, mappingsFile)
+    val personTypes = ontology.classes.values.filter(x => ontology.isSubclassOf(x, person)).map(x => x.uri).toList
+
+    val extractor = new PersonDataExtractorNew(baseDir, instanceFile, rawDataFile, destination, personTypes, mappingsFile)
     extractor.extract()
   }
 
@@ -125,7 +76,7 @@ object PersonDataExtractorNew {
   * Runs on wikidata raw file, outputs the wikidata PersonData file.
   */
 class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFile : RichFile,
-                              destination: Destination, instanceTypeOf: Array[String], mappingsFile: JsonConfig) {
+                              destination: Destination, instanceTypeOf: List[String], mappingsFile: JsonConfig) {
 
   def extract(): Unit = {
 
