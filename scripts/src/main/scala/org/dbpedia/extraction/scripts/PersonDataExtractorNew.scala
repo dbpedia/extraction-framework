@@ -5,12 +5,14 @@ import java.io.File
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.ontology.datatypes.Datatype
+import org.dbpedia.extraction.ontology.io.OntologyReader
+import org.dbpedia.extraction.sources.XMLSource
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 
 import scala.collection.mutable
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.{ArrayBuffer}
 
 object PersonDataExtractorNew {
   def main(args: Array[String]): Unit = {
@@ -23,22 +25,36 @@ object PersonDataExtractorNew {
       throw error("dir " + baseDir + " does not exist")
     }
 
+    val rawDataset = DBpediaDatasets.WikidataRawRedirected
+    val suffix = config.inputSuffix match{
+      case Some(suf) => suf
+      case None => throw new IllegalArgumentException("no suffix option was provided in the properties file.")
+    }
+
     val inputFinder = new Finder[File](baseDir, Language.Wikidata, "wiki")
     val date = inputFinder.dates().last
     val dfinder = new DateFinder[File](inputFinder)
-    dfinder.byName("raw.tql.bz2", auto = true) // work around for setting the date-finder date
+
+    //TODO after merge -> replace encoded with getfilename
+    dfinder.byName(rawDataset.encoded.replace("_", "-") + suffix, auto = true) // work around for setting the date-finder date
 
     // output
     val destination = DestinationUtils.createDestination(dfinder,
       Array(DBpediaDatasets.Persondata.getLanguageVersion(Language.Wikidata, config.dbPediaVersion)), config.formats.toMap)
 
     // raw property data input
-    val rawDataFile : RichFile = inputFinder.file(date, "raw.tql.bz2").get
+    val rawDataFile : RichFile = inputFinder.file(date, rawDataset.encoded.replace("_", "-") + suffix).get
     // file with the instance Type information
-    val instanceFile : RichFile = inputFinder.file(date, "instance_types.tql.bz2").get
+    val instanceFile : RichFile = inputFinder.file(date, DBpediaDatasets.OntologyTypes.encoded.replace("_", "-") + suffix).get
     // Mapping JSON
     val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("persondatamapping.json"))
 
+    val ontology = {
+      val ontologySource = ConfigUtils.getValue(Config.universalConfig.properties, "ontology")(new File(_))
+      new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
+    }
+
+    //TODO get rid of list when merged
     // Types of instances our subjects could be. Here: Subclasses of dbo:Person
     val instanceTypes = Array(
       "http://dbpedia.org/ontology/Person",
@@ -135,9 +151,11 @@ class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFil
             // Subject is not defined as Person => check if the properties are maybe similar
             var similarity = 0
             quads.foreach(quad => {
-              if(mappingsFile.keys().toList.contains(quad.predicate)) similarity += 1
+              if(mappingsFile.keys().toList.contains(quad.predicate))
+                similarity += 1
             })
-            if(similarity >= 3) new_quads = process(quads)
+            if(similarity >= 3)
+              new_quads = process(quads)
         }
       }
       destination.write(new_quads)
@@ -163,8 +181,16 @@ class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFil
         case Some(node) =>
           // datatype is either defined by the quad (value is literal) or null (value is another resource)
           var datatype : Datatype = null
-          if(quad.datatype != null) datatype = new Datatype(quad.datatype)
-          new_quads += new Quad(Language.Wikidata, DBpediaDatasets.Persondata, subject, node.asText(), value, new String(quad.context), datatype)
+          if(quad.datatype != null)
+            datatype = new Datatype(quad.datatype)
+          new_quads += new Quad(
+            Language.Wikidata,
+            DBpediaDatasets.Persondata,
+            subject,
+            node.asText(),
+            value,
+            if(quad.context != null) quad.context else null,
+            datatype)
         case None =>
       }
     })
