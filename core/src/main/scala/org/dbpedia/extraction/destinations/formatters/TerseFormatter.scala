@@ -1,6 +1,5 @@
 package org.dbpedia.extraction.destinations.formatters
 
-import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util.StringUtils.formatCurrentTimestamp
 import UriPolicy._
 

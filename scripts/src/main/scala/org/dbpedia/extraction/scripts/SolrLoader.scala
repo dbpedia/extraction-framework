@@ -1,7 +1,7 @@
 package org.dbpedia.extraction.scripts
 
 import java.io.File
-import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.{ConcurrentHashMap, TimeUnit}
 
 import aksw.org.sdw.kg.handler.solr.{KgSorlInputDocument, SolrHandler, SolrUriInputDocument}
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
@@ -13,6 +13,10 @@ import scala.collection.concurrent
 import scala.collection.mutable.ListBuffer
 import scala.collection.convert.decorateAsScala._
 import scala.collection.convert.decorateAsJava._
+import scala.concurrent._
+import scala.concurrent.duration.Duration
+
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by chile on 07.06.17.
@@ -39,6 +43,9 @@ object SolrLoader {
   private var suffix: String = _
   private var solrHandler: SolrHandler = _
   private var nonCommittedDocs: Int = 0
+  private var solrCommitPromise: Promise[Boolean] = Promise.apply[Boolean]()
+  //init as successful since this is what keeps it going
+  solrCommitPromise.completeWith(Future.successful(true))
 
   private val docQueue = new ListBuffer[KgSorlInputDocument]()
 
@@ -74,6 +81,19 @@ object SolrLoader {
     }
   }
 
+  /**
+    * Async document commit to Solr -> so we don't have to wait for its result and can gather more docs in the meantime
+    * @param docs
+    * @return
+    */
+  private def commitDocQueue(docs: List[KgSorlInputDocument]) = {
+    val promise: Promise[Boolean] = Promise.apply[Boolean]()
+    promise.completeWith(Future {
+      solrHandler.addSolrDocuments(docs.asJava)
+      true
+    })
+    promise
+  }
 
   def main(args: Array[String]): Unit = {
 
@@ -108,8 +128,21 @@ object SolrLoader {
 
     Workers.workInParallel[Language](Array(disambWorker, redirectWorker), List(language))
 
+    val allDisambiguations = disambiguations.values.flatten.map(x => x -> null).toMap
+    val allRedirects = redirects.values.flatten.map(x => x -> null).toMap
+
     new QuadReader(logfile, 2000, " Documents imported into Solr.").readSortedQuads(language, leadFile, sortedInputs){ quads =>
       val doc = new SolrUriInputDocument(quads.head.subject)
+
+      //ignore disambiguation and redirect pages
+      allDisambiguations.get(doc.getId) match{
+        case Some(x) => return
+        case None => allRedirects.get(doc.getId) match{
+          case Some(y) => return
+          case None =>
+        }
+      }
+
       val altlabels = new ListBuffer[String]()
       val sameass = new ListBuffer[String]()
       val subjects = new ListBuffer[String]()
@@ -141,32 +174,42 @@ object SolrLoader {
       }
 
       doc.addFieldData("id", doc.getId)
-      doc.addFieldData("titel", WikiUtil.wikiDecode(doc.getId.substring(doc.getId.lastIndexOf("/")+1)))
+      doc.addFieldData("titel", WikiUtil.wikiDecode(doc.getId.substring(language.resourceUri.toString.length)))
 
       doc.addFieldData("altLabel", altlabels.distinct.toList.asJava)
       doc.addFieldData("sameAs", sameass.distinct.toList.asJava)
       doc.addFieldData("subjects", subjects.distinct.toList.asJava)
 
       redirects.get(doc.getId) match{
-        case Some(x) => doc.addFieldData("redirects", x.map( y => WikiUtil.wikiDecode(y.substring(y.lastIndexOf("/")+1))).asJava)
+        case Some(x) => doc.addFieldData("redirects", x.map( y => WikiUtil.wikiDecode(y.substring(language.resourceUri.toString.length))).asJava)
         case None =>
       }
 
       disambiguations.get(doc.getId) match{
-        case Some(x) => doc.addFieldData("disambiguations", x.map( y => WikiUtil.wikiDecode(y.substring(y.lastIndexOf("/")+1))).asJava)
+        case Some(x) => doc.addFieldData("disambiguations", x.map( y => WikiUtil.wikiDecode(y.substring(language.resourceUri.toString.length))).asJava)
         case None =>
       }
 
       nonCommittedDocs = nonCommittedDocs +1
-      if(nonCommittedDocs % 1000 == 0){
+      if(nonCommittedDocs % 100000 == 0){
         docQueue.append(doc)
-        solrHandler.addSolrDocuments(docQueue.toList.asJava)
+        //wait if the last commit to solr has not finished yet (quiet unlikely)
+        Await.result(solrCommitPromise.future, Duration.apply(3l, TimeUnit.MINUTES) )  //TODO 3 minutes additional waiting?
+        //commit current queue
+        solrCommitPromise = commitDocQueue(docQueue.toList)
+        //clear queue
         docQueue.clear()
-        System.out.println(nonCommittedDocs + " documents were successfully imported.")
       }
       else
         docQueue.append(doc)
     }
+
+    //wait if the last commit to solr has not finished yet (quiet unlikely)
+    Await.result(solrCommitPromise.future, Duration.apply(1000l, TimeUnit.MILLISECONDS) )
+    //commit current queue
+    solrCommitPromise = commitDocQueue(docQueue.toList)
+    //wait for the last time
+    Await.result(solrCommitPromise.future, Duration.apply(1000l, TimeUnit.MILLISECONDS) )
     System.out.println(nonCommittedDocs + " documents were successfully imported.")
   }
 }

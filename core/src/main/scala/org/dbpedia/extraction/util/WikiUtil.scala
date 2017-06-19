@@ -2,7 +2,6 @@ package org.dbpedia.extraction.util
 
 import org.dbpedia.extraction.util.RichString.wrapString
 import org.dbpedia.util.text.uri.UriDecoder
-import java.util.Arrays
 
 /**
  * Contains several utility functions related to WikiText.

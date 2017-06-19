@@ -16,7 +16,6 @@ import org.dbpedia.extraction.wikiparser.{Namespace, PageNode, WikiPage}
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable
 import scala.collection.mutable.HashSet
-import scala.io.Codec
 import scala.util.Try
 import scala.util.matching.Regex
 

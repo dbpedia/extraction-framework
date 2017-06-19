@@ -4,7 +4,6 @@ import org.apache.commons.compress.compressors.bzip2.{BZip2CompressorInputStream
 import java.util.zip.{GZIPInputStream,GZIPOutputStream}
 import java.io._
 import scala.io.Codec
-import org.dbpedia.extraction.util.RichReader.wrapReader
 import java.nio.charset.Charset
 
 /**
