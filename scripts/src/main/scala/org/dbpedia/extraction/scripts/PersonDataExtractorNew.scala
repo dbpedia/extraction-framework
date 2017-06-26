@@ -186,7 +186,7 @@ class PersonDataExtractorNew(config: Config) {
             case Some(v) => v._1
             case None => quad.value
           }
-          new_quads += quad.copy(value = value, dataset = DBpediaDatasets.WikidataPersondataRaw.encoded)
+          new_quads += quad.copy(value = value, dataset = DBpediaDatasets.Persondata.encoded)
         }
       }
       new_quads
@@ -196,11 +196,11 @@ class PersonDataExtractorNew(config: Config) {
       var new_quads = new ArrayBuffer[Quad]()
       if (quads.nonEmpty) {
         mappingValues.get((quads.head.subject, rdfslabel)) match {
-          case Some(q) => q.foreach(z => new_quads ++= quads.map(x => x.copy(subject = z._1, predicate = z._2, dataset = DBpediaDatasets.WikidataPersondataRaw.encoded)))
+          case Some(q) => q.foreach(z => new_quads ++= quads.map(x => x.copy(subject = z._1, predicate = z._2, dataset = DBpediaDatasets.Persondata.encoded)))
           case None =>
         }
         instanceMap.get(quads.head.subject) match {
-          case Some(p) => new_quads ++= quads.map(x => x.copy(predicate = RdfNamespace.resolvePrefix("foaf:name"), dataset = DBpediaDatasets.WikidataPersondataRaw.encoded))
+          case Some(p) => new_quads ++= quads.map(x => x.copy(predicate = RdfNamespace.resolvePrefix("foaf:name"), dataset = DBpediaDatasets.Persondata.encoded))
           case None =>
         }
       }
@@ -210,7 +210,7 @@ class PersonDataExtractorNew(config: Config) {
     new QuadMapper().mapSortedQuads(Language.Wikidata, descriptionFile, finalDestination, required = true) { quads =>
       if (quads.nonEmpty) {
         instanceMap.get(quads.head.subject) match {
-          case Some(p) => quads.map(x => x.copy(predicate = RdfNamespace.resolvePrefix("dct:description"), dataset = DBpediaDatasets.WikidataPersondataRaw.encoded))
+          case Some(p) => quads.map(x => x.copy(predicate = RdfNamespace.resolvePrefix("dct:description"), dataset = DBpediaDatasets.Persondata.encoded))
           case None => Seq()
         }
       }
