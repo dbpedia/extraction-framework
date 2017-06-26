@@ -9,7 +9,7 @@ import org.scalatest.FunSuite
   */
 class DatasetTest extends FunSuite {
 
-val dataset = DBpediaDatasets.TestDataset.getLanguageVersion(Language("de"), "2016-10")
+val dataset = DBpediaDatasets.TestDataset.getLanguageVersion(Language("de"), "2016-10").get
   test("testVersionUri") {
     println(dataset.versionUri)
     println(dataset.canonicalVersion.versionUri)

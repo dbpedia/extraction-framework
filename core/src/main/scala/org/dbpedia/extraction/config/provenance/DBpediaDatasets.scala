@@ -262,6 +262,7 @@ object DBpediaDatasets
     val WikidataReference: Dataset = datasets("references")
     val WikidataDublicateIriSplit: Dataset = datasets("wikidata_duplicate_iri_split")
     val WikidataTypeLikeStatements: Dataset = datasets("wikidata_type_like_statements")
+    val WikidataPersondataRaw: Dataset = datasets("wikidata_persondata_raw")
 
     val WikidataR2RErrorDataset = DBpediaDatasets.WikidataR2R_mappingerrors
     val WikidataDuplicateIRIDataset = DBpediaDatasets.WikidataDublicateIriSplit
@@ -280,7 +281,7 @@ object DBpediaDatasets
     */
   val MainDataset: Dataset = datasets("main_dataset")
   val WiktionaryDataset: Dataset = datasets("wiktionary_dbpedia_org")
-  val TestDataset = new Dataset("test_dataset", "this is just a test", Language.English, "2015-10", "test_dataset", Seq(MainDataset), null, Seq(), "2015-10", DatasetTrait.ValueSet(DatasetTrait.Ordered, DatasetTrait.Provenance))
+  val TestDataset = new Dataset("test_dataset", "this is just a test", null, null, "test_dataset", Seq(MainDataset), null, Seq(), null, DatasetTrait.ValueSet(DatasetTrait.Ordered, DatasetTrait.Provenance))
 
 
   def getDataset(dataset: Dataset, language: Language, version: String): Dataset = getDataset(dataset.encoded, language, version)

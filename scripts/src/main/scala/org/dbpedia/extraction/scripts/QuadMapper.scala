@@ -137,7 +137,7 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
     * exist, we probably shouldn't open the destination at all, so it's ok that it's happening in
     * this method after checking the input file.
     */
-  def mapSortedQuads(language: Language, inFile: FileLike[_], destination: Destination, required: Boolean)(map: Traversable[Quad] => Traversable[Quad]): Unit = {
+  def mapSortedQuads(language: Language, inFile: FileLike[_], destination: Destination, required: Boolean, closeWriter: Boolean = true)(map: Traversable[Quad] => Traversable[Quad]): Unit = {
 
     if (! inFile.exists) {
       if (required) throw new IllegalArgumentException(language.wikiCode+": file "+inFile+" does not exist")
@@ -149,11 +149,14 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
     destination.open()
     try {
       readSortedQuads(language, inFile) { old =>
-        destination.write(map(old))
+        val rs = map(old)
+        destination.write(rs)
         mapCount += old.size
       }
     }
-    finally destination.close()
+    finally
+      if(closeWriter)
+        destination.close()
     err.println(language.wikiCode+": mapped "+mapCount+" quads")
   }
 }

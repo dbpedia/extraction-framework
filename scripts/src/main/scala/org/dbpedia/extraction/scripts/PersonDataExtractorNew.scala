@@ -1,9 +1,8 @@
 package org.dbpedia.extraction.scripts
 
-import java.io.File
-
 import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.destinations._
+import org.dbpedia.extraction.ontology.{OntologyClass, RdfNamespace}
 import org.dbpedia.extraction.ontology.datatypes.Datatype
 import org.dbpedia.extraction.ontology.io.OntologyReader
 import org.dbpedia.extraction.sources.XMLSource
@@ -12,7 +11,7 @@ import org.dbpedia.extraction.util.RichFile.wrapFile
 import org.dbpedia.extraction.util._
 
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer}
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 object PersonDataExtractorNew {
   def main(args: Array[String]): Unit = {
@@ -24,44 +23,8 @@ object PersonDataExtractorNew {
     if (!baseDir.exists) {
       throw error("dir " + baseDir + " does not exist")
     }
-
-    val rawDataset = DBpediaDatasets.WikidataRawRedirected
-    val suffix = config.inputSuffix match{
-      case Some(suf) => suf
-      case None => throw new IllegalArgumentException("no suffix option was provided in the properties file.")
-    }
-
-    val inputFinder = new Finder[File](baseDir, Language.Wikidata, "wiki")
-    val date = inputFinder.dates().last
-    val dfinder = new DateFinder[File](inputFinder)
-
-    //TODO after merge -> replace encoded with getfilename
-    dfinder.byName(rawDataset.encoded.replace("_", "-") + suffix, auto = true) // work around for setting the date-finder date
-
-    // output
-    val destination = DestinationUtils.createDestination(dfinder,
-      Array(DBpediaDatasets.Persondata.getLanguageVersion(Language.Wikidata, config.dbPediaVersion)), config.formats.toMap)
-
-    // raw property data input
-    val rawDataFile : RichFile = inputFinder.file(date, rawDataset.encoded.replace("_", "-") + suffix).get
-    // file with the instance Type information
-    val instanceFile : RichFile = inputFinder.file(date, DBpediaDatasets.OntologyTypes.encoded.replace("_", "-") + suffix).get
-    // Mapping JSON
-    val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("persondatamapping.json"))
-
-    val ontology = {
-      val ontologySource = config.ontologyFile
-      new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
-    }
-
-    val person = ontology.getOntologyClass("Person") match{
-      case Some(p) => p
-      case None => throw new IllegalArgumentException("Class dbo:Person was not found!")
-    }
-
-    val personTypes = ontology.classes.values.filter(x => ontology.isSubclassOf(x, person)).map(x => x.uri).toList
-
-    val extractor = new PersonDataExtractorNew(baseDir, instanceFile, rawDataFile, destination, personTypes, mappingsFile)
+    //start the extractor
+    val extractor = new PersonDataExtractorNew(config: Config)
     extractor.extract()
   }
 
@@ -74,9 +37,95 @@ object PersonDataExtractorNew {
   * Created by Robert Bielinski on 02.06.17.
   * PersonData Extractor for the new Wikipedia Template standards.
   * Runs on wikidata raw file, outputs the wikidata PersonData file.
+  *
+  * Input Files need to be sorted!
   */
-class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFile : RichFile,
-                              destination: Destination, instanceTypeOf: List[String], mappingsFile: JsonConfig) {
+class PersonDataExtractorNew(config: Config) {
+
+  //TODO make sorted datasets mandatory
+
+  private val suffix = config.inputSuffix match{
+    case Some(x) => x
+    case None => throw new IllegalArgumentException("input-suffix parameter was not provided in the properties file")
+  }
+
+  private val ontology = {
+    val ontologySource = config.ontologyFile
+    new OntologyReader().read( XMLSource.fromFile(ontologySource, Language.Mappings))
+  }
+
+  //get dbo:Person
+  private val person = ontology.getOntologyClass("Person") match{
+    case Some(p) => p
+    case None => throw new IllegalArgumentException("Class dbo:Person was not found!")
+  }
+
+  //collect all sub-classes from dbo:Person
+  private val personTypes = ontology.classes.values.filter(x => ontology.isSubclassOf(x, person)).map(x => x.uri).toList
+
+
+  private val dfinder = new DateFinder(config.dumpDir, Language.Wikidata)
+
+  dfinder.byName(DBpediaDatasets.WikidataRawRedirected.filenameEncoded + suffix, auto = true) // work around for setting the date-finder date
+
+  // output
+  private val finalDestination: Destination = DestinationUtils.createDestination(dfinder,
+    List(DBpediaDatasets.Persondata.getLanguageVersion(Language.Wikidata, config.dbPediaVersion).get),
+    config.formats.toMap)
+
+  private val testination: Destination = DestinationUtils.createDestination(dfinder,
+    List(DBpediaDatasets.WikidataPersondataRaw.getLanguageVersion(Language.Wikidata, config.dbPediaVersion).get),
+    config.formats.toMap)
+
+  private val testSource = dfinder.byName(DBpediaDatasets.WikidataPersondataRaw.filenameEncoded + suffix, auto = true) match{
+    case Some(x) => x
+    case None => throw new IllegalArgumentException("Wikidata input file was not found: " + DBpediaDatasets.WikidataPersondataRaw.filenameEncoded)
+  }
+
+  // raw property data input
+  private val rawDataFile : RichFile = dfinder.byName(DBpediaDatasets.WikidataRawRedirected.filenameEncoded + "-sorted" + suffix, auto = true) match{
+    case Some(x) => x
+    case None => throw new IllegalArgumentException("Wikidata input file was not found: " + DBpediaDatasets.WikidataRawRedirected.filenameEncoded)
+  }
+  // file with the instance Type information
+  private val instanceFile : RichFile =  dfinder.byName(DBpediaDatasets.OntologyTypes.filenameEncoded + suffix, auto = true) match{
+    case Some(x) => x
+    case None => throw new IllegalArgumentException("Wikidata input file was not found: " + DBpediaDatasets.OntologyTypes.filenameEncoded)
+  }
+  // raw property data input
+  private val labelsFile : RichFile = dfinder.byName(DBpediaDatasets.Labels.filenameEncoded + "-sorted" + suffix, auto = true) match{
+    case Some(x) => x
+    case None => throw new IllegalArgumentException("Wikidata input file was not found: " + DBpediaDatasets.WikidataRawRedirected.filenameEncoded)
+  }
+  // raw property data input
+  private val descriptionFile : RichFile = dfinder.byName(DBpediaDatasets.WikidataDescriptionMappingsWiki.filenameEncoded + "-sorted" + suffix, auto = true) match{
+    case Some(x) => x
+    case None => throw new IllegalArgumentException("Wikidata input file was not found: " + DBpediaDatasets.WikidataRawRedirected.filenameEncoded)
+  }
+  
+  private val rdfslabel = RdfNamespace.resolvePrefix("rdfs:label")
+
+  // Mapping JSON
+  private val mappingsFile: JsonConfig = new JsonConfig(this.getClass.getClassLoader.getResource("persondatamapping.json"))
+
+  private var mappingValues = new mutable.HashMap[(String, String), ListBuffer[(String, String)]]()
+
+  private var propertyPathMap = mappingsFile.configMap.map(x => {
+    val zw = new ListBuffer[String]()
+    for(i <- 0 until x._2.size)
+        zw.append(RdfNamespace.resolvePrefix(x._2.get(i).asText()))
+    zw.append(RdfNamespace.resolvePrefix(x._1))
+    zw.head -> zw.tail.toList
+  })
+
+  private def updatePropertyMap = {
+    propertyPathMap = propertyPathMap.map(x =>
+      if(x._2.nonEmpty && RdfNamespace.resolvePrefix(x._2.head) != rdfslabel)
+        x._2.head -> x._2.tail
+      else
+        x._1 -> x._2
+    )
+  }
 
   def extract(): Unit = {
 
@@ -84,67 +133,142 @@ class PersonDataExtractorNew(baseDir : File, instanceFile : RichFile, rawDataFil
 
     //Read Instance File
     new QuadMapper().readQuads(Language.Wikidata, instanceFile)(quad =>
-      if(instanceTypeOf.contains(quad.value)){
-        instanceMap.put(quad.subject, null)
+      if (personTypes.contains(quad.value)) {
+        instanceMap.put(quad.subject, quad.value)
       }
     )
 
     // read raw file and process quads
-    destination.open()
-    new QuadMapper().readSortedQuads(Language.Wikidata, rawDataFile)(quads => {
-      var new_quads = Traversable[Quad]()
-      if(quads.nonEmpty) {
+    new QuadMapper().mapSortedQuads(Language.Wikidata, rawDataFile, testination, required = true) { quads =>
+      var new_quads = ArrayBuffer[Quad]()
+      if (quads.nonEmpty) {
         instanceMap.get(quads.head.subject) match {
           case Some(o) =>
             // Subject is an instance of our desired Type or Subtype of it
-            new_quads = process(quads)
+            new_quads ++= process(quads)
           case None =>
             // Subject is not defined as Person => check if the properties are maybe similar
-            var similarity = 0
-            quads.foreach(quad => {
-              if(mappingsFile.keys().toList.contains(quad.predicate))
-                similarity += 1
-            })
-            if(similarity >= 3)
-              new_quads = process(quads)
+            val similarity = quads.count(q => propertyPathMap.keySet.toList.contains(q.predicate))
+            if (similarity >= 2) {
+              new_quads ++= process(quads)
+              instanceMap.put(quads.head.subject, person.uri)
+            }
+        }
+        instanceMap.get(quads.head.subject) match {
+          case Some(typp) => new_quads += quads.head.copy(
+            dataset = DBpediaDatasets.WikidataPersondataRaw.encoded,
+            predicate = RdfNamespace.resolvePrefix("rdf:type"),
+            datatype = null,
+            value = typp)
+          case None =>
         }
       }
-      destination.write(new_quads)
-    })
-    destination.close()
-  }
+      new_quads
+    }
+    updatePropertyMap
 
-  def maptoLanguage(languages: Traversable[Language]): Unit ={
-    // TODO
-    // read sameAs File of Language
-    // read our new PersonData File
-    // replace subjects and objects
-    // save in Language Folder
+    while (!propertyPathMap.values.forall(x => x.isEmpty || RdfNamespace.resolvePrefix(x.head) == rdfslabel)) {
+      new QuadMapper().readSortedQuads(Language.Wikidata, rawDataFile) { quads =>
+        if (quads.nonEmpty)
+          process2(quads)
+      }
+      updatePropertyMap
+    }
+
+    val finalValueMap = mappingValues.filter(x => x._1._2 != "http://www.w3.org/2000/01/rdf-schema#label").flatMap(x => x._2.map(y => y -> x._1))
+
+    //FIXME the last three mappings need to be transformed into a readSortedQuads of multiple files (test, labels, description) after merge with quad utility
+    new QuadMapper().mapSortedQuads(Language.Wikidata, testSource, finalDestination, required = true, closeWriter = false) { quads =>
+      var new_quads = new ArrayBuffer[Quad]()
+      if (quads.nonEmpty) {
+        for (quad <- quads) {
+          val value = finalValueMap.get((quad.subject, quad.predicate)) match {
+            case Some(v) => v._1
+            case None => quad.value
+          }
+          new_quads += quad.copy(value = value, dataset = DBpediaDatasets.WikidataPersondataRaw.encoded)
+        }
+      }
+      new_quads
+    }
+
+    new QuadMapper().mapSortedQuads(Language.Wikidata, labelsFile, finalDestination, required = true, closeWriter = false) { quads =>
+      var new_quads = new ArrayBuffer[Quad]()
+      if (quads.nonEmpty) {
+        mappingValues.get((quads.head.subject, rdfslabel)) match {
+          case Some(q) => q.foreach(z => new_quads ++= quads.map(x => x.copy(subject = z._1, predicate = z._2, dataset = DBpediaDatasets.WikidataPersondataRaw.encoded)))
+          case None =>
+        }
+        instanceMap.get(quads.head.subject) match {
+          case Some(p) => new_quads ++= quads.map(x => x.copy(predicate = RdfNamespace.resolvePrefix("foaf:name"), dataset = DBpediaDatasets.WikidataPersondataRaw.encoded))
+          case None =>
+        }
+      }
+      new_quads
+    }
+
+    new QuadMapper().mapSortedQuads(Language.Wikidata, descriptionFile, finalDestination, required = true) { quads =>
+      if (quads.nonEmpty) {
+        instanceMap.get(quads.head.subject) match {
+          case Some(p) => quads.map(x => x.copy(predicate = RdfNamespace.resolvePrefix("dct:description"), dataset = DBpediaDatasets.WikidataPersondataRaw.encoded))
+          case None => Seq()
+        }
+      }
+      else
+        Seq()
+    }
   }
 
   def process(quads : Traversable[Quad]) : Traversable[Quad] =  {
     var new_quads = ArrayBuffer[Quad]()
     quads.foreach(quad => {
-      val subject = new String(quad.subject)
-      val value = new String(quad.value)
-
-      mappingsFile.get(quad.predicate) match{
-        case Some(node) =>
-          // datatype is either defined by the quad (value is literal) or null (value is another resource)
-          var datatype : Datatype = null
-          if(quad.datatype != null)
-            datatype = new Datatype(quad.datatype)
-          new_quads += new Quad(
-            Language.Wikidata,
-            DBpediaDatasets.Persondata,
-            subject,
-            node.asText(),
-            value,
-            if(quad.context != null) quad.context else null,
-            datatype)
-        case None =>
+      propertyPathMap.get(quad.predicate) match{
+        case Some(properties) =>
+          if(properties.size > 1){
+            mappingValues.get((quad.value, properties.head)) match{
+              case Some(h) => h.append((quad.subject, properties.reverse.head))
+              case None => {
+                val zw = new ListBuffer[(String, String)]()
+                zw.append((quad.subject, properties.reverse.head))
+                mappingValues.put((quad.value, properties.head), zw)
+              }
+            }
+          }
+          else
+            // datatype is either defined by the quad (value is literal) or null (value is another resource)
+            new_quads += new Quad(
+              Language.Wikidata,
+              DBpediaDatasets.WikidataPersondataRaw,
+              quad.subject,
+              properties.reverse.head,
+              quad.value,
+              if(quad.context != null)
+                quad.context
+              else null,
+              if(quad.datatype != null)
+                new Datatype(quad.datatype)
+              else null)
+          case None =>
       }
     })
     new_quads
+  }
+
+  def process2(quads : Traversable[Quad]) :Unit =  {
+    quads.foreach(quad => {
+
+      mappingValues.get((quad.subject, quad.predicate)) match{
+        case Some(origSubj) => {
+          val properties = propertyPathMap(quad.predicate)
+          if (properties.nonEmpty)
+            mappingValues.put((quad.value, RdfNamespace.resolvePrefix(properties.head)), origSubj)
+          else
+            mappingValues.put((quad.value, null), origSubj)
+
+          mappingValues.remove((quad.subject, quad.predicate))
+        }
+        case None =>
+      }
+    })
   }
 }

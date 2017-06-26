@@ -524,7 +524,7 @@ object SdTypeCreation {
       clearAllMaps
       finder = new DateFinder(baseDir, language)
       finder.byName("instance-types" + suffix, auto = true) //work around to set date of finder
-      destination = DestinationUtils.createDestination(finder, Array(dataset.getLanguageVersion(language, config.dbPediaVersion)), formats)
+      destination = DestinationUtils.createDestination(finder, Array(dataset.getLanguageVersion(language, config.dbPediaVersion).get), formats)
 
       //read all input files and process the content
       Workers.workInParallel[Language](Array(typesWorker, objectPropWorker, workerDisamb, literalWorker), List(language))

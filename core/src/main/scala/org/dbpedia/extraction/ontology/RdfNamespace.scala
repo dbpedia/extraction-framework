@@ -42,6 +42,21 @@ object RdfNamespace {
     prefixMap(prefix) = ns
     ns
   }
+
+  def getNamespace(uri: String): RdfNamespace ={
+    for(p <- prefixMap)
+      if(uri.startsWith(p._2.namespace))
+        return p._2
+    null
+  }
+
+  def resolvePrefix(uri: String): String ={
+    val parts = split(null, uri)
+    if(parts._1 != null)
+      parts._1.append(parts._2)
+    else
+      uri
+  }
   
   // FIXME: move these to mappings wiki
   
@@ -85,8 +100,15 @@ object RdfNamespace {
    */
   def split(default: RdfNamespace, name: String): (RdfNamespace, String) = {
     val parts = name.split(":", 2) // TODO: use name.split(":", -1) instead???
-    if (parts.size == 2 && prefixMap.contains(parts(0))) (prefixMap(parts(0)), parts(1))
-    else (default, name)
+    if (parts.size == 2 && prefixMap.contains(parts(0)))
+      (prefixMap(parts(0)), parts(1))
+    else {
+      val nss = getNamespace(name)
+      if(nss != null)
+        (nss, name.substring(nss.namespace.length))
+      else
+        (default, name)
+    }
   }
   
   /**

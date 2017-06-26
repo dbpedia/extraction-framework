@@ -19,14 +19,14 @@ object DestinationUtils {
     for ((suffix, format) <- formats) {
       val datasetDestinations = new mutable.HashMap[String, Destination]()
       for (dataset <- datasets) {
-        finder.file(date, dataset.replace('_', '-')+'.'+suffix) match{
+        finder.file(date, dataset.replace("_", "-") +'.'+suffix) match{
           case Some(file) => datasetDestinations(dataset) = new WriterDestination(() => IOUtils.writer(file), format)
           case None =>
         }
       }
       destination += new DatasetDestination(datasetDestinations)
     }
-    new CompositeDestination(destination.toSeq: _*)
+    new CompositeDestination(destination: _*)
   }
 
   def createDestination(finder: DateFinder[File], datasets: Seq[Dataset], formats: Map[String, Formatter], append: Boolean = false) : Destination = {
@@ -34,7 +34,7 @@ object DestinationUtils {
   }
 
   def createDestination(finder: DateFinder[File], datasets: Seq[String], formats: Map[String, Formatter]) : Destination = {
-    createDestination(finder.finder, finder.date, datasets, formats, append=false)
+    createDestination(finder.finder, finder.date, datasets, formats, append = false)
   }
 
   def getDatasets(obj: Any) = {

@@ -495,7 +495,7 @@ object DataIdGenerator {
       val name = splits.slice(0, i).foldLeft("")(_ + "_" + _).substring(1)
       val ext = splits.slice(i, splits.length).foldLeft("")(_ + "_" + _)
       internalGet(name, ext) match{
-        case Some(d) => return Some(d.getLanguageVersion(lang, dbpv))
+        case Some(d) => return d.getLanguageVersion(lang, dbpv).toOption
         case None =>
       }
     }

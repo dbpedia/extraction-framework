@@ -43,36 +43,39 @@ class Dataset private[provenance](
     case None => Failure(new IllegalArgumentException("No target class for inputFor provided."))
   }
 
-  val name = WikiUtil.wikiDecode(naturalName.trim)
+  val name: String = WikiUtil.wikiDecode(naturalName.trim)
   if (name.isEmpty) throw new WikiParserException("dataset name must not be empty")
 
   /** Wiki-encoded dataset name */
-  val encoded = WikiUtil.wikiEncode((if(Option(fileName).nonEmpty && fileName.trim.nonEmpty) fileName.trim else name).replace("-", "_")).toLowerCase
+  val encoded: String = WikiUtil.wikiEncode((if(Option(fileName).nonEmpty && fileName.trim.nonEmpty) fileName.trim else name).replace("-", "_")).toLowerCase
 
-  val filenameEncoded = encoded.replace("_", "-")
+  val filenameEncoded: String = encoded.replace("_", "-")
 
-  val canonicalUri = RdfNamespace.fullUri(DBpediaNamespace.DATASET, encoded)
+  val canonicalUri: String = RdfNamespace.fullUri(DBpediaNamespace.DATASET, encoded)
 
-  val version = ConfigUtils.parseVersionString(versionEntry)
+  val version: Try[String] = ConfigUtils.parseVersionString(versionEntry)
 
-  val deprecatedSince = ConfigUtils.parseVersionString(depr)
+  val deprecatedSince: Try[String] = ConfigUtils.parseVersionString(depr)
 
-  lazy val canonicalVersion = if(isCanonical) this else copyDataset(lang = null, versionEntry = null)
+  lazy val canonicalVersion: Dataset = if(isCanonical) this else copyDataset(lang = null, versionEntry = null)
 
-  def getLanguageVersion(language: Language, version: String = null): Dataset ={
-    ConfigUtils.parseVersionString(version) match
-    {
-      case Success(v) => this.copyDataset(lang = language, versionEntry = v)
-      case Failure(e) => this.copyDataset(lang = language)
+  def getLanguageVersion(language: Language, version: String = null): Try[Dataset] ={
+    if(this.language.isEmpty || this.language.get == language) {
+      Success(ConfigUtils.parseVersionString(version) match {
+        case Success(v) => this.copyDataset(lang = language, versionEntry = v)
+        case Failure(e) => this.copyDataset(lang = language)
+      })
     }
+    else
+      Failure(new IllegalArgumentException("The target Dataset is already language specific: " + this.language.get.name + ". Conversion to other languages is therefore not permitted."))
   }
 
-  def languageUri = this.language match{
+  def languageUri: String = this.language match{
     case Some(lang) => canonicalUri + "?lang=" + lang.wikiCode
     case None => canonicalUri
   }
 
-  def versionUri = this.language match {
+  def versionUri: String = this.language match {
     case Some(l) => version match
     {
       case Success(v) => this.languageUri + "&dbpv=" + v
@@ -81,12 +84,12 @@ class Dataset private[provenance](
     case None => canonicalUri
   }
 
-  def isCanonical = language match {
+  def isCanonical: Boolean = language match {
     case Some(lang) => false
     case None => true
   }
 
-  def getDistributionUri(distType: String, extension: String) ={
+  def getDistributionUri(distType: String, extension: String): String ={
     val lang = this.language match{
       case Some(l) => l
       case None => throw new MissingFormatArgumentException("Dataset is language unspecific and can therefore not provide distribution URIs. Please specify a language first!.")
@@ -94,7 +97,7 @@ class Dataset private[provenance](
     this.versionUri + "&" + distType  + "=" + this.encoded +"_" + lang.wikiCode + extension
   }
 
-  def getRelationUri(role: String, target: Dataset) ={
+  def getRelationUri(role: String, target: Dataset): String ={
     val lang = this.language match{
       case Some(l) => l
       case None => throw new MissingFormatArgumentException("Dataset is language unspecific and can therefore not provide dataset relation URIs. Please specify a language first!.")
@@ -130,13 +133,13 @@ class Dataset private[provenance](
     }
   }
 
-  def isLinkedDataDataset = traits.contains(DatasetTrait.LinkedData)
+  def isLinkedDataDataset: Boolean = traits.contains(DatasetTrait.LinkedData)
 
-  override def toString = name
+  override def toString: String = encoded
 
-  override def hashCode = encoded.hashCode
+  override def hashCode: Int = encoded.hashCode
 
-  override def equals(other : Any) = other match {
+  override def equals(other : Any): Boolean = other match {
     case that: Dataset => this.encoded == that.encoded
     case _ => false
   }

@@ -79,9 +79,10 @@ object JsonConfig{
   def getObjectMap(node: JsonNode): Map[String, JsonNode] ={
     var ret = Map[String, JsonNode]()
     node.getNodeType match{
-      case JsonNodeType.OBJECT =>     for ( key <- node.fieldNames()) {
-        if(ret.keys.contains(key))
-          throw new Exception("JsonObjectMap was loaded with non unique key: " + key)
+      case JsonNodeType.OBJECT =>
+        for ( key <- node.fieldNames()) {
+         if(ret.keys.contains(key))
+           throw new Exception("JsonObjectMap was loaded with non unique key: " + key)
         val jsonNode = node.get(key)
         ret += (key -> jsonNode)
       }
@@ -98,7 +99,7 @@ object JsonConfig{
           }
         }
       }
-      case _ => throw new Exception("JsonObjectMap was loaded with non ObjectNode type.")
+      case _ => throw new Exception("JsonObjectMap was loaded with non ObjectNode or ArrayNode type.")
     }
     ret
   }

@@ -19,10 +19,12 @@ class Datatype(name : String, labels : Map[Language, String], comments : Map[Lan
      */
     def this(name : String) = this(name, Map(Language.English -> name), Map())
 
+    DBpediaNamespace.DATATYPE
+
     /**
      * The URI of this datatype
      */
-    override val uri = RdfNamespace.fullUri(DBpediaNamespace.DATATYPE, name)
+    override val uri = RdfNamespace.resolvePrefix(name)
 
     val isExternalProperty = ! uri.startsWith(DBpediaNamespace.DATATYPE.namespace)
 }
