@@ -67,7 +67,7 @@ object MapWikidataToLanguageUri {
         if (quad.language == null) {
           if(quad.datatype == null && quad.value.startsWith(Language.Wikidata.resourceUri.toString))
             map.get(quad.value.substring(cutWikidataAt)) match {
-              case Some(v) => Option(quad.copy(subject = newSubject, value = v, dataset = DBpediaDatasets.Persondata.encoded))
+              case Some(v) => Option(quad.copy(subject = newSubject, value = language.resourceUri.toString + v, dataset = DBpediaDatasets.Persondata.encoded))
               case None => Option(quad.copy(subject = newSubject, dataset = DBpediaDatasets.Persondata.encoded))
             }
           else
