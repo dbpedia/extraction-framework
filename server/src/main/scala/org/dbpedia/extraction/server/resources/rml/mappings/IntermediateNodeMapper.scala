@@ -9,8 +9,10 @@ import org.dbpedia.extraction.server.resources.rml.model.RMLModel
 /**
   * IntermediateNodeMapper
   */
-class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMapping) {
+class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMapping, state : MappingState) {
 
+  private val intermedatiaNodeMappingsNumber = state.intermediateNodeMappingsDone + 1
+  state.incrementInterMediateNodeMappingsDone()
 
   def mapToModel() : List[RMLPredicateObjectMap] = {
     addIntermediateNodeMapping()
@@ -19,7 +21,14 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
   def addIndependentIntermediateNodeMapping() : List[RMLPredicateObjectMap] =
   {
     //create the predicate object map and add it to the triples map
-    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/IntermediateNodeMapping/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name)
+    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri +
+                            "/IntermediateNodeMapping/" +
+                            mapping.nodeClass.name +
+                            "/" +
+                            mapping.correspondingProperty.name +
+                            "__" +
+                            intermedatiaNodeMappingsNumber)
+
     val intermediateNodePom = rmlModel.rmlFactory.createRMLPredicateObjectMap(uri)
     addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom)
 
@@ -29,7 +38,13 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
   def addIntermediateNodeMapping() : List[RMLPredicateObjectMap] =
   {
 
-    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri + "/IntermediateNodeMapping/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name)
+    val uri = new RMLUri(rmlModel.wikiTitle.resourceIri +
+                          "/IntermediateNodeMapping/" +
+                          mapping.nodeClass.name + "/" +
+                          mapping.correspondingProperty.name +
+                          "__" +
+                          intermedatiaNodeMappingsNumber)
+
     val intermediateNodePom = rmlModel.triplesMap.addPredicateObjectMap(uri)
 
     addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom)
@@ -40,6 +55,8 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
 
   private def addIntermediateNodeMappingToPredicateObjectMap(intermediateNodePom: RMLPredicateObjectMap) =
   {
+
+
     intermediateNodePom.addPredicate(new RMLUri(mapping.correspondingProperty.uri))
     intermediateNodePom.addDCTermsType(new RMLLiteral("intermediateNodeMapping"))
 
@@ -52,8 +69,9 @@ class IntermediateNodeMapper(rmlModel: RMLModel, mapping: IntermediateNodeMappin
 
     val parentSubjectMap = parentTriplesMap.addSubjectMap(parentTriplesMapUri.extend("/SubjectMap"))
     parentSubjectMap.addClass(new RMLUri(mapping.nodeClass.uri))
-    parentSubjectMap.addTermTypeIRI()
-    parentSubjectMap.addConstant(new RMLLiteral("http://en.dbpedia.org/resource/{{wikititle}}/" + mapping.nodeClass.name + "/" + mapping.correspondingProperty.name))
+    parentSubjectMap.addIRITermType()
+    parentSubjectMap.addTemplate(new RMLLiteral("http://en.dbpedia.org/resource/{wikititle}__" + intermedatiaNodeMappingsNumber))
+    if(mapping.correspondingProperty != null) parentSubjectMap.addRMLReference(new RMLLiteral(mapping.correspondingProperty.uri))
 
     //create the intermediate mappings
     for(mapping <- mapping.mappings) {

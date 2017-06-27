@@ -26,7 +26,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
     }
   }
   
-  def addMapping(mapping: Extractor[TemplateNode]) :List[RMLPredicateObjectMap] =
+  def addMapping(mapping: Extractor[TemplateNode], state : MappingState) :List[RMLPredicateObjectMap] =
   {
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => addSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
@@ -34,7 +34,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
       case "CombineDateMapping" => addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
       case "DateIntervalMapping" => addDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
       case "GeoCoordinatesMapping" => addGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
-      case "IntermediateNodeMapping" => addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
+      case "IntermediateNodeMapping" => addIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping], state)
       case "ConstantMapping" => addConstantMapping(mapping.asInstanceOf[ConstantMapping])
     }
   }
@@ -42,7 +42,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
   /**
     * Create mapping that is not linked yet to a triples map
     */
-  def addIndependentMapping(mapping: Extractor[TemplateNode]) : List[RMLPredicateObjectMap] =
+  def addIndependentMapping(mapping: Extractor[TemplateNode], state : MappingState) : List[RMLPredicateObjectMap] =
   {
     mapping.getClass.getSimpleName match {
       case "SimplePropertyMapping" => addIndependentSimplePropertyMapping(mapping.asInstanceOf[SimplePropertyMapping])
@@ -50,7 +50,7 @@ class RMLModelMapper(rmlModel: RMLModel) {
       case "CombineDateMapping" => addCombineDateMapping(mapping.asInstanceOf[CombineDateMapping])
       case "DateIntervalMapping" => addIndependentDateIntervalMapping(mapping.asInstanceOf[DateIntervalMapping])
       case "GeoCoordinatesMapping" => addIndependentGeoCoordinatesMapping(mapping.asInstanceOf[GeoCoordinatesMapping])
-      case "IntermediateNodeMapping" => addIndependentIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping])
+      case "IntermediateNodeMapping" => addIndependentIntermediateNodeMapping(mapping.asInstanceOf[IntermediateNodeMapping], state)
       case "ConstantMapping" => addIndependentConstantMapping(mapping.asInstanceOf[ConstantMapping])
     }
   }
@@ -132,14 +132,14 @@ class RMLModelMapper(rmlModel: RMLModel) {
   }
 
 
-  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping) : List[RMLPredicateObjectMap] =
+  def addIntermediateNodeMapping(mapping: IntermediateNodeMapping, state: MappingState) : List[RMLPredicateObjectMap] =
   {
-    new IntermediateNodeMapper(rmlModel, mapping).mapToModel()
+    new IntermediateNodeMapper(rmlModel, mapping, state : MappingState).mapToModel()
   }
 
-  def addIndependentIntermediateNodeMapping(mapping: IntermediateNodeMapping) : List[RMLPredicateObjectMap] =
+  def addIndependentIntermediateNodeMapping(mapping: IntermediateNodeMapping, state : MappingState) : List[RMLPredicateObjectMap] =
   {
-    new IntermediateNodeMapper(rmlModel, mapping).addIndependentIntermediateNodeMapping()
+    new IntermediateNodeMapper(rmlModel, mapping, state).addIndependentIntermediateNodeMapping()
   }
 
 

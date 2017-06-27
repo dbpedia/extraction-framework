@@ -29,4 +29,11 @@ class ModelWrapper() {
     out.toString
   }
 
+  def writeAsNTriples: String =
+  {
+    val out = new StringWriter()
+    model.write(out, "NTRIPLES")
+    out.toString
+  }
+
 }

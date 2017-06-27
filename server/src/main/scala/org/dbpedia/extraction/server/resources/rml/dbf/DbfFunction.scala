@@ -13,12 +13,14 @@ object DbfFunction {
 
   private val _startDateFunction = new {
     def name = "startDateFunction"
-    def startDateParameter = "startDateParameter"
+    def startDateParameter = "startDatePropertyParameter"
+    def ontologyParameter = "startDateOntologyParameter"
   }
 
   private val _endDateFunction = new {
     def name = "endDateFunction"
-    def endDateParameter = "endDateParameter"
+    def endDateParameter = "endDatePropertyParameter"
+    def ontologyParameter = "endDateOntologyParameter"
   }
 
   private val _latFunction = new {
@@ -26,6 +28,7 @@ object DbfFunction {
     def latParameter = "latParameter"
     def latDegreesParameter = "latDegreesParameter"
     def latMinutesParameter = "latMinutesParameter"
+    def latSecondsParameter = "latSecondsParameter"
     def latDirectionParameter = "latDirectionParameter"
   }
 
@@ -34,6 +37,7 @@ object DbfFunction {
     def lonParameter = "lonParameter"
     def lonDegreesParameter = "lonDegreesParameter"
     def lonMinutesParameter = "lonMinutesParameter"
+    def lonSecondsParameter = "lonSecondsParameter"
     def lonDirectionParameter = "lonDirectionParameter"
   }
 

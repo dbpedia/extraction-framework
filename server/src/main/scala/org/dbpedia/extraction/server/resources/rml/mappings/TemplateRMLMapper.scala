@@ -2,7 +2,7 @@ package org.dbpedia.extraction.server.resources.rml.mappings
 
 import org.dbpedia.extraction.mappings._
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLUri}
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLSubjectMap, RMLUri}
 
 /**
   * Creates an RML Template Mapping
@@ -23,9 +23,10 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
 
   private def defineSubjectMap() =
   {
-    rmlModel.subjectMap.addConstant(rmlModel.rmlFactory.createRMLLiteral("http://en.dbpedia.org/resource/{{wikititle}}"))
+    rmlModel.subjectMap.addTemplate(rmlModel.rmlFactory.createRMLLiteral("http://en.dbpedia.org/resource/{wikititle}"))
     rmlModel.subjectMap.addClass(rmlModel.rmlFactory.createRMLUri(templateMapping.mapToClass.uri))
-    rmlModel.subjectMap.addTermTypeIRI()
+    addExtraClassesToSubjectMap(rmlModel.subjectMap)
+    rmlModel.subjectMap.addIRITermType()
     addCorrespondingPropertyAndClassToSubjectMap()
   }
 
@@ -36,9 +37,10 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
 
   private def addPropertyMappings() =
   {
+    val state = new MappingState
     val mapper = new RMLModelMapper(rmlModel)
     for(mapping <- templateMapping.mappings) {
-      addPropertyMapping(mapper, mapping)
+      addPropertyMapping(mapper, mapping, state)
     }
   }
 
@@ -62,10 +64,25 @@ class TemplateRMLMapper(rmlModel: RMLModel, templateMapping: TemplateMapping) {
     }
   }
 
-
-  private def addPropertyMapping(mapper: RMLModelMapper, mapping: PropertyMapping) =
+  /**
+    * Add related classes to the subject map
+    *
+    * @param subjectMap
+    */
+  private def addExtraClassesToSubjectMap(subjectMap: RMLSubjectMap) =
   {
-    mapper.addMapping(mapping)
+    val relatedClasses = templateMapping.mapToClass.relatedClasses
+    for(cls <- relatedClasses) {
+      if(!cls.uri.contains("%3E")) {
+        subjectMap.addClass(new RMLUri(cls.uri))
+      }
+    }
+  }
+
+
+  private def addPropertyMapping(mapper: RMLModelMapper, mapping: PropertyMapping, state: MappingState) =
+  {
+    mapper.addMapping(mapping, state)
   }
 
 }

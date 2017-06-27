@@ -8,22 +8,49 @@ import org.dbpedia.extraction.ontology.RdfNamespace
   */
 class RMLSubjectMap(override val resource: Resource) extends RMLResource(resource) {
 
-  def addConstant(literal: RMLLiteral) =
+  def addConstant(literal: RMLLiteral) : RMLSubjectMap =
   {
     resource.addLiteral(createProperty(RdfNamespace.RR.namespace + "constant"), literal.toString())
+    this
   }
 
-  def addConstant(uri: RMLUri) = {
+  def addRMLReference(literal: RMLLiteral) =
+  {
+    resource.addLiteral(createProperty(RdfNamespace.RML.namespace + "reference"), literal.toString())
+  }
+
+  def addConstant(uri: RMLUri) : RMLSubjectMap = {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "constant"), createProperty(uri.toString()))
+    this
   }
 
-  def addTermTypeIRI() = {
-    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "IRI"))
-  }
-
-  def addClass(uri: RMLUri) =
+  def addClass(uri: RMLUri) : RMLSubjectMap =
   {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "class"), createProperty(uri.toString()))
+    this
+  }
+
+  def addIRITermType() : RMLSubjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "IRI"))
+    this
+  }
+
+  def addLiteralTermType() : RMLSubjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "Literal"))
+    this
+  }
+
+  def addBlankNodeTermType() : RMLSubjectMap =
+  {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "BlankNode"))
+    this
+  }
+
+  def addTemplate(literal : RMLLiteral) : RMLSubjectMap = {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "template"), literal.toString())
+    this
   }
 
 }

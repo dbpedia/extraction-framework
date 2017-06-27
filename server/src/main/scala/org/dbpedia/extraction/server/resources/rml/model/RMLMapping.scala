@@ -10,4 +10,6 @@ abstract class RMLMapping {
   def printAsTurtle: Unit
 
   def writeAsTurtle: String
+
+  def writeAsNTriples: String
 }

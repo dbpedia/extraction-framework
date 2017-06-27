@@ -28,7 +28,7 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
 
   def addConstant(uri: RMLUri) : RMLObjectMap =
   {
-    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "constant"), createProperty(uri.toString()))
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "constant"), createProperty(uri.toString))
     this
   }
 
@@ -41,6 +41,11 @@ class RMLObjectMap(override val resource: Resource) extends RMLResource(resource
   def addLiteralTermType() : RMLObjectMap =
   {
     resource.addProperty(createProperty(RdfNamespace.RR.namespace + "termType"), createProperty(RdfNamespace.RR.namespace + "Literal"))
+    this
+  }
+
+  def addDatatype(uri : RMLUri) = {
+    resource.addProperty(createProperty(RdfNamespace.RR.namespace + "datatype"), createProperty(uri.toString))
     this
   }
 

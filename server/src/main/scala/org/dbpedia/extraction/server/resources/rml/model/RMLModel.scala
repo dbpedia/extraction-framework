@@ -14,9 +14,17 @@ class RMLModel(val wikiTitle: WikiTitle, val sourceUri : String) extends ModelWr
   val rmlFactory = new RMLResourceFactory(model)
 
   private val _triplesMap: RMLTriplesMap = rmlFactory.createRMLTriplesMap(new RMLUri(wikiTitle.resourceIri))
+
+
   private val _subjectMap: RMLSubjectMap = _triplesMap.addSubjectMap(new RMLUri(convertToSubjectMapUri(wikiTitle)))
   private val _logicalSource: RMLLogicalSource = _triplesMap.addLogicalSource(new RMLUri(convertToLogicalSourceUri(wikiTitle)))
   private val _functionSubjectMap: RMLSubjectMap = rmlFactory.createRMLSubjectMap(new RMLUri(convertToSubjectMapUri(wikiTitle) + "/Function"))
+                                                              .addClass(new RMLUri(RdfNamespace.FNO.namespace + "Execution"))
+                                                                .addBlankNodeTermType()
+
+
+  _logicalSource.addIterator(new RMLLiteral("Infobox"))
+  _logicalSource.addReferenceFormulation(new RMLUri(RdfNamespace.QL.namespace + "wikitext"))
 
   def logicalSource = _logicalSource
   def subjectMap = _subjectMap

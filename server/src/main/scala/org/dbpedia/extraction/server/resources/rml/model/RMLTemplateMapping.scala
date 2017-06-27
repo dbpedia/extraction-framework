@@ -20,5 +20,8 @@ class RMLTemplateMapping(modelWrapper: ModelWrapper) extends RMLMapping {
     modelWrapper.writeAsTurtle
   }
 
-
+  def writeAsNTriples: String =
+  {
+    modelWrapper.writeAsNTriples
+  }
 }

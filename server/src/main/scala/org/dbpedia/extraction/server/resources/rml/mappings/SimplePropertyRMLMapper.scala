@@ -1,10 +1,11 @@
 package org.dbpedia.extraction.server.resources.rml.mappings
 
-import org.dbpedia.extraction.mappings.{SimplePropertyMapping}
-import org.dbpedia.extraction.ontology.RdfNamespace
+import org.dbpedia.extraction.mappings.SimplePropertyMapping
+import org.dbpedia.extraction.ontology.{OntologyClass, RdfNamespace}
 import org.dbpedia.extraction.server.resources.rml.dbf.DbfFunction
-import org.dbpedia.extraction.server.resources.rml.model.rmlresources.{RMLLiteral, RMLPredicateObjectMap, RMLTriplesMap, RMLUri}
+import org.dbpedia.extraction.server.resources.rml.model.rmlresources._
 import org.dbpedia.extraction.server.resources.rml.model.RMLModel
+
 import scala.language.reflectiveCalls
 
 /**
@@ -34,7 +35,6 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
   def addSimplePropertyMappingToTriplesMap(uri: String, triplesMap: RMLTriplesMap) : List[RMLPredicateObjectMap] =
   {
 
-
     val simplePropertyMappingUri = new RMLUri(uri + "/SimplePropertyMapping/" + mapping.ontologyProperty.name + "/" + mapping.templateProperty)
     val simplePmPom = triplesMap.addPredicateObjectMap(simplePropertyMappingUri)
 
@@ -43,26 +43,26 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
 
     addSimplePropertyToPredicateObjectMap(simplePmPom)
 
+
     List(simplePmPom)
 
   }
 
+  private def addDatatype(rMLPredicateObjectMap: RMLObjectMap) = {
+    if (mapping.unit != null) {
+      rMLPredicateObjectMap.addDatatype(new RMLUri(mapping.unit.uri))
+    }
+  }
+
   private def addSimplePropertyToPredicateObjectMap(simplePmPom: RMLPredicateObjectMap) =
   {
-    val executeFunction = mapping.factor != 1 ||
-      mapping.select != null || mapping.prefix != null ||
-      mapping.suffix != null || mapping.transform != null ||
-      mapping.unit != null
-
-    if (!executeFunction) {
-      val objectMapUri = simplePmPom.uri.extend("/ObjectMap")
-      val objectMap = simplePmPom.addObjectMap(objectMapUri)
-      objectMap.addRMLReference(new RMLLiteral(mapping.templateProperty))
-    }
-    else {
 
       val functionTermMapUri = simplePmPom.uri.extend("/FunctionTermMap")
       val functionTermMap = simplePmPom.addFunctionTermMap(functionTermMapUri)
+
+      // adds the unit datatype if there is one
+      addDatatype(functionTermMap)
+
       val functionValueUri = functionTermMapUri.extend("/FunctionValue")
       val functionValue = functionTermMap.addFunctionValue(functionValueUri)
       functionValue.addLogicalSource(rmlModel.logicalSource)
@@ -74,36 +74,39 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       val ExecuteObjectMapUri = executePomUri.extend("/ObjectMap")
       executePom.addObjectMap(ExecuteObjectMapUri).addConstant(new RMLUri(RdfNamespace.DBF.namespace + DbfFunction.simplePropertyFunction.name))
 
-      addParameterFunction("property", functionValue)
+      addReferenceParameterFunction("property", functionValue)
 
       if(mapping.factor != 1) {
-        addParameterFunction("factor", functionValue)
+        addConstantParameterFunction("factor", functionValue)
       }
 
       if(mapping.transform != null) {
-        addParameterFunction("transform", functionValue)
+        addConstantParameterFunction("transform", functionValue)
       }
 
       if(mapping.select != null) {
-        addParameterFunction("select", functionValue)
+        addConstantParameterFunction("select", functionValue)
       }
 
       if(mapping.prefix != null) {
-        addParameterFunction("prefix", functionValue)
+        addConstantParameterFunction("prefix", functionValue)
       }
 
       if(mapping.suffix != null) {
-        addParameterFunction("suffix", functionValue)
+        addConstantParameterFunction("suffix", functionValue)
       }
 
       if(mapping.unit != null) {
-        addParameterFunction("unit", functionValue)
+        addConstantParameterFunction("unit", functionValue)
       }
-    }
+
+      if(mapping.ontologyProperty != null) {
+        addConstantParameterFunction("ontologyProperty", functionValue)
+      }
 
   }
 
-  private def addParameterFunction(param : String, functionValue: RMLTriplesMap) =
+  private def addReferenceParameterFunction(param : String, functionValue: RMLTriplesMap) =
   {
     val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
     val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
@@ -113,8 +116,18 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
 
   }
 
+  private def addConstantParameterFunction(param : String, functionValue: RMLTriplesMap) =
+  {
+    val parameterPomUri = functionValue.uri.extend("/" + param + "ParameterPOM")
+    val parameterPom = functionValue.addPredicateObjectMap(parameterPomUri)
+    parameterPom.addPredicate(new RMLUri(RdfNamespace.DBF.namespace + param + "Parameter"))
+    val parameterObjectMapUri = parameterPomUri.extend("/ObjectMap")
+    parameterPom.addObjectMap(parameterObjectMapUri).addConstant(new RMLLiteral(getParameterValue(param)))
+  }
+
   private def getParameterValue(param: String) : String =
   {
+
     param match {
       case "factor" => mapping.factor.toString
       case "transform" => mapping.transform
@@ -123,7 +136,9 @@ class SimplePropertyRMLMapper(rmlModel: RMLModel, mapping: SimplePropertyMapping
       case "suffix" => mapping.suffix
       case "unit" => mapping.unit.name
       case "property" => mapping.templateProperty
+      case "ontologyProperty" => mapping.ontologyProperty.name
     }
+
   }
 
 

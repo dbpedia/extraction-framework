@@ -42,7 +42,7 @@ class ConstantRMLMapper(rmlModel: RMLModel, mapping: ConstantMapping) {
     constantPom.addDCTermsType(new RMLLiteral("constantMapping"))
     constantPom.addPredicate(new RMLUri(mapping.ontologyProperty.uri))
 
-    if(mapping.datatype != null) {
+    if(mapping.datatype == null) {
       val objectMapUri = constantPom.uri.extend("/ObjectMap")
       constantPom.addObjectMap(objectMapUri).addConstant(new RMLLiteral(mapping.value))
     } else {
