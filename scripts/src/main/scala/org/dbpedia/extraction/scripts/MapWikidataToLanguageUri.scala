@@ -65,10 +65,13 @@ object MapWikidataToLanguageUri {
       def selectPredicateGroupRepresentative(newSubject: String, group: (String, Traversable[Quad])): Option[Quad] = {
         val quad = group._2.head
         if (quad.language == null) {
-          map.get(quad.value) match {
-            case Some(v) => Option(quad.copy(subject = newSubject, value = v, dataset = DBpediaDatasets.Persondata.encoded))
-            case None => Option(quad.copy(subject = newSubject, dataset = DBpediaDatasets.Persondata.encoded))
-          }
+          if(quad.datatype == null && quad.value.startsWith(Language.Wikidata.resourceUri.toString))
+            map.get(quad.value.substring(cutWikidataAt)) match {
+              case Some(v) => Option(quad.copy(subject = newSubject, value = v, dataset = DBpediaDatasets.Persondata.encoded))
+              case None => Option(quad.copy(subject = newSubject, dataset = DBpediaDatasets.Persondata.encoded))
+            }
+          else
+            Option(quad.copy(subject = newSubject, dataset = DBpediaDatasets.Persondata.encoded))
         }
         else {
           group._2.find(x => x.language == language.wikiCode) match {
