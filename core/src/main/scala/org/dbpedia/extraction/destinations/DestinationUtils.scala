@@ -14,7 +14,7 @@ import scala.collection.mutable.ArrayBuffer
   * Created by Chile on 9/29/2016.
   */
 object DestinationUtils {
-  def createDestination(finder: Finder[File], date: String, datasets: Seq[String], formats: Map[String, Formatter], append: Boolean) : Destination = {
+  def createDestination(finder: Finder[File], date: String, datasets: Seq[String], formats: collection.Map[String, Formatter], append: Boolean) : Destination = {
     val destination = new ArrayBuffer[Destination]()
     for ((suffix, format) <- formats) {
       val datasetDestinations = new mutable.HashMap[String, Destination]()
@@ -29,11 +29,11 @@ object DestinationUtils {
     new CompositeDestination(destination: _*)
   }
 
-  def createDestination(finder: DateFinder[File], datasets: Seq[Dataset], formats: Map[String, Formatter], append: Boolean = false) : Destination = {
+  def createDestination(finder: DateFinder[File], datasets: Seq[Dataset], formats: collection.Map[String, Formatter], append: Boolean = false) : Destination = {
     createDestination(finder.finder, finder.date, datasets.map(_.encoded), formats, append)
   }
 
-  def createDestination(finder: DateFinder[File], datasets: Seq[String], formats: Map[String, Formatter]) : Destination = {
+  def createDestination(finder: DateFinder[File], datasets: Seq[String], formats: collection.Map[String, Formatter]) : Destination = {
     createDestination(finder.finder, finder.date, datasets, formats, append = false)
   }
 

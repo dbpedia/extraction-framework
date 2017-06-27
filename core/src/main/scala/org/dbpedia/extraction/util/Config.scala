@@ -113,7 +113,7 @@ class Config(val configPath: String) extends
 
   lazy val policies: Map[String, Array[Policy]] = parsePolicies(this, "uri-policy")
 
-  lazy val formats: Map[String, Formatter] = parseFormats(this, "format", policies)
+  lazy val formats: Map[String, Formatter] = parseFormats(this, "format", policies).toMap
 
   lazy val disambiguations: String = this.getProperty("disambiguations", "page_props.sql.gz")
 
