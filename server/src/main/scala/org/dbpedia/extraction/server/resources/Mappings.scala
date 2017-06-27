@@ -196,7 +196,7 @@ class Mappings(@PathParam("lang") langCode : String)
      * Retrieves all rml mapping pages
      */
     @GET
-    @Path("pages/rdf/all")
+    @Path("pages/rml/all")
     @Produces(Array("text/turtle"))
     def getAllRdfMappings() : String =
     {
