@@ -1,5 +1,7 @@
 package org.dbpedia.extraction.server.resources
 
+import java.io
+
 import org.dbpedia.extraction.mappings.{MappingsLoader, Redirects}
 import org.dbpedia.extraction.util.{Language, WikiApi}
 import org.dbpedia.extraction.server.resources.stylesheets.{Log, TriX}
@@ -15,7 +17,8 @@ import java.net.{URI, URL}
 import java.lang.Exception
 
 import xml.{Elem, NodeBuffer, ProcInstr, XML}
-import java.io.StringWriter
+import java.io._
+import java.util.zip.{ZipEntry, ZipOutputStream}
 
 import org.dbpedia.extraction.server.resources.rml.model.factories.RMLTemplateMappingFactory
 
@@ -193,13 +196,73 @@ class Mappings(@PathParam("lang") langCode : String)
     }
 
     /**
-     * Retrieves all rml mapping pages
+     * Retrieves all rml mapping pages in a zip (separate file per mapping)
      */
     @GET
-    @Path("pages/rml/all")
-    @Produces(Array("text/turtle"))
-    def getAllRdfMappings() : String =
+    @Path("pages/rml/mappings.zip")
+    @Produces(Array("application/x-zip-compressed"))
+    def getAllRMLMappings() : InputStream =
     {
+
+      // write to the PipedOutputStream so that data is then available in the returned PipedInputStream
+      val sink : PipedOutputStream = new PipedOutputStream
+      val source : PipedInputStream = new PipedInputStream(sink)
+
+      // PipedOutputStream needs to write in a separate thread.
+      val runnable : Runnable = new Runnable() {
+
+        override def run(): Unit = {
+
+          //PrintStream => BufferedOutputStream => ZipOutputStream => PipedOutputStream
+          val zip : ZipOutputStream  = new ZipOutputStream(sink)
+
+          val writer : PrintStream = new PrintStream(new BufferedOutputStream(zip))
+
+          try {
+            // retrieve the titles of all RML Mappings
+            val titles = Server.instance.extractor.mappingPageSource(language).map(x => x.title.encodedWithNamespace.replace(":", "%3A").replace("/", "%2F"))
+
+            // iterate over all titles and add them as zip entries to a zip file
+            for(title <- titles) {
+
+              // retrieve RML mapping as a string
+              val mappingAsString = try {getRdfMapping(title)}
+              catch {
+                case x: Throwable => ""
+              }
+
+              // add new zip entry
+              zip.putNextEntry(new ZipEntry(title + ".ttl"))
+
+              // write into new zip entry
+              writer.println(mappingAsString)
+              writer.flush()
+
+              // close the zip entry
+              zip.closeEntry()
+
+            }
+
+          } catch {
+            case x : IOException => x.getMessage
+          }
+
+          writer.flush()
+          writer.close()
+
+        }
+
+      }
+
+      // start the writing thread
+      val writerThread : Thread = new Thread(runnable, "RMLMappingZipper")
+      writerThread.start()
+
+      // return the InputStream
+      source
+
+
+      /**
       //getAllMappings = true
       val builder = new StringBuilder()
       val titles = Server.instance.extractor.mappingPageSource(language).map(x => x.title.encodedWithNamespace.replace(":", "%3A"))
@@ -213,6 +276,7 @@ class Mappings(@PathParam("lang") langCode : String)
       }
       //getAllMappings = false
       builder.toString()
+        **/
     }
 
     /**
