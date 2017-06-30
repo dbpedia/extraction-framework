@@ -1,0 +1,1214 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nickname" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "monthofdeath" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap> ;
+        rr:predicate  foaf:nick .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofdeath" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearofdeath" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debut year" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dayofbirth" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "fc" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "activeYearsEndYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nationality" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "yearofbirth" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "FC runs" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fullname" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_cricketer?oldid=28758" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "activeYearsStartDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "placeofbirth" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "fcRuns" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dayofdeath" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "activeYearsStartYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "cricket team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "nationality" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "monthofbirth" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debut date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "activeYearsEndDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_place" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsEndDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap> ;
+        rr:predicate  dbo:fc .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "FCs" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "countryofbirth" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "playername" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/fullname/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:nick" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fc/FCs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last year" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/placeofbirth/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsEndYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap> ;
+        rr:predicate  dbo:fcRuns .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/death_place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "death_place" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/dayofdeath/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/birth_place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/yearofdeath/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/monthofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birth_date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:nick/nickname/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/foaf:name/playername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/fcRuns/FC%20runs/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/team/cricket%20team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q215627 , owl:Thing , schema:Person , dul:NaturalPerson , foaf:Person , dbo:Cricketer , dbo:Person , dbo:Athlete , wikidata:Q5 , dbo:Agent , dul:Agent ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/monthofdeath/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndDate/last%20date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthPlace/countryofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartYear/debut%20year/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsEndYear/last%20year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/yearofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap> ;
+        rr:predicate  dbo:nationality .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/countryofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "countryofdeath" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/activeYearsStartDate/debut%20date/FunctionTermMap> ;
+        rr:predicate  dbo:activeYearsStartDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/nationality/nationality/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathDate/death_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/dayofbirth/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/Infobox_cricketer/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/deathPlace/placeofdeath/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_cricketer/SimplePropertyMapping/birthDate/birth_date/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+

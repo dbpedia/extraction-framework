@@ -1,0 +1,933 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Time> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first_date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "lastFlightStartDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mirDockings" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap> ;
+        rr:predicate  dbo:missions .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "contractAward" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "crews" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last_date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap> ;
+        rr:predicate  dbo:lastFlightEndDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "timeInSpace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "status" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap> ;
+        rr:predicate  dbo:firstFlight .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first_flight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstFlightEndDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first_date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "issDockings" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "lastFlight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Time" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_space_shuttle?oldid=49824" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap> ;
+        rr:predicate  dbo:lastFlight .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "time" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "orbits" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dul:DesignedArtifact , dbo:MeanOfTransportation , wikidata:Q48806 , dbo:SpaceShuttle ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "crews" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "number" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap> ;
+        rr:predicate  dbo:number .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap> ;
+        rr:predicate  dbo:distance .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstFlightStartDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "distance" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "distance" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap> ;
+        rr:predicate  dbo:status .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap> ;
+        rr:predicate  dbo:mirDockings .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap> ;
+        rr:predicate  dbo:timeInSpace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "orbits" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dockings_iss" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "status" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstFlight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "satellitesDeployed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "lastFlightEndDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deployed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "contract" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last_flight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap> ;
+        rr:predicate  dbo:crews .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "dockings_mir" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last_date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/mirDockings/dockings_mir/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap> ;
+        rr:predicate  dbo:issDockings .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "named_after" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap> ;
+        rr:predicate  dbo:satellitesDeployed .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "number" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "namedAfter" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightEndDate/last_date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/contractAward/contract/FunctionTermMap> ;
+        rr:predicate  dbo:contractAward .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap> ;
+        rr:predicate  dbo:orbits .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlightStartDate/last_date/FunctionTermMap> ;
+        rr:predicate  dbo:lastFlightStartDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "missions" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/country/country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/crews/crews/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/distance/distance/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap> ;
+        rr:predicate  dbo:firstFlightStartDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/satellitesDeployed/deployed/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlight/first_flight/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/issDockings/dockings_iss/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/namedAfter/named_after/FunctionTermMap> ;
+        rr:predicate  dbo:namedAfter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/timeInSpace/time/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightEndDate/first_date/FunctionTermMap> ;
+        rr:predicate  dbo:firstFlightEndDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/missions/missions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "missions" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/lastFlight/last_flight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/status/status/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/orbits/orbits/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/SimplePropertyMapping/firstFlightStartDate/first_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_space_shuttle/Infobox_space_shuttle/SubjectMap/Function> .
+

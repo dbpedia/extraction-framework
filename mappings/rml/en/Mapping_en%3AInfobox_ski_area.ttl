@@ -1,0 +1,506 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     schema:Place , dbo:ArchitecturalStructure , dbo:SportFacility , dbo:Location , dbo:SkiArea , dbo:Place , owl:Thing , schema:SkiResort ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonMinutesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maximumElevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap> ;
+        rr:predicate  dbo:nearestCity .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap> ;
+        rr:predicate  geo:long .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_minutes" , "longm" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap> ;
+        rr:predicate  dbo:maximumElevation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_degrees" , "longd" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "base_elevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_minutes" , "latm" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Area" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_degrees" , "latd" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDegreesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "areaTotal" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "nearestCity" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "minimumElevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "skiable_area" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "external_link" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap> ;
+        rr:predicate  geo:lat .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_seconds" , "longs" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap> ;
+        rr:predicate  dbo:areaTotal .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonSecondsParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_direction" , "latNS" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_seconds" , "lats" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap> ;
+        rr:predicate  dbo:minimumElevation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/latitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_direction" , "longEW" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/foaf:homepage/external_link/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/areaTotal/skiable_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "nearest_city" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/location/location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/minimumElevation/base_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_ski_area?oldid=7442" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "top_elevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/nearestCity/nearest_city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/SimplePropertyMapping/maximumElevation/top_elevation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/Infobox_ski_area/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_ski_area/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDirectionParameter .
+

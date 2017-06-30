@@ -1,0 +1,1192 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ValueParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "topo" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latMinutesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "elevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "locatedInArea" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "other_name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap> ;
+        rr:predicate  dbo:firstAscentPerson .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap> ;
+        rr:predicate  dbo:firstAscentYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prominence" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "parentMountainPeak" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Maar" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_d" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "elevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "otherName" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDirectionParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maar" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/foot> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Stratovolcano" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstAscentYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDegreesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ValueParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foot" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_d" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "prominence" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "range" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap> ;
+        rr:predicate  dbo:prominence .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_s" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first_ascent" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:NaturalPlace , wikidata:Q8072 , dbo:Volcano .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation_m" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonMinutesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap> ;
+        crml:fallbackMap     <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap> ;
+        rr:predicate  dbo:eruptionYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap> ;
+        rr:predicate  dbo:prominence .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prominence_ft" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_s" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "prominence" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap> ;
+        rr:predicate  dbo:otherName .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonDegreesParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap> ;
+        rr:predicate  dbo:parentMountainPeak .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap> ;
+        rr:predicate  dbo:locatedInArea .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap> ;
+        rr:predicate  dbo:prominence .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foot" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prominence_m" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "prominence" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap> ;
+        rr:predicate  dbo:region .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar>
+        a                    rr:PredicateObjectMap ;
+        dcterms:type         "conditionalMapping" ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap> ;
+        crml:fallbackMap     <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latSecondsParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstAscentPerson" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "elevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_EW" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latDirectionParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "last_eruption" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap> ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap> ;
+        rr:predicate  dbo:mountainRange .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap> ;
+        crml:fallbackMap     <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "eruptionYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "metre" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:otherwise .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:NaturalPlace , wikidata:Q8072 , dbo:Volcano .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:NaturalPlace , wikidata:Q8502 , schema:Mountain , dbo:Mountain .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_mountain?oldid=39192" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "region" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap> ;
+        rr:predicate  dbo:nationalTopographicSystemMapNumber .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_m" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "first_ascent" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonSecondsParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/3/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mountainRange" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:NaturalPlace , wikidata:Q8072 , dbo:Volcano .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "region" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "long_m" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elevation_ft" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/metre> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "nationalTopographicSystemMapNumber" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "parent_peak" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain>
+        a                      rr:TriplesMap ;
+        dcterms:type           "conditionalMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/region/region> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/locatedInArea/location> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/eruptionYear/last_eruption> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_ft> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentPerson/first_ascent> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence_m> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/otherName/other_name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/type/type> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/firstAscentYear/first_ascent> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/nationalTopographicSystemMapNumber/topo> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/parentMountainPeak/parent_peak> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/longitude> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/Infobox_mountain/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/prominence/prominence/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/mountainRange/range/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/ConditionalMapping/type_contains_Maar/1/2/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "metre" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lat_NS" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_mountain/SimplePropertyMapping/elevation/elevation_ft/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/foot> .
+

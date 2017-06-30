@@ -1,0 +1,827 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formerTeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stat1label" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthplace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "statisticYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap> ;
+        rr:predicate  dbo:battingSide .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "finalteam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "teams" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap> ;
+        rr:predicate  dbo:throwingSide .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap> ;
+        rr:predicate  dbo:award .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formerTeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "throwingSide" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "positionplain" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "debutteam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "number" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "statyear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "awards" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap> ;
+        rr:predicate  dbo:formerTeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap> ;
+        rr:predicate  dbo:number .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "number" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap> ;
+        rr:predicate  dbo:birthDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathdate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "position" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_MLB_player?oldid=14666" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap> ;
+        rr:predicate  dbo:statisticYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bats" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "position" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap> ;
+        rr:predicate  dbo:statisticValue .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "deathplace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap> ;
+        rr:predicate  dbo:statisticLabel .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap> ;
+        rr:predicate  dbo:position .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Athlete , dbo:Person , owl:Thing , dul:Agent , foaf:Person , wikidata:Q10871364 , dbo:Agent , dbo:BaseballPlayer , dul:NaturalPerson , schema:Person , wikidata:Q215627 , wikidata:Q5 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "birthDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap> ;
+        rr:predicate  dbo:deathDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap> ;
+        rr:predicate  dbo:team .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace/FunctionTermMap> ;
+        rr:predicate  dbo:birthPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap> ;
+        rr:predicate  dbo:formerTeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stat1value" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/positionplain> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthPlace/birthplace> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "throws" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "statisticValue" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "battingSide" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap> ;
+        rr:predicate  dbo:deathPlace .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/throwingSide/throws/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathDate/deathdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticValue/stat1value/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticYear/statyear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "position" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "deathPlace" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/debutteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/number/number/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/statisticLabel/stat1label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "statisticLabel" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/birthDate/birthdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "birthdate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/award/awards/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "award" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/Infobox_MLB_player/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/team/teams/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/formerTeam/finalteam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/position/position/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/deathPlace/deathplace/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_MLB_player/SimplePropertyMapping/battingSide/bats/FunctionTermMap/FunctionValue> .
+

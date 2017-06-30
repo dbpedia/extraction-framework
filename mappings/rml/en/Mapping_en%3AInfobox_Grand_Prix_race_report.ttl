@@ -1,0 +1,1211 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap> ;
+        rr:predicate  dbo:fastestDriverCountry .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap> ;
+        rr:predicate  dbo:firstDriver .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "poleDriver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Second_Driver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap> ;
+        rr:predicate  dbo:thirdDriverCountry .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Distance_laps" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Pole_Country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "First_Country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "kilometre" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Course_km" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "distanceLaps" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "secondTeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Distance_mi" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Course_mi" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "secondDriverCountry" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "fastestDriverCountry" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Year" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "First_Team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q1656682 , schema:Event , owl:Thing , dbo:GrandPrix , dul:Event , dbo:SportsEvent , dbo:Event , dbo:SocietalEvent , schema:SportsEvent ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap> ;
+        rr:predicate  dbo:poleDriverCountry .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Fast_Country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap> ;
+        rr:predicate  dbo:thirdDriver .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Pole_Team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap> ;
+        rr:predicate  dbo:poleDriverTeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/mile> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap> ;
+        rr:predicate  dbo:fastestDriver .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Third_Driver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mile" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "secondDriver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap> ;
+        rr:predicate  dbo:fastestDriverTeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstDriverTeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap> ;
+        rr:predicate  dbo:secondDriverCountry .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "thirdDriver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap> ;
+        rr:predicate  dbo:course .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap> ;
+        rr:predicate  dbo:distanceLaps .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/mile> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "First_Driver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mile" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap> ;
+        rr:predicate  dbo:secondTeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstDriverCountry" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap> ;
+        rr:predicate  dbo:course .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Third_Country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap> ;
+        rr:predicate  dbo:firstDriverTeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Distance_km" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Pole_Driver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "course" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Second_Team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Third_Team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "kilometre" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Second_Country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "poleDriverCountry" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "country" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Fast_Team" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "thirdDriverCountry" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "fastestDriverTeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "fastestDriver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "distance" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap> ;
+        rr:predicate  dbo:country .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Fast_Driver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year/FunctionTermMap> ;
+        rr:predicate  dbo:date .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "course" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "thirdTeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "firstDriver" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap> ;
+        rr:predicate  dbo:secondDriver .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap> ;
+        rr:predicate  dbo:thirdTeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Official name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country/FunctionTermMap> ;
+        rr:predicate  dbo:firstDriverCountry .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "poleDriverTeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "distance" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver/FunctionTermMap> ;
+        rr:predicate  dbo:poleDriver .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap> ;
+        rr:predicate  dbo:date .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km/FunctionTermMap> ;
+        rr:predicate  dbo:distance .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverTeam/Fast_Team> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverTeam/First_Team> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriverCountry/Third_Country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdDriver/Third_Driver> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/foaf:name/Official%20name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriver/Pole_Driver> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/thirdTeam/Third_Team> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriverCountry/First_Country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/country/Country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondTeam/Second_Team> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriver/Second_Driver> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/type/Type> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Year> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverCountry/Pole_Country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/poleDriverTeam/Pole_Team> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriverCountry/Fast_Country> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_km> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/secondDriverCountry/Second_Country/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Grand_Prix_race_report?oldid=7316" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/location/Location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/date/Date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/firstDriver/First_Driver/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/course/Course_km/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distance/Distance_mi/FunctionTermMap> ;
+        rr:predicate  dbo:distance .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/distanceLaps/Distance_laps/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/SimplePropertyMapping/fastestDriver/Fast_Driver/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Grand_Prix_race_report/Infobox_Grand_Prix_race_report/SubjectMap/Function> .
+

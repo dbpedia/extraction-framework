@@ -1,0 +1,1213 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap> ;
+        rr:predicate  dbo:address .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "oldname2" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "postal" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "servingRailwayLine" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap> ;
+        rr:predicate  dbo:servingRailwayLine .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "picture" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/People's_Republic_of_China" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap> ;
+        rr:predicate  dbo:closingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap> ;
+        rr:predicate  dbo:closingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/People's_Republic_of_China" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "station_code" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Place , owl:Thing , dbo:ArchitecturalStructure , schema:Place , dbo:Infrastructure , dbo:Location , dbo:Station , wikidata:Q719456 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "address" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formerName" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatedBy" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "address" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prov" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap> ;
+        rr:predicate  dbo:formerName .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "statsy" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Place" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "agencyStationCode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap> ;
+        rr:predicate  dbo:formerName .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "othername" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "namerom" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "oldname" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "open" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "operator2" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "close" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "address" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "postalCode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "passengersPerYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "railwayPlatforms" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "line" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "close" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Platform" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "passengersPerDay" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap> ;
+        rr:predicate  dbo:agencyStationCode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap> ;
+        rr:predicate  dbo:passengersPerYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap> ;
+        rr:predicate  dbo:passengersPerDay .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stats" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatedBy" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap> ;
+        rr:predicate  dbo:postalCode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "town" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap> ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap> ;
+        rr:predicate  dbo:address .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "open" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "entirenamerom" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_China_station?oldid=14582" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/Infobox_China_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap> ;
+        rr:predicate  dbo:railwayPlatforms .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "operator" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image/FunctionTermMap> ;
+        rr:predicate  dbo:picture .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formerName" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "alias" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+

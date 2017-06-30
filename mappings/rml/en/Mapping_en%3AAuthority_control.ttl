@@ -1,0 +1,741 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "rkdArtistsId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "NDL" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "selibrId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "orcidId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "ridId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap> ;
+        rr:predicate  dbo:individualisedGnd .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap> ;
+        rr:predicate  dbo:bibsysId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap> ;
+        rr:predicate  dbo:nlaId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "VIAF" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "MBA" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap> ;
+        rr:predicate  dbo:sudocId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "ulanId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "SELIBR" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "individualisedGnd" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "ndlId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "isniId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "bpnId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "SUDOC" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap> ;
+        rr:predicate  dbo:viafId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "GND" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "nlaId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "viafId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "BPN" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "RID" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "LCCN" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "NLA" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ULAN" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap> ;
+        rr:predicate  dbo:orcidId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "bibsysId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap> ;
+        rr:predicate  dbo:bnfId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap> ;
+        rr:predicate  dbo:isniId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Authority_control?oldid=45419" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "lccnId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap> ;
+        rr:predicate  dbo:lccnId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ISNI" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "RKDartists" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bpnId/BPN/FunctionTermMap> ;
+        rr:predicate  dbo:bpnId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "bnfId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mbaId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap> ;
+        rr:predicate  dbo:selibrId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap> ;
+        rr:predicate  dbo:rkdArtistsId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "sudocId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap> ;
+        rr:predicate  dbo:ulanId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap> ;
+        rr:predicate  dbo:mbaId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ORCID" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ulanId/ULAN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "BIBSYS" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/sudocId/SUDOC/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bibsysId/BIBSYS/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/nlaId/NLA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/rkdArtistsId/RKDartists/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/bnfId/BNF/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "BNF" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/selibrId/SELIBR/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/lccnId/LCCN/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/orcidId/ORCID/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/mbaId/MBA/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ridId/RID/FunctionTermMap> ;
+        rr:predicate  dbo:ridId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/individualisedGnd/GND/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/ndlId/NDL/FunctionTermMap> ;
+        rr:predicate  dbo:ndlId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/viafId/VIAF/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Authority_control/Authority_control/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Authority_control/SimplePropertyMapping/isniId/ISNI/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+

@@ -1,0 +1,1702 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "max_temp_1" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap> ;
+        rr:predicate  dbo:minimumTemperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "density" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "period" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "periapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "apparentMagnitude" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap> ;
+        rr:predicate  dbo:rotationPeriod .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mass" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap> ;
+        rr:predicate  dbo:epoch .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "astronomicalUnit" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap> ;
+        rr:predicate  dbo:maximumTemperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/astronomicalUnit> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "epoch" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap> ;
+        rr:predicate  dbo:meanTemperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "escape_velocity" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap> ;
+        rr:predicate  dbo:averageSpeed .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap> ;
+        rr:predicate  dbo:periapsis .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "abs_magnitude" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/astronomicalUnit> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mass" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "apoastron" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap> ;
+        rr:predicate  dbo:mass .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap> ;
+        rr:predicate  dbo:albedo .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "meanTemperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "minimumTemperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometrePerSecond> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "discoverer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "escapeVelocity" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "epoch" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap> ;
+        rr:predicate  dbo:temperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/astronomicalUnit> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Area" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap> ;
+        rr:predicate  dbo:formerName .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap> ;
+        rr:predicate  dbo:periapsis .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mean_temp_2" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "meanTemperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discovery_site" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "day" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discoverer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap> ;
+        rr:predicate  dbo:apoapsis .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "periapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "periapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alt_names" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/day> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "minimumTemperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discovered" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "absoluteMagnitude" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap> ;
+        rr:predicate  dbo:volume .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "apoapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "day" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "magnitude" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap> ;
+        rr:predicate  dbo:apparentMagnitude .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cubicMetre" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "min_temp_2" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "periapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap> ;
+        rr:predicate  dbo:escapeVelocity .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap> ;
+        rr:predicate  dbo:apoapsis .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aphelion" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/astronomicalUnit> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "min_temp_1" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Density> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap> ;
+        rr:predicate  dbo:apoapsis .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "single_temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formerName" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mean_temp_1" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/cubicMetre> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "volume" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "averageSpeed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "rotationPeriod" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/aphelion/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "apoapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "albedo" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "astronomicalUnit" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maximumTemperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "kilometrePerSecond" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/epoch/epoch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap> ;
+        rr:predicate  dbo:discoverer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "surfaceArea" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "avg_speed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap> ;
+        rr:predicate  dbo:meanRadius .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "temperatures" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/day> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap> ;
+        rr:predicate  dbo:surfaceArea .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discoverer/discoverer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Area> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mean_radius" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:CelestialBody , dbo:Location , wikidata:Q634 , dbo:Planet , schema:Place , dbo:Place , owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/averageSpeed/avg_speed/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:homepage/discovery_site/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maximumTemperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "periastron" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "meanRadius" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "astronomicalUnit" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "albedo" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "perihelion" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/albedo/albedo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "detectionMethod" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Temperature> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap> ;
+        rr:predicate  dbo:minimumTemperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap> ;
+        rr:predicate  dbo:periapsis .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periastron/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apparentMagnitude/magnitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "density" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "discovery_method" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/surfaceArea/surface_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "surface_area" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap> ;
+        rr:predicate  dbo:discovered .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Temperature" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "apoapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/rotationPeriod/rotation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "rotation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "orbitalPeriod" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/kilometrePerSecond> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoapsis/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "apoapsis" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/periapsis/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/escapeVelocity/escape_velocity/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "kilometrePerSecond" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/formerName/alt_names/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/periapsis/perihelion/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Mass" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/volume/volume/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "volume" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "discovered" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap> ;
+        rr:predicate  dbo:density .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanRadius/mean_radius/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/temperatures/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/minimumTemperature/min_temp_2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_1/FunctionTermMap> ;
+        rr:predicate  dbo:maximumTemperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/mass/mass/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/temperature/single_temperature/FunctionTermMap> ;
+        rr:predicate  dbo:temperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/density/density/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Density" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/meanTemperature/mean_temp_1/FunctionTermMap> ;
+        rr:predicate  dbo:meanTemperature .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/Infobox_planet/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_planet?oldid=26551" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/discovered/discovered/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/absoluteMagnitude/abs_magnitude/FunctionTermMap> ;
+        rr:predicate  dbo:absoluteMagnitude .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/detectionMethod/discovery_method/FunctionTermMap> ;
+        rr:predicate  dbo:detectionMethod .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/maximumTemperature/max_temp_2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "max_temp_2" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/orbitalPeriod/period/FunctionTermMap> ;
+        rr:predicate  dbo:orbitalPeriod .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_planet/SimplePropertyMapping/apoapsis/apoastron/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "astronomicalUnit" .
+

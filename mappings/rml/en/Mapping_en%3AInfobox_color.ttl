@@ -1,0 +1,779 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "colourHexCode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty/ObjectMap> ;
+        rr:predicate  dbo:variantOf .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "nanometre" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "m" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "hasVariant" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap> ;
+        rr:predicate  dbo:hsvCoordinateHue .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap> ;
+        rr:predicate  dbo:frequency .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "rgbCoordinateGreen" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "connotation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty/ObjectMap/ParentTriplesMap>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:subjectMap      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "y" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap> ;
+        rr:predicate  dbo:hsvCoordinateValue .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap> ;
+        rr:predicate  dbo:rgbCoordinateBlue .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap> ;
+        rr:predicate  dbo:hasVariant .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "rgbCoordinateRed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "r" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty/ObjectMap/ParentTriplesMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap> ;
+        rr:predicate  dbo:cmykCoordinateBlack .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "hsvCoordinateHue" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cmykCoordinateMagenta" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/nanometre> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "wavelength" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "symbolism" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap> ;
+        rr:predicate  dbo:cmykCoordinateYellow .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "frequency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "hex" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/connotation/symbolism/FunctionTermMap> ;
+        rr:predicate  dbo:connotation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "frequency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap> ;
+        rr:predicate  dbo:cmykCoordinateCyanic .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cmykCoordinateCyanic" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/terahertz> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "wavelength" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "hsvCoordinateSaturation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "s" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap> ;
+        rr:predicate  dbo:rgbCoordinateGreen .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "title" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "h" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap> ;
+        rr:predicate  dbo:wavelength .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "b" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "terahertz" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cmykCoordinateBlack" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "variations" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateHue/h/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/colourHexCode/hex/FunctionTermMap> ;
+        rr:predicate  dbo:colourHexCode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cmykCoordinateYellow" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "v" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateGreen/g/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "g" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/CorrespondingProperty/ObjectMap/ParentTriplesMap/SubjectMap>
+        a         rr:SubjectMap ;
+        rr:class  dbo:Colour .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap> ;
+        rr:predicate  dbo:cmykCoordinateMagenta .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateRed/r/FunctionTermMap> ;
+        rr:predicate  dbo:rgbCoordinateRed .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "c" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/foaf:name/title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateValue/v/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "hsvCoordinateValue" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "k" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_color?oldid=35349" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateCyanic/c/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/frequency/frequency/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hasVariant/variations/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dbo:Colour ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateYellow/y/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateBlack/k/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/rgbCoordinateBlue/b/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "rgbCoordinateBlue" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/wavelength/wavelength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/hsvCoordinateSaturation/s/FunctionTermMap> ;
+        rr:predicate  dbo:hsvCoordinateSaturation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/SimplePropertyMapping/cmykCoordinateMagenta/m/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_color/Infobox_color/SubjectMap/Function> .
+

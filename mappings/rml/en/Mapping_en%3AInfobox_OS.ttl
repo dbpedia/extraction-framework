@@ -1,0 +1,870 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap> ;
+        rr:predicate  dbo:latestReleaseVersion .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap> ;
+        rr:predicate  dbo:latestPreviewVersion .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_OS?oldid=16234" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "releaseDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "status" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "frequentlyUpdated" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "latestPreviewVersion" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "programmingLanguage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "latestPreviewVersion" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "programmingLanguage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap> ;
+        rr:predicate  dbo:frequentlyUpdated .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "latestReleaseVersion" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "released" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap> ;
+        rr:predicate  dbo:latestReleaseVersion .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap> ;
+        rr:predicate  dbo:latestPreviewDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "latestReleaseDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap> ;
+        rr:predicate  dbo:status .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "programming language" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "frequently updated" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "developer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap> ;
+        rr:predicate  dbo:developer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "frequentlyUpdated" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "latestPreviewDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latest_release_date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prog language" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap> ;
+        rr:predicate  dbo:license .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latest_preview_version" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap> ;
+        rr:predicate  dbo:programmingLanguage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "latestReleaseDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latest release version" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "license" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap> ;
+        rr:predicate  dbo:frequentlyUpdated .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latest release date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap> ;
+        rr:predicate  dbo:programmingLanguage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "developer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "license" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "frequently_updated" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , wikidata:Q386724 , schema:CreativeWork , dbo:Work , wikidata:Q7397 , dbo:Software ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "working_state" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latest preview date" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "programmingLanguage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "latestReleaseVersion" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest%20preview%20version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latest preview version" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest_release_version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latest_release_version" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap> ;
+        rr:predicate  dbo:latestPreviewVersion .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/status/working_state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/developer/developer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "prog_language" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog_language/FunctionTermMap> ;
+        rr:predicate  dbo:programmingLanguage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently%20updated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewDate/latest%20preview%20date/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest_release_date/FunctionTermMap> ;
+        rr:predicate  dbo:latestReleaseDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestPreviewVersion/latest_preview_version/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseDate/latest%20release%20date/FunctionTermMap> ;
+        rr:predicate  dbo:latestReleaseDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/releaseDate/released/FunctionTermMap> ;
+        rr:predicate  dbo:releaseDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/latestReleaseVersion/latest%20release%20version/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/frequentlyUpdated/frequently_updated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/license/license/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/programming%20language/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/SimplePropertyMapping/programmingLanguage/prog%20language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_OS/Infobox_OS/SubjectMap/Function> .
+

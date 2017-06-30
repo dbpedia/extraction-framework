@@ -1,0 +1,1673 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "material" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "crosses" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap> ;
+        rr:predicate  dbo:closingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "demolitionDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap> ;
+        rr:predicate  dbo:architect .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "builder" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "picture" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "buildingEndDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap> ;
+        rr:predicate  dbo:vehiclesPerDay .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "cost" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap> ;
+        rr:predicate  dbo:maintainedBy .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "maint" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "constructionMaterial" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap> ;
+        rr:predicate  dbo:crosses .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "design" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mainspan" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap> ;
+        rr:predicate  dbo:bridgeCarries .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "toll" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "open" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "carries" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "official_name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "inaugurated" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfPiersInWater .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap> ;
+        rr:predicate  dbo:builder .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "locale" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "vehiclesPerDay" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mainspan" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "width" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "architect" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "architect" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap> ;
+        rr:predicate  dbo:toll .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "crosses" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfSpans" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_bridge?oldid=12463" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "architect" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "load" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap> ;
+        rr:predicate  dbo:demolitionDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "width" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "buildingStartDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "alias" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "unitedStatesNationalBridgeId" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "spans" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "closed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "complete" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap> ;
+        rr:predicate  dbo:width .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap> ;
+        rr:predicate  dbo:unitedStatesNationalBridgeId .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "inaugurated" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap> ;
+        rr:predicate  dbo:alias .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap> ;
+        rr:predicate  dbo:cost .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "locatedInArea" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "cost" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maintainedBy" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "designer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "native_name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap> ;
+        rr:predicate  dbo:locatedInArea .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "bridgeCarries" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap> ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "builder" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "toll" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "traffic" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "pierswater" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "open" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "other_names" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "begin" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfPiersInWater" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "closed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "height" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap> ;
+        rr:predicate  dbo:loadLimit .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfSpans .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap> ;
+        rr:predicate  dbo:buildingEndDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap> ;
+        rr:predicate  dbo:buildingStartDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Place , dbo:Location , wikidata:Q12280 , owl:Thing , schema:Place , dbo:Infrastructure , dbo:Bridge , dbo:RouteOfTransportation , dbo:ArchitecturalStructure ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "id" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "collapsed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap> ;
+        rr:predicate  dbo:closingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap> ;
+        rr:predicate  dbo:picture .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap> ;
+        rr:predicate  dbo:mainspan .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "loadLimit" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer/FunctionTermMap> ;
+        rr:predicate  dbo:architect .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height/FunctionTermMap> ;
+        rr:predicate  dbo:height .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bridge_name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material/FunctionTermMap> ;
+        rr:predicate  dbo:constructionMaterial .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/cost/cost> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/height/height> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfSpans/spans> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/constructionMaterial/material> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/builder/builder> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/open> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/alias/other_names> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingYear/closed> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/longitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/loadLimit/load> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingYear/inaugurated> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/open> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/native_name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/mainspan/mainspan> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/picture/image> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/vehiclesPerDay/traffic> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/type/design> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/designer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/unitedStatesNationalBridgeId/id> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/crosses/crosses> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/architect/architect> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingEndDate/complete> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/openingDate/inaugurated> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/latitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/bridge_name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/owner/owner> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/foaf:name/official_name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/length/length> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/numberOfPiersInWater/pierswater> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/demolitionDate/collapsed> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/toll/toll> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/closingDate/closed> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/buildingStartDate/begin> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/locatedInArea/locale> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/Infobox_bridge/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/bridgeCarries/carries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bridge/SimplePropertyMapping/maintainedBy/maint/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+

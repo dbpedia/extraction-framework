@@ -1,0 +1,1687 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "predecessor" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:startDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap> ;
+        rr:predicate  dbo:layout .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "successor" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_end" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "layout" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "configuration" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "relatedMeanOfTransportation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Power> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap> ;
+        rr:predicate   dbo:modelEndYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Volume> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionEndYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap> ;
+        rr:predicate   dbo:modelEndDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "weight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionEndDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap> ;
+        rr:predicate  dbo:relatedMeanOfTransportation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap> ;
+        rr:predicate  dbo:productionEndDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "millimetre" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionStartYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:endDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty/ObjectMap/ParentTriplesMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_start" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap> ;
+        rr:predicate  dbo:transmission .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap> ;
+        rr:predicate  dbo:wheelbase .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1/ObjectMap/ParentTriplesMap/SubjectMap>
+        a              rr:SubjectMap ;
+        rml:reference  "http://dbpedia.org/ontology/engine" ;
+        rr:class       dbo:AutomobileEngine ;
+        rr:template    "http://en.dbpedia.org/resource/{wikititle}__1" ;
+        rr:termType    rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap> ;
+        rr:predicate  dbo:powerOutput .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "modelStartYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionStartYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "assembly" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:endDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "designer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "related" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:startDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "modelEndYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap> ;
+        rr:predicate  dbo:predecessor .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:endDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , dul:DesignedArtifact , dbo:MeanOfTransportation , schema:Product , dbo:Automobile ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap> ;
+        rr:predicate  dbo:parentCompany .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap> ;
+        rr:predicate  dbo:length .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "class" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap> ;
+        rr:predicate  dbo:weight .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap> ;
+        rr:predicate  dbo:successor .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Automobile_generation?oldid=7246" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "class" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "width" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manufacturer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "body_style" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap> ;
+        rr:predicate  dbo:manufacturer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionStartDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:startDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "designer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap> ;
+        rr:predicate  dbo:automobilePlatform .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap> ;
+        rr:predicate  dbo:designer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "layout" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "transmission" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap> ;
+        rr:predicate  dbo:productionStartYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:endDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "designer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:startDateFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_start" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1/ObjectMap>
+        a                    rr:ObjectMap ;
+        rr:parentTriplesMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1/ObjectMap/ParentTriplesMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty/ObjectMap> ;
+        rr:predicate  dbo:variantOf .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "assembly" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Volume" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap> ;
+        rr:predicate  dbo:modelStartYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/engineConfiguration> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "manufacturer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:endDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDateOntologyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:startDatePropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionStartDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap> ;
+        rr:predicate  dbo:productionStartDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1/ObjectMap/ParentTriplesMap>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "parentCompany" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "predecessor" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty/ObjectMap/ParentTriplesMap>
+        a                  rr:TriplesMap ;
+        rml:logicalSource  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:subjectMap      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty/ObjectMap/ParentTriplesMap/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "bodyStyle" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "designCompany" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap> ;
+        rr:predicate  dbo:displacement .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "engineConfiguration" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/predecessor/predecessor> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap> ;
+        rr:predicate  dbo:configuration .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "modelEndDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "width" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "platform" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "height" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "successor" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/relatedMeanOfTransportation/related/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartYear/production_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "height" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "intermediateNodeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/IntermediateNodeMapping/AutomobileEngine/engine__1/ObjectMap> ;
+        rr:predicate  dbo:engine .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap> ;
+        rr:predicate  dbo:bodyStyle .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap> ;
+        rr:predicate  dbo:productionStartDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/automobilePlatform/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "automobilePlatform" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap> ;
+        rr:predicate  dbo:assembly .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Mass" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Power" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "aka" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartDate/modelEndDate/model_years> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap> ;
+        rr:predicate  dbo:modelStartDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionEndDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap> ;
+        rr:predicate   dbo:productionEndDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/millimetre> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap> ;
+        rr:predicate  dbo:productionEndYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/CorrespondingProperty/ObjectMap/ParentTriplesMap/SubjectMap>
+        a         rr:SubjectMap ;
+        rr:class  dbo:Automobile .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "transmission" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/class/class/FunctionTermMap> ;
+        rr:predicate  dbo:class .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "engine" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartDate/modelEndDate/model_years/FunctionTermMap/FunctionValue/OntologyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "modelStartDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "wheelbase" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production>
+        a              rr:PredicateObjectMap ;
+        dbf:startDate  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production> ;
+        dcterms:type   "endDateIntervalMapping" ;
+        rr:objectMap   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap> ;
+        rr:predicate   dbo:productionEndYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "wheelbase" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "powerOutput" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "engine" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production_end" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production>
+        a             rr:PredicateObjectMap ;
+        dbf:endDate   <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production> ;
+        dcterms:type  "startDateIntervalMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap> ;
+        rr:predicate  dbo:productionStartYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Mass> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/successor/successor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "weight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/powerOutput/engine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/aka/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/height/height/FunctionTermMap> ;
+        rr:predicate  dbo:height .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap> ;
+        rr:predicate  dbo:designCompany .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/configuration/engine/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "engine" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionStartDate/production_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/OntologyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/productionStartYear/productionEndYear/production/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/productionStartDate/productionEndDate/production/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "production" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "parent_company" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/manufacturer/manufacturer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/length/length/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap> ;
+        rr:predicate  dbo:width .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/EndDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndDate/production_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/layout/layout/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/parentCompany/parent_company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/weight/weight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designer/designer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/wheelbase/wheelbase/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/transmission/transmission/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/assembly/assembly/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/productionEndYear/production_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "productionEndYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "model_years" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/width/width/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/StartDate/modelStartYear/modelEndYear/model_years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/bodyStyle/body_style/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/displacement/engine/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "displacement" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/SimplePropertyMapping/designCompany/designer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_Automobile_generation/Infobox_Automobile_generation/SubjectMap/Function> .
+

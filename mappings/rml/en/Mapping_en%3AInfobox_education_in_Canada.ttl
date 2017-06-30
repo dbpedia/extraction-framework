@@ -1,0 +1,1762 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap> ;
+        rr:predicate  dbo:religion .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "postalCode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap> ;
+        rr:predicate  dbo:headLabel .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "schooltype" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap> ;
+        rr:predicate  dbo:principal .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap> ;
+        rr:predicate  dbo:schoolBoard .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "url" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap> ;
+        rr:predicate  dbo:formationDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "religious_affiliation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap> ;
+        rr:predicate  dbo:endowment .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap> ;
+        rr:predicate  dbo:grades .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap> ;
+        rr:predicate  dbo:teamName .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "religion" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "schoolnumber" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formationDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "campus" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap> ;
+        rr:predicate  dbo:administrator .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Agent , dbo:EducationalInstitution , dul:Agent , dbo:School , wikidata:Q43229 , schema:Organization , schema:School , wikidata:Q3914 , dbo:Organisation , owl:Thing , dul:SocialPerson , schema:EducationalOrganization ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap> ;
+        rr:predicate  dbo:vicePrincipal .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "district" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "teamname" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap> ;
+        rr:predicate  dbo:district .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "principal_label" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap> ;
+        rr:predicate  dbo:facultySize .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "postalcode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "affiliation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap> ;
+        rr:predicate  dbo:oversight .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "principal" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "faculty" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "assistantPrincipal" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "vicePrincipalLabel" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "city" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "endowment" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap> ;
+        rr:predicate  dbo:language .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "established" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "motto_translation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "enrollment" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap> ;
+        rr:predicate  dbo:superintendent .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "principal" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "custodian" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "oversight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "schoolBoard" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "schoolboard" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "grades" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "mascot" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "custodian" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "motto" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "motto" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "facultySize" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "assistant_principals" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "city" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap> ;
+        rr:predicate  dbo:mascot .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap> ;
+        rr:predicate  dbo:motto .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap> ;
+        rr:predicate  dbo:campusType .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap> ;
+        rr:predicate  dbo:facultySize .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "district" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap> ;
+        rr:predicate  dbo:officialSchoolColour .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "language" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "facultySize" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formationDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "affiliation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "endowment" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:coordParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/endowment/endowment/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "trustee" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfStudents" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap> ;
+        rr:predicate  dbo:province .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "colours" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_education_in_Canada?oldid=13071" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap> ;
+        rr:predicate  dbo:assistantPrincipal .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "administrator" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "mascot" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "province" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/schooltype/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "officialSchoolColour" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "trustee" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "viceprincipal_label" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap> ;
+        rr:predicate  dbo:postalCode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap> ;
+        rr:predicate  dbo:affiliation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap> ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "staff" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "oversight" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "coordinates" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/teamName/teamname/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "teamName" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/religion/religious_affiliation/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "administrator" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/administrator/administrator/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "province" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap> ;
+        rr:predicate  dbo:vicePrincipalLabel .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/url/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "viceprincipal" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap> ;
+        rr:predicate  dbo:trustee .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "grades" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/type/type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/faculty/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/grades/grades/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "vicePrincipal" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/trustee/trustee/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/affiliation/affiliation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto_translation/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "superintendent" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/founded/FunctionTermMap> ;
+        rr:predicate  dbo:formationDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "campusType" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/postalCode/postalcode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipal/viceprincipal/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/district/district/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/superintendent/superintendent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "superintendent" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/assistantPrincipal/assistant_principals/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "headLabel" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "language" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/formationDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap> ;
+        rr:predicate  dbo:schoolNumber .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/headLabel/principal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/language/language/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/oversight/oversight/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "motto" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/vicePrincipalLabel/viceprincipal_label/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/city/city/FunctionTermMap> ;
+        rr:predicate  dbo:city .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/numberOfStudents/enrollment/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfStudents .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/campusType/campus/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/principal/principal/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/mascot/mascot/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/motto/motto/FunctionTermMap> ;
+        rr:predicate  dbo:motto .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolBoard/schoolboard/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/facultySize/staff/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap> ;
+        rr:predicate  dbo:custodian .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/longitude/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/custodian/custodian/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/Infobox_education_in_Canada/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_education_in_Canada/SimplePropertyMapping/schoolNumber/schoolnumber/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "schoolNumber" .
+

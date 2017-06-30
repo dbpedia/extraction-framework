@@ -1,0 +1,1178 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "maximumBoatLength" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     wikidata:Q47521 , dbo:BodyOfWater , dbo:Location , schema:BodyOfWater , dbo:NaturalPlace , dbo:Canal , dbo:Stream , dbo:Place , owl:Thing , schema:Place , schema:Canal ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap> ;
+        rr:predicate  dbo:dateCompleted .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "originalMaximumBoatBeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap> ;
+        rr:predicate  dbo:startPoint .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap> ;
+        rr:predicate  dbo:originalEndPoint .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "elevation" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maximumBoatBeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "originalMaximumBoatLength" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_rest" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "elev" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "a_engineer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "maximumBoatBeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap> ;
+        rr:predicate  dbo:dateUse .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "originalMaximumBoatLength" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dateCompleted" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "riverBranch" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap> ;
+        rr:predicate  dbo:originalMaximumBoatBeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "originalStartPoint" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap> ;
+        rr:predicate  dbo:hasJunctionWith .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap> ;
+        rr:predicate  dbo:originalMaximumBoatLength .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap> ;
+        rr:predicate  dbo:maximumBoatLength .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_closed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap> ;
+        rr:predicate  dbo:dateConstruction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "endPoint" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Length> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/foot> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "company" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "riverBranchOf" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "principalEngineer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "branch" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_canal?oldid=10461" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_const" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_act" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_comp" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap> ;
+        rr:predicate  dbo:riverBranch .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "restoreDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "o_end" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap> ;
+        rr:predicate  dbo:company .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dateClosed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "o_start" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "engineer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "m_name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foot" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "branch_of" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "join" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap> ;
+        rr:predicate  dbo:endPoint .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap> ;
+        rr:predicate  dbo:dateExtended .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dateExtended" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap> ;
+        rr:predicate  dbo:restoreDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "startPoint" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap> ;
+        rr:predicate  dbo:riverBranchOf .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap> ;
+        rr:predicate  dbo:elevation .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "o_name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap> ;
+        rr:predicate  dbo:dateAct .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap> ;
+        rr:predicate  dbo:principalEngineer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dateConstruction" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "originalEndPoint" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/principalEngineer/engineer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "engineer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dateAct" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranchOf/branch_of/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "dateUse" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "originalMaximumBoatBeam" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateConstruction/date_const/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_ext" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateAct/date_act/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "maximumBoatLength" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "date_use" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateExtended/date_ext/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap> ;
+        rr:predicate  dbo:dateClosed .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap> ;
+        rr:predicate  dbo:engineer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/startPoint/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatBeam/originalMaximumBoatBeam/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalEndPoint/o_end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/riverBranch/branch/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "company" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/m_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateUse/date_use/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "hasJunctionWith" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/elevation/elev/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/hasJunctionWith/join/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/company/company/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/endPoint/end/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "end" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/o_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateClosed/date_closed/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/engineer/a_engineer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/Infobox_canal/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalStartPoint/o_start/FunctionTermMap> ;
+        rr:predicate  dbo:originalStartPoint .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/dateCompleted/date_comp/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/restoreDate/date_rest/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatLength/maximumBoatLength/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/maximumBoatBeam/maximumBoatBeam/FunctionTermMap> ;
+        rr:predicate  dbo:maximumBoatBeam .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_canal/SimplePropertyMapping/originalMaximumBoatLength/originalMaximumBoatLength/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+

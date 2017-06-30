@@ -1,0 +1,1102 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "airline" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "alliance" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "headquarter" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "num_employees" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatingIncome" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "hubAirport" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "targetAirport" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap> ;
+        rr:predicate  dbo:targetAirport .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap> ;
+        rr:predicate  dbo:closingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap> ;
+        rr:predicate  dbo:subsidiary .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "assets" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap> ;
+        rr:predicate  dbo:hubAirport .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap> ;
+        rr:predicate  dbo:alliance .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "formationDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap> ;
+        rr:predicate  dbo:destination .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "destinations" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "commenced" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "subsidiaries" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "icaoAirlineCode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "operating_income" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "targetAirport" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "equity" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "iataAirlineCode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "assets" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "focus_cities" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ICAO" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap> ;
+        rr:predicate  dbo:netIncome .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "headquarters" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "IATA" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap> ;
+        rr:predicate  dbo:targetAirport .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap> ;
+        rr:predicate  dbo:formationDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "revenue" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "parent" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "hubs" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap> ;
+        rr:predicate  dbo:lounge .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "subsidiary" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport/ObjectMap> ;
+        rr:predicate  dbo:industry .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfEmployees" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "equity" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lounge" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Currency> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap> ;
+        rr:predicate  dbo:headquarter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "hubAirport" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "revenue" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap> ;
+        rr:predicate  dbo:assets .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "net_income" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "destination" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "lounge" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Air_Transport" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap> ;
+        rr:predicate  dbo:iataAirlineCode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alliance" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfEmployees .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap> ;
+        rr:predicate  dbo:icaoAirlineCode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "parentCompany" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "bases" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "secondary_hubs" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap> ;
+        rr:predicate  dbo:revenue .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity/FunctionTermMap> ;
+        rr:predicate  dbo:equity .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ceased" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income/FunctionTermMap> ;
+        rr:predicate  dbo:operatingIncome .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap> ;
+        rr:predicate  dbo:hubAirport .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent/FunctionTermMap> ;
+        rr:predicate  dbo:parentCompany .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     dbo:Organisation , dul:Agent , dul:SocialPerson , dbo:Company , dbo:Airline , dbo:Agent , wikidata:Q46970 , schema:Organization , wikidata:Q43229 , owl:Thing ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Currency" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_airline?oldid=38855" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "netIncome" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/Infobox_airline/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+

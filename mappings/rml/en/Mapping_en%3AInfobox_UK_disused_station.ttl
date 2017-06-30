@@ -1,0 +1,1027 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "latitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap> ;
+        rr:predicate  geo:lat .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "years" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "starting" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "platforms" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "manager" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure , dbo:Infrastructure , wikidata:Q719456 , dbo:Station .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:otherwise .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station>
+        a                      rr:TriplesMap ;
+        dcterms:type           "conditionalMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "picture" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "events1" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "agencyStationCode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "longitude" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap> ;
+        rr:predicate  dbo:railwayPlatforms .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "gridref" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "longitudeMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap> ;
+        rr:predicate  geo:long .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "code" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "gridReference" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "starting" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap> ;
+        rr:predicate  dbo:picture .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "events" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "railwayPlatforms" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "locale" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Opened" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "start" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap>
+        a                      rr:TriplesMap , fnml:FunctionTermMap ;
+        fnml:functionValue     <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap> ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1>
+        a                    rr:PredicateObjectMap ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap> ;
+        crml:fallbackMap     <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/valueParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap> ;
+        rr:predicate  dbo:agencyStationCode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure , dbo:Infrastructure , wikidata:Q719456 , dbo:Station .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "district" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatedBy" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap> ;
+        rr:predicate  dbo:district .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ValueParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap> ;
+        rr:predicate  dbo:gridReference .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap> ;
+        rr:predicate  dbo:passengersPerYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "railwayPlatforms" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:latParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "owner" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Opened" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:latFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "passengersPerYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap> ;
+        rr:predicate  dbo:railwayPlatforms .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platform/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "platform" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/railwayPlatforms/platforms/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:lonParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:lonFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "lowusage1011" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened>
+        a                    rr:PredicateObjectMap ;
+        dcterms:type         "conditionalMapping" ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap> ;
+        crml:fallbackMap     <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/ObjectMap> ;
+        rr:predicate         rdf:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/starting/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "borough" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:contains .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/passengersPerYear/lowusage1011/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "years1" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap/FunctionValue/PropertyParameterPOM/ObjectMap> ;
+        rr:predicate  <http://dbpedia.org/function/contains/propertyParameter> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/owner/owner/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_UK_disused_station?oldid=14649" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/Infobox_UK_disused_station/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years1/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/longitude/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/latitude/FunctionTermMap/ParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "latitude" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "image" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure , dbo:Infrastructure , wikidata:Q719456 , dbo:Station .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "borough" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years>
+        a                    rr:PredicateObjectMap ;
+        dcterms:type         "simplePropertyMapping" ;
+        crml:equalCondition  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/ConditionalMapping/events_contains_Opened/FunctionTermMap> ;
+        rr:objectMap         <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/openingYear/years/FunctionTermMap> ;
+        rr:predicate         dbo:openingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/operatedBy/manager/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_UK_disused_station/SimplePropertyMapping/district/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+

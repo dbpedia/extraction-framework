@@ -1,0 +1,751 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Series" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Airdate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Next" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap> ;
+        rr:predicate  dbo:guest .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     owl:Thing , wikidata:Q386724 , schema:CreativeWork , dbo:Work , schema:TVEpisode , dbo:TelevisionEpisode ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap> ;
+        rr:predicate  dbo:producer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "runtime" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap> ;
+        rr:predicate  dbo:photographer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap> ;
+        rr:predicate  dbo:director .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Photographer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "guest" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap> ;
+        rr:predicate  dbo:editor .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Series name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap> ;
+        rr:predicate  dbo:runtime .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Director" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "editor" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Season" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Prev" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "series" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/unitParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "episodeNumber" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "producer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "series" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap> ;
+        rr:predicate  dbo:writer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap> ;
+        rr:predicate  dbo:series .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap> ;
+        rr:predicate  dbo:episodeNumber .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "releaseDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "Time" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Producer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "writer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "length" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Editor" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Music" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "musicComposer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap> ;
+        rr:predicate  dbo:subsequentWork .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap> ;
+        rr:predicate  dbo:previousWork .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap> ;
+        rr:predicate  dbo:seasonNumber .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap> ;
+        rr:predicate  dbo:series .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap> ;
+        rr:predicate  dbo:musicComposer .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "seasonNumber" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "previousWork" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Writer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Episode" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_television_episode?oldid=11099" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "director" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Title" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "photographer" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "subsequentWork" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue> ;
+        rr:datatype         <http://dbpedia.org/datatype/Time> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/previousWork/Prev> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/seasonNumber/Season> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/musicComposer/Music> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/writer/Writer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/producer/Producer> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/photographer/Photographer/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/episodeNumber/Episode/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/releaseDate/Airdate/FunctionTermMap> ;
+        rr:predicate  dbo:releaseDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/director/Director/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/editor/Editor/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/Infobox_television_episode/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/foaf:name/Title/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/unitParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/runtime/length/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:unitParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/subsequentWork/Next/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/guest/Guests/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "Guests" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_television_episode/SimplePropertyMapping/series/Series%20name/FunctionTermMap/FunctionValue> .
+

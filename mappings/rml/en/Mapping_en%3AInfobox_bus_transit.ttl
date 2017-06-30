@@ -1,0 +1,1042 @@
+@prefix schema: <http://schema.org/> .
+@prefix rr:    <http://www.w3.org/ns/r2rml#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix gml:   <http://www.opengis.net/gml/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix bio:   <http://purl.org/vocab/bio/0.1/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix d0:    <http://www.ontologydesignpatterns.org/ont/d0.owl#> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rml:   <http://semweb.mmlab.be/ns/rml#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix fnml:  <http://semweb.mmlab.be/ns/fnml#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ql:    <http://semweb.mmlab.be/ns/ql#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix crml:  <http://semweb.mmlab.be/ns/crml#> .
+@prefix fno:   <http://w3id.org/function/ontology#> .
+@prefix georss: <http://www.georss.org/georss/> .
+@prefix dbf:   <http://dbpedia.org/function/> .
+@prefix dbo:   <http://dbpedia.org/ontology/> .
+@prefix mappings: <http://mappings.dbpedia.org/wiki/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bibo:  <http://purl.org/ontology/bibo/> .
+@prefix dul:   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix cidoccrm: <http://purl.org/NET/cidoc-crm/core#> .
+@prefix wikidata: <http://www.wikidata.org/entity/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "service_area" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "passengersPerYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap> ;
+        rr:predicate  dbo:passengersPerYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap> ;
+        rr:predicate  dbo:passengersPerYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfVehicles" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "defunct" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfLines .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "isPartOf" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap> ;
+        rr:predicate  dbo:closingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "defunct" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "locale" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfStations .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "closingYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource>
+        a                         rml:LogicalSource ;
+        rml:iterator              "Infobox" ;
+        rml:referenceFormulation  ql:wikitext ;
+        rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_bus_transit?oldid=12923" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "regionServed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "routes" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit>
+        a                      rr:TriplesMap ;
+        dcterms:type           "templateMapping" ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "operator" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "passengersPerDay" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "passengersPerYear" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "logo" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfStations" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "ridership" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap> ;
+        rr:predicate  dbo:location .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "company_slogan" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap> ;
+        rr:predicate  foaf:name .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stations" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap> ;
+        rr:predicate  dbo:operatedBy .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "slogan" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap> ;
+        rr:predicate  dbo:type .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap> ;
+        rr:predicate  dbo:openingYear .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "operatedBy" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:logo" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "annual ridership" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfStations .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "alliance" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap> ;
+        rr:predicate  dbo:headquarter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "stops" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap> ;
+        rr:predicate  dbo:passengersPerDay .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap> ;
+        rr:predicate  dbo:closingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap> ;
+        rr:predicate  dbo:slogan .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "website" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfStations" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "headquarters" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap> ;
+        rr:predicate  dbo:isPartOf .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap> ;
+        rr:predicate  dbo:regionServed .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "fleet" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/isPartOf/alliance/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "parent" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:name" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "founded" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap> ;
+        rr:predicate  foaf:homepage .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "annual_ridership" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual_ridership/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "owner" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap> ;
+        rr:predicate  foaf:logo .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "service_type" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap>
+        a            rr:SubjectMap ;
+        rr:class     schema:Organization , owl:Thing , dul:Agent , dul:SocialPerson , dbo:Agent , dbo:Organisation , dbo:PublicTransitSystem , wikidata:Q43229 ;
+        rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
+        rr:termType  rr:IRI .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingDate/defunct/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/owner/parent/FunctionTermMap> ;
+        rr:predicate  dbo:owner .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/slogan/company_slogan/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/headquarter/headquarters/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "headquarter" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/closingYear/defunct/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:logo/logo/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfVehicles/fleet/FunctionTermMap> ;
+        rr:predicate  dbo:numberOfVehicles .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerYear/annual%20ridership/FunctionTermMap/FunctionValue> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "regionServed" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfLines/routes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "numberOfLines" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/operatedBy/operator/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/passengersPerDay/ridership/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap> ;
+        rr:predicate  dbo:regionServed .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/service_area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/propertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/type/service_type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:propertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "openingDate" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stations/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function>
+        a            rr:SubjectMap ;
+        rr:class     fno:Execution ;
+        rr:termType  rr:BlankNode .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/regionServed/destinations/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "destinations" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "location" .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/LogicalSource> ;
+        rr:predicateObjectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/propertyParameterPOM> , <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingYear/founded/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/Infobox_bus_transit/SubjectMap/Function> .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "simplePropertyMapping" ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/openingDate/founded/FunctionTermMap> ;
+        rr:predicate  dbo:openingDate .
+
+<http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ExecutePOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <http://en.dbpedia.org/resource/Mapping_en:Infobox_bus_transit/SimplePropertyMapping/numberOfStations/stops/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
+        rr:predicate  fno:executes .
+
