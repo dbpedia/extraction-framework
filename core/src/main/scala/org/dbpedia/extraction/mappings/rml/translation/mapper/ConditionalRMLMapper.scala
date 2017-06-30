@@ -1,6 +1,8 @@
 package org.dbpedia.extraction.mappings.rml.translation.mapper
 
 import org.dbpedia.extraction.mappings._
+import org.dbpedia.extraction.mappings.rml.translation.dbf.DbfFunction
+import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources._
 import org.dbpedia.extraction.ontology.{OntologyClass, RdfNamespace}
 

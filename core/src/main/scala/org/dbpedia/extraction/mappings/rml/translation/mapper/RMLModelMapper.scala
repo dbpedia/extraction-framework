@@ -1,5 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.translation.mapper
 
+import org.dbpedia.extraction.mappings.rml.translation.model.RMLModel
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLPredicateObjectMap, RMLTriplesMap}
 import org.dbpedia.extraction.mappings.{ConditionalMapping, GeoCoordinatesMapping, IntermediateNodeMapping, _}
 import org.dbpedia.extraction.wikiparser.TemplateNode

@@ -1,8 +1,7 @@
 package org.dbpedia.extraction.mappings.rml.translation.model.factories
 
 import org.dbpedia.extraction.mappings._
-import org.dbpedia.extraction.mappings.rml.translation.RMLModelMapper
-import org.dbpedia.extraction.mappings.rml.translation.mappings.TemplateRMLMapper
+import org.dbpedia.extraction.mappings.rml.translation.mapper.{RMLModelMapper, TemplateRMLMapper}
 import org.dbpedia.extraction.mappings.rml.translation.model.rmlresources.{RMLPredicateObjectMap, RMLUri}
 import org.dbpedia.extraction.mappings.rml.translation.model.{RMLModel, RMLTemplateMapping}
 import org.dbpedia.extraction.util.Language
