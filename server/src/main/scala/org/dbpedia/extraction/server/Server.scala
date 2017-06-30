@@ -53,6 +53,7 @@ object Server
         val millis = System.currentTimeMillis
         
         logger.info("DBpedia server starting")
+        logger.setLevel(Level.OFF)
         
         require(args != null && args.length == 1, "need the server configuration file as argument.")
 
