@@ -34,6 +34,7 @@ class WikidataLLExtractor(
   private val datasetMap: Map[String, Dataset] = (
     for (lang <- mappingLanguages)
       yield lang.wikiCode -> DBpediaDatasets.getDataset("interlanguage_links_" + lang.wikiCode)
+        .getOrElse(throw new IllegalArgumentException("A dataset named " + "interlanguage_links_" + lang.wikiCode + " is unknown."))
     )(collection.breakOut)
   override val datasets = datasetMap.values.toSet
 

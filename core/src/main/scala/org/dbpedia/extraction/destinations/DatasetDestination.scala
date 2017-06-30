@@ -26,7 +26,7 @@ extends Destination
 
   override def write(graph : Traversable[Quad]) : Unit = {
     for((dataset, quads) <- graph.groupBy(_.dataset)) {
-      destinations.get(DBpediaDatasets.getDataset(dataset)).foreach(_.write(quads))
+      destinations.get(DBpediaDatasets.getDataset(dataset).get).foreach(_.write(quads))
     }
   }
 

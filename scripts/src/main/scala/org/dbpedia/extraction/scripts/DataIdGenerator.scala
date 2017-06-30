@@ -195,6 +195,7 @@ object DataIdGenerator {
             dataset = addDataset(mainModel, lang, dis, creator)
             if(dis.contains("pages_articles"))
               pagesArticles = DBpediaDatasets.getDataset(dataset.getURI, lang, this.dbpVersion)
+                .getOrElse(throw new IllegalArgumentException("A dataset named " + dataset.getURI + " is unknown."))
             else {
               topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
               mainModel.add(dataset, getProperty("dc", "isPartOf"), currentRootSet)
@@ -480,7 +481,9 @@ object DataIdGenerator {
   def getDBpediaDataset(fileName: String, lang: Language, dbpv: String): Option[Dataset] ={
 
     def internalGet(name:String, ext: String): Option[Dataset] = scala.util.Try {
-      DBpediaDatasets.getDataset(name + (if(ext != null) ext else ""), lang, dbpv)
+      DBpediaDatasets.getDataset(name + (if(ext != null) ext else ""), lang, dbpv).getOrElse(
+        throw new IllegalArgumentException("A dataset named " + name + (if(ext != null) ext else "") + " is unknown.")
+      )
     } match{
       case Success(s) => Some(s)
       case Failure(e) => None

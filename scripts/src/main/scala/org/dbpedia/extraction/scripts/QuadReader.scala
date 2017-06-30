@@ -2,6 +2,7 @@ package org.dbpedia.extraction.scripts
 
 import java.io.File
 
+import org.dbpedia.extraction.config.provenance.DBpediaDatasets
 import org.dbpedia.extraction.mappings.{ExtractionRecorder, RecordEntry, RecordSeverity}
 import org.dbpedia.extraction.transform.Quad
 import org.dbpedia.extraction.util._
@@ -9,6 +10,7 @@ import org.dbpedia.extraction.util.StringUtils.prettyMillis
 
 import scala.Console.err
 import scala.collection.mutable.ListBuffer
+import scala.util.{Failure, Success}
 
 /**
  */
@@ -77,17 +79,21 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
    */
   def readQuads(language: Language, file: FileLike[_])(proc: Quad => Unit): Unit = {
     val dataset = "(?<=(.*wiki-\\d{8}-))([^\\.]+)".r.findFirstIn(file.toString) match {
-      case Some(x) => x
+      case Some(x) => DBpediaDatasets.getDataset(x, language) match{
+        case Success(d) => d
+        case Failure(f) => null
+      }
       case None => null
     }
-    getRecorder.initialize(language, "Processing Quads")
+
+    getRecorder.initialize(language, "Processing Quads", if(dataset != null) Seq(dataset) else Seq())
 
     IOUtils.readLines(file) { line =>
       line match {
         case null => // ignore last value
         case Quad(quad) => {
           val copy = quad.copy (
-            dataset = dataset
+            dataset = dataset.encoded
           )
           proc(copy)
           addQuadRecord(copy, language)

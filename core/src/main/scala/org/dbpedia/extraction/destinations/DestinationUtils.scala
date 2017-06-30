@@ -34,7 +34,8 @@ object DestinationUtils {
   }
 
   def createDatasetDestination(finder: DateFinder[File], datasets: Seq[String], formats: collection.Map[String, Formatter]) : Destination = {
-    createDatasetDestination(finder.finder, finder.date, datasets.map(x => DBpediaDatasets.getDataset(x)), formats, append = false)
+    createDatasetDestination(finder.finder, finder.date, datasets.map(x => DBpediaDatasets.getDataset(x).getOrElse[Dataset](
+      throw new IllegalArgumentException("A dataset named " + x + " is unknown."))), formats, append = false)
   }
 
   def createWriterDestination(file: FileLike[_], format: Formatter): WriterDestination ={

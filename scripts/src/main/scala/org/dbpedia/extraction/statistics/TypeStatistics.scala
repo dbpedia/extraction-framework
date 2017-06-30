@@ -4,6 +4,7 @@ import java.io.{File, PrintWriter}
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.{Level, Logger}
 
+import org.apache.jena.atlas.json.JSON
 import org.dbpedia.extraction.scripts.QuadMapper
 import org.dbpedia.extraction.util.{Language, RichFile, SimpleWorkers, Workers}
 import org.dbpedia.extraction.wikiparser.Namespace
@@ -35,6 +36,7 @@ object TypeStatistics {
         /*6*/ "listobjects / not - do not only count all objects instances, but list all objects with their pertaining occurrences" +
         /*7*/ "canonical identifier - (optional) part of the filename which identifies a canonical dataset (default: _en_uris, for 2015-04 its -en-uris)"
     )
+
 
     val baseDir = new File(args(0))
     require(baseDir.isDirectory, "basedir is not a directory")
@@ -108,16 +110,18 @@ object TypeStatistics {
 
     logger.log(Level.INFO, "finished calculations")
 
-    val sb = new StringBuilder("{\n")
+    val sb = new StringBuilder()
     for(langEntry <- results)
     {
+      if(sb.isEmpty)
+        sb.append("{\n")
+      else
+        sb.append(",\n")
       sb.append(langEntry._2)
-      sb.append(",\n")
     }
 
     val writer = new PrintWriter(outfile)
-    val res = sb.toString()
-    writer.write(res.substring(0, res.length-1))
+    writer.write(sb.toString())
     writer.write("\n}")
     writer.close()
     logger.log(Level.INFO, "finished writing output")
@@ -127,15 +131,12 @@ object TypeStatistics {
     val sb = new StringBuilder()
     sb.append("\t\"" + lang + "\": {")
     sb.append("\t\t\"subjects\": {")
-    logger.log(Level.INFO, "write subject map " + lang)
     writeMap(subjects.toMap, sb, false)
     sb.append("\t\t} ,")
     sb.append("\t\t\"properties\": {")
-    logger.log(Level.INFO, "write prop map " + lang)
     writeMap(props.toMap, sb, writeProps)
     sb.append("\t\t} ,")
     sb.append("\t\t\"objects\": {")
-    logger.log(Level.INFO, "write object map " + lang)
     writeMap(objects.toMap, sb, writeObjects)
     sb.append("\t\t} ,")
     sb.append("\t\t\"statements\": {")

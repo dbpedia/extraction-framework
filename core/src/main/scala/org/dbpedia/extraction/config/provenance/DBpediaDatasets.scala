@@ -5,6 +5,7 @@ import org.dbpedia.extraction.util
 import org.dbpedia.extraction.util.{JsonConfig, Language, StringUtils, WikiUtil}
 
 import scala.collection.mutable
+import scala.util.Try
 
 /**
  * Defines the datasets which are extracted by DBpedia.
@@ -285,27 +286,29 @@ object DBpediaDatasets
   val TestDataset = new Dataset("test_dataset", "this is just a test", null, null, "test_dataset", Seq(MainDataset), null, Seq(), null, DatasetTrait.ValueSet(DatasetTrait.Ordered, DatasetTrait.Provenance))
 
 
-  def getDataset(dataset: Dataset, language: Language, version: String): Dataset = getDataset(dataset.encoded, language, version)
+  def getDataset(dataset: Dataset, language: Language, version: String): Try[Dataset] = getDataset(dataset.encoded, language, version)
 
-  def getDataset(name: String, language: Language = null, version: String = null): Dataset =
+  def getDataset(name: String, language: Language = null, version: String = null): Try[Dataset] =
   {
-    val n = if(name.startsWith(DBpediaNamespace.DATASET.toString))
-      name.substring(DBpediaNamespace.DATASET.toString.length, if(name.indexOf("?") >= 0) name.indexOf("?") else name.length)
-    else
-      util.WikiUtil.wikiEncode(name.toLowerCase).replaceAll("-", "_")
-    datasets.get(n) match {
-      case Some(d) => {
-        Option(language) match {
-          case Some(l) => {
-            Option(version) match {
-              case Some(v) => d.copyDataset(lang = l, versionEntry = v)
-              case None => d.copyDataset(lang = l)
+    Try {
+      val n = if (name.startsWith(DBpediaNamespace.DATASET.toString))
+        name.substring(DBpediaNamespace.DATASET.toString.length, if (name.indexOf("?") >= 0) name.indexOf("?") else name.length)
+      else
+        util.WikiUtil.wikiEncode(name.toLowerCase).replaceAll("-", "_")
+      datasets.get(n) match {
+        case Some(d) => {
+          Option(language) match {
+            case Some(l) => {
+              Option(version) match {
+                case Some(v) => d.copyDataset(lang = l, versionEntry = v)
+                case None => d.copyDataset(lang = l)
+              }
             }
+            case None => d
           }
-          case None => d
         }
+        case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
       }
-      case None => throw new NotImplementedError("DBpediaDataset class is missing the declaration of dataset " + name.replaceAll("-", "_").replaceAll("\\s+", "_"))
     }
   }
 }

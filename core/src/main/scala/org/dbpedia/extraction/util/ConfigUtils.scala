@@ -162,12 +162,11 @@ object ConfigUtils {
   }
 
   private def downloadedLanguages(baseDir: File, wikiPostFix: String = "wiki"): Array[Language] = {
-    for (file <- baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith(wikiPostFix))) yield
+    (for (file <- baseDir.listFiles().filter(x => x.isDirectory)) yield
       Language.get(file.getName.replaceAll(wikiPostFix + "$", "").replace("_", "-")) match{
         case Some(l) => l
-        case None => throw new IllegalArgumentException(file.getName.replaceAll(wikiPostFix + "$", "").replace("_", "-") +
-          ": is an unknown language code. Please update the addonlangs.json file and add this language.")
-      }
+        case None => null
+      }).filter(x => x != null)
   }
 
   def toRange(from: String, to: String): (Int, Int) = {

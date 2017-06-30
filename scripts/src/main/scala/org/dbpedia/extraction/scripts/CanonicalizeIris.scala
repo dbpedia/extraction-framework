@@ -206,7 +206,10 @@ object CanonicalizeIris {
     //execute all file mappings
     val parameters = for (lang <- languages; input <- inputs)
       yield
-        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get), DBpediaDatasets.getDataset(input+extension.getOrElse("")))
+        new WorkParameters(language = lang, source = new RichFile(finder(lang).byName(input+inputSuffix, auto = true).get),
+          DBpediaDatasets.getDataset(input+extension.getOrElse("")).getOrElse(
+            throw new IllegalArgumentException("A dataset named " + input+extension.getOrElse("") + " is unknown.")
+          ))
 
     Workers.work[WorkParameters](SimpleWorkers(threads, threads)(mappingExecutor), parameters.toList, "executing language mappings")
   }
