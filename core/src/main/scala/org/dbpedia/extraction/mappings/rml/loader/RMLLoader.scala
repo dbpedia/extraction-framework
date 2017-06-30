@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.mappings.rml.loader
 
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLMapping
+import be.ugent.mmlab.rml.model.RMLMapping
 import org.dbpedia.extraction.util.Language
 
 /**

@@ -5,7 +5,7 @@ import java.nio.file.Paths
 
 import be.ugent.mmlab.rml.mapdochandler.extraction.std.StdRMLMappingFactory
 import be.ugent.mmlab.rml.mapdochandler.retrieval.RMLDocRetrieval
-import org.dbpedia.extraction.mappings.rml.translation.model.RMLMapping
+import be.ugent.mmlab.rml.model.RMLMapping
 import org.eclipse.rdf4j.rio.RDFFormat
 
 /**
@@ -45,9 +45,9 @@ object RMLParser {
     val files = dir.listFiles
                     .filter(_.isFile)
                     .filter(_.length() > 0)
-                    .filter(_.getName.contains(".rml.ttl")).toList
+                    .filter(_.getName.contains(".ttl")).toList
 
-    val map = files.map(file => file.getName.replace(".rml.ttl", "") -> RMLParser.parseFromFile(file.getAbsolutePath)).toMap
+    val map = files.map(file => file.getName.replace(".ttl", "") -> RMLParser.parseFromFile(file.getAbsolutePath)).toMap
 
     map
   }

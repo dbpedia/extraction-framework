@@ -4,7 +4,7 @@ import java.util.logging.{Level, Logger}
 import org.dbpedia.extraction.sources.{WikiPage, Source}
 import collection.mutable.{HashSet, HashMap}
 import java.io._
-import util.control.ControlThrowable
+import scala.util.control.ControlThrowable
 import org.dbpedia.extraction.wikiparser._
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.impl.wikipedia.Redirect

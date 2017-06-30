@@ -2,7 +2,7 @@ package org.dbpedia.extraction.dataparser
 
 import org.dbpedia.extraction.wikiparser.{TemplateNode, Node}
 import java.util.logging.{Level, Logger}
-import util.control.ControlThrowable
+import scala.util.control.ControlThrowable
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.config.dataparser.GeoCoordinateParserConfig
 import org.dbpedia.extraction.mappings.Redirects

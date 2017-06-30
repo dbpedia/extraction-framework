@@ -1,6 +1,6 @@
 package org.dbpedia.extraction.server.providers
 
-import util.control.ControlThrowable
+import scala.util.control.ControlThrowable
 import xml.{Elem, XML}
 import javax.ws.rs.ext.{Provider, MessageBodyReader}
 import javax.ws.rs.{Consumes, WebApplicationException}
