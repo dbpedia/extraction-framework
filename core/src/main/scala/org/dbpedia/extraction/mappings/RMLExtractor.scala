@@ -3,7 +3,6 @@ package org.dbpedia.extraction.mappings
 import be.ugent.mmlab.rml.model.RMLMapping
 import org.dbpedia.extraction.destinations.{DBpediaDatasets, Dataset, Quad}
 import org.dbpedia.extraction.mappings.rml.processing.RMLProcessorRunner
-import org.dbpedia.extraction.mappings.rml.util.RMLMappingWrapper
 import org.dbpedia.extraction.ontology.Ontology
 import org.dbpedia.extraction.util.Language
 import org.dbpedia.extraction.wikiparser.{Node, PageNode, TemplateNode}
@@ -19,15 +18,14 @@ class RMLExtractor(
   context : {
     def redirects: Redirects
     def language: Language
-    def rmlMap : Map[String, RMLMapping]
+    def rmlMappings : Map[String, RMLMapping]
     def ontology: Ontology
   }
 ) extends PageNodeExtractor{
 
 
 
-  //val rmlMappingWrapper = new RMLMappingWrapper(context.rmlMappings)
-  val rmlProcessorRunner = new RMLProcessorRunner(context.rmlMap)
+  val rmlProcessorRunner = new RMLProcessorRunner(context.rmlMappings)
 
   /**
     * @param input       The source node
@@ -53,19 +51,13 @@ class RMLExtractor(
     {
       case templateNode : TemplateNode =>
       {
-        /*
-        rmlMappingWrapper.getTriplesMap(templateNode.title.decoded) match {
-          case Some(triplesMap) =>
-            rmlProcessorRunner.process(templateNode, triplesMap, subjectUri, context)
-          case None => Seq.empty
-        }
-        */
-        val templateTitle = "Mapping_en:" + templateNode.title.encoded.toString
-        if (context.rmlMap.contains(templateTitle)) {
-          val start = System.nanoTime()
+
+        val templateTitle = "Mapping_en%3A" + templateNode.title.encoded.toString
+
+        if (context.rmlMappings.contains(templateTitle)) {
+
           val result = rmlProcessorRunner.process(templateNode, templateTitle, subjectUri, context)
-          val delta = System.nanoTime() - start
-          RMLProcessorRunner.ProcessorRunnerCounter += delta
+
           result
         } else {
           Seq.empty

@@ -36,7 +36,7 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
       */
 
     val parameters = new util.HashMap[String, String]()
-    val triplesMap = "http://en.dbpedia.org/resource/" + mappingName
+    val triplesMap = "http://en.dbpedia.org/resource/" + mappingName.replace("%3A", ":")
     val exeTriplesMap = List[String](triplesMap)
     val engine = new StdRMLEngine()
     val dataset : RMLDataset = new StdRMLDataset()
@@ -69,8 +69,6 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
     val triplesInputStream = new ByteArrayInputStream(triplesOutputStream.toByteArray)
     val model = ModelFactory.createDefaultModel()
     model.read(triplesInputStream, null, "TURTLE")
-
-
 
     /**
       * Iterating over the output and generating Quads
@@ -126,7 +124,6 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
       } else {
 
         // if the ontology is not in DBpedia!
-
         val datatype = if(statement.getObject.isResource) {
           null
         } else {
@@ -145,7 +142,6 @@ class RMLProcessorRunner(mappings: Map[String, RMLMapping]) {
     }
 
     seq
-
 
   }
 
