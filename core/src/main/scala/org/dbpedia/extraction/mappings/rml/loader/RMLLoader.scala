@@ -13,8 +13,21 @@ object RMLLoader {
     * @param language
     * @return
     */
-  def load(language :Language) : Map[String, RMLMapping] = {
-    Map()
+  def load(language :Language, pathToRMLMappingsDir : String) : Map[String, RMLMapping] = {
+
+    val pathToLanguageDir = getPathToLanguageDir(language, pathToRMLMappingsDir)
+    RMLParser.parseFromDir(pathToLanguageDir)
+
+  }
+
+  /**
+    * Creates the path to the mappings dir based on the language and path to all the RML mappings
+    * @param language
+    * @param pathToRMLMappingsDir
+    * @return
+    */
+  private def getPathToLanguageDir(language: Language, pathToRMLMappingsDir : String) : String = {
+    pathToRMLMappingsDir + "/" + language.isoCode
   }
 
 }
