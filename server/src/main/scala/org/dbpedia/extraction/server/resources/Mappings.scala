@@ -20,7 +20,7 @@ import xml.{Elem, NodeBuffer, ProcInstr, XML}
 import java.io._
 import java.util.zip.{ZipEntry, ZipOutputStream}
 
-import org.dbpedia.extraction.server.resources.rml.model.factories.RMLTemplateMappingFactory
+import org.dbpedia.extraction.mappings.rml.translation.model.factories.RMLTemplateMappingFactory
 
 /**
  * TODO: merge Extraction.scala and Mappings.scala
@@ -78,6 +78,7 @@ class Mappings(@PathParam("lang") langCode : String)
             <div class="row">
              <div class="col-md-3 col-md-offset-5">
             <h2>Mapping pages</h2>
+
             { Server.instance.extractor.mappingPageSource(language).map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
              </div>
             </div>
@@ -140,7 +141,7 @@ class Mappings(@PathParam("lang") langCode : String)
 
 
     /**
-     * Retrieves a mapping as rml
+     * Retrieves overview of rml mappings
      */
     @GET
     @Path("pages/rml/")
@@ -155,6 +156,9 @@ class Mappings(@PathParam("lang") langCode : String)
           <div class="row">
             <div class="col-md-3 col-md-offset-5">
               <h2>RML Mapping pages</h2>
+              <a href="rml/mappings.zip">Download all {langCode} mappings</a>
+              <br />
+              <br />
               { pages.map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
             </div>
           </div>
