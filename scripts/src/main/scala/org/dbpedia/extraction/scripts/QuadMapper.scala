@@ -3,7 +3,8 @@ package org.dbpedia.extraction.scripts
 import java.io.File
 import java.lang.StringBuilder
 
-import org.dbpedia.extraction.destinations.{Destination, WriterDestination}
+import org.dbpedia.extraction.config.provenance.Dataset
+import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.destinations.formatters.TerseFormatter
 import org.dbpedia.extraction.destinations.formatters.UriPolicy.Policy
 import org.dbpedia.extraction.transform.Quad
@@ -105,6 +106,15 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
     mapQuads(language, inFile, destination, required, closeWriter = true)(map)
   }
 
+  private def getTransitiveDatasets(dest: Destination): Seq[Dataset] = {
+    dest match{
+      case d : CompositeDestination => d.destinations.flatMap(x => getTransitiveDatasets(x))
+      case d : WrapperDestination => getTransitiveDatasets(d.destination)
+      case d : DatasetDestination => d.destinations.keySet.toSeq
+      case _ => Seq()
+    }
+  }
+
   /**
    * TODO: do we really want to open and close the destination here? Users may want to map quads
    * from multiple input files to one destination. On the other hand, if the input file doesn't
@@ -113,13 +123,15 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
     * Chile: made closing optional, also WriteDestination can only open Writer one now
    */
   def mapQuads(language: Language, inFile: FileLike[_], destination: Destination, required: Boolean, closeWriter: Boolean)(map: Quad => Traversable[Quad]): Unit = {
-    
+
+
     if (! inFile.exists) {
       if (required) throw new IllegalArgumentException(language.wikiCode+": file "+inFile+" does not exist")
       return
     }
-
     destination.open()
+    this.getRecorder.initialize(language, "Mapping Quads", getTransitiveDatasets(destination))
+
     try {
       readQuads(language, inFile) { old =>
         destination.write(map(old))
@@ -147,6 +159,8 @@ class QuadMapper(file: FileLike[File] = null, preamble: String = null) extends Q
 
     var mapCount = 0
     destination.open()
+    this.getRecorder.initialize(language, "Mapping Quads", getTransitiveDatasets(destination))
+
     try {
       readSortedQuads(language, inFile) { old =>
         val rs = map(old)

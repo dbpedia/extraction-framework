@@ -1,7 +1,8 @@
 package org.dbpedia.extraction.config.provenance
 
 import org.dbpedia.extraction.ontology.DBpediaNamespace
-import org.dbpedia.extraction.util.{JsonConfig, Language}
+import org.dbpedia.extraction.util
+import org.dbpedia.extraction.util.{JsonConfig, Language, StringUtils, WikiUtil}
 
 import scala.collection.mutable
 
@@ -291,7 +292,7 @@ object DBpediaDatasets
     val n = if(name.startsWith(DBpediaNamespace.DATASET.toString))
       name.substring(DBpediaNamespace.DATASET.toString.length, if(name.indexOf("?") >= 0) name.indexOf("?") else name.length)
     else
-      name.trim.toLowerCase.replaceAll("-", "_").replaceAll("\\s+", "_")
+      util.WikiUtil.wikiEncode(name.toLowerCase).replaceAll("-", "_")
     datasets.get(n) match {
       case Some(d) => {
         Option(language) match {

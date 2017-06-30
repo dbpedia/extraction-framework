@@ -5,6 +5,7 @@ import java.net.URL
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Logger
 
+import org.dbpedia.extraction.config.provenance.Dataset
 import org.dbpedia.extraction.destinations._
 import org.dbpedia.extraction.dump.download.Download
 import org.dbpedia.extraction.mappings._
@@ -157,10 +158,10 @@ class ConfigLoader(config: Config)
     val formatDestinations = new ArrayBuffer[Destination]()
 
     for ((suffix, format) <- config.formats) {
-      val datasetDestinations = new HashMap[String, Destination]()
+      val datasetDestinations = new HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix) match{
-          case Some(file)=> datasetDestinations(dataset.encoded) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
+          case Some(file)=> datasetDestinations(dataset) = new DeduplicatingDestination(new WriterDestination(writer(file), format))
           case None =>
         }
       }
@@ -194,7 +195,7 @@ class ConfigLoader(config: Config)
     * Creates ab extraction job for a specific language.
     */
   val imageCategoryWorker = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-    getExtractionRecorder(lang).initialize(lang)
+    getExtractionRecorder(lang).initialize(lang, "Image Extraction")
     getExtractionRecorder(lang).printLabeledLine("Start image list preparation for ImageExtractor.", RecordSeverity.Info)
     val finder = new Finder[File](config.dumpDir, lang, config.wikiName)
     val imageCategories = ConfigUtils.loadImages(getArticlesSource(lang, finder), lang.wikiCode, getExtractionRecorder(lang))

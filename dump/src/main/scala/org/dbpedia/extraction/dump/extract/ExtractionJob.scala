@@ -59,7 +59,7 @@ class ExtractionJob(
   
   def run(): Unit =
   {
-    extractionRecorder.initialize(language, extractor.datasets.toSeq)
+    extractionRecorder.initialize(language, "Main Extraction", extractor.datasets.toSeq)
 
     extractor.initializeExtractor()
     

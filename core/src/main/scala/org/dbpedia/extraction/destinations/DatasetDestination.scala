@@ -1,8 +1,9 @@
 package org.dbpedia.extraction.destinations
 
+import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
 import org.dbpedia.extraction.transform.Quad
 
-import scala.collection.{Map, mutable}
+import scala.collection.Map
 
 /**
  * A destination which groups quads by dataset and writes them to different destinations.
@@ -13,20 +14,19 @@ import scala.collection.{Map, mutable}
  * @param destinations All quads for a dataset are written to the destination given in this map. 
  * If the map contains no destination for a dataset, all quads for that dataset will be ignored.
  */
-class DatasetDestination(destinations: Map[String, Destination]) 
+class DatasetDestination(val destinations: Map[Dataset, Destination])
 extends Destination
 {
   override def open() = {
     for(dest <- destinations)
     {
       dest._2.open()
-      DatasetDestination.openedDatasets(dest._1) = true
     }
   }
 
   override def write(graph : Traversable[Quad]) : Unit = {
     for((dataset, quads) <- graph.groupBy(_.dataset)) {
-      destinations.get(dataset).foreach(_.write(quads))
+      destinations.get(DBpediaDatasets.getDataset(dataset)).foreach(_.write(quads))
     }
   }
 
@@ -34,13 +34,7 @@ extends Destination
     for(dest <- destinations)
     {
       dest._2.close()
-      DatasetDestination.openedDatasets.remove(dest._1)
     }
   }
 
-}
-
-object DatasetDestination{
-  //maybe use the map to add some provenance ?
-  private val openedDatasets = mutable.HashMap[String, Boolean]()
 }

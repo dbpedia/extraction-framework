@@ -51,12 +51,13 @@ object MapWikidataToLanguageUri {
         case None => throw new IllegalArgumentException("Interlanguage link file for language " + language.name + " was not found: " + DBpediaDatasets.InterLanguageLinks.filenameEncoded + suffix)
       }
 
-      val destination = DestinationUtils.createDestination(finder, Array(DBpediaDatasets.Persondata.getLanguageVersion(language, config.dbPediaVersion).get), config.formats)
+      val destination = DestinationUtils.createDatasetDestination(finder, Array(DBpediaDatasets.Persondata.getLanguageVersion(language, config.dbPediaVersion).get), config.formats)
 
       val map = new mutable.HashMap[String, String]()
 
       val cutWikidataAt = Language.Wikidata.resourceUri.toString.length
-      val cutLanguageAt = language.resourceUri.toString.length
+      val langResourcUri = if(language == Language.English) language.resourceUri.toString.replace("en.", "") else language.resourceUri.toString
+      val cutLanguageAt = langResourcUri.length
       new QuadReader().readQuads(language, interlanguageLinks){ quad =>
         if(quad.value.startsWith(Language.Wikidata.resourceUri.toString))
           map.put(quad.value.substring(cutWikidataAt), quad.subject.substring(cutLanguageAt))
@@ -67,7 +68,7 @@ object MapWikidataToLanguageUri {
         if (quad.language == null) {
           if(quad.datatype == null && quad.value.startsWith(Language.Wikidata.resourceUri.toString))
             map.get(quad.value.substring(cutWikidataAt)) match {
-              case Some(v) => Option(quad.copy(subject = newSubject, value = language.resourceUri.toString + v, dataset = DBpediaDatasets.Persondata.encoded))
+              case Some(v) => Option(quad.copy(subject = newSubject, value = langResourcUri + v, dataset = DBpediaDatasets.Persondata.encoded))
               case None => Option(quad.copy(subject = newSubject, dataset = DBpediaDatasets.Persondata.encoded))
             }
           else
@@ -135,7 +136,7 @@ object MapWikidataToLanguageUri {
             case Some(u) => {
               val groups = quads.groupBy(g => g.predicate)
               val ret = new ArrayBuffer[Quad]()
-              ret ++= (for (group <- groups) yield selectPredicateGroupRepresentative(language.resourceUri.toString + u, group)).flatten
+              ret ++= (for (group <- groups) yield selectPredicateGroupRepresentative(langResourcUri + u, group)).flatten
               clacSurOrGivenName(groups, ret) match{
                 case Some(q) => ret += q
                 case None =>

@@ -97,7 +97,7 @@ object CanonicalizeIris {
     val oldPrefix = uriPrefix(langSourceDest.language)
     val oldResource = oldPrefix+"resource/"
 
-    val destination = DestinationUtils.createDestination(finder(langSourceDest.language), Seq(langSourceDest.destination), formats)
+    val destination = DestinationUtils.createDatasetDestination(finder(langSourceDest.language), Seq(langSourceDest.destination), formats)
     val destName = langSourceDest.destination.encoded
     val map = mappings.get(langSourceDest.language).get //if this fails something is really wrong
 

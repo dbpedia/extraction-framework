@@ -59,7 +59,7 @@ object TypeStatistics {
     writeProps = args(5).toLowerCase == "listproperties"
     writeObjects = args(6).toLowerCase == "listobjects"
 
-    val canonicalStr = if(args.length == 7) "_en_uris" else args(7).trim
+    val canonicalStr = if(args.length < 8) "_en_uris" else args(7).trim
 
     val results = new ConcurrentHashMap[String, String]().asScala
 
@@ -102,9 +102,11 @@ object TypeStatistics {
             }
           }
         }
+        else
+          throw new IllegalArgumentException("File was not found: " + file.getFile.getAbsoluteFile)
       }
       results.put(lang.wikiCode, writeLang(lang.wikiCode, statements, subjects, props, objects))
-    }, Namespace.mappingLanguages.toList.sortBy(x => x))
+    }, List(Language("de")))//Namespace.mappingLanguages.toList.sortBy(x => x))
 
     logger.log(Level.INFO, "finished calculations")
 

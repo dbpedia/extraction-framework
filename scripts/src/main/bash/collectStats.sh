@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# NEEDS TO RUN ON THE DownloadServer!!! (following the naming regime of /core-i18n/en/dataset_name_en.ttl.bz2)
 # this script will collect all necessary statistics when a release is finished
 # publish these files alongside the data and use the html example (directory wiki)
 # on how to integrate the stats on the drupal wiki pages
 
 # for more information about the parameters have a look at the classes in /statistics
+# $1 = baseDirectory
 
 ../run TypeStatistics $1 .ttl.bz2 "short_abstracts" stats-instances-cd.json canonicalized donotlist donotlist
 ../run TypeStatistics $1 .ttl.bz2 "short_abstracts" stats-instances-ld.json localized donotlist donotlist

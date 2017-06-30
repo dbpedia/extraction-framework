@@ -9,7 +9,7 @@ import org.dbpedia.extraction.transform.Quad
  * This class does not use synchronization, but if the target datasets are thread-safe then
  * so is this destination. The write() method may be executed concurrently by multiple threads. 
  */
-class CompositeDestination(destinations : Destination *) extends Destination
+class CompositeDestination(val destinations : Destination *) extends Destination
 {
     /**
      * Opens all child destinations.

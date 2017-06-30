@@ -69,11 +69,11 @@ class PersonDataExtractorNew(config: Config) {
   dfinder.byName(DBpediaDatasets.WikidataRawRedirected.filenameEncoded + suffix, auto = true) // work around for setting the date-finder date
 
   // output
-  private val finalDestination: Destination = DestinationUtils.createDestination(dfinder,
+  private val finalDestination: Destination = DestinationUtils.createDatasetDestination(dfinder,
     List(DBpediaDatasets.Persondata.getLanguageVersion(Language.Wikidata, config.dbPediaVersion).get),
     config.formats.toMap)
 
-  private val testination: Destination = DestinationUtils.createDestination(dfinder,
+  private val testination: Destination = DestinationUtils.createDatasetDestination(dfinder,
     List(DBpediaDatasets.WikidataPersondataRaw.getLanguageVersion(Language.Wikidata, config.dbPediaVersion).get),
     config.formats.toMap)
 

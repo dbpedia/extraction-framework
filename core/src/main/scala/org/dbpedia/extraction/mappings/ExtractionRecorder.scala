@@ -42,6 +42,8 @@ class ExtractionRecorder[T](
   private var slackIncreaseExceptionThreshold = 1
 
   private var datasets: Seq[Dataset] = Seq()
+  private var task: String = "transformation"
+  private var initialized = false
 
   private var writerOpen = if(logWriter == null) false else true
 
@@ -216,7 +218,7 @@ class ExtractionRecorder[T](
     } else print
 
     val status = getStatusValues(lang)
-    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; extraction at {time}{data}; ") + line
+    val replacedLine = (if (noLabel) "" else severity.toString + "; " + lang.wikiCode + "; {task} at {time}{data}; ") + line
     val pattern = "\\{\\s*\\w+\\s*\\}".r
     var lastend = 0
     var resultString = ""
@@ -231,6 +233,7 @@ class ExtractionRecorder[T](
             case i if i == "{erate}" => status("erate")
             case i if i == "{fail}" => status("failed")
             case i if i == "{data}" => status("dataset")
+            case i if i == "{task}" => status("task")
             case _ => ""
           }
         case None => ""
@@ -252,24 +255,32 @@ class ExtractionRecorder[T](
     val pages = successfulPages(lang)
     val time = System.currentTimeMillis - startTime.get
     val failed = failedPages(lang)
+    val datasetss = if(datasets.nonEmpty && datasets.size <= 5)
+      datasets.foldLeft[String]("")((x,y) => x + ", " + y.encoded).substring(2)
+    else
+      String.valueOf(datasets.size) + " datasets"
 
     Map("pages" -> pages.toString,
       "failed" -> failed.toString,
       "mspp" -> (decForm.format(time.toDouble / pages) + " ms"),
       "erate" -> (if(failed == 0) "0" else ((pages+failed) / failed).toString),
-      "dataset" -> (if(datasets.nonEmpty) datasets.size + " datasets" else ""),
-      "time" -> StringUtils.prettyMillis(time)
+      "dataset" -> datasetss,
+      "time" -> StringUtils.prettyMillis(time),
+      "task" -> task
     )
   }
 
-  def initialize(lang: Language, datasets: Seq[Dataset] = Seq()): Unit ={
-    failedPageMap = Map[Language, scala.collection.mutable.Map[(Long, T), Throwable]]()
-    successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
-    successfulPageCount = Map[Language,AtomicLong]()
+  def initialize(lang: Language, task: String, datasets: Seq[Dataset] = Seq()): Boolean ={
+    if(initialized)
+      return false
+    this.failedPageMap = Map[Language, scala.collection.mutable.Map[(Long, T), Throwable]]()
+    this.successfulPagesMap = Map[Language, scala.collection.mutable.Map[Long, WikiTitle]]()
+    this.successfulPageCount = Map[Language,AtomicLong]()
 
-    startTime.set(System.currentTimeMillis)
-    defaultLang = lang
+    this.startTime.set(System.currentTimeMillis)
+    this.defaultLang = lang
     this.datasets = datasets
+    this.task = task
 
     if(preamble != null)
       printLabeledLine(preamble, RecordSeverity.Info, lang)
@@ -277,6 +288,8 @@ class ExtractionRecorder[T](
     val line = "Extraction started for language: " + lang.name + " (" + lang.wikiCode + ")" + (if (datasets.nonEmpty) " on " + datasets.size + " datasets." else "")
     printLabeledLine(line, RecordSeverity.Info, lang)
     forwardExtractionOverview(lang, line)
+    initialized = true
+    true
   }
 
   override def finalize(): Unit ={
@@ -342,7 +355,7 @@ class ExtractionRecorder[T](
       return
     val status = getStatusValues(lang)
     val attachments = new JsonArray()
-    val attachment = getAttachment("Extraction Status Report:", "#36a64f")
+    val attachment = getAttachment("Status Report of " + status("task"), "#36a64f")
     val fields = new JsonArray()
     addKeyValue(fields, "extracted pages:", status("pages"))
     if(status("dataset").nonEmpty)

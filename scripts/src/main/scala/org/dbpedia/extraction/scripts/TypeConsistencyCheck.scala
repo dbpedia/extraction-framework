@@ -311,10 +311,10 @@ object TypeConsistencyCheck {
   private def createDestination(finder: Finder[File], date: String, formats: scala.collection.Map[String, Formatter]) : Destination = {
     val destination = new ArrayBuffer[Destination]()
     for ((suffix, format) <- formats) {
-      val datasetDestinations = new HashMap[String, Destination]()
+      val datasetDestinations = new HashMap[Dataset, Destination]()
       for (dataset <- datasets) {
         val file = finder.file(date, dataset.encoded.replace('_', '-')+'.'+suffix).get
-        datasetDestinations(dataset.encoded) = new WriterDestination(writer(file), format)
+        datasetDestinations(dataset) = new WriterDestination(writer(file), format)
       }
 
       destination += new DatasetDestination(datasetDestinations)

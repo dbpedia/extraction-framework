@@ -80,7 +80,7 @@ class QuadReader(log: FileLike[File] = null, preamble: String = null) {
       case Some(x) => x
       case None => null
     }
-    getRecorder.initialize(language)
+    getRecorder.initialize(language, "Processing Quads")
 
     IOUtils.readLines(file) { line =>
       line match {
