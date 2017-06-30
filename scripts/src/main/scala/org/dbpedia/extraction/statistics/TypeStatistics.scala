@@ -19,10 +19,10 @@ object TypeStatistics {
   private var localized = false
   private var writeProps = false
   private var writeObjects = false
+  private val logger = Logger.getLogger(getClass.getName)
 
   def main(args: Array[String]): Unit = {
 
-    val logger = Logger.getLogger(getClass.getName)
 
     require(args != null && args.length >= 7,
       "need at least three args: " +
@@ -59,7 +59,7 @@ object TypeStatistics {
     writeProps = args(5).toLowerCase == "listproperties"
     writeObjects = args(6).toLowerCase == "listobjects"
 
-    val canonicalStr = if(args.length < 8) "_en_uris" else args(7).trim
+    val canonicalStr = if(args.length < 8) "_wkd_uris" else args(7).trim
 
     val results = new ConcurrentHashMap[String, String]().asScala
 
@@ -129,12 +129,15 @@ object TypeStatistics {
     val sb = new StringBuilder()
     sb.append("\t\"" + lang + "\": {")
     sb.append("\t\t\"subjects\": {")
+    logger.log(Level.INFO, "write subject map " + lang)
     writeMap(subjects.toMap, sb, false)
     sb.append("\t\t} ,")
     sb.append("\t\t\"properties\": {")
+    logger.log(Level.INFO, "write prop map " + lang)
     writeMap(props.toMap, sb, writeProps)
     sb.append("\t\t} ,")
     sb.append("\t\t\"objects\": {")
+    logger.log(Level.INFO, "write object map " + lang)
     writeMap(objects.toMap, sb, writeObjects)
     sb.append("\t\t} ,")
     sb.append("\t\t\"statements\": {")
