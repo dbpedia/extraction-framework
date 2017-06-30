@@ -20,6 +20,7 @@ private class ServerConfiguration(config: Properties) {
   val statisticsDir = getValue(config, "statisticsDir", true)(new File(_))
   val ontologyFile = getValue(config, "ontologyFile", false)(new File(_))
   val mappingsDir = getValue(config, "mappingsDir", false)(new File(_))
+  val rmlMappingsDir = getString(config, "rmlMappingsDir", true)
 
   val _languages = getString(config, "languages",true)
   val languages = parseLanguages(null,Seq(_languages))

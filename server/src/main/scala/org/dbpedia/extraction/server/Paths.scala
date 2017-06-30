@@ -12,4 +12,4 @@ import java.net.URL
  * @param mappingsDir Directory containing mappings in xml dump format. If directory is null or 
  * does not exist, load mappings from server. 
  */
-class Paths(val pagesUrl: URL, val apiUrl: URL, val statsDir: File, val ontologyFile: File, val mappingsDir: File)
+class Paths(val pagesUrl: URL, val apiUrl: URL, val statsDir: File, val ontologyFile: File, val mappingsDir: File, val rmlMappingsDir: String)
