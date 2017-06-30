@@ -27,13 +27,13 @@ object CreateLinesBytesPacked {
   def getMd5(file: File): String = Process("/bin/bash", Seq("-c", "md5deep -o fl -l <" + resolveSymLink(file) + " | tr --delete '\\n'")).!!.trim
   def getLinesCompressed(file: File): (String, String) = {
     val link = resolveSymLink(file)
-    var exeption = new StringBuilder()
+    val exception = new StringBuilder()
     val zw = Process("/bin/bash", Seq("-c", "bzip2 -cd <" + link + " | wc -cl")).!!<(
       ProcessLogger.apply((o: String) => o, (e: String)=>
-        exeption.append(e)))
+        exception.append(e)))
 
-    if(exeption.nonEmpty && exeption.toString.contains("bzip2"))
-      throw new IllegalArgumentException("An exception arose: " + exeption)
+    if(exception.nonEmpty && exception.toString.contains("bzip2"))
+      throw new IllegalArgumentException("An exception arose: " + exception.toString)
 
     val tt = zw.replaceAll("\\n", "").trim.split("\\s+")
     (tt.head, tt(1))
@@ -51,7 +51,6 @@ object CreateLinesBytesPacked {
         val splits = line.trim.split(";")
         if (splits.length != 5) {
           logger.log(Level.WARNING, "The file " + file.getAbsoluteFile + " was not in the expected csv format of 5 columns.")
-          map.clear()
           break
         }
         val insert = new mutable.HashMap[String, String]()
@@ -96,25 +95,27 @@ object CreateLinesBytesPacked {
     }
 
     val dirWorkers = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-        logger.log(Level.INFO, "starting language " + lang.name)
-        var map: mutable.HashMap[String, mutable.HashMap[String, String]] = null
-        val path = new File(baseDir, lang.wikiCode)
-        if (!path.exists || !path.isDirectory) {
-          logger.log(Level.SEVERE, "No direcory for language " + lang.wikiCode + " was found: " + path.getAbsolutePath)
-          return
-        }
+      logger.log(Level.INFO, "starting language " + lang.name)
+      var map: mutable.HashMap[String, mutable.HashMap[String, String]] = null
+      val path = new File(baseDir, lang.wikiCode)
+      if (!path.exists || !path.isDirectory) {
+        logger.log(Level.SEVERE, "No direcory for language " + lang.wikiCode + " was found: " + path.getAbsolutePath)
+        return
+      }
 
-        val target = new File(path, "lines-bytes-packed.csv")
-        if (target.exists())
-          map = readLBP(target)
-        else
-          map = new mutable.HashMap[String, mutable.HashMap[String, String]]()
+      val target = new File(path, "lines-bytes-packed.csv")
+      if (target.exists())
+        map = readLBP(target)
+      else
+        map = new mutable.HashMap[String, mutable.HashMap[String, String]]()
 
-        target.createNewFile()
-        val writer = IOUtils.writer(target)
+      target.createNewFile()
+      val writer = IOUtils.writer(target)
+      var lastFile: String = ""
 
       try {
         for (file <- path.listFiles().filter(x => x.isFile && pattern.findFirstMatchIn(x.getName).isDefined).sortBy(x => x.getName)) {
+          lastFile = file.getAbsolutePath
           map.get(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1)) match {
             case Some(insert) => if (insert("hash") != getMd5(file))
               writeInsert(file, writer)
@@ -135,7 +136,7 @@ object CreateLinesBytesPacked {
         }
       } catch{
         case f: Throwable =>
-          logger.log(Level.SEVERE, "An exception for language " + lang.wikiCode + " arose: " + f.getMessage)
+          logger.log(Level.SEVERE, "An exception for filr " + lastFile + " arose: " + f.getMessage)
           writer.write("Exception: " + f.getMessage + "\n")
           writer.close()
       }
