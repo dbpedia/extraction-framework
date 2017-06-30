@@ -102,8 +102,6 @@ object TypeStatistics {
             }
           }
         }
-        else
-          throw new IllegalArgumentException("File was not found: " + file.getFile.getAbsoluteFile)
       }
       results.put(lang.wikiCode, writeLang(lang.wikiCode, statements, subjects, props, objects))
     }, Namespace.mappingLanguages.toList.sortBy(x => x))
