@@ -156,7 +156,7 @@ class Mappings(@PathParam("lang") langCode : String)
           <div class="row">
             <div class="col-md-3 col-md-offset-5">
               <h2>RML Mapping pages</h2>
-              <a href="rml/mappings.zip">Download all {langCode} mappings</a>
+              <a href="mappings.zip">Download all {langCode} mappings</a>
               <br />
               <br />
               { pages.map(page => PageUtils.relativeLink(parser(page).getOrElse(throw new Exception("Cannot get page: " + page.title.decoded + ". Parsing failed"))) ++ <br/>) }
@@ -265,22 +265,6 @@ class Mappings(@PathParam("lang") langCode : String)
       // return the InputStream
       source
 
-
-      /**
-      //getAllMappings = true
-      val builder = new StringBuilder()
-      val titles = Server.instance.extractor.mappingPageSource(language).map(x => x.title.encodedWithNamespace.replace(":", "%3A"))
-
-      for(title <- titles) {
-        val zw = try {getRdfMapping(title)}
-        catch {
-          case x: Throwable => ""
-        }
-        builder.append(zw)
-      }
-      //getAllMappings = false
-      builder.toString()
-        **/
     }
 
     /**
