@@ -106,7 +106,7 @@ object TypeStatistics {
           throw new IllegalArgumentException("File was not found: " + file.getFile.getAbsoluteFile)
       }
       results.put(lang.wikiCode, writeLang(lang.wikiCode, statements, subjects, props, objects))
-    }, List(Language("de")))//Namespace.mappingLanguages.toList.sortBy(x => x))
+    }, Namespace.mappingLanguages.toList.sortBy(x => x))
 
     logger.log(Level.INFO, "finished calculations")
 
