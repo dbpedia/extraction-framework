@@ -27,8 +27,13 @@ object CreateLinesBytesPacked {
   def getMd5(file: File): String = Process("/bin/bash", Seq("-c", "md5deep -o fl -l <" + resolveSymLink(file) + " | tr --delete '\\n'")).!!.trim
   def getLinesCompressed(file: File): (String, String) = {
     val link = resolveSymLink(file)
+    var exeption = new StringBuilder()
     val zw = Process("/bin/bash", Seq("-c", "bzip2 -cd <" + link + " | wc -cl")).!!<(
-      ProcessLogger.apply((o: String) => o, (e: String)=> if(e.contains("bzip2")) throw new IllegalArgumentException(file.getAbsolutePath + " is not a valid bzip2 file.")))
+      ProcessLogger.apply((o: String) => o, (e: String)=>
+        exeption.append(e)))
+
+    if(exeption.nonEmpty && exeption.toString.contains("bzip2"))
+      throw new IllegalArgumentException("An exception arose: " + exeption)
 
     val tt = zw.replaceAll("\\n", "").trim.split("\\s+")
     (tt.head, tt(1))
@@ -76,6 +81,20 @@ object CreateLinesBytesPacked {
     baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith(config.wikiName)).foreach(x =>
       throw new IllegalArgumentException("Please make sure to run this script on the Download Server only. The following directory should therefore not end with the wiki string: " + x))
 
+    def writeInsert(file: File, writer: Writer): Unit = {
+      val lin = getLinesCompressed(file)
+      writer.write(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1))
+      writer.write(";")
+      writer.write(lin._1)
+      writer.write(";")
+      writer.write(lin._2)
+      writer.write(";")
+      writer.write(getLength(file))
+      writer.write(";")
+      writer.write(getMd5(file))
+      writer.write("\n")
+    }
+
     val dirWorkers = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
         logger.log(Level.INFO, "starting language " + lang.name)
         var map: mutable.HashMap[String, mutable.HashMap[String, String]] = null
@@ -96,11 +115,11 @@ object CreateLinesBytesPacked {
 
       try {
         for (file <- path.listFiles().filter(x => x.isFile && pattern.findFirstMatchIn(x.getName).isDefined).sortBy(x => x.getName)) {
-          map.get(file.getName) match {
+          map.get(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1)) match {
             case Some(insert) => if (insert("hash") != getMd5(file))
               writeInsert(file, writer)
             else {
-              writer.write(file.getName)
+              writer.write(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1))
               writer.write(";")
               writer.write(insert("lines"))
               writer.write(";")
@@ -125,19 +144,5 @@ object CreateLinesBytesPacked {
     }
 
     Workers.work[Language](dirWorkers, language)
-  }
-
-  private def writeInsert(file: File, writer: Writer): Unit = {
-    val lin = getLinesCompressed(file)
-    writer.write(file.getName)
-    writer.write(";")
-    writer.write(lin._1)
-    writer.write(";")
-    writer.write(lin._2)
-    writer.write(";")
-    writer.write(getLength(file))
-    writer.write(";")
-    writer.write(getMd5(file))
-    writer.write("\n")
   }
 }
