@@ -74,7 +74,7 @@ object CreateLinesBytesPacked {
 
   def main(args: Array[String]): Unit = {
 
-    if (SystemUtils.IS_OS_UNIX)
+    if (!SystemUtils.IS_OS_UNIX)
       throw new RuntimeException("Make sure to run this script only on UNIX environments!")
 
     require(args != null && args.length == 1, "One arguments required, extraction config file")
