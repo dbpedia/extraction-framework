@@ -35,45 +35,45 @@ object DataIdGenerator {
   //todo change external instances of lexvo to DBpedia+ worldfact ids
   private val dateformat = new SimpleDateFormat("yyyy-MM-dd")
   //statements
-  private var stmtModel: Model = null
-  private var agentModel: Model = null
-  private var checksumModel: Model = null
-  private var catalogModel: Model = null
-  private var staticModel: Model = null
-  private var relationModel: Model = null
+  private var stmtModel: Model = _
+  private var agentModel: Model = _
+  private var checksumModel: Model = _
+  private var catalogModel: Model = _
+  private var staticModel: Model = _
+  private var relationModel: Model = _
   private var latestDataId: Option[(List[Resource], String)] = None
   private var previousDataId: Option[(List[Resource], String)] = None
   private var nextDataId: Option[(List[Resource], String)] = None
-  private var versionStatement: Resource = null
-  private var rightsStatement: Resource = null
-  private var dataidStandard: Resource = null
-  private var dataidLdStandard: Resource = null
+  private var versionStatement: Resource = _
+  private var rightsStatement: Resource = _
+  private var dataidStandard: Resource = _
+  private var dataidLdStandard: Resource = _
 
-  private var catalogInUse: Resource = null
-  private var currentRootSet: Resource = null
-  private var currentDataIdUri: Resource = null
-  private var currentDataid: Model = null
+  private var catalogInUse: Resource = _
+  private var currentRootSet: Resource = _
+  private var currentDataIdUri: Resource = _
+  private var currentDataid: Model = _
 
-  private var configMap: JsonObject = null
+  private var configMap: JsonObject = _
 
-  private var mediaTypeMap: Map[(String, String), Resource] = null
-  private var lbpMap: Map[String, Map[String, String]] = null
-  private var webDir: String = null
-  private var dump: File = null
+  private var mediaTypeMap: Map[(String, String), Resource] = _
+  private var lbpMap: Map[String, Map[String, String]] = _
+  private var webDir: String = _
+  private var dump: File = _
 
-  private var documentation: String = null
-  private var compression: String = null
-  private var vocabulary: String = null
-  private var idVersion: String = null
-  private var dbpVersion: String = null
-  private var preamble: String = null
-  private var rights: String = null
-  private var license: String = null
-  private var sparqlEndpoint: String = null
-  private var extensions: List[JsonValue] = null
-  private var coreList: List[String] = null
+  private var documentation: String = _
+  private var compression: String = _
+  private var vocabulary: String = _
+  private var idVersion: String = _
+  private var dbpVersion: String = _
+  private var preamble: String = _
+  private var rights: String = _
+  private var license: String = _
+  private var sparqlEndpoint: String = _
+  private var extensions: List[JsonValue] = _
+  private var coreList: List[String] = _
 
-  private var releaseDate: Date = null
+  private var releaseDate: Date = _
 
   private val dumpFile = "^[a-zA-Z0-9-_]+".r
 
@@ -98,9 +98,9 @@ object DataIdGenerator {
         val filter = new FilenameFilter {
           override def accept(dir: File, name: String): Boolean = {
             if (name.matches(fileFilter))
-              return true
+              true
             else
-              return false
+              false
           }
         }
         dir.listFiles(filter).map(x => x.getName.replace("-", "_")).toList.sorted
@@ -515,10 +515,9 @@ object DataIdGenerator {
     val datasetName = getDatasetName(currentFile, lang)  //TODO check if we can get this from Dataset?
     val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
       case Some(d) => d
-      case None => {
+      case None =>
         err.println("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
         return null
-      }
     }
     val datasetUri = model.createResource(dataset.versionUri)
     //add dataset to catalog
@@ -576,18 +575,17 @@ object DataIdGenerator {
       model.add(datasetUri, getProperty("dc", "conformsTo"), dataidLdStandard)
       lbpMap.get("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile) match {
         case Some(triples) =>
-          model.add(datasetUri, getProperty("void", "triples"), createLiteral((new Integer(triples.get("lines").get) - 2).toString, "xsd", "integer"))
+          model.add(datasetUri, getProperty("void", "triples"), createLiteral((new Integer(triples("lines")) - 2).toString, "xsd", "integer"))
         case None =>
       }
 
     }
     else if(currentFile.contains("pages_articles")) { //is wikipedia dump dataset
       getWikipediaDownloadInfo(lang) match {
-        case Some(dlInfo) => {
+        case Some(dlInfo) =>
           val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
           model.add(datasetUri, getProperty("dc", "hasVersion"), dlInfo._1.trim)
           model.add(datasetUri, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
-        }
         case None =>
       }
       val wikimedia = addAgent(agentModel, datasetUri, model, configMap.get("wikimedia").getAsObject)
@@ -609,10 +607,9 @@ object DataIdGenerator {
     val datasetName =  getDatasetName(currentFile, lang)
     val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
       case Some(d) => d
-      case None => {
+      case None =>
         err.println("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
         return null
-      }
     }
     val dist = model.createResource(dataset.getDistributionUri("file", currentFile.substring(currentFile.indexOf('.'))))
     model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
@@ -636,12 +633,11 @@ object DataIdGenerator {
     {
       val wikimedia = addAgent(agentModel, dist, model, configMap.get("wikimedia").getAsObject)
       getWikipediaDownloadInfo(lang) match {
-        case Some(dlInfo) => {
+        case Some(dlInfo) =>
           val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
           model.add(dist, getProperty("dc", "hasVersion"), dlInfo._1.trim)
           model.add(dist, getProperty("dc", "issued"), createLiteral(rDate, "xsd", "date"))
           model.add(dist, getProperty("dcat", "downloadURL"), model.createResource(dlInfo._2.trim))
-        }
         case None =>
       }
       model.add(dist, getProperty("dc", "publisher"), wikimedia)
@@ -665,8 +661,8 @@ object DataIdGenerator {
       lbpMap.get(outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile)
       match {
         case Some(bytes) => {
-          model.add(dist, getProperty("dcat", "byteSize"), createLiteral(bytes.get("bz2").get, "xsd", "integer"))
-          model.add(dist, getProperty("dataid", "uncompressedByteSize"), createLiteral(bytes.get("bytes").get, "xsd", "integer"))
+          model.add(dist, getProperty("dcat", "byteSize"), createLiteral(bytes("bz2"), "xsd", "integer"))
+          model.add(dist, getProperty("dataid", "uncompressedByteSize"), createLiteral(bytes("bytes"), "xsd", "integer"))
           //add checksum
           bytes.get("md5") match{
             case Some(md5) => {
@@ -711,7 +707,7 @@ object DataIdGenerator {
     require(URI.create(webDir) != null, "Please specify a valid web directory!")
 
     dump = new File(configMap.get("localDir").getAsString.value)
-    require(dump.isDirectory() && dump.canRead(), "Please specify a valid local dump directory!")
+    require(dump.isDirectory && dump.canRead, "Please specify a valid local dump directory!")
 
     //this csv file is created with the command below
     //line structure: file;line count;uncompressed byte size;byte size;md5 checksum
@@ -739,7 +735,7 @@ object DataIdGenerator {
     require(compression.startsWith("."), "please provide a valid file extension starting with a dot")
 
     extensions = configMap.get("serializations").getAsArray.subList(0, configMap.get("serializations").getAsArray.size()).asScala.toList
-    require(extensions.map(x => x.getAsString.value().startsWith(".")).foldLeft(true)(_ && _), "list of valid serialization extensions starting with a dot")
+    require(extensions.forall(x => x.getAsString.value().startsWith(".")), "list of valid serialization extensions starting with a dot")
 
     require(!configMap.get("outputFileTemplate").getAsString.value.contains("."), "Please specify a valid output file name without extension")
 
@@ -903,7 +899,7 @@ object DataIdGenerator {
   }
 
   def getOtherVersionUri(targetModel: List[Resource], version: String, currentUri: Resource): Option[Resource] = {
-    if (targetModel == null || targetModel.size == 0)
+    if (targetModel == null || targetModel.isEmpty)
       return None
 
     val uri = new URI(currentUri.getURI)

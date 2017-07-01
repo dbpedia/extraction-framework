@@ -3,6 +3,8 @@ package org.dbpedia.extraction.scripts
 import java.io.{File, Writer}
 import java.util.logging.{Level, Logger}
 
+import org.apache.commons.lang3.SystemUtils
+
 import scala.util.control.Breaks._
 import org.dbpedia.extraction.util._
 import org.dbpedia.extraction.util.RichFile.wrapFile
@@ -14,17 +16,23 @@ import scala.util.matching.Regex
 
 /**
   * Created by chile on 30.06.17.
+  * This script will create the lines-bytes-packed.csv files for every subdirectory (maxdepth 2)
+  * recording each bz2 file (this can be changed by adapting the 'pattern' variable.
+  * Format (filepath;lines;uncompressed length;file length;md5 hash)
+  * It should only be run on the Download Server. Its results are then used by the DataIdGenerator script.
+  * ! only suitable for UNIX environments !
   */
 object CreateLinesBytesPacked {
   private val logger = Logger.getLogger(getClass.getName)
-  private var pattern: Regex = ".*\\.bz2$".r
+  private val pattern: Regex = ".*\\.bz2$".r
 
   def resolveSymLink(file: File): String ={
     val command = "file=" + file.getAbsolutePath + "; test=$(stat  --printf='%F' $file ); if [[ 'symbolic link' == \"$test\" ]] ; then file=$(readlink -f $file); fi; echo \"$file\";"
-    Process("/bin/bash", Seq("-c", command)).!!.replaceAll("\\n", "")
+    Process("/bin/bash", Seq("-c", command)).!!.replaceAll("\\n", "").trim
   }
 
   def getMd5(file: File): String = Process("/bin/bash", Seq("-c", "md5deep -o fl -l <" + resolveSymLink(file) + " | tr --delete '\\n'")).!!.trim
+
   def getLinesCompressed(file: File): (String, String) = {
     val link = resolveSymLink(file)
     val exception = new StringBuilder()
@@ -64,9 +72,10 @@ object CreateLinesBytesPacked {
     map
   }
 
-
-
   def main(args: Array[String]): Unit = {
+
+    if (SystemUtils.IS_OS_UNIX)
+      throw new RuntimeException("Make sure to run this script only on UNIX environments!")
 
     require(args != null && args.length == 1, "One arguments required, extraction config file")
 
@@ -75,12 +84,9 @@ object CreateLinesBytesPacked {
     val baseDir = config.dumpDir
     require(baseDir.isDirectory && baseDir.canRead && baseDir.canWrite, "Please specify a valid local base extraction directory - invalid path: " + baseDir)
 
-    val language = config.languages
+    val directories = baseDir.listFiles.filter(_.isDirectory).flatMap(x => x.listFiles.filter(_.isDirectory)).map(x => new RichPath(x.toPath))
 
-    baseDir.listFiles().filter(x => x.isDirectory && x.getName.endsWith(config.wikiName)).foreach(x =>
-      throw new IllegalArgumentException("Please make sure to run this script on the Download Server only. The following directory should therefore not end with the wiki string: " + x))
-
-    def writeInsert(file: File, writer: Writer): Unit = {
+    def writeInsert(file: File, writer: Writer, md5: String): Unit = {
       val lin = getLinesCompressed(file)
       writer.write(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1))
       writer.write(";")
@@ -90,20 +96,25 @@ object CreateLinesBytesPacked {
       writer.write(";")
       writer.write(getLength(file))
       writer.write(";")
-      writer.write(getMd5(file))
+      writer.write(md5)
       writer.write("\n")
     }
 
-    val dirWorkers = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { lang: Language =>
-      logger.log(Level.INFO, "starting language " + lang.name)
-      var map: mutable.HashMap[String, mutable.HashMap[String, String]] = null
-      val path = new File(baseDir, lang.wikiCode)
+    val dirWorkers = SimpleWorkers(config.parallelProcesses, config.parallelProcesses) { path: FileLike[_] =>
+
       if (!path.exists || !path.isDirectory) {
-        logger.log(Level.SEVERE, "No direcory for language " + lang.wikiCode + " was found: " + path.getAbsolutePath)
+        logger.log(Level.SEVERE, "Directory does not exist : " + path.getFile.getAbsolutePath)
         return
       }
+      //get all bz2 files of this directory and check if this list is empty
+      val files = path.getFile.listFiles().filter(x => x.isFile && pattern.findFirstMatchIn(x.getName).isDefined).sortBy(x => x.getName)
+      if(files.isEmpty)
+        return
 
-      val target = new File(path, "lines-bytes-packed.csv")
+      logger.log(Level.INFO, "starting directory " + path.name)
+      var map: mutable.HashMap[String, mutable.HashMap[String, String]] = null
+
+      val target = new File(path.getFile, "lines-bytes-packed.csv")
       if (target.exists())
         map = readLBP(target)
       else
@@ -114,11 +125,12 @@ object CreateLinesBytesPacked {
       var lastFile: String = ""
 
       try {
-        for (file <- path.listFiles().filter(x => x.isFile && pattern.findFirstMatchIn(x.getName).isDefined).sortBy(x => x.getName)) {
+        for (file <- files) {
           lastFile = file.getAbsolutePath
+          val md5 = getMd5(file)
           map.get(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1)) match {
-            case Some(insert) => if (insert("hash") != getMd5(file))
-              writeInsert(file, writer)
+            case Some(insert) => if (insert("hash").trim != md5)
+              writeInsert(file, writer, md5)
             else {
               writer.write(file.getAbsolutePath.substring(baseDir.getAbsolutePath.length+1))
               writer.write(";")
@@ -131,12 +143,12 @@ object CreateLinesBytesPacked {
               writer.write(insert("hash"))
               writer.write("\n")
             }
-            case None => writeInsert(file, writer)
+            case None => writeInsert(file, writer, md5)
           }
         }
       } catch{
         case f: Throwable =>
-          logger.log(Level.SEVERE, "An exception for filr " + lastFile + " arose: " + f.getMessage)
+          logger.log(Level.SEVERE, "An exception for file " + lastFile + " arose: " + f.getMessage)
           writer.write("Exception: " + f.getMessage + "\n")
           writer.close()
       }
@@ -144,6 +156,6 @@ object CreateLinesBytesPacked {
         writer.close()
     }
 
-    Workers.work[Language](dirWorkers, language)
+    Workers.work[FileLike[_]](dirWorkers, directories)
   }
 }
