@@ -86,10 +86,8 @@ object DataIdGenerator {
       case Some(l) if this.langList.contains(l) => l
       case _ =>
         logger.log(Level.INFO, "no allowed language found for: " + dir.getName)
-        null
+        Language.None
     }
-    val fileFilter = ("^[^$]+_[a-z-_]+(" + extensions.foldLeft(new StringBuilder) { (sb, s) => sb.append("|." + s) }.toString.substring(1) + ")" +
-      "(" + compression.foldLeft(new StringBuilder) { (sb, s) => sb.append("|." + s) }.toString.substring(1) + ")").replace(".", "\\.")
 
     //reading in the lines-bytes-packed.csv file of this directory
     val lbp = Option(try {
@@ -355,20 +353,20 @@ object DataIdGenerator {
           }
         })
         val i = Option(inner match {
-          case ttl if ttl.contains(".ttl") => "text/turtle"
-          case tql if tql.contains(".tql") || tql.contains(".nq") => "application/n-quads"
-          case nt if nt.contains(".nt") => "application/n-triples"
-          case xml if xml.contains(".xml") => "application/xml"
+          case ttl if ttl.contains("ttl") => "text/turtle"
+          case tql if tql.contains("tql") || tql.contains(".nq") => "application/n-quads"
+          case nt if nt.contains("nt") => "application/n-triples"
+          case xml if xml.contains("xml") => "application/xml"
           case _ => {
             logger.log(Level.WARNING, "inner MediaType could not be determined: " + inner)
             null
           }
         })
         val ie = Option(inner match {
-          case ttl if ttl.contains(".ttl") => ".ttl"
-          case tql if tql.contains(".tql") || tql.contains(".nq") => ".tql"
-          case nt if nt.contains(".nt") => ".nt"
-          case xml if xml.contains(".xml") => "application/xml"
+          case ttl if ttl.contains("ttl") => ".ttl"
+          case tql if tql.contains("tql") || tql.contains(".nq") => ".tql"
+          case nt if nt.contains("nt") => ".nt"
+          case xml if xml.contains("xml") => "application/xml"
           case _ => {
             logger.log(Level.WARNING, "inner file extension could not be determined: " + inner)
             null

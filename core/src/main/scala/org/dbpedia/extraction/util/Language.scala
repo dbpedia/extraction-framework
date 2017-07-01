@@ -51,7 +51,7 @@ class Language private(
      * Wikipedia dump files use this prefix (with underscores), e.g. be_x_old, but
      * Wikipedia domains use the wikiCode (with dashes), e.g. http://be-x-old.wikipedia.org
      */
-    val filePrefix = wikiCode.replace('-', '_')
+    val filePrefix: String = wikiCode.replace('-', '_')
     /**
      */
     override def toString: String = "wiki="+wikiCode+",locale="+locale.getLanguage
@@ -61,9 +61,9 @@ class Language private(
 
 object Language extends (String => Language)
 {
-  implicit val wikiCodeOrdering = Ordering.by[Language, String](_.wikiCode)
+  implicit val wikiCodeOrdering: Ordering[Language] = Ordering.by[Language, String](_.wikiCode)
 
-  val logger = Logger.getLogger(Language.getClass.getName)
+  val logger: Logger = Logger.getLogger(Language.getClass.getName)
 
   val wikipediaLanguageUrl = "https://noc.wikimedia.org/conf/langlist"
   
@@ -138,27 +138,32 @@ object Language extends (String => Language)
   /**
    * English Wikipedia
    */
-  val English = map("en")
+  val English: Language = map("en")
   
   /**
    * DBpedia mappings wiki
    */
-  val Mappings = map("mappings")
+  val Mappings: Language = map("mappings")
   
   /**
    * Wikimedia commons
    */
-  val Commons = map("commons")
+  val Commons: Language = map("commons")
 
   /**
    * Wikimedia Wikidata
    */
-  val Wikidata = map("wikidata")
+  val Wikidata: Language = map("wikidata")
 
   /**
-    * Wikimedia Wikidata
+    * The Core Directory as a quasi language
     */
-  val Core = map("core")
+  val Core: Language = map("core")
+
+  /**
+    * Alibi Language
+    */
+  val None: Language = map("none")
 
   /**
    * Gets a language object for a Wikipedia language code.
