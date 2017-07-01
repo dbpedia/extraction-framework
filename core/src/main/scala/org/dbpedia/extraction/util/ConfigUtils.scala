@@ -126,6 +126,7 @@ object ConfigUtils {
       case "@mappings" => languages ++= Namespace.mappingLanguages
       case "@chapters" => languages ++= Namespace.chapterLanguages
       case "@downloaded" => languages ++= downloadedLanguages(baseDir, wikiPostFix)
+      case "@all" => languages ++= Language.map.values
       case "@abstracts" => {
         //@downloaded - Commons & Wikidata
         languages ++= downloadedLanguages(baseDir, wikiPostFix)

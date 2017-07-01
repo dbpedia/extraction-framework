@@ -8,25 +8,25 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.logging.{Level, Logger}
 
-import org.apache.commons.lang3.SystemUtils
 import org.apache.http.client.utils.URLEncodedUtils
-import org.apache.jena.atlas.json.{JSON, JsonObject, JsonValue}
+import org.apache.jena.atlas.json.{JSON, JsonObject}
 import org.apache.jena.rdf.model._
 import org.apache.jena.vocabulary.RDF
 import org.dbpedia.extraction.config.provenance.{DBpediaDatasets, Dataset}
-import org.dbpedia.extraction.util.{ConfigUtils, Language, OpenRdfUtils}
+import org.dbpedia.extraction.util.{Config, Language, OpenRdfUtils}
 import org.openrdf.rio.RDFFormat
 
 import scala.Console._
 import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.language.postfixOps
-import scala.sys.process._
 import scala.util.{Failure, Success}
 
 
 /**
   * Created by Chile on 1/8/2016.
+  * Creates all DataIds for each dataset.
+  * Please run the CreateLinesBytesPacked script first
   */
 object DataIdGenerator {
 
@@ -41,9 +41,9 @@ object DataIdGenerator {
   private var catalogModel: Model = _
   private var staticModel: Model = _
   private var relationModel: Model = _
-  private var latestDataId: Option[(List[Resource], String)] = None
-  private var previousDataId: Option[(List[Resource], String)] = None
-  private var nextDataId: Option[(List[Resource], String)] = None
+  private var latestDataId: Option[(Model, String)] = None
+  private var previousDataId: Option[(Model, String)] = None
+  private var nextDataId: Option[(Model, String)] = None
   private var versionStatement: Resource = _
   private var rightsStatement: Resource = _
   private var dataidStandard: Resource = _
@@ -62,7 +62,8 @@ object DataIdGenerator {
   private var dump: File = _
 
   private var documentation: String = _
-  private var compression: String = _
+  private var compression: List[String] = _
+  private var extensions: List[String] = _
   private var vocabulary: String = _
   private var idVersion: String = _
   private var dbpVersion: String = _
@@ -70,8 +71,9 @@ object DataIdGenerator {
   private var rights: String = _
   private var license: String = _
   private var sparqlEndpoint: String = _
-  private var extensions: List[JsonValue] = _
-  private var coreList: List[String] = _
+  private var coreList: List[String] = List()
+
+  private var langList: List[Language] = _
 
   private var releaseDate: Date = _
 
@@ -81,163 +83,153 @@ object DataIdGenerator {
   {
     val innerPath = if(dir.getName == "core") "" else outer.getName+"/"
     val lang = Language.get(dir.getName.replace("_", "-")) match {
-      case Some(l) => l
+      case Some(l) if this.langList.contains(l) => l
       case _ =>
-        logger.log(Level.INFO, "no language found for: " + dir.getName)
+        logger.log(Level.INFO, "no allowed language found for: " + dir.getName)
         null
     }
-    val fileFilter = ("^[^$]+_[a-z-_]+(" + extensions.foldLeft(new StringBuilder) { (sb, s) => sb.append("|" + s.getAsString.value()) }.toString.substring(1) + "|.xml)" + compression).replace(".", "\\.")
+    val fileFilter = ("^[^$]+_[a-z-_]+(" + extensions.foldLeft(new StringBuilder) { (sb, s) => sb.append("|." + s) }.toString.substring(1) + ")" +
+      "(" + compression.foldLeft(new StringBuilder) { (sb, s) => sb.append("|." + s) }.toString.substring(1) + ")").replace(".", "\\.")
 
-    val distributions = try {
-      if (SystemUtils.IS_OS_UNIX) {
-        //Linux: have to use processes to avoid symlink problem with listFiles
-        val commandRes: String = ("ls -1 " + dir.getAbsolutePath).!!
-        commandRes.split("\\n").flatMap(x => fileFilter.r.findFirstIn(x)).map(_.trim.replace("-", "_")).toList.sorted
-      }
-      else if (SystemUtils.IS_OS_WINDOWS) {
-        val filter = new FilenameFilter {
-          override def accept(dir: File, name: String): Boolean = {
-            if (name.matches(fileFilter))
-              true
-            else
-              false
-          }
-        }
-        dir.listFiles(filter).map(x => x.getName.replace("-", "_")).toList.sorted
-      }
+    //reading in the lines-bytes-packed.csv file of this directory
+    val lbp = Option(try {
+      Source.fromFile(new File(dir, "lines-bytes-packed.csv"))
+    } catch {
+      case fnf: FileNotFoundException => null
+    })
+    lbpMap = lbp match {
+      case Some(ld) => ld.getLines.map(_.split(";")).map(x => if(x.length > 4)
+        x.head -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3), "md5" -> x(4))
+      else if (x.length == 4)
+        x.head -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))
       else
-        List()
-    }
-    catch {
-      case e : Exception => {
-        logger.log(Level.WARNING, "problems with directory: " + dir)
-        List()
-      }
+        throw new InvalidParameterException("Lines-bytes-packed.csv file is not in an expected format!")
+      ).toMap
+      case None =>
+        logger.log(Level.INFO, "No lines-bytes-packed.csv file found for directory " + dir)
+        return
     }
 
     if(dir.getName == "core")
-      coreList = distributions.flatMap( dis => dumpFile.findFirstIn(dis))
+      coreList = lbpMap.keySet.toList
 
-    if (lang != null && distributions.map(x => x.contains("short_abstracts") || x.contains("interlanguage_links")).foldRight(false)(_ || _)) {
-      currentDataid = ModelFactory.createDefaultModel()
-      val topsetModel = ModelFactory.createDefaultModel()
-      agentModel = ModelFactory.createDefaultModel()
-      val mainModel = ModelFactory.createDefaultModel()
-      relationModel = ModelFactory.createDefaultModel()
-      stmtModel = ModelFactory.createDefaultModel()
-      checksumModel = ModelFactory.createDefaultModel()
+    currentDataid = ModelFactory.createDefaultModel()
+    val topsetModel = ModelFactory.createDefaultModel()
+    agentModel = ModelFactory.createDefaultModel()
+    val mainModel = ModelFactory.createDefaultModel()
+    relationModel = ModelFactory.createDefaultModel()
+    stmtModel = ModelFactory.createDefaultModel()
+    checksumModel = ModelFactory.createDefaultModel()
 
-      addPrefixes(currentDataid)
-      addPrefixes(topsetModel)
-      addPrefixes(mainModel)
-      addPrefixes(agentModel)
-      addPrefixes(stmtModel)
-      addPrefixes(checksumModel)
-      addPrefixes(relationModel)
+    addPrefixes(currentDataid)
+    addPrefixes(topsetModel)
+    addPrefixes(mainModel)
+    addPrefixes(agentModel)
+    addPrefixes(stmtModel)
+    addPrefixes(checksumModel)
+    addPrefixes(relationModel)
 
-      val ttlOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
-      val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
-      logger.log(Level.INFO, "started DataId: " + ttlOutFile.getAbsolutePath)
+    val ttlOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
+    val jldOutFile = new File(dir.getAbsolutePath.replace("\\", "/") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".json")
+    logger.log(Level.INFO, "started DataId: " + ttlOutFile.getAbsolutePath)
 
-      currentDataIdUri = currentDataid.createResource(webDir + innerPath + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
-      require(currentDataIdUri != null, "Please provide a valid directory")
-      currentDataid.add(currentDataIdUri, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DataId"))
+    currentDataIdUri = currentDataid.createResource(webDir + innerPath + lang.wikiCode.replace("-", "_") + "/" + configMap.get("outputFileTemplate").getAsString.value + "_" + lang.wikiCode.replace("-", "_") + ".ttl")
+    require(currentDataIdUri != null, "Please provide a valid directory")
+    currentDataid.add(currentDataIdUri, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DataId"))
 
-      // add prev/next/latest statements
-      addVersionPointers(currentDataid, currentDataIdUri)
+    // add prev/next/latest statements
+    addVersionPointers(currentDataid, currentDataIdUri)
 
-      //statements
-      versionStatement = addSimpleStatement("version", idVersion, idVersion)
-      rightsStatement = addSimpleStatement("rights", "dbpedia-rights", rights, Language.English)
-      dataidStandard = addSimpleStatement(null, null, "DataID - dataset metadata ontology", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/core"))
-      dataidLdStandard = addSimpleStatement(null, null, "DataID-LD - dataset metadata ontology with linked data extension", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/ld"))
+    //statements
+    versionStatement = addSimpleStatement(stmtModel, currentDataIdUri, "version", idVersion, idVersion)
+    rightsStatement = addSimpleStatement(stmtModel, currentDataIdUri, "rights", "dbpedia-rights", rights, Language.English)
+    dataidStandard = addSimpleStatement(stmtModel, currentDataIdUri, null, null, "DataID - dataset metadata ontology", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/core"))
+    dataidLdStandard = addSimpleStatement(stmtModel, currentDataIdUri, null, null, "DataID-LD - dataset metadata ontology with linked data extension", Language.English, staticModel.createResource("http://dataid.dbpedia.org/ns/ld"))
 
-      val creator = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("creator").getAsObject)
-      val maintainer = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("maintainer").getAsObject)
-      val contact = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("contact").getAsObject)
-      require(creator != null, "Please define an dataid:Agent as a Creator in the dataid stump file (use dataid:Authorization).")
+    val creator = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("creator").getAsObject)
+    val maintainer = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("maintainer").getAsObject)
+    val contact = addAgent(agentModel, currentDataIdUri, currentDataid, configMap.get("contact").getAsObject)
+    require(creator != null, "Please define an dataid:Agent as a Creator in the dataid stump file (use dataid:Authorization).")
 
-      currentDataid.add(currentDataIdUri, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
-      currentDataid.add(currentDataIdUri, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
-      currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), creator)
-      currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), maintainer)
-      currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), contact)
-      currentDataid.add(currentDataIdUri, getProperty("dataid", "inCatalog"), catalogInUse)
-      currentDataid.add(currentDataIdUri, getProperty("dc", "title"), createLiteral("DataID metadata for the " + lang.name + " DBpedia", "en"))
-      currentDataid.add(currentDataIdUri, getProperty("dc", "conformsTo"), dataidStandard)
-      currentDataid.add(currentDataIdUri, getProperty("dc", "conformsTo"), dataidLdStandard)
-      currentDataid.add(currentDataIdUri, getProperty("dc", "publisher"), creator)
-      currentDataid.add(currentDataIdUri, getProperty("dc", "hasVersion"), versionStatement)
-      catalogModel.add(catalogInUse, getProperty("dcat", "record"), currentDataIdUri)
+    currentDataid.add(currentDataIdUri, getProperty("dc", "modified"), createLiteral(dateformat.format(new Date()), "xsd", "date"))
+    currentDataid.add(currentDataIdUri, getProperty("dc", "issued"), createLiteral(dateformat.format(releaseDate), "xsd", "date"))
+    currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), creator)
+    currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), maintainer)
+    currentDataid.add(currentDataIdUri, getProperty("dataid", "associatedAgent"), contact)
+    currentDataid.add(currentDataIdUri, getProperty("dataid", "inCatalog"), catalogInUse)
+    currentDataid.add(currentDataIdUri, getProperty("dc", "title"), createLiteral("DataID metadata for the " + lang.name + " DBpedia", "en"))
+    currentDataid.add(currentDataIdUri, getProperty("dc", "conformsTo"), dataidStandard)
+    currentDataid.add(currentDataIdUri, getProperty("dc", "conformsTo"), dataidLdStandard)
+    currentDataid.add(currentDataIdUri, getProperty("dc", "publisher"), creator)
+    currentDataid.add(currentDataIdUri, getProperty("dc", "hasVersion"), versionStatement)
+    catalogModel.add(catalogInUse, getProperty("dcat", "record"), currentDataIdUri)
 
-      currentRootSet = addDataset(topsetModel, lang, "main_dataset", creator, superset = true)
-      currentDataid.add(currentDataIdUri, getProperty("foaf", "primaryTopic"), currentRootSet)
-      topsetModel.add(currentRootSet, getProperty("foaf", "isPrimaryTopicOf"), currentDataIdUri)
-      topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary))
-      topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary.replace(".owl", ".nt")))
-      topsetModel.add(currentRootSet, getProperty("dc", "description"), createLiteral(configMap.get("description").getAsString.value, "en"))
-      topsetModel.add(currentRootSet, getProperty("dc", "title"), createLiteral("DBpedia root dataset for " + lang.name + ", version " + dbpVersion, "en"))
+    currentRootSet = addDataset(topsetModel, lang, "main_dataset", creator, superset = true)
+    currentDataid.add(currentDataIdUri, getProperty("foaf", "primaryTopic"), currentRootSet)
+    topsetModel.add(currentRootSet, getProperty("foaf", "isPrimaryTopicOf"), currentDataIdUri)
+    topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary))
+    topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary.replace(".owl", ".nt")))
+    topsetModel.add(currentRootSet, getProperty("dc", "description"), createLiteral(configMap.get("description").getAsString.value, "en"))
+    topsetModel.add(currentRootSet, getProperty("dc", "title"), createLiteral("DBpedia root dataset for " + lang.name + ", version " + dbpVersion, "en"))
 
-      if (rights != null)
-        topsetModel.add(currentRootSet, getProperty("dc", "rights"), rightsStatement)
+    if (rights != null)
+      topsetModel.add(currentRootSet, getProperty("dc", "rights"), rightsStatement)
 
-      if (configMap.get("addDmpProps").getAsBoolean.value())
-        addDmpStatements(topsetModel, currentRootSet)
+    if (configMap.get("addDmpProps").getAsBoolean.value())
+      addDmpStatements(topsetModel, currentRootSet)
 
-      var lastFile: String = null
-      var dataset: Resource = null
-      var pagesArticles: Dataset = null
-      for (dis <- distributions) {
-        if(dis.contains("_" + dir.getName))
-        {
-          if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {  //only add dataset once for all its distributions
-            lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
-            dataset = addDataset(mainModel, lang, dis, creator)
-            if(dis.contains("pages_articles"))
-              pagesArticles = DBpediaDatasets.getDataset(dataset.getURI, lang, this.dbpVersion)
-                .getOrElse(throw new IllegalArgumentException("A dataset named " + dataset.getURI + " is unknown."))
-            else {
-              topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
-              mainModel.add(dataset, getProperty("dc", "isPartOf"), currentRootSet)
-            }
+    var lastFile: String = null
+    var dataset: Resource = null
+    var pagesArticles: Dataset = null
+
+    //create datasets and distributions
+    for (dis <- lbpMap.keys.toList.sorted) {
+      if (lastFile != dis.split("\\.").head) {  //only add dataset once for all its distributions
+        dataset = addDataset(mainModel, lang, dis, creator)
+        if(dataset != null) {
+          if (dis.contains("pages_articles"))
+            pagesArticles = DBpediaDatasets.getDataset(dataset.getURI, lang, this.dbpVersion)
+              .getOrElse(throw new IllegalArgumentException("A dataset named " + dataset.getURI + " is unknown."))
+          else {
+            topsetModel.add(currentRootSet, getProperty("void", "subset"), dataset)
+            mainModel.add(dataset, getProperty("dc", "isPartOf"), currentRootSet)
           }
-          dumpFile.findFirstIn(dis) match {
-            case Some(l) =>
-              if(coreList.contains(l)) {
-                mainModel.add(addSparqlEndpoint(dataset))
-                mainModel.add(dataset, getProperty("void", "sparqlEndpoint"), mainModel.createResource(sparqlEndpoint))
-              }
-            case None =>
+          if(coreList.contains(dis)) { //TODO check this
+            mainModel.add(addSparqlEndpoint(dataset))
+            mainModel.add(dataset, getProperty("void", "sparqlEndpoint"), mainModel.createResource(sparqlEndpoint))
           }
-          addDistribution(mainModel, dataset, lang, outer.getName, dis, creator)
         }
       }
-      //run through all dataset again to add dataset relations
-      if(pagesArticles != null) {
-        val pagesArticlesResource = mainModel.createResource(pagesArticles.versionUri)
-        for (dis <- distributions) {
-          if (dis.contains("_" + dir.getName)) {
-            if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {
-              //only add dataset once for all its distributions
-              lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
-              val datasetName = getDatasetName(dis, lang)
-              getDBpediaDataset(datasetName, lang, this.dbpVersion) match {
-                case Some(d) => {
-                  val dResource = mainModel.createResource(d.versionUri)
-                  val relation = mainModel.createResource(d.getRelationUri("source", pagesArticles))
-                  mainModel.add(dResource, getProperty("dataid", "relatedDataset"), pagesArticlesResource)
-                  mainModel.add(dResource, getProperty("dataid", "qualifiedDatasetRelation"), relation)
+      lastFile = dis.split("\\.").head
+      if(dataset != null)
+        addDistribution(mainModel, dataset, lang, dis, creator)
+    }
+    //run through all dataset again to add dataset relations
+    if(pagesArticles != null) {
+      val pagesArticlesResource = mainModel.createResource(pagesArticles.versionUri)
+      for (dis <- lbpMap.keys.toList.sorted) {
+        if (dis.contains("_" + dir.getName)) {
+          if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {
+            //only add dataset once for all its distributions
+            lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
+            val datasetName = getDatasetName(dis, lang)
+            getDBpediaDataset(datasetName, lang, this.dbpVersion) match {
+              case Some(d) => {
+                val dResource = mainModel.createResource(d.versionUri)
+                val relation = mainModel.createResource(d.getRelationUri("source", pagesArticles))
+                mainModel.add(dResource, getProperty("dataid", "relatedDataset"), pagesArticlesResource)
+                mainModel.add(dResource, getProperty("dataid", "qualifiedDatasetRelation"), relation)
 
-                  relationModel.add(relation, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DatasetRelationship"))
-                  relationModel.add(relation, getProperty("dataid", "qualifiedRelationOf"), dResource)
-                  relationModel.add(relation, getProperty("dataid", "qualifiedRelationTo"), pagesArticlesResource)
-                  relationModel.add(relation, getProperty("dataid", "datasetRelationRole"), currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "SourceRole"))
-                }
-                case None =>
+                relationModel.add(relation, RDF.`type`, currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "DatasetRelationship"))
+                relationModel.add(relation, getProperty("dataid", "qualifiedRelationOf"), dResource)
+                relationModel.add(relation, getProperty("dataid", "qualifiedRelationTo"), pagesArticlesResource)
+                relationModel.add(relation, getProperty("dataid", "datasetRelationRole"), currentDataid.createResource(currentDataid.getNsPrefixURI("dataid") + "SourceRole"))
               }
+              case None =>
             }
           }
         }
+
       }
 
       //TODO validate & publish DataIds online!!!
@@ -343,11 +335,8 @@ object DataIdGenerator {
   }
 
   def getMediaType(outer: String, inner: String): Resource = {
-    try {
-      return mediaTypeMap((outer, inner))
-    }
-    catch {
-      case e: NoSuchElementException => {
+    mediaTypeMap.get((outer, inner)) match{
+      case None => {
         val o = Option(outer match {
           case y if y.contains("gz") => "application/x-gzip"
           case z if z.contains("bz2") => "application/x-bzip2"
@@ -423,22 +412,22 @@ object DataIdGenerator {
         mediaTypeMap += (outer, inner) -> mime
         mime
       }
-      case ex : Exception => throw ex
+      case Some(m) => m
     }
   }
 
-  def addSimpleStatement(typ: String, uriVal: String, stmt: String, lang: Language = null, ref: Resource = null): Resource = {
+  def addSimpleStatement(model:Model, subject: Resource, typ: String, uriVal: String, stmt: String, lang: Language = null, ref: Resource = null): Resource = {
     val ss = if (ref != null && ref.isURIResource)
-      stmtModel.createResource(ref.getURI + (if (uriVal != null) "#" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8") else ""))
+      model.createResource(ref.getURI + (if (uriVal != null) "#" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8") else ""))
     else
-      stmtModel.createResource(currentDataIdUri.getURI + (if (uriVal != null) "?" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8") else ""))
-    stmtModel.add(ss, RDF.`type`, stmtModel.createResource(stmtModel.getNsPrefixURI("dataid") + "SimpleStatement"))
+      model.createResource(subject.getURI + (if (uriVal != null) "?" + typ + "=" + URLEncoder.encode(uriVal, "UTF-8") else ""))
+    model.add(ss, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SimpleStatement"))
     if (lang != null)
-      stmtModel.add(ss, getProperty("dataid", "statement"), createLiteral(stmt, lang.isoCode))
+      model.add(ss, getProperty("dataid", "statement"), createLiteral(stmt, lang.isoCode))
     else
-      stmtModel.add(ss, getProperty("dataid", "statement"), createLiteral(stmt))
+      model.add(ss, getProperty("dataid", "statement"), createLiteral(stmt))
     if (ref != null)
-      stmtModel.add(ss, getProperty("dc", "references"), ref)
+      model.add(ss, getProperty("dc", "references"), ref)
     ss
   }
 
@@ -460,22 +449,22 @@ object DataIdGenerator {
     sparql.add(dist, getProperty("dc", "license"), sparql.createResource(license))
     sparql.add(dist, getProperty("dcat", "mediaType"), getMediaType("sparql", ""))
     sparql.add(dist, getProperty("dcat", "accessURL"), sparql.createResource(sparqlEndpoint))
-    sparql.add(dist, getProperty("dataid", "accessProcedure"), addSimpleStatement("stmt", "sparqlaccproc", "An endpoint for sparql queries: provide valid queries."))
+    sparql.add(dist, getProperty("dataid", "accessProcedure"), addSimpleStatement(stmtModel, currentDataIdUri, "stmt", "sparqlaccproc", "An endpoint for sparql queries: provide valid queries."))
     sparql.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
     sparql.add(dist, getProperty("dc", "conformsTo"), dataidLdStandard)
     sparql
   }
 
   def addDmpStatements(model: Model, dataset: Resource): Unit = {
-    model.add(dataset, getProperty("dataid", "usefulness"), addSimpleStatement("stmt", "usefulness", configMap.get("dmpusefulness").getAsString.value, Language.English))
-    model.add(dataset, getProperty("dataid", "similarData"), addSimpleStatement("stmt", "similarData", configMap.get("dmpsimilarData").getAsString.value, Language.English))
-    model.add(dataset, getProperty("dataid", "reuseAndIntegration"), addSimpleStatement("stmt", "reuseAndIntegration", configMap.get("dmpreuseAndIntegration").getAsString.value, Language.English))
+    model.add(dataset, getProperty("dataid", "usefulness"), addSimpleStatement(stmtModel, currentDataIdUri, "stmt", "usefulness", configMap.get("dmpusefulness").getAsString.value, Language.English))
+    model.add(dataset, getProperty("dataid", "similarData"), addSimpleStatement(stmtModel, currentDataIdUri, "stmt", "similarData", configMap.get("dmpsimilarData").getAsString.value, Language.English))
+    model.add(dataset, getProperty("dataid", "reuseAndIntegration"), addSimpleStatement(stmtModel, currentDataIdUri, "stmt", "reuseAndIntegration", configMap.get("dmpreuseAndIntegration").getAsString.value, Language.English))
     //TODO put that to distributions... model.add(dataset, getProperty("dataid", "softwareRequirement"), addSimpleStatement("stmt", "softwareRequirement", configMap.get("dmpadditionalSoftware").getAsString.value, Language.English))
     //TODO model.add(dataset, getProperty("dmp", "repositoryUrl"), model.createResource(configMap.get("dmprepositoryUrl").getAsString.value))
-    model.add(dataset, getProperty("dataid", "growth"), addSimpleStatement("stmt", "growth", configMap.get("dmpgrowth").getAsString.value, Language.English))
+    model.add(dataset, getProperty("dataid", "growth"), addSimpleStatement(stmtModel, currentDataIdUri, "stmt", "growth", configMap.get("dmpgrowth").getAsString.value, Language.English))
     //TODO model.add(dataset, getProperty("dmp", "archiveLink"), model.createResource(configMap.get("dmparchiveLink").getAsString.value))
     //TODO model.add(dataset, getProperty("dmp", "preservation"), createLiteral(configMap.get("dmppreservation").getAsString.value, "en"))
-    model.add(dataset, getProperty("dataid", "openness"), addSimpleStatement("stmt", "openness", configMap.get("dmpopenness").getAsString.value, Language.English))
+    model.add(dataset, getProperty("dataid", "openness"), addSimpleStatement(stmtModel, currentDataIdUri, "stmt", "openness", configMap.get("dmpopenness").getAsString.value, Language.English))
   }
 
   def getDBpediaDataset(fileName: String, lang: Language, dbpv: String): Option[Dataset] ={
@@ -507,8 +496,8 @@ object DataIdGenerator {
 
   def getDatasetName(fileName: String, lang: Language) =
     if(fileName.contains("_" + lang.wikiCode.replace("-", "_") + "."))
-      fileName.substring(0, fileName.lastIndexOf("_" + lang.wikiCode.replace("-", "_") + "."))
-    else fileName.replaceAll("\\.\\w+", "")
+      fileName.substring(fileName.lastIndexOf("/")+1, fileName.lastIndexOf("_" + lang.wikiCode.replace("-", "_") + "."))
+    else fileName.substring(fileName.lastIndexOf("/")+1).replaceAll("\\.\\w+", "")
 
   def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, superset: Boolean = false): Resource = {
 
@@ -573,12 +562,11 @@ object DataIdGenerator {
         model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral(key, "en"))
       model.add(datasetUri, getProperty("dc", "conformsTo"), dataidStandard)
       model.add(datasetUri, getProperty("dc", "conformsTo"), dataidLdStandard)
-      lbpMap.get("core-i18n/" + lang.wikiCode.replace("-", "_") + "/" + currentFile) match {
+      lbpMap.get(currentFile) match {
         case Some(triples) =>
           model.add(datasetUri, getProperty("void", "triples"), createLiteral((new Integer(triples("lines")) - 2).toString, "xsd", "integer"))
         case None =>
       }
-
     }
     else if(currentFile.contains("pages_articles")) { //is wikipedia dump dataset
       getWikipediaDownloadInfo(lang) match {
@@ -603,7 +591,7 @@ object DataIdGenerator {
     datasetUri
   }
 
-  def addDistribution(model: Model, datasetUri: Resource, lang: Language, outerDirectory: String, currentFile: String, associatedAgent: Resource): Resource = {
+  def addDistribution(model: Model, datasetUri: Resource, lang: Language, currentFile: String, associatedAgent: Resource): Resource = {
     val datasetName =  getDatasetName(currentFile, lang)
     val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
       case Some(d) => d
@@ -657,89 +645,73 @@ object DataIdGenerator {
       model.add(dist, getProperty("dc", "conformsTo"), dataidStandard)
     }
 
-    if (outerDirectory != null && lang != null) {
-      lbpMap.get(outerDirectory + "/" + lang.wikiCode.replace("-", "_") + "/" + currentFile)
-      match {
-        case Some(bytes) => {
-          model.add(dist, getProperty("dcat", "byteSize"), createLiteral(bytes("bz2"), "xsd", "integer"))
-          model.add(dist, getProperty("dataid", "uncompressedByteSize"), createLiteral(bytes("bytes"), "xsd", "integer"))
-          //add checksum
-          bytes.get("md5") match{
-            case Some(md5) => {
-              if (checksumModel != null) {
-                val checksum = model.createResource(dist.getURI + "&checksum=" + "md5")
-                model.add(dist, getProperty("dataid", "checksum"), checksum)
-                checksumModel.add(checksum, RDF.`type`, model.createResource(model.getNsPrefixURI("spdx") + "Checksum"))
-                checksumModel.add(checksum, getProperty("spdx", "algorithm"), model.createResource(model.getNsPrefixURI("spdx") + "checksumAlgorithm_md5"))
-                checksumModel.add(checksum, getProperty("spdx", "checksumValue"), createLiteral(md5, "xsd", "hexBinary"))
-              }
+    lbpMap.get(currentFile)
+    match {
+      case Some(bytes) => {
+        model.add(dist, getProperty("dcat", "byteSize"), createLiteral(bytes("bz2"), "xsd", "integer"))
+        model.add(dist, getProperty("dataid", "uncompressedByteSize"), createLiteral(bytes("bytes"), "xsd", "integer"))
+        //add checksum
+        bytes.get("md5") match{
+          case Some(md5) => {
+            if (checksumModel != null) {
+              val checksum = model.createResource(dist.getURI + "&checksum=" + "md5")
+              model.add(dist, getProperty("dataid", "checksum"), checksum)
+              checksumModel.add(checksum, RDF.`type`, model.createResource(model.getNsPrefixURI("spdx") + "Checksum"))
+              checksumModel.add(checksum, getProperty("spdx", "algorithm"), model.createResource(model.getNsPrefixURI("spdx") + "checksumAlgorithm_md5"))
+              checksumModel.add(checksum, getProperty("spdx", "checksumValue"), createLiteral(md5, "xsd", "hexBinary"))
             }
-            case None =>
           }
+          case None =>
         }
-        case None =>
       }
-      model.add(dist, getProperty("dcat", "downloadURL"), model.createResource(webDir + outerDirectory + "/" + lang.wikiCode.replace("-", "_").replace("-", "_") + "/" + currentFile))
-      model.add(dist, getProperty("dataid", "preview"), model.createResource("http://downloads.dbpedia.org/preview.php?file=" + dbpVersion + "_sl_" + outerDirectory + "_sl_" + lang.wikiCode.replace("-", "_").replace("-", "_") + "_sl_" + currentFile))
+      case None =>
     }
-    var inner = dist.getURI.substring(dist.getURI.lastIndexOf("_"))
-    inner = inner.substring(inner.indexOf(".")).replace(compression, "")
-    model.add(dist, getProperty("dcat", "mediaType"), getMediaType(compression, inner))
+    model.add(dist, getProperty("dcat", "downloadURL"), model.createResource(webDir + currentFile))
+    model.add(dist, getProperty("dataid", "preview"), model.createResource("http://downloads.dbpedia.org/preview.php?file=" + dbpVersion + "_sl_" + currentFile.replace("/", "_sl_")))
+
+    val inner = dist.getURI.substring(dist.getURI.lastIndexOf("_")).split("\\.")
+    model.add(dist, getProperty("dcat", "mediaType"), getMediaType(inner(2), inner(1)))
     dist
   }
 
   def main(args: Array[String]) {
 
     require(args != null && args.length >= 1,
-      "we need on argument: " +
+      "we need one argument: " +
         /*0*/ "config file location"
     )
 
-    val source = scala.io.Source.fromFile(args(0))
-    val jsonString = source.mkString.replaceAll("#[^\"]+", "")
-    source.close()
+    val config = new Config(args(0))
 
-    configMap = JSON.parse(jsonString)
+    val jsonString = config.getArbitraryStringProperty("dataid-config") match{
+      case Some(s) =>
+        val path = if(s.startsWith("/")) s else  System.getProperty("user.dir") + "/" + s
+        val source = scala.io.Source.fromFile(path)
+        configMap = JSON.parse(source.mkString.replaceAll("#[^\"]+", ""))
+        source.close()
+      case None => throw new IllegalArgumentException("No DataId configuration file was found, provided via the properties file (dataid-config)")
+    }
+
+    langList = config.languages.toList
     currentRootSet = null
 
     // Collect arguments
-    webDir = configMap.get("webDir").getAsString.value() + (if (configMap.get("webDir").getAsString.value().endsWith("/")) "" else "/")
+    webDir = configMap.get("base-url").getAsString.value() + (if (configMap.get("base-url").getAsString.value().endsWith("/")) "" else "/")
     require(URI.create(webDir) != null, "Please specify a valid web directory!")
 
-    dump = new File(configMap.get("localDir").getAsString.value)
+    dump = config.dumpDir
     require(dump.isDirectory && dump.canRead, "Please specify a valid local dump directory!")
-
-    //this csv file is created with the command below
-    //line structure: file;line count;uncompressed byte size;byte size;md5 checksum
-    //for file in $(find -name '*.bz2' | sort) ; do md5sum <$file | tr --delete '\n' ; stat --printf='%n %s ' $file ; bzip2 -d <$file | wc -cl ; done | awk '{sub(/-\.\//, "", $2); sub(/.bz2$/, "", $2); print $2";"$4";"$5";"$3";"$1}' >lines-bytes-packed.csv
-    val lbp = Option(try {
-      Source.fromFile(configMap.get("linesBytesPacked").getAsString.value)
-    } catch {
-      case fnf: FileNotFoundException => null
-    })
-    lbpMap = lbp match {
-      case Some(ld) => ld.getLines.map(_.split(";")).map(x => if(x.length > 4)
-          x.head -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3), "md5" -> x(4))
-      else if (x.length == 4)
-          x.head -> Map("lines" -> x(1), "bytes" -> x(2), "bz2" -> x(3))
-      else
-        throw new InvalidParameterException("Lines-bytes-packed.csv file is not in an expected format!")
-      ).toMap
-      case None => Map[String, Map[String, String]]()
-    }
 
     documentation = configMap.get("documentation").getAsString.value
     require(URI.create(documentation) != null, "Please specify a valid documentation web page!")
 
-    compression = configMap.get("fileExtension").getAsString.value
-    require(compression.startsWith("."), "please provide a valid file extension starting with a dot")
+    compression = config.formats.keySet.map(k => k.split("\\.")(1)).toList.distinct
 
-    extensions = configMap.get("serializations").getAsArray.subList(0, configMap.get("serializations").getAsArray.size()).asScala.toList
-    require(extensions.forall(x => x.getAsString.value().startsWith(".")), "list of valid serialization extensions starting with a dot")
+    extensions = config.formats.keySet.map(k => k.split("\\.")(0)).toList.distinct
 
     require(!configMap.get("outputFileTemplate").getAsString.value.contains("."), "Please specify a valid output file name without extension")
 
-    dbpVersion = configMap.get("dbpediaVersion").getAsString.value
+    dbpVersion = config.dbPediaVersion
     idVersion = configMap.get("dataidVersion").getAsString.value
     vocabulary = configMap.get("vocabularyUri").getAsString.value
     require(URI.create(vocabulary) != null, "Please enter a valid ontology uri of ths DBpedia release")
@@ -778,7 +750,8 @@ object DataIdGenerator {
 
     //TODO links...
     //visit all subdirectories, determine if its a dbpedia language dir, and create a DataID for this language
-    extractDataID(dump, new File(dump, "core"))
+    //TODO reactivate!
+    //extractDataID(dump, new File(dump, "core"))
     for (outer <- dump.listFiles().filter(_.isDirectory).filter(_.getName != "core")) {
       //core has other structure (no languages)
       for (dir <- outer.listFiles().filter(_.isDirectory).filter(!_.getName.startsWith(".")))
@@ -795,28 +768,28 @@ object DataIdGenerator {
     printStream.close()
   }
 
-  def getOtherDataId(catalogTag: String): Option[(List[Resource], String)] = {
-    Option(configMap.get(catalogTag).getAsObject.get("path").getAsString.value()) match {
+  def getOtherDataId(catalogTag: String): Option[(Model, String)] = {
+    Option(configMap.get(catalogTag).getAsString.value()) match {
       case Some(x) => try {
         val m = ModelFactory.createDefaultModel()
         m.read(x, "TURTLE")
         getCreationDate(m) match {
           case Some(created) if releaseDate.after(created) => throw new InvalidParameterException("The creation date of the next DataID catalog is after the current release Date.")
-          case None =>
+          case _ =>
         }
-        var dataid = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "dataset")).asScala.map(y => y.asResource()).toList
-        dataid = dataid ::: m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).asScala.map(y => y.asResource()).toList
-        dataid = dataid ::: List(m.listSubjectsWithProperty(m.getProperty(m.getNsPrefixURI("dcat"), "record")).next())
 
-        val version = ConfigUtils.parseVersionString(configMap.get(catalogTag).getAsObject.get("version").getAsString.value()) match {
-          case Success(s) => s
-          case Failure(e) => logger.log(Level.INFO, "Faulty version string provided for: " + catalogTag)
+        val blank = m.listObjectsOfProperty(m.getProperty(m.getNsPrefixURI("dc"), "hasVersion")).next().asResource()
+        val version = m.listObjectsOfProperty(blank, m.getProperty(m.getNsPrefixURI("dataid"), "statement")).asScala.map(y => y.asLiteral().getString).toList.headOption match {
+          case Some(s) => s
+          case None =>
+            logger.log(Level.INFO, "The catalog provided has no dct:hasVersion property: " + catalogTag)
             return None
         }
-        Option((dataid, version))
+        Option((m, version))
       }
       catch {
-        case e : Throwable => logger.log(Level.INFO, "No next version catalog provided.")
+        case e : Throwable =>
+          logger.log(Level.INFO, "An exception occurred while reading a DataID of the " + catalogTag + ": " + e.getMessage)
           None
       }
       case None => None
@@ -834,6 +807,7 @@ object DataIdGenerator {
     catalogModel.add(catalogInUse, getProperty("dc", "publisher"), catalogAgent)
     catalogModel.add(catalogInUse, getProperty("dc", "license"), catalogModel.createResource(license))
     catalogModel.add(catalogInUse, getProperty("foaf", "homepage"), catalogModel.createResource(configMap.get("creator").getAsObject.get("homepage").getAsString.value()))
+    catalogModel.add(catalogInUse, getProperty("dc", "hasVersion"), addSimpleStatement(catalogModel, catalogInUse, "version", dbpVersion, dbpVersion))
 
     // add prev/next/latest statements
     addVersionPointers(catalogModel, catalogInUse)
@@ -877,7 +851,8 @@ object DataIdGenerator {
   def addVersionPointers(model: Model, currentUri: Resource): Unit = {
     previousDataId match{
       case Some(t) => getOtherVersionUri(t._1, t._2, currentUri) match{
-        case Some(uri) => model.add(currentUri, getProperty("dataid", "previousVersion"), uri)
+        case Some(uri) =>
+          model.add(currentUri, getProperty("dataid", "previousVersion"), uri)
         case None =>
       }
       case None =>
@@ -898,13 +873,14 @@ object DataIdGenerator {
     }
   }
 
-  def getOtherVersionUri(targetModel: List[Resource], version: String, currentUri: Resource): Option[Resource] = {
+  def getOtherVersionUri(targetModel: Model, version: String, currentUri: Resource): Option[Resource] = {
     if (targetModel == null || targetModel.isEmpty)
       return None
 
     val uri = new URI(currentUri.getURI)
     val params = URLEncodedUtils.parse(uri, "UTF-8").asScala
     var target = uri.getScheme + "://" + uri.getHost + uri.getPath
+    target = target.replace(dbpVersion, version)
     for(i <- params.indices)
     {
       if(i == 0)
@@ -916,10 +892,15 @@ object DataIdGenerator {
       else
         target += params(i).getName + "=" + params(i).getValue
     }
-    for(uri <- targetModel)
-      if(uri.getURI.endsWith(target))
-        return Option(uri.asResource())
-    None
+
+    val res = targetModel.createResource(target)
+    lazy val subject = targetModel.query(new SimpleSelector(res, null, null.asInstanceOf[RDFNode]))
+    lazy val dataid = targetModel.query(new SimpleSelector(null, targetModel.getProperty(targetModel.getNsPrefixURI("dcat"), "record"), res))
+    lazy val dataset = targetModel.query(new SimpleSelector(null, targetModel.getProperty(targetModel.getNsPrefixURI("dcat"), "dataset"), res))
+    if(res == null || (subject.isEmpty && dataid.isEmpty && dataset.isEmpty))
+      None
+    else
+      Some(res)
   }
 
   def getWikipediaDownloadInfo(lang: Language): Option[(String, String)] ={

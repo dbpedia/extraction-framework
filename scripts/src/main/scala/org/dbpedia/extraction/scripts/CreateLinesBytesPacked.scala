@@ -84,7 +84,7 @@ object CreateLinesBytesPacked {
     val baseDir = config.dumpDir
     require(baseDir.isDirectory && baseDir.canRead && baseDir.canWrite, "Please specify a valid local base extraction directory - invalid path: " + baseDir)
 
-    val directories = baseDir.listFiles.filter(_.isDirectory).flatMap(x => x.listFiles.filter(_.isDirectory)).map(x => new RichPath(x.toPath))
+    val directories = baseDir.listFiles.filter(_.isDirectory).flatMap(x => x.listFiles.filter(_.isDirectory)).map(x => new RichPath(x.toPath)) ++ baseDir.listFiles.filter(_.isDirectory).map(x => new RichPath(x.toPath))
 
     def writeInsert(file: File, writer: Writer, md5: String): Unit = {
       val lin = getLinesCompressed(file)
