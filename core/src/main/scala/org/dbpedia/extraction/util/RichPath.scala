@@ -98,5 +98,5 @@ class RichPath(path: Path) extends FileLike[Path] {
     else Files.newOutputStream(path)
   }
 
-  override def getFile: File = path.getFile
+  override def getFile: File = path.toFile
 }
