@@ -110,7 +110,7 @@ object Language extends (String => Language)
             properties("apiUri").asText,
             properties("pages").asInt
           )
-          case None => languages(lang) = language(
+          case scala.None => languages(lang) = language(
             properties("wikiCode").asText,
             properties("name").asText,
             properties("isoCode").asText,
