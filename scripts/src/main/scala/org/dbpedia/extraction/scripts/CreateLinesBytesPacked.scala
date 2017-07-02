@@ -171,6 +171,6 @@ object CreateLinesBytesPacked {
       }
     }
 
-    Workers.work[FileLike[_]](dirWorkers, directories)
+    Workers.work[FileLike[_]](dirWorkers, directories.sortBy(x => x.getFile.getCanonicalPath))
   }
 }

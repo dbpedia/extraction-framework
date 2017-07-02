@@ -88,7 +88,6 @@ object DataIdGenerator {
         logger.log(Level.INFO, "no allowed language found for: " + dir.getName)
         Language.None
     }
-
     //reading in the lines-bytes-packed.csv file of this directory
     val lbp = Option(try {
       Source.fromFile(new File(dir, "lines-bytes-packed.csv"))
@@ -162,7 +161,7 @@ object DataIdGenerator {
     currentDataid.add(currentDataIdUri, getProperty("dc", "hasVersion"), versionStatement)
     catalogModel.add(catalogInUse, getProperty("dcat", "record"), currentDataIdUri)
 
-    currentRootSet = addDataset(topsetModel, lang, "main_dataset", creator, superset = true)
+    currentRootSet = addDataset(topsetModel, lang, DBpediaDatasets.MainDataset.getLanguageVersion(lang, this.dbpVersion).get, creator, null, superset = true)
     currentDataid.add(currentDataIdUri, getProperty("foaf", "primaryTopic"), currentRootSet)
     topsetModel.add(currentRootSet, getProperty("foaf", "isPrimaryTopicOf"), currentDataIdUri)
     topsetModel.add(currentRootSet, getProperty("void", "vocabulary"), topsetModel.createResource(vocabulary))
@@ -211,8 +210,7 @@ object DataIdGenerator {
           if (lastFile != dis.substring(0, dis.lastIndexOf("_" + dir.getName))) {
             //only add dataset once for all its distributions
             lastFile = dis.substring(0, dis.lastIndexOf("_" + dir.getName))
-            val datasetName = getDatasetName(dis, lang)
-            getDBpediaDataset(datasetName, lang, this.dbpVersion) match {
+            Option(getDataset(dis, lang)) match {
               case Some(d) =>
                 val dResource = mainModel.createResource(d.versionUri)
                 val relation = mainModel.createResource(d.getRelationUri("source", pagesArticles))
@@ -228,6 +226,7 @@ object DataIdGenerator {
           }
         }
       }
+    }
 
       //TODO validate & publish DataIds online!!!
 
@@ -274,7 +273,6 @@ object DataIdGenerator {
       printStream.close()
 
       logger.log(Level.INFO, "finished DataId: " + ttlOutFile.getAbsolutePath)
-    }
   }
 
   def addPrefixes(model: Model): Unit = {
@@ -485,20 +483,38 @@ object DataIdGenerator {
     None
   }
 
-  def getDatasetName(fileName: String, lang: Language): String =
-    if(fileName.contains("_" + lang.wikiCode.replace("-", "_") + "."))
-      fileName.substring(fileName.lastIndexOf("/")+1, fileName.lastIndexOf("_" + lang.wikiCode.replace("-", "_") + "."))
-    else fileName.substring(fileName.lastIndexOf("/")+1).replaceAll("\\.\\w+", "")
+  def getDataset(fileName: String, lang:Language): Dataset = {
+    val actualLang = if(lang == Language.Core || lang == Language.None) {
+      val i = fileName.lastIndexOf("_")+1
+      if(i > 0)
+        Language(fileName.substring(i, fileName.indexOf(".")))
+      else
+        return null
+    }
+    else lang
+    val datasetName = if(fileName.contains("_" + actualLang.wikiCode + "."))
+      fileName.substring(fileName.lastIndexOf("/")+1, fileName.lastIndexOf("_" + actualLang.wikiCode + "."))
+    else
+      fileName.substring(fileName.lastIndexOf("/")+1).replaceAll("\\.\\w+", "")
 
-  def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, superset: Boolean = false): Resource = {
-
-    val datasetName = getDatasetName(currentFile, lang)  //TODO check if we can get this from Dataset?
-    val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
+    getDBpediaDataset(datasetName, actualLang, this.dbpVersion) match{
       case Some(d) => d
       case None =>
         err.println("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
-        return null
+        null
     }
+  }
+
+  def addDataset(model: Model, lang: Language, currentFile: String, associatedAgent: Resource, superset: Boolean = false): Resource = {
+    val dataset = Option(getDataset(currentFile, lang)) match {
+      case Some(d) => d
+      case None => return null
+    }
+    val map = lbpMap.getOrElse(currentFile, null)
+    addDataset(model, lang, dataset, associatedAgent, map, superset)
+  }
+
+  def addDataset(model: Model, lang: Language, dataset: Dataset, associatedAgent: Resource, lbpMap: Map[String, String], superset: Boolean): Resource = {
     val datasetUri = model.createResource(dataset.versionUri)
     //add dataset to catalog
     catalogModel.add(catalogInUse, getProperty("dcat", "dataset"), datasetUri)
@@ -506,7 +522,7 @@ object DataIdGenerator {
       model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Superset"))
       model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
     }
-    else if(currentFile.contains("pages_articles")){
+    else if(dataset.encoded.contains("pages_articles")){
       model.add(datasetUri, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "Dataset"))
     }
     else {
@@ -524,8 +540,8 @@ object DataIdGenerator {
       dataset.description match{
         case Some(desc) => model.add(datasetUri, getProperty("dc", "description"), createLiteral(desc, "en"))
         case None =>
-          model.add(datasetUri, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
-          err.println("Could not find description for dataset: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
+          model.add(datasetUri, getProperty("dc", "description"), createLiteral("DBpedia dataset " + dataset.encoded + ", subset of " + currentRootSet.getLocalName, "en"))
+          err.println("Could not find description for dataset: " + lang.wikiCode.replace("-", "_") + "/" + dataset.encoded)
       }
       if(dataset.isLinkedDataDataset) {
         model.add(datasetUri, getProperty("void", "rootResource"), currentRootSet)
@@ -548,17 +564,14 @@ object DataIdGenerator {
       model.add(datasetUri, getProperty("dc", "publisher"), associatedAgent)
       model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral("DBpedia", "en"))
       model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral(dataset.name, "en"))
+      if(lbpMap != null)
+        model.add(datasetUri, getProperty("void", "triples"), createLiteral((new Integer(lbpMap("lines")) - 2).toString, "xsd", "integer"))
       for(key <- dataset.keywords)
         model.add(datasetUri, getProperty("dcat", "keyword"), createLiteral(key, "en"))
       model.add(datasetUri, getProperty("dc", "conformsTo"), dataidStandard)
       model.add(datasetUri, getProperty("dc", "conformsTo"), dataidLdStandard)
-      lbpMap.get(currentFile) match {
-        case Some(triples) =>
-          model.add(datasetUri, getProperty("void", "triples"), createLiteral((new Integer(triples("lines")) - 2).toString, "xsd", "integer"))
-        case None =>
-      }
     }
-    else if(currentFile.contains("pages_articles")) { //is wikipedia dump dataset
+    else if(dataset.encoded.contains("pages_articles")) { //is wikipedia dump dataset
       getWikipediaDownloadInfo(lang) match {
         case Some(dlInfo) =>
           val rDate = dlInfo._1.trim.substring(0, 4) + "-" + dlInfo._1.trim.substring(4, 6) + "-" + dlInfo._1.trim.substring(6)
@@ -582,13 +595,7 @@ object DataIdGenerator {
   }
 
   def addDistribution(model: Model, datasetUri: Resource, lang: Language, currentFile: String, associatedAgent: Resource): Resource = {
-    val datasetName =  getDatasetName(currentFile, lang)
-    val dataset = getDBpediaDataset(datasetName, lang, this.dbpVersion) match{
-      case Some(d) => d
-      case None =>
-        err.println("Dataset " + datasetName + " was not found! Please edit the DBpediaDatasets.scala file to include it.")
-        return null
-    }
+    val dataset = getDataset(currentFile, lang)
     val dist = model.createResource(dataset.getDistributionUri("file", currentFile.substring(currentFile.indexOf('.'))))
     model.add(dist, RDF.`type`, model.createResource(model.getNsPrefixURI("dataid") + "SingleFile"))
     model.add(datasetUri, getProperty("dcat", "distribution"), dist)
@@ -599,7 +606,7 @@ object DataIdGenerator {
     dataset.description match{
       case Some(desc) => model.add(dist, getProperty("dc", "description"), createLiteral(desc, "en"))
       case None =>
-        model.add(dist, getProperty("dc", "description"), createLiteral("DBpedia dataset " + datasetName + ", subset of " + currentRootSet.getLocalName, "en"))
+        model.add(dist, getProperty("dc", "description"), createLiteral("DBpedia dataset " + dataset.encoded + ", subset of " + currentRootSet.getLocalName, "en"))
         err.println("Could not find description for distribution: " + lang.wikiCode.replace("-", "_") + "/" + currentFile)
     }
 
