@@ -487,11 +487,15 @@ object DataIdGenerator {
     val actualLang = if(lang == Language.Core || lang == Language.None) {
       val i = fileName.lastIndexOf("_")+1
       if(i > 0)
-        Language(fileName.substring(i, fileName.indexOf(".")))
+        Language.get(fileName.substring(i, fileName.indexOf("."))).orNull
       else
-        return null
+        null
     }
     else lang
+
+    if(actualLang == null)
+      return null
+
     val datasetName = if(fileName.contains("_" + actualLang.wikiCode + "."))
       fileName.substring(fileName.lastIndexOf("/")+1, fileName.lastIndexOf("_" + actualLang.wikiCode + "."))
     else
