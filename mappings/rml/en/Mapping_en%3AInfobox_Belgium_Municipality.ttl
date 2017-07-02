@@ -89,10 +89,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Belgium/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Belgium" .
-
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "areaCode" .
@@ -108,6 +104,12 @@
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes>
         a             rr:PredicateObjectMap ;
@@ -339,6 +341,10 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Belgium" .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -656,7 +662,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Belgium_Municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Belgium_Municipality/longitude> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Belgium> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Belgium_Municipality/latitude> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/arrondissement/arrondissement> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Belgium_Municipality/longitude> , <./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/Belgium> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Belgium_Municipality/latitude> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes> , <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/areaCode/telephone-area> ;
         rr:subjectMap          <./Mapping_en:Infobox_Belgium_Municipality/SubjectMap> .
 
 <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/postalCode/postal-codes/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
@@ -721,12 +727,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Belgium>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Belgium_Municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Belgium/ObjectMap> ;
-        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Belgium_Municipality/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM/ObjectMap>
         a              rr:ObjectMap ;

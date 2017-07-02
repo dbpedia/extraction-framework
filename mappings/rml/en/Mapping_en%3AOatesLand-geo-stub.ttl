@@ -28,56 +28,58 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
-
 <./Mapping_en:OatesLand-geo-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:OatesLand-geo-stub?oldid=30074" .
 
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
-
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Antarctica>
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Antarctica>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Antarctica/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Antarctica/ObjectMap> ;
         rr:predicate  dbo:locatedInArea .
 
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Oates_Land/ObjectMap>
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Oates_Land/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Oates_Land" .
+
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/Antarctica>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:OatesLand-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Oates_Land> , <./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica> , <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Oates_Land> , <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Antarctica> ;
+        rr:predicateObjectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/Oates_Land> , <./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/Antarctica> , <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Oates_Land> , <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Antarctica> ;
         rr:subjectMap          <./Mapping_en:OatesLand-geo-stub/SubjectMap> .
 
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Oates_Land>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Oates_Land/ObjectMap> ;
-        rr:predicate  dbo:isPartOf .
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Antarctica/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
+
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/Oates_Land/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Oates_Land" .
 
 <./Mapping_en:OatesLand-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica>
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/Oates_Land>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap> ;
-        rr:predicate  dbo:country .
+        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/isPartOf/Oates_Land/ObjectMap> ;
+        rr:predicate  dbo:isPartOf .
 
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Oates_Land/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Oates_Land" .
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Oates_Land>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/Oates_Land/ObjectMap> ;
+        rr:predicate  dbo:locatedInArea .
 
 <./Mapping_en:OatesLand-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -85,9 +87,7 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Oates_Land>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:OatesLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Oates_Land/ObjectMap> ;
-        rr:predicate  dbo:locatedInArea .
+<./Mapping_en:OatesLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 

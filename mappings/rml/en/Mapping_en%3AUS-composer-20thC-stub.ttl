@@ -34,11 +34,9 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:US-composer-20thC-stub?oldid=29069" .
 
-<./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:US-composer-20thC-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -49,15 +47,17 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-composer-20thC-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/United_States> ;
         rr:subjectMap          <./Mapping_en:US-composer-20thC-stub/SubjectMap> .
-
-<./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:US-composer-20thC-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
+
+<./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:US-composer-20thC-stub/ConstantMapping/country/United_States/ObjectMap> ;
+        rr:predicate  dbo:country .
 

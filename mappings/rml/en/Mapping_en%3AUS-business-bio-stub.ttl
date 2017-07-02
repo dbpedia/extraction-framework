@@ -28,20 +28,14 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States/ObjectMap>
+<./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/United_States/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
-<./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:nationality .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-business-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/United_States> ;
         rr:subjectMap          <./Mapping_en:US-business-bio-stub/SubjectMap> .
 
 <./Mapping_en:US-business-bio-stub/SubjectMap>
@@ -55,6 +49,12 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:US-business-bio-stub?oldid=28795" .
+
+<./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:US-business-bio-stub/ConstantMapping/nationality/United_States/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <./Mapping_en:US-business-bio-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

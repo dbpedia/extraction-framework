@@ -37,12 +37,6 @@
         fnml:functionValue  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
-<./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/http://en.dbpedia.org/resource/Portugal>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/http://en.dbpedia.org/resource/Portugal/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "populationAsOf" .
@@ -111,6 +105,12 @@
         a              rr:ObjectMap ;
         rml:reference  "demonym" .
 
+<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
+        a                      rr:TriplesMap ;
+        rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
+        rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
+
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
@@ -133,17 +133,15 @@
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue>
-        a                      rr:TriplesMap ;
-        rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM> ;
-        rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
-
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Portugal" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -285,6 +283,12 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
+
+<./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -611,7 +615,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Parish_PT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Parish_PT/longitude> , <./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/http://en.dbpedia.org/resource/Portugal> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Parish_PT/latitude> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Parish_PT/longitude> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/Portugal> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Parish_PT/latitude> , <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/foaf:homepage/website> ;
         rr:subjectMap          <./Mapping_en:Infobox_Parish_PT/SubjectMap> .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/minimumElevation/lowest_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap>
@@ -643,10 +647,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/areaTotal/area/FunctionTermMap> ;
         rr:predicate  dbo:areaTotal .
-
-<./Mapping_en:Infobox_Parish_PT/ConstantMapping/country/http://en.dbpedia.org/resource/Portugal/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Portugal" .
 
 <./Mapping_en:Infobox_Parish_PT/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

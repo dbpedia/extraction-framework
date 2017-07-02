@@ -97,7 +97,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Deutsche_Bahn_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms> , <./Mapping_en:Infobox_Deutsche_Bahn_station/longitude> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale> , <./Mapping_en:Infobox_Deutsche_Bahn_station/latitude> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough> , <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/http://en.dbpedia.org/resource/Germany> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start> , <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/http://en.dbpedia.org/resource/Germany> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/Germany> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/state> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms> , <./Mapping_en:Infobox_Deutsche_Bahn_station/longitude> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale> , <./Mapping_en:Infobox_Deutsche_Bahn_station/latitude> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/alias/other_name> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough> , <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/Germany> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/servingRailwayLine/lines> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/abbreviation/ds100> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start> ;
         rr:subjectMap          <./Mapping_en:Infobox_Deutsche_Bahn_station/SubjectMap> .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/railwayPlatforms/platforms>
@@ -143,6 +143,10 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/agencyStationCode/code/FunctionTermMap> ;
         rr:predicate  dbo:agencyStationCode .
+
+<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/Germany/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Germany" .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -209,16 +213,16 @@
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/http://en.dbpedia.org/resource/Germany>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/http://en.dbpedia.org/resource/Germany/ObjectMap> ;
-        rr:predicate  dbo:location .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/Germany>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/Germany/ObjectMap> ;
+        rr:predicate  dbo:location .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -269,12 +273,6 @@
 <./Mapping_en:Infobox_Deutsche_Bahn_station/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/http://en.dbpedia.org/resource/Germany>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap> ;
-        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -507,19 +505,11 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Deutsche_Bahn_station/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/http://en.dbpedia.org/resource/Germany/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Germany" .
-
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingDate/start/FunctionTermMap> ;
         rr:predicate  dbo:openingDate .
-
-<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Germany" .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/picture/image/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -601,6 +591,12 @@
         rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
+<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/Germany>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/country/Germany/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/openingYear/start/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "start" .
@@ -657,6 +653,10 @@
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/address/street/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "street" .
+
+<./Mapping_en:Infobox_Deutsche_Bahn_station/ConstantMapping/location/Germany/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Germany" .
 
 <./Mapping_en:Infobox_Deutsche_Bahn_station/SimplePropertyMapping/location/locale/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;

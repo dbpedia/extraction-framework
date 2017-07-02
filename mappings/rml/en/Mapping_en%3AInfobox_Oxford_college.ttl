@@ -66,12 +66,6 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/http://en.dbpedia.org/resource/Oxford>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/http://en.dbpedia.org/resource/Oxford/ObjectMap> ;
-        rr:predicate  dbo:location .
-
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
@@ -282,10 +276,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/http://en.dbpedia.org/resource/Oxford/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Oxford" .
-
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -297,15 +287,21 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Oxford_college/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue> .
+
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/formerName/old_names>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap> ;
         rr:predicate  dbo:formerName .
 
-<./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue> .
+<./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/University_of_Oxford>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/University_of_Oxford/ObjectMap> ;
+        rr:predicate  dbo:isPartOf .
 
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -357,10 +353,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/University_of_Oxford/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/University_of_Oxford" .
-
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/full_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "full_name" .
@@ -389,13 +381,23 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Oxford_college/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/University_of_Oxford> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/sisterCollege/sister_college> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/formerName/old_names> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foundingDate/established> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/name_Latin> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/full_name> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/numberOfGraduateStudents/graduates> , <./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/http://en.dbpedia.org/resource/Oxford> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/officialSchoolColour/colours> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/numberOfUndergraduateStudents/undergraduates> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/sisterCollege/sister_college> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/formerName/old_names> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foundingDate/established> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/name_Latin> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/full_name> , <./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/Oxford> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/numberOfGraduateStudents/graduates> , <./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/University_of_Oxford> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/officialSchoolColour/colours> ;
         rr:subjectMap          <./Mapping_en:Infobox_Oxford_college/SubjectMap> .
 
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/formerName/old_names/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
+
+<./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/Oxford>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/Oxford/ObjectMap> ;
+        rr:predicate  dbo:location .
+
+<./Mapping_en:Infobox_Oxford_college/ConstantMapping/location/Oxford/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Oxford" .
 
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/officialSchoolColour/colours/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -508,12 +510,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:name/name_Latin/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/University_of_Oxford>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/University_of_Oxford/ObjectMap> ;
-        rr:predicate  dbo:isPartOf .
-
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/sisterCollege/sister_college/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Oxford_college/LogicalSource> ;
@@ -523,6 +519,10 @@
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/foaf:homepage/homepage/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_Oxford_college/ConstantMapping/isPartOf/University_of_Oxford/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/University_of_Oxford" .
 
 <./Mapping_en:Infobox_Oxford_college/SimplePropertyMapping/head/head/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;

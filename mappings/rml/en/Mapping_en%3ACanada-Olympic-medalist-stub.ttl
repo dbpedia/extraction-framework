@@ -33,17 +33,21 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 
 <./Mapping_en:Canada-Olympic-medalist-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dul:NaturalPerson , dul:Agent , dbo:Athlete , owl:Thing , dbo:Agent , wikidata:Q215627 , schema:Person , foaf:Person , dbo:Person , wikidata:Q5 ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/Canada>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Canada-Olympic-medalist-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -54,10 +58,6 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Canada-Olympic-medalist-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada> ;
+        rr:predicateObjectMap  <./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/Canada> ;
         rr:subjectMap          <./Mapping_en:Canada-Olympic-medalist-stub/SubjectMap> .
-
-<./Mapping_en:Canada-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 

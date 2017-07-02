@@ -45,19 +45,19 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/http://en.dbpedia.org/resource/Biography>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/http://en.dbpedia.org/resource/Biography/ObjectMap> ;
-        rr:predicate  dbo:literaryGenre .
-
-<./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/http://en.dbpedia.org/resource/Biography/ObjectMap>
+<./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/Biography/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Biography" .
+
+<./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/Biography>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/Biography/ObjectMap> ;
+        rr:predicate  dbo:literaryGenre .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Bio-book-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/http://en.dbpedia.org/resource/Biography> ;
+        rr:predicateObjectMap  <./Mapping_en:Bio-book-stub/ConstantMapping/literaryGenre/Biography> ;
         rr:subjectMap          <./Mapping_en:Bio-book-stub/SubjectMap> .
 

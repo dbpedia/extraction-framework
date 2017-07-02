@@ -40,6 +40,12 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Poland-railstation-stub?oldid=29062" .
 
+<./Mapping_en:Poland-railstation-stub/ConstantMapping/location/Poland>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Poland-railstation-stub/ConstantMapping/location/Poland/ObjectMap> ;
+        rr:predicate  dbo:location .
+
 <./Mapping_en:Poland-railstation-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -48,16 +54,10 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Poland-railstation-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Poland-railstation-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Poland> ;
+        rr:predicateObjectMap  <./Mapping_en:Poland-railstation-stub/ConstantMapping/location/Poland> ;
         rr:subjectMap          <./Mapping_en:Poland-railstation-stub/SubjectMap> .
 
-<./Mapping_en:Poland-railstation-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Poland/ObjectMap>
+<./Mapping_en:Poland-railstation-stub/ConstantMapping/location/Poland/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Poland" .
-
-<./Mapping_en:Poland-railstation-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Poland>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Poland-railstation-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Poland/ObjectMap> ;
-        rr:predicate  dbo:location .
 

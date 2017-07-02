@@ -28,27 +28,27 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Ellsworth_Land/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Ellsworth_Land" .
-
-<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Ellsworth_Land>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Ellsworth_Land/ObjectMap> ;
-        rr:predicate  dbo:isPartOf .
-
 <./Mapping_en:EllsworthLand-geo-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:EllsworthLand-geo-stub?oldid=30065" .
 
+<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:EllsworthLand-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Ellsworth_Land> , <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica> ;
+        rr:predicateObjectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land> , <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica> ;
         rr:subjectMap          <./Mapping_en:EllsworthLand-geo-stub/SubjectMap> .
+
+<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Ellsworth_Land" .
 
 <./Mapping_en:EllsworthLand-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -56,18 +56,18 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica>
+<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
+
+<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap> ;
-        rr:predicate  dbo:country .
+        rr:objectMap  <./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/isPartOf/Ellsworth_Land/ObjectMap> ;
+        rr:predicate  dbo:isPartOf .
 
 <./Mapping_en:EllsworthLand-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:EllsworthLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 

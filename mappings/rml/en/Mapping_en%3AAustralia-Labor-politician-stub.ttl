@@ -34,10 +34,10 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Australian_Labor_Party>
+<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Australian_Labor_Party/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party/ObjectMap> ;
         rr:predicate  dbo:party .
 
 <./Mapping_en:Australia-Labor-politician-stub/LogicalSource>
@@ -46,10 +46,16 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Australia-Labor-politician-stub?oldid=29598" .
 
+<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia/ObjectMap> ;
+        rr:predicate  dbo:nationality .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Australia-Labor-politician-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Australia> , <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Australian_Labor_Party> ;
+        rr:predicateObjectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia> , <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party> ;
         rr:subjectMap          <./Mapping_en:Australia-Labor-politician-stub/SubjectMap> .
 
 <./Mapping_en:Australia-Labor-politician-stub/SubjectMap/Function>
@@ -57,17 +63,11 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Australia>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Australia/ObjectMap> ;
-        rr:predicate  dbo:nationality .
-
-<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Australian_Labor_Party/ObjectMap>
+<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/party/Australian_Labor_Party/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Australian_Labor_Party" .
 
-<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Australia/ObjectMap>
+<./Mapping_en:Australia-Labor-politician-stub/ConstantMapping/nationality/Australia/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Australia" .
 

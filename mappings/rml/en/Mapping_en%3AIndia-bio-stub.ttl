@@ -34,31 +34,31 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:India-bio-stub/ConstantMapping/nationality/India>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:India-bio-stub/ConstantMapping/nationality/India/ObjectMap> ;
+        rr:predicate  dbo:nationality .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:India-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:India-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India> , <./Mapping_en:India-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India> ;
+        rr:predicateObjectMap  <./Mapping_en:India-bio-stub/ConstantMapping/country/India> , <./Mapping_en:India-bio-stub/ConstantMapping/nationality/India> ;
         rr:subjectMap          <./Mapping_en:India-bio-stub/SubjectMap> .
 
-<./Mapping_en:India-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India/ObjectMap>
+<./Mapping_en:India-bio-stub/ConstantMapping/country/India/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/India" .
 
-<./Mapping_en:India-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India/ObjectMap>
+<./Mapping_en:India-bio-stub/ConstantMapping/nationality/India/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/India" .
 
-<./Mapping_en:India-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India>
+<./Mapping_en:India-bio-stub/ConstantMapping/country/India>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:India-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:India-bio-stub/ConstantMapping/country/India/ObjectMap> ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:India-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:India-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India/ObjectMap> ;
-        rr:predicate  dbo:nationality .
 
 <./Mapping_en:India-bio-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

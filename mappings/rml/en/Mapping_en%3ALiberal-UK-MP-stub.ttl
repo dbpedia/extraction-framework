@@ -28,31 +28,31 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/Liberal_Party_(UK)/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Liberal_Party_(UK)" .
+
 <./Mapping_en:Liberal-UK-MP-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Liberal-UK-MP-stub?oldid=28848" .
 
-<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Liberal_Party_(UK)>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Liberal_Party_(UK)/ObjectMap> ;
-        rr:predicate  dbo:party .
-
-<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Liberal-UK-MP-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Liberal_Party_(UK)> , <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/Liberal_Party_(UK)> , <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:Liberal-UK-MP-stub/SubjectMap> .
-
-<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Liberal_Party_(UK)/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Liberal_Party_(UK)" .
 
 <./Mapping_en:Liberal-UK-MP-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -60,11 +60,11 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/Liberal_Party_(UK)>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:country .
+        rr:objectMap  <./Mapping_en:Liberal-UK-MP-stub/ConstantMapping/party/Liberal_Party_(UK)/ObjectMap> ;
+        rr:predicate  dbo:party .
 
 <./Mapping_en:Liberal-UK-MP-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

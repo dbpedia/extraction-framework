@@ -31,23 +31,23 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-org-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-org-stub/ConstantMapping/location/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-org-stub/ConstantMapping/location/United_States> ;
         rr:subjectMap          <./Mapping_en:US-org-stub/SubjectMap> .
-
-<./Mapping_en:US-org-stub/ConstantMapping/location/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:US-org-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:US-org-stub/ConstantMapping/location/http://en.dbpedia.org/resource/United_States>
+<./Mapping_en:US-org-stub/ConstantMapping/location/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-org-stub/ConstantMapping/location/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:US-org-stub/ConstantMapping/location/United_States/ObjectMap> ;
         rr:predicate  dbo:location .
+
+<./Mapping_en:US-org-stub/ConstantMapping/location/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:US-org-stub/SubjectMap>
         a            rr:SubjectMap ;

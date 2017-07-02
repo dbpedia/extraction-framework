@@ -80,33 +80,21 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_sq_mi/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_sq_mi/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_sq_mi/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Pittsburgh_neighborhood/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
-        a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
-
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_Pittsburgh_neighborhood/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Pittsburgh_neighborhood/SubjectMap/Function> .
 
+<./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
+
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin3/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:country .
-
-<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/http://en.dbpedia.org/resource/Pittsburgh,_Pennsylvania>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/http://en.dbpedia.org/resource/Pittsburgh,_Pennsylvania/ObjectMap> ;
-        rr:predicate  dbo:city .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank2_sq_mi/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -339,6 +327,10 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
 
+<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/Pennsylvania/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Pennsylvania" .
+
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name4/FunctionTermMap/FunctionValue> .
@@ -383,10 +375,6 @@
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/density_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "populationDensity" .
-
-<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/http://en.dbpedia.org/resource/Pittsburgh,_Pennsylvania/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Pittsburgh,_Pennsylvania" .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/area_water_km2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -765,12 +753,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/HighestElev_ft/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
-<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/http://en.dbpedia.org/resource/Pennsylvania>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/http://en.dbpedia.org/resource/Pennsylvania/ObjectMap> ;
-        rr:predicate  dbo:state .
-
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin7>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -1130,6 +1112,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title1/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaMetro/area_metro_km2/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "area_metro_km2" .
@@ -1424,6 +1410,10 @@
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "longs" .
+
+<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/Pittsburgh,_Pennsylvania/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Pittsburgh,_Pennsylvania" .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -2371,6 +2361,12 @@
         a            rr:ObjectMap ;
         rr:constant  "twinCountry" .
 
+<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/Pittsburgh,_Pennsylvania>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/Pittsburgh,_Pennsylvania/ObjectMap> ;
+        rr:predicate  dbo:city .
+
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationAsOf/PopulationYear/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationAsOf/PopulationYear/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -2402,10 +2398,6 @@
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "areaCode" .
-
-<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/TotalArea/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -2622,6 +2614,12 @@
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/population_total/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "populationTotal" .
+
+<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/United_States/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:homepage/web/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -3242,7 +3240,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Pittsburgh_neighborhood/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/elevation/elevation_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank2_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/type/settlement_type> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationAsOf/population_as_of> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/longitude> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/language/OfficialLang> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/HighestElev_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/Density> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/WaterArea> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/LowestElev> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationMetro/population_metro> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/http://en.dbpedia.org/resource/Pittsburgh,_Pennsylvania> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinCountry/twin1_country> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/largestCity/largest%20city%20wl> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingYear/founded%20year> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank1_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationUrbanDensity/population_density_urban_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/latitude> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/HighestElev> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin4> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/population_blank1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaMetro/area_metro_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/pop> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/area/area> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationAsOf/PopulationYear> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/area_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationMetroDensity/population_density_metro_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/area_water_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/canton/cantons> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/LowestElev_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/elevation_max_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/percentageOfAreaWater/area_water_percent> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/elevation/elevation_m> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/population_total> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/arrondissement/arrondissements> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/synonym/other_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/county> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/memberOfParliament/mps> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/TotalArea> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank1_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaLand/area_land_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/largestCity/LargestCity> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/http://en.dbpedia.org/resource/Pennsylvania> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationUrbanDensity/population_density_urban_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/elevation_min_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin7> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name4> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/department/departments> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaLand/area_land_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/elevation_max_m> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/demonym/Demonym> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title4> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/founder/founder> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/language/Languages> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/founded%20date> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/cityType/city%20type> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaLand/LandArea> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/Fullname> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/common_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/language/official_languages> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/demonym/population_demonym> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank2_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/area_total_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/density_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:homepage/web> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationUrban/population_urban> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin5> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/area_water_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin6> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationMetroDensity/population_density_metro_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/area_total_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/population_blank2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaMetro/area_metro_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/Population> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/elevation_min_m> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/commune/communes> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/capital/Capital> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/elevation/elevation_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank2_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/type/settlement_type> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationAsOf/population_as_of> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/longitude> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/language/OfficialLang> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/HighestElev_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/Density> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/WaterArea> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/LowestElev> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationMetro/population_metro> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinCountry/twin1_country> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/largestCity/largest%20city%20wl> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingYear/founded%20year> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank1_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationUrbanDensity/population_density_urban_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/latitude> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/HighestElev> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin4> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/population_blank1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaMetro/area_metro_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/pop> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/area/area> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationAsOf/PopulationYear> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/area_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationMetroDensity/population_density_metro_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/area_water_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/canton/cantons> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/LowestElev_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/elevation_max_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/city/Pittsburgh,_Pennsylvania> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/percentageOfAreaWater/area_water_percent> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/Pennsylvania> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/elevation/elevation_m> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/population_total> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/arrondissement/arrondissements> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/synonym/other_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/county> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/memberOfParliament/mps> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/TotalArea> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank1_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaLand/area_land_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/largestCity/LargestCity> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationUrbanDensity/population_density_urban_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/elevation_min_ft> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin7> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name4> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/department/departments> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/established_date1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaLand/area_land_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/country/United_States> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/maximumElevation/elevation_max_m> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/demonym/Demonym> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title4> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/founder/founder> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/language/Languages> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foundingDate/founded%20date> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/cityType/city%20type> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin1> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaLand/LandArea> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/Fullname> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/common_name> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/language/official_languages> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/demonym/population_demonym> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank2_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/area_total_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaUrban/area_urban_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/density_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:homepage/web> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationUrban/population_urban> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin5> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/area_water_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/twinTown/twin6> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationMetroDensity/population_density_metro_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderName/leader_name3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/area_total_sq_mi> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/population_blank2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaMetro/area_metro_km2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationTotal/Population> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/minimumElevation/elevation_min_m> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title2> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/commune/communes> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title3> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/leaderTitle/leader_title> , <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/capital/Capital> ;
         rr:subjectMap          <./Mapping_en:Infobox_Pittsburgh_neighborhood/SubjectMap> .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/populationDensity/population_density_blank1_km2/FunctionTermMap>
@@ -3613,10 +3611,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/founder/founder/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/http://en.dbpedia.org/resource/Pennsylvania/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Pennsylvania" .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/foaf:name/common_name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -4352,6 +4346,12 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaTotal/area_total_km2/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
         rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/Pennsylvania>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Pittsburgh_neighborhood/ConstantMapping/state/Pennsylvania/ObjectMap> ;
+        rr:predicate  dbo:state .
 
 <./Mapping_en:Infobox_Pittsburgh_neighborhood/SimplePropertyMapping/areaWater/area_water_sq_mi/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

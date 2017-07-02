@@ -28,6 +28,12 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:nationality .
+
 <./Mapping_en:UK-Christian-clergy-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -42,12 +48,8 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:UK-Christian-clergy-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:UK-Christian-clergy-stub/SubjectMap> .
-
-<./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
 <./Mapping_en:UK-Christian-clergy-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -55,9 +57,7 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:nationality .
+<./Mapping_en:UK-Christian-clergy-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 

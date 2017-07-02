@@ -34,10 +34,10 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:US-boxing-bio-stub?oldid=29057" .
 
-<./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
+<./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/United_States/ObjectMap> ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:US-boxing-bio-stub/SubjectMap/Function>
@@ -48,16 +48,16 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-boxing-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/United_States> ;
         rr:subjectMap          <./Mapping_en:US-boxing-bio-stub/SubjectMap> .
+
+<./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:US-boxing-bio-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Athlete , dbo:Agent , owl:Thing , wikidata:Q215627 , schema:Person , dul:NaturalPerson , dul:Agent , dbo:Boxer , wikidata:Q5 , dbo:Person , foaf:Person ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:US-boxing-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 

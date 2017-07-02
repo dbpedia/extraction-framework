@@ -28,10 +28,20 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/Jazz>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/Jazz/ObjectMap> ;
+        rr:predicate  dbo:genre .
+
 <./Mapping_en:Jazz-composition-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
+
+<./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/Jazz/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Jazz" .
 
 <./Mapping_en:Jazz-composition-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -42,22 +52,12 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Jazz-composition-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/http://en.dbpedia.org/resource/Jazz> ;
+        rr:predicateObjectMap  <./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/Jazz> ;
         rr:subjectMap          <./Mapping_en:Jazz-composition-stub/SubjectMap> .
-
-<./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/http://en.dbpedia.org/resource/Jazz/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Jazz" .
 
 <./Mapping_en:Jazz-composition-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , wikidata:Q386724 , schema:CreativeWork , dbo:Work , wikidata:Q2188189 , dbo:MusicalWork ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/http://en.dbpedia.org/resource/Jazz>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Jazz-composition-stub/ConstantMapping/genre/http://en.dbpedia.org/resource/Jazz/ObjectMap> ;
-        rr:predicate  dbo:genre .
 

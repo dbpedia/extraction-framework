@@ -259,12 +259,6 @@
         rr:predicateObjectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_French_commune/SubjectMap/Function> .
 
-<./Mapping_en:Infobox_French_commune/ConstantMapping/country/http://en.dbpedia.org/resource/France>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_French_commune/ConstantMapping/country/http://en.dbpedia.org/resource/France/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation%20max%20m/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
@@ -518,6 +512,12 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/latitude/FunctionTermMap/ParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latParameter .
+
+<./Mapping_en:Infobox_French_commune/ConstantMapping/country/France>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_French_commune/ConstantMapping/country/France/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -1105,7 +1105,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_French_commune/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/inseeCode/INSEE> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/canton/canton> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation_m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area_km2> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area%20km2> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation%20min%20m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population%20date> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/intercommunality/intercommunality> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation_max_m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population_year> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/timeZone/time_zone> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation%20max%20m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_French_commune/latitude> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal%20code> , <./Mapping_en:Infobox_French_commune/longitude> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation_min_m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/arrondissement/arrondissement> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation%20m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/department/department> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/motto/city_motto> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native%20name> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/region/region> , <./Mapping_en:Infobox_French_commune/ConstantMapping/country/http://en.dbpedia.org/resource/France> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/inseeCode/INSEE> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/canton/canton> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation_m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area_km2> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/area/area%20km2> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/subdivisions/subdivisions> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation%20min%20m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population%20date> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/intercommunality/intercommunality> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation_max_m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationAsOf/population_year> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/timeZone/time_zone> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/maximumElevation/elevation%20max%20m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_French_commune/ConstantMapping/country/France> , <./Mapping_en:Infobox_French_commune/latitude> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/postalCode/postal%20code> , <./Mapping_en:Infobox_French_commune/longitude> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/minimumElevation/elevation_min_m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/arrondissement/arrondissement> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation%20m> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/department/department> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/motto/city_motto> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/foaf:name/native%20name> , <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/region/region> ;
         rr:subjectMap          <./Mapping_en:Infobox_French_commune/SubjectMap> .
 
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/timeZone/time_zone/FunctionTermMap>
@@ -1180,10 +1180,6 @@
         a            rr:ObjectMap ;
         rr:constant  "metre" .
 
-<./Mapping_en:Infobox_French_commune/ConstantMapping/country/http://en.dbpedia.org/resource/France/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/France" .
-
 <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/intercommunality/intercommunality/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
@@ -1234,6 +1230,10 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_French_commune/SimplePropertyMapping/elevation/elevation_m/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
         rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_French_commune/ConstantMapping/country/France/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/France" .
 
 <./Mapping_en:Infobox_French_commune/latitude/FunctionTermMap/ExecutePOM>
         a             rr:PredicateObjectMap ;

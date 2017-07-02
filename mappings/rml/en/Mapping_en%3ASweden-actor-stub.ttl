@@ -28,11 +28,15 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Sweden>
+<./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/Sweden>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Sweden/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/Sweden/ObjectMap> ;
         rr:predicate  dbo:nationality .
+
+<./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/Sweden/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Sweden" .
 
 <./Mapping_en:Sweden-actor-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -42,7 +46,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Sweden-actor-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Sweden> ;
+        rr:predicateObjectMap  <./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/Sweden> ;
         rr:subjectMap          <./Mapping_en:Sweden-actor-stub/SubjectMap> .
 
 <./Mapping_en:Sweden-actor-stub/SubjectMap>
@@ -56,8 +60,4 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Sweden-actor-stub?oldid=28771" .
-
-<./Mapping_en:Sweden-actor-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Sweden/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Sweden" .
 

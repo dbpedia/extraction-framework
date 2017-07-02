@@ -31,7 +31,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:ScottCoast-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica> , <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Victoria_Land> ;
+        rr:predicateObjectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Antarctica> , <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Victoria_Land> ;
         rr:subjectMap          <./Mapping_en:ScottCoast-geo-stub/SubjectMap> .
 
 <./Mapping_en:ScottCoast-geo-stub/LogicalSource>
@@ -40,20 +40,20 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:ScottCoast-geo-stub?oldid=28802" .
 
-<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Victoria_Land>
+<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Antarctica>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Victoria_Land/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Antarctica/ObjectMap> ;
         rr:predicate  dbo:location .
-
-<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 
 <./Mapping_en:ScottCoast-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
+
+<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Antarctica/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 
 <./Mapping_en:ScottCoast-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -61,13 +61,13 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Victoria_Land/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Victoria_Land" .
-
-<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica>
+<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Victoria_Land>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Victoria_Land/ObjectMap> ;
         rr:predicate  dbo:location .
+
+<./Mapping_en:ScottCoast-geo-stub/ConstantMapping/location/Victoria_Land/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Victoria_Land" .
 

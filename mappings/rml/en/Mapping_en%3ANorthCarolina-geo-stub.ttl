@@ -28,9 +28,11 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/North_Carolina/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/North_Carolina" .
+<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/North_Carolina>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/North_Carolina/ObjectMap> ;
+        rr:predicate  dbo:locatedInArea .
 
 <./Mapping_en:NorthCarolina-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -43,10 +45,24 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/North_Carolina/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/North_Carolina" .
+
+<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+
+<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/United_States/ObjectMap> ;
+        rr:predicate  dbo:locatedInArea .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:NorthCarolina-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/United_States> , <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/North_Carolina> ;
+        rr:predicateObjectMap  <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/United_States> , <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/North_Carolina> ;
         rr:subjectMap          <./Mapping_en:NorthCarolina-geo-stub/SubjectMap> .
 
 <./Mapping_en:NorthCarolina-geo-stub/LogicalSource>
@@ -54,20 +70,4 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:NorthCarolina-geo-stub?oldid=30072" .
-
-<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/United_States>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:locatedInArea .
-
-<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
-<./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/North_Carolina>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:NorthCarolina-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/North_Carolina/ObjectMap> ;
-        rr:predicate  dbo:locatedInArea .
 

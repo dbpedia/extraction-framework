@@ -242,6 +242,12 @@
         rr:objectMap  <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/demonym/demonym/FunctionTermMap> ;
         rr:predicate  dbo:demonym .
 
+<./Mapping_en:Infobox_South_African_town/ConstantMapping/country/South_Africa>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_South_African_town/ConstantMapping/country/South_Africa/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -455,6 +461,10 @@
         rr:objectMap  <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
+<./Mapping_en:Infobox_South_African_town/ConstantMapping/country/South_Africa/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/South_Africa" .
+
 <./Mapping_en:Infobox_South_African_town/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_South_African_town/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
@@ -514,10 +524,6 @@
 <./Mapping_en:Infobox_South_African_town/longitude/ObjectMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:lonFunction .
-
-<./Mapping_en:Infobox_South_African_town/ConstantMapping/country/http://en.dbpedia.org/resource/South_Africa/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/South_Africa" .
 
 <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -681,27 +687,21 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
 
-<./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/leaderParty/mayor_party/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "leaderParty" .
 
-<./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
-        a              rr:ObjectMap ;
-        rml:reference  "postal_code" .
+<./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
 
 <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/isoCodeRegion/iso-code-region/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "iso-code-region" .
 
-<./Mapping_en:Infobox_South_African_town/ConstantMapping/country/http://en.dbpedia.org/resource/South_Africa>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_South_African_town/ConstantMapping/country/http://en.dbpedia.org/resource/South_Africa/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/postalCode/postal_code/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
+        a              rr:ObjectMap ;
+        rml:reference  "postal_code" .
 
 <./Mapping_en:Infobox_South_African_town/longitude/ObjectMap/FunctionValue/lonSecondsParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -975,7 +975,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_South_African_town/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/populationTotal/populationof> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/subject_name> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/type/municipality_type> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/censusYear/popofyear> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/canton/canton> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/municipalityCode/municipality_code> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_South_African_town/ConstantMapping/country/http://en.dbpedia.org/resource/South_Africa> , <./Mapping_en:Infobox_South_African_town/longitude> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/leaderParty/mayor_party> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/lowestPlace/lowest> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/district/district> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/municipalityCode/municipal_code> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/highestPlace/highest> , <./Mapping_en:Infobox_South_African_town/latitude> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/twinTown/twintowns> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/elevation/elevation_m> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/isoCodeRegion/iso-code-region> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/elevation/altitude> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/municipality/within_municipality> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/name> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/populationTotal/populationof> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/subject_name> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/type/municipality_type> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/censusYear/popofyear> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/canton/canton> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/municipalityCode/municipality_code> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_South_African_town/longitude> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/leaderParty/mayor_party> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/lowestPlace/lowest> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/district/district> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/municipalityCode/municipal_code> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/highestPlace/highest> , <./Mapping_en:Infobox_South_African_town/ConstantMapping/country/South_Africa> , <./Mapping_en:Infobox_South_African_town/latitude> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/twinTown/twintowns> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/elevation/elevation_m> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/isoCodeRegion/iso-code-region> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/elevation/altitude> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/municipality/within_municipality> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:nick/nickname> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/foaf:name/name> ;
         rr:subjectMap          <./Mapping_en:Infobox_South_African_town/SubjectMap> .
 
 <./Mapping_en:Infobox_South_African_town/SimplePropertyMapping/canton/canton/FunctionTermMap/FunctionValue/ExecutePOM>

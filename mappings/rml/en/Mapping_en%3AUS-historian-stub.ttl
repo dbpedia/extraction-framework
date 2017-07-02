@@ -37,7 +37,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-historian-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-historian-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-historian-stub/ConstantMapping/nationality/United_States> ;
         rr:subjectMap          <./Mapping_en:US-historian-stub/SubjectMap> .
 
 <./Mapping_en:US-historian-stub/SubjectMap>
@@ -46,18 +46,18 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:US-historian-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
 <./Mapping_en:US-historian-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:US-historian-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States>
+<./Mapping_en:US-historian-stub/ConstantMapping/nationality/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+
+<./Mapping_en:US-historian-stub/ConstantMapping/nationality/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-historian-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:US-historian-stub/ConstantMapping/nationality/United_States/ObjectMap> ;
         rr:predicate  dbo:nationality .
 

@@ -28,11 +28,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Spain>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Spain/ObjectMap> ;
-        rr:predicate  dbo:nationality .
+<./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/Spain/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Spain" .
 
 <./Mapping_en:Spain-bio-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -40,15 +38,17 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Spain/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Spain" .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Spain-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Spain> ;
+        rr:predicateObjectMap  <./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/Spain> ;
         rr:subjectMap          <./Mapping_en:Spain-bio-stub/SubjectMap> .
+
+<./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/Spain>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Spain-bio-stub/ConstantMapping/nationality/Spain/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <./Mapping_en:Spain-bio-stub/LogicalSource>
         a                         rml:LogicalSource ;

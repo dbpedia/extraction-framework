@@ -31,7 +31,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:France-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:France-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/France> ;
+        rr:predicateObjectMap  <./Mapping_en:France-writer-stub/ConstantMapping/country/France> ;
         rr:subjectMap          <./Mapping_en:France-writer-stub/SubjectMap> .
 
 <./Mapping_en:France-writer-stub/LogicalSource>
@@ -39,12 +39,6 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:France-writer-stub?oldid=28832" .
-
-<./Mapping_en:France-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/France>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:France-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/France/ObjectMap> ;
-        rr:predicate  dbo:country .
 
 <./Mapping_en:France-writer-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -57,7 +51,13 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:France-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/France/ObjectMap>
+<./Mapping_en:France-writer-stub/ConstantMapping/country/France>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:France-writer-stub/ConstantMapping/country/France/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:France-writer-stub/ConstantMapping/country/France/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/France" .
 

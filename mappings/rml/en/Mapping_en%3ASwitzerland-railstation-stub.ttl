@@ -28,9 +28,11 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Switzerland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Switzerland" .
+<./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/Switzerland>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/Switzerland/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Switzerland-railstation-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -41,14 +43,12 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Switzerland-railstation-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Switzerland> ;
+        rr:predicateObjectMap  <./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/Switzerland> ;
         rr:subjectMap          <./Mapping_en:Switzerland-railstation-stub/SubjectMap> .
 
-<./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Switzerland>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Switzerland/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Switzerland-railstation-stub/ConstantMapping/country/Switzerland/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Switzerland" .
 
 <./Mapping_en:Switzerland-railstation-stub/SubjectMap>
         a            rr:SubjectMap ;

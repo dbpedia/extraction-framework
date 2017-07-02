@@ -33,11 +33,9 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Canada>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
-        rr:predicate  dbo:nationality .
+<./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 
 <./Mapping_en:Canada-bio-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -54,10 +52,12 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Canada-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Canada> ;
+        rr:predicateObjectMap  <./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/Canada> ;
         rr:subjectMap          <./Mapping_en:Canada-bio-stub/SubjectMap> .
 
-<./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
+<./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/Canada>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Canada-bio-stub/ConstantMapping/nationality/Canada/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 

@@ -566,15 +566,15 @@
         a            rr:ObjectMap ;
         rr:constant  "Currency" .
 
+<./Mapping_en:Infobox_airline/ConstantMapping/industry/Air_Transport>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_airline/ConstantMapping/industry/Air_Transport/ObjectMap> ;
+        rr:predicate  dbo:industry .
+
 <./Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "subsidiary" .
-
-<./Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport/ObjectMap> ;
-        rr:predicate  dbo:industry .
 
 <./Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -695,6 +695,10 @@
         rr:objectMap  <./Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_airline/ConstantMapping/industry/Air_Transport/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Air_Transport" .
+
 <./Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
@@ -801,7 +805,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_airline/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO> , <./Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_airline/SimplePropertyMapping/operatingIncome/operating_income> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/equity/equity> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/closingDate/ceased> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/alliance/alliance> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/parentCompany/parent> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/headquarter/headquarters> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/icaoAirlineCode/ICAO> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/revenue/revenue> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/netIncome/net_income> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/numberOfEmployees/num_employees> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/focus_cities> , <./Mapping_en:Infobox_airline/ConstantMapping/industry/Air_Transport> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/foaf:name/airline> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/targetAirport/bases> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/subsidiary/subsidiaries> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/openingDate/commenced> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/destination/destinations> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/hubs> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/iataAirlineCode/IATA> , <./Mapping_en:Infobox_airline/SimplePropertyMapping/lounge/lounge> ;
         rr:subjectMap          <./Mapping_en:Infobox_airline/SubjectMap> .
 
 <./Mapping_en:Infobox_airline/SimplePropertyMapping/formationDate/founded/FunctionTermMap>
@@ -818,10 +822,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_airline/SimplePropertyMapping/assets/assets/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
-
-<./Mapping_en:Infobox_airline/ConstantMapping/industry/http://en.dbpedia.org/resource/Air_Transport/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Air_Transport" .
 
 <./Mapping_en:Infobox_airline/SimplePropertyMapping/hubAirport/secondary_hubs/FunctionTermMap>
         a                   fnml:FunctionTermMap ;

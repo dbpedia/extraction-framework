@@ -28,15 +28,17 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:California-school-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
 <./Mapping_en:California-school-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Organisation , dul:SocialPerson , schema:Organization , dul:Agent , dbo:EducationalInstitution , dbo:Agent , owl:Thing , wikidata:Q43229 , schema:EducationalOrganization ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:California-school-stub/ConstantMapping/country/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:California-school-stub/ConstantMapping/country/United_States/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:California-school-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -44,27 +46,25 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:California-school-stub?oldid=30080" .
 
-<./Mapping_en:California-school-stub/ConstantMapping/state/http://en.dbpedia.org/resource/California>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:California-school-stub/ConstantMapping/state/http://en.dbpedia.org/resource/California/ObjectMap> ;
-        rr:predicate  dbo:state .
+<./Mapping_en:California-school-stub/ConstantMapping/state/California/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/California" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:California-school-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:California-school-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> , <./Mapping_en:California-school-stub/ConstantMapping/state/http://en.dbpedia.org/resource/California> ;
+        rr:predicateObjectMap  <./Mapping_en:California-school-stub/ConstantMapping/country/United_States> , <./Mapping_en:California-school-stub/ConstantMapping/state/California> ;
         rr:subjectMap          <./Mapping_en:California-school-stub/SubjectMap> .
 
-<./Mapping_en:California-school-stub/ConstantMapping/state/http://en.dbpedia.org/resource/California/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/California" .
-
-<./Mapping_en:California-school-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
+<./Mapping_en:California-school-stub/ConstantMapping/state/California>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:California-school-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:country .
+        rr:objectMap  <./Mapping_en:California-school-stub/ConstantMapping/state/California/ObjectMap> ;
+        rr:predicate  dbo:state .
+
+<./Mapping_en:California-school-stub/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:California-school-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

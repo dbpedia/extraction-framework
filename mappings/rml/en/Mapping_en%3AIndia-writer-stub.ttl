@@ -28,20 +28,22 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:India-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/India" .
-
 <./Mapping_en:India-writer-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dul:NaturalPerson , schema:Person , foaf:Person , owl:Thing , dul:Agent , dbo:Person , wikidata:Q36180 , wikidata:Q215627 , dbo:Agent , dbo:Writer , wikidata:Q5 ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:India-writer-stub/ConstantMapping/country/India>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:India-writer-stub/ConstantMapping/country/India/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:India-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:India-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India> ;
+        rr:predicateObjectMap  <./Mapping_en:India-writer-stub/ConstantMapping/country/India> ;
         rr:subjectMap          <./Mapping_en:India-writer-stub/SubjectMap> .
 
 <./Mapping_en:India-writer-stub/SubjectMap/Function>
@@ -49,15 +51,13 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:India-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:India-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/India/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:India-writer-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:India-writer-stub?oldid=28839" .
+
+<./Mapping_en:India-writer-stub/ConstantMapping/country/India/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/India" .
 

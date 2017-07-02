@@ -28,12 +28,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/http://en.dbpedia.org/resource/Piano>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/http://en.dbpedia.org/resource/Piano/ObjectMap> ;
-        rr:predicate  dbo:instrument .
-
 <./Mapping_en:Classical-pianist-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -45,19 +39,25 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Classical-pianist-stub?oldid=29040" .
 
-<./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/http://en.dbpedia.org/resource/Piano/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Piano" .
-
 <./Mapping_en:Classical-pianist-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     wikidata:Q483501 , schema:Person , owl:Thing , dbo:Artist , foaf:Person , wikidata:Q5 , dbo:MusicalArtist , dul:NaturalPerson , schema:MusicGroup , dbo:Agent , dbo:Person , wikidata:Q215627 , dbo:ClassicalMusicArtist , dul:Agent ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/Piano/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Piano" .
+
+<./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/Piano>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/Piano/ObjectMap> ;
+        rr:predicate  dbo:instrument .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Classical-pianist-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/http://en.dbpedia.org/resource/Piano> ;
+        rr:predicateObjectMap  <./Mapping_en:Classical-pianist-stub/ConstantMapping/instrument/Piano> ;
         rr:subjectMap          <./Mapping_en:Classical-pianist-stub/SubjectMap> .
 

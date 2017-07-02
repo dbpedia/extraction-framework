@@ -39,35 +39,35 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Conrwall/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Conrwall" .
-
-<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Conrwall>
+<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Conrwall/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall/ObjectMap> ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Cornwall-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Conrwall> , <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall> , <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:Cornwall-geo-stub/SubjectMap> .
 
-<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
+
+<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/Conrwall/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Conrwall" .
 
 <./Mapping_en:Cornwall-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , dbo:Location , schema:Place , dbo:Place ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Cornwall-geo-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
 

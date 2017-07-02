@@ -31,7 +31,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Italy-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Italy-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Italy> ;
+        rr:predicateObjectMap  <./Mapping_en:Italy-writer-stub/ConstantMapping/country/Italy> ;
         rr:subjectMap          <./Mapping_en:Italy-writer-stub/SubjectMap> .
 
 <./Mapping_en:Italy-writer-stub/SubjectMap>
@@ -40,13 +40,7 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Italy-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Italy>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Italy-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Italy/ObjectMap> ;
-        rr:predicate  dbo:country .
-
-<./Mapping_en:Italy-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Italy/ObjectMap>
+<./Mapping_en:Italy-writer-stub/ConstantMapping/country/Italy/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Italy" .
 
@@ -55,6 +49,12 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Italy-writer-stub?oldid=28845" .
+
+<./Mapping_en:Italy-writer-stub/ConstantMapping/country/Italy>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Italy-writer-stub/ConstantMapping/country/Italy/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Italy-writer-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

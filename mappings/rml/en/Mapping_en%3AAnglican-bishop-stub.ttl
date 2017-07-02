@@ -28,26 +28,20 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/Anglicanism/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Anglicanism" .
+
 <./Mapping_en:Anglican-bishop-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Anglican-bishop-stub?oldid=28809" .
 
-<./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/http://en.dbpedia.org/resource/Anglicanism/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Anglicanism" .
-
 <./Mapping_en:Anglican-bishop-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/http://en.dbpedia.org/resource/Anglicanism>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/http://en.dbpedia.org/resource/Anglicanism/ObjectMap> ;
-        rr:predicate  dbo:religion .
 
 <./Mapping_en:Anglican-bishop-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -55,9 +49,15 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/Anglicanism>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/Anglicanism/ObjectMap> ;
+        rr:predicate  dbo:religion .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Anglican-bishop-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/http://en.dbpedia.org/resource/Anglicanism> ;
+        rr:predicateObjectMap  <./Mapping_en:Anglican-bishop-stub/ConstantMapping/religion/Anglicanism> ;
         rr:subjectMap          <./Mapping_en:Anglican-bishop-stub/SubjectMap> .
 

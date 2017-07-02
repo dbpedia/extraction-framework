@@ -81,6 +81,10 @@
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "largest city" .
@@ -129,6 +133,12 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
 
+<./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
@@ -164,7 +174,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_U.S._county/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year> , <./Mapping_en:Infobox_U.S._county/longitude> , <./Mapping_en:Infobox_U.S._county/latitude> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat%20wl> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationTotal/pop> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:homepage/web> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_km2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_km2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaWater/area_water_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingYear/founded%20year> , <./Mapping_en:Infobox_U.S._county/longitude> , <./Mapping_en:Infobox_U.S._county/latitude> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/percentageOfAreaWater/area%20percentage> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foaf:name/county> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaLand/area_land_sq_mi> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20estimate%20yr> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded%20date> , <./Mapping_en:Infobox_U.S._county/ConstantMapping/country/United_States> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/timeZone/time%20zone> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district3> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city%20wl> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/areaTotal/area_total_km2> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/countySeat/seat> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/foundingDate/founded> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/censusYear/census%20yr> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/congressionalDistrict/district> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/largestCity/largest%20city> , <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/populationDensity/density_km2> ;
         rr:subjectMap          <./Mapping_en:Infobox_U.S._county/SubjectMap> .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto>
@@ -567,10 +577,6 @@
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/cityType/city%20type/FunctionTermMap> ;
         rr:predicate  dbo:cityType .
-
-<./Mapping_en:Infobox_U.S._county/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -1206,12 +1212,6 @@
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/motto/motto/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "motto" .
-
-<./Mapping_en:Infobox_U.S._county/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_U.S._county/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_U.S._county/SimplePropertyMapping/state/state/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;

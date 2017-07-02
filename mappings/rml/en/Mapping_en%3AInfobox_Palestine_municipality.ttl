@@ -48,23 +48,19 @@
         rr:objectMap  <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/maximumElevation/highest_m/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
-<./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "foaf:homepage" .
-
 <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/metre> .
 
+<./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "foaf:homepage" .
+
 <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/http://en.dbpedia.org/resource/Palestinian_territories/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Palestinian_territories" .
 
 <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -80,7 +76,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Palestine_municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/http://en.dbpedia.org/resource/Palestinian_territories> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Palestine_municipality/latitude> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Palestine_municipality/longitude> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Palestine_municipality/latitude> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Palestine_municipality/longitude> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/Palestinian_territories> , <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> ;
         rr:subjectMap          <./Mapping_en:Infobox_Palestine_municipality/SubjectMap> .
 
 <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -144,12 +140,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/elevation/elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
         rr:predicate  dbf:unitParameter .
-
-<./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/http://en.dbpedia.org/resource/Palestinian_territories>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/http://en.dbpedia.org/resource/Palestinian_territories/ObjectMap> ;
-        rr:predicate  dbo:location .
 
 <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -414,6 +404,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/populationTotal/population/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/Palestinian_territories/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Palestinian_territories" .
+
 <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "neighboring_municipalities" .
@@ -577,6 +571,12 @@
 <./Mapping_en:Infobox_Palestine_municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
+
+<./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/Palestinian_territories>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Palestine_municipality/ConstantMapping/location/Palestinian_territories/ObjectMap> ;
+        rr:predicate  dbo:location .
 
 <./Mapping_en:Infobox_Palestine_municipality/SubjectMap>
         a            rr:SubjectMap ;

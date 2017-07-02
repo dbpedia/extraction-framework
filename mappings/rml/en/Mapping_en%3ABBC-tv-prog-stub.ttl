@@ -33,25 +33,25 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/http://en.dbpedia.org/resource/BBC>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/http://en.dbpedia.org/resource/BBC/ObjectMap> ;
-        rr:predicate  dbo:network .
-
 <./Mapping_en:BBC-tv-prog-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , wikidata:Q386724 , schema:CreativeWork , dbo:Work , wikidata:Q15416 , dbo:TelevisionShow ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/BBC>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/BBC/ObjectMap> ;
+        rr:predicate  dbo:network .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:BBC-tv-prog-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/http://en.dbpedia.org/resource/BBC> ;
+        rr:predicateObjectMap  <./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/BBC> ;
         rr:subjectMap          <./Mapping_en:BBC-tv-prog-stub/SubjectMap> .
 
-<./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/http://en.dbpedia.org/resource/BBC/ObjectMap>
+<./Mapping_en:BBC-tv-prog-stub/ConstantMapping/network/BBC/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/BBC" .
 

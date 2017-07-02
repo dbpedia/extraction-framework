@@ -33,6 +33,10 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
+<./Mapping_en:Canada-journalist-stub/ConstantMapping/country/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
+
 <./Mapping_en:Canada-journalist-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
@@ -42,7 +46,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Canada-journalist-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Canada-journalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada> ;
+        rr:predicateObjectMap  <./Mapping_en:Canada-journalist-stub/ConstantMapping/country/Canada> ;
         rr:subjectMap          <./Mapping_en:Canada-journalist-stub/SubjectMap> .
 
 <./Mapping_en:Canada-journalist-stub/SubjectMap>
@@ -51,13 +55,9 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Canada-journalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada>
+<./Mapping_en:Canada-journalist-stub/ConstantMapping/country/Canada>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Canada-journalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Canada-journalist-stub/ConstantMapping/country/Canada/ObjectMap> ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:Canada-journalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 

@@ -28,10 +28,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:US-painter-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
 <./Mapping_en:US-painter-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
@@ -41,14 +37,12 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-painter-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-painter-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-painter-stub/ConstantMapping/country/United_States> ;
         rr:subjectMap          <./Mapping_en:US-painter-stub/SubjectMap> .
 
-<./Mapping_en:US-painter-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-painter-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:US-painter-stub/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:US-painter-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -60,4 +54,10 @@
         rr:class     wikidata:Q1028181 , schema:Person , wikidata:Q5 , dbo:Artist , foaf:Person , dbo:Person , dbo:Painter , dul:NaturalPerson , wikidata:Q215627 , owl:Thing , wikidata:Q483501 , dbo:Agent , dul:Agent ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:US-painter-stub/ConstantMapping/country/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:US-painter-stub/ConstantMapping/country/United_States/ObjectMap> ;
+        rr:predicate  dbo:country .
 

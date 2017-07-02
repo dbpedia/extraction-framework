@@ -28,10 +28,10 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:UK-composer-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:UK-composer-stub/ConstantMapping/nationality/United_Kingdom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:UK-composer-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:UK-composer-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap> ;
         rr:predicate  dbo:nationality .
 
 <./Mapping_en:UK-composer-stub/SubjectMap>
@@ -46,11 +46,7 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:UK-composer-stub?oldid=29716" .
 
-<./Mapping_en:UK-composer-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
-
-<./Mapping_en:UK-composer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+<./Mapping_en:UK-composer-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
@@ -59,15 +55,19 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:UK-composer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:UK-composer-stub/ConstantMapping/country/United_Kingdom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:UK-composer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:UK-composer-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
         rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:UK-composer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:UK-composer-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom> , <./Mapping_en:UK-composer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:UK-composer-stub/ConstantMapping/nationality/United_Kingdom> , <./Mapping_en:UK-composer-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:UK-composer-stub/SubjectMap> .
+
+<./Mapping_en:UK-composer-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 

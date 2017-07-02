@@ -39,25 +39,25 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Germany-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Germany-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Germany-politician-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Germany-politician-stub?oldid=29070" .
 
-<./Mapping_en:Germany-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap>
+<./Mapping_en:Germany-politician-stub/ConstantMapping/country/Germany/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Germany" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Germany-politician-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Germany-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany> ;
+        rr:predicateObjectMap  <./Mapping_en:Germany-politician-stub/ConstantMapping/country/Germany> ;
         rr:subjectMap          <./Mapping_en:Germany-politician-stub/SubjectMap> .
+
+<./Mapping_en:Germany-politician-stub/ConstantMapping/country/Germany>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Germany-politician-stub/ConstantMapping/country/Germany/ObjectMap> ;
+        rr:predicate  dbo:country .
 

@@ -28,24 +28,22 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
-
-<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/http://en.dbpedia.org/resource/Newfoundland_and_Labrador/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Newfoundland_and_Labrador" .
-
-<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada>
+<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada/ObjectMap> ;
         rr:predicate  dbo:country .
+
+<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador/ObjectMap> ;
+        rr:predicate  dbo:province .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Newfoundland-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/http://en.dbpedia.org/resource/Newfoundland_and_Labrador> , <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada> ;
+        rr:predicateObjectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador> , <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada> ;
         rr:subjectMap          <./Mapping_en:Newfoundland-geo-stub/SubjectMap> .
 
 <./Mapping_en:Newfoundland-geo-stub/LogicalSource>
@@ -54,16 +52,18 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Newfoundland-geo-stub?oldid=29791" .
 
+<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/Newfoundland_and_Labrador/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Newfoundland_and_Labrador" .
+
+<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/country/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
+
 <./Mapping_en:Newfoundland-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/http://en.dbpedia.org/resource/Newfoundland_and_Labrador>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Newfoundland-geo-stub/ConstantMapping/province/http://en.dbpedia.org/resource/Newfoundland_and_Labrador/ObjectMap> ;
-        rr:predicate  dbo:province .
 
 <./Mapping_en:Newfoundland-geo-stub/SubjectMap>
         a            rr:SubjectMap ;

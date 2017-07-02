@@ -511,10 +511,6 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
 
-<./Mapping_en:Infobox_Town_AT/ConstantMapping/country/http://en.dbpedia.org/resource/Austria/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Austria" .
-
 <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/Partei/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/Partei/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -1177,6 +1173,12 @@
         rr:objectMap  <./Mapping_en:Infobox_Town_AT/latitude/ObjectMap/FunctionValue/latDirectionParameterPOM/ObjectMap> ;
         rr:predicate  dbf:latDirectionParameter .
 
+<./Mapping_en:Infobox_Town_AT/ConstantMapping/country/Austria>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConstantMapping/country/Austria/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Infobox_Town_AT/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
@@ -1545,6 +1547,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/maximumElevation/elevationmax/FunctionTermMap> ;
         rr:predicate  dbo:maximumElevation .
 
+<./Mapping_en:Infobox_Town_AT/ConstantMapping/country/Austria/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Austria" .
+
 <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/Partei/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/Partei/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
@@ -1701,7 +1707,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Town_AT/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:name/Name> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:homepage/Website> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaTotal/Fl%C3%A4che> , <./Mapping_en:Infobox_Town_AT/ConstantMapping/country/http://en.dbpedia.org/resource/Austria> , <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/state/Bundesland> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/state/state> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/postalCode/PLZ> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaCode/Vorwahl> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/elevation/H%C3%B6he> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/district/district> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/district/Bezirk> , <./Mapping_en:Infobox_Town_AT/longitude> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/Partei> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/party> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/populationTotal/Einwohner> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/populationAsOf/population_as_of> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/maximumElevation/elevationmax> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Town_AT/latitude> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/mayor/B%C3%BCrgermeister> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/postalCode/postal_code> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:name/Name> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:homepage/Website> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaTotal/Fl%C3%A4che> , <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/state/Bundesland> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/state/state> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/postalCode/PLZ> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaCode/Vorwahl> , <./Mapping_en:Infobox_Town_AT/ConstantMapping/country/Austria> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/elevation/H%C3%B6he> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/district/district> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/district/Bezirk> , <./Mapping_en:Infobox_Town_AT/longitude> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/Partei> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/party> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/populationTotal/Einwohner> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/populationAsOf/population_as_of> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/maximumElevation/elevationmax> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Town_AT/latitude> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/mayor/B%C3%BCrgermeister> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/postalCode/postal_code> ;
         rr:subjectMap          <./Mapping_en:Infobox_Town_AT/SubjectMap> .
 
 <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/ObjectMap>
@@ -2048,12 +2054,6 @@
 <./Mapping_en:Infobox_Town_AT/ConditionalMapping/type_equals_City/1/2/3/4/5/6/7/8/9/10/11/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:equals .
-
-<./Mapping_en:Infobox_Town_AT/ConstantMapping/country/http://en.dbpedia.org/resource/Austria>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Town_AT/ConstantMapping/country/http://en.dbpedia.org/resource/Austria/ObjectMap> ;
-        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Town_AT/SimplePropertyMapping/party/Partei/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;

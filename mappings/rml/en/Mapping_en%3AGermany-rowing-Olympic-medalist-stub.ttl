@@ -28,20 +28,14 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Germany" .
-
 <./Mapping_en:Germany-rowing-Olympic-medalist-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/Germany/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Germany" .
 
 <./Mapping_en:Germany-rowing-Olympic-medalist-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -52,7 +46,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Germany-rowing-Olympic-medalist-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany> ;
+        rr:predicateObjectMap  <./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/Germany> ;
         rr:subjectMap          <./Mapping_en:Germany-rowing-Olympic-medalist-stub/SubjectMap> .
 
 <./Mapping_en:Germany-rowing-Olympic-medalist-stub/SubjectMap>
@@ -60,4 +54,10 @@
         rr:class     wikidata:Q5 , wikidata:Q215627 , dbo:Athlete , dul:NaturalPerson , owl:Thing , foaf:Person , dul:Agent , schema:Person , dbo:Person , dbo:Agent , dbo:Rower , wikidata:Q13382576 ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/Germany>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Germany-rowing-Olympic-medalist-stub/ConstantMapping/country/Germany/ObjectMap> ;
+        rr:predicate  dbo:country .
 

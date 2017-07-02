@@ -34,13 +34,11 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:England-bio-stub?oldid=28800" .
 
-<./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
-
-<./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/England" .
+<./Mapping_en:England-bio-stub/ConstantMapping/nationality/England>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/England/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <./Mapping_en:England-bio-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -48,26 +46,28 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:England-bio-stub/ConstantMapping/nationality/England/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/England" .
+
+<./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:England-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England> , <./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/England> , <./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:England-bio-stub/SubjectMap> .
-
-<./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England/ObjectMap> ;
-        rr:predicate  dbo:nationality .
-
-<./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:nationality .
 
 <./Mapping_en:England-bio-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
+
+<./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:England-bio-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 

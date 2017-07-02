@@ -28,16 +28,10 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:PalmerLand-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Palmer_Land> , <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica> ;
+        rr:predicateObjectMap  <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/Palmer_Land> , <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/Antarctica> ;
         rr:subjectMap          <./Mapping_en:PalmerLand-geo-stub/SubjectMap> .
 
 <./Mapping_en:PalmerLand-geo-stub/LogicalSource>
@@ -46,28 +40,34 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:PalmerLand-geo-stub?oldid=30067" .
 
-<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
+<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/Antarctica>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:PalmerLand-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Palmer_Land>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Palmer_Land/ObjectMap> ;
-        rr:predicate  dbo:isPartOf .
-
-<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/http://en.dbpedia.org/resource/Palmer_Land/ObjectMap>
+<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/Palmer_Land/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Palmer_Land" .
+
+<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 
 <./Mapping_en:PalmerLand-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , dbo:Location , schema:Place , dbo:Place ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/Palmer_Land>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:PalmerLand-geo-stub/ConstantMapping/isPartOf/Palmer_Land/ObjectMap> ;
+        rr:predicate  dbo:isPartOf .
 

@@ -28,32 +28,26 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
-
-<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Scotland-writer-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     wikidata:Q36180 , schema:Person , wikidata:Q215627 , foaf:Person , dul:NaturalPerson , wikidata:Q5 , dbo:Person , dbo:Writer , owl:Thing , dul:Agent , dbo:Agent ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/Scotland/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Scotland" .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Scotland-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland> , <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/Scotland> , <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:Scotland-writer-stub/SubjectMap> .
 
-<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/United_Kingdom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
         rr:predicate  dbo:country .
 
 <./Mapping_en:Scotland-writer-stub/SubjectMap/Function>
@@ -61,13 +55,19 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland/ObjectMap>
+<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Scotland" .
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
 <./Mapping_en:Scotland-writer-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Scotland-writer-stub?oldid=28847" .
+
+<./Mapping_en:Scotland-writer-stub/ConstantMapping/country/Scotland>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Scotland-writer-stub/ConstantMapping/country/Scotland/ObjectMap> ;
+        rr:predicate  dbo:country .
 

@@ -140,12 +140,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name/FunctionTermMap/FunctionValue> .
@@ -229,6 +223,12 @@
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_Scottish_island?oldid=14642" .
+
+<./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/Scotland>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/Scotland/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -418,10 +418,6 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
 
-<./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Scotland" .
-
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -452,7 +448,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Scottish_island/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation> , <./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/http://en.dbpedia.org/resource/Scotland> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Scottish_island/latitude> , <./Mapping_en:Infobox_Scottish_island/longitude> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/celtic%20name> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/archipelago/island%20group> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/foaf:name/official_name> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Scottish_island/latitude> , <./Mapping_en:Infobox_Scottish_island/longitude> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/unitaryAuthority/local%20authority> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationDensity/population%20density> , <./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/Scotland> , <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/largestSettlement/main%20settlement> ;
         rr:subjectMap          <./Mapping_en:Infobox_Scottish_island/SubjectMap> .
 
 <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/populationTotal/population>
@@ -513,6 +509,10 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Scottish_island/SimplePropertyMapping/maximumElevation/highest%20elevation/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
         rr:predicate  dbf:unitParameter .
+
+<./Mapping_en:Infobox_Scottish_island/ConstantMapping/country/Scotland/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Scotland" .
 
 <./Mapping_en:Infobox_Scottish_island/latitude/FunctionTermMap>
         a                      rr:TriplesMap , fnml:FunctionTermMap ;

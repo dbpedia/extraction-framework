@@ -31,7 +31,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Wisconsin-politician-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/United_States> ;
         rr:subjectMap          <./Mapping_en:Wisconsin-politician-stub/SubjectMap> .
 
 <./Mapping_en:Wisconsin-politician-stub/LogicalSource>
@@ -46,15 +46,15 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
-<./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
+<./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/United_States/ObjectMap> ;
         rr:predicate  dbo:country .
+
+<./Mapping_en:Wisconsin-politician-stub/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 
 <./Mapping_en:Wisconsin-politician-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

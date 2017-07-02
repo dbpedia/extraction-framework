@@ -247,12 +247,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/elevation/elevation_cen/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
         rr:predicate  dbf:unitParameter .
 
-<./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/http://en.dbpedia.org/resource/Greece>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/http://en.dbpedia.org/resource/Greece/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaMetro/area_metro/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
@@ -339,6 +333,12 @@
         a            rr:ObjectMap ;
         rr:constant  "areaTotal" .
 
+<./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/Greece>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/Greece/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -377,6 +377,10 @@
         rml:logicalSource      <./Mapping_en:Infobox_Greek_Dimos/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaCode/area_code/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Greek_Dimos/SubjectMap/Function> .
+
+<./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/Greece/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Greece" .
 
 <./Mapping_en:Infobox_Greek_Dimos/longitude/ObjectMap/FunctionValue/lonMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -438,7 +442,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Greek_Dimos/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:name/name_local> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/elevation/elevation_cen> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/populationMetro/population_metro> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/maximumElevation/elevation_max> , <./Mapping_en:Infobox_Greek_Dimos/longitude> , <./Mapping_en:Infobox_Greek_Dimos/latitude> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaMetro/area_metro> , <./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/http://en.dbpedia.org/resource/Greece> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/minimumElevation/elevation_min> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:name/name_local> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/elevation/elevation_cen> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/populationMetro/population_metro> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/maximumElevation/elevation_max> , <./Mapping_en:Infobox_Greek_Dimos/longitude> , <./Mapping_en:Infobox_Greek_Dimos/latitude> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaMetro/area_metro> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/areaCode/area_code> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/mayor/mayor> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/populationTotal/population> , <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/minimumElevation/elevation_min> , <./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/Greece> ;
         rr:subjectMap          <./Mapping_en:Infobox_Greek_Dimos/SubjectMap> .
 
 <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:name/name_local>
@@ -705,10 +709,6 @@
 <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/foaf:name/name_local/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Greek_Dimos/ConstantMapping/country/http://en.dbpedia.org/resource/Greece/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Greece" .
 
 <./Mapping_en:Infobox_Greek_Dimos/SimplePropertyMapping/elevation/elevation_cen/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

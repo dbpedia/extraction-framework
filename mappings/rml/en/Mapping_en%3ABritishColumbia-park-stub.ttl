@@ -28,15 +28,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap>
+<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/British_Columbia/ObjectMap>
         a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
-
-<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/British_Columbia>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/British_Columbia/ObjectMap> ;
-        rr:predicate  dbo:locatedInArea .
+        rr:constant  "http://en.dbpedia.org/resource/British_Columbia" .
 
 <./Mapping_en:BritishColumbia-park-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -44,26 +38,18 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:BritishColumbia-park-stub?oldid=30086" .
 
-<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 
-<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/http://en.dbpedia.org/resource/British_Columbia>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/http://en.dbpedia.org/resource/British_Columbia/ObjectMap> ;
-        rr:predicate  dbo:province .
-
-<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/British_Columbia/ObjectMap>
+<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/British_Columbia/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/British_Columbia" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:BritishColumbia-park-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/http://en.dbpedia.org/resource/British_Columbia> , <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada> , <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/British_Columbia> ;
+        rr:predicateObjectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/British_Columbia> , <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/Canada> , <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/British_Columbia> ;
         rr:subjectMap          <./Mapping_en:BritishColumbia-park-stub/SubjectMap> .
 
 <./Mapping_en:BritishColumbia-park-stub/SubjectMap>
@@ -77,7 +63,21 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/http://en.dbpedia.org/resource/British_Columbia/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/British_Columbia" .
+<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/British_Columbia>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/locatedInArea/British_Columbia/ObjectMap> ;
+        rr:predicate  dbo:locatedInArea .
+
+<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/British_Columbia>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/province/British_Columbia/ObjectMap> ;
+        rr:predicate  dbo:province .
+
+<./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/Canada>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:BritishColumbia-park-stub/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:predicate  dbo:country .
 

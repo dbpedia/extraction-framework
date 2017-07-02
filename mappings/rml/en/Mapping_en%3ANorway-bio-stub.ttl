@@ -28,6 +28,12 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/Norway>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/Norway/ObjectMap> ;
+        rr:predicate  dbo:nationality .
+
 <./Mapping_en:Norway-bio-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Person , schema:Person , foaf:Person , wikidata:Q5 , dul:NaturalPerson , wikidata:Q215627 , owl:Thing , dul:Agent , dbo:Agent ;
@@ -37,12 +43,8 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Norway-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Norway> ;
+        rr:predicateObjectMap  <./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/Norway> ;
         rr:subjectMap          <./Mapping_en:Norway-bio-stub/SubjectMap> .
-
-<./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Norway/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Norway" .
 
 <./Mapping_en:Norway-bio-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -50,11 +52,9 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Norway-bio-stub?oldid=28810" .
 
-<./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Norway>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/Norway/ObjectMap> ;
-        rr:predicate  dbo:nationality .
+<./Mapping_en:Norway-bio-stub/ConstantMapping/nationality/Norway/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Norway" .
 
 <./Mapping_en:Norway-bio-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

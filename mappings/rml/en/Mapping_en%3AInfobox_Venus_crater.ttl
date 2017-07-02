@@ -32,10 +32,6 @@
         a            rr:ObjectMap ;
         rr:constant  "kilometre" .
 
-<./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/http://en.dbpedia.org/resource/Venus/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Venus" .
-
 <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "name" .
@@ -71,12 +67,6 @@
         a            rr:ObjectMap ;
         rr:constant  "diameter" .
 
-<./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/http://en.dbpedia.org/resource/Venus>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/http://en.dbpedia.org/resource/Venus/ObjectMap> ;
-        rr:predicate  dbo:location .
-
 <./Mapping_en:Infobox_Venus_crater/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
@@ -86,7 +76,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Venus_crater/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/depth/depth> , <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/diameter/diameter> , <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/http://en.dbpedia.org/resource/Venus> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/depth/depth> , <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/diameter/diameter> , <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/Venus> ;
         rr:subjectMap          <./Mapping_en:Infobox_Venus_crater/SubjectMap> .
 
 <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue>
@@ -172,6 +162,10 @@
         a            rr:ObjectMap ;
         rr:constant  "foaf:name" .
 
+<./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/Venus/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Venus" .
+
 <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/depth/depth/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -195,6 +189,12 @@
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/diameter/diameter/FunctionTermMap/FunctionValue> ;
         rr:datatype         <http://dbpedia.org/datatype/kilometre> .
+
+<./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/Venus>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Venus_crater/ConstantMapping/location/Venus/ObjectMap> ;
+        rr:predicate  dbo:location .
 
 <./Mapping_en:Infobox_Venus_crater/SimplePropertyMapping/foaf:name/name>
         a             rr:PredicateObjectMap ;

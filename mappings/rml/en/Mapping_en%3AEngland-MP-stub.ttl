@@ -28,31 +28,31 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:England-MP-stub/ConstantMapping/nationality/England>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:England-MP-stub/ConstantMapping/nationality/England/ObjectMap> ;
         rr:predicate  dbo:nationality .
 
-<./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/England" .
-
-<./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England/ObjectMap> ;
-        rr:predicate  dbo:nationality .
-
-<./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+<./Mapping_en:England-MP-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
+
+<./Mapping_en:England-MP-stub/ConstantMapping/nationality/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:England-MP-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <./Mapping_en:England-MP-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     foaf:Person , dbo:Agent , dbo:Politician , dul:Agent , wikidata:Q486839 , dul:NaturalPerson , wikidata:Q82955 , wikidata:Q5 , schema:Person , dbo:MemberOfParliament , wikidata:Q215627 , dbo:Person , owl:Thing ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:England-MP-stub/ConstantMapping/nationality/England/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/England" .
 
 <./Mapping_en:England-MP-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -62,7 +62,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:England-MP-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/England> , <./Mapping_en:England-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:England-MP-stub/ConstantMapping/nationality/England> , <./Mapping_en:England-MP-stub/ConstantMapping/nationality/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:England-MP-stub/SubjectMap> .
 
 <./Mapping_en:England-MP-stub/LogicalSource>

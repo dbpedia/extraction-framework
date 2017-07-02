@@ -28,31 +28,31 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Germany-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Germany-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap> ;
-        rr:predicate  dbo:country .
-
-<./Mapping_en:Germany-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Germany" .
-
 <./Mapping_en:Germany-writer-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Germany-writer-stub?oldid=28836" .
 
+<./Mapping_en:Germany-writer-stub/ConstantMapping/country/Germany>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Germany-writer-stub/ConstantMapping/country/Germany/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Germany-writer-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
+<./Mapping_en:Germany-writer-stub/ConstantMapping/country/Germany/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Germany" .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Germany-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Germany-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Germany> ;
+        rr:predicateObjectMap  <./Mapping_en:Germany-writer-stub/ConstantMapping/country/Germany> ;
         rr:subjectMap          <./Mapping_en:Germany-writer-stub/SubjectMap> .
 
 <./Mapping_en:Germany-writer-stub/SubjectMap>

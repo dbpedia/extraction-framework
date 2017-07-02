@@ -28,12 +28,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Labor_Party_(UK)>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Labor_Party_(UK)/ObjectMap> ;
-        rr:predicate  dbo:party .
-
 <./Mapping_en:Labour-UK-MP-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     wikidata:Q5 , dul:Agent , schema:Person , wikidata:Q82955 , dbo:Person , foaf:Person , dul:NaturalPerson , wikidata:Q486839 , owl:Thing , dbo:MemberOfParliament , wikidata:Q215627 , dbo:Politician , dbo:Agent ;
@@ -46,6 +40,10 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Labour-UK-MP-stub?oldid=28823" .
 
+<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/Labor_Party_(UK)/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Labor_Party_(UK)" .
+
 <./Mapping_en:Labour-UK-MP-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -54,20 +52,22 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Labour-UK-MP-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Labor_Party_(UK)> , <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/Labor_Party_(UK)> , <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:Labour-UK-MP-stub/SubjectMap> .
 
-<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
-<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/Labor_Party_(UK)>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:country .
+        rr:objectMap  <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/Labor_Party_(UK)/ObjectMap> ;
+        rr:predicate  dbo:party .
 
-<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Labor_Party_(UK)/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Labor_Party_(UK)" .
+<./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Labour-UK-MP-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
 

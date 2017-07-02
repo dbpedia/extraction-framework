@@ -28,14 +28,16 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Japan-writer-stub/ConstantMapping/country/Japan>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Japan-writer-stub/ConstantMapping/country/Japan/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Japan-writer-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:Japan-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Japan/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Japan" .
 
 <./Mapping_en:Japan-writer-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -49,15 +51,13 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Japan-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Japan>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Japan-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Japan/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Japan-writer-stub/ConstantMapping/country/Japan/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Japan" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Japan-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Japan-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Japan> ;
+        rr:predicateObjectMap  <./Mapping_en:Japan-writer-stub/ConstantMapping/country/Japan> ;
         rr:subjectMap          <./Mapping_en:Japan-writer-stub/SubjectMap> .
 

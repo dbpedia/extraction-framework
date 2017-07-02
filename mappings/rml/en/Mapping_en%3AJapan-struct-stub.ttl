@@ -31,7 +31,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Japan-struct-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Japan-struct-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Japan> ;
+        rr:predicateObjectMap  <./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan> ;
         rr:subjectMap          <./Mapping_en:Japan-struct-stub/SubjectMap> .
 
 <./Mapping_en:Japan-struct-stub/SubjectMap/Function>
@@ -45,19 +45,19 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Japan-struct-stub?oldid=29692" .
 
-<./Mapping_en:Japan-struct-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Japan>
+<./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Japan-struct-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Japan/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan/ObjectMap> ;
         rr:predicate  dbo:location .
-
-<./Mapping_en:Japan-struct-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Japan/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Japan" .
 
 <./Mapping_en:Japan-struct-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , dbo:Location , schema:Place , dbo:Place , dbo:ArchitecturalStructure ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:Japan-struct-stub/ConstantMapping/location/Japan/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Japan" .
 

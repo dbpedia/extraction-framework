@@ -33,31 +33,31 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Ireland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Ireland>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Ireland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Ireland/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Ireland-writer-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Ireland-writer-stub?oldid=28841" .
 
+<./Mapping_en:Ireland-writer-stub/ConstantMapping/country/Ireland>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Ireland-writer-stub/ConstantMapping/country/Ireland/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Ireland-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Ireland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Ireland> ;
+        rr:predicateObjectMap  <./Mapping_en:Ireland-writer-stub/ConstantMapping/country/Ireland> ;
         rr:subjectMap          <./Mapping_en:Ireland-writer-stub/SubjectMap> .
-
-<./Mapping_en:Ireland-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Ireland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Ireland" .
 
 <./Mapping_en:Ireland-writer-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:Person , dul:NaturalPerson , owl:Thing , dbo:Writer , wikidata:Q215627 , dul:Agent , wikidata:Q36180 , foaf:Person , wikidata:Q5 , schema:Person , dbo:Agent ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
+
+<./Mapping_en:Ireland-writer-stub/ConstantMapping/country/Ireland/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Ireland" .
 

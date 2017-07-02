@@ -323,12 +323,6 @@
         a            rr:ObjectMap ;
         rr:constant  "buildingStartYear" .
 
-<./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/http://en.dbpedia.org/resource/Hydropower>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/http://en.dbpedia.org/resource/Hydropower/ObjectMap> ;
-        rr:predicate  dbo:primaryFuelType .
-
 <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_dam/latitude/ObjectMap/FunctionValue/LatMinutesParameterPOM/ObjectMap> ;
@@ -772,15 +766,15 @@
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/http://en.dbpedia.org/resource/Hydropower/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Hydropower" .
-
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission/FunctionTermMap> ;
         rr:predicate  dbo:closingDate .
+
+<./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/Hydropower/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Hydropower" .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/demolitionDate/demolished/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -967,6 +961,12 @@
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines/FunctionTermMap/FunctionValue> .
+
+<./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/Hydropower>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/Hydropower/ObjectMap> ;
+        rr:predicate  dbo:primaryFuelType .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -1621,7 +1621,7 @@
 <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap>
         a                      rr:TriplesMap ;
         rml:logicalSource      <./Mapping_en:Infobox_dam/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type> , <./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/http://en.dbpedia.org/resource/Hydropower> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingYear/plant_commission> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/operator/plant_operator> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/latitude> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/code/plant_type> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/foaf:name/plant_name> , <./Mapping_en:Infobox_dam/ConstantMapping/primaryFuelType/Hydropower> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/closingDate/plant_decommission> , <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/longitude> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/installedCapacity/plant_capacity> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/generationUnits/plant_turbines> , <./Mapping_en:Infobox_dam/SimplePropertyMapping/openingDate/plant_commission> ;
         rr:subjectMap          <./Mapping_en:Infobox_dam/IntermediateNodeMapping/PowerStation/part__2/ObjectMap/ParentTriplesMap/SubjectMap> .
 
 <./Mapping_en:Infobox_dam/SimplePropertyMapping/averageAnnualGeneration/plant_annual_gen/FunctionTermMap>

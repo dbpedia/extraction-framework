@@ -34,6 +34,12 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Conservative-UK-MP-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -42,37 +48,31 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Conservative-UK-MP-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom> , <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> , <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Conservative_Party_(UK)> ;
+        rr:predicateObjectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/United_Kingdom> , <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/United_Kingdom> , <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/Conservative_Party_(UK)> ;
         rr:subjectMap          <./Mapping_en:Conservative-UK-MP-stub/SubjectMap> .
 
-<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
-<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
-<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:country .
-
-<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Conservative_Party_(UK)>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Conservative_Party_(UK)/ObjectMap> ;
-        rr:predicate  dbo:party .
-
-<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Conservative_Party_(UK)/ObjectMap>
+<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/Conservative_Party_(UK)/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Conservative_Party_(UK)" .
 
-<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/Conservative_Party_(UK)>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/party/Conservative_Party_(UK)/ObjectMap> ;
+        rr:predicate  dbo:party .
+
+<./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Conservative-UK-MP-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap> ;
         rr:predicate  dbo:nationality .
 
 <./Mapping_en:Conservative-UK-MP-stub/LogicalSource>

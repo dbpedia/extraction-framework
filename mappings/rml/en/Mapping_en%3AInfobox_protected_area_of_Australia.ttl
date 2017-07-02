@@ -80,21 +80,15 @@
         a              rr:ObjectMap ;
         rml:reference  "long_minutes" .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap>
-        a                   fnml:FunctionTermMap ;
-        fnml:functionValue  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue> .
-
 <./Mapping_en:Infobox_protected_area_of_Australia/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Infobox_protected_area_of_Australia?oldid=14654" .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/http://en.dbpedia.org/resource/Australia>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/http://en.dbpedia.org/resource/Australia/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap>
+        a                   fnml:FunctionTermMap ;
+        fnml:functionValue  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue> .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -338,7 +332,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_protected_area_of_Australia/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num> , <./Mapping_en:Infobox_protected_area_of_Australia/longitude> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/http://en.dbpedia.org/resource/Australia> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category> , <./Mapping_en:Infobox_protected_area_of_Australia/latitude> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:homepage/official_site> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/numberOfVisitors/visitation_num> , <./Mapping_en:Infobox_protected_area_of_Australia/longitude> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_city> , <./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/Australia> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/foaf:name/native_name> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category> , <./Mapping_en:Infobox_protected_area_of_Australia/latitude> , <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/nearestCity/nearest_town_or_city> ;
         rr:subjectMap          <./Mapping_en:Infobox_protected_area_of_Australia/SubjectMap> .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/areaTotal/area>
@@ -450,6 +444,10 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
 
+<./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/Australia/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Australia" .
+
 <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/SimplePropertyMapping/iucnCategory/iucn_category/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
@@ -528,9 +526,11 @@
         rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/longitude/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
-<./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/http://en.dbpedia.org/resource/Australia/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Australia" .
+<./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/Australia>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_protected_area_of_Australia/ConstantMapping/country/Australia/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_protected_area_of_Australia/latitude/ObjectMap/FunctionValue/LatSecondsParameterPOM>
         a             rr:PredicateObjectMap ;

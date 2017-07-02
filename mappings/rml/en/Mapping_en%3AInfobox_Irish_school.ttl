@@ -54,6 +54,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
 
+<./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Republic_of_Ireland" .
+
 <./Mapping_en:Infobox_Irish_school/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dbo:School , dul:SocialPerson , dbo:Organisation , dbo:EducationalInstitution , schema:Organization , schema:School , wikidata:Q3914 , schema:EducationalOrganization , dbo:Agent , dul:Agent , owl:Thing , wikidata:Q43229 ;
@@ -101,6 +105,12 @@
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
 
+<./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland/ObjectMap> ;
+        rr:predicate  dbo:country .
+
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -118,7 +128,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Irish_school/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_Irish_school/ConstantMapping/country/http://en.dbpedia.org/resource/Republic_of_Ireland> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/location/location> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foundingDate/established> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colour/colours> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/principal/keypname> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/motto/motto> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:homepage/homepage> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/officialSchoolColour/colours> , <./Mapping_en:Infobox_Irish_school/ConstantMapping/country/Republic_of_Ireland> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours> , <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/numberOfStudents/students> ;
         rr:subjectMap          <./Mapping_en:Infobox_Irish_school/SubjectMap> .
 
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/colourName/colours/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
@@ -461,12 +471,6 @@
         a            rr:ObjectMap ;
         rr:constant  "foaf:name" .
 
-<./Mapping_en:Infobox_Irish_school/ConstantMapping/country/http://en.dbpedia.org/resource/Republic_of_Ireland>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Irish_school/ConstantMapping/country/http://en.dbpedia.org/resource/Republic_of_Ireland/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -494,10 +498,6 @@
 <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Irish_school/SimplePropertyMapping/foaf:name/irish_name/FunctionTermMap/FunctionValue> .
-
-<./Mapping_en:Infobox_Irish_school/ConstantMapping/country/http://en.dbpedia.org/resource/Republic_of_Ireland/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Republic_of_Ireland" .
 
 <./Mapping_en:Infobox_Irish_school/LogicalSource>
         a                         rml:LogicalSource ;

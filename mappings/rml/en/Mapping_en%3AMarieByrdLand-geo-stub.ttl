@@ -28,10 +28,14 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/West_Antarctica/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/West_Antarctica" .
+
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:MarieByrdLand-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Marie_Byrd_Land> , <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/West_Antarctica> , <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica> ;
+        rr:predicateObjectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/Marie_Byrd_Land> , <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/West_Antarctica> , <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/Antarctica> ;
         rr:subjectMap          <./Mapping_en:MarieByrdLand-geo-stub/SubjectMap> .
 
 <./Mapping_en:MarieByrdLand-geo-stub/LogicalSource>
@@ -40,25 +44,15 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:MarieByrdLand-geo-stub?oldid=28806" .
 
-<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/West_Antarctica>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/West_Antarctica/ObjectMap> ;
-        rr:predicate  dbo:location .
-
-<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Marie_Byrd_Land/ObjectMap>
+<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/Marie_Byrd_Land/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Marie_Byrd_Land" .
 
-<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/West_Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/West_Antarctica" .
-
-<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Marie_Byrd_Land>
+<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/West_Antarctica>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/http://en.dbpedia.org/resource/Marie_Byrd_Land/ObjectMap> ;
-        rr:predicate  dbo:locatedInArea .
+        rr:objectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/West_Antarctica/ObjectMap> ;
+        rr:predicate  dbo:location .
 
 <./Mapping_en:MarieByrdLand-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -66,18 +60,24 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
-
-<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica>
+<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/Marie_Byrd_Land>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/http://en.dbpedia.org/resource/Antarctica/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/locatedInArea/Marie_Byrd_Land/ObjectMap> ;
+        rr:predicate  dbo:locatedInArea .
+
+<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/Antarctica>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/Antarctica/ObjectMap> ;
         rr:predicate  dbo:location .
 
 <./Mapping_en:MarieByrdLand-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
+
+<./Mapping_en:MarieByrdLand-geo-stub/ConstantMapping/location/Antarctica/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 

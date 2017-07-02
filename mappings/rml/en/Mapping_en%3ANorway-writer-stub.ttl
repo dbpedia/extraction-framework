@@ -28,11 +28,9 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Norway-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Norway>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Norway-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Norway/ObjectMap> ;
-        rr:predicate  dbo:country .
+<./Mapping_en:Norway-writer-stub/ConstantMapping/country/Norway/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Norway" .
 
 <./Mapping_en:Norway-writer-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -40,9 +38,11 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Norway-writer-stub?oldid=28834" .
 
-<./Mapping_en:Norway-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Norway/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Norway" .
+<./Mapping_en:Norway-writer-stub/ConstantMapping/country/Norway>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Norway-writer-stub/ConstantMapping/country/Norway/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Norway-writer-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -58,6 +58,6 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Norway-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Norway-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Norway> ;
+        rr:predicateObjectMap  <./Mapping_en:Norway-writer-stub/ConstantMapping/country/Norway> ;
         rr:subjectMap          <./Mapping_en:Norway-writer-stub/SubjectMap> .
 

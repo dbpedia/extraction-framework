@@ -28,14 +28,16 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
+<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:UK-Olympic-medalist-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom> , <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> ;
+        rr:predicateObjectMap  <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/United_Kingdom> , <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/United_Kingdom> ;
         rr:subjectMap          <./Mapping_en:UK-Olympic-medalist-stub/SubjectMap> .
 
 <./Mapping_en:UK-Olympic-medalist-stub/SubjectMap>
@@ -44,26 +46,24 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
+<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/United_Kingdom/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
-<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom>
+<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/United_Kingdom>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:nationality .
+        rr:objectMap  <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/nationality/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
 <./Mapping_en:UK-Olympic-medalist-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
-
-<./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:UK-Olympic-medalist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:country .
 
 <./Mapping_en:UK-Olympic-medalist-stub/LogicalSource>
         a                         rml:LogicalSource ;

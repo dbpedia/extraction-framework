@@ -28,31 +28,31 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:INC-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Indian_National_Congress>
+<./Mapping_en:INC-politician-stub/ConstantMapping/nationality/India>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:INC-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Indian_National_Congress/ObjectMap> ;
-        rr:predicate  dbo:party .
+        rr:objectMap  <./Mapping_en:INC-politician-stub/ConstantMapping/nationality/India/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:INC-politician-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:INC-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India> , <./Mapping_en:INC-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Indian_National_Congress> ;
+        rr:predicateObjectMap  <./Mapping_en:INC-politician-stub/ConstantMapping/nationality/India> , <./Mapping_en:INC-politician-stub/ConstantMapping/party/Indian_National_Congress> ;
         rr:subjectMap          <./Mapping_en:INC-politician-stub/SubjectMap> .
 
-<./Mapping_en:INC-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/India" .
-
-<./Mapping_en:INC-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India>
+<./Mapping_en:INC-politician-stub/ConstantMapping/party/Indian_National_Congress>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:INC-politician-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/India/ObjectMap> ;
-        rr:predicate  dbo:nationality .
+        rr:objectMap  <./Mapping_en:INC-politician-stub/ConstantMapping/party/Indian_National_Congress/ObjectMap> ;
+        rr:predicate  dbo:party .
 
-<./Mapping_en:INC-politician-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Indian_National_Congress/ObjectMap>
+<./Mapping_en:INC-politician-stub/ConstantMapping/party/Indian_National_Congress/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Indian_National_Congress" .
+
+<./Mapping_en:INC-politician-stub/ConstantMapping/nationality/India/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/India" .
 
 <./Mapping_en:INC-politician-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

@@ -39,25 +39,25 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Korean_cuisine/ConstantMapping/origin/http://en.dbpedia.org/resource/Korea/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Korea" .
-
 <./Mapping_en:Korean_cuisine/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Korean_cuisine?oldid=29109" .
 
-<./Mapping_en:Korean_cuisine/ConstantMapping/origin/http://en.dbpedia.org/resource/Korea>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Korean_cuisine/ConstantMapping/origin/http://en.dbpedia.org/resource/Korea/ObjectMap> ;
-        rr:predicate  dbo:origin .
-
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Korean_cuisine/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Korean_cuisine/ConstantMapping/origin/http://en.dbpedia.org/resource/Korea> ;
+        rr:predicateObjectMap  <./Mapping_en:Korean_cuisine/ConstantMapping/origin/Korea> ;
         rr:subjectMap          <./Mapping_en:Korean_cuisine/SubjectMap> .
+
+<./Mapping_en:Korean_cuisine/ConstantMapping/origin/Korea/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Korea" .
+
+<./Mapping_en:Korean_cuisine/ConstantMapping/origin/Korea>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Korean_cuisine/ConstantMapping/origin/Korea/ObjectMap> ;
+        rr:predicate  dbo:origin .
 

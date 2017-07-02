@@ -42,8 +42,14 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:NewZealand-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/New_Zealand> ;
+        rr:predicateObjectMap  <./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/New_Zealand> ;
         rr:subjectMap          <./Mapping_en:NewZealand-bio-stub/SubjectMap> .
+
+<./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/New_Zealand>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/New_Zealand/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <./Mapping_en:NewZealand-bio-stub/SubjectMap>
         a            rr:SubjectMap ;
@@ -51,13 +57,7 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/New_Zealand/ObjectMap>
+<./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/New_Zealand/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/New_Zealand" .
-
-<./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/New_Zealand>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:NewZealand-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/New_Zealand/ObjectMap> ;
-        rr:predicate  dbo:nationality .
 

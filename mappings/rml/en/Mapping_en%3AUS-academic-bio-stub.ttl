@@ -28,6 +28,10 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+
 <./Mapping_en:US-academic-bio-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -45,19 +49,15 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+<./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/United_States>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/United_States/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-academic-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/United_States> ;
         rr:subjectMap          <./Mapping_en:US-academic-bio-stub/SubjectMap> .
-
-<./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-academic-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
-        rr:predicate  dbo:nationality .
 

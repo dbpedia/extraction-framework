@@ -213,6 +213,10 @@
         a            rr:ObjectMap ;
         rr:constant  "metre" .
 
+<./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/Serbia/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Serbia" .
+
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaCode/municipality_code/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
@@ -336,10 +340,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
-
-<./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Serbia/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Serbia" .
 
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -592,7 +592,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Serbia_municipality/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Serbia_municipality/latitude> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Serbia> , <./Mapping_en:Infobox_Serbia_municipality/longitude> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationTotal/population> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/neighboringMunicipality/neighboring_municipalities> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/maximumElevation/highest_m> , <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/postalCode/postal_code> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/demonym/demonym> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/areaCode/municipality_code> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/elevation/elevation> , <./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/Serbia> , <./Mapping_en:Infobox_Serbia_municipality/latitude> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationAsOf/populationof> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/foaf:homepage/website> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/minimumElevation/lowest_m> , <./Mapping_en:Infobox_Serbia_municipality/longitude> , <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/populationTotal/population> ;
         rr:subjectMap          <./Mapping_en:Infobox_Serbia_municipality/SubjectMap> .
 
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/foaf:homepage/website/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
@@ -619,12 +619,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/longitude/ObjectMap/FunctionValue/lonDegreesParameterPOM/ObjectMap> ;
         rr:predicate  dbf:lonDegreesParameter .
-
-<./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Serbia>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/http://en.dbpedia.org/resource/Serbia/ObjectMap> ;
-        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city/1/2/FunctionTermMap>
         a                   fnml:FunctionTermMap ;
@@ -691,13 +685,19 @@
         rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city/1/FunctionTermMap/FunctionValue/ValueParameterPOM/ObjectMap> ;
         rr:predicate  <http://dbpedia.org/function/equals/valueParameter> .
 
+<./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:otherwise .
+
 <./Mapping_en:Infobox_Serbia_municipality/latitude/ObjectMap>
         a                   fnml:FunctionTermMap ;
         fnml:functionValue  <./Mapping_en:Infobox_Serbia_municipality/latitude/ObjectMap/FunctionValue> .
 
-<./Mapping_en:Infobox_Serbia_municipality/ConditionalMapping/settlement_type_equals_city/1/2/3/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:otherwise .
+<./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/Serbia>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Serbia_municipality/ConstantMapping/country/Serbia/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Serbia_municipality/SimplePropertyMapping/demonym/demonym/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;

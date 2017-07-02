@@ -28,26 +28,26 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:US-music-bio-stub/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+
 <./Mapping_en:US-music-bio-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:US-music-bio-stub?oldid=29047" .
 
-<./Mapping_en:US-music-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
-
-<./Mapping_en:US-music-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
+<./Mapping_en:US-music-bio-stub/ConstantMapping/country/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-music-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:US-music-bio-stub/ConstantMapping/country/United_States/ObjectMap> ;
         rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-music-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-music-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-music-bio-stub/ConstantMapping/country/United_States> ;
         rr:subjectMap          <./Mapping_en:US-music-bio-stub/SubjectMap> .
 
 <./Mapping_en:US-music-bio-stub/SubjectMap>

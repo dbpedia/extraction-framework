@@ -357,6 +357,10 @@
         rr:objectMap         <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years/FunctionTermMap> ;
         rr:predicate         dbo:openingYear .
 
+<./Mapping_en:Infobox_GB_station/ConstantMapping/country/United_Kingdom/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
+
 <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
@@ -591,12 +595,6 @@
         rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_GB_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_GB_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/years/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  dbf:simplePropertyFunction .
@@ -609,7 +607,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "conditionalMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_GB_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/years> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough> , <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start> , <./Mapping_en:Infobox_GB_station/latitude> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref> , <./Mapping_en:Infobox_GB_station/longitude> , <./Mapping_en:Infobox_GB_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platform> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/years> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage0910> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage0910> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/locale> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/location/borough> , <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/starting> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/operatedBy/manager> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/agencyStationCode/code> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/district/borough> , <./Mapping_en:Infobox_GB_station/ConstantMapping/country/United_Kingdom> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/lowusage1011> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/years> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingYear/start> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/railwayPlatforms/platforms> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/start> , <./Mapping_en:Infobox_GB_station/latitude> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/gridReference/gridref> , <./Mapping_en:Infobox_GB_station/longitude> , <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/picture/image> ;
         rr:subjectMap          <./Mapping_en:Infobox_GB_station/SubjectMap> .
 
 <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM>
@@ -705,6 +703,12 @@
 <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/passengersPerYear/usage1011/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "passengersPerYear" .
+
+<./Mapping_en:Infobox_GB_station/ConstantMapping/country/United_Kingdom>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_GB_station/ConstantMapping/country/United_Kingdom/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/openingDate/starting/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;
@@ -1126,10 +1130,6 @@
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_GB_station/SimplePropertyMapping/owner/owner/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
-
-<./Mapping_en:Infobox_GB_station/ConstantMapping/country/http://en.dbpedia.org/resource/United_Kingdom/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_Kingdom" .
 
 <./Mapping_en:Infobox_GB_station/ConditionalMapping/events_contains_Opened/1/2/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;

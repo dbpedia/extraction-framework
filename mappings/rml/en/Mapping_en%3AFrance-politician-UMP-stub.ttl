@@ -34,37 +34,37 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
+<./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/Union_for_a_Popular_Movement>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/Union_for_a_Popular_Movement/ObjectMap> ;
+        rr:predicate  dbo:party .
+
 <./Mapping_en:France-politician-UMP-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:France-politician-UMP-stub?oldid=29595" .
 
-<./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/France" .
-
-<./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Union_for_a_Popular_Movement/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Union_for_a_Popular_Movement" .
-
-<./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France>
+<./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/France>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/France/ObjectMap> ;
         rr:predicate  dbo:nationality .
+
+<./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/France/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/France" .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:France-politician-UMP-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Union_for_a_Popular_Movement> , <./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France> ;
+        rr:predicateObjectMap  <./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/Union_for_a_Popular_Movement> , <./Mapping_en:France-politician-UMP-stub/ConstantMapping/nationality/France> ;
         rr:subjectMap          <./Mapping_en:France-politician-UMP-stub/SubjectMap> .
 
-<./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Union_for_a_Popular_Movement>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/http://en.dbpedia.org/resource/Union_for_a_Popular_Movement/ObjectMap> ;
-        rr:predicate  dbo:party .
+<./Mapping_en:France-politician-UMP-stub/ConstantMapping/party/Union_for_a_Popular_Movement/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Union_for_a_Popular_Movement" .
 
 <./Mapping_en:France-politician-UMP-stub/SubjectMap/Function>
         a            rr:SubjectMap ;

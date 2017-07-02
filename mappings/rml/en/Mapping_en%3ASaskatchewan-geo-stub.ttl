@@ -31,33 +31,33 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Saskatchewan-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada> , <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/http://en.dbpedia.org/resource/Saskatchewan> ;
+        rr:predicateObjectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada> , <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan> ;
         rr:subjectMap          <./Mapping_en:Saskatchewan-geo-stub/SubjectMap> .
+
+<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 
 <./Mapping_en:Saskatchewan-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
-<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/http://en.dbpedia.org/resource/Saskatchewan>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/http://en.dbpedia.org/resource/Saskatchewan/ObjectMap> ;
-        rr:predicate  dbo:region .
-
-<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
-        rr:predicate  dbo:country .
-
-<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
-
-<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/http://en.dbpedia.org/resource/Saskatchewan/ObjectMap>
+<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Saskatchewan" .
+
+<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/region/Saskatchewan/ObjectMap> ;
+        rr:predicate  dbo:region .
+
+<./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Saskatchewan-geo-stub/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Saskatchewan-geo-stub/SubjectMap>
         a            rr:SubjectMap ;

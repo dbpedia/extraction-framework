@@ -28,19 +28,19 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Australia>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Australia/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Australia-rugbyleague-bio-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Australia-rugbyleague-bio-stub?oldid=29075" .
 
-<./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Australia/ObjectMap>
+<./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/Australia>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/Australia/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/Australia/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Australia" .
 
@@ -52,7 +52,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Australia-rugbyleague-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Australia> ;
+        rr:predicateObjectMap  <./Mapping_en:Australia-rugbyleague-bio-stub/ConstantMapping/country/Australia> ;
         rr:subjectMap          <./Mapping_en:Australia-rugbyleague-bio-stub/SubjectMap> .
 
 <./Mapping_en:Australia-rugbyleague-bio-stub/SubjectMap>

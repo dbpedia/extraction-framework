@@ -39,25 +39,25 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Greek-myth-stub?oldid=28798" .
 
-<./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/http://en.dbpedia.org/resource/Greek_mythology/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Greek_mythology" .
+<./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/Greek_mythology>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/Greek_mythology/ObjectMap> ;
+        rr:predicate  dbo:mythology .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Greek-myth-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/http://en.dbpedia.org/resource/Greek_mythology> ;
+        rr:predicateObjectMap  <./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/Greek_mythology> ;
         rr:subjectMap          <./Mapping_en:Greek-myth-stub/SubjectMap> .
+
+<./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/Greek_mythology/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Greek_mythology" .
 
 <./Mapping_en:Greek-myth-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dul:NaturalPerson , wikidata:Q5 , foaf:Person , dbo:FictionalCharacter , dbo:Person , owl:Thing , schema:Person , dul:Agent , dbo:MythologicalFigure , wikidata:Q15410431 , dbo:Agent , wikidata:Q215627 , wikidata:Q95074 ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
-
-<./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/http://en.dbpedia.org/resource/Greek_mythology>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Greek-myth-stub/ConstantMapping/mythology/http://en.dbpedia.org/resource/Greek_mythology/ObjectMap> ;
-        rr:predicate  dbo:mythology .
 

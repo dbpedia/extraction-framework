@@ -43,6 +43,10 @@
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens/FunctionTermMap> ;
         rr:predicate  dbo:populationDensity .
 
+<./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
+
 <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -58,12 +62,6 @@
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/http://en.dbpedia.org/resource/Canada>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM/ObjectMap> ;
@@ -72,6 +70,11 @@
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "populationAsOf" .
+
+<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+        a             rr:PredicateObjectMap ;
+        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
+        rr:predicate  dbf:ontologyPropertyParameter .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap>
         a            rr:SubjectMap ;
@@ -82,13 +85,14 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_Canadian_provincial_riding/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/http://en.dbpedia.org/resource/Canada> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province> , <./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/Canada> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationDensity/popdens> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationTotal/pop> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/foaf:name/name> ;
         rr:subjectMap          <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap> .
 
-<./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
+<./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/Canada>
         a             rr:PredicateObjectMap ;
-        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/populationAsOf/census-date/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
-        rr:predicate  dbf:ontologyPropertyParameter .
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
@@ -125,10 +129,6 @@
         rml:logicalSource      <./Mapping_en:Infobox_Canadian_provincial_riding/LogicalSource> ;
         rr:predicateObjectMap  <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/unitParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/propertyParameterPOM> , <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/areaTotal/area/FunctionTermMap/FunctionValue/ExecutePOM> ;
         rr:subjectMap          <./Mapping_en:Infobox_Canadian_provincial_riding/SubjectMap/Function> .
-
-<./Mapping_en:Infobox_Canadian_provincial_riding/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
 
 <./Mapping_en:Infobox_Canadian_provincial_riding/SimplePropertyMapping/province/province/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
         a            rr:ObjectMap ;

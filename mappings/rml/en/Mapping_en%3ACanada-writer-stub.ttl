@@ -28,27 +28,27 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Canada-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Canada" .
-
 <./Mapping_en:Canada-writer-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     wikidata:Q5 , wikidata:Q215627 , dul:Agent , dul:NaturalPerson , dbo:Writer , schema:Person , dbo:Person , foaf:Person , dbo:Agent , owl:Thing , wikidata:Q36180 ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:Canada-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Canada-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Canada-writer-stub/LogicalSource>
         a                         rml:LogicalSource ;
         rml:iterator              "Infobox" ;
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Canada-writer-stub?oldid=28835" .
+
+<./Mapping_en:Canada-writer-stub/ConstantMapping/country/Canada/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Canada" .
+
+<./Mapping_en:Canada-writer-stub/ConstantMapping/country/Canada>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Canada-writer-stub/ConstantMapping/country/Canada/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Canada-writer-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
@@ -58,6 +58,6 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Canada-writer-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Canada-writer-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Canada> ;
+        rr:predicateObjectMap  <./Mapping_en:Canada-writer-stub/ConstantMapping/country/Canada> ;
         rr:subjectMap          <./Mapping_en:Canada-writer-stub/SubjectMap> .
 

@@ -28,12 +28,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctic_Peninsula>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctic_Peninsula/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:GrahamLand-geo-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
@@ -42,10 +36,20 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:GrahamLand-geo-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica> , <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctic_Peninsula> ;
+        rr:predicateObjectMap  <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctica> , <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctic_Peninsula> ;
         rr:subjectMap          <./Mapping_en:GrahamLand-geo-stub/SubjectMap> .
 
-<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap>
+<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctic_Peninsula/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Antarctic_Peninsula" .
+
+<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctica>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap> ;
+        rr:predicate  dbo:country .
+
+<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctica/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "http://en.dbpedia.org/resource/Antarctica" .
 
@@ -55,19 +59,15 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:GrahamLand-geo-stub?oldid=28791" .
 
-<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctica/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:GrahamLand-geo-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     owl:Thing , dbo:Location , schema:Place , dbo:Place ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Antarctic_Peninsula/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Antarctic_Peninsula" .
+<./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctic_Peninsula>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:GrahamLand-geo-stub/ConstantMapping/country/Antarctic_Peninsula/ObjectMap> ;
+        rr:predicate  dbo:country .
 

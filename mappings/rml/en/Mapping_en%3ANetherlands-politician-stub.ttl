@@ -28,6 +28,10 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
+<./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/Netherlands/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/Netherlands" .
+
 <./Mapping_en:Netherlands-politician-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     dul:Agent , schema:Person , owl:Thing , wikidata:Q215627 , foaf:Person , dbo:Person , dbo:Agent , dbo:Politician , dul:NaturalPerson , wikidata:Q5 , wikidata:Q82955 ;
@@ -45,19 +49,15 @@
         rml:referenceFormulation  ql:wikitext ;
         rml:source                "http://en.wikipedia.org/wiki/Mapping_en:Netherlands-politician-stub?oldid=29042" .
 
-<./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Netherlands/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/Netherlands" .
+<./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/Netherlands>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/Netherlands/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Netherlands-politician-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Netherlands> ;
+        rr:predicateObjectMap  <./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/Netherlands> ;
         rr:subjectMap          <./Mapping_en:Netherlands-politician-stub/SubjectMap> .
-
-<./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Netherlands>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Netherlands-politician-stub/ConstantMapping/country/http://en.dbpedia.org/resource/Netherlands/ObjectMap> ;
-        rr:predicate  dbo:country .
 

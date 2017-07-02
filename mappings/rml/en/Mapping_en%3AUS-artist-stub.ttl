@@ -31,7 +31,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:US-artist-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:US-artist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States> ;
+        rr:predicateObjectMap  <./Mapping_en:US-artist-stub/ConstantMapping/country/United_States> ;
         rr:subjectMap          <./Mapping_en:US-artist-stub/SubjectMap> .
 
 <./Mapping_en:US-artist-stub/LogicalSource>
@@ -45,19 +45,19 @@
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
 
+<./Mapping_en:US-artist-stub/ConstantMapping/country/United_States/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/United_States" .
+
 <./Mapping_en:US-artist-stub/SubjectMap>
         a            rr:SubjectMap ;
         rr:class     foaf:Person , owl:Thing , dbo:Agent , wikidata:Q215627 , wikidata:Q483501 , dbo:Person , dul:Agent , wikidata:Q5 , dbo:Artist , dul:NaturalPerson , schema:Person ;
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:US-artist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States>
+<./Mapping_en:US-artist-stub/ConstantMapping/country/United_States>
         a             rr:PredicateObjectMap ;
         dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:US-artist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap> ;
+        rr:objectMap  <./Mapping_en:US-artist-stub/ConstantMapping/country/United_States/ObjectMap> ;
         rr:predicate  dbo:country .
-
-<./Mapping_en:US-artist-stub/ConstantMapping/country/http://en.dbpedia.org/resource/United_States/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/United_States" .
 

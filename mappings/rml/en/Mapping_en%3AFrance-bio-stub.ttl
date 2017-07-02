@@ -31,14 +31,12 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:France-bio-stub/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:France-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France> ;
+        rr:predicateObjectMap  <./Mapping_en:France-bio-stub/ConstantMapping/nationality/France> ;
         rr:subjectMap          <./Mapping_en:France-bio-stub/SubjectMap> .
 
-<./Mapping_en:France-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:France-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France/ObjectMap> ;
-        rr:predicate  dbo:nationality .
+<./Mapping_en:France-bio-stub/ConstantMapping/nationality/France/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/France" .
 
 <./Mapping_en:France-bio-stub/LogicalSource>
         a                         rml:LogicalSource ;
@@ -52,12 +50,14 @@
         rr:template  "http://en.dbpedia.org/resource/{wikititle}" ;
         rr:termType  rr:IRI .
 
-<./Mapping_en:France-bio-stub/ConstantMapping/nationality/http://en.dbpedia.org/resource/France/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/France" .
-
 <./Mapping_en:France-bio-stub/SubjectMap/Function>
         a            rr:SubjectMap ;
         rr:class     fno:Execution ;
         rr:termType  rr:BlankNode .
+
+<./Mapping_en:France-bio-stub/ConstantMapping/nationality/France>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:France-bio-stub/ConstantMapping/nationality/France/ObjectMap> ;
+        rr:predicate  dbo:nationality .
 

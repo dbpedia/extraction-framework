@@ -28,12 +28,6 @@
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-<./Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap> ;
-        rr:predicate  dbo:country .
-
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
@@ -151,10 +145,6 @@
         rr:objectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
-<./Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/People's_Republic_of_China" .
-
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "openingDate" .
@@ -205,24 +195,20 @@
         rr:objectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:ontologyPropertyParameter .
 
-<./Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  dbf:simplePropertyFunction .
-
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
         rr:objectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap> ;
         rr:predicate  fno:executes .
+
+<./Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ExecutePOM/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  dbf:simplePropertyFunction .
 
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
         rr:objectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close/FunctionTermMap> ;
         rr:predicate  dbo:closingYear .
-
-<./Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap>
-        a            rr:ObjectMap ;
-        rr:constant  "http://en.dbpedia.org/resource/People's_Republic_of_China" .
 
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom/FunctionTermMap/FunctionValue/ExecutePOM>
         a             rr:PredicateObjectMap ;
@@ -287,9 +273,21 @@
         a            rr:ObjectMap ;
         rr:constant  "location" .
 
+<./Mapping_en:Infobox_China_station/ConstantMapping/location/People's_Republic_of_China>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_China_station/ConstantMapping/location/People's_Republic_of_China/ObjectMap> ;
+        rr:predicate  dbo:location .
+
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "address" .
+
+<./Mapping_en:Infobox_China_station/ConstantMapping/country/People's_Republic_of_China>
+        a             rr:PredicateObjectMap ;
+        dcterms:type  "constantMapping" ;
+        rr:objectMap  <./Mapping_en:Infobox_China_station/ConstantMapping/country/People's_Republic_of_China/ObjectMap> ;
+        rr:predicate  dbo:country .
 
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place/FunctionTermMap/FunctionValue/propertyParameterPOM>
         a             rr:PredicateObjectMap ;
@@ -484,12 +482,6 @@
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap>
         a              rr:ObjectMap ;
         rml:reference  "othername" .
-
-<./Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China>
-        a             rr:PredicateObjectMap ;
-        dcterms:type  "constantMapping" ;
-        rr:objectMap  <./Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China/ObjectMap> ;
-        rr:predicate  dbo:location .
 
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov/FunctionTermMap/FunctionValue>
         a                      rr:TriplesMap ;
@@ -790,6 +782,10 @@
         rr:objectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name/FunctionTermMap/FunctionValue/propertyParameterPOM/ObjectMap> ;
         rr:predicate  dbf:propertyParameter .
 
+<./Mapping_en:Infobox_China_station/ConstantMapping/location/People's_Republic_of_China/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/People's_Republic_of_China" .
+
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats>
         a             rr:PredicateObjectMap ;
         dcterms:type  "simplePropertyMapping" ;
@@ -828,6 +824,10 @@
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2/FunctionTermMap/FunctionValue/ontologyPropertyParameterPOM/ObjectMap>
         a            rr:ObjectMap ;
         rr:constant  "operatedBy" .
+
+<./Mapping_en:Infobox_China_station/ConstantMapping/country/People's_Republic_of_China/ObjectMap>
+        a            rr:ObjectMap ;
+        rr:constant  "http://en.dbpedia.org/resource/People's_Republic_of_China" .
 
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open>
         a             rr:PredicateObjectMap ;
@@ -917,7 +917,7 @@
 <>      a                      rr:TriplesMap ;
         dcterms:type           "templateMapping" ;
         rml:logicalSource      <./Mapping_en:Infobox_China_station/LogicalSource> ;
-        rr:predicateObjectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open> , <./Mapping_en:Infobox_China_station/latitude> , <./Mapping_en:Infobox_China_station/ConstantMapping/location/http://en.dbpedia.org/resource/People's_Republic_of_China> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2> , <./Mapping_en:Infobox_China_station/ConstantMapping/country/http://en.dbpedia.org/resource/People's_Republic_of_China> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov> , <./Mapping_en:Infobox_China_station/longitude> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator> ;
+        rr:predicateObjectMap  <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/address> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/openingYear/open> , <./Mapping_en:Infobox_China_station/latitude> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/namerom> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator2> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname2> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/entirenamerom> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/railwayPlatforms/Platform> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingYear/close> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/town> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerDay/stats> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/agencyStationCode/station_code> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/openingDate/open> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/postalCode/postal> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/district> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/address/Place> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/servingRailwayLine/line> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/picture/image> , <./Mapping_en:Infobox_China_station/ConstantMapping/country/People's_Republic_of_China> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/prov> , <./Mapping_en:Infobox_China_station/longitude> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city> , <./Mapping_en:Infobox_China_station/ConstantMapping/location/People's_Republic_of_China> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/passengersPerYear/statsy> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/closingDate/close> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/alias/othername> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/formerName/oldname> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/foaf:name/name> , <./Mapping_en:Infobox_China_station/SimplePropertyMapping/operatedBy/operator> ;
         rr:subjectMap          <./Mapping_en:Infobox_China_station/SubjectMap> .
 
 <./Mapping_en:Infobox_China_station/SimplePropertyMapping/location/city>
